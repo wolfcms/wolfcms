@@ -9,7 +9,7 @@
     
     <base href="<?php echo trim(BASE_URL, '?/').'/'; ?>" />
 
-    <link rel="favourites icon" href="<?php echo URL_PUBLIC; ?>favicon.ico">
+    <link rel="favourites icon" href="<?php echo URL_PUBLIC; ?>favicon.ico" />
     <link href="stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
     <link href="stylesheets/toolbar.css" media="screen" rel="Stylesheet" type="text/css" />
     <link href="themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />

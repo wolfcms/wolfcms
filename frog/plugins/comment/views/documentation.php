@@ -57,7 +57,7 @@
 </p>
 <pre>
 &lt;?php
-    if (Plugins::isEnabled('comment'))
+    if (Plugin::isEnabled('comment'))
     {
         if ($this->comment_status != Comment::NONE)
             $this->includeSnippet('comment-each');

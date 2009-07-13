@@ -72,7 +72,7 @@ class PluginController extends Controller
             $plugin = Plugin::$controllers[$action];
             if (file_exists($plugin->file))
             {
-                include $plugin->file;
+                include_once $plugin->file;
                 
                 $plugin_controller = new $plugin->class_name;
                 
