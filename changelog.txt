@@ -1,0 +1,285 @@
+FROG CMS - Change Log
+
+======
+Sigla:
++ enhancement, addition
+- bug fix
+. other development
+======
+
+0.9.5 - released 2009-04-27
+
++ Added experimental Global XSS filtering, by default turned off. To turn on add define('GLOBAL_XSS_FILTERING', true) to config.php - issue 162
++ Added advisory about removing changelog.txt to install screen.
++ Added output buffering around main() - issue 114
++ Added option to choose administrator name in install screen. - issue 149
++ Added function that generates administrator password during install routine. - issue 149
++ Added check to make sure config.php isn't writable.
++ Added inheritence to hasContent() function. - issue 142
++ Added icon to directories in file_manager plugin - issue 140
++ Added Plugin::isEnabled($plugin_id) to Plugin class for plugin devs. (allows for basic plugin dependancies.)
++ Added getSetting(), setSetting(), getAllSettings() and setAllSettings() to Plugin class for plugin devs - issue 128
++ Added comments plugin option to display to-be-moderated comments on plugin tab (default true)
++ Added MySQL port to install screen. Thanks gilles.doge - issue 107
++ Added new events - issue 94
++ Added site identifiers to login screens (both login.php and forgot.php) based on Admin screen title setting.
++ Added front-end login feature similar to layout selector. (login required, not required, inherit)
++ Added drag-to-copy feature for better multi-language support. Thanks tuupola.
++ Added a new core plugin called skeleton to help out new plugin developers.
++ Added translation template generator to help out translators with translating Frog core and plugins.
++ Added Norwegian and Swedish core translations.
++ Added updated Chinese translation.
++ Removed split between frontend and backend.
++ Added an ID to the "view this page" link so it can be styled.
++ Added Danish translation for admin and file manager. Thanks Kenan.
++ Added Croatian translation for admin and file manager. Thanks jackie.
+
+- Fixed small bug with wrong link to rss feed in Normal theme - issue 166
+- Fixed bug with default tab listing showing controller which had set show_tab to false.
+- Fixed some SQLite related problems in the comment plugin
+- Fixed some i18n issues - issue 158
+- Fixed default_tab setting causing endless redirect - issue 106
+- Fixed issue with 'title' attribute in link(). Removed auto-generation of attribute for accessibility purposes. - issue 154
+- Fixed issue with Comment plugin where leave off http:// in website link would cause malformed url - issue 151
+- Fixed issue where using '..' would allow access to files outside public directory - issue 148
+- Fixed issue where saving page layout without title did not result in error - issue 146
+- Fixed setAllSettings failing to update settings with SQLite - issue 145
+- Fixed issue with page_requested event parameter not being backwards compatible - issue 141
+- Fixed USE_MOD_REWRITE is undefined in case of system not yet being installed - issue 132
+- Fixed issue with failed login redirecting to admin section once logged in. - issue 131
+- Fixed issue with settings table. Changed table setting's field value to TEXT instead of VARCHAR.
+- Fixed GET variables not being available in Frog's frontend. - issue 75
+- Fixed issue where AutoLoader did not find file for 'PageArchiveMonthIndex' - issue 101
+- Fixed issue where saving a page without title results in loss of entered content - issue 68
+- Fixed issue with filename lowercasing during upload of files. Thanks david - issue 113
+- Fixed previous()/next() functions to work for all levels. Thanks rid - issue 109
+- Fixed "Add child" tooltip for browsers not picking up the alt value of the icon.
+- Fixed broken View Site link for TLDs starting with 'a' - issue 116
+- Fixed XHTML compatibility problem with Comment plugin.
+- Fixed issue where only the last addJavascript was accepted.
+- Fixed admin CSS so that foreground colours are declared - issue 137
+- Fixed MOD_REWRITE test which produced double slashes - issue 150
+
+. Removed two <p>&nbsp;</p> statements from layout\edit.php - issue 168
+. Updated license statements to reflect change to GNU GPLv3 with an exception.
+. Improved replacement of letters like ö in the slug
+. Improved default 404 message for useability. - issue 163
+. Updated chinese translation - thanks westup
+. Updated comment plugin to make use of statistics_api plugin if available and enabled.
+. Restricted access to backend to roles administrator, developer and editor - issue 122
+. Updated readme.txt with requirements detail for MySQL server.
+. Updated file_manager plugin translations to conform to new template.
+. Updated comments in preparation for PHPDoc documentation.
+. Renamed root dir text files to avoid name conflicts and accomodate Windows users.
+. Renamed style.css into screen.css for more consistency with print.css in Normal layout.
+. Simplified Comment plugin to make use of Plugin::getAllSettings() and friends.
+. Commented .htaccess file for new users.
+. Removed slug field from Homepage metadata (and initial code fixed).
+. Enhanced comments in config.php template
+
+0.9.4 - released 2008-09-29
+
++ Added function to allow plugin devs to add one or more javascript file to the backend html for their plugin. (issue 35)
++ Added auto-detected link to a plugin's documentation page. Checks for existence of documentation() function in plugin's controller (issue 33)
++ Added auto-detected link to a plugin's settings page. Checks for existence of settings() function in plugin's controller (issue 32)
++ Added Indonesian translation
++ Added "View this page" link in the Edit page screen
++ Added "Tag to use this snippet" in the Snippets tab
++ Added en-messages.php.template to i18n directory of core to assist translators
++ Added admin section option to choose default tab after login (issue 29)
++ Added display of latest plugin version in Frog admin section
++ Added option to admin screen: allow html in page title. (default: false) (issue 66)
++ Added favicon
++ Added option to Plugin::addController to allow for controller without displaying a tab
+- Fixed lacking PNG support for IE6 (issue 64)
+- Fixed bug allowing HTML code in page title, now filtered with Kses
+- $values => $value in Page.childrenCount()
+- Fixed security issue with DB username password in index.php
+- Fixed incorrect return and if statement in DoPgsql.php
+- Fixed accidental assignment bug in Framework.php (issue 43)
+- Fixed bug where "Files" tab was accessible to users without roles. Now restricted to "administrator,developer,editor" (issue 42)
+- Fixed bug where using permissions string as parameter to addController had no effect (issue 41)
+- Fixed "s" echo for count in comment-each snippet of comment plugin
+- Fixed Gravatar bug to display default user image.
+. Updated all languages files to move file manager plugin translations to file manager plugin i18n directory
+. Updated core plugin index.php files to make use of the new "latest" functionality
+. Updated the comments plugin
+. Updated Dutch translation
+. Updated default Layout to find metadata from Edit.Page.Metadata tab
+. Updated default Normal Layout to check for existence of keywords, otherwise use default strings
+. Corrected the default RSS Feed, should now validate. Also added RSS subscription link tag to default Normal template.
+. Modified the place of the "filter" input in Snippets
+. Removed comments css code from admin.css
+. Changed default footer snippet to read copyright Madebyfrog.com instead of Philworks.com
+. Changed plugin list "from ..." wording to "by ...".
+. Updated Russian translation
+. Typo corrections on dummy text for default installation
+
+0.9.3 - released 2008-08-14
+
++ license change to AGPLv3
++ auto page tabs generation "javascript"
++ i18n for filemanager plugin - fr
++ i18n for plugin api
++ new improved installation script ( without choosing the use of PDO )
++ Adding Russian translation
++ Adding Czech translation
++ Bangla/Bengali translation added
++ Polish translation added
++ adding Dutch translation
++ comments to moved from core to plugin
++ adding keywords() and description() to page object
++ login error effect is now working
+- mktime() warning in archive plugin issue fixed
+- installation without PDO driver, but with PDO installed issue fixed
+- comment plugin edit fixed
+- fixed: page updated_on and published_on
+- issue #22: Fix for FileManager plugin
+- fixed CSS for ul list line-height
+- fixed sqlite use without mysql driver installed with pdo
+- fixed archive sql data
+- adding s if more then one comment in sql_data
+- schemas db comment fixed
+- protolype speeling mistake
+- fixed plugin comment constant usage
+- fixed comment plugin install issue
+. plugin comment enable.php removing update date and id
+. plugin comment enable (snippet - insertion)
+. removing autoenabling comment plugin from core website
+. Hungarian translation revision
+. css border input + prototype.js now in login
+
+0.9.2
+  bug fixed: issue 10 Remove Markdown/Textile from default plugin if not enabled
+  cleaning old files
+  bug fixed: issue 16 CSS files are pulling from the wrong path
+  some typo fixed
+  removing green and blue grey theme
+  bug fixed: SQLite 3 plugin crash the administration setting when PDO is not installed
+  adding new theme directories
+  bug fixed: file manager plugin viewing file with spaces
+  bug fixed: issue 14 deleting file in file manager plugin
+
+0.9.1
+  reorder snippet and layout
+  adding SQLite as a second database choice (sqlite 3 only)
+  adding SQLite 3 pluggin to make archive pluggin works
+  bug fixed: drag handle when opening new branch
+  bug fixed: tab (page part) position in page edit
+  bug fixed: internet explorer drag and drop bug
+
+0.9.0
+  Plugin API
+  reorganization of the code
+  bug fixed: deleting page part
+  pass to prototype 1.6 and scriptaculous 1.8
+  removing file manager from the core
+  adding file manager plugin
+  adding observer to the front end
+  adding behavior plugin page not found
+  bug fixed: 404 from fastcgi is now sended
+
+0.8.7
+  Framework bug fixed: php6 compatiblities (magic_quote doesn't exist anymore in php6)
+  bug fixed: installation config.php not config/config.php
+  suffix url in configuration file
+  simplify installation
+  page can now be protected from editor
+  new role: editor
+  user can now edit there profile (top right name link)
+  setting editable for administrator
+  more complex textile toolbar, modification of the markdown toolbar
+  simple markdown toolbar from (http://livepipe.net)
+  new filter for a tinyMCE wysiwyg editor
+  toolbar linked with filter by using: (http://livepipe.net/projects/control_textarea/)
+  new tab in page edit for page title and metadata (including tags)
+  validation xhtml/css
+  bug fixed: cross browser (safari, firefox, opera, internet explorer)
+  backend layout modification (color and disposition)
+  adding archive behavior to the release
+  new behavior implementation (frog give the control to behavior)
+  core add: comments (frontend and backend)
+  core add: stats (frontend and backend)
+  core add: tags (frontend and backend (metadata))
+  files add: renaming files
+  user gravatar implementation
+  removing subtitle in backend
+
+0.6.2 - 0.8.6
+  all experimentation of those version has been ignored
+
+0.6.1
+  restarting with the 0.5.8 version
+  change everything to utf-8
+  replaced innoDB to MyISAM
+
+0.5.9 - 0.6.0
+  all experimentation of those version has been ignored
+
+0.5.8
+  bug fixed: page reordering drop on level 1 repair
+  new framework
+  new user permission
+  new database schemas
+  no more dependencies for PDO
+  adding DoLite (database object lite)
+
+... a lot of experimentations have been done here ...
+
+0.2.2
+  localization of all the administration part of frog (english, french)
+  bug fixed: tab (page part) can't remove body part
+  view site link will NO LONGER open in a new window (really don't like it)
+  bug fixed: page toggle now al levels works
+  bug fixed: sortable drag and drop page on second level now display right level
+
+0.2.1
+  drag and drop sortable page position (order)
+  fontend page->children() now search first for the position and then for id
+  bug fixed: htmlentities now use utf8
+  bug fixed: url_match and url_start_with '/' compatibility
+  view site link will now open in a new window
+  bug fixed: more link in firefox osx now works (already fixed on radiantCMS)
+  bug fixed: trailing <? removed
+
+0.1.7
+  bug fixe filter and behavior listing now exclude all hidden files
+
+0.1.6
+  bug fixe edit page with a ended textarea stop display the reste of the content
+  bug fixe same as before but for snippet and layout too
+
+0.1.5
+  this is a beautiful day for me and all of you that use php5
+  frog framework is now 10 times more faster and more secure and php5 only
+  alot of optimisation have been done, and some security hole
+  routing optimization and singleton
+  flash singleton
+  zip library is now done
+  email library (from code igniter - thanks to them)
+  utilisation of php5 PDO
+
+0.1.4
+  database abstraction for mysql, postgresql and sqlite
+  adding behavior for pages (page plugin like Radiant CMS)
+  renaming framework to Frog (bye bye Maple!)
+  over 30 bug fix
+  installation script modified (database type added (and remove! this feature will be add in a other version sorry))
+  small code cleaning
+  files tab
+
+0.1.3
+  redesign for fitting the new name Frog
+  adding installer script
+  bug fix: doadd and doedit accessed direcly redirect to index
+  renaming all the project to Frog
+  remove version.php
+  add versin in admin/index.php
+
+0.1.2
+  adding version.php
+  adding markdown filter
+  bug fix: filter in snippet is now like in parts
+
+0.1.1
+  first public version with 1 week of dev... mega alpha beta version.

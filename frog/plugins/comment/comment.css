@@ -1,0 +1,77 @@
+/* Pagination style for the Comments Plugin */
+
+div.pagination {
+	padding:3px;
+	margin:3px;
+	text-align:center;
+}
+
+div.pagination a {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #ddd;
+	text-decoration: none; 
+	color: #5599cc;
+}
+div.pagination a:hover, div.pagination a:active {
+	border:1px solid #99ccee;
+	color: #5599cc;
+	background-color: #e5eff8;
+}
+div.pagination span.current {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #5599cc;
+	font-weight: bold;
+	background-color: #99ccee;
+	color: #FFF;
+}
+div.pagination span.disabled {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #f3f3f3;
+	color: #ccc;
+}
+
+#comments .moderate{
+	background:#FF9393 none repeat scroll 0 0;
+	border-color:#99CC99;
+	border-bottom:1px solid #E5EFF8;
+}
+#comments .approve {
+	background:#FF9393 none repeat scroll 0 0;
+	border-color:#99CC99;
+	border-bottom:1px solid #E5EFF8;	
+}
+#comments .even {
+	background:#CAE4F7 none repeat scroll 0 0;
+}
+#comments .odd {
+	background:#F7FBFF none repeat scroll 0 0;
+}
+#comments-def { margin-top: 20px; position: relative; }
+#comments-def .comments {}
+#comments-def .modify { position: absolute; top: 0px; right: 5px; width: 50px }
+#comments-def div {
+  padding: 2px 4px;
+  font-size: 90%;
+  font-weight: normal;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+#comments { list-style: none; }
+#comments li { position: relative; padding: 5px 10px; border-bottom: 1px solid #ddd; }
+#comments p { margin-top: .6em; }
+
+#comments-def { margin-top: 20px; position: relative; }
+#comments-def .comments {}
+#comments-def .modify { position: absolute; top: 0px; right: 5px; width: 50px }
+#comments-def div {
+  padding: 2px 4px;
+  font-size: 90%;
+  font-weight: normal;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+#comments .infos { position: absolute; top: 8px; right: 10px; font-size: .83em; color: #666; }
+#comments .approve .infos { color: #8b8; }

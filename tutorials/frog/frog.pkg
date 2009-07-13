@@ -1,0 +1,23 @@
+<refentry id="{@id}">
+    <refnamediv>
+        <refname>Core Developer's Guide for Frog CMS</refname>
+        <refpurpose>Providing core developers with documentation of the Frog CMS code.</refpurpose>
+    </refnamediv>
+    <refsynopsisdiv>
+        <author>
+            Martijn van der Kleijn, core developer &amp; release manager
+            <authorblurb>{@link mailto:martijn.niji@gmail.com martijn.niji@gmail.com}</authorblurb>
+        </author>
+        <author>
+            David Reimer, communications manager
+            <authorblurb>{@link mailto:djreimer@gmail.com djreimer@gmail.com}</authorblurb>
+        </author>
+    </refsynopsisdiv>
+    {@toc}
+    <refsect1 id="{@id intro}">
+        <title>Introduction</title>
+        <para>
+            Welcome to the Core Developer's Guide for Frog CMS... bladibla... bladibla...
+        </para>
+    </refsect1>
+</refentry>

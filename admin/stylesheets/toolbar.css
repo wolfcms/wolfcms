@@ -1,0 +1,101 @@
+
+/**
+ * Frog CMS - Content Management Simplified. <http://www.madebyfrog.com>
+ * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
+ *
+ * This file is part of Frog CMS.
+ *
+ * Frog CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Frog CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Frog CMS.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Frog CMS has made an exception to the GNU General Public License for plugins.
+ * See exception.txt for details and the full text.
+ */
+
+.filter_toolbar {
+	position:relative;
+	border:1px solid #ccc;
+	background-color:#F6F6F6;
+	width:100%;
+	height:26px;
+	border-bottom: 0;
+}
+
+.filter_toolbar li {
+	list-style:none;
+	float:left;
+}
+
+.filter_toolbar li a {
+	margin: 2px;
+	width:20px;
+	height:20px;
+	float:left;
+	display:block;
+	background-image:url(../images/toolbar-icons.gif);
+	border:1px solid #f6f6f6;
+}
+
+.filter_toolbar li a:hover {
+	border-color:#0A246A;
+	background-color: #B2BBD0;
+}
+
+.filter_toolbar li span {
+	display:none;
+}
+
+.filter_toolbar li a#filter_help_button {
+	position:absolute;
+	top:0;
+	right:0;
+	border-left-color:#d7d7d7;
+	border-right-color:#fff;
+}
+
+.filter_toolbar li a#filter_help_button:hover {
+	border-left-color:#5f9846;
+	border-right-color:#5f9846;
+}
+
+/* Theme */
+#filter_bold_button {background-position:0 0}
+#filter_italic_button {background-position:-60px 0}
+#filter_underline_button {background-position:-140px 0}
+#filter_strikethrough_button {background-position:-120px 0}
+#filter_unordered_list_button {background-position:-20px 0}
+#filter_ordered_list_button {background-position:-80px 0}
+#filter_left_justify_button {background-position:-460px 0}
+#filter_right_justify_button {background-position:-480px 0}
+#filter_center_text_button {background-position:-420px 0}
+#filter_justify_button {background-position:-440px 0}
+#filter_indent_button {background-position:-400px 0}
+#filter_outdent_button {background-position:-540px 0}
+#filter_link_button {background-position:-500px 0}
+#filter_unlink_button {background-position:-640px 0}
+#filter_sub_button {background-position:-600px 0}
+#filter_sup_button {background-position:-620px 0}
+#filter_image_button {background-position:-380px 0}
+#filter_help_button {background-position:-340px 0}
+#filter_code_button {background-position:-260px 0}
+#filter_hr_button {background-position:-360px 0}
+#filter_quote_button {background-position:-220px 0}
+
+#filter_paragraph_button { background-position: -20px 0; }
+#filter_h1_button { background-position: -660px 0; }
+#filter_h2_button { background-position: -680px 0; }
+#filter_h3_button { background-position: -700px 0; }
+#filter_h4_button { background-position: -720px 0; }
+#filter_h5_button { background-position: -740px 0; }
+#filter_h6_button { background-position: -760px 0; }
+

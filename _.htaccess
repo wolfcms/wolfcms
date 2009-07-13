@@ -1,0 +1,30 @@
+#
+# Setting Frog requirements
+#
+
+php_flag magic_quotes_gpc off
+AddDefaultCharset UTF-8
+Options -Indexes +FollowSymLinks
+
+#
+# Setting rewrite rules
+#
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Set next line to your Frog root - if not in subdir, then just / 
+  RewriteBase /frog/
+  
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  # Administration URL rewriting.
+  RewriteRule ^admin(.*)$ admin/index.php?$1 [L,QSA]
+  
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  # Main URL rewriting.
+  RewriteRule ^(.*)$ index.php?PAGE=$1 [L,QSA]
+
+</IfModule>

@@ -1,0 +1,182 @@
+
+/**
+ * Frog CMS - Content Management Simplified. <http://www.madebyfrog.com>
+ * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
+ *
+ * This file is part of Frog CMS.
+ *
+ * Frog CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Frog CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Frog CMS.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Frog CMS has made an exception to the GNU General Public License for plugins.
+ * See exception.txt for details and the full text.
+ */
+
+/* General ---------------------------------------------------------------- */
+
+body { background-color: #e5e5e5; }
+
+h3 { }
+a { color: #457; }
+a:hover { }
+h1 { color: #fff; background-color: #333; text-shadow: -1px 2px 3px #111; }
+h1 a { color: #fff; }
+h2 { }
+
+.warning { color: #D42B27; }
+
+/* Header ----------------------------------------------------------------- */
+
+#header { color: #fff; background-color: #242424; }
+#header a { color: #fff; }
+
+/* Navigation ------------------------------------------------------------- */
+
+#mainTabs a:link, #mainTabs a:visited { color: #eee; background-color: #323232; border-color: #454545; }
+#mainTabs a:hover { color: #242424; background-color: #999; border-color: #777; }
+#mainTabs a:link.current, #mainTabs a:visited.current { color: #242424; background-color: #e5e5e5; border-color: #e5e5e5; }
+
+/* Content ---------------------------------------------------------------- */
+
+#content-wrapper { background-color: #fff; border-color: #C7C7C7; }
+
+/* Sidebar ---------------------------------------------------------------- */
+
+#sidebar h2 { border-color: #D8E0EC; }
+#sidebar .box { background-color: #fff; border-color: #9BB5D0; }
+#sidebar p.button { background-color: #6184B2; }
+#sidebar p.button img { background-color: #446795; }
+#sidebar p.button a { color: #fff; }
+#sidebar p.button a:hover { color: #242424; }
+#sidebar .this { color: #999; }
+#sidebar .optional { color: #666; }
+
+/* Footer ----------------------------------------------------------------- */
+
+#footer { color: #555; }
+#footer .stats { color: #777; }
+
+/* Site links ------------------------------------------------------------- */
+
+#site-links { color: #888; }
+#site-links a, #site-links a:visited { color: #e5e5e5; }
+
+/* Messages --------------------------------------------------------------- */
+
+#info { background: #EDFE86; }
+#error { background: #a22; color: #fff; }
+#error a { color: #fff; font-weight: bold; }
+#success { background: #cfc; color: #051; }
+
+/* Index table ------------------------------------------------------------ */
+
+table.index { border-color: #ddd; }
+table.index th { background-color: #f5f5f5; }
+table.index td { border-color: #ddd; }
+table.index .node .user small { color: #666; }
+table.index .even:hover, table.index .odd:hover, table.index .even.hover, table.index .odd.hover { background-color: #f5f5f5;}
+table.index .node .snippet a, table.index .node .snippet a:visited, table.index .node .layout a, table.index .node .layout a:visited, table.index .node .user a, table.index .node .user a:visited { color: #000;}
+table.index td.note { color: silver; }
+
+/* Site Map --------------------------------------------------------------- */
+
+#site-map-root .page a .title, #site-map .page a .title, #site-map .node .page a:visited .title { color: #000; }
+#site-map .node .page .title.protected { color: #9eb3bf; }
+#site-map .node .page .info { color: #9eb3bf; }
+#site-map-def div { background-color: #f5f5f5;}
+#site-map { border-color: #ddd; }
+#site-map-root li, #site-map li { border-color: #ddd; }
+#site-map-root li:hover, #site-map-root li.hover, #site-map li:hover, #site-map li.hover { background-color: #f5f5f5; }
+#site-map ul { background-color: #fff; }
+#site-map .status { color: #9eb3bf; }
+#site-map .status.draft-status { color: #c00; }
+#site-map .status.published-status { color: #000; }
+#site-map .status.hidden-stats { color: #0c0; }
+
+/* Form Elements ---------------------------------------------------------- */
+
+.form-area { background-color: #ddd; }
+.form-area .error-with-field .error { color: #f00; }
+table.fieldset td { background-color: white; border-color: #ccc; }
+table.fieldset td.label .optional { color: #929488; }
+table.fieldset td.help { background-color: #eee; }
+table.fieldset .error-with-field small { color: red; }
+
+/* Tabs ------------------------------------------------------------------- */
+
+#tabs-meta .tab, #tabs .tab { background-color: #ddd; color: #000; }
+#tabs-meta .tab.here,
+#tabs .tab.here { background-color: #fff; }
+#tab-toolbar img { padding-bottom: 2px; }
+#meta-divs td { background-color: #fff; }
+#meta-divs td.label .optional { color: #929488; }
+#meta-divs, #pages { background-color: white; }
+#content #pages .page {}
+#content textarea { border-color: #ccc; }
+#content #pages label {}
+
+
+/* Popups ----------------------------------------------------------------- */
+
+#content .popup { background-color: white; border-color: silver; }
+#content .popup .busy { }
+#content .popup h3 { }
+#content .popup .close-link { color: #999; }
+
+/* Comments --------------------------------------------------------------- */
+
+#comments-def div { background-color: #f5f5f5; border-color: #ddd; }
+#comments li { border-color: #ddd; }
+#comments li:hover { background-color: #eee; }
+#comments .even {}
+#comments .odd {}
+#comments .infos { color: #666; }
+#comments .approve { color: #7a7; background-color: #dfd; border-color: #9c9; }
+#comments .approve a { color: #696; }
+#comments .approve .infos { color: #8b8; }
+
+/* Calendar (Date picker) ------------------------------------------------- */
+
+.dpDiv { background-color: #eee; border-color: #ccc; }
+/* the table (within the div) that holds the date picker calendar */
+.dpTable { color: #333; }
+.dpTable td { border-color: #eee; }
+/* a table row that holds date numbers (either blank or 1-31) */
+.dpTR {}
+/* the top table row that holds the month, year, and forward/backward buttons */
+.dpTitleTR { color: #fff; background-color: #e5e5e5; }
+/* the second table row, that holds the names of days of the week (Mo, Tu, We, etc.) */
+.dpDayTR {}
+/* the bottom table row, that has the "This Month" and "Close" buttons */
+.dpTodayButtonTR { background-color: #eee; }
+/* a table cell that holds a date number (1-31) */
+.dpTD { background-color: #fff; }
+.dpTDempty {}
+/* a table cell that holds a highlighted day (usually either today's date or the current date field value) */
+.dpDayHighlightTD {}
+/* the date number table cell that the mouse pointer is currently over (you can use contrasting colors to make it apparent which cell is being hovered over) */
+.dpTDHover { color: #fff; background-color: #e5e5e5; }
+/* the table cell that holds the name of the month and the year */
+.dpTitleTD {}
+/* a table cell that holds one of the forward/backward buttons */
+.dpButtonTD button { color: #fff; background-color: #47a; }
+/* the table cell that holds the "This Month" or "Close" button at the bottom */
+.dpTodayButtonTD { background-color: #ddd; }
+/* a table cell that holds the names of days of the week (Mo, Tu, We, etc.) */
+.dpDayTD { color: #666; background-color: #ddd; border-color: #ccc; }
+/* additional style information for the cell that holds a highlighted day (usually either today's date or the current date field value) */ 
+.dpDayHighlight { color: #47a; background-color: #fff; }
+/* the forward/backward buttons at the top */
+.dpButton { color: #fff; background-color: #47a; }
+/* the "This Month" and "Close" buttons at the bottom */
+.dpTodayButton { color: #666; }

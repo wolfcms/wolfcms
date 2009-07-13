@@ -1,0 +1,58 @@
+                       Frog CMS exception to GNU GPL
+                         Version 1, 15 April 2009
+
+      Copyright (C) 2009 Philippe Archambault and Martijn van der Kleijn
+                        <http://www.madebyfrog.com/>
+
+Everyone is permitted to copy and distribute verbatim copies of this license
+document, but changing it is not allowed.
+
+TERMS AND CONDITIONS
+
+0. Definitions
+
+“The Program” refers to Frog, a PHP-based content management system. It does not
+include the Plugins distributed along with Frog.
+
+“This Exception” refers to version 1 of the Frog CMS exception to the GNU GPL.
+
+“GNU GPL” refers to version 3 of the GNU General Public License.
+
+“A Plugin” refers to a set of files which work together and have the intention
+to extend or modify the behaviour of the Program, and use the Plugin interface
+that is part of the Program.
+
+1. Exceptions
+
+Linking the Program statically or dynamically with Plugins is making a combined
+work based on the Program.  Using inheritance to create new functionality such
+as a Plugin is considered to “modify” the Program according to the definitions
+set forth in the GNU GPL.
+
+Thus, the terms and conditions of the GNU GPL cover the whole combination of the
+Program including any Plugins.
+
+As a special exception, the copyright holders of the Program give you permission
+to create Plugins, and to copy and distribute those Plugins under terms of your
+choice, provided that those terms do not place additional restrictions on the
+Plugin or the Program.
+
+The Plugin must include the complete text with the terms that apply to it. The
+Plugin, or the documentation that accompanies it, must always clearly state for
+which version of the Program the Plugin was designed.
+
+2. Termination of the Exception
+
+The Exception is automatically terminated when the copyrights on the Program are
+violated in any manner.
+
+The Exception is automatically terminated when the terms placed on the Plugin
+are more restrictive than the GNU GPL.
+
+This Exception is automatically terminated when the terms placed on the Plugin
+would in any way compromise the validity of the GNU GPL for the Program beyond
+the exceptions listed in this document.
+
+This Exception cannot be used for a Plugin when the intent of the Plugin is to
+remove the code or portions of the code that are part of the Program from under
+the GNU GPL license.
