@@ -26,7 +26,7 @@
 
 //  Constantes  --------------------------------------------------------------
 
-define('FROG_VERSION', '0.9.5');
+define('FROG_VERSION', '0.5.5');
 
 define('FROG_ROOT', dirname(__FILE__).'/..');
 define('CORE_ROOT', FROG_ROOT.'/wolf');
