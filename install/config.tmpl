@@ -1,7 +1,7 @@
 <?php echo '<?php'; ?> 
 
 // Database information:
-// for SQLite, use sqlite:/tmp/frog.db (SQLite 3)
+// for SQLite, use sqlite:/tmp/wolf.db (SQLite 3)
 // The path can only be absolute path or :memory:
 // For more info look at: www.php.net/pdo
 
@@ -15,24 +15,24 @@ define('DB_USER', '<?php echo $db_user; ?>');
 define('DB_PASS', '<?php echo $db_pass; ?>');
 define('TABLE_PREFIX', '<?php echo $table_prefix; ?>');
 
-// Should Frog produce PHP error messages for debugging?
+// Should Wolf produce PHP error messages for debugging?
 define('DEBUG', false);
 
-// Should Frog check for updates on Frog itself and the installed plugins?
+// Should Wolf check for updates on Wolf itself and the installed plugins?
 define('CHECK_UPDATES', true);
 
-// The number of seconds before the check for a new Frog version times out in case of problems.
+// The number of seconds before the check for a new Wolf version times out in case of problems.
 define('CHECK_TIMEOUT', 3);
 
-// The full URL of your Frog CMS install
+// The full URL of your Wolf CMS install
 define('URL_PUBLIC', 'http://<?php echo substr(dirname($_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']), 0, strrpos(dirname($_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']), '/')); ?>/');
 
-// The directory name of your Frog CMS administration (you will need to change it manually)
+// The directory name of your Wolf CMS administration (you will need to change it manually)
 define('ADMIN_DIR', 'admin');
 
 // Change this setting to enable mod_rewrite. Set to "true" to remove the "?" in the URL.
 // To enable mod_rewrite, you must also change the name of "_.htaccess" in your
-// Frog CMS root directory to ".htaccess"
+// Wolf CMS root directory to ".htaccess"
 define('USE_MOD_REWRITE', false);
 
 // Add a suffix to pages (simluating static pages '.html')

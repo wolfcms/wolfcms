@@ -1,29 +1,29 @@
 <?php
 /**
- * Frog CMS - Content Management Simplified. <http://www.madebyfrog.com>
+ * Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
  * Copyright (C) 2008 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
- * This file is part of Frog CMS.
+ * This file is part of Wolf CMS.
  *
- * Frog CMS is free software: you can redistribute it and/or modify
+ * Wolf CMS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Frog CMS is distributed in the hope that it will be useful,
+ * Wolf CMS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Frog CMS.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Frog CMS has made an exception to the GNU General Public License for plugins.
+ * Wolf CMS has made an exception to the GNU General Public License for plugins.
  * See exception.txt for details and the full text.
  */
 
 /**
- * @package frog
+ * @package wolf
  * @subpackage views
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -33,11 +33,11 @@
  */
 ?>
 
-<h1>Translating Frog</h1>
+<h1>Translating Wolf</h1>
 <p>
     This will attempt to give you some information on how you can help out by translating
-    Frog or one of its plugins into your native language. Below are easy-to-follow steps
-    for translating Frog or a plugin.
+    Wolf or one of its plugins into your native language. Below are easy-to-follow steps
+    for translating Wolf or a plugin.
 </p>
 <h2>For plugin developers</h2>
 <p>
@@ -67,34 +67,34 @@
 <p>
     Just follow these easy steps to create a translations.
 </p>
-<p><strong>To translate Frog Core:</strong></p>
+<p><strong>To translate Wolf Core:</strong></p>
 <ol style="list-style-position: inside;">
     <li>Create a new translation file called "nl-message.php" where "nl" is the iso_639_1 language code for your language.</li>
     <li>Click on "<?php echo __('Create Core template'); ?>" in the sidebar.</li>
     <li>Copy the generated output.</li>
     <li>Paste it into your newly created translation file.</li>
     <li>Translate every string by filling the empty strings on the right of the => mark.</li>
-    <li>Place the newly created translation file in Frog's i18n directory. (This is: .../frog/app/i18n)</li>
-    <li>Go to the "Administration" section of Frog.</li>
+    <li>Place the newly created translation file in Wolf's i18n directory. (This is: .../wolf/app/i18n)</li>
+    <li>Go to the "Administration" section of Wolf.</li>
     <li>On the "Settings" tab, select your newly added language from the dropdown box and click Save.</li>
-    <li>View and test your new translation of the Frog interface.</li>
-    <li>Go to http://forum.madebyfrog.com/ let us know about your translation!</li>
+    <li>View and test your new translation of the Wolf interface.</li>
+    <li>Go to http://forum.madebywolf.com/ let us know about your translation!</li>
     <li>Thanks for helping out...</li>
 </ol>
 <p><em>Important notes:</em> please do <strong>not</strong> translate variable names like ":name".</p>
 
-<p><strong>To translate a Frog plugin:</strong></p>
+<p><strong>To translate a Wolf plugin:</strong></p>
 <ol style="list-style-position: inside;">
     <li>Create a new translation file called "nl-message.php" where "nl" is the iso_639_1 language code for your language.</li>
     <li>Click on "<?php echo __('Create Plugin templates'); ?>" in the sidebar.</li>
     <li>Copy the piece of generated output for the plugin you want to translate.</li>
     <li>Paste it into your newly created translation file for the plugin you want to translate.</li>
     <li>Translate every string by filling the empty strings on the right of the => mark.</li>
-    <li>Place the newly created translation file in the plugin's i18n directory. (This is: .../frog/plugins/&lt;pluginname&gt;/i18n)</li>
-    <li>Go to the "Administration" section of Frog.</li>
+    <li>Place the newly created translation file in the plugin's i18n directory. (This is: .../wolf/plugins/&lt;pluginname&gt;/i18n)</li>
+    <li>Go to the "Administration" section of Wolf.</li>
     <li>On the "Settings" tab, select your newly added language from the dropdown box and click Save.</li>
-    <li>View and test your new translation of the Frog interface.</li>
-    <li>Go to http://forum.madebyfrog.com/ let us know about your translation!</li>
+    <li>View and test your new translation of the Wolf interface.</li>
+    <li>Go to http://forum.madebywolf.com/ let us know about your translation!</li>
     <li>Thanks for helping out...</li>
 </ol>
 <p><em>Important notes:</em> please do <strong>not</strong> translate variable names like ":name".</p>
@@ -104,9 +104,9 @@
     These steps assume the earlier translation was created with this tool. If it wasn't, you'll have slightly more work to do.
 </p>
 <ol style="list-style-position: inside;">
-    <li>On the OLD Frog installation, generate a blank template.</li>
-    <li>Update Frog and/or its plugins to the latest release.</li>
-    <li>On the NEW Frog installation, generate a blank template.</li>
+    <li>On the OLD Wolf installation, generate a blank template.</li>
+    <li>Update Wolf and/or its plugins to the latest release.</li>
+    <li>On the NEW Wolf installation, generate a blank template.</li>
     <li>Use a tool like diff to spot any changes that were made.</li>
     <li>Based on the diff output, update your old translation file so it conforms to the new blank template.</li>
 </ol>

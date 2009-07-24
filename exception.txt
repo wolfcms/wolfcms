@@ -1,8 +1,8 @@
-                       Frog CMS exception to GNU GPL
+                       Wolf CMS exception to GNU GPL
                          Version 1, 15 April 2009
 
       Copyright (C) 2009 Philippe Archambault and Martijn van der Kleijn
-                        <http://www.madebyfrog.com/>
+                        <http://www.madebywolf.com/>
 
 Everyone is permitted to copy and distribute verbatim copies of this license
 document, but changing it is not allowed.
@@ -11,10 +11,10 @@ TERMS AND CONDITIONS
 
 0. Definitions
 
-“The Program” refers to Frog, a PHP-based content management system. It does not
-include the Plugins distributed along with Frog.
+“The Program” refers to Wolf, a PHP-based content management system. It does not
+include the Plugins distributed along with Wolf.
 
-“This Exception” refers to version 1 of the Frog CMS exception to the GNU GPL.
+“This Exception” refers to version 1 of the Wolf CMS exception to the GNU GPL.
 
 “GNU GPL” refers to version 3 of the GNU General Public License.
 

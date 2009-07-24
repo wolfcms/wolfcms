@@ -1,26 +1,26 @@
 <?php
 
 /**
- * Frog CMS - Content Management Simplified. <http://www.madebyfrog.com>
+ * Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  * Copyright (C) 2008 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
- * This file is part of Frog CMS.
+ * This file is part of Wolf CMS.
  *
- * Frog CMS is free software: you can redistribute it and/or modify
+ * Wolf CMS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Frog CMS is distributed in the hope that it will be useful,
+ * Wolf CMS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Frog CMS.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Frog CMS has made an exception to the GNU General Public License for plugins.
+ * Wolf CMS has made an exception to the GNU General Public License for plugins.
  * See exception.txt for details and the full text.
  */
 
@@ -29,7 +29,7 @@
 define('FROG_VERSION', '0.9.5');
 
 define('FROG_ROOT', dirname(__FILE__).'/..');
-define('CORE_ROOT', FROG_ROOT.'/frog');
+define('CORE_ROOT', FROG_ROOT.'/wolf');
 
 require_once(CORE_ROOT.'/utils.php');
 
@@ -41,9 +41,9 @@ require_once($config_file);
 if (DEBUG == false && isWritable($config_file)) {
     // Windows systems always have writable config files... skip those.
     if (substr(PHP_OS, 0, 3) != 'WIN') {
-        echo '<html><head><title>Frog CMS automatically disabled!</title></head><body>';
-        echo '<h1>Frog CMS automatically disabled!</h1>';
-        echo '<p>Frog CMS has been disabled as a security precaution.</p>';
+        echo '<html><head><title>Wolf CMS automatically disabled!</title></head><body>';
+        echo '<h1>Wolf CMS automatically disabled!</h1>';
+        echo '<p>Wolf CMS has been disabled as a security precaution.</p>';
         echo '<p><strong>Reason:</strong> the configuration file was found to be writable.</p>';
         echo '</body></html>';
         exit();

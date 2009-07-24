@@ -3,11 +3,11 @@
 /**
  * Russian language file for plugin file_manager
  *
- * @package frog
+ * @package wolf
  * @subpackage plugin.file_manager.translations
  *
  * @author Maslakov Alexander <jmas.ukraine@gmail.com>
- * @version Frog 0.9.4
+ * @version Wolf 0.9.4
  */
 
     return array(

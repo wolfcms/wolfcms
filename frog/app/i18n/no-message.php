@@ -3,11 +3,11 @@
 /**
  * Norwegian language file
  *
- * @package frog
+ * @package wolf
  * @subpackage translations
  *
  * @author Philip Suffren
- * @version Frog x.y.z
+ * @version Wolf x.y.z
  */
 
 return array(

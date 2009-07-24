@@ -3,11 +3,11 @@
 /**
  * Indonesian language file
  *
- * @package frog
+ * @package wolf
  * @subpackage translations
  *
  * @author Rendra Stanfordi <renstanford@gmail.com>
- * @version Frog 0.9.4
+ * @version Wolf 0.9.4
  * @link http://okecoy.com
  */
 

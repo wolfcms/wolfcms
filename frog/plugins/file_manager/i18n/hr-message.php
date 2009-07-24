@@ -3,11 +3,11 @@
     /**
      * Croatian file for plugin file_manager
      *
-     * @package frog
+     * @package wolf
      * @subpackage plugin.file_manager.translations
      *
      * @author Dejan Andjelkovic <dejan79@gmail.com>
-     * @version Frog 0.9.5
+     * @version Wolf 0.9.5
      */
 
     return array(

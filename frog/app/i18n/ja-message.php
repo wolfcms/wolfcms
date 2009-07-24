@@ -3,11 +3,11 @@
 /**
  * Japanese language file
  *
- * @package frog
+ * @package wolf
  * @subpackage translations
  *
  * @author Sunao Hara
- * @version Frog x.y.z
+ * @version Wolf x.y.z
  */
  
 return array(

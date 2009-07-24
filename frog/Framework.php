@@ -1,26 +1,26 @@
 <?php
 
 /**
- * Frog CMS - Content Management Simplified. <http://www.madebyfrog.com>
+ * Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  * Copyright (C) 2008 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
- * This file is part of Frog CMS.
+ * This file is part of Wolf CMS.
  *
- * Frog CMS is free software: you can redistribute it and/or modify
+ * Wolf CMS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Frog CMS is distributed in the hope that it will be useful,
+ * Wolf CMS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Frog CMS.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Frog CMS has made an exception to the GNU General Public License for plugins.
+ * Wolf CMS has made an exception to the GNU General Public License for plugins.
  * See exception.txt for details and the full text.
  */
 
@@ -197,7 +197,7 @@ final class Dispatcher
     public static function getController()
     {
         // Check for settable default controller
-        // if it's a plugin and not activated, revert to Frog hardcoded default
+        // if it's a plugin and not activated, revert to Wolf hardcoded default
         if (isset(self::$params[0]) && self::$params[0] == 'plugin' )
         {
             $loaded_plugins = Plugin::$plugins;
@@ -721,7 +721,7 @@ class View
  * that contain the business logic of your application (render a blog post, log a user in,
  * delete something and redirect, etc).
  *
- * In the Frog class you can define what urls / routes map to what Controllers and
+ * In the Wolf class you can define what urls / routes map to what Controllers and
  * methods. Each method can either:
  *
  * - return a string response

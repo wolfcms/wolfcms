@@ -3,11 +3,11 @@
 /**
  * Swedish language file
  *
- * @package frog
+ * @package wolf
  * @subpackage translations
  *
  * @author Andreas Johansson
- * @version Frog x.y.z
+ * @version Wolf x.y.z
  * @link http://www.ibuypink.com
  */
 

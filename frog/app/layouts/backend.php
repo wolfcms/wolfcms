@@ -22,19 +22,19 @@
     <script type="text/javascript" charset="utf-8" src="javascripts/effects.js"></script>
     <script type="text/javascript" charset="utf-8" src="javascripts/dragdrop.js"></script>
     <script type="text/javascript" charset="utf-8" src="javascripts/cp-datepicker.js"></script>
-    <script type="text/javascript" charset="utf-8" src="javascripts/frog.js"></script>
+    <script type="text/javascript" charset="utf-8" src="javascripts/wolf.js"></script>
     <script type="text/javascript" charset="utf-8" src="javascripts/control.textarea.js"></script>
     
 <?php foreach(Plugin::$plugins as $plugin_id => $plugin): ?>
 <?php if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $plugin_id . '.js')): ?>
-    <script type="text/javascript" charset="utf-8" src="../frog/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.js"></script>
 <?php endif; ?>
 <?php if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $plugin_id . '.css')): ?>
-    <link href="../frog/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.css" media="screen" rel="Stylesheet" type="text/css" />
+    <link href="../wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.css" media="screen" rel="Stylesheet" type="text/css" />
 <?php endif; ?>
 <?php endforeach; ?>
 <?php foreach(Plugin::$javascripts as $jscript_plugin_id => $javascript): ?>
-    <script type="text/javascript" charset="utf-8" src="../frog/plugins/<?php echo $javascript; ?>"></script>
+    <script type="text/javascript" charset="utf-8" src="../wolf/plugins/<?php echo $javascript; ?>"></script>
 <?php endforeach; ?>
 
 <?php $action = Dispatcher::getAction(); ?>
@@ -97,7 +97,7 @@
     <hr class="hidden" />
     <div id="footer">
       <p>
-      <?php echo __('Thank you for using'); ?> <a href="http://www.madebyfrog.com/" target="_blank">Frog CMS</a> <?php echo FROG_VERSION; ?> | <a href="http://forum.madebyfrog.com/" target="_blank"><?php echo __('Feedback'); ?></a>
+      <?php echo __('Thank you for using'); ?> <a href="http://www.madebywolf.com/" target="_blank">Wolf CMS</a> <?php echo FROG_VERSION; ?> | <a href="http://forum.madebywolf.com/" target="_blank"><?php echo __('Feedback'); ?></a>
       </p>
 <?php if (DEBUG): ?>
       <p class="stats"> <?php echo __('Page rendered in'); ?> <?php echo execution_time(); ?> <?php echo __('seconds'); ?>

@@ -3,11 +3,11 @@
 /**
  * French language file
  *
- * @package frog
+ * @package wolf
  * @subpackage translations
  *
  * @author Philippe Archambault
- * @version Frog x.y.z
+ * @version Wolf x.y.z
  */
 
 return array(

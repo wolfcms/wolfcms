@@ -3,11 +3,11 @@
     /**
      * Dutch file for plugin skeleton
      *
-     * @package frog
+     * @package wolf
      * @subpackage plugin.skeleton.translations
      *
      * @author Martijn van der Kleijn <martijn.niji@gmail.com>
-     * @version Frog 0.9.5
+     * @version Wolf 0.9.5
      */
 
     return array(

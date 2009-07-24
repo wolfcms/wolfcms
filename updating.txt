@@ -1,4 +1,4 @@
-# FROG CMS - INFORMATION ABOUT UPDATING
+# Wolf CMS - INFORMATION ABOUT UPDATING
 
 
 ## General ##
@@ -8,20 +8,20 @@ upgrade from 0.9.3 to 0.9.4 and only then to 0.9.5.
 
 If you're upgrading from a pre-0.9.4 release, consider installing from scratch.
 
-Please be aware that all Frog 0.9.4 plugins except the core plugins will require
-some minor updates to work with Frog 0.9.5. Please check with the plugin authors
+Please be aware that all Wolf 0.9.4 plugins except the core plugins will require
+some minor updates to work with Wolf 0.9.5. Please check with the plugin authors
 for updated plugins.
 
 
 ## UPDATING FROM 0.9.4 to 0.9.5 ##
 
-WARNING - The split between frontend and backend in the Frog code has been
+WARNING - The split between frontend and backend in the Wolf code has been
           removed in this version. This has led to significant code and path
           changes.
 
           You will need to update *ALL* files.
 
-Please remember to MAKE BACKUPS of Frog and your DB before trying to update!
+Please remember to MAKE BACKUPS of Wolf and your DB before trying to update!
 The upgrade sequence described below will remove all the old files. Be sure to
 have a full backup!
 
@@ -37,7 +37,7 @@ PLEASE READ THROUGH ALL OF THE STEPS BEFORE STARTING THE PROCEDURE.
 
 2. Create a FULL backup of your all your files. (including config.php)
 
-3. Download and unzip Frog 0.9.5 to a temporary directory.
+3. Download and unzip Wolf 0.9.5 to a temporary directory.
 
 4. Remove the following files/directories from your temporary 0.9.5 directory:
     - The "public" directory.
@@ -47,15 +47,15 @@ PLEASE READ THROUGH ALL OF THE STEPS BEFORE STARTING THE PROCEDURE.
    (plugins generally shouldn't remove data from the database when being
     disabled, so this shouldn't be a problem.)
 
-6. Remove ALL the files of your old Frog 0.9.4 installation EXCEPT the "public"
+6. Remove ALL the files of your old Wolf 0.9.4 installation EXCEPT the "public"
    directory. (and except any custom files you may have added of course)
 
-7. Copy/upload ALL files from the temporary directory to your old 0.9.4 Frog
+7. Copy/upload ALL files from the temporary directory to your old 0.9.4 Wolf
    installation's directory.
 
 8. Copy the original config.php file to your new installation.
 
-9. Run the following SQL commands on your Frog database after adding a prefix to
+9. Run the following SQL commands on your Wolf database after adding a prefix to
    the table names if necessary:
 
     ### NOTE: MYSQL commands, but SQLite commands should be almost the same.
@@ -78,20 +78,20 @@ PLEASE READ THROUGH ALL OF THE STEPS BEFORE STARTING THE PROCEDURE.
 11. Check the new htaccess file settings against your old htaccess file.
 
 12. Lastly, you need to add some options to the config.php file that were added
-    in Frog 0.9.5:
+    in Wolf 0.9.5:
 
-    // Should Frog check for updates on Frog itself and the installed plugins?
+    // Should Wolf check for updates on Wolf itself and the installed plugins?
     define('CHECK_UPDATES', true);
 
-    // The number of seconds before the check for a new Frog version times out in case of problems.
+    // The number of seconds before the check for a new Wolf version times out in case of problems.
     define('CHECK_TIMEOUT', 3);
 
-13. Re-install any old plugins that your Frog installation were using.
+13. Re-install any old plugins that your Wolf installation were using.
 
 14. Re-enable the plugins one-by-one, each time checking your site remains working.
 
-15. That should be it! Test out your new Frog 0.9.5 system.
-    Remember to remove the write permissions from config.php, otherwise, Frog
+15. That should be it! Test out your new Wolf 0.9.5 system.
+    Remember to remove the write permissions from config.php, otherwise, Wolf
     will complain.
 
 ## TROUBLESHOOTING / NOTES ##
@@ -99,11 +99,11 @@ PLEASE READ THROUGH ALL OF THE STEPS BEFORE STARTING THE PROCEDURE.
 - If you don't see your old comments in the administration area, try disabling and
   then re-enabling the comment plugin.
 
-- The plugin system was changed in Frog 0.9.5 so try to download and install
-  plugins that are compatible with Frog 0.9.5. Older plugins may or may not work.
+- The plugin system was changed in Wolf 0.9.5 so try to download and install
+  plugins that are compatible with Wolf 0.9.5. Older plugins may or may not work.
 
 - The public directory now contains a themes subdirectory in a default installation.
-  It is advised that all themes for Frog follow the same approach as the
+  It is advised that all themes for Wolf follow the same approach as the
   Normal theme.
 
 - It is advised to always use the htaccess file. You can dis/enable the url

@@ -3,11 +3,11 @@
 /**
  * Polish language file
  *
- * @package frog
+ * @package wolf
  * @subpackage translations
  *
  * @author Marcin Chwedziak
- * @version Frog x.y.z
+ * @version Wolf x.y.z
  */
 
 return array(

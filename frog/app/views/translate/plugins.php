@@ -1,30 +1,30 @@
 <?php
 
 /**
- * Frog CMS - Content Management Simplified. <http://www.madebyfrog.com>
+ * Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
  * Copyright (C) 2008 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
- * This file is part of Frog CMS.
+ * This file is part of Wolf CMS.
  *
- * Frog CMS is free software: you can redistribute it and/or modify
+ * Wolf CMS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Frog CMS is distributed in the hope that it will be useful,
+ * Wolf CMS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Frog CMS.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Frog CMS has made an exception to the GNU General Public License for plugins.
+ * Wolf CMS has made an exception to the GNU General Public License for plugins.
  * See exception.txt for details and the full text.
  */
 
 /**
- * @package frog
+ * @package wolf
  * @subpackage views
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -84,11 +84,11 @@ function writeTemplate($pluginname, $strings) {
     /**
      * YourLanguage file for plugin '.$pluginname.'
      *
-     * @package frog
+     * @package wolf
      * @subpackage plugin.'.$pluginname.'.translations
      *
      * @author Your Name <email@domain.something>
-     * @version Frog x.y.z
+     * @version Wolf x.y.z
      */
 
     return array(

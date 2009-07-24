@@ -3,11 +3,11 @@
 /**
  * Czech language file
  *
- * @package frog
+ * @package wolf
  * @subpackage translations
  *
  * @author David Vlcek
- * @version Frog x.y.z
+ * @version Wolf x.y.z
  */
 
 return array(

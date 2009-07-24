@@ -1,39 +1,39 @@
 <?php
 /**
- * Frog CMS - Content Management Simplified. <http://www.madebyfrog.com>
+ * Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  * Copyright (C) 2008 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
- * This file is part of Frog CMS.
+ * This file is part of Wolf CMS.
  *
- * Frog CMS is free software: you can redistribute it and/or modify
+ * Wolf CMS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Frog CMS is distributed in the hope that it will be useful,
+ * Wolf CMS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Frog CMS.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Frog CMS has made an exception to the GNU General Public License for plugins.
+ * Wolf CMS has made an exception to the GNU General Public License for plugins.
  * See exception.txt for details and the full text.
  */
 
 /**
  * The Comment plugin provides an interface to enable adding and moderating page comments.
  *
- * @package frog
+ * @package wolf
  * @subpackage plugin.comment
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author Bebliuc George <bebliuc.george@gmail.com>
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @version 1.2.0
- * @since Frog version 0.9.3
+ * @since Wolf version 0.9.3
  * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Philippe Archambault, Bebliuc George & Martijn van der Kleijn, 2008
  */
@@ -44,9 +44,9 @@ Plugin::setInfos(array(
 	'version'     => '1.2.1',
 	'license'     => 'GPL',
 	'author'      => 'Philippe Archambault',
-	'website'     => 'http://www.madebyfrog.com/',
-    'update_url'  => 'http://www.madebyfrog.com/plugin-versions.xml',
-	'require_frog_version' => '0.9.5'
+	'website'     => 'http://www.madebywolf.com/',
+    'update_url'  => 'http://www.madebywolf.com/plugin-versions.xml',
+	'require_wolf_version' => '0.9.5'
 ));
 
 
@@ -273,7 +273,7 @@ function captcha()
             echo '<p>'.__('Please insert the result of the arithmetical operation from the following image:').'</p>';
         }
 
-        echo '<img id="comment-captcha" src="'.URL_PUBLIC.'frog/plugins/comment/image.php" alt="'.__('Please insert the result of the arithmetical operation from this image.').'" />';
+        echo '<img id="comment-captcha" src="'.URL_PUBLIC.'wolf/plugins/comment/image.php" alt="'.__('Please insert the result of the arithmetical operation from this image.').'" />';
         echo ' = <input id="comment-captcha-answer" class="input" type="text" name="comment[secure]" />';
     }
 

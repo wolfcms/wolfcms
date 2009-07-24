@@ -3,11 +3,11 @@
 /**
  * Dutch language file
  *
- * @package frog
+ * @package wolf
  * @subpackage translations
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @version Frog x.y.z
+ * @version Wolf x.y.z
  */
 
 return array(

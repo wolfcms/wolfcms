@@ -26,8 +26,8 @@ This skeleton plugin makes use/provides the following features:
 * To use the settings and documentation pages, you will first need to enable
   the plugin!
 
-* In index.php, change the value of require_frog_version into a non-existant
-  Frog version and look at the plugins list (in the administration section)
+* In index.php, change the value of require_wolf_version into a non-existant
+  Wolf version and look at the plugins list (in the administration section)
   again.
 
 * Did you know you can have the controller make a visible tab (or not)? Change

@@ -1,29 +1,29 @@
 <?php
 /**
- * Frog CMS - Content Management Simplified. <http://www.madebyfrog.com>
+ * Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
- * This file is part of Frog CMS.
+ * This file is part of Wolf CMS.
  *
- * Frog CMS is free software: you can redistribute it and/or modify
+ * Wolf CMS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Frog CMS is distributed in the hope that it will be useful,
+ * Wolf CMS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Frog CMS.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Frog CMS has made an exception to the GNU General Public License for plugins.
+ * Wolf CMS has made an exception to the GNU General Public License for plugins.
  * See exception.txt for details and the full text.
  */
 
 /**
- * @package frog
+ * @package wolf
  * @subpackage views
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
@@ -58,7 +58,7 @@
 <?php $loaded_plugins = Plugin::$plugins; ?>
 <?php $loaded_filters = Filter::$filters; ?>
 <?php foreach(Plugin::findAll() as $plugin): ?>
-    <?php $disabled = (isset($plugin->require_frog_version) and $plugin->require_frog_version > FROG_VERSION); ?>
+    <?php $disabled = (isset($plugin->require_wolf_version) and $plugin->require_wolf_version > FROG_VERSION); ?>
     <tr<?php if ($disabled) echo ' class="disabled"'; ?>>
       <td class="plugin">
         <h4>
@@ -70,7 +70,7 @@
         ?>
         <span class="from"><?php if (isset($plugin->author)) echo ' '.__('by').' '.$plugin->author; ?></span>
         </h4>
-        <p><?php echo $plugin->description; ?> <?php if ($disabled) echo '<span class="notes">'.__('This plugin CANNOT be enabled! It requires Frog version :v.', array(':v' => $plugin->require_frog_version)).'</span>'; ?></p>
+        <p><?php echo $plugin->description; ?> <?php if ($disabled) echo '<span class="notes">'.__('This plugin CANNOT be enabled! It requires Wolf version :v.', array(':v' => $plugin->require_wolf_version)).'</span>'; ?></p>
       </td>
       <td class="pluginSettings">
       <?php
@@ -112,7 +112,7 @@
 <?php endforeach; ?>
           </select>
         </td>
-        <td class="help"><?php echo __('This will set your language for the backend.'); ?><br /><?php echo __('Help us <a href=":url">translate Frog</a>!', array(':url' => get_url('translate'))); ?></td>
+        <td class="help"><?php echo __('This will set your language for the backend.'); ?><br /><?php echo __('Help us <a href=":url">translate Wolf</a>!', array(':url' => get_url('translate'))); ?></td>
       </tr>
       <tr>
         <td class="label"><label for="setting_theme"><?php echo __('Administration Theme'); ?></label></td>

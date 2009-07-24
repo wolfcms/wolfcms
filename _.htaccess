@@ -1,5 +1,5 @@
 #
-# Setting Frog requirements
+# Setting Wolf CMS requirements
 #
 
 php_flag magic_quotes_gpc off
@@ -12,8 +12,8 @@ Options -Indexes +FollowSymLinks
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  # Set next line to your Frog root - if not in subdir, then just / 
-  RewriteBase /frog/
+  # Set next line to your Wolf CMS root - if not in subdir, then just /
+  RewriteBase /wolf/
   
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d

@@ -1,7 +1,7 @@
 <refentry id="{@id}">
     <refnamediv>
-        <refname>Core Developer's Guide for Frog CMS</refname>
-        <refpurpose>Providing core developers with documentation of the Frog CMS code.</refpurpose>
+        <refname>Core Developer's Guide for Wolf CMS</refname>
+        <refpurpose>Providing core developers with documentation of the Wolf CMS code.</refpurpose>
     </refnamediv>
     <refsynopsisdiv>
         <author>
@@ -17,7 +17,7 @@
     <refsect1 id="{@id intro}">
         <title>Introduction</title>
         <para>
-            Welcome to the Core Developer's Guide for Frog CMS... bladibla... bladibla...
+            Welcome to the Core Developer's Guide for Wolf CMS... bladibla... bladibla...
         </para>
     </refsect1>
 </refentry>

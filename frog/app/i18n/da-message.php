@@ -3,11 +3,11 @@
 	/**
 	 * Danish language file [DA/dk]
 	 *
-	 * @package frog
+	 * @package wolf
 	 * @subpackage translations
 	 *
      * @author Kenan Christensen <kenan@devmore.org>
-	 * @version Frog x.y.z
+	 * @version Wolf x.y.z
 	 */
 
 return array(

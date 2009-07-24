@@ -3,18 +3,18 @@
 /**
  * Chinese-simple language file
  *
- * @package frog
+ * @package wolf
  * @subpackage translations
  *
  * @author westup <email@domain.something>
  * @link http://www.lintaorun.com
  * @author SunUltimate <jzb1987@gmail.com>
  * @link http://blog.ultimatesun.cn
- * @version Frog 0.9.5
+ * @version Wolf 0.9.5
  */
 
     return array(
-        //'<b>Information!</b> New Frog version available (v. <b>:version</b>)! Visit <a href="http://www.madebyfrog.com/">http://www.madebyfrog.com/</a> to upgrade your version!' => '',
+        //'<b>Information!</b> New Wolf version available (v. <b>:version</b>)! Visit <a href="http://www.madebywolf.com/">http://www.madebywolf.com/</a> to upgrade your version!' => '',
         //'A translatable string with a %param% system.' => '',
         //'A translatable string.' => '',
         'Action disabled!' => '操作无效!',
@@ -68,7 +68,7 @@
         'Filter' => '过滤器',
         'Forgot password' => '忘记密码',
         'Forgot password?' => '忘记密码?',
-        //'Help us <a href=":url">translate Frog</a>!' => '',
+        //'Help us <a href=":url">translate Wolf</a>!' => '',
         'Hidden' => '隐藏',
         'Just replace <b>snippet</b> by the snippet name you want to include.' => '只需要用共用片段名称来替换，代码格式如下',
         //'Keywords' => '',
@@ -148,7 +148,7 @@
         'Thank you for using' => '感谢您使用',
         'The avatars are automatically linked for those with a <a href="http://www.gravatar.com/" target="_blank">Gravatar</a> (a free service) account.' => '头像链接来源于<a href="http://www.gravatar.com" target="_blank">Gravatar</a>,一个免费的头像接口网站.',
         //'This allows you to specify which tab (controller) you will see by default after login.' => '',
-        //'This plugin CANNOT be enabled! It requires Frog version :v.' => '',
+        //'This plugin CANNOT be enabled! It requires Wolf version :v.' => '',
         'This will change your Administration theme.' => '这会改变管理区主题.',
         'This will set your language for the backend.' => '这会设置你的后台语言.',
         'Use layouts to apply a visual look to a Web page. Layouts can contain special tags to include

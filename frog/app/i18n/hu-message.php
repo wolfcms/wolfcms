@@ -3,11 +3,11 @@
 /**
  * Hungarian language file
  *
- * @package frog
+ * @package wolf
  * @subpackage translations
  *
  * @author H.S.Laszlo <http://www.bluedesign.hu>
- * @version Frog x.y.z
+ * @version Wolf x.y.z
  */
 
 return array(

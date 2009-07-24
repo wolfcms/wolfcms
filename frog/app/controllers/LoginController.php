@@ -1,31 +1,31 @@
 <?php 
 
 /**
- * Frog CMS - Content Management Simplified. <http://www.madebyfrog.com>
+ * Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  * Copyright (C) 2008 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
- * This file is part of Frog CMS.
+ * This file is part of Wolf CMS.
  *
- * Frog CMS is free software: you can redistribute it and/or modify
+ * Wolf CMS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * Frog CMS is distributed in the hope that it will be useful,
+ * Wolf CMS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Frog CMS.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Frog CMS has made an exception to the GNU General Public License for plugins.
+ * Wolf CMS has made an exception to the GNU General Public License for plugins.
  * See exception.txt for details and the full text.
  */
 
 /**
- * @package frog
+ * @package wolf
  * @subpackage controllers
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
@@ -40,7 +40,7 @@
  * It also has functionality to email a new password to the user if that user
  * cannot remember his or her password.
  *
- * @package frog
+ * @package wolf
  * @subpackage controllers
  * 
  * @version 0.1
@@ -159,9 +159,9 @@ class LoginController extends Controller
             $user->save();
             
             $email = new Email();
-            $email->from('no-reply@madebyfrog.com', 'Frog CMS');
+            $email->from('no-reply@madebywolf.com', 'Wolf CMS');
             $email->to($user->email);
-            $email->subject('Your new password from Frog CMS');
+            $email->subject('Your new password from Wolf CMS');
             $email->message('username: '.$user->username."\npassword: ".$new_pass);
             $email->send();
             
@@ -177,7 +177,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Checks what the latest Frog version is that is available at madebyfrog.com
+     * Checks what the latest Wolf version is that is available at madebywolf.com
      *
      * @todo Make this check optional through the configuration file
      */
@@ -189,10 +189,10 @@ class LoginController extends Controller
         if (!defined('CHECK_TIMEOUT')) define('CHECK_TIMEOUT', 5);
         $ctx = stream_context_create(array('http' => array('timeout' => CHECK_TIMEOUT)));
         
-        $v = file_get_contents('http://www.madebyfrog.com/version/', 0, $ctx);
+        $v = file_get_contents('http://www.madebywolf.com/version/', 0, $ctx);
         if ($v > FROG_VERSION)
         {
-            Flash::set('error', __('<b>Information!</b> New Frog version available (v. <b>:version</b>)! Visit <a href="http://www.madebyfrog.com/">http://www.madebyfrog.com/</a> to upgrade your version!',
+            Flash::set('error', __('<b>Information!</b> New Wolf version available (v. <b>:version</b>)! Visit <a href="http://www.madebywolf.com/">http://www.madebywolf.com/</a> to upgrade your version!',
                        array(':version' => $v )));
         }
     }

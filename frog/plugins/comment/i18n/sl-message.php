@@ -3,11 +3,11 @@
     /**
      * Slovenian file for plugin comment
      *
-     * @package frog
+     * @package wolf
      * @subpackage plugin.comment.translations
      *
      * @author Andrej Čremožnik <andrej.cremoznik@gmail.com>
-     * @version Frog 0.9.5
+     * @version Wolf 0.9.5
      */
 
     return array(

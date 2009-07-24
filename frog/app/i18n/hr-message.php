@@ -3,16 +3,16 @@
     /**
      * Croatian language file
      *
-     * @package frog
+     * @package wolf
      * @subpackage translations
      *
      * @author Dejan Andjelkovic <dejan79@gmail.com>
-     * @version Frog 0.9.5
+     * @version Wolf 0.9.5
      */
 
     return array(
     	'&#8212; naslijedi &#8212;' => '',
-	'<b>Information!</b> New Frog version available (v. <b>:version</b>)! Visit <a href="http://www.madebyfrog.com/">http://www.madebyfrog.com/</a> to upgrade your version!' => '<b>Obavijest!</b> Nova verzija Frog CMS-a je dostupna (v. <b>:version</b>)! Posjetite <a href="http://www.madebyfrog.com/">http://www.madebyfrog.com/</a> kako biste ažurirali na novu verziju!',
+	'<b>Information!</b> New Wolf version available (v. <b>:version</b>)! Visit <a href="http://www.madebywolf.com/">http://www.madebywolf.com/</a> to upgrade your version!' => '<b>Obavijest!</b> Nova verzija Wolf CMS-a je dostupna (v. <b>:version</b>)! Posjetite <a href="http://www.madebywolf.com/">http://www.madebywolf.com/</a> kako biste ažurirali na novu verziju!',
 	'A translatable string with a %param% system.' => 'Niz za prijevod sa %param% sustavom.',
 	'A translatable string.' => 'Niz za prijevod',
 	'Action disabled!' => 'Akcija onemogućena!',
@@ -67,7 +67,7 @@
 	'Filter' => 'Filter',
 	'Forgot password' => 'Zaboravljena lozinka',
 	'Forgot password?' => 'Zaboravili ste lozinku?',
-	'Help us <a href=":url">translate Frog</a>!' => 'Pomozite nam <a href=":url">prevesti Frog</a>!',
+	'Help us <a href=":url">translate Wolf</a>!' => 'Pomozite nam <a href=":url">prevesti Wolf</a>!',
 	'Hidden' => 'Skriveno',
 	'Just replace <b>snippet</b> by the snippet name you want to include.' => 'Jednostavno zamijenite <b>komadić</b> sa nazivom komadića koji želite ubaciti u kod',
 	'Keywords' => 'Ključne riječi',
@@ -150,7 +150,7 @@
 	'Thank you for using' => 'Hvala što koristite',
 	'The avatars are automatically linked for those with a <a href="http://www.gravatar.com/" target="_blank">Gravatar</a> (a free service) account.' => 'Avatari se automatski povezuju sa <a href="http://www.gravatar.com/" target="_blank">Gravatar</a> (besplatan servis) računom.',
 	'This allows you to specify which tab (controller) you will see by default after login.' => 'Ovo vam omogućuje da odredite koja kartica (kontroler) će biti zadana (prva vidljiva) nakon prijave.',
-	'This plugin CANNOT be enabled! It requires Frog version :v.' => 'Ovaj plugin se NE MOŽE omogućiti! Zahtjeva verziju Frog-a :v.',
+	'This plugin CANNOT be enabled! It requires Wolf version :v.' => 'Ovaj plugin se NE MOŽE omogućiti! Zahtjeva verziju Wolf-a :v.',
 	'This will change your Administration theme.' => 'Ovo će izmjeniti temu Administracijskog sučelja.',
 	'This will set your language for the backend.' => 'Ovo će izmjeniti jezik sučelja.',
 	'Use layouts to apply a visual look to a Web page. Layouts can contain special tags to include
