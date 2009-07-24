@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
+ * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
  * This file is part of Wolf CMS.
@@ -46,8 +47,8 @@ if (class_exists('PDO', false))
 		'title'		  => 'SQLite 3', 
 		'description' => 'Provides function to run Wolf CMS with SQLite 3 database.', 
 		'version'	  => '1.0.0', 
-		'website'	  => 'http://www.madebywolf.com/',
-        'update_url'  => 'http://www.madebywolf.com/plugin-versions.xml'
+		'website'	  => 'http://www.wolfcms.org/',
+        'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml'
     ));
 
 	// adding function date_format to sqlite 3 'mysql date_format function'

@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
+ * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
  * This file is part of Wolf CMS.
@@ -38,5 +39,5 @@ header("Status: 404 Not Found");
 <h1>Not Found</h1>
 <p>The requested URL was not found on this server.</p>
 <hr>
-<address><a href="http://www.madebywolf.com/">Wolf</a> Content Management Simplified</address>
+<address><a href="http://www.wolfcms.org/">Wolf</a> Content Management Simplified</address>
 </body></html>

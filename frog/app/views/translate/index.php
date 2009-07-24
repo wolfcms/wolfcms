@@ -1,6 +1,6 @@
 <?php
 /**
- * Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
+ * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
  * This file is part of Wolf CMS.
@@ -78,7 +78,7 @@
     <li>Go to the "Administration" section of Wolf.</li>
     <li>On the "Settings" tab, select your newly added language from the dropdown box and click Save.</li>
     <li>View and test your new translation of the Wolf interface.</li>
-    <li>Go to http://forum.madebywolf.com/ let us know about your translation!</li>
+    <li>Go to http://forum.wolfcms.org/ let us know about your translation!</li>
     <li>Thanks for helping out...</li>
 </ol>
 <p><em>Important notes:</em> please do <strong>not</strong> translate variable names like ":name".</p>
@@ -94,7 +94,7 @@
     <li>Go to the "Administration" section of Wolf.</li>
     <li>On the "Settings" tab, select your newly added language from the dropdown box and click Save.</li>
     <li>View and test your new translation of the Wolf interface.</li>
-    <li>Go to http://forum.madebywolf.com/ let us know about your translation!</li>
+    <li>Go to http://forum.wolfcms.org/ let us know about your translation!</li>
     <li>Thanks for helping out...</li>
 </ol>
 <p><em>Important notes:</em> please do <strong>not</strong> translate variable names like ":name".</p>

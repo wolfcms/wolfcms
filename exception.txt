@@ -2,7 +2,7 @@
                          Version 1, 15 April 2009
 
       Copyright (C) 2009 Philippe Archambault and Martijn van der Kleijn
-                        <http://www.madebywolf.com/>
+                        <http://www.wolfcms.org/>
 
 Everyone is permitted to copy and distribute verbatim copies of this license
 document, but changing it is not allowed.

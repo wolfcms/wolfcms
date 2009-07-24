@@ -1,8 +1,8 @@
 <?php
 /**
- * Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
+ * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
- * Copyright (C) 2008 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2008,2009 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
  * This file is part of Wolf CMS.
  *
@@ -44,8 +44,8 @@ Plugin::setInfos(array(
 	'version'     => '1.2.1',
 	'license'     => 'GPL',
 	'author'      => 'Philippe Archambault',
-	'website'     => 'http://www.madebywolf.com/',
-    'update_url'  => 'http://www.madebywolf.com/plugin-versions.xml',
+	'website'     => 'http://www.wolfcms.org/',
+    'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml',
 	'require_wolf_version' => '0.9.5'
 ));
 

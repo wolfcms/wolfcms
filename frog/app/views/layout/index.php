@@ -1,6 +1,7 @@
 <?php
 /**
- * Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
+ * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
  * This file is part of Wolf CMS.

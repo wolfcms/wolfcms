@@ -1,9 +1,9 @@
 <?php 
 
 /**
- * Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
+ * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
- * Copyright (C) 2008 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2008,2009 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
  * This file is part of Wolf CMS.
  *
@@ -159,7 +159,7 @@ class LoginController extends Controller
             $user->save();
             
             $email = new Email();
-            $email->from('no-reply@madebywolf.com', 'Wolf CMS');
+            $email->from('no-reply@wolfcms.org', 'Wolf CMS');
             $email->to($user->email);
             $email->subject('Your new password from Wolf CMS');
             $email->message('username: '.$user->username."\npassword: ".$new_pass);
@@ -177,7 +177,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Checks what the latest Wolf version is that is available at madebywolf.com
+     * Checks what the latest Wolf version is that is available at wolfcms.org
      *
      * @todo Make this check optional through the configuration file
      */
@@ -189,10 +189,10 @@ class LoginController extends Controller
         if (!defined('CHECK_TIMEOUT')) define('CHECK_TIMEOUT', 5);
         $ctx = stream_context_create(array('http' => array('timeout' => CHECK_TIMEOUT)));
         
-        $v = file_get_contents('http://www.madebywolf.com/version/', 0, $ctx);
+        $v = file_get_contents('http://www.wolfcms.org/version/', 0, $ctx);
         if ($v > FROG_VERSION)
         {
-            Flash::set('error', __('<b>Information!</b> New Wolf version available (v. <b>:version</b>)! Visit <a href="http://www.madebywolf.com/">http://www.madebywolf.com/</a> to upgrade your version!',
+            Flash::set('error', __('<b>Information!</b> New Wolf version available (v. <b>:version</b>)! Visit <a href="http://www.wolfcms.org/">http://www.wolfcms.org/</a> to upgrade your version!',
                        array(':version' => $v )));
         }
     }

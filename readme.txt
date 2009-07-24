@@ -2,7 +2,7 @@
 
 ## About
 
-Wolf CMS began as fork of Wolf CMS. This product has been made available under
+Wolf CMS began as a fork of Frog CMS. This product has been made available under
 the terms of the GNU GPL version 3.
 
 Please read the license.txt for the exact license details for Wolf CMS.

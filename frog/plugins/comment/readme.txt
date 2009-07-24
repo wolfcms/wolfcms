@@ -46,7 +46,7 @@ You will need to add this little code in your layout:
 
 == LICENSE ==
 
-Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
+Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
 
 Comments plugin:
 

@@ -8,7 +8,8 @@ The Page HAVE TO be et has hidden to be hidden from children list.
 
 == LICENSE:
 
- Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
+ Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
  Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
 
  This file is part of Wolf CMS.

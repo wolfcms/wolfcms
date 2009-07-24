@@ -14,7 +14,7 @@
  */
 
     return array(
-        //'<b>Information!</b> New Wolf version available (v. <b>:version</b>)! Visit <a href="http://www.madebywolf.com/">http://www.madebywolf.com/</a> to upgrade your version!' => '',
+        //'<b>Information!</b> New Wolf version available (v. <b>:version</b>)! Visit <a href="http://www.wolfcms.org/">http://www.wolfcms.org/</a> to upgrade your version!' => '',
         //'A translatable string with a %param% system.' => '',
         //'A translatable string.' => '',
         'Action disabled!' => '操作无效!',

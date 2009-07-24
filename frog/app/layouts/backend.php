@@ -97,7 +97,7 @@
     <hr class="hidden" />
     <div id="footer">
       <p>
-      <?php echo __('Thank you for using'); ?> <a href="http://www.madebywolf.com/" target="_blank">Wolf CMS</a> <?php echo FROG_VERSION; ?> | <a href="http://forum.madebywolf.com/" target="_blank"><?php echo __('Feedback'); ?></a>
+      <?php echo __('Thank you for using'); ?> <a href="http://www.wolfcms.org/" target="_blank">Wolf CMS</a> <?php echo FROG_VERSION; ?> | <a href="http://forum.wolfcms.org/" target="_blank"><?php echo __('Feedback'); ?></a>
       </p>
 <?php if (DEBUG): ?>
       <p class="stats"> <?php echo __('Page rendered in'); ?> <?php echo execution_time(); ?> <?php echo __('seconds'); ?>

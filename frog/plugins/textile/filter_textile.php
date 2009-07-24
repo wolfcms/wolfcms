@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Wolf CMS - Content Management Simplified. <http://www.madebywolf.com>
+ * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  *
  * This file is part of Wolf CMS.
  *
