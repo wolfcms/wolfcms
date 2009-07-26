@@ -27,6 +27,7 @@
 //  Constants  ---------------------------------------------------------------
 
 define('CMS_ROOT', dirname(__FILE__));
+define('FROG_ROOT', CMS_ROOT); // DEFINED ONLY FOR BACKWARDS SUPPORT - to be taken out before 0.9.0
 define('CORE_ROOT', CMS_ROOT.'/wolf');
 
 define('APP_PATH', CORE_ROOT.'/app');
@@ -78,6 +79,9 @@ else
     require_once CORE_ROOT . '/libraries/DoLite.php';
     $__CMS_CONN__ = new DoLite(DB_DSN, DB_USER, DB_PASS);
 }
+
+// DEFINED ONLY FOR BACKWARDS SUPPORT - to be taken out before 0.9.0
+$__FROG_CONN__ = $__CMS_CONN__;
 
 Record::connection($__CMS_CONN__);
 Record::getConnection()->exec("set names 'utf8'");
