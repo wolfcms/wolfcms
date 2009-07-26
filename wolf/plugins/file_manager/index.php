@@ -41,7 +41,7 @@
 /**
  * Root location where files get uploaded to as an absolute path.
  */
-define('FILES_DIR', FROG_ROOT.'/public');
+define('FILES_DIR', CMS_ROOT.'/public');
 
 /**
  * Root location where files get uploaded to as a URL.

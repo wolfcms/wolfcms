@@ -10,7 +10,7 @@
  * @link http://www.lintaorun.com
  * @author SunUltimate <jzb1987@gmail.com>
  * @link http://blog.ultimatesun.cn
- * @version Wolf 0.9.5
+ * @version Wolf 0.5.5
  */
 
     return array(

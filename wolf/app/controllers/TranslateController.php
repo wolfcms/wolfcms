@@ -60,7 +60,7 @@ class TranslateController extends Controller {
 
     function core() {
         $complete = array();
-        $basedir = FROG_ROOT.'';
+        $basedir = CMS_ROOT.'';
         $dirs = $this->listdir($basedir);
 
         foreach ($dirs as $id => $path) {
@@ -103,7 +103,7 @@ class TranslateController extends Controller {
     
     function plugins() {
         $files = array();
-        $basedir = FROG_ROOT.'/wolf/plugins';
+        $basedir = CMS_ROOT.'/wolf/plugins';
         $dirs = $this->listdir($basedir, true);
 
         foreach ($dirs as $id => $path) {

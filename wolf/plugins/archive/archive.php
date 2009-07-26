@@ -78,7 +78,7 @@ class Archive
     {
         $this->interval = $interval;
         
-        global $__FROG_CONN__;
+        global $__CMS_CONN__;
         
         $page = $this->page->children(array(
             'where' => "behavior_id = 'archive_{$interval}_index'",
@@ -118,13 +118,13 @@ class Archive
     
     function archivesByYear()
     {
-        global $__FROG_CONN__;
+        global $__CMS_CONN__;
         
         $out = array();
 
         $sql = "SELECT DISTINCT(DATE_FORMAT(created_on, '%Y')) FROM ".TABLE_PREFIX."page WHERE parent_id=? AND status_id != ".Page::STATUS_HIDDEN." ORDER BY created_on DESC";
         
-        $stmt = $__FROG_CONN__->prepare($sql);
+        $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute(array($this->page->id));
         
         while ($date = $stmt->fetchColumn())
@@ -135,13 +135,13 @@ class Archive
     
     function archivesByMonth($year='all')
     {
-        global $__FROG_CONN__;
+        global $__CMS_CONN__;
         
         $out = array();
         
         $sql = "SELECT DISTINCT(DATE_FORMAT(created_on, '%Y/%m')) FROM ".TABLE_PREFIX."page WHERE parent_id=? AND status_id != ".Page::STATUS_HIDDEN." ORDER BY created_on DESC";
         
-        $stmt = $__FROG_CONN__->prepare($sql);
+        $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute(array($this->page->id));
         
         while ($date = $stmt->fetchColumn())
@@ -152,7 +152,7 @@ class Archive
     
     function archivesByDay($year='all')
     {
-        global $__FROG_CONN__;
+        global $__CMS_CONN__;
         
         $out = array();
         
@@ -160,7 +160,7 @@ class Archive
         
         $sql = "SELECT DISTINCT(DATE_FORMAT(created_on, '%Y/%m/%d')) FROM ".TABLE_PREFIX."page WHERE parent_id=? AND status_id != ".Page::STATUS_HIDDEN." ORDER BY created_on DESC";
         
-        $stmt = $__FROG_CONN__->prepare($sql);
+        $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute(array($this->page->id));
         
         while ($date = $stmt->fetchColumn())

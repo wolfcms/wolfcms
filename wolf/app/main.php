@@ -50,7 +50,7 @@ function explode_uri($uri)
 
 function find_page_by_uri($uri)
 {
-    global $__FROG_CONN__;
+    global $__CMS_CONN__;
     
     $uri = trim($uri, '/');
     
@@ -95,7 +95,7 @@ function find_page_by_uri($uri)
 
 function find_page_by_slug($slug, &$parent)
 {
-    global $__FROG_CONN__;
+    global $__CMS_CONN__;
     
     $page_class = 'Page';
     
@@ -107,7 +107,7 @@ function find_page_by_slug($slug, &$parent)
          . 'LEFT JOIN '.TABLE_PREFIX.'user AS updator ON updator.id = page.updated_by_id '
          . 'WHERE slug = ? AND parent_id = ? AND (status_id='.Page::STATUS_REVIEWED.' OR status_id='.Page::STATUS_PUBLISHED.' OR status_id='.Page::STATUS_HIDDEN.')';
     
-    $stmt = $__FROG_CONN__->prepare($sql);
+    $stmt = $__CMS_CONN__->prepare($sql);
     
     $stmt->execute(array($slug, $parent_id));
     
@@ -133,13 +133,13 @@ function find_page_by_slug($slug, &$parent)
 
 function get_parts($page_id)
 {
-    global $__FROG_CONN__;
+    global $__CMS_CONN__;
     
     $objPart = new stdClass;
     
     $sql = 'SELECT name, content_html FROM '.TABLE_PREFIX.'page_part WHERE page_id=?';
     
-    if ($stmt = $__FROG_CONN__->prepare($sql))
+    if ($stmt = $__CMS_CONN__->prepare($sql))
     {
         $stmt->execute(array($page_id));
         

@@ -59,7 +59,7 @@
 <?php $loaded_plugins = Plugin::$plugins; ?>
 <?php $loaded_filters = Filter::$filters; ?>
 <?php foreach(Plugin::findAll() as $plugin): ?>
-    <?php $disabled = (isset($plugin->require_wolf_version) and $plugin->require_wolf_version > FROG_VERSION); ?>
+    <?php $disabled = (isset($plugin->require_wolf_version) and $plugin->require_wolf_version > CMS_VERSION); ?>
     <tr<?php if ($disabled) echo ' class="disabled"'; ?>>
       <td class="plugin">
         <h4>

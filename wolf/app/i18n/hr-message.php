@@ -7,7 +7,7 @@
      * @subpackage translations
      *
      * @author Dejan Andjelkovic <dejan79@gmail.com>
-     * @version Wolf 0.9.5
+     * @version Wolf 0.5.5
      */
 
     return array(

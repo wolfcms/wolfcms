@@ -51,14 +51,14 @@ Observer::observe('page_not_found', 'behavior_page_not_found');
 
 /**
  *
- * @global <type> $__FROG_CONN__ 
+ * @global <type> $__CMS_CONN__ 
  */
 function behavior_page_not_found()
 {
-    global $__FROG_CONN__;
+    global $__CMS_CONN__;
     
     $sql = 'SELECT * FROM '.TABLE_PREFIX."page WHERE behavior_id='page_not_found'";
-    $stmt = $__FROG_CONN__->prepare($sql);
+    $stmt = $__CMS_CONN__->prepare($sql);
     $stmt->execute();
     
     if ($page = $stmt->fetchObject())

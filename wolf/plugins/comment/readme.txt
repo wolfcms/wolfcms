@@ -4,7 +4,7 @@ The Comments plugin provides you with the functionality to enable visitors to
 leave comments on your pages.
 
 Dependencies:
-    - Wolf 0.9.5+
+    - Wolf 0.5.5+
     - Statistics API plugin (optional, see NOTES section)
 
 == HOW TO USE IT ==

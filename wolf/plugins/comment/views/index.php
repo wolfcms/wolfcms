@@ -45,9 +45,9 @@
     <div class="modify"><?php echo __('Modify'); ?></div>
 </div>
 <?php
-global $__FROG_CONN__;
+global $__CMS_CONN__;
 $sql = "SELECT COUNT(*) FROM ".TABLE_PREFIX."comment WHERE is_approved = 1";
-$stmt = $__FROG_CONN__->query($sql);
+$stmt = $__CMS_CONN__->query($sql);
 $comments_count = $stmt->fetchColumn();
 $stmt->closeCursor();
 
@@ -65,7 +65,7 @@ $sql = "SELECT comment.is_approved, comment.id, comment.page_id, comment.author_
     TABLE_PREFIX . "comment AS comment, " . TABLE_PREFIX .
     "page AS page WHERE comment.is_approved = 1 AND comment.page_id = page.id LIMIT " . $start . "," . $rowspage;
 
-$stmt = $__FROG_CONN__->prepare($sql);
+$stmt = $__CMS_CONN__->prepare($sql);
 $stmt->execute();
 $lastpage = ceil($totalrecords / $rowspage);
 if($comments_count <= $rowspage) { $lastpage = 0; } else { $lastpage = abs($lastpage - 1); }

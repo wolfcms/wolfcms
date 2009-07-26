@@ -41,7 +41,7 @@
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @version 1.0.0
- * @since Wolf version 0.9.5
+ * @since Wolf version 0.5.5
  * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Martijn van der Kleijn, 2008
  */

@@ -190,7 +190,7 @@ class LoginController extends Controller
         $ctx = stream_context_create(array('http' => array('timeout' => CHECK_TIMEOUT)));
         
         $v = file_get_contents('http://www.wolfcms.org/version/', 0, $ctx);
-        if ($v > FROG_VERSION)
+        if ($v > CMS_VERSION)
         {
             Flash::set('error', __('<b>Information!</b> New Wolf version available (v. <b>:version</b>)! Visit <a href="http://www.wolfcms.org/">http://www.wolfcms.org/</a> to upgrade your version!',
                        array(':version' => $v )));

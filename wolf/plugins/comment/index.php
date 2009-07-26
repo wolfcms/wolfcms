@@ -46,7 +46,7 @@ Plugin::setInfos(array(
 	'author'      => 'Philippe Archambault',
 	'website'     => 'http://www.wolfcms.org/',
     'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml',
-	'require_wolf_version' => '0.9.5'
+	'require_wolf_version' => '0.5.5'
 ));
 
 
@@ -133,9 +133,9 @@ function comments_count_moderatable()
  */
 function comments_count_total()
 {
-    global $__FROG_CONN__;
+    global $__CMS_CONN__;
     $sql = 'SELECT COUNT(*) AS count FROM '.TABLE_PREFIX.'comment';
-    $stmt = $__FROG_CONN__->prepare($sql);
+    $stmt = $__CMS_CONN__->prepare($sql);
     $stmt->execute();
     $total = $stmt->fetchObject();
 
@@ -145,7 +145,7 @@ function comments_count_total()
 /**
  * Executed through the Observer system each time a page is found.
  * 
- * @global <type> $__FROG_CONN__
+ * @global <type> $__CMS_CONN__
  * @param Page $page The object instance for the page that was found.
  * @return <type> Nothing.
  */
@@ -212,19 +212,19 @@ function comment_save(&$page)
         }
     }
 
-    global $__FROG_CONN__;
+    global $__CMS_CONN__;
 		
     $sql = 'INSERT INTO '.TABLE_PREFIX.'comment (page_id, author_name, author_email, author_link, ip, body, is_approved, created_on) VALUES ('.
            '\''.$page->id.'\', '.
-           $__FROG_CONN__->quote(strip_tags($data['author_name'])).', '.
-           $__FROG_CONN__->quote(strip_tags($data['author_email'])).', '.
-           $__FROG_CONN__->quote(strip_tags($data['author_link'])).', '.
-           $__FROG_CONN__->quote($data['author_ip']).', '.
-           $__FROG_CONN__->quote(kses($data['body'], $allowed_tags)).', '.
-           $__FROG_CONN__->quote($auto_approve_comment).', '.
-           $__FROG_CONN__->quote(date('Y-m-d H:i:s')).')';
+           $__CMS_CONN__->quote(strip_tags($data['author_name'])).', '.
+           $__CMS_CONN__->quote(strip_tags($data['author_email'])).', '.
+           $__CMS_CONN__->quote(strip_tags($data['author_link'])).', '.
+           $__CMS_CONN__->quote($data['author_ip']).', '.
+           $__CMS_CONN__->quote(kses($data['body'], $allowed_tags)).', '.
+           $__CMS_CONN__->quote($auto_approve_comment).', '.
+           $__CMS_CONN__->quote(date('Y-m-d H:i:s')).')';
 
-    $__FROG_CONN__->exec($sql);
+    $__CMS_CONN__->exec($sql);
 
     // FIXME - If code above used Comment object for saving data there would be
     // no need to reload it from database. Using lastInsertId() is unrealiable anyway.

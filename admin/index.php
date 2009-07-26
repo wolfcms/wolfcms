@@ -26,14 +26,14 @@
 
 //  Constantes  --------------------------------------------------------------
 
-define('FROG_VERSION', '0.5.5');
+define('CMS_VERSION', '0.5.5');
 
-define('FROG_ROOT', dirname(__FILE__).'/..');
-define('CORE_ROOT', FROG_ROOT.'/wolf');
+define('CMS_ROOT', dirname(__FILE__).'/..');
+define('CORE_ROOT', CMS_ROOT.'/wolf');
 
 require_once(CORE_ROOT.'/utils.php');
 
-$config_file = FROG_ROOT.'/config.php';
+$config_file = CMS_ROOT.'/config.php';
 
 require_once($config_file);
 
@@ -70,17 +70,17 @@ require CORE_ROOT.'/Framework.php';
 
 if (USE_PDO)
 {
-    $__FROG_CONN__ = new PDO(DB_DSN, DB_USER, DB_PASS);
-    if ($__FROG_CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) == 'mysql')
-        $__FROG_CONN__->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+    $__CMS_CONN__ = new PDO(DB_DSN, DB_USER, DB_PASS);
+    if ($__CMS_CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) == 'mysql')
+        $__CMS_CONN__->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
 }
 else
 {
     require_once CORE_ROOT . '/libraries/DoLite.php';
-    $__FROG_CONN__ = new DoLite(DB_DSN, DB_USER, DB_PASS);
+    $__CMS_CONN__ = new DoLite(DB_DSN, DB_USER, DB_PASS);
 }
 
-Record::connection($__FROG_CONN__);
+Record::connection($__CMS_CONN__);
 Record::getConnection()->exec("set names 'utf8'");
 
 

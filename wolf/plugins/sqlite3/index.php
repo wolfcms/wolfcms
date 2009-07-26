@@ -60,9 +60,9 @@ if (class_exists('PDO', false))
 		}
 	}
 	
-	if (isset($GLOBALS['__FROG_CONN__']))
-		if ($GLOBALS['__FROG_CONN__']->getAttribute(PDO::ATTR_DRIVER_NAME) == 'sqlite')
-			$GLOBALS['__FROG_CONN__']->sqliteCreateFunction('date_format', 'mysql_function_date_format', 2);
+	if (isset($GLOBALS['__CMS_CONN__']))
+		if ($GLOBALS['__CMS_CONN__']->getAttribute(PDO::ATTR_DRIVER_NAME) == 'sqlite')
+			$GLOBALS['__CMS_CONN__']->sqliteCreateFunction('date_format', 'mysql_function_date_format', 2);
 	else if (Record::getConnection()->getAttribute(Record::ATTR_DRIVER_NAME) == 'sqlite')
 		Record::getConnection()->sqliteCreateFunction('date_format', 'mysql_function_date_format', 2);
 }

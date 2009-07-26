@@ -113,7 +113,7 @@ class Setting extends Record
     public static function getThemes()
     {
         $themes = array();
-        $dir = FROG_ROOT.'/'.ADMIN_DIR.'/themes/';
+        $dir = CMS_ROOT.'/'.ADMIN_DIR.'/themes/';
         if ($handle = opendir($dir))
         {
             while (false !== ($file = readdir($handle)))

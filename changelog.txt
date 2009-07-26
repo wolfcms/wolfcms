@@ -10,9 +10,16 @@ Sigla:
 0.5.5 - release 2009-07-??
 + Added Slovak translation. Thanks Payo.
 + Added Slovenian translation. Thanks skye28.
-- Fixed backend favicon tag not closed - issue 178
+- Fixed backend favicon tag not closed - frog issue 178
 - Fixed faulty code in comment plugin documentation - thanks stevesmc
-. Changed include to include_once in PluginController - issue 179
+. Changed include to include_once in PluginController - frog issue 179
+. Rebranded to Wolf CMS
+
+NOTES for plugin devs-
+    - changed FROG_VERSION into CMS_VERSION
+    - changed FROG_ROOT into CMS_ROOT
+    - changed FROG_CONN into CMS_CONN
+    - changed all other instances of "frog" into "wolf"
 
 0.5.0 -
-. Straight fork from Wolf CMS 0.9.5
+. Straight fork from Frog CMS 0.9.5

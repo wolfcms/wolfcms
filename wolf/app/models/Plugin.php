@@ -30,7 +30,7 @@
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @version 0.9.5
+ * @version 0.5.5
  * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Philippe Archambault, Martijn van der Kleijn 2008
  */
@@ -288,14 +288,14 @@ class Plugin
     {
         if ($array == null || $plugin_id == null) return false;
 
-        global $__FROG_CONN__;
+        global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
-        $plugin_id = $__FROG_CONN__->quote($plugin_id);
+        $plugin_id = $__CMS_CONN__->quote($plugin_id);
 
         $existingSettings = array();
 
         $sql = "SELECT name FROM $tablename WHERE plugin_id=$plugin_id";
-        $stmt = $__FROG_CONN__->prepare($sql);
+        $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute();
 
         while ($settingname = $stmt->fetchColumn())
@@ -307,18 +307,18 @@ class Plugin
         {
             if (array_key_exists($name, $existingSettings))
             {
-                $name = $__FROG_CONN__->quote($name);
-                $value = $__FROG_CONN__->quote($value);
+                $name = $__CMS_CONN__->quote($name);
+                $value = $__CMS_CONN__->quote($value);
                 $sql = "UPDATE $tablename SET value=$value WHERE name=$name AND plugin_id=$plugin_id";
             }
             else
             {
-                $name = $__FROG_CONN__->quote($name);
-                $value = $__FROG_CONN__->quote($value);
+                $name = $__CMS_CONN__->quote($name);
+                $value = $__CMS_CONN__->quote($value);
                 $sql = "INSERT INTO $tablename (value, name, plugin_id) VALUES ($value, $name, $plugin_id)";
             }
 
-            $stmt = $__FROG_CONN__->prepare($sql);
+            $stmt = $__CMS_CONN__->prepare($sql);
             $ret = $stmt->execute();
         }
 
@@ -336,14 +336,14 @@ class Plugin
     {
         if ($name == null || $value == null || $plugin_id == null) return false;
 
-        global $__FROG_CONN__;
+        global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
-        $plugin_id = $__FROG_CONN__->quote($plugin_id);
+        $plugin_id = $__CMS_CONN__->quote($plugin_id);
 
         $existingSettings = array();
 
         $sql = "SELECT name FROM $tablename WHERE plugin_id=$plugin_id";
-        $stmt = $__FROG_CONN__->prepare($sql);
+        $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute(array($plugin_id));
 
         while ($settingname = $stmt->fetchColumn())
@@ -351,18 +351,18 @@ class Plugin
 
         if (in_array($name, $existingSettings))
         {
-            $name = $__FROG_CONN__->quote($name);
-            $value = $__FROG_CONN__->quote($value);
+            $name = $__CMS_CONN__->quote($name);
+            $value = $__CMS_CONN__->quote($value);
             $sql = "UPDATE $tablename SET value=$value WHERE name=$name AND plugin_id=$plugin_id";
         }
         else
         {
-            $name = $__FROG_CONN__->quote($name);
-            $value = $__FROG_CONN__->quote($value);
+            $name = $__CMS_CONN__->quote($name);
+            $value = $__CMS_CONN__->quote($value);
             $sql = "INSERT INTO $tablename (value, name, plugin_id) VALUES ($value, $name, $plugin_id)";
         }
 
-        $stmt = $__FROG_CONN__->prepare($sql);
+        $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute();
     }
 
@@ -376,14 +376,14 @@ class Plugin
     {
         if ($plugin_id == null) return false;
 
-        global $__FROG_CONN__;
+        global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
-        $plugin_id = $__FROG_CONN__->quote($plugin_id);
+        $plugin_id = $__CMS_CONN__->quote($plugin_id);
 
         $settings = array();
 
         $sql = "SELECT name,value FROM $tablename WHERE plugin_id=$plugin_id";
-        $stmt = $__FROG_CONN__->prepare($sql);
+        $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute();
 
         while ($obj = $stmt->fetchObject()) {
@@ -404,15 +404,15 @@ class Plugin
     {
         if ($name == null || $plugin_id == null) return false;
 
-        global $__FROG_CONN__;
+        global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
-        $plugin_id = $__FROG_CONN__->quote($plugin_id);
-        $name = $__FROG_CONN__->quote($name);
+        $plugin_id = $__CMS_CONN__->quote($plugin_id);
+        $name = $__CMS_CONN__->quote($name);
 
         $existingSettings = array();
 
         $sql = "SELECT value FROM $tablename WHERE plugin_id=$plugin_id AND name=$name LIMIT 1";
-        $stmt = $__FROG_CONN__->prepare($sql);
+        $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute();
 
         if ($value = $stmt->fetchColumn()) return $value;

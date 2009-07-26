@@ -243,7 +243,7 @@ class Page
     
     public function children($args=null, $value=array(), $include_hidden=false)
     {
-        global $__FROG_CONN__;
+        global $__CMS_CONN__;
         
         $page_class = 'Page';
         
@@ -279,7 +279,7 @@ class Page
         }
         
         // Run!
-        if ($stmt = $__FROG_CONN__->prepare($sql))
+        if ($stmt = $__CMS_CONN__->prepare($sql))
         {
             $stmt->execute($value);
             
@@ -301,7 +301,7 @@ class Page
     
     public function childrenCount($args=null, $value=array(), $include_hidden=false)
     {
-        global $__FROG_CONN__;
+        global $__CMS_CONN__;
         
         // Collect attributes...
         $where   = isset($args['where']) ? $args['where']: '';
@@ -318,7 +318,7 @@ class Page
              . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_REVIEWED.' OR status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
              . "$where_string ORDER BY $order $limit_string";
         
-        $stmt = $__FROG_CONN__->prepare($sql);
+        $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute($value);
         
         return (int) $stmt->fetchColumn();
@@ -341,11 +341,11 @@ class Page
     
     public function includeSnippet($name)
     {
-        global $__FROG_CONN__;
+        global $__CMS_CONN__;
         
         $sql = 'SELECT content_html FROM '.TABLE_PREFIX.'snippet WHERE name LIKE ?';
         
-        $stmt = $__FROG_CONN__->prepare($sql);
+        $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute(array($name));
         
         if ($snippet = $stmt->fetchObject())
@@ -373,11 +373,11 @@ class Page
      
     public function _executeLayout()
     {
-        global $__FROG_CONN__;
+        global $__CMS_CONN__;
         
         $sql = 'SELECT content_type, content FROM '.TABLE_PREFIX.'layout WHERE id = ?';
         
-        $stmt = $__FROG_CONN__->prepare($sql);
+        $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute(array($this->_getLayoutId()));
         
         if ($layout = $stmt->fetchObject())
@@ -422,13 +422,13 @@ class Page
     
     private function _loadTags()
     {
-        global $__FROG_CONN__;
+        global $__CMS_CONN__;
         $this->tags = array();
         
         $sql = "SELECT tag.id AS id, tag.name AS tag FROM ".TABLE_PREFIX."page_tag AS page_tag, ".TABLE_PREFIX."tag AS tag ".
                "WHERE page_tag.page_id={$this->id} AND page_tag.tag_id = tag.id";
         
-        if ( ! $stmt = $__FROG_CONN__->prepare($sql))
+        if ( ! $stmt = $__CMS_CONN__->prepare($sql))
             return;
             
         $stmt->execute();

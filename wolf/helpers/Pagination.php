@@ -30,7 +30,7 @@
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author CodeIgniter helper
  * @version 0.1
- * @since Wolf version 0.9.5
+ * @since Wolf version 0.5.5
  */
 
 /**

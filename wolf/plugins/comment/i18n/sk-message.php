@@ -7,7 +7,7 @@
      * @subpackage plugin.comment.translations
      *
      * @author Pali Petras <payo@creoactive.com>
-     * @version Wolf 0.9.5
+     * @version Wolf 0.5.5
      */
 
     return array(
