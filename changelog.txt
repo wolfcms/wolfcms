@@ -16,10 +16,12 @@ Sigla:
 . Removing unneeded files - issue 23
 . Rebranded to Wolf CMS
 
-NOTES for plugin devs-
+IMPORTANT NOTES for plugin devs -
     - changed FROG_VERSION into CMS_VERSION
     - changed FROG_ROOT into CMS_ROOT
     - changed FROG_CONN into CMS_CONN
+    - old FROG_---- versions still work, but are deprecated and will be removed
+      in future releases of Wolf CMS
     - changed all other instances of "frog" into "wolf"
 
 0.5.0 -
