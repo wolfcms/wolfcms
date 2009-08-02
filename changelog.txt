@@ -13,6 +13,7 @@ Sigla:
 - Fixed backend favicon tag not closed - frog issue 178
 - Fixed faulty code in comment plugin documentation - thanks stevesmc
 - Added missing HTML tags in default Homepage sidebar code - issue 22
+. Changed old Normal layout into new Simple layout with new colors.
 . Changed include to include_once in PluginController - frog issue 179
 . Removing unneeded files - issue 23
 . Rebranded to Wolf CMS

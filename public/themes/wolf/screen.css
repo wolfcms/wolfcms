@@ -1,0 +1,268 @@
+﻿/* WOLF cms CSS
+ *
+ * Initial public release: 20090801
+ * Appearance inspired by EveryBlock = http://www.everyblock.com/
+ * Adapted from Matthew James Taylor's "Holy Grail 3 column liquid-layout" = http://bit.ly/ejfjq
+ *
+ * NOTES:
+ * Left/Right columns set to 280px width
+ * No snippets used; but snippet blocks for header, secondary nav, and footer are indicated
+ *
+ * *********** */
+
+/* RESET */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,input,textarea,p,blockquote,th,td { margin:0; padding:0; }
+table { border-collapse:collapse; border-spacing:0; }
+fieldset,img { border:0; }
+address,caption,cite,code,dfn,em,strong,th,var { font-style:normal; font-weight:normal; }
+ol,ul { list-style:none; }
+caption,th { text-align:left; }
+h1,h2,h3,h4,h5,h6 { font-size:100%; font-weight:normal; }
+q:before,q:after { content:''; }
+abbr,acronym { border:0; }
+
+/* BASIC SETTINGS */
+body {
+	margin:0;
+	padding:0;
+	width:100%;
+	background:#ccc;
+	min-width:600px;		/* Minimum width of layout - remove line if not required */
+					/* The min-width property does not work in old versions of Internet Explorer */
+	font-size:90%;
+	font-family: 'Calibri','Trebuchet MS','Verdana','Helvetica',Arial,sans-serif;
+}
+
+h1, h2, h3 {
+	margin:.8em 0 .2em 0;
+	padding:0;
+}
+p {
+	margin:.4em 0 .8em 0;
+	padding:0;
+}
+strong { font-weight: bolder; }
+em { font-style: italic; }
+a, a:visited {
+	color: #79A325;
+	background: inherit;
+	text-decoration: none;
+}
+a:hover {
+	color: #73471B;
+	background: inherit;
+	text-decoration: underline;
+}
+img {
+	margin:10px 0 5px;
+}
+blockquote {
+	padding: 0 12px;
+	border-left: 6px solid #EBD9BB;
+	color: #666;
+	font-family: Georgia, serif;
+	font-style: italic;
+	font-size:.9em;
+	line-height: 1.4em;
+}
+
+
+/* SITE STRUCTURE */
+#header {
+	float:left;
+	width:100%;
+	padding:.3em 0;
+	margin:0;
+	background-color: #483E37;
+	color: #fff;
+}
+#nav {
+	float:left;
+	width:100%;
+	padding:.2em 0 ;
+	margin:0;
+	background-color: #A18C6A;
+	border-bottom: 4px solid #75A838;
+}
+#colmask {
+	position:relative;	/* This fixes the IE7 overflow hidden bug and stops the layout jumping out of place */
+	clear:both;
+	float:left;
+	width:100%;			/* width of whole page */
+	overflow:hidden;		/* This chops off any overhanging divs */
+	background:#fff;		/* Left column background colour */
+}
+#colmid {
+	padding-bottom:1.0em;
+	float:left;
+	width:200%;
+	position:relative;
+	left:280px;				/* 200 */
+	background:#fff;    	/* Centre column background colour */
+}
+#colright {
+	float:left;
+	width:100%;
+	position:relative;
+	left:50%;
+	margin-left:-560px;		/* 400 */
+	background:#fff;    	/* Right column background colour */
+}
+#col1wrap {
+	float:right;
+	width:50%;
+	position:relative;
+	right:100%;
+}
+#col1pad {
+	margin:0 15px 0 575px;		/* 415 */
+	overflow:hidden;
+}
+/* col1 = main content */
+#col1 {
+	width:100%;
+	overflow:hidden;
+}
+/* col2 = sidebar */
+#col2 {
+	float:left;
+	width:250px;		/* 170 */
+	position:relative;
+	margin-left:-50%;
+	left:295px;			/* 215 */
+	overflow:hidden;
+}
+/* col3 = secondary nav */
+#col3 {
+	float:left;
+	width:250px;		/* 170 */
+	position:relative;
+	left:15px;
+	overflow:hidden;
+}
+#footer {
+	clear:both;
+	float:left;
+	width:100%;
+	padding:0;
+	margin:0;
+	background-color: #ccc;
+	border-top: 4px solid #75A838;
+
+}
+
+/* STYLES */
+#header h1  {
+	padding:.2em 15px .2em 20px;
+	margin:0;
+	font-size: 24px;
+	font-weight: bold;
+}
+#header h1 a { color: #fff; }
+#header h1 a:hover {
+	color: #79A325;
+	text-decoration: none;
+}
+
+#header .tagline {
+	font-size:12px;
+	padding-left: 10px;
+	font-weight: normal;
+}
+
+#nav {
+}
+#nav ul {
+	list-style-type: none;
+	margin: 6px;
+	color: #fff;
+	font-weight: bold;
+}
+#nav ul li {
+	list-style-type: none;
+	display: inline;
+	margin: 4px 8px;
+}
+#nav ul li a {
+	padding: 4px;
+	color: #fff;
+	text-decoration: none;
+}
+#nav li a.current {
+	color: #EBD9BB;
+}
+#nav ul li a:hover {
+	padding: 4px;
+	background-color: #483E37;
+	text-decoration: none;
+}
+
+/* all three middle columns */
+#colmid h2 {
+	color: #75a838;
+	font-size: 18px;
+	font-weight: bold;
+	padding: 0 0 12px 0;
+}
+#colmid h2 a {
+	color: #76aac9;
+	text-decoration: none;
+}
+#colmid h2 a:hover {
+	color: #7C90A1;
+}
+#colmid h3, #colmid h4 {
+/*	border-top: 1px solid #dfe3e4; */
+	padding: 4px 0;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+#colmid ul, ol {
+	line-height: 1.4em;
+	margin: 0 0 0 24px;
+	color: #666;
+}
+#colmid ul li {
+	line-height: 1.4em;
+	list-style: square;
+	padding-left: 4px;
+}
+#colmid ol li {
+	line-height: 1.4em;
+	list-style: decimal;
+	padding-left: 2px;
+}
+#col3 ul li {
+	font-weight: bold;
+}
+
+/* footer */
+#footer {
+	padding: 12px 0 12px 0;
+	font-size: 0.95em;
+	color: #777;
+	text-align: center;
+}
+#footer p {
+	padding:10px 0;
+}
+#footer a:hover {
+	color: #555;
+	border-bottom: 1px dotted #555;
+	text-decoration: none;
+}
+
+.info {
+	margin: 8px 0;
+	padding: 6px;
+	font-size: 0.8em;
+	color: #666;
+	background: #EBD9BB;
+	border: solid 1px #978060;
+}
+
+/* comment */
+.comment-form-body {
+  width: 450px;
+}
