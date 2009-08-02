@@ -1,3 +1,5 @@
+﻿/* Simple CSS for Wolf CMS */
+
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,input,textarea,p,blockquote,th,td { margin:0; padding:0; }
 table { border-collapse:collapse; border-spacing:0; }
 fieldset,img { border:0; }
@@ -9,19 +11,19 @@ q:before,q:after { content:''; }
 abbr,acronym { border:0; }
 
 body {
-  background: #221f20;
-  color: #324F6A;
-  font: 62.5% Tahoma, Verdana, Arial, Helvetica, sans-serif;	
+  background: #B6B6B6;
+  color: #6B6B6B;
+  font: 62.5% Tahoma, Verdana, Arial, Helvetica, sans-serif;
   text-align: center;
 }
 
 /* links  */
 
-a {
-  color: #7C90A1;
+a, a:visited {
+  color: #79A325;
   text-decoration: underline;
 }
-a:hover { color: #234466; }
+a:hover { color: #73471B; }
 
 /* headings */
 
@@ -45,16 +47,17 @@ input, select, th, td {font-size:1em}
 /* page structure & layout */
 
 #page {
-  background: #f8fdfe;
-  border-left: 1px solid #000;
-  border-right: 1px solid #000;
+  background: #fff;
+  border-left: 1px solid #483E37;
+  border-right: 1px solid #483E37;
+  border-bottom: 1px solid #483E37;
   margin: 0 auto;
   text-align: left;
   width: 760px;
 }
-#header {	
-  background: #012345;
-  border-bottom: 3px solid #3C6787;
+#header {
+  background: #483E37;
+  border-bottom: 3px solid #75a838; /* #A28C6A;  #75A838; */
   height: 118px;
   position: relative;
 }
@@ -62,7 +65,7 @@ input, select, th, td {font-size:1em}
   bottom: 0;
   font-size: 1.1em;
   position: absolute;
-  right: 25px;	
+  right: 25px;
 }
 #breadcrumb {
   background: #87BCD8;
@@ -73,11 +76,11 @@ input, select, th, td {font-size:1em}
   position: relative;
 }
 #info {
-  background: #76AAC9; 
+  background: #76AAC9;
   border-bottom: 3px solid #93CCEA;
-  color: #E4EEF4; 	
+  color: #E4EEF4;
   font-size: 1.2em;
-  line-height: 2.0em;	
+  line-height: 2.0em;
   position: relative;
   padding: 20px 230px 20px 30px;
 }
@@ -89,7 +92,7 @@ input, select, th, td {font-size:1em}
   width: 448px;
 }
 #sidebar {
-  color: #4B798B;
+  color: #6B6B6B;
   float: right;
   font-size: 1.1em;
   line-height: 1.4em;
@@ -112,13 +115,13 @@ input, select, th, td {font-size:1em}
   margin: 30px 0 0 45px;
 }
 #header h1 a {
-  color: #9ca9b7;
+  color: #D1BB9A;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   font-weight: normal;
   letter-spacing: -1px;
   text-decoration: none;
 }
-#header h1 a:hover {color: #fff;}
+#header h1 a:hover {color: #988060;}
 #header h1 span {
   color: #fff;
   font-size: 18px;
@@ -135,7 +138,7 @@ input, select, th, td {font-size:1em}
   list-style: none;
 }
 #nav li a {
-  background: #234466;
+  background: #D1BB9A; /*  #A28C6A #91d045 #83bd3f; */
   color: #fff;
   display: block;
   margin: 0 1px 0 1px;
@@ -145,7 +148,7 @@ input, select, th, td {font-size:1em}
   text-decoration: none;
 }
 #nav li a:hover,
-#nav li a.current { background: #3C6787; }
+#nav li a.current { background: #75a838; }
 
 /* breadcrumb */
 
@@ -163,7 +166,7 @@ input, select, th, td {font-size:1em}
 /* content */
 
 #content h2 {
-  color: #76aac9;
+  color: #75a838;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 22px;
   font-weight: normal;
@@ -179,7 +182,7 @@ input, select, th, td {font-size:1em}
 }
 #content h3, #content h4 {
   background: none;
-  border-bottom: 1px solid #dfe3e4;
+  border-top: 1px solid #dfe3e4;
   font-size: 1.2em;
   font-weight: bold;
   margin-bottom: 10px;
@@ -219,12 +222,13 @@ input, select, th, td {font-size:1em}
 #sidebar ul li {
   line-height: 18px;
   list-style: square;
-}	
-#sidebar a {
+}
+/*
+ #sidebar a {
   color: #4B798B;
 }
 #sidebar a:hover { color: #231f20; }
-
+*/
 
 /* footer */
 
@@ -244,10 +248,10 @@ a img { border: none; }
 acronym { cursor: help; }
 blockquote {
   background: url(quote.gif) no-repeat 10px 0;
-  color: #76aac9;
-  border-left: 2px solid #76aac9;
+  color: #76A83A;
+  border-left: 2px solid #76A83A;
   line-height: 1.5em;
-  margin: 0 10px 20px 10px;	
+  margin: 0 10px 20px 10px;
   padding: 0 10px 0 10px;
 }
 hr, .hide { display: none; }
