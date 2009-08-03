@@ -7,9 +7,10 @@ Sigla:
 . other development
 ======
 
-0.5.5 - release 2009-07-??
+0.5.5 - release 2009-08-??
 + Added new Wolf layout.
 + Added auto-fading messages.
++ Added updated Russian translation. Thanks Dmitry.
 + Added Slovak translation. Thanks Payo.
 + Added Slovenian translation. Thanks skye28.
 - Fixed backend favicon tag not closed - frog issue 178
