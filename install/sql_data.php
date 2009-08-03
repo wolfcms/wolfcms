@@ -84,7 +84,7 @@ $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (3, 'editor
 
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('admin_title', 'Wolf CMS')");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('language', 'en')");
-$PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('theme', 'default')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('theme', 'brown_and_green')");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('default_status_id', '1')");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('default_filter_id', '')");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('default_tab', '')");
