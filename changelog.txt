@@ -8,11 +8,13 @@ Sigla:
 ======
 
 0.5.5 - release 2009-07-??
++ Added new Wolf layout.
 + Added Slovak translation. Thanks Payo.
 + Added Slovenian translation. Thanks skye28.
 - Fixed backend favicon tag not closed - frog issue 178
 - Fixed faulty code in comment plugin documentation - thanks stevesmc
 - Added missing HTML tags in default Homepage sidebar code - issue 22
+. Added new default admin area theme
 . Changed old Normal layout into new Simple layout with new colors.
 . Changed include to include_once in PluginController - frog issue 179
 . Removing unneeded files - issue 23

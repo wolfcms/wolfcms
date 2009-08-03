@@ -277,6 +277,38 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 
 /* Messages --------------------------------------------------------------- */
 
+#info, #error, #success {
+/* css for fade positioning -- start */
+  position: absolute;
+/* css for fade positioning -- end */
+  margin: auto;
+  padding: 1em 1.5em 0.9em 1.5em;
+/* centered text for fade -- default is left */
+  text-align: center;
+}
+#info {
+  background: #EDFE86;
+  color: #000;
+  border: 1px solid #bbb;
+  border-right: 2px solid #ffffa8;
+  border-bottom: 2px solid #ffffa8;
+}
+#error {
+  background: #a22;
+  color: #fff;
+  border: 1px solid #999;
+  border-right: 2px solid #c66;
+  border-bottom: 2px solid #c66;
+}
+#success {
+  background: #cfc;
+  color: #000;
+  border: 1px solid #999;
+  border-right: 2px solid #afa;
+  border-bottom: 2px solid #afa;
+}
+
+/*
 #error, #success {
   margin: -20px -20px 20px;
   padding: 10px 20px;
@@ -293,6 +325,7 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   background: #cfc;
   color: #051;
 }
+*/
 
 /* Index table, list ------------------------------------------------------ */
 

@@ -174,26 +174,33 @@ blockquote {
 }
 #nav ul {
 	list-style-type: none;
-	margin: 6px;
+	argin: 6px;
+    margin-top: 6px;
 	color: #fff;
 	font-weight: bold;
 }
 #nav ul li {
 	list-style-type: none;
 	display: inline;
-	margin: 4px 8px;
+	argin: 4px 8px;
+    argin: 0.3em 1em;
 }
 #nav ul li a {
-	padding: 4px;
+	adding: 4px;
+    padding: 0.3em 1em;
 	color: #fff;
 	text-decoration: none;
 }
 #nav li a.current {
-	color: #EBD9BB;
+	color: #fff;
+    background-color: #76A83A;
+}
+#nav li a.current:hover {
+    background-color: #76A83A;
 }
 #nav ul li a:hover {
-	padding: 4px;
-	background-color: #483E37;
+	adding: 4px;
+	background-color: #483E37; /*#483E37;*/
 	text-decoration: none;
 }
 
