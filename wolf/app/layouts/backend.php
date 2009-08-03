@@ -79,8 +79,8 @@
         <div id="success" style="display: none"><?php echo Flash::get('success'); ?></div>
         <script type="text/javascript" language="javascript">
         // <![CDATA[
-            Effect.Appear('error', { queue: {scope: 'fadeovers', position: 'end' }});
-            Effect.Fade('error',{ queue: {scope: 'fadeovers', position: 'end'}, delay: 1.5 });
+            Effect.Appear('success', { queue: {scope: 'fadeovers', position: 'end' }});
+            Effect.Fade('success',{ queue: {scope: 'fadeovers', position: 'end'}, delay: 1.5 });
         // ]]>
         </script>
 <?php endif; ?>
