@@ -39,7 +39,7 @@ body {
   font-family: "Lucida Grande", "Bitstream Vera Sans", Helvetica, Verdana, Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #6ad;
+  background-color: /*#6ad;*/ #e5e5e5;
   color: #000;
 }
 
@@ -64,7 +64,7 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 /* Header ----------------------------------------------------------------- */
 
 #header {
-  background-color: #123;
+  background-color: /*#123;*/ #483E37;
   color: #fff;
   width: 100%;
   padding-top: 1px;
@@ -145,7 +145,7 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   width: 70%;
   font-size: 95%;
   background-color: #fff;
-  border-bottom: 2px solid #58b;
+  border-bottom: 2px solid #76A83A; /*#58b;*/
 }
 
 #installation #content-wrapper,
@@ -167,6 +167,11 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 
 #content {
   padding: 20px;
+}
+
+#content .logo {
+    float: right;
+    margin-top: 1em;
 }
 
 /* Sidebar ---------------------------------------------------------------- */
@@ -238,11 +243,9 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 /* Footer ----------------------------------------------------------------- */
 
 #footer {
-  color: #fff;
+  color: #000;
   font-size: 80%;
   float: left;
-  padding-top: 20px;
-  padding-bottom: 20px;
   width: 100%;
 }
 #footer p {

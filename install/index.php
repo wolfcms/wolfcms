@@ -118,24 +118,26 @@ if ( ! defined('DEBUG') && isset($_POST['commit']) && (file_exists($config_file)
 </head>
 <body id="installation">
 <div id="header">
-  <div id="site-title">Wolf CMS</div>
+  <div id="site-title">Wolf CMS - Install</div>
 </div>
 <div id="main">
   <div id="content-wrapper">
       <div id="content">
               <!-- Content -->
-        <h1>Wolf Installation</h1>
-
+<div>
+    <img src="install-logo.png" alt="Wolf CMS logo" class="logo" />
+    <h1>Wolf Installation</h1>
 <p style="color: red">
 <?php if ( ! file_exists($config_file)) { ?>
   <strong>Error</strong>: config.php doesn't exist<br />
 <?php } else if ( ! is_writable($config_file)) { ?>
   <strong>Error</strong>: config.php must be writable<br />
-<?php } ?>
-<?php if ( ! is_writable('../public/')): ?>
+<?php } else { echo '<br />'; } ?>
+<?php if ( ! is_writable('../public/')) { ?>
   <strong>Error</strong>: public/ folder must be writable<br />
-<?php endif; ?>
+<?php } else { echo '<br />'; } ?>
 </p>
+</div>
 
 <?php if ( ! defined('DEBUG')): ?>
 <form action="index.php" method="post">
@@ -246,7 +248,7 @@ if ( ! defined('DEBUG') && isset($_POST['commit']) && (file_exists($config_file)
 </div>
 
 <div id="footer">
-  <p>This system was made with <a href="http://www.php.net" target="_blank">PHP</a> and is powered by <a href="http://www.wolfcms.org/">Wolf CMS</a></p>
+  <p>Powered by <a href="http://www.wolfcms.org/">Wolf CMS</a></p>
 </div>
 </body>
 </html>
