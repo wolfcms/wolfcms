@@ -13,7 +13,7 @@ Options -Indexes +FollowSymLinks
 <IfModule mod_rewrite.c>
   RewriteEngine On
   # Set next line to your Wolf CMS root - if not in subdir, then just /
-  RewriteBase /wolf/
+  RewriteBase /wolfcms/
   
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d

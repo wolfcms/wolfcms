@@ -7,7 +7,7 @@ Sigla:
 . other development
 ======
 
-0.5.5 - release 2009-08-??
+0.5.5 - released 2009-08-04
 + Added new Wolf layout.
 + Added auto-fading messages.
 + Added updated Russian translation. Thanks Dmitry.
@@ -16,6 +16,7 @@ Sigla:
 - Fixed backend favicon tag not closed - frog issue 178
 - Fixed faulty code in comment plugin documentation - thanks stevesmc
 - Added missing HTML tags in default Homepage sidebar code - issue 22
+. Changed default RewriteBase to wolfcms
 . Added new default admin area theme
 . Changed old Normal layout into new Simple layout with new colors.
 . Changed include to include_once in PluginController - frog issue 179
