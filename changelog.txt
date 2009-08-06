@@ -13,6 +13,7 @@ Sigla:
 + Added updated Russian translation. Thanks Dmitry.
 + Added Slovak translation. Thanks Payo.
 + Added Slovenian translation. Thanks skye28.
+- Fixed problem with comment plugin frog.ttf being damaged - issue 29
 - Fixed backend favicon tag not closed - frog issue 178
 - Fixed faulty code in comment plugin documentation - thanks stevesmc
 - Added missing HTML tags in default Homepage sidebar code - issue 22
