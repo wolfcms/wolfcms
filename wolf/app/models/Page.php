@@ -55,6 +55,7 @@ class Page extends Record
     const LOGIN_REQUIRED = 1;
     const LOGIN_INHERIT = 2;
     
+    public $id;
     public $title;
     public $slug;
     public $breadcrumb;
@@ -66,6 +67,7 @@ class Page extends Record
     public $behavior_id;
     public $status_id;
     public $comment_status;
+    public $parent = false;
     
     public $created_on;
     public $published_on;
@@ -75,7 +77,264 @@ class Page extends Record
     public $position;
     public $is_protected;
     public $needs_login;
-    
+    public $url = '';
+    public $level = false;
+    public $tags = false;
+
+
+
+    public function __construct($object=null, $parent=null) {
+        if ($parent !== null) {
+            $this->parent = $parent;
+        }
+
+        if ($object !== null) {
+        foreach ($object as $key => $value) {
+            $this->$key = $value;
+        }
+        }
+
+        if ($this->parent)
+        {
+            $this->setUrl();
+        }
+    }
+
+    public function author() { return $this->author; }
+    public function authorId() { return $this->author_id; }
+    public function title() { return $this->title; }
+    public function description() { return $this->description; }
+    public function keywords() { return $this->keywords; }
+    public function url() { return BASE_URL . $this->url . ($this->url != '' ? URL_SUFFIX: ''); }
+    public function slug() { return $this->slug; }
+
+    public function includeSnippet($name)
+    {
+        global $__CMS_CONN__;
+
+        $sql = 'SELECT content_html FROM '.TABLE_PREFIX.'snippet WHERE name LIKE ?';
+
+        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt->execute(array($name));
+
+        if ($snippet = $stmt->fetchObject())
+        {
+            eval('?>'.$snippet->content_html);
+        }
+    }
+
+
+    private function _loadTags()
+    {
+        global $__CMS_CONN__;
+        $this->tags = array();
+
+        $sql = "SELECT tag.id AS id, tag.name AS tag FROM ".TABLE_PREFIX."page_tag AS page_tag, ".TABLE_PREFIX."tag AS tag ".
+               "WHERE page_tag.page_id={$this->id} AND page_tag.tag_id = tag.id";
+
+        if ( ! $stmt = $__CMS_CONN__->prepare($sql))
+            return;
+
+        $stmt->execute();
+
+        // Run!
+        while ($object = $stmt->fetchObject())
+             $this->tags[$object->id] = $object->tag;
+    }
+
+    public function tags()
+    {
+        if ( ! $this->tags)
+            $this->_loadTags();
+
+        return $this->tags;
+    }
+
+
+    public function level()
+    {
+        if ($this->level === false)
+            $this->level = empty($this->url) ? 0 : substr_count($this->url, '/')+1;
+
+        return $this->level;
+    }
+
+
+    /**
+     * http://php.net/strftime
+     * exemple (can be useful):
+     *  '%a, %e %b %Y'      -> Wed, 20 Dec 2006 <- (default)
+     *  '%A, %e %B %Y'      -> Wednesday, 20 December 2006
+     *  '%B %e, %Y, %H:%M %p' -> December 20, 2006, 08:30 pm
+     */
+    public function date($format='%a, %e %b %Y', $which_one='created')
+    {
+        if ($which_one == 'update' || $which_one == 'updated')
+            return strftime($format, strtotime($this->updated_on));
+        else if ($which_one == 'publish' || $which_one == 'published')
+            return strftime($format, strtotime($this->published_on));
+        else
+            return strftime($format, strtotime($this->created_on));
+    }
+
+
+    public function content($part='body', $inherit=false)
+    {
+        // if part exist we generate the content en execute it!
+        if (isset($this->part->$part))
+        {
+            ob_start();
+            eval('?>'.$this->part->$part->content_html);
+            $out = ob_get_contents();
+            ob_end_clean();
+            return $out;
+        }
+        else if ($inherit && $this->parent)
+        {
+            return $this->parent->content($part, true);
+        }
+    }
+
+    public function hasContent($part, $inherit=false)
+    {
+        if ( isset($this->part->$part) ) {
+            return true;
+        }
+        else if ( $inherit && $this->parent )
+        {
+            return $this->parent->hasContent($part, true);
+        }
+    }
+
+    protected function setUrl() {
+        $this->url = trim($this->parent->url .'/'. $this->slug, '/');
+    }
+
+    public function link($label=null, $options='')
+    {
+        if ($label == null)
+            $label = $this->title();
+
+        return sprintf('<a href="%s" %s>%s</a>',
+               $this->url(),
+               $options,
+               $label
+        );
+    }
+
+
+    public function children($args=null, $value=array(), $include_hidden=false)
+    {
+        global $__CMS_CONN__;
+
+        $page_class = 'Page';
+
+        // Collect attributes...
+        $where   = isset($args['where']) ? $args['where']: '';
+        $order   = isset($args['order']) ? $args['order']: 'page.position, page.id';
+        $offset  = isset($args['offset']) ? $args['offset']: 0;
+        $limit   = isset($args['limit']) ? $args['limit']: 0;
+
+        // auto offset generated with the page param
+        if ($offset == 0 && isset($_GET['page']))
+            $offset = ((int)$_GET['page'] - 1) * $limit;
+
+        // Prepare query parts
+        $where_string = trim($where) == '' ? '' : "AND ".$where;
+        $limit_string = $limit > 0 ? "LIMIT $offset, $limit" : '';
+
+        // Prepare SQL
+        $sql = 'SELECT page.*, author.name AS author, author.id AS author_id, updator.name AS updator, updator.id AS updator_id '
+             . 'FROM '.TABLE_PREFIX.'page AS page '
+             . 'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
+             . 'LEFT JOIN '.TABLE_PREFIX.'user AS updator ON updator.id = page.updated_by_id '
+             . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_REVIEWED.' OR status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
+             . "$where_string ORDER BY $order $limit_string";
+
+        $pages = array();
+
+        // hack to be able to redefine the page class with behavior
+        if ( ! empty($this->behavior_id))
+        {
+            // will return Page by default (if not found!)
+            $page_class = Behavior::loadPageHack($this->behavior_id);
+        }
+
+        // Run!
+        if ($stmt = $__CMS_CONN__->prepare($sql))
+        {
+            $stmt->execute($value);
+
+            while ($object = $stmt->fetchObject())
+            {
+                $page = new $page_class($object, $this);
+
+                // assignParts
+                $page->part = get_parts($page->id);
+                $pages[] = $page;
+            }
+        }
+
+        if ($limit == 1)
+            return isset($pages[0]) ? $pages[0]: false;
+
+        return $pages;
+    }
+
+
+    /**
+     * Finds the "login needed" status for the page.
+     *
+     * @return int Integer corresponding to one of the LOGIN_* constants.
+     */
+    public function getLoginNeeded()
+    {
+        if ($this->needs_login == Page::LOGIN_INHERIT && $this->parent)
+            return $this->parent->getLoginNeeded();
+        else
+            return $this->needs_login;
+    }
+
+    public function _executeLayout()
+    {
+        global $__CMS_CONN__;
+
+        $sql = 'SELECT content_type, content FROM '.TABLE_PREFIX.'layout WHERE id = ?';
+
+        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt->execute(array($this->_getLayoutId()));
+
+        if ($layout = $stmt->fetchObject())
+        {
+            // if content-type not set, we set html as default
+            if ($layout->content_type == '')
+                $layout->content_type = 'text/html';
+
+            // set content-type and charset of the page
+            header('Content-Type: '.$layout->content_type.'; charset=UTF-8');
+
+            // execute the layout code
+            eval('?>'.$layout->content);
+        }
+    }
+
+    /**
+     * find the layoutId of the page where the layout is set
+     */
+    private function _getLayoutId()
+    {
+        if ($this->layout_id)
+            return $this->layout_id;
+        else if ($this->parent)
+            return $this->parent->_getLayoutId();
+        else
+            exit ('You need to set a layout!');
+    }
+
+
+/* -------- */
+
+
     public function beforeInsert()
     {
         $this->created_on = date('Y-m-d H:i:s');
@@ -107,6 +366,12 @@ class Page extends Record
         
         $this->updated_by_id = AuthUser::getId();
         $this->updated_on = date('Y-m-d H:i:s');
+
+        unset($this->url);
+        unset($this->level);
+        unset($this->tags);
+        unset($this->parent);
+
         
         return true;
     }
@@ -205,9 +470,61 @@ class Page extends Record
             }
         }
     }
-    
-    public static function find($args = null)
-    {
+
+    public static function find_page_by_uri($uri) {
+        return Page::findByUri($uri);
+    }
+
+    public static function findByUri($uri) {
+        global $__CMS_CONN__;
+
+        $uri = trim($uri, '/');
+
+        $has_behavior = false;
+
+        // adding the home root
+        $urls = array_merge(array(''), explode_uri($uri));
+        $url = '';
+
+        $page = new stdClass;
+        $page->id = 0;
+
+        $parent = false;
+
+        foreach ($urls as $page_slug)
+        {
+            $url = ltrim($url . '/' . $page_slug, '/');
+
+            if ($page = find_page_by_slug($page_slug, $parent))
+            {
+                // check for behavior
+                if ($page->behavior_id != '')
+                {
+                    // add a instance of the behavior with the name of the behavior
+                    $params = explode_uri(substr($uri, strlen($url)));
+                    $page->{$page->behavior_id} = Behavior::load($page->behavior_id, $page, $params);
+
+                    return $page;
+                }
+            }
+            else
+            {
+                break;
+            }
+
+            $parent = $page;
+
+        } // foreach
+
+        return ( ! $page && $has_behavior) ? $parent: $page;
+    } // find_page_by_slug
+
+
+    public static function find($args = null) {
+        if (!is_array($args)) {
+            // Assumes find was called with a uri
+            return Page::find_page_by_uri($args);
+        }
         
         // Collect attributes...
         $where    = isset($args['where']) ? trim($args['where']) : '';

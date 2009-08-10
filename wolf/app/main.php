@@ -25,7 +25,7 @@
  */
 
 require APP_PATH . '/models/Plugin.php';
-require APP_PATH . '/classes/Page.php';
+require APP_PATH . '/models/Page.php';
 
 if ( ! defined('HELPER_PATH')) define('HELPER_PATH', CORE_ROOT.'/helpers');
 if ( ! defined('URL_SUFFIX')) define('URL_SUFFIX', '');
@@ -48,50 +48,6 @@ function explode_uri($uri)
     return preg_split('/\//', $uri, -1, PREG_SPLIT_NO_EMPTY);
 }
 
-function find_page_by_uri($uri)
-{
-    global $__CMS_CONN__;
-    
-    $uri = trim($uri, '/');
-    
-    $has_behavior = false;
-    
-    // adding the home root
-    $urls = array_merge(array(''), explode_uri($uri));
-    $url = '';
- 
-    $page = new stdClass;
-    $page->id = 0;
-    
-    $parent = false;
-    
-    foreach ($urls as $page_slug)
-    {
-        $url = ltrim($url . '/' . $page_slug, '/');
-        
-        if ($page = find_page_by_slug($page_slug, $parent))
-        {
-            // check for behavior
-            if ($page->behavior_id != '')
-            {
-                // add a instance of the behavior with the name of the behavior 
-                $params = explode_uri(substr($uri, strlen($url)));
-                $page->{$page->behavior_id} = Behavior::load($page->behavior_id, $page, $params);
-                
-                return $page;
-            }
-        }
-        else
-        {
-            break;
-        }
-        
-        $parent = $page;
-        
-    } // foreach
-    
-    return ( ! $page && $has_behavior) ? $parent: $page;
-} // find_page_by_slug
 
 function find_page_by_slug($slug, &$parent)
 {
@@ -221,7 +177,7 @@ function main()
     Observer::notify('page_requested', $uri);
     
     // this is where 80% of the things is done
-    $page = find_page_by_uri($uri);
+    $page = Page::findByUri($uri);
     
     // if we fund it, display it!
     if (is_object($page))
