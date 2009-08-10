@@ -82,7 +82,7 @@ class SettingController extends Controller
         
         Setting::saveFromData($data);
         
-        Flash::set('success', __('Settings has been saved!'));
+        Flash::set('success', __('Settings have been saved!'));
         
         redirect(get_url('setting'));
     }

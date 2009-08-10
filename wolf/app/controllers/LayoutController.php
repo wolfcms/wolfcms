@@ -178,7 +178,7 @@ class LayoutController extends Controller
         if ($layout = Record::findByIdFrom('Layout', $id))
         {
             if ($layout->isUsed())
-                Flash::set('error', __('Layout <b>:name</b> is used! It CAN NOT be deleted!', array(':name'=>$layout->name)));
+                Flash::set('error', __('Layout <b>:name</b> is in use! It CAN NOT be deleted!', array(':name'=>$layout->name)));
             else if ($layout->delete())
             {
                 Flash::set('success', __('Layout <b>:name</b> has been deleted!', array(':name'=>$layout->name)));

@@ -174,7 +174,6 @@ blockquote {
 }
 #nav ul {
 	list-style-type: none;
-	argin: 6px;
     margin-top: 6px;
 	color: #fff;
 	font-weight: bold;
@@ -182,8 +181,6 @@ blockquote {
 #nav ul li {
 	list-style-type: none;
 	display: inline;
-	argin: 4px 8px;
-    argin: 0.3em 1em;
 }
 #nav ul li a {
 	adding: 4px;
@@ -199,7 +196,6 @@ blockquote {
     background-color: #76A83A;
 }
 #nav ul li a:hover {
-	adding: 4px;
 	background-color: #483E37; /*#483E37;*/
 	text-decoration: none;
 }

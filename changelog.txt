@@ -7,6 +7,9 @@ Sigla:
 . other development
 ======
 
+Post-0.5.5.
+. Minor text, css edits
+
 0.5.5 - released 2009-08-04
 + Added new Wolf layout.
 + Added auto-fading messages.
