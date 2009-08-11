@@ -43,7 +43,7 @@ class BackupRestoreController extends PluginController {
 
     public function __construct() {
         $this->setLayout('backend');
-        $this->assignToLayout('sidebar', new View(PLUGINS_ROOT.'/backup_restore/views/sidebar'));
+        $this->assignToLayout('sidebar', new View('../../plugins/backup_restore/views/sidebar'));
     }
 
     public function index() {
@@ -56,5 +56,10 @@ class BackupRestoreController extends PluginController {
 
     function settings() {
         $this->display('backup_restore/views/settings', Plugin::getAllSettings('backup_restore'));
+    }
+
+    public function export() {
+        $this->setLayout('');
+        $this->display('backup_restore/views/xmlexport');
     }
 }
