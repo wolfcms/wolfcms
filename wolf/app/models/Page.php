@@ -56,11 +56,11 @@ class Page extends Record
     const LOGIN_INHERIT = 2;
     
     public $id;
-    public $title;
-    public $slug;
+    public $title = '';
+    public $slug = '';
     public $breadcrumb;
-    public $keywords;
-    public $description;
+    public $keywords = '';
+    public $description = '';
     public $content;
     public $parent_id;
     public $layout_id;
@@ -80,6 +80,11 @@ class Page extends Record
     public $url = '';
     public $level = false;
     public $tags = false;
+    public $author;
+    public $author_id;
+    public $updator;
+    public $updator_id;
+
 
 
 
@@ -100,6 +105,7 @@ class Page extends Record
         }
     }
 
+    public function id() { return $this->id; }
     public function author() { return $this->author; }
     public function authorId() { return $this->author_id; }
     public function title() { return $this->title; }
@@ -107,6 +113,98 @@ class Page extends Record
     public function keywords() { return $this->keywords; }
     public function url() { return BASE_URL . $this->url . ($this->url != '' ? URL_SUFFIX: ''); }
     public function slug() { return $this->slug; }
+    public function breadcrumb() { return $this->breadcrumb; }
+    public function updator() { return $this->updator; }
+    public function updatorId() { return $this->updator_id; }
+
+    public function breadcrumbs($separator='&gt;')
+    {
+        $url = '';
+        $path = '';
+        $paths = explode('/', '/'.$this->slug);
+        $nb_path = count($paths);
+
+        $out = '<div class="breadcrumb">'."\n";
+
+        if ($this->parent)
+            $out .= $this->parent->_inversedBreadcrumbs($separator);
+
+        return $out . '<span class="breadcrumb-current">'.$this->breadcrumb().'</span></div>'."\n";
+
+    }
+
+    public function previous()
+    {
+        if ($this->parent)
+            return $this->parent->children(array(
+                'limit' => 1,
+                'where' => 'page.id < '. $this->id,
+                'order' => 'page.created_on DESC'
+            ));
+    }
+
+    public function next()
+    {
+        if ($this->parent)
+            return $this->parent->children(array(
+                'limit' => 1,
+                'where' => 'page.id > '. $this->id,
+                'order' => 'page.created_on ASC'
+            ));
+    }
+
+    public function childrenCount($args=null, $value=array(), $include_hidden=false)
+    {
+        global $__CMS_CONN__;
+
+        // Collect attributes...
+        $where   = isset($args['where']) ? $args['where']: '';
+        $order   = isset($args['order']) ? $args['order']: 'position, id';
+        $limit   = isset($args['limit']) ? $args['limit']: 0;
+        $offset  = 0;
+
+        // Prepare query parts
+        $where_string = trim($where) == '' ? '' : "AND ".$where;
+        $limit_string = $limit > 0 ? "LIMIT $offset, $limit" : '';
+
+        // Prepare SQL
+        $sql = 'SELECT COUNT(*) AS nb_rows FROM '.TABLE_PREFIX.'page '
+             . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_REVIEWED.' OR status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
+             . "$where_string ORDER BY $order $limit_string";
+
+        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt->execute($value);
+
+        return (int) $stmt->fetchColumn();
+    }
+
+    public function parent($level=null)
+    {
+        if ($level === null)
+            return $this->parent;
+
+        if ($level > $this->level)
+            return false;
+        else if ($this->level == $level)
+            return $this;
+        else
+            return $this->parent($level);
+    }
+
+    public function executionTime()
+    {
+        return execution_time();
+    }
+
+    private function _inversedBreadcrumbs($separator)
+    {
+        $out = '<a href="'.$this->url().'" title="'.$this->breadcrumb.'">'.$this->breadcrumb.'</a> <span class="breadcrumb-separator">'.$separator.'</span> '."\n";
+
+        if ($this->parent)
+            return $this->parent->_inversedBreadcrumbs($separator) . $out;
+
+        return $out;
+    }
 
     public function includeSnippet($name)
     {

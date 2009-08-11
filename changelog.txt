@@ -7,7 +7,8 @@ Sigla:
 . other development
 ======
 
-Post-0.5.5.
+0.6.0 - released 2009-0?-??
+. Removed last remnants of split (classes/Page) - issue 33
 . Minor text, css edits
 
 0.5.5 - released 2009-08-04
