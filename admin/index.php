@@ -32,6 +32,8 @@ define('FROG_VERSION', CMS_VERSION); // DEFINED ONLY FOR BACKWARDS SUPPORT - to 
 define('CMS_ROOT', dirname(__FILE__).'/..');
 define('FROG_ROOT', CMS_ROOT); // DEFINED ONLY FOR BACKWARDS SUPPORT - to be taken out before 0.9.0
 define('CORE_ROOT', CMS_ROOT.'/wolf');
+define('PLUGINS_ROOT', CORE_ROOT.'/plugins');
+
 
 require_once(CORE_ROOT.'/utils.php');
 
