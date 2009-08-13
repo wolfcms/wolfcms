@@ -368,6 +368,7 @@ class FileManagerController extends PluginController
                     $object->is_dir = true;
                     $object->is_file = false;
                     $object->link = '<a href="'.get_url('plugin/file_manager/browse/'.$this->path.$file).'">'.$file.'</a>';
+                    $file = '/'.$file;
                 }
                 else
                 {
