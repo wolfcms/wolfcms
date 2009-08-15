@@ -36,4 +36,11 @@
  * @copyright Martijn van der Kleijn, 2009
  */
 
-exit();
+// Check if the plugin's settings already exist and create them if not.
+if (Plugin::getSetting('zip', 'backup_restore') === false) {
+    // Store settings new style
+    $settings = array('zip' => '1',
+                     );
+
+    Plugin::setAllSettings($settings, 'backup_restore');
+}

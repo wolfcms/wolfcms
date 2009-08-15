@@ -38,8 +38,17 @@
 ?>
 <h1><?php echo __('Documentation'); ?></h1>
 <p>
-<?php echo __('Display your documentation here!'); ?>
-
-
-
+    The Backup/Restore plugin allows you to create complete backups of the Wolf
+    CMS core database. It generates an XML file that contains all records for each
+    of the Wolf CMS core database tables.
+</p>
+<h2><?php echo __('Creating the backup'); ?></h2>
+<p>
+    To create and download the backup, simply select the
+    <?php echo __('Backup Wolf CMS'); ?> option.
+</p>
+<p>
+    By default, the download is generated in a zip file. If you want to download
+    the plain unzipped XML file, go to the settings for this plugin and change
+    the option there.
 </p>

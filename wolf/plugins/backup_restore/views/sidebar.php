@@ -36,9 +36,17 @@
  * @copyright Martijn van der Kleijn, 2009
  */
 ?>
+<p class="button"><a href="<?php echo get_url('plugin/backup_restore/documentation'); ?>"><img src="../wolf/plugins/backup_restore/images/page.png" align="middle" alt="documentation icon" /> <?php echo __('Documentation'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/backup_restore/backup'); ?>"><img src="../wolf/plugins/backup_restore/images/snippet.png" align="middle" alt="xml icon" /> <?php echo __('Backup Wolf CMS'); ?></a></p>
+<!-- p class="button"><a href="<?php echo get_url('plugin/backup_restore/restore'); ?>"><img src="../wolf/plugins/backup_restore/images/upload.png" align="middle" alt="xml icon" /> <?php echo __('Restore Wolf CMS'); ?></a></p -->
+<p class="button"><a href="<?php echo get_url('plugin/backup_restore/settings'); ?>"><img src="../wolf/plugins/backup_restore/images/settings.png" align="middle" alt="settings icon" /> <?php echo __('Settings'); ?></a></p>
 <div class="box">
-<h2><?php echo __('A sidebar');?></h2>
+<h2><?php echo __('Backup/Restore plugin');?></h2>
 <p>
-<?php echo __('Put something here, or leave out the sidebar entirely.')?>
+<?php echo __('The Backup/Restore plugin allows you to create complete backups of the Wolf CMS core database.'); ?><br />
+</p>
+<p>
+<?php echo __('Version'); ?> - 1.0.0<br />
+<?php echo __('Designed for Wolf version'); ?> 0.5.5.<br />
 </p>
 </div>
