@@ -46,7 +46,7 @@
 <?php echo __('The Backup/Restore plugin allows you to create complete backups of the Wolf CMS core database.'); ?><br />
 </p>
 <p>
-<?php echo __('Version'); ?> - 1.0.0<br />
-<?php echo __('Designed for Wolf version'); ?> 0.5.5.<br />
+<?php echo __('Version'); ?> - <?php echo BR_VERSION; ?><br />
+<?php echo __('Designed for Wolf version').' '.Plugin::getSetting('wolfversion', 'backup_restore'); ?><br />
 </p>
 </div>

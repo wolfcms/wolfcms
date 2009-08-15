@@ -84,18 +84,27 @@ class BackupRestoreController extends PluginController {
     function backup() {
         $settings = Plugin::getAllSettings('backup_restore');
 
+        // All of the tablesnames that belong to Wolf CMS core.
         $tablenames = array('layout', 'page', 'page_part', 'page_tag', 'permission',
-                            'plugin_settings', 'setting', 'snippet', 'tag', 'user', 'user_permission');
+                            'plugin_settings', 'setting', 'snippet', 'tag', 'user',
+                            'user_permission'
+                           );
 
+        // All fields that should be wrapped as CDATA
+        $cdata_fields = array('content', 'content_html');
+
+        // Setup XML for backup
         $xmltext = '<?xml version="1.0" encoding="UTF-8"?><wolfcms></wolfcms>';
         $xmlobj = new SimpleXMLExtended($xmltext);
         $xmlobj->addAttribute('version', CMS_VERSION);
 
+        // Retrieve all database information for placement in XML backup
         global $__CMS_CONN__;
         Record::connection($__CMS_CONN__);
 
         $lasttable = '';
 
+        // Generate XML file entry for each table
         foreach ($tablenames as $tablename) {
             $table = Record::query('SELECT * FROM '.TABLE_PREFIX.$tablename);
 
@@ -106,7 +115,7 @@ class BackupRestoreController extends PluginController {
                 }
                 $subchild = $child->addChild($tablename);
                 while (list($key, $val) = each($entry)) {
-                    if ($key === 'content' || $key === 'content_html') {
+                    if (in_array($key, $cdata_fields, true)) {
                         $subchild->addCData($key,$val);
                     }
                     else {
@@ -116,15 +125,26 @@ class BackupRestoreController extends PluginController {
             }
         }
 
+        // Create the XML file
         $file = $xmlobj->asXML();
-        $filename = 'wolfcms-backup-'.date('Ymd', time());
+        $filename = 'wolfcms-backup-'.date($settings['stamp']);
 
-        // Offer a plain XML file or a zip file?
-        if (isset($settings['zip']) && $settings['zip'] == '1') {
+        // Offer a plain XML file or a zip file for download
+        if ($settings['zip'] == '1') {
+            // Create a note file
+            $note = "---[ NOTES for $filename.xml ]---\n\n";
+            $note .= "This backup was created for a specific Wolf CMS version, please only restore it\n";
+            $note .= "on the same version.\n\n";
+            $note .= 'Created on '.date('Y-m-d').' at '.date('H:i:s').' GTM '.date('O').".\n";
+            $note .= 'Created with BackupRestore plugin version '.BR_VERSION."\n";
+            $note .= 'Created for Wolf CMS version '.CMS_VERSION."\n\n";
+            $note .= '---[ END NOTES ]---';
+
             use_helper('Zip');
 
             $zip = new Zip();
             $zip->clear();
+            $zip->addFile($note, 'readme.txt');
             $zip->addFile($file, $filename.'.xml');
             $zip->download($filename.'.zip');
         }

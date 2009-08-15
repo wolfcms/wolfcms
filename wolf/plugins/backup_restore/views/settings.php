@@ -45,12 +45,28 @@
             <tr>
                 <td class="label"><label for="setting_zip"><?php echo __('Package as zip file'); ?>: </label></td>
                 <td class="field">
-                    <select name="settings[zip]">
+                    <select class="select" name="settings[zip]" id="setting_zip">
                         <option value="1" <?php if ($settings['zip'] == "1") echo 'selected ="";' ?>><?php echo __('Yes'); ?></option>
                         <option value="0" <?php if ($settings['zip'] == "0") echo 'selected ="";' ?>><?php echo __('No'); ?></option>
                     </select>
                 </td>
                 <td class="help"><?php echo __('Do you want to download the backup as a zip file?'); ?></td>
+            </tr>
+            <tr>
+                <td class="label"><label for="setting_stamp"><?php echo __('Filename timestamp style'); ?>: </label></td>
+                <td class="field">
+                    <select class="select" name="settings[stamp]" id="setting_stamp">
+                        <option value="Ymd" <?php if ($settings['stamp'] == "Ymd") echo 'selected ="";' ?>><?php echo date('Ymd'); ?></option>
+                        <option value="YmdHi" <?php if ($settings['stamp'] == "YmdHi") echo 'selected ="";' ?>><?php echo date('YmdHi'); ?></option>
+                        <option value="YmdHis" <?php if ($settings['stamp'] == "YmdHis") echo 'selected ="";' ?>><?php echo date('YmdHis'); ?></option>
+                    </select>
+                </td>
+                <td class="help"><?php echo __('What style of timestamp should be encorporated into the filename.'); ?></td>
+            </tr>
+            <tr>
+                <td class="label"><label for="example_filename"><?php echo __('Current style'); ?>: </label></td>
+                <td class="field"><input class="textbox" id="example_filename" maxlength="255" name="example_filename" size="255" type="text" readonly="readonly" value="wolfcms-backup-<?php echo date($settings['stamp']); ?>.xml" /></td>
+                <td class="help"><?php echo __('This is an example of the filename that will be used for the generated XML file.'); ?></td>
             </tr>
         </table>
     </fieldset>

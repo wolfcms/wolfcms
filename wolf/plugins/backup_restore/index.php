@@ -36,16 +36,19 @@
  * @copyright Martijn van der Kleijn, 2009
  */
 
+
+if (!defined('BR_VERSION')) { define('BR_VERSION', '2.0.0'); }
+
 Plugin::setInfos(array(
     'id'          => 'backup_restore',
     'title'       => 'Backup Restore',
     'description' => 'Provides administrators with the option of backing up their pages and settings to an XML file.',
-    'version'     => '0.0.1',
+    'version'     => BR_VERSION,
     'license'     => 'GPLv3',
     'author'      => 'Martijn van der Kleijn',
     'website'     => 'http://www.wolfcms.org/',
     'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml',
-    'require_wolf_version' => '0.5.0'
+    'require_wolf_version' => '0.5.5'
 ));
 
 Plugin::addController('backup_restore', 'Backup Restore', 'administrator', false);

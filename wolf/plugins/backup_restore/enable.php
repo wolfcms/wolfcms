@@ -40,6 +40,8 @@
 if (Plugin::getSetting('zip', 'backup_restore') === false) {
     // Store settings new style
     $settings = array('zip' => '1',
+                      'stamp' => 'Ymd',
+                      'wolfversion' => '0.5.5'
                      );
 
     Plugin::setAllSettings($settings, 'backup_restore');
