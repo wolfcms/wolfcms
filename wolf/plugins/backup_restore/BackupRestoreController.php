@@ -126,12 +126,16 @@ class BackupRestoreController extends PluginController {
                     $child = $xmlobj->addChild($tablename.'s');
                 }
                 $subchild = $child->addChild($tablename);
-                while (list($key, $val) = each($entry)) {
+                while (list($key, $value) = each($entry)) {
+                    if ($key === 'password' && $settings['pwd'] === '0') {
+                        $value = '';
+                    }
+
                     if (in_array($key, $cdata_fields, true)) {
-                        $subchild->addCData($key,$val);
+                        $subchild->addCData($key,$value);
                     }
                     else {
-                        $subchild->addChild($key,$val);
+                        $subchild->addChild($key,$value);
                     }
                 }
             }
@@ -217,6 +221,14 @@ class BackupRestoreController extends PluginController {
                     $keys = array();
                     $values = array();
                     foreach ($element as $key => $value) {
+                        if ($key === 'password' && (!isset($value) || empty($value) || $value === '' || $value === null)) {
+                            if (isset($settings['default_pwd']) && $settings['default_pwd'] !== '') {
+                                $value = sha1($settings['default_pwd']);
+                            }
+                            else {
+                                $value = sha1('pswpsw123');
+                            }
+                        }
                         $keys[] = $key;
                         $values[] = $__CMS_CONN__->quote($value);
                     }

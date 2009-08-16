@@ -43,6 +43,16 @@
         <legend style="padding: 0em 0.5em 0em 0.5em; font-weight: bold;"><?php echo __('Backup settings'); ?></legend>
         <table class="fieldset" cellpadding="0" cellspacing="0" border="0">
             <tr>
+                <td class="label"><label for="setting_pwd"><?php echo __('Include passwords'); ?>: </label></td>
+                <td class="field">
+                    <select class="select" name="settings[pwd]" id="setting_pwd">
+                        <option value="1" <?php if ($settings['pwd'] == "1") echo 'selected ="";' ?>><?php echo __('Yes'); ?></option>
+                        <option value="0" <?php if ($settings['pwd'] == "0") echo 'selected ="";' ?>><?php echo __('No'); ?></option>
+                    </select>
+                </td>
+                <td class="help"><?php echo __('Do you want to include passwords in the backup file? <br/> If you select no, all passwords will be reset upon restoring the backup.'); ?></td>
+            </tr>
+            <tr>
                 <td class="label"><label for="setting_zip"><?php echo __('Package as zip file'); ?>: </label></td>
                 <td class="field">
                     <select class="select" name="settings[zip]" id="setting_zip">
@@ -70,6 +80,17 @@
             </tr>
         </table>
     </fieldset>
+    <fieldset style="padding: 0.5em;">
+        <legend style="padding: 0em 0.5em 0em 0.5em; font-weight: bold;"><?php echo __('Restore settings'); ?></legend>
+        <table class="fieldset" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <td class="label"><label for="setting_default_pwd"><?php echo __('Reset passwords to'); ?>: </label></td>
+                <td class="field"><input class="textbox" id="setting_default_pwd" maxlength="255" name="settings[default_pwd]" size="255" type="text" value="<?php echo $settings['default_pwd']; ?>" /></td>
+                <td class="help"><?php echo __('If no password is provided in the backup file, reset all password fields to this default.'); ?></td>
+            </tr>
+        </table>
+    </fieldset>
+
     <p class="buttons">
         <input class="button" name="commit" type="submit" accesskey="s" value="<?php echo __('Save'); ?>" />
     </p>

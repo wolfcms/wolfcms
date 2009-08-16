@@ -52,3 +52,22 @@
     the plain unzipped XML file, go to the settings for this plugin and change
     the option there.
 </p>
+<h2><?php echo __('Restoring a backup'); ?></h2>
+<p>
+    To upload and restore a backup, simply select the
+    <?php echo __('Restore Wolf CMS'); ?> option.
+</p>
+<p>
+    You can set a default password to enter into any password fields if the backup
+    file does not contain passwords. For this to function, the system expects there
+    to be password fields in the backup file with no value.
+</p>
+<p>
+    Example: &lt;password/&gt;
+</p>
+<h2><?php echo __('Notes'); ?></h2>
+<p>
+    Database tables that are created by plugins are currently <strong>not</strong>
+    backed up through this mechanism. However, plugin settings for plugins that use the settings
+    functionality provided by Wolf CMS <strong>are</strong> backed up.
+</p>
