@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -30,39 +29,37 @@
  * @package wolf
  * @subpackage plugin.sqlite3
  *
+ * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @version 1.0
- * @since Wolf version 0.9.1
- * @license http://www.gnu.org/licenses/gpl.html GPL License
+ * @version 1.1.0
+ * @since Wolf version 0.5.5
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
+ * @copyright Martijn van der Kleijn, 2009
  * @copyright Philippe Archambault, 2008
  */
 
 /**
  *
  */
-if (class_exists('PDO', false))
-{
-	Plugin::setInfos(array(
-		'id'		  => 'sqlite3',
-		'title'		  => 'SQLite 3', 
-		'description' => 'Provides function to run Wolf CMS with SQLite 3 database.', 
-		'version'	  => '1.0.0', 
-		'website'	  => 'http://www.wolfcms.org/',
-        'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml'
+Plugin::setInfos(array(
+    'id'          => 'sqlite3',
+    'title'       => 'SQLite 3',
+    'description' => 'Allows Wolf CMS to use the SQLite 3 database.',
+    'version'     => '1.1.0',
+    'website'     => 'http://www.wolfcms.org/',
+    'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml'
     ));
 
-	// adding function date_format to sqlite 3 'mysql date_format function'
-	if (! function_exists('mysql_date_format_function'))
-	{
-		function mysql_function_date_format($date, $format)
-		{
-			return strftime($format, strtotime($date));
-		}
-	}
-	
-	if (isset($GLOBALS['__CMS_CONN__']))
-		if ($GLOBALS['__CMS_CONN__']->getAttribute(PDO::ATTR_DRIVER_NAME) == 'sqlite')
-			$GLOBALS['__CMS_CONN__']->sqliteCreateFunction('date_format', 'mysql_function_date_format', 2);
-	else if (Record::getConnection()->getAttribute(Record::ATTR_DRIVER_NAME) == 'sqlite')
-		Record::getConnection()->sqliteCreateFunction('date_format', 'mysql_function_date_format', 2);
+// Adding date_format function to SQLite 3 'mysql date_format function'
+if (! function_exists('mysql_date_format_function')) {
+    function mysql_function_date_format($date, $format) {
+        return strftime($format, strtotime($date));
+    }
+}
+
+$PDO = Record::getConnection();
+$driver = strtolower($PDO->getAttribute(Record::ATTR_DRIVER_NAME));
+
+if ($driver === 'sqlite') {
+    $PDO->sqliteCreateFunction('date_format', 'mysql_function_date_format', 2);
 }
