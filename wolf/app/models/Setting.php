@@ -89,7 +89,10 @@ class Setting extends Record
     
     public static function getLanguages()
     {
-        global $iso_639_1;
+        //global $iso_639_1;
+
+        //if (empty($iso_639_1)) $iso_639_1 = SettingController::$iso_639_1;
+        $iso_639_1 = SettingController::$iso_639_1;
         
         $languages = array('en' => 'English');
         

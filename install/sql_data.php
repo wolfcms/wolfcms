@@ -100,7 +100,7 @@ $PDO->exec("INSERT INTO ".TABLE_PREFIX."snippet (id, name, filter_id, content, c
 
 //  Dumping data for table: user ---------------------------------------------
 
-$PDO->exec("INSERT INTO ".TABLE_PREFIX."user (id, name, email, username, password, created_on, updated_on, created_by_id, updated_by_id) VALUES (1, 'Administrator', 'admin@yoursite.com', '".$admin_name."', '".$admin_passwd."', '".wolf_datetime_incrementor()."', '".wolf_datetime_incrementor()."', 1, 1)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."user (id, name, email, username, password, language, created_on, updated_on, created_by_id, updated_by_id) VALUES (1, 'Administrator', 'admin@yoursite.com', '".$admin_name."', '".$admin_passwd."', 'en', '".wolf_datetime_incrementor()."', '".wolf_datetime_incrementor()."', 1, 1)");
 
 
 //  Dumping data for table: user_permission ----------------------------------

@@ -47,6 +47,9 @@ class User extends Record
     public $name = '';
     public $email = '';
     public $username = '';
+
+    // User preferences
+    public $language = '';
     
     public $created_on;
     public $updated_on;

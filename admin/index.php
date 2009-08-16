@@ -96,7 +96,14 @@ Record::getConnection()->exec("set names 'utf8'");
 Setting::init();
 
 use_helper('I18n');
-I18n::setLocale(Setting::get('language'));
+
+AuthUser::load();
+if (AuthUser::isLoggedIn()) {
+    I18n::setLocale(AuthUser::getRecord()->language);
+}
+else {
+    I18n::setLocale(Setting::get('language'));
+}
 
 Plugin::init();
 

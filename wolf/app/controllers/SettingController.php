@@ -105,9 +105,7 @@ class SettingController extends Controller {
         Observer::notify('plugin_after_uninstall', $plugin);
     }
 
-} // end SettingController class
-
-$GLOBALS['iso_639_1'] = array(
+public static $iso_639_1 = array(
 'aa' => 'Afar',
 'ab' => 'Abkhazian',
 'ae' => 'Avestan',
@@ -294,3 +292,7 @@ $GLOBALS['iso_639_1'] = array(
 'za' => 'Zhuang',
 'zh' => 'Chinese',
 'zu' => 'Zulu');
+
+} // end SettingController class
+
+//$GLOBALS['iso_639_1'] = SettingController::$iso_639_1;

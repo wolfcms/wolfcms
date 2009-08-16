@@ -154,6 +154,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user (
   email varchar(255) default NULL,
   username varchar(40) NOT NULL,
   password varchar(40) default NULL,
+  language varchar(40) default NULL,
   created_on datetime default NULL,
   updated_on datetime default NULL,
   created_by_id int(11) default NULL,
