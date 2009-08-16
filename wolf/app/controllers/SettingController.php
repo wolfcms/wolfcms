@@ -42,25 +42,28 @@
  *
  * @since 0.8.7
  */
-class SettingController extends Controller
-{
-    public function __construct()
-    {
+class SettingController extends Controller {
+
+    // Can be used to check generic permissions for entire controller.
+    private static function _checkPermission() {
         AuthUser::load();
-        if ( ! AuthUser::isLoggedIn())
-        {
+        if ( ! AuthUser::isLoggedIn()) {
             redirect(get_url('login'));
         }
-        else if ( ! AuthUser::hasPermission('administrator'))
-        {
+        else if ( ! AuthUser::hasPermission('administrator')) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
 
-            if (Setting::get('default_tab') === 'setting')
+            if (Setting::get('default_tab') === 'setting') {
                 redirect(get_url('page'));
-            else
+            }
+            else {
                 redirect(get_url());
+            }
         }
-        
+    }
+
+    public function __construct() {
+        SettingController::_checkPermission();
         $this->setLayout('backend');
     }
     
@@ -87,28 +90,19 @@ class SettingController extends Controller
         redirect(get_url('setting'));
     }
     
-    public function activate_plugin($plugin)
-    {
-        if ( ! AuthUser::hasPermission('administrator'))
-        {
-            Flash::set('error', __('You do not have permission to access the requested page!'));
-            redirect(get_url());
-        }
-        
+    public function activate_plugin($plugin) {
         Plugin::activate($plugin);
         Observer::notify('plugin_after_enable', $plugin);
     }
     
-    public function deactivate_plugin($plugin)
-    {
-        if ( ! AuthUser::hasPermission('administrator'))
-        {
-            Flash::set('error', __('You do not have permission to access the requested page!'));
-            redirect(get_url());
-        }
-        
+    public function deactivate_plugin($plugin) {
         Plugin::deactivate($plugin);
         Observer::notify('plugin_after_disable', $plugin);
+    }
+
+    public function uninstall_plugin($plugin) {
+        Plugin::uninstall($plugin);
+        Observer::notify('plugin_after_uninstall', $plugin);
     }
 
 } // end SettingController class

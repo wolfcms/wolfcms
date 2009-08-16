@@ -121,6 +121,23 @@ class Plugin
 	}
 
 	/**
+	 * Uninstall a plugin
+	 *
+	 * @param plugin_id string	The plugin name to uninstall
+	 */
+        static function uninstall($plugin_id) {
+            if (isset(self::$plugins[$plugin_id])) {
+                unset(self::$plugins[$plugin_id]);
+                self::save();
+            }
+
+            $file = CORE_ROOT.'/plugins/'.$plugin_id.'/uninstall.php';
+            if (file_exists($file)) {
+                include $file;
+            }
+        }
+
+	/**
 	 * Save activated plugins to the setting 'plugins'
 	 */
 	static function save()
@@ -277,6 +294,20 @@ class Plugin
         else
             return 0;
     }
+
+    static function deleteAllSettings($plugin_id) {
+        if ($plugin_id === null || $plugin_id === '') return false;
+
+        global $__CMS_CONN__;
+        $tablename = TABLE_PREFIX.'plugin_settings';
+        $plugin_id = $__CMS_CONN__->quote($plugin_id);
+
+        $sql = "DELETE FROM $tablename WHERE plugin_id=$plugin_id";
+        echo $sql;
+        $stmt = $__CMS_CONN__->prepare($sql);
+        return $stmt->execute();
+    }
+
 
     /**
      * Stores all settings from a name<->value pair array in the database.

@@ -53,6 +53,7 @@
       <th class="version"><?php echo __('Version'); ?></th>
       <th class="latest"><?php echo __('Latest'); ?></th>
       <th class="enabled"><?php echo __('Enabled'); ?></th>
+      <th class="enabled"><?php echo __('Uninstall'); ?></th>
     </tr>
   </thead>
   <tbody>
@@ -85,6 +86,7 @@
       <td class="version"><?php echo $plugin->version; ?></td>
       <td class="latest"><?php echo Plugin::checkLatest($plugin); ?></td>
       <td class="enabled"><input type="checkbox" name="enabled_<?php echo $plugin->id; ?>" value="<?php echo $plugin->id; ?>"<?php if (isset($loaded_plugins[$plugin->id])) echo ' checked="checked"'; if ($disabled) echo ' disabled="disabled"'; ?> onclick="new Ajax.Request('<?php echo get_url('setting'); ?>'+(this.checked ? '/activate_plugin/':'/deactivate_plugin/')+this.value, {method: 'get'});" /></td>
+      <td class="uninstall"><a href="<?php echo get_url('setting'); ?>" name="uninstall_<?php echo $plugin->id; ?>" onclick="if (confirm('<?php echo __('Are you sure you wish to uninstall this plugin?'); ?>')) { new Ajax.Request('<?php echo get_url('setting/uninstall_plugin/'.$plugin->id); ?>', {method: 'get'}); }"><?php echo __('Uninstall'); ?></a></td>
     </tr>
 <?php endforeach; ?>
   </tbody>
