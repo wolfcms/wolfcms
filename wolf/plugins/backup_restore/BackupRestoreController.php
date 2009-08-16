@@ -53,7 +53,7 @@ class BackupRestoreController extends PluginController {
     }
 
     public function __construct() {
-        BackupRestoreController::_checkPermission();
+        self::_checkPermission();
         $this->setLayout('backend');
         $this->assignToLayout('sidebar', new View('../../plugins/backup_restore/views/sidebar'));
     }

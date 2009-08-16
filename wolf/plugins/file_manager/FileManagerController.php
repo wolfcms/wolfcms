@@ -41,40 +41,33 @@
 /**
  * 
  */
-class FileManagerController extends PluginController
-{
+class FileManagerController extends PluginController {
     var $path;
     var $fullpath;
     
-    public static function _checkPermission()
-    {
+    public static function _checkPermission() {
         AuthUser::load();
-        if ( ! AuthUser::isLoggedIn())
-        {
+        if ( ! AuthUser::isLoggedIn()) {
             redirect(get_url('login'));
         }
-        else if ( ! AuthUser::hasPermission('administrator,developer,editor'))
-        {
+        else if ( ! AuthUser::hasPermission('administrator,developer,editor')) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url());
         }
     }
     
-    public function __construct()
-    {
+    public function __construct() {
+        self::_checkPermission();
+        
         $this->setLayout('backend');
         $this->assignToLayout('sidebar', new View('../../plugins/file_manager/views/sidebar'));
     }
     
-    public function index()
-    {
-        $this->_checkPermission();
+    public function index() {
         $this->browse();
     }
     
-    public function browse()
-    {
-        $this->_checkPermission();
+    public function browse() {
         $params = func_get_args();
         
         $this->path = join('/', $params);
@@ -118,9 +111,7 @@ class FileManagerController extends PluginController
         ));
     } // browse
     
-    public function view()
-    {
-        $this->_checkPermission();
+    public function view() {
         $params = func_get_args();
         $content = '';
 
@@ -165,9 +156,7 @@ class FileManagerController extends PluginController
         ));
     }
     
-    public function save()
-    {
-        $this->_checkPermission();
+    public function save() {
         $data = $_POST['file'];
         
         // security (remove all ..)
@@ -208,9 +197,7 @@ class FileManagerController extends PluginController
         
     }
     
-    public function create_file()
-    {
-        $this->_checkPermission();
+    public function create_file() {
         $data = $_POST['file'];
         
         $path = str_replace('..', '', $data['path']);
@@ -228,9 +215,7 @@ class FileManagerController extends PluginController
         redirect(get_url('plugin/file_manager/browse/'.$path));
     }
     
-    public function create_directory()
-    {
-        $this->_checkPermission();
+    public function create_directory() {
         $data = $_POST['directory'];
         
         $path = str_replace('..', '', $data['path']);
@@ -248,9 +233,7 @@ class FileManagerController extends PluginController
         redirect(get_url('plugin/file_manager/browse/'.$path));
     }
     
-    public function delete()
-    {
-        $this->_checkPermission();
+    public function delete() {
         $paths = func_get_args();
         
         $file = urldecode(join('/', $paths));
@@ -273,9 +256,7 @@ class FileManagerController extends PluginController
         redirect(get_url('plugin/file_manager/browse/'.$paths));
     }
     
-    public function upload()
-    {
-        $this->_checkPermission();
+    public function upload() {
         $data = $_POST['upload'];
         $path = str_replace('..', '', $data['path']);
         $overwrite = isset($data['overwrite']) ? true: false;
@@ -290,9 +271,7 @@ class FileManagerController extends PluginController
         redirect(get_url('plugin/file_manager/browse/'.$path));
     }
     
-    public function chmod()
-    {
-        $this->_checkPermission();
+    public function chmod() {
         $data = $_POST['file'];
         $data['name'] = str_replace('..', '', $data['name']);
         $file = FILES_DIR.'/'.$data['name'];
@@ -311,9 +290,7 @@ class FileManagerController extends PluginController
         redirect(get_url('plugin/file_manager/browse/'.$path));
     }
     
-    public function rename()
-    {
-        $this->_checkPermission();
+    public function rename() {
         $data = $_POST['file'];
         
         $data['current_name'] = str_replace('..', '', $data['current_name']);

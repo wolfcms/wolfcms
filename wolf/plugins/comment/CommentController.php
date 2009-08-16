@@ -47,26 +47,43 @@
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @since Wolf version 0.6
  */
-class CommentController extends PluginController
-{
-    function __construct()
-    {
+class CommentController extends PluginController {
+
+    private static function _checkPermission() {
         AuthUser::load();
-        if ( ! AuthUser::isLoggedIn())
+        if ( ! AuthUser::isLoggedIn()) {
             redirect(get_url('login'));
+        }
+    }
+
+    function __construct() {
+        self::_checkPermission();
         
         $this->setLayout('backend');
         $this->assignToLayout('sidebar', new View('../../plugins/comment/views/sidebar'));
     }
     
-    function index($page = 0)
-    {
+    function index($page = 0) {
         $this->display('comment/views/index', array(
             'comments' => Comment::findAll(),
             'page' => $page
         ));
     }
-    
+
+    function documentation() {
+    	$this->display('comment/views/documentation');
+    }
+
+    function settings() {
+        $tmp = Plugin::getAllSettings('comment');
+        $settings = array('approve' => $tmp['auto_approve_comment'],
+                          'captcha' => $tmp['use_captcha'],
+                          'rowspage' => $tmp['rowspage'],
+                          'numlabel' => $tmp['numlabel']
+                         );
+        $this->display('comment/views/settings', $settings);
+    }
+   
     function edit($id=null)
     {
         if (is_null($id))
@@ -159,17 +176,7 @@ class CommentController extends PluginController
         
         redirect(get_url('plugin/comment'));
     }
-   
-    function settings() {
-        $tmp = Plugin::getAllSettings('comment');
-        $settings = array('approve' => $tmp['auto_approve_comment'],
-                          'captcha' => $tmp['use_captcha'],
-                          'rowspage' => $tmp['rowspage'],
-                          'numlabel' => $tmp['numlabel']
-                         );
-        $this->display('comment/views/settings', $settings);
-    }
-    
+       
 	function save() {
 		$approve = mysql_escape_string($_POST['autoapprove']);
         $captcha = mysql_escape_string($_POST['captcha']);
@@ -192,9 +199,6 @@ class CommentController extends PluginController
         redirect(get_url('plugin/comment/settings'));
 	}
 	
-	function documentation() {
-    	$this->display('comment/views/documentation'); 
-    }
     function moderation($page = 0) {
     	 $this->display('comment/views/moderation', array(
             'comments' => Comment::findAll(),

@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2008,2009 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
  * This file is part of Wolf CMS.
  *
@@ -41,13 +42,13 @@
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @version 1.0.1
- * @since Wolf version 0.5.5
+ * @since Wolf version 0.6.0
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
- * @copyright Martijn van der Kleijn, 2008,2009
+ * @copyright Martijn van der Kleijn, 2009
  */
 
 /*
- * Any code below gets executed each time the plugin is enabled.
+ * Any code below gets executed each time the plugin is disabled.
  */
 
 exit();
