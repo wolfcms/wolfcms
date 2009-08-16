@@ -8,6 +8,7 @@ Sigla:
 ======
 
 0.6.0 - released 2009-0?-??
++ Added uninstall feature support for comment plugin.
 + Added uninstall feature for plugins - issue 40
 + Added new core plugin, BackupRestore - issue 27
 - Fixed duplicate IDs in Administration / Settings tab - issue 37 - thanks slowgary
