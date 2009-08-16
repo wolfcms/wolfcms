@@ -41,7 +41,19 @@
  */
 class BackupRestoreController extends PluginController {
 
+    private static function _checkPermission() {
+        AuthUser::load();
+        if ( ! AuthUser::isLoggedIn()) {
+            redirect(get_url('login'));
+        }
+        else if ( ! AuthUser::hasPermission('administrator')) {
+            Flash::set('error', __('You do not have permission to access the requested page!'));
+            redirect(get_url());
+        }
+    }
+
     public function __construct() {
+        BackupRestoreController::_checkPermission();
         $this->setLayout('backend');
         $this->assignToLayout('sidebar', new View('../../plugins/backup_restore/views/sidebar'));
     }
@@ -228,7 +240,6 @@ class BackupRestoreController extends PluginController {
         $this->display('backup_restore/views/xmlexport');
     }
 }
-
 
 class SimpleXMLExtended extends SimpleXMLElement {
     public function addCData($nodename,$cdata_text) {
