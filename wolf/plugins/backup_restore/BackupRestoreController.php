@@ -161,6 +161,68 @@ class BackupRestoreController extends PluginController {
         }
     }
 
+    function restore() {
+        if (isset($_POST['action']) && $_POST['action'] == 'restore') {
+            if (is_uploaded_file($_FILES['restoreFile']['tmp_name'])) {
+                $fileData = file_get_contents($_FILES['restoreFile']['tmp_name']);
+
+                if (isset($fileData) && $fileData !== null && $fileData !== false && $fileData !== '') {
+                    $this->_restore($fileData);
+                }
+            }
+        }
+        else {
+            $this->display('backup_restore/views/restore', array('settings' => Plugin::getAllSettings('backup_restore')));
+        }
+    }
+
+    function _restore($fileData) {
+        global $__CMS_CONN__;
+
+        $settings = Plugin::getAllSettings('backup_restore');
+
+        // All of the tablesnames that belong to Wolf CMS core.
+        $tablenames = array('layout', 'page', 'page_part', 'page_tag', 'permission',
+                            'plugin_settings', 'setting', 'snippet', 'tag', 'user',
+                            'user_permission'
+                           );
+
+        // All fields that should be wrapped as CDATA
+        $cdata_fields = array('content', 'content_html');
+
+        $xml = simplexml_load_string($fileData);
+
+        // Import each table and table entry
+        foreach($tablenames as $tablename) {
+            $container = $tablename.'s';
+            if ($__CMS_CONN__->exec('TRUNCATE '.$tablename) === false) {
+                Flash::set('error', __('Unable to truncate current table :tablename.', array('tablename' => $tablename)));
+                redirect(get_url('plugin/backup_restore'));
+            }
+
+            if (array_key_exists($container, $xml)) {
+                foreach ($xml->$container->$tablename as $element) {
+                    $keys = array();
+                    $values = array();
+                    foreach ($element as $key => $value) {
+                        $keys[] = $key;
+                        $values[] = $__CMS_CONN__->quote($value);
+                    }
+                    $sql = 'INSERT INTO '.$tablename.' ('.join(', ', $keys).') VALUES ('.join(', ', $values).')'."\r";
+
+                    if ($__CMS_CONN__->exec($sql) === false) {
+                        Flash::set('error', __('Unable to reconstruct table :tablename.', array('tablename' => $tablename)));
+                        redirect(get_url('plugin/backup_restore'));
+                    }
+                }
+            }
+        }
+
+        Flash::set('success', __('Succesfully restored backup.'));
+
+        redirect(get_url('plugin/backup_restore'));
+    }
+
     public function export() {
         $this->setLayout('');
         $this->display('backup_restore/views/xmlexport');

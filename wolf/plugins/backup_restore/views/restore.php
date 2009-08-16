@@ -35,20 +35,17 @@
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  * @copyright Martijn van der Kleijn, 2009
  */
+?>
+<h1><?php echo __('Restore a backup'); ?></h1>
 
-
-if (!defined('BR_VERSION')) { define('BR_VERSION', '0.6.0'); }
-
-Plugin::setInfos(array(
-    'id'          => 'backup_restore',
-    'title'       => 'Backup Restore',
-    'description' => 'Provides administrators with the option of backing up their pages and settings to an XML file.',
-    'version'     => BR_VERSION,
-    'license'     => 'GPLv3',
-    'author'      => 'Martijn van der Kleijn',
-    'website'     => 'http://www.wolfcms.org/',
-    'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml',
-    'require_wolf_version' => '0.5.5'
-));
-
-Plugin::addController('backup_restore', 'Backup Restore', 'administrator', false);
+<form action="<?php echo get_url('plugin/backup_restore/restore'); ?>" method="post" enctype="multipart/form-data">
+    <fieldset style="padding: 0.5em;">
+        <!-- legend style="padding: 0em 0.5em 0em 0.5em; font-weight: bold;"><?php echo __('Backup settings'); ?></legend -->
+        <p>
+            <input name="MAX_FILE_SIZE" value="1048576" type="hidden"/>
+            <input name="action" value="restore" type="hidden"/>
+            <input name="restoreFile" type="file" />
+            <input type="submit" value="<?php echo __('Upload file'); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to restore?'); ?>');"/>
+        </p>
+    </fieldset>
+</form>
