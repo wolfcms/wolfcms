@@ -123,6 +123,8 @@ return array(
 'This allows you to specify which tab (controller) you will see by default after login.' => 'Dit stelt u in staat om the bepalen welke tab (controller) standaard getoond wordt na het aanmelden.',
 'Determines whether or not HTML code is allowed in a page\'s title.' => 'Bepaald of HTML code is toegestaan in een pagina z\'n titel.',
 'by' => 'door',
+'Uninstall' => 'Deinstalleer',
+'latest' => 'recentste',
 
 // snippets
 'New Snippet' => 'Nieuwe Snipper',

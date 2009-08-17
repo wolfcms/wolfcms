@@ -246,11 +246,6 @@ class BackupRestoreController extends PluginController {
 
         redirect(get_url('plugin/backup_restore'));
     }
-
-    public function export() {
-        $this->setLayout('');
-        $this->display('backup_restore/views/xmlexport');
-    }
 }
 
 class SimpleXMLExtended extends SimpleXMLElement {

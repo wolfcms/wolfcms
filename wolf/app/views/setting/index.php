@@ -68,11 +68,11 @@
         if (isset($loaded_plugins[$plugin->id]) && Plugin::hasDocumentationPage($plugin->id) )
             echo '<a href="'.get_url('plugin/'.$plugin->id.'/documentation').'">'.$plugin->title.'</a>';
           else
-            echo $plugin->title;
+            echo __($plugin->title);
         ?>
         <span class="from"><?php if (isset($plugin->author)) echo ' '.__('by').' '.$plugin->author; ?></span>
         </h4>
-        <p><?php echo $plugin->description; ?> <?php if ($disabled) echo '<span class="notes">'.__('This plugin CANNOT be enabled! It requires Wolf version :v.', array(':v' => $plugin->require_wolf_version)).'</span>'; ?></p>
+        <p><?php echo __($plugin->description); ?> <?php if ($disabled) echo '<span class="notes">'.__('This plugin CANNOT be enabled! It requires Wolf version :v.', array(':v' => $plugin->require_wolf_version)).'</span>'; ?></p>
       </td>
       <td class="pluginSettings">
       <?php

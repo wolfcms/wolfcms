@@ -41,8 +41,8 @@ if (!defined('BR_VERSION')) { define('BR_VERSION', '0.6.0'); }
 
 Plugin::setInfos(array(
     'id'          => 'backup_restore',
-    'title'       => 'Backup Restore',
-    'description' => 'Provides administrators with the option of backing up their pages and settings to an XML file.',
+    'title'       => __('Backup Restore'),
+    'description' => __('Provides administrators with the option of backing up their pages and settings to an XML file.'),
     'version'     => BR_VERSION,
     'license'     => 'GPLv3',
     'author'      => 'Martijn van der Kleijn',
@@ -51,4 +51,4 @@ Plugin::setInfos(array(
     'require_wolf_version' => '0.5.5'
 ));
 
-Plugin::addController('backup_restore', 'Backup Restore', 'administrator', true);
+Plugin::addController('backup_restore', __('Backup Restore'), 'administrator', true);
