@@ -42,10 +42,9 @@
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @since Wolf version 0.1
  */
-class Page extends Record
-{
+class Page extends Record {
     const TABLE_NAME = 'page';
-    
+
     const STATUS_DRAFT = 1;
     const STATUS_REVIEWED = 50;
     const STATUS_PUBLISHED = 100;
@@ -54,7 +53,7 @@ class Page extends Record
     const LOGIN_NOT_REQUIRED = 0;
     const LOGIN_REQUIRED = 1;
     const LOGIN_INHERIT = 2;
-    
+
     public $id;
     public $title = '';
     public $slug = '';
@@ -68,7 +67,7 @@ class Page extends Record
     public $status_id;
     public $comment_status;
     public $parent = false;
-    
+
     public $created_on;
     public $published_on;
     public $updated_on;
@@ -94,13 +93,12 @@ class Page extends Record
         }
 
         if ($object !== null) {
-        foreach ($object as $key => $value) {
-            $this->$key = $value;
-        }
+            foreach ($object as $key => $value) {
+                $this->$key = $value;
+            }
         }
 
-        if ($this->parent)
-        {
+        if ($this->parent) {
             $this->setUrl();
         }
     }
@@ -117,8 +115,7 @@ class Page extends Record
     public function updator() { return $this->updator; }
     public function updatorId() { return $this->updator_id; }
 
-    public function breadcrumbs($separator='&gt;')
-    {
+    public function breadcrumbs($separator='&gt;') {
         $url = '';
         $path = '';
         $paths = explode('/', '/'.$this->slug);
@@ -133,28 +130,25 @@ class Page extends Record
 
     }
 
-    public function previous()
-    {
+    public function previous() {
         if ($this->parent)
             return $this->parent->children(array(
-                'limit' => 1,
-                'where' => 'page.id < '. $this->id,
-                'order' => 'page.created_on DESC'
+            'limit' => 1,
+            'where' => 'page.id < '. $this->id,
+            'order' => 'page.created_on DESC'
             ));
     }
 
-    public function next()
-    {
+    public function next() {
         if ($this->parent)
             return $this->parent->children(array(
-                'limit' => 1,
-                'where' => 'page.id > '. $this->id,
-                'order' => 'page.created_on ASC'
+            'limit' => 1,
+            'where' => 'page.id > '. $this->id,
+            'order' => 'page.created_on ASC'
             ));
     }
 
-    public function childrenCount($args=null, $value=array(), $include_hidden=false)
-    {
+    public function childrenCount($args=null, $value=array(), $include_hidden=false) {
         global $__CMS_CONN__;
 
         // Collect attributes...
@@ -169,8 +163,8 @@ class Page extends Record
 
         // Prepare SQL
         $sql = 'SELECT COUNT(*) AS nb_rows FROM '.TABLE_PREFIX.'page '
-             . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_REVIEWED.' OR status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
-             . "$where_string ORDER BY $order $limit_string";
+            . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_REVIEWED.' OR status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
+            . "$where_string ORDER BY $order $limit_string";
 
         $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute($value);
@@ -178,26 +172,23 @@ class Page extends Record
         return (int) $stmt->fetchColumn();
     }
 
-    public function parent($level=null)
-    {
+    public function parent($level=null) {
         if ($level === null)
             return $this->parent;
 
         if ($level > $this->level)
             return false;
         else if ($this->level == $level)
-            return $this;
-        else
-            return $this->parent($level);
+                return $this;
+            else
+                return $this->parent($level);
     }
 
-    public function executionTime()
-    {
+    public function executionTime() {
         return execution_time();
     }
 
-    private function _inversedBreadcrumbs($separator)
-    {
+    private function _inversedBreadcrumbs($separator) {
         $out = '<a href="'.$this->url().'" title="'.$this->breadcrumb.'">'.$this->breadcrumb.'</a> <span class="breadcrumb-separator">'.$separator.'</span> '."\n";
 
         if ($this->parent)
@@ -206,8 +197,7 @@ class Page extends Record
         return $out;
     }
 
-    public function includeSnippet($name)
-    {
+    public function includeSnippet($name) {
         global $__CMS_CONN__;
 
         $sql = 'SELECT content_html FROM '.TABLE_PREFIX.'snippet WHERE name LIKE ?';
@@ -215,20 +205,18 @@ class Page extends Record
         $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute(array($name));
 
-        if ($snippet = $stmt->fetchObject())
-        {
+        if ($snippet = $stmt->fetchObject()) {
             eval('?>'.$snippet->content_html);
         }
     }
 
 
-    private function _loadTags()
-    {
+    private function _loadTags() {
         global $__CMS_CONN__;
         $this->tags = array();
 
         $sql = "SELECT tag.id AS id, tag.name AS tag FROM ".TABLE_PREFIX."page_tag AS page_tag, ".TABLE_PREFIX."tag AS tag ".
-               "WHERE page_tag.page_id={$this->id} AND page_tag.tag_id = tag.id";
+            "WHERE page_tag.page_id={$this->id} AND page_tag.tag_id = tag.id";
 
         if ( ! $stmt = $__CMS_CONN__->prepare($sql))
             return;
@@ -237,11 +225,10 @@ class Page extends Record
 
         // Run!
         while ($object = $stmt->fetchObject())
-             $this->tags[$object->id] = $object->tag;
+            $this->tags[$object->id] = $object->tag;
     }
 
-    public function tags()
-    {
+    public function tags() {
         if ( ! $this->tags)
             $this->_loadTags();
 
@@ -249,8 +236,7 @@ class Page extends Record
     }
 
 
-    public function level()
-    {
+    public function level() {
         if ($this->level === false)
             $this->level = empty($this->url) ? 0 : substr_count($this->url, '/')+1;
 
@@ -265,64 +251,56 @@ class Page extends Record
      *  '%A, %e %B %Y'      -> Wednesday, 20 December 2006
      *  '%B %e, %Y, %H:%M %p' -> December 20, 2006, 08:30 pm
      */
-    public function date($format='%a, %e %b %Y', $which_one='created')
-    {
+    public function date($format='%a, %e %b %Y', $which_one='created') {
         if ($which_one == 'update' || $which_one == 'updated')
             return strftime($format, strtotime($this->updated_on));
         else if ($which_one == 'publish' || $which_one == 'published')
-            return strftime($format, strtotime($this->published_on));
-        else
-            return strftime($format, strtotime($this->created_on));
+                return strftime($format, strtotime($this->published_on));
+            else
+                return strftime($format, strtotime($this->created_on));
     }
 
 
-    public function content($part='body', $inherit=false)
-    {
-        // if part exist we generate the content en execute it!
-        if (isset($this->part->$part))
-        {
+    public function content($part='body', $inherit=false) {
+    // if part exist we generate the content en execute it!
+        if (isset($this->part->$part)) {
             ob_start();
             eval('?>'.$this->part->$part->content_html);
             $out = ob_get_contents();
             ob_end_clean();
             return $out;
         }
-        else if ($inherit && $this->parent)
-        {
-            return $this->parent->content($part, true);
-        }
+        else if ($inherit && $this->parent) {
+                return $this->parent->content($part, true);
+            }
     }
 
-    public function hasContent($part, $inherit=false)
-    {
+    public function hasContent($part, $inherit=false) {
         if ( isset($this->part->$part) ) {
             return true;
         }
-        else if ( $inherit && $this->parent )
-        {
-            return $this->parent->hasContent($part, true);
-        }
+        else if ( $inherit && $this->parent ) {
+                return $this->parent->hasContent($part, true);
+            }
     }
 
     protected function setUrl() {
         $this->url = trim($this->parent->url .'/'. $this->slug, '/');
     }
 
-    public function link($label=null, $options='')
-    {
+    public function link($label=null, $options='') {
         if ($label == null)
             $label = $this->title();
 
         return sprintf('<a href="%s" %s>%s</a>',
-               $this->url(),
-               $options,
-               $label
+        $this->url(),
+        $options,
+        $label
         );
     }
 
 
-    public function children($args=null, $value=array(), $include_hidden=false)
-    {
+    public function children($args=null, $value=array(), $include_hidden=false) {
         global $__CMS_CONN__;
 
         $page_class = 'Page';
@@ -343,28 +321,25 @@ class Page extends Record
 
         // Prepare SQL
         $sql = 'SELECT page.*, author.name AS author, author.id AS author_id, updator.name AS updator, updator.id AS updator_id '
-             . 'FROM '.TABLE_PREFIX.'page AS page '
-             . 'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
-             . 'LEFT JOIN '.TABLE_PREFIX.'user AS updator ON updator.id = page.updated_by_id '
-             . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_REVIEWED.' OR status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
-             . "$where_string ORDER BY $order $limit_string";
+            . 'FROM '.TABLE_PREFIX.'page AS page '
+            . 'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
+            . 'LEFT JOIN '.TABLE_PREFIX.'user AS updator ON updator.id = page.updated_by_id '
+            . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_REVIEWED.' OR status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
+            . "$where_string ORDER BY $order $limit_string";
 
         $pages = array();
 
         // hack to be able to redefine the page class with behavior
-        if ( ! empty($this->behavior_id))
-        {
-            // will return Page by default (if not found!)
+        if ( ! empty($this->behavior_id)) {
+        // will return Page by default (if not found!)
             $page_class = Behavior::loadPageHack($this->behavior_id);
         }
 
         // Run!
-        if ($stmt = $__CMS_CONN__->prepare($sql))
-        {
+        if ($stmt = $__CMS_CONN__->prepare($sql)) {
             $stmt->execute($value);
 
-            while ($object = $stmt->fetchObject())
-            {
+            while ($object = $stmt->fetchObject()) {
                 $page = new $page_class($object, $this);
 
                 // assignParts
@@ -385,16 +360,14 @@ class Page extends Record
      *
      * @return int Integer corresponding to one of the LOGIN_* constants.
      */
-    public function getLoginNeeded()
-    {
+    public function getLoginNeeded() {
         if ($this->needs_login == Page::LOGIN_INHERIT && $this->parent)
             return $this->parent->getLoginNeeded();
         else
             return $this->needs_login;
     }
 
-    public function _executeLayout()
-    {
+    public function _executeLayout() {
         global $__CMS_CONN__;
 
         $sql = 'SELECT content_type, content FROM '.TABLE_PREFIX.'layout WHERE id = ?';
@@ -402,9 +375,8 @@ class Page extends Record
         $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute(array($this->_getLayoutId()));
 
-        if ($layout = $stmt->fetchObject())
-        {
-            // if content-type not set, we set html as default
+        if ($layout = $stmt->fetchObject()) {
+        // if content-type not set, we set html as default
             if ($layout->content_type == '')
                 $layout->content_type = 'text/html';
 
@@ -419,49 +391,44 @@ class Page extends Record
     /**
      * find the layoutId of the page where the layout is set
      */
-    private function _getLayoutId()
-    {
+    private function _getLayoutId() {
         if ($this->layout_id)
             return $this->layout_id;
         else if ($this->parent)
-            return $this->parent->_getLayoutId();
-        else
-            exit ('You need to set a layout!');
+                return $this->parent->_getLayoutId();
+            else
+                exit ('You need to set a layout!');
     }
 
 
 /* -------- */
 
 
-    public function beforeInsert()
-    {
+    public function beforeInsert() {
         $this->created_on = date('Y-m-d H:i:s');
         $this->created_by_id = AuthUser::getId();
-        
+
         $this->updated_on = $this->created_on;
         $this->updated_by_id = $this->created_by_id;
-        
+
         if ($this->status_id == Page::STATUS_PUBLISHED)
             $this->published_on = date('Y-m-d H:i:s');
-        
+
         return true;
     }
-    
-    public function beforeUpdate()
-    {
+
+    public function beforeUpdate() {
         $this->created_on = $this->created_on . ' ' . $this->created_on_time;
         unset($this->created_on_time);
-        
-        if ( ! empty($this->published_on))
-        {
+
+        if ( ! empty($this->published_on)) {
             $this->published_on = $this->published_on . ' ' . $this->published_on_time;
             unset($this->published_on_time);
         }
-        else if ($this->status_id == Page::STATUS_PUBLISHED)
-        {
-            $this->published_on = date('Y-m-d H:i:s');
-        }
-        
+        else if ($this->status_id == Page::STATUS_PUBLISHED) {
+                $this->published_on = date('Y-m-d H:i:s');
+            }
+
         $this->updated_by_id = AuthUser::getId();
         $this->updated_on = date('Y-m-d H:i:s');
 
@@ -470,12 +437,11 @@ class Page extends Record
         unset($this->tags);
         unset($this->parent);
 
-        
+
         return true;
     }
 
-    public function getUri()
-    {
+    public function getUri() {
         $result = null;
 
         $parent = $this->findById($this->parent_id);
@@ -488,79 +454,72 @@ class Page extends Record
 
         return $result;
     }
-    
-    public function getTags()
-    {
+
+    public function getTags() {
         $tablename_page_tag = self::tableNameFromClassName('PageTag');
         $tablename_tag = self::tableNameFromClassName('Tag');
-        
+
         $sql = "SELECT tag.id AS id, tag.name AS tag FROM $tablename_page_tag AS page_tag, $tablename_tag AS tag ".
-               "WHERE page_tag.page_id={$this->id} AND page_tag.tag_id = tag.id";
-        
+            "WHERE page_tag.page_id={$this->id} AND page_tag.tag_id = tag.id";
+
         if ( ! $stmt = self::$__CONN__->prepare($sql))
             return array();
-            
+
         $stmt->execute();
-        
+
         // Run!
         $tags = array();
         while ($object = $stmt->fetchObject())
-             $tags[$object->id] = $object->tag;
-        
+            $tags[$object->id] = $object->tag;
+
         return $tags;
     }
-    
-    public function saveTags($tags)
-    {
+
+    public function saveTags($tags) {
         if (is_string($tags))
             $tags = explode(',', $tags);
-        
+
         $tags = array_map('trim', $tags);
-        
+
         $current_tags = $this->getTags();
-        
+
         // no tag before! no tag now! ... nothing to do!
         if (count($tags) == 0 && count($current_tags) == 0)
             return;
-        
+
         // delete all tags
-        if (count($tags) == 0)
-        {
+        if (count($tags) == 0) {
             $tablename = self::tableNameFromClassName('Tag');
-            
+
             // update count (-1) of those tags
             foreach($current_tags as $tag)
                 self::$__CONN__->exec("UPDATE $tablename SET count = count - 1 WHERE name = '$tag'");
-            
+
             return Record::deleteWhere('PageTag', 'page_id=?', array($this->id));
         }
-        else
-        {
+        else {
             $old_tags = array_diff($current_tags, $tags);
             $new_tags = array_diff($tags, $current_tags);
-            
+
             // insert all tags in the tag table and then populate the page_tag table
-            foreach ($new_tags as $index => $tag_name)
-            {
-                if ( ! empty($tag_name))
-                {
-                    // try to get it from tag list, if not we add it to the list
+            foreach ($new_tags as $index => $tag_name) {
+                if ( ! empty($tag_name)) {
+                // try to get it from tag list, if not we add it to the list
                     if ( ! $tag = Record::findOneFrom('Tag', 'name=?', array($tag_name)))
                         $tag = new Tag(array('name' => trim($tag_name)));
-                    
+
                     $tag->count++;
                     $tag->save();
-                    
+
                     // create the relation between the page and the tag
                     $tag = new PageTag(array('page_id' => $this->id, 'tag_id' => $tag->id));
                     $tag->save();
                 }
             }
-            
+
             // remove all old tag
-            foreach ($old_tags as $index => $tag_name)
-            {
-                // get the id of the tag
+            foreach ($old_tags as $index => $tag_name) {
+            // get the id of the tag
                 $tag = Record::findOneFrom('Tag', 'name=?', array($tag_name));
                 Record::deleteWhere('PageTag', 'page_id=? AND tag_id=?', array($this->id, $tag->id));
                 $tag->count--;
@@ -589,24 +548,20 @@ class Page extends Record
 
         $parent = false;
 
-        foreach ($urls as $page_slug)
-        {
+        foreach ($urls as $page_slug) {
             $url = ltrim($url . '/' . $page_slug, '/');
 
-            if ($page = find_page_by_slug($page_slug, $parent))
-            {
-                // check for behavior
-                if ($page->behavior_id != '')
-                {
-                    // add a instance of the behavior with the name of the behavior
+            if ($page = find_page_by_slug($page_slug, $parent)) {
+            // check for behavior
+                if ($page->behavior_id != '') {
+                // add a instance of the behavior with the name of the behavior
                     $params = explode_uri(substr($uri, strlen($url)));
                     $page->{$page->behavior_id} = Behavior::load($page->behavior_id, $page, $params);
 
                     return $page;
                 }
             }
-            else
-            {
+            else {
                 break;
             }
 
@@ -620,76 +575,69 @@ class Page extends Record
 
     public static function find($args = null) {
         if (!is_array($args)) {
-            // Assumes find was called with a uri
+        // Assumes find was called with a uri
             return Page::find_page_by_uri($args);
         }
-        
+
         // Collect attributes...
         $where    = isset($args['where']) ? trim($args['where']) : '';
         $order_by = isset($args['order']) ? trim($args['order']) : '';
         $offset   = isset($args['offset']) ? (int) $args['offset'] : 0;
         $limit    = isset($args['limit']) ? (int) $args['limit'] : 0;
-        
+
         // Prepare query parts
         $where_string = empty($where) ? '' : "WHERE $where";
         $order_by_string = empty($order_by) ? '' : "ORDER BY $order_by";
         $limit_string = $limit > 0 ? "LIMIT $offset, $limit" : '';
-        
+
         $tablename = self::tableNameFromClassName('Page');
         $tablename_user = self::tableNameFromClassName('User');
-        
+
         // Prepare SQL
         $sql = "SELECT page.*, creator.name AS created_by_name, updator.name AS updated_by_name FROM $tablename AS page".
-               " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id".
-               " LEFT JOIN $tablename_user AS updator ON page.updated_by_id = updator.id".
-               " $where_string $order_by_string $limit_string";
-        
+            " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id".
+            " LEFT JOIN $tablename_user AS updator ON page.updated_by_id = updator.id".
+            " $where_string $order_by_string $limit_string";
+
         $stmt = self::$__CONN__->prepare($sql);
         $stmt->execute();
-        
+
         // Run!
-        if ($limit == 1)
-        {
+        if ($limit == 1) {
             return $stmt->fetchObject('Page');
         }
-        else
-        {
+        else {
             $objects = array();
             while ($object = $stmt->fetchObject('Page'))
                 $objects[] = $object;
-            
+
             return $objects;
         }
     }
-    
-    public static function findAll($args = null)
-    {
+
+    public static function findAll($args = null) {
         return self::find($args);
     }
-    
-    public static function findById($id)
-    {
+
+    public static function findById($id) {
         return self::find(array(
-            'where' => 'page.id='.(int)$id,
-            'limit' => 1
+        'where' => 'page.id='.(int)$id,
+        'limit' => 1
         ));
     }
-    
-    public static function childrenOf($id)
-    {
+
+    public static function childrenOf($id) {
         return self::find(array('where' => 'parent_id='.$id, 'order' => 'position, page.created_on DESC'));
     }
-    
-    public static function hasChildren($id)
-    {
+
+    public static function hasChildren($id) {
         return (boolean) self::countFrom('Page', 'parent_id = '.(int)$id);
     }
-    
-    public static function cloneTree($page, $parent_id)
-    {
+
+    public static function cloneTree($page, $parent_id) {
         /* This will hold new id of root of cloned tree. */
         static $new_root_id = false;
-        
+
         /* Clone passed in page. */
         $clone = Record::findByIdFrom('Page', $page->id);
         $clone->parent_id = (int)$parent_id;
@@ -697,7 +645,7 @@ class Page extends Record
         $clone->title .= " (copy)";
         $clone->slug .= "-copy";
         $clone->save();
-        
+
         /* Also clone the page parts. */
         $page_part = PagePart::findByPageId($page->id);
         if (count($page_part)) {
@@ -707,7 +655,7 @@ class Page extends Record
                 $part->save();
             }
         }
-        
+
         /* This gets set only once even when called recursively. */
         if (!$new_root_id) {
             $new_root_id = $clone->id;
@@ -719,8 +667,8 @@ class Page extends Record
                 Page::cloneTree($child, $clone->id);
             }
         }
-        
+
         return $new_root_id;
     }
-    
+
 } // end Page class

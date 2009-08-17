@@ -42,29 +42,26 @@
  *
  * @since Wolf version 0.5
  */
-class Behavior
-{
+class Behavior {
     private static $loaded_files = array();
     private static $behaviors = array();
-    
+
     /**
      * Add a new behavior to Wolf CMS
      *
      * @param behavior_id string  The Behavior plugin folder name
      * @param file      string  The file where the Behavior class is
      */
-    public static function add($behavior_id, $file)
-    {
+    public static function add($behavior_id, $file) {
         self::$behaviors[$behavior_id] = $file;
     }
-    
+
     /**
      * Remove a behavior to Wolf CMS
      *
      * @param behavior_id string  The Behavior plugin folder name
      */
-    public static function remove($behavior_id)
-    {
+    public static function remove($behavior_id) {
         if (isset(self::$behaviors[$behavior_id]))
             unset(self::$behaviors[$behavior_id]);
     }
@@ -78,23 +75,19 @@ class Behavior
      *
      * @return object
      */
-    public static function load($behavior_id, &$page, $params)
-    {
-        if ( ! empty(self::$behaviors[$behavior_id]))
-        {
+    public static function load($behavior_id, &$page, $params) {
+        if ( ! empty(self::$behaviors[$behavior_id])) {
             $file = CORE_ROOT.'/plugins/'.self::$behaviors[$behavior_id];
 
             if (isset(self::$loaded_files[$file]))
                 return new $behavior_id($page, $params);
 
-            if (file_exists($file))
-            {
+            if (file_exists($file)) {
                 include $file;
                 self::$loaded_files[$file] = true;
                 return new $behavior_id($page, $params);
             }
-            else
-            {
+            else {
                 exit ("Behavior $behavior_id not found!");
             }
         }
@@ -107,8 +100,7 @@ class Behavior
      *
      * @return string   class name of the page
      */
-    public static function loadPageHack($behavior_id)
-    {
+    public static function loadPageHack($behavior_id) {
         $behavior_page_class = 'Page'.str_replace(' ','',ucwords(str_replace('_',' ', $behavior_id)));
 
         if (class_exists($behavior_page_class, false))
@@ -117,15 +109,14 @@ class Behavior
             return 'Page';
     }
 
-    
+
     /**
      *
-       Find all active Behaviors id
+     Find all active Behaviors id
 
-       return array
+     return array
      */
-    public static function findAll()
-    {
+    public static function findAll() {
         return array_keys(self::$behaviors);
     }
 

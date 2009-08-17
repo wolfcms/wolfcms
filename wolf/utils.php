@@ -35,7 +35,7 @@
  * @param     string
  * @return    bool
  */
-function startsWith($haystack, $needle){
+function startsWith($haystack, $needle) {
     return strpos($haystack, $needle) === 0;
 }
 
@@ -46,7 +46,7 @@ function startsWith($haystack, $needle){
  * @param     string
  * @return    bool
  */
-function endsWith($haystack, $needle){
+function endsWith($haystack, $needle) {
     return strrpos($haystack, $needle) === strlen($haystack)-strlen($needle);
 }
 

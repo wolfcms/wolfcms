@@ -24,8 +24,7 @@
  * See exception.txt for details and the full text.
  */
 
-class Template
-{
+class Template {
 
     public $template;         // String of template file
     private $_vars = array(); // Array of template variables
@@ -36,8 +35,7 @@ class Template
      * @param string $template Template path (absolute path or path relative to the templates dir)
      * @return void
      */
-    public function __construct($template_path)
-    {
+    public function __construct($template_path) {
         $this->template = $template_path;
     }
 
@@ -48,8 +46,7 @@ class Template
      * @param mixed $value Variable value
      * @return void
      */
-    public function assign($name, $value=null)
-    {
+    public function assign($name, $value=null) {
         if (is_array($name)) {
             foreach($name as $n => $v) {
                 $this->_vars[$n] = $v;
@@ -64,8 +61,7 @@ class Template
      *
      * @return string content of compiled template
      */
-    public function fetch()
-    {
+    public function fetch() {
         ob_start();
         if ($this->_includeTemplate()) {
             return ob_get_clean();
@@ -78,8 +74,7 @@ class Template
      *
      * @return boolean
      */
-    public function display()
-    {
+    public function display() {
         return $this->_includeTemplate();
     }
 
@@ -88,8 +83,7 @@ class Template
      *
      * @return boolean
      */
-    private function _includeTemplate()
-    {
+    private function _includeTemplate() {
         if (file_exists($this->template)) {
             extract($this->_vars, EXTR_SKIP);
             include $this->template;

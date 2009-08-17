@@ -36,141 +36,128 @@
  */
 
 /**
- * class Plugin 
+ * class Plugin
  *
  * Provide a Plugin API to make wolf more flexible
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @since Wolf version 0.9
  */
-class Plugin
-{
-	static $plugins = array();
-	static $plugins_infos = array();
+class Plugin {
+    static $plugins = array();
+    static $plugins_infos = array();
     static $updatefile_cache = array();
 
-	static $controllers = array();
+    static $controllers = array();
     static $javascripts = array();
 
-	/**
-	 * Initialize all activated plugin by including is index.php file
-	 */
-	static function init()
-	{
-		self::$plugins = unserialize(Setting::get('plugins'));
-		foreach (self::$plugins as $plugin_id => $tmp)
-		{
-			$file = CORE_ROOT.'/plugins/'.$plugin_id.'/index.php';
-			if (file_exists($file))
-				include $file;
-			
-			$file = CORE_ROOT.'/plugins/'.$plugin_id.'/i18n/'.I18n::getLocale().'-message.php';
-			if (file_exists($file))
-			{
-				$array = include $file;
-				I18n::add($array);
-			}
-		}
-	}
-
-	/**
-	 * Set plugin informations (id, title, description, version and website)
-	 *
-	 * @param infos array Assoc array with plugin informations
-	 */
-	static function setInfos($infos)
-	{
-		self::$plugins_infos[$infos['id']] = (object) $infos;
-	}
-
-	/**
-	 * Activate a plugin. This will execute the enable.php file of the plugin
-     * when found.
-	 *
-	 * @param plugin_id string	The plugin name to activate
-	 */
-	static function activate($plugin_id)
-	{
-		self::$plugins[$plugin_id] = 1;
-		self::save();
-
-		$file = CORE_ROOT.'/plugins/'.$plugin_id.'/enable.php';
-		if (file_exists($file))
-			include $file;
-        
-        $class_name = Inflector::camelize($plugin_id).'Controller';        
-        AutoLoader::addFile($class_name, self::$controllers[$plugin_id]->file);
-	}
-	
-	/**
-	 * Deactivate a plugin
-	 *
-	 * @param plugin_id string	The plugin name to deactivate
-	 */
-	static function deactivate($plugin_id)
-	{
-		if (isset(self::$plugins[$plugin_id]))
-		{
-			unset(self::$plugins[$plugin_id]);
-			self::save();
-
-			$file = CORE_ROOT.'/plugins/'.$plugin_id.'/disable.php';
-			if (file_exists($file))
-				include $file;
-		}
-	}
-
-	/**
-	 * Uninstall a plugin
-	 *
-	 * @param plugin_id string	The plugin name to uninstall
-	 */
-        static function uninstall($plugin_id) {
-            if (isset(self::$plugins[$plugin_id])) {
-                unset(self::$plugins[$plugin_id]);
-                self::save();
-            }
-
-            $file = CORE_ROOT.'/plugins/'.$plugin_id.'/uninstall.php';
-            if (file_exists($file)) {
+    /**
+     * Initialize all activated plugin by including is index.php file
+     */
+    static function init() {
+        self::$plugins = unserialize(Setting::get('plugins'));
+        foreach (self::$plugins as $plugin_id => $tmp) {
+            $file = CORE_ROOT.'/plugins/'.$plugin_id.'/index.php';
+            if (file_exists($file))
                 include $file;
+
+            $file = CORE_ROOT.'/plugins/'.$plugin_id.'/i18n/'.I18n::getLocale().'-message.php';
+            if (file_exists($file)) {
+                $array = include $file;
+                I18n::add($array);
             }
         }
+    }
 
-	/**
-	 * Save activated plugins to the setting 'plugins'
-	 */
-	static function save()
-	{
-		Setting::saveFromData(array('plugins' => serialize(self::$plugins)));
-	}
+    /**
+     * Set plugin informations (id, title, description, version and website)
+     *
+     * @param infos array Assoc array with plugin informations
+     */
+    static function setInfos($infos) {
+        self::$plugins_infos[$infos['id']] = (object) $infos;
+    }
 
-	/**
-	 * Find all plugins installed in the plugin folder
-	 *
-	 * @return array
-	 */
-	static function findAll()
-	{
-		$dir = CORE_ROOT.'/plugins/';
+    /**
+     * Activate a plugin. This will execute the enable.php file of the plugin
+     * when found.
+     *
+     * @param plugin_id string	The plugin name to activate
+     */
+    static function activate($plugin_id) {
+        self::$plugins[$plugin_id] = 1;
+        self::save();
 
-		if ($handle = opendir($dir))
-		{
-			while (false !== ($plugin_id = readdir($handle)))
-			{
-				if ( ! isset(self::$plugins[$plugin_id]) && is_dir($dir.$plugin_id) && strpos($plugin_id, '.') !== 0)
-				{
-					$file = CORE_ROOT.'/plugins/'.$plugin_id.'/index.php';
-					if (file_exists($file))
-						include $file;
-				}
-			}
-			closedir($handle);
-		}
+        $file = CORE_ROOT.'/plugins/'.$plugin_id.'/enable.php';
+        if (file_exists($file))
+            include $file;
 
-		ksort(self::$plugins_infos);
-		return self::$plugins_infos;
-	}
+        $class_name = Inflector::camelize($plugin_id).'Controller';
+        AutoLoader::addFile($class_name, self::$controllers[$plugin_id]->file);
+    }
+
+    /**
+     * Deactivate a plugin
+     *
+     * @param plugin_id string	The plugin name to deactivate
+     */
+    static function deactivate($plugin_id) {
+        if (isset(self::$plugins[$plugin_id])) {
+            unset(self::$plugins[$plugin_id]);
+            self::save();
+
+            $file = CORE_ROOT.'/plugins/'.$plugin_id.'/disable.php';
+            if (file_exists($file))
+                include $file;
+        }
+    }
+
+    /**
+     * Uninstall a plugin
+     *
+     * @param plugin_id string	The plugin name to uninstall
+     */
+    static function uninstall($plugin_id) {
+        if (isset(self::$plugins[$plugin_id])) {
+            unset(self::$plugins[$plugin_id]);
+            self::save();
+        }
+
+        $file = CORE_ROOT.'/plugins/'.$plugin_id.'/uninstall.php';
+        if (file_exists($file)) {
+            include $file;
+        }
+    }
+
+    /**
+     * Save activated plugins to the setting 'plugins'
+     */
+    static function save() {
+        Setting::saveFromData(array('plugins' => serialize(self::$plugins)));
+    }
+
+    /**
+     * Find all plugins installed in the plugin folder
+     *
+     * @return array
+     */
+    static function findAll() {
+        $dir = CORE_ROOT.'/plugins/';
+
+        if ($handle = opendir($dir)) {
+            while (false !== ($plugin_id = readdir($handle))) {
+                if ( ! isset(self::$plugins[$plugin_id]) && is_dir($dir.$plugin_id) && strpos($plugin_id, '.') !== 0) {
+                    $file = CORE_ROOT.'/plugins/'.$plugin_id.'/index.php';
+                    if (file_exists($file))
+                        include $file;
+                }
+            }
+            closedir($handle);
+        }
+
+        ksort(self::$plugins_infos);
+        return self::$plugins_infos;
+    }
 
     /**
      * Check the file mentioned as update_url for the latest plugin version available.
@@ -183,8 +170,7 @@ class Plugin
      *
      * @return           string The latest version number or a localized message.
      */
-    static function checkLatest($plugin)
-    {
+    static function checkLatest($plugin) {
         $data = null;
 
         if (!defined('CHECK_UPDATES') || !CHECK_UPDATES)
@@ -200,7 +186,7 @@ class Plugin
         }
 
         if (!array_key_exists($plugin->update_url, Plugin::$updatefile_cache)) {
-            // Read and cache the update file
+        // Read and cache the update file
             if (!defined('CHECK_TIMEOUT')) define('CHECK_TIMEOUT', 5);
             $ctx = stream_context_create(array('http' => array('timeout' => CHECK_TIMEOUT)));
 
@@ -224,32 +210,31 @@ class Plugin
     }
 
 
-	/**
-	 * Add a controller (tab) to the administration
-	 *
-	 * @param plugin_id     string  The folder name of the plugin
-	 * @param label         string  The tab label
-	 * @param permissions   string  List of roles that will have the tab displayed
-	 *                              separate by coma ie: 'administrator,developer'
+    /**
+     * Add a controller (tab) to the administration
+     *
+     * @param plugin_id     string  The folder name of the plugin
+     * @param label         string  The tab label
+     * @param permissions   string  List of roles that will have the tab displayed
+     *                              separate by coma ie: 'administrator,developer'
      * @param show_tab      boolean Either 'true' or 'false'. Defaults to true.
-	 *
-	 * @return void
-	 */
-	static function addController($plugin_id, $label, $permissions=false, $show_tab=true)
-	{
-		$class_name = Inflector::camelize($plugin_id).'Controller';
+     *
+     * @return void
+     */
+    static function addController($plugin_id, $label, $permissions=false, $show_tab=true) {
+        $class_name = Inflector::camelize($plugin_id).'Controller';
 
-		self::$controllers[$plugin_id] = (object) array(
-			'label' => ucfirst($label),
-			'class_name' => $class_name,
-			'file'	=> CORE_ROOT.'/plugins/'.$plugin_id.'/'.$class_name.'.php',
-			'permissions' => $permissions,
+        self::$controllers[$plugin_id] = (object) array(
+            'label' => ucfirst($label),
+            'class_name' => $class_name,
+            'file'	=> CORE_ROOT.'/plugins/'.$plugin_id.'/'.$class_name.'.php',
+            'permissions' => $permissions,
             'show_tab' => $show_tab
-		);
-        
+        );
+
         AutoLoader::addFile($class_name, self::$controllers[$plugin_id]->file);
-	}
-    
+    }
+
 
     /**
      * Add a javascript file to be added to the html page for a plugin.
@@ -258,27 +243,23 @@ class Plugin
      * @param $plugin_id    string  The folder name of the plugin
      * @param $file         string  The path to the javascript file relative to plugin root
      */
-    static function addJavascript($plugin_id, $file)
-    {
-        if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $file))
-        {
+    static function addJavascript($plugin_id, $file) {
+        if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $file)) {
             self::$javascripts[] = $plugin_id.'/'.$file;
         }
     }
-    
-    
-    static function hasSettingsPage($plugin_id)
-    {
+
+
+    static function hasSettingsPage($plugin_id) {
         $class_name = Inflector::camelize($plugin_id).'Controller';
-        
+
         return (array_key_exists($plugin_id, Plugin::$controllers) && method_exists($class_name, 'settings'));
     }
-    
-    
-    static function hasDocumentationPage($plugin_id)
-    {
+
+
+    static function hasDocumentationPage($plugin_id) {
         $class_name = Inflector::camelize($plugin_id).'Controller';
-        
+
         return (array_key_exists($plugin_id, Plugin::$controllers) && method_exists($class_name, 'documentation'));
     }
 
@@ -287,8 +268,7 @@ class Plugin
      *
      * @param string $plugin_id
      */
-    static function isEnabled($plugin_id)
-    {
+    static function isEnabled($plugin_id) {
         if (array_key_exists($plugin_id, Plugin::$plugins) && Plugin::$plugins[$plugin_id] == 1)
             return true;
         else
@@ -315,8 +295,7 @@ class Plugin
      * @param array $settings Array of name-value pairs
      * @param string $plugin_id     The folder name of the plugin
      */
-    static function setAllSettings($array=null, $plugin_id=null)
-    {
+    static function setAllSettings($array=null, $plugin_id=null) {
         if ($array == null || $plugin_id == null) return false;
 
         global $__CMS_CONN__;
@@ -334,16 +313,13 @@ class Plugin
 
         $ret = false;
 
-        foreach ($array as $name => $value)
-        {
-            if (array_key_exists($name, $existingSettings))
-            {
+        foreach ($array as $name => $value) {
+            if (array_key_exists($name, $existingSettings)) {
                 $name = $__CMS_CONN__->quote($name);
                 $value = $__CMS_CONN__->quote($value);
                 $sql = "UPDATE $tablename SET value=$value WHERE name=$name AND plugin_id=$plugin_id";
             }
-            else
-            {
+            else {
                 $name = $__CMS_CONN__->quote($name);
                 $value = $__CMS_CONN__->quote($value);
                 $sql = "INSERT INTO $tablename (value, name, plugin_id) VALUES ($value, $name, $plugin_id)";
@@ -363,8 +339,7 @@ class Plugin
      * @param string $value         Setting value
      * @param string $plugin_id     Plugin folder name
      */
-    static function setSetting($name=null, $value=null, $plugin_id=null)
-    {
+    static function setSetting($name=null, $value=null, $plugin_id=null) {
         if ($name == null || $value == null || $plugin_id == null) return false;
 
         global $__CMS_CONN__;
@@ -380,14 +355,12 @@ class Plugin
         while ($settingname = $stmt->fetchColumn())
             $existingSettings[$settingname] = $settingname;
 
-        if (in_array($name, $existingSettings))
-        {
+        if (in_array($name, $existingSettings)) {
             $name = $__CMS_CONN__->quote($name);
             $value = $__CMS_CONN__->quote($value);
             $sql = "UPDATE $tablename SET value=$value WHERE name=$name AND plugin_id=$plugin_id";
         }
-        else
-        {
+        else {
             $name = $__CMS_CONN__->quote($name);
             $value = $__CMS_CONN__->quote($value);
             $sql = "INSERT INTO $tablename (value, name, plugin_id) VALUES ($value, $name, $plugin_id)";
@@ -403,8 +376,7 @@ class Plugin
      *
      * @param <type> $plugin_id
      */
-    static function getAllSettings($plugin_id=null)
-    {
+    static function getAllSettings($plugin_id=null) {
         if ($plugin_id == null) return false;
 
         global $__CMS_CONN__;
@@ -431,8 +403,7 @@ class Plugin
      * @param <type> $name
      * @param <type> $plugin_id
      */
-    static function getSetting($name=null, $plugin_id=null)
-    {
+    static function getSetting($name=null, $plugin_id=null) {
         if ($name == null || $plugin_id == null) return false;
 
         global $__CMS_CONN__;

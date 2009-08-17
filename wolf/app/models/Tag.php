@@ -40,7 +40,6 @@
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @since Wolf version 0.8.7
  */
-class Tag extends Record
-{
+class Tag extends Record {
     const TABLE_NAME = 'tag';
 }

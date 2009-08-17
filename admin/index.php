@@ -43,7 +43,7 @@ require_once($config_file);
 
 // Security checks -----------------------------------------------------------
 if (DEBUG == false && isWritable($config_file)) {
-    // Windows systems always have writable config files... skip those.
+// Windows systems always have writable config files... skip those.
     if (substr(PHP_OS, 0, 3) != 'WIN') {
         echo '<html><head><title>Wolf CMS automatically disabled!</title></head><body>';
         echo '<h1>Wolf CMS automatically disabled!</h1>';
@@ -72,14 +72,12 @@ require CORE_ROOT.'/Framework.php';
 
 //  Database connection  -----------------------------------------------------
 
-if (USE_PDO)
-{
+if (USE_PDO) {
     $__CMS_CONN__ = new PDO(DB_DSN, DB_USER, DB_PASS);
     if ($__CMS_CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) == 'mysql')
         $__CMS_CONN__->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
 }
-else
-{
+else {
     require_once CORE_ROOT . '/libraries/DoLite.php';
     $__CMS_CONN__ = new DoLite(DB_DSN, DB_USER, DB_PASS);
 }

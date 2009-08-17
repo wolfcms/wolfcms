@@ -39,7 +39,6 @@
  *
  * @since Wolf version 0.8.7
  */
-class PageTag extends Record
-{
+class PageTag extends Record {
     const TABLE_NAME = 'page_tag';
 }

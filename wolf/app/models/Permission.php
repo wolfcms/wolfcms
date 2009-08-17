@@ -40,7 +40,6 @@
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @since Wolf version 0.5
  */
-class Permission extends Record
-{
+class Permission extends Record {
     const TABLE_NAME = 'permission';
 }

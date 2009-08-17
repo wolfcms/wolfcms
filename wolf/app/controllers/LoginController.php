@@ -36,23 +36,21 @@
 
 /**
  * Allows a user to access login/logout related functionality.
- * 
+ *
  * It also has functionality to email a new password to the user if that user
  * cannot remember his or her password.
  *
  * @package wolf
  * @subpackage controllers
- * 
+ *
  * @version 0.1
  * @since 0.1
  */
-class LoginController extends Controller
-{
-    /**
-     * Sets up the LoginController.
-     */
-    function __construct()
-    {
+class LoginController extends Controller {
+/**
+ * Sets up the LoginController.
+ */
+    function __construct() {
         AuthUser::load();
     }
 
@@ -60,16 +58,15 @@ class LoginController extends Controller
      * Checks if a user is already logged in, otherwise it redirects the user
      * to the login screen.
      */
-    function index()
-    {
-        // already log in ?
+    function index() {
+    // already log in ?
         if (AuthUser::isLoggedIn()) {
             if (Flash::get('redirect') != null)
                 redirect(Flash::get('redirect'));
             else
                 redirect(get_url());
         }
-        
+
         // show it!
         $this->display('login/login', array(
             'username' => Flash::get('username'),
@@ -80,23 +77,21 @@ class LoginController extends Controller
     /**
      * Allows a user to login.
      */
-    function login()
-    {
-        // already log in ?
+    function login() {
+    // already log in ?
         if (AuthUser::isLoggedIn())
             if (Flash::get('redirect') != null)
                 redirect(Flash::get('redirect'));
             else
                 redirect(get_url());
-        
+
         if (get_request_method() == 'POST') {
             $data = isset($_POST['login']) ? $_POST['login']: array('username' => '', 'password' => '');
             Flash::set('username', $data['username']);
-        
-            if (AuthUser::login($data['username'], $data['password'], isset($data['remember'])))
-            {
+
+            if (AuthUser::login($data['username'], $data['password'], isset($data['remember']))) {
                 Observer::notify('admin_login_success', $data['username']);
-                
+
                 $this->_checkVersion();
                 // redirect to defaut controller and action
                 if ($data['redirect'] != null && $data['redirect'] != 'null')
@@ -109,20 +104,19 @@ class LoginController extends Controller
                 Observer::notify('admin_login_failed', $data['username']);
             }
         }
-        
+
         // not find or password is wrong
         if ($data['redirect'] != null && $data['redirect'] != 'null')
             redirect($data['redirect']);
         else
             redirect(get_url('login'));
-        
+
     }
 
     /**
      * Allows a user to logout.
      */
-    function logout()
-    {
+    function logout() {
         $username = AuthUser::getUserName();
         AuthUser::logout();
         Observer::notify('admin_after_logout', $username);
@@ -134,42 +128,38 @@ class LoginController extends Controller
      *
      * @return <type> ???
      */
-    function forgot()
-    {
+    function forgot() {
         if (get_request_method() == 'POST')
             return $this->_sendPasswordTo($_POST['forgot']['email']);
-        
+
         $this->display('login/forgot', array('email' => Flash::get('email')));
     }
-    
+
     /**
      * This method is used to send a newly generated password to a user.
-     * 
+     *
      * @param string $email The user's email adress.
      */
-    private function _sendPasswordTo($email)
-    {
+    private function _sendPasswordTo($email) {
         $user = User::findBy('email', $email);
-        if ($user)
-        {
+        if ($user) {
             use_helper('Email');
-            
+
             $new_pass = '12'.dechex(rand(100000000, 4294967295)).'K';
             $user->password = sha1($new_pass);
             $user->save();
-            
+
             $email = new Email();
             $email->from('no-reply@wolfcms.org', 'Wolf CMS');
             $email->to($user->email);
             $email->subject('Your new password from Wolf CMS');
             $email->message('username: '.$user->username."\npassword: ".$new_pass);
             $email->send();
-            
+
             Flash::set('success', 'An email has been send with your new password!');
             redirect(get_url('login'));
         }
-        else
-        {
+        else {
             Flash::set('email', $email);
             Flash::set('error', 'No user found!');
             redirect(get_url('login/forgot'));
@@ -181,20 +171,18 @@ class LoginController extends Controller
      *
      * @todo Make this check optional through the configuration file
      */
-    private function _checkVersion()
-    {
+    private function _checkVersion() {
         if (!defined('CHECK_UPDATES') || !CHECK_UPDATES)
             return;
 
         if (!defined('CHECK_TIMEOUT')) define('CHECK_TIMEOUT', 5);
         $ctx = stream_context_create(array('http' => array('timeout' => CHECK_TIMEOUT)));
-        
+
         $v = file_get_contents('http://www.wolfcms.org/version/', 0, $ctx);
-        if ($v > CMS_VERSION)
-        {
+        if ($v > CMS_VERSION) {
             Flash::set('error', __('<b>Information!</b> New Wolf version available (v. <b>:version</b>)! Visit <a href="http://www.wolfcms.org/">http://www.wolfcms.org/</a> to upgrade your version!',
-                       array(':version' => $v )));
+                array(':version' => $v )));
         }
     }
-    
+
 } // end LoginController class

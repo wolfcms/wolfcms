@@ -44,7 +44,7 @@ if ( ! defined('DEBUG')) { header('Location: install/'); exit(); }
 
 // Security checks -----------------------------------------------------------
 if (DEBUG == false && isWritable($config_file)) {
-    // Windows systems always have writable config files... skip those.
+// Windows systems always have writable config files... skip those.
     if (substr(PHP_OS, 0, 3) != 'WIN') {
         echo '<html><head><title>Wolf CMS automatically disabled!</title></head><body>';
         echo '<h1>Wolf CMS automatically disabled!</h1>';
@@ -61,22 +61,18 @@ define('BASE_URL', URL_PUBLIC . (endsWith(URL_PUBLIC, '/') ? '': '/') . (USE_MOD
 
 require CORE_ROOT.'/Framework.php';
 
-if (USE_PDO)
-{
-    try 
-	{
+if (USE_PDO) {
+    try {
         $__CMS_CONN__ = new PDO(DB_DSN, DB_USER, DB_PASS);
-	} 
-	catch (PDOException $error) 
-	{
+    }
+    catch (PDOException $error) {
         die('DB Connection failed: '.$error->getMessage());
-	}
-    
+    }
+
     if ($__CMS_CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) == 'mysql')
         $__CMS_CONN__->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
 }
-else
-{
+else {
     require_once CORE_ROOT . '/libraries/DoLite.php';
     $__CMS_CONN__ = new DoLite(DB_DSN, DB_USER, DB_PASS);
 }

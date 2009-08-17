@@ -36,8 +36,7 @@
 /**
  *
  */
-class Pagination
-{
+class Pagination {
 
     var $base_url           = ''; // The page we are linking to
     var $total_rows         = ''; // Total number of items (database results)
@@ -69,8 +68,7 @@ class Pagination
      *
      * @param array initialization parameters
      */
-    function __construct($params = array())
-    {
+    function __construct($params = array()) {
         if (count($params) > 0) {
             $this->initialize($params);
         }
@@ -82,15 +80,14 @@ class Pagination
      * @param	array	initialization parameters
      * @return	void
      */
-    function initialize($params = array())
-    {
-      if (count($params) > 0) {
-        foreach ($params as $key => $val) {
-          if (isset($this->$key))  {
-              $this->$key = $val;
-          }
+    function initialize($params = array()) {
+        if (count($params) > 0) {
+            foreach ($params as $key => $val) {
+                if (isset($this->$key)) {
+                    $this->$key = $val;
+                }
+            }
         }
-      }
     } // initialize
 
     /**
@@ -98,63 +95,62 @@ class Pagination
      *
      * @return	string
      */
-    function createLinks()
-    {
-      // If our item count or per-page total is zero there is no need to continue.
-      if ($this->total_rows == 0 || $this->per_page == 0)  {
-        return '';
-      }
+    function createLinks() {
+    // If our item count or per-page total is zero there is no need to continue.
+        if ($this->total_rows == 0 || $this->per_page == 0) {
+            return '';
+        }
 
-      // Calculate the total number of pages
-      $num_pages = ceil($this->total_rows / $this->per_page);
+        // Calculate the total number of pages
+        $num_pages = ceil($this->total_rows / $this->per_page);
 
-      // Is there only one page? Hm... nothing more to do here then.
-      if ($num_pages == 1) {
-        return '';
-      }
+        // Is there only one page? Hm... nothing more to do here then.
+        if ($num_pages == 1) {
+            return '';
+        }
 
-      // Calculate the start and end numbers. These determine
-      // which number to start and end the digit links with
-      $start = (($this->cur_page - $this->num_links) > 0) ? $this->cur_page - ($this->num_links - 1) : 1;
-      $end = (($this->cur_page + $this->num_links) < $num_pages) ? $this->cur_page + $this->num_links : $num_pages;
+        // Calculate the start and end numbers. These determine
+        // which number to start and end the digit links with
+        $start = (($this->cur_page - $this->num_links) > 0) ? $this->cur_page - ($this->num_links - 1) : 1;
+        $end = (($this->cur_page + $this->num_links) < $num_pages) ? $this->cur_page + $this->num_links : $num_pages;
 
-      // Add a trailing slash to the base URL if needed
-      $this->base_url = preg_replace("/(.+?)\/*$/", "\\1/",  $this->base_url);
+        // Add a trailing slash to the base URL if needed
+        $this->base_url = preg_replace("/(.+?)\/*$/", "\\1/",  $this->base_url);
 
-      // And here we go...
-      $output = '';
+        // And here we go...
+        $output = '';
 
-      // Render the "First" link
-      if ($this->cur_page > $this->num_links) {
-        $output .= $this->first_tag_open.'<a href="'.$this->base_url.'">'.$this->first_link.'</a>'.$this->first_tag_close;
-      }
+        // Render the "First" link
+        if ($this->cur_page > $this->num_links) {
+            $output .= $this->first_tag_open.'<a href="'.$this->base_url.'">'.$this->first_link.'</a>'.$this->first_tag_close;
+        }
 
-      // Write the digit links
-      for ($page = $start -1; $page <= $end; $page++) {
-        if ($page > 0) {
-          if ($this->cur_page == $page) {
-            $output .= $this->cur_tag_open.$page.$this->cur_tag_close; // Current page
-          } else {
-            //$page_offset = ($page-1)*$this->per_page;
-            $output .= $this->num_tag_open.'<a href="'.$this->base_url.$page.'">'.$page.'</a>'.$this->num_tag_close;
-          } // if
-        } // if
-      } // for
+        // Write the digit links
+        for ($page = $start -1; $page <= $end; $page++) {
+            if ($page > 0) {
+                if ($this->cur_page == $page) {
+                    $output .= $this->cur_tag_open.$page.$this->cur_tag_close; // Current page
+                } else {
+                //$page_offset = ($page-1)*$this->per_page;
+                    $output .= $this->num_tag_open.'<a href="'.$this->base_url.$page.'">'.$page.'</a>'.$this->num_tag_close;
+                } // if
+            } // if
+        } // for
 
-      // Render the "Last" link
-      if (($this->cur_page + $this->num_links) < $num_pages) {
+        // Render the "Last" link
+        if (($this->cur_page + $this->num_links) < $num_pages) {
         //$page = (($num_pages * $this->per_page) - $this->per_page);
-        $output .= $this->last_tag_open.'<a href="'.$this->base_url.$num_pages.'">'.$this->last_link.'</a>'.$this->last_tag_close;
-      }
+            $output .= $this->last_tag_open.'<a href="'.$this->base_url.$num_pages.'">'.$this->last_link.'</a>'.$this->last_tag_close;
+        }
 
-      // Kill double slashes.  Note: Sometimes we can end up with a double slash
-      // in the penultimate link so we'll kill all double shashes.
-      $output = preg_replace("#([^:])//+#", "\\1/", $output);
+        // Kill double slashes.  Note: Sometimes we can end up with a double slash
+        // in the penultimate link so we'll kill all double shashes.
+        $output = preg_replace("#([^:])//+#", "\\1/", $output);
 
-      // Add the wrapper HTML if exists
-      $output = $this->full_tag_open.$output.$this->full_tag_close;
+        // Add the wrapper HTML if exists
+        $output = $this->full_tag_open.$output.$this->full_tag_close;
 
-      return $output;
+        return $output;
     } // createLinks
 
   } // Pagination

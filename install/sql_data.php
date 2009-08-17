@@ -33,8 +33,7 @@ if (!defined('INSTALL_SEQUENCE') || !isset($admin_name) || !isset($admin_passwd)
     die('Attempt to call setup file outside of install sequence!');
 }
 
-function wolf_datetime_incrementor()
-{
+function wolf_datetime_incrementor() {
     static $cpt=1;
     $cpt++;
     return date('Y-m-d H:i:s', time()+$cpt);

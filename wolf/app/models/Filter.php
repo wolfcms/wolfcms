@@ -42,43 +42,39 @@
  *
  * @since Wolf version 0.5
  */
-class Filter
-{
+class Filter {
     static $filters = array();
     private static $filters_loaded = array();
-    
+
     /**
      * Add a new filter to Wolf CMS
      *
      * @param filter_id string  The Filter plugin folder name
      * @param file      string  The file where the Filter class is
      */
-    public static function add($filter_id, $file)
-    {
+    public static function add($filter_id, $file) {
         self::$filters[$filter_id] = $file;
     }
-    
+
     /**
      * Remove a filter to Wolf CMS
      *
      * @param filter_id string  The Filter plugin folder name
      */
-    public static function remove($filter_id)
-    {
+    public static function remove($filter_id) {
         if (isset(self::$filters[$filter_id]))
             unset(self::$filters[$filter_id]);
     }
-    
+
     /**
      * Find all active filters id
      *
      * @return array
      */
-    public static function findAll()
-    {
+    public static function findAll() {
         return array_keys(self::$filters);
     }
-    
+
     /**
      * Get a instance of a filter
      *
@@ -86,17 +82,13 @@ class Filter
      *
      * @return mixed   if founded an object, else false
      */
-    public static function get($filter_id)
-    {
-        if ( ! isset(self::$filters_loaded[$filter_id]))
-        {
-            if (isset(self::$filters[$filter_id]))
-            {
+    public static function get($filter_id) {
+        if ( ! isset(self::$filters_loaded[$filter_id])) {
+            if (isset(self::$filters[$filter_id])) {
                 $file = CORE_ROOT.'/plugins/'.self::$filters[$filter_id];
-                if (file_exists($file))
-                {
+                if (file_exists($file)) {
                     include $file;
-                    
+
                     $filter_class = Inflector::camelize($filter_id);
                     self::$filters_loaded[$filter_id] = new $filter_class();
                     return self::$filters_loaded[$filter_id];
@@ -106,6 +98,6 @@ class Filter
         }
         else return self::$filters_loaded[$filter_id];
     }
-    
+
 } // end Filter class
 
