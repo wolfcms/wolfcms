@@ -52,11 +52,14 @@
         <p>
             As such, the contents of your backup file will replace the contents of your core Wolf CMS database tables.
         </p>
+        <p style="text-align: center;"><strong>
+            Do NOT upload a zip file, only upload a plain text XML file!
+        </strong></p>
     </fieldset>
     <p style="text-align: center;">
         <input name="MAX_FILE_SIZE" value="1048576" type="hidden"/>
         <input name="action" value="restore" type="hidden"/>
         <input name="restoreFile" type="file" size="39"/>
-        <input type="submit" value="<?php echo __('Upload file'); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to restore?'); ?>');"/>
+        <input type="submit" value="<?php echo __('Upload plain text XML file'); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to restore?'); ?>');"/>
     </p>
 </form>

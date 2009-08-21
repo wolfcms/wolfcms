@@ -151,6 +151,7 @@ class BackupRestoreController extends PluginController {
             $note = "---[ NOTES for $filename.xml ]---\n\n";
             $note .= "This backup was created for a specific Wolf CMS version, please only restore it\n";
             $note .= "on the same version.\n\n";
+            $note .= "When restoring a backup, upload the UNzipped XML file, not this zip file.\n\n";
             $note .= 'Created on '.date('Y-m-d').' at '.date('H:i:s').' GTM '.date('O').".\n";
             $note .= 'Created with BackupRestore plugin version '.BR_VERSION."\n";
             $note .= 'Created for Wolf CMS version '.CMS_VERSION."\n\n";
@@ -182,8 +183,12 @@ class BackupRestoreController extends PluginController {
             if (is_uploaded_file($_FILES['restoreFile']['tmp_name'])) {
                 $fileData = file_get_contents($_FILES['restoreFile']['tmp_name']);
 
-                if (isset($fileData) && $fileData !== null && $fileData !== false && $fileData !== '') {
+                if (isset($fileData) && $fileData !== null && $fileData !== false && $fileData !== '' && strlen($fileData) > 70 ) {
                     $this->_restore($fileData);
+                }
+                else {
+                    Flash::set('error', __('Backup file was not uploaded correctly/completely or is broken.'));
+                    $this->display('backup_restore/views/restore');
                 }
             }
         }
@@ -208,15 +213,28 @@ class BackupRestoreController extends PluginController {
 
         $xml = simplexml_load_string($fileData);
 
+        if (false === $xml) {
+            $errors = '';
+
+            foreach(libxml_get_errors() as $error) {
+                $errors .= $error->message;
+                $errors .= "<br/>\n";
+            }
+
+            Flash::set('error', 'An error occurred with the XML backup file: :error', array(':error' => $errors));
+            redirect(get_url('plugin/backup_restore'));
+        }
+
         // Import each table and table entry
         foreach($tablenames as $tablename) {
             $container = $tablename.'s';
-            if ($__CMS_CONN__->exec('TRUNCATE '.TABLE_PREFIX.$tablename) === false) {
-                Flash::set('error', __('Unable to truncate current table :tablename.', array(':tablename' => TABLE_PREFIX.$tablename)));
-                redirect(get_url('plugin/backup_restore'));
-            }
 
-            if (array_key_exists($container, $xml)) {
+            if (array_key_exists($container, $xml) && count($xml->$container->$tablename) > 0) {
+                if (false === $__CMS_CONN__->exec('TRUNCATE '.TABLE_PREFIX.$tablename)) {
+                    Flash::set('error', __('Unable to truncate current table :tablename.', array(':tablename' => TABLE_PREFIX.$tablename)));
+                    redirect(get_url('plugin/backup_restore'));
+                }
+
                 foreach ($xml->$container->$tablename as $element) {
                     $keys = array();
                     $values = array();
