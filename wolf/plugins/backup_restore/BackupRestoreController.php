@@ -212,7 +212,7 @@ class BackupRestoreController extends PluginController {
         foreach($tablenames as $tablename) {
             $container = $tablename.'s';
             if ($__CMS_CONN__->exec('TRUNCATE '.TABLE_PREFIX.$tablename) === false) {
-                Flash::set('error', __('Unable to truncate current table :tablename.', array('tablename' => TABLE_PREFIX.$tablename)));
+                Flash::set('error', __('Unable to truncate current table :tablename.', array(':tablename' => TABLE_PREFIX.$tablename)));
                 redirect(get_url('plugin/backup_restore'));
             }
 
@@ -235,7 +235,7 @@ class BackupRestoreController extends PluginController {
                     $sql = 'INSERT INTO '.TABLE_PREFIX.$tablename.' ('.join(', ', $keys).') VALUES ('.join(', ', $values).')'."\r";
 
                     if ($__CMS_CONN__->exec($sql) === false) {
-                        Flash::set('error', __('Unable to reconstruct table :tablename.', array('tablename' => TABLE_PREFIX.$tablename)));
+                        Flash::set('error', __('Unable to reconstruct table :tablename.', array(':tablename' => TABLE_PREFIX.$tablename)));
                         redirect(get_url('plugin/backup_restore'));
                     }
                 }
