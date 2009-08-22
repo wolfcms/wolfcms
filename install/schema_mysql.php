@@ -24,6 +24,15 @@
  * See exception.txt for details and the full text.
  */
 
+// Table structure for table: cron -----------------------------------------
+
+$PDO->exec("CREATE TABLE ".TABLE_PREFIX."cron (
+  id int(11) unsigned NOT NULL auto_increment,
+  lastrun text,
+  PRIMARY KEY  (id),
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8");
+
+
 // Table structure for table: layout -----------------------------------------
 
 $PDO->exec("CREATE TABLE ".TABLE_PREFIX."layout (

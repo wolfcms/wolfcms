@@ -88,5 +88,21 @@ Setting::init();
 use_helper('I18n');
 I18n::setLocale(Setting::get('language'));
 
+// Only add the cron web bug when necessary
+if (defined('USE_POORMANSCRON') && USE_POORMANSCRON) {
+    Observer::observe('page_before_execute_layout', 'run_cron');
+
+    function run_cron() {
+        $cron = Cron::findByIdFrom('Cron', '1');
+        $now = time();
+        $last = $cron->getLastRunTime();
+
+        if ($now - $last > Setting::get('cron_interval')) {
+            $cron->save();
+            echo $cron->generateWebBug();
+        }
+    }
+}
+
 // run everything!
 require APP_PATH.'/main.php';

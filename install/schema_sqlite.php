@@ -24,6 +24,13 @@
  * See exception.txt for details and the full text.
  */
 
+// Table structure for table: cron -----------------------------------------
+
+$PDO->exec("CREATE TABLE layout (
+    id INTEGER NOT NULL PRIMARY KEY,
+    lastrun text,
+)");
+
 
 // Table structure for table: layout -----------------------------------------
 

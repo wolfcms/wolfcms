@@ -8,6 +8,7 @@ Sigla:
 ======
 
 0.6.0 - released 2009-0?-??
++ Added basic cron support.
 + Added user-specific language setting for back-end. - issue 13
 + Added uninstall feature support for comment plugin.
 + Added uninstall feature for plugins - issue 40

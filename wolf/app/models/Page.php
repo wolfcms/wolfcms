@@ -383,6 +383,8 @@ class Page extends Record {
             // set content-type and charset of the page
             header('Content-Type: '.$layout->content_type.'; charset=UTF-8');
 
+            Observer::notify('page_before_execute_layout');
+
             // execute the layout code
             eval('?>'.$layout->content);
         }
