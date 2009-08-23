@@ -445,7 +445,8 @@ class Record {
 
         self::logQuery($sql);
 
-        // Run it !!...
+        if ( ! $this->afterSave()) return false;
+
         return $return;
     }
 
