@@ -39,8 +39,8 @@
 
 Plugin::setInfos(array(
     'id'          => 'textile',
-    'title'       => 'Textile filter', 
-    'description' => 'Allows you to compose page parts or snippets using the Textile text filter.', 
+    'title'       => __('Textile filter'),
+    'description' => __('Allows you to compose page parts or snippets using the Textile text filter.'),
     'version'     => '1.0.0', 
     'website'     => 'http://www.wolfcms.org/',
     'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml'

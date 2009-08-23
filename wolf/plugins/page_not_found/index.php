@@ -39,8 +39,8 @@
 
 Plugin::setInfos(array(
     'id'          => 'page_not_found',
-    'title'       => 'Page not found', 
-    'description' => 'Provides Page not found page types.', 
+    'title'       => __('Page not found'),
+    'description' => __('Provides Page not found page types.'),
     'version'     => '1.0.0', 
     'website'     => 'http://www.wolfcms.org/',
     'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml'

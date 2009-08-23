@@ -52,14 +52,14 @@ define('BASE_FILES_DIR', URL_PUBLIC . 'public');
 
 Plugin::setInfos(array(
     'id'          => 'file_manager',
-    'title'       => 'File Manager', 
-    'description' => 'Provides interface to manage files from the administration.', 
+    'title'       => __('File Manager'),
+    'description' => __('Provides interface to manage files from the administration.'),
     'version'     => '1.0.0', 
     'website'     => 'http://www.wolfcms.org/',
     'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml'
 ));
 
-Plugin::addController('file_manager', 'Files', 'developer,editor');
+Plugin::addController('file_manager', __('Files'), 'developer,editor');
 
 // Make sure possible hack attempts get registered if the statistics API is available.
 if (Plugin::isEnabled('statistics_api')) {

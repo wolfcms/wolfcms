@@ -38,8 +38,8 @@
  */
 Plugin::setInfos(array(
     'id'          => 'markdown',
-    'title'       => 'Markdown filter', 
-    'description' => 'Allows you to compose page parts or snippets using the Markdown text filter.', 
+    'title'       => __('Markdown filter'),
+    'description' => __('Allows you to compose page parts or snippets using the Markdown text filter.'),
     'version'     => '1.0.0', 
     'website'     => 'http://www.wolfcms.org/',
     'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml'

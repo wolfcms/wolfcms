@@ -39,8 +39,8 @@
  */
 Plugin::setInfos(array(
 	'id'          => 'comment',
-	'title'       => 'Comments',
-	'description' => 'Provides interface to add page comments.',
+	'title'       => __('Comments'),
+	'description' => __('Provides interface to add page comments.'),
 	'version'     => '1.2.1',
 	'license'     => 'GPL',
 	'author'      => 'Philippe Archambault',
@@ -54,7 +54,7 @@ Plugin::setInfos(array(
 AutoLoader::addFile('Comment', CORE_ROOT.'/plugins/comment/Comment.php');
 
 // Add the plugin's tab and controller
-Plugin::addController('comment', 'Comments');
+Plugin::addController('comment', __('Comments'));
 
 // Observe the necessary events.
 Observer::observe('view_page_edit_plugins', 'comment_display_dropdown');

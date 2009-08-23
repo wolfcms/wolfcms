@@ -43,8 +43,8 @@
  */
 Plugin::setInfos(array(
     'id'          => 'sqlite3',
-    'title'       => 'SQLite 3',
-    'description' => 'Allows Wolf CMS to use the SQLite 3 database.',
+    'title'       => __('SQLite 3'),
+    'description' => __('Allows Wolf CMS to use the SQLite 3 database.'),
     'version'     => '1.1.0',
     'website'     => 'http://www.wolfcms.org/',
     'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml'

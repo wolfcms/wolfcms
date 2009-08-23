@@ -16,6 +16,7 @@ Sigla:
 + Added improved <title> for backend. - issue 7
 + Added sitewide sender email address. - issue 11
 + Added use of site title for reminder mail - issue 10
++ Added number of translatable strings - issue 15
 - Fixed bug in Framework where afterSave() was never called. - issue 16
 - Fixed spelling problem by replacing updator() and updatorId() by updater() and updaterId() - issue 1
 - Fixed problem where child pages were not deleted when deleting parent. - issue 45 - thanks gilles

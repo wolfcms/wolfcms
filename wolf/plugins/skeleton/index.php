@@ -49,8 +49,8 @@
 
 Plugin::setInfos(array(
     'id'          => 'skeleton',
-    'title'       => 'Skeleton',
-    'description' => 'Provides a basic plugin implementation. (try enabling it!)',
+    'title'       => __('Skeleton'),
+    'description' => __('Provides a basic plugin implementation. (try enabling it!)'),
     'version'     => '1.1.0',
    	'license'     => 'GPL',
 	'author'      => 'Martijn van der Kleijn',
@@ -59,4 +59,4 @@ Plugin::setInfos(array(
     'require_wolf_version' => '0.5.5'
 ));
 
-Plugin::addController('skeleton', 'Skeleton', 'administrator', false);
+Plugin::addController('skeleton', __('Skeleton'), 'administrator', false);
