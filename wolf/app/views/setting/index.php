@@ -106,6 +106,11 @@
         <td class="help"><?php echo __('By using <strong>&lt;img src="img_path" /&gt;</strong> you can set your company logo instead of a title.'); ?></td>
       </tr>
       <tr>
+        <td class="label"><label for="setting_admin_email"><?php echo __('Site email'); ?></label></td>
+        <td class="field"><input class="textbox" id="setting_admin_email" maxlength="255" name="setting[admin_email]" size="255" type="text" value="<?php echo Setting::get('admin_email'); ?>" /></td>
+        <td class="help"><?php echo __('When emails are sent by Wolf CMS, this email address will be used as the sender. Default: do-not-reply@wolfcms.org'); ?></td>
+      </tr>
+      <tr>
         <td class="label"><label for="setting_language"><?php echo __('Language'); ?></label></td>
         <td class="field">
           <select class="select" id="setting_language" name="setting[language]">

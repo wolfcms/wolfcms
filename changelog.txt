@@ -14,6 +14,7 @@ Sigla:
 + Added uninstall feature for plugins - issue 40
 + Added new core plugin, BackupRestore - issue 27
 + Added improved <title> for backend. - issue 7
++ Added sitewide sender email address. - issue 11
 + Added use of site title for reminder mail - issue 10
 - Fixed bug in Framework where afterSave() was never called. - issue 16
 - Fixed spelling problem by replacing updator() and updatorId() by updater() and updaterId() - issue 1
