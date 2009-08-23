@@ -150,9 +150,9 @@ class LoginController extends Controller {
             $user->save();
 
             $email = new Email();
-            $email->from('no-reply@wolfcms.org', 'Wolf CMS');
+            $email->from('no-reply@wolfcms.org', Setting::get('admin_title'));
             $email->to($user->email);
-            $email->subject('Your new password from Wolf CMS');
+            $email->subject('Your new password from '.Setting::get('admin_title'));
             $email->message('username: '.$user->username."\npassword: ".$new_pass);
             $email->send();
 
