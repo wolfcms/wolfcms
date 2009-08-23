@@ -449,6 +449,10 @@ class Page extends Record {
         return true;
     }
 
+    public function beforeDelete() {
+        return self::deleteChildrenOf($this->id);
+    }
+
     public function getUri() {
         $result = null;
 
@@ -640,6 +644,29 @@ class Page extends Record {
 
     public static function hasChildren($id) {
         return (boolean) self::countFrom('Page', 'parent_id = '.(int)$id);
+    }
+
+    public static function deleteChildrenOf($id) {
+        $id = (int)$id;
+
+        if(self::hasChildren($id)) {
+            $children = self::childrenOf($id);
+            if(is_array($children)) {
+                foreach ($children as $child) {
+                    if (!$child->delete()) {
+                        return false;
+                    }
+                }
+            }
+            // because Page::childrenOf return directly an object when there is only 1 child...
+            elseif ($children instanceof Page) {
+                if (!$children->delete()) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     public static function cloneTree($page, $parent_id) {
