@@ -13,11 +13,12 @@ Sigla:
 + Added uninstall feature support for comment plugin.
 + Added uninstall feature for plugins - issue 40
 + Added new core plugin, BackupRestore - issue 27
++ Added improved <title> for backend. - issue 7
 - Fixed bug in Framework where afterSave() was never called. - issue 16
 - Fixed spelling problem by replacing updator() and updatorId() by updater() and updaterId() - issue 1
 - Fixed problem where child pages were not deleted when deleting parent. - issue 45 - thanks gilles
 - Fixed duplicate IDs in Administration / Settings tab - issue 37 - thanks slowgary
-- Small fix to rss.xml for atom:link reference
+- Fixed atom:link reference in rss.xml
 . File Manager - show folders before files - issue 38 - thanks slowgary
 . Removed last remnants of split (classes/Page) - issue 33
 . Minor text, css edits

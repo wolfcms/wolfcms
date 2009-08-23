@@ -1,12 +1,29 @@
 <?php if (!AuthUser::hasPermission('administrator,developer,editor')) { header('Location: '.URL_PUBLIC.' '); exit(); } ?>
 
+<?php
+// Setup some stuff...
+$ctrl = Dispatcher::getController(Setting::get('default_tab'));
+
+// Allow for nice title. TODO - improve/clean this up.
+$title = ($ctrl == 'plugin') ? Plugin::$controllers[Dispatcher::getAction()]->label : ucfirst($ctrl).'s';
+if (isset($this->vars['content_for_layout']->vars['action'])) {
+    $tmp = $this->vars['content_for_layout']->vars['action'];
+    $title .= ' - '.ucfirst($tmp);
+
+    if ($tmp == 'edit' && isset($this->vars['content_for_layout']->vars['page'])) {
+        $tmp = $this->vars['content_for_layout']->vars['page'];
+        $title .= ' - '.$tmp->title;
+    }
+}
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title><?php use_helper('Kses'); echo kses(Setting::get('admin_title'), array()) . ' - ' . ucfirst($ctrl = Dispatcher::getController(Setting::get('default_tab'))); ?></title>
-    
+    <title><?php use_helper('Kses'); echo kses(Setting::get('admin_title'), array()) . ' - ' . $title; ?></title>
+
     <base href="<?php echo trim(BASE_URL, '?/').'/'; ?>" />
 
     <link rel="favourites icon" href="<?php echo URL_PUBLIC; ?>favicon.ico" />
