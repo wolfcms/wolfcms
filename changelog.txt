@@ -13,6 +13,7 @@ Sigla:
 + Added uninstall feature support for comment plugin.
 + Added uninstall feature for plugins - issue 40
 + Added new core plugin, BackupRestore - issue 27
+- Fixed spelling problem by replacing updator() and updatorId() by updater() and updaterId() - issue 1
 - Fixed problem where child pages were not deleted when deleting parent. - issue 45 - thanks gilles
 - Fixed duplicate IDs in Administration / Settings tab - issue 37 - thanks slowgary
 - Small fix to rss.xml for atom:link reference

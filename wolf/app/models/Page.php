@@ -81,8 +81,8 @@ class Page extends Record {
     public $tags = false;
     public $author;
     public $author_id;
-    public $updator;
-    public $updator_id;
+    public $updater;
+    public $updater_id;
 
 
 
@@ -112,8 +112,8 @@ class Page extends Record {
     public function url() { return BASE_URL . $this->url . ($this->url != '' ? URL_SUFFIX: ''); }
     public function slug() { return $this->slug; }
     public function breadcrumb() { return $this->breadcrumb; }
-    public function updator() { return $this->updator; }
-    public function updatorId() { return $this->updator_id; }
+    public function updater() { return $this->updater; }
+    public function updaterId() { return $this->updater_id; }
 
     public function breadcrumbs($separator='&gt;') {
         $url = '';
@@ -320,10 +320,10 @@ class Page extends Record {
         $limit_string = $limit > 0 ? "LIMIT $offset, $limit" : '';
 
         // Prepare SQL
-        $sql = 'SELECT page.*, author.name AS author, author.id AS author_id, updator.name AS updator, updator.id AS updator_id '
+        $sql = 'SELECT page.*, author.name AS author, author.id AS author_id, updater.name AS updater, updater.id AS updater_id '
             . 'FROM '.TABLE_PREFIX.'page AS page '
             . 'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
-            . 'LEFT JOIN '.TABLE_PREFIX.'user AS updator ON updator.id = page.updated_by_id '
+            . 'LEFT JOIN '.TABLE_PREFIX.'user AS updater ON updater.id = page.updated_by_id '
             . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_REVIEWED.' OR status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
             . "$where_string ORDER BY $order $limit_string";
 
@@ -606,9 +606,9 @@ class Page extends Record {
         $tablename_user = self::tableNameFromClassName('User');
 
         // Prepare SQL
-        $sql = "SELECT page.*, creator.name AS created_by_name, updator.name AS updated_by_name FROM $tablename AS page".
+        $sql = "SELECT page.*, creator.name AS created_by_name, updater.name AS updated_by_name FROM $tablename AS page".
             " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id".
-            " LEFT JOIN $tablename_user AS updator ON page.updated_by_id = updator.id".
+            " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id".
             " $where_string $order_by_string $limit_string";
 
         $stmt = self::$__CONN__->prepare($sql);

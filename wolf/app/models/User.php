@@ -105,9 +105,9 @@ class User extends Record {
         $tablename = self::tableNameFromClassName('User');
 
         // Prepare SQL
-        $sql = "SELECT $tablename.*, creator.name AS created_by_name, updator.name AS updated_by_name FROM $tablename".
+        $sql = "SELECT $tablename.*, creator.name AS created_by_name, updater.name AS updated_by_name FROM $tablename".
             " LEFT JOIN $tablename AS creator ON $tablename.created_by_id = creator.id".
-            " LEFT JOIN $tablename AS updator ON $tablename.updated_by_id = updator.id".
+            " LEFT JOIN $tablename AS updater ON $tablename.updated_by_id = updater.id".
             " $where_string $order_by_string $limit_string";
 
         $stmt = self::$__CONN__->prepare($sql);
