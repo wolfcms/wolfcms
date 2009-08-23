@@ -22,6 +22,7 @@ Sigla:
 - Fixed problem where child pages were not deleted when deleting parent. - issue 45 - thanks gilles
 - Fixed duplicate IDs in Administration / Settings tab - issue 37 - thanks slowgary
 - Fixed atom:link reference in rss.xml
+. Removed outer DIV produced by breadcrumbs() function - issue 18
 . File Manager - show folders before files - issue 38 - thanks slowgary
 . Removed last remnants of split (classes/Page) - issue 33
 . Minor text, css edits

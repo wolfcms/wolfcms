@@ -116,17 +116,16 @@ class Page extends Record {
     public function updaterId() { return $this->updater_id; }
 
     public function breadcrumbs($separator='&gt;') {
+        $out = '';
         $url = '';
         $path = '';
         $paths = explode('/', '/'.$this->slug);
         $nb_path = count($paths);
 
-        $out = '<div class="breadcrumb">'."\n";
-
         if ($this->parent)
             $out .= $this->parent->_inversedBreadcrumbs($separator);
 
-        return $out . '<span class="breadcrumb-current">'.$this->breadcrumb().'</span></div>'."\n";
+        return $out . '<span class="breadcrumb-current">'.$this->breadcrumb().'</span>'."\n";
 
     }
 
