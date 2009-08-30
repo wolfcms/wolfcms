@@ -26,7 +26,7 @@
 
 // Table structure for table: cron -----------------------------------------
 
-$PDO->exec("CREATE TABLE layout (
+$PDO->exec("CREATE TABLE cron (
     id INTEGER NOT NULL PRIMARY KEY,
     lastrun text,
 )");
