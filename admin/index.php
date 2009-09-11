@@ -26,6 +26,8 @@
 
 //  Constantes  --------------------------------------------------------------
 
+define('CMS_BACKEND', true);
+
 define('CMS_VERSION', '0.5.5');
 define('FROG_VERSION', CMS_VERSION); // DEFINED ONLY FOR BACKWARDS SUPPORT - to be taken out before 0.9.0
 

@@ -48,17 +48,63 @@ class PluginController extends Controller {
     public $plugin;
 
     function __construct() {
-        AuthUser::load();
-        if ( ! AuthUser::isLoggedIn())
-            redirect(get_url('login'));
+        if (defined('CMS_BACKEND')) {
+            AuthUser::load();
+            if ( ! AuthUser::isLoggedIn())
+                redirect(get_url('login'));
+        }
+    }
+
+    public function display($view, $vars=array(), $exit=true) {
+        if (defined('CMS_BACKEND')) {
+            return parent::display($view, $vars, $exit);
+        }
+        else {
+            $this->content = $this->render($view, $vars);
+            $this->executeFrontendLayout();
+            if ($exit) exit;
+        }
+    }
+
+    public function executeFrontendLayout() {
+        global $__CMS_CONN__;
+
+        $sql = 'SELECT content_type, content FROM '.TABLE_PREFIX.'layout WHERE name = '."'$this->frontend_layout'";
+
+        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt->execute();
+
+        if ($layout = $stmt->fetchObject()) {
+        // if content-type not set, we set html as default
+            if ($layout->content_type == '')
+                $layout->content_type = 'text/html';
+
+            // set content-type and charset of the page
+            header('Content-Type: '.$layout->content_type.'; charset=UTF-8');
+
+            // execute the layout code
+            eval('?>'.$layout->content);
+        }
+    }
+
+    public function setLayout($layout) {
+        if (defined('CMS_BACKEND'))
+            parent::setLayout($layout);
+        else
+            $this->frontend_layout = $layout;
     }
 
     public function render($view, $vars=array()) {
-        if ($this->layout) {
-            $this->layout_vars['content_for_layout'] = new View('../../plugins/'.$view, $vars);
-            return new View('../layouts/'.$this->layout, $this->layout_vars);
+        if (defined('CMS_BACKEND')) {
+            if ($this->layout) {
+                $this->layout_vars['content_for_layout'] = new View('../../plugins/'.$view, $vars);
+                return new View('../layouts/'.$this->layout, $this->layout_vars);
+            }
+            else return new View('../../plugins/'.$view, $vars);
         }
-        else return new View('../../plugins/'.$view, $vars);
+        else {
+            return parent::render($view, $vars);
+        }
     }
 
     public function execute($action, $params) {

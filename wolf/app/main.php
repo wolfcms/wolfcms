@@ -122,7 +122,7 @@ function url_start_with($url) {
 }
 
 function main() {
-// get the uri string from the query
+    // get the uri string from the query
     $uri = $_SERVER['QUERY_STRING'];
 
     // START processing $_GET variables
@@ -159,6 +159,12 @@ function main() {
         $uri = preg_replace('#^(.*)('.URL_SUFFIX.')$#i', "$1", $uri);
 
     define('CURRENT_URI', trim($uri, '/'));
+
+    if ($uri != null && $uri[0] != '/') $uri = '/'.$uri;
+
+    if (Dispatcher::hasRoute($uri)) {
+        Dispatcher::dispatch($uri);
+    }
 
     Observer::notify('page_requested', $uri);
 

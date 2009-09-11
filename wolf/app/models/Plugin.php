@@ -75,7 +75,23 @@ class Plugin {
      * @param infos array Assoc array with plugin informations
      */
     static function setInfos($infos) {
-        self::$plugins_infos[$infos['id']] = (object) $infos;
+        if (!isset($infos['type']) && defined('CMS_BACKEND')) {
+            self::$plugins_infos[$infos['id']] = (object) $infos;
+            return;
+        }
+        else if (!isset($infos['type'])) {
+            return;
+        }
+
+        if (defined('CMS_BACKEND') && ($infos['type'] == 'backend' || $infos['type'] == 'both')) {
+            self::$plugins_infos[$infos['id']] = (object) $infos;
+            return;
+        }
+
+        if (!defined('CMS_BACKEND') && ($infos['type'] == 'frontend' || $infos['type'] == 'both')) {
+            self::$plugins_infos[$infos['id']] = (object) $infos;
+            return;
+        }
     }
 
     /**
@@ -222,6 +238,8 @@ class Plugin {
      * @return void
      */
     static function addController($plugin_id, $label, $permissions=false, $show_tab=true) {
+        if (!isset(self::$plugins_infos[$plugin_id])) return;
+
         $class_name = Inflector::camelize($plugin_id).'Controller';
 
         self::$controllers[$plugin_id] = (object) array(
@@ -272,7 +290,7 @@ class Plugin {
         if (array_key_exists($plugin_id, Plugin::$plugins) && Plugin::$plugins[$plugin_id] == 1)
             return true;
         else
-            return 0;
+            return false;
     }
 
     static function deleteAllSettings($plugin_id) {

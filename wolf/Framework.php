@@ -115,6 +115,31 @@ final class Dispatcher {
         self::$routes = array_merge(self::$routes, $route);
     }
 
+    public static function hasRoute($requested_url) {
+        if (!self::$routes || count(self::$routes) == 0) {
+            return false;
+        }
+
+        foreach (self::$routes as $route => $uri) {
+            // Convert wildcards to regex
+            if (strpos($route, ':') !== false) {
+                $route = str_replace(':any', '(.+)', str_replace(':num', '([0-9]+)', $route));
+            }
+            // Does the regex match?
+            if (preg_match('#^'.$route.'$#', $requested_url)) {
+            // Do we have a back-reference?
+                if (strpos($uri, '$') !== false && strpos($route, '(') !== false) {
+                    $uri = preg_replace('#^'.$route.'$#', $uri, $requested_url);
+                }
+                self::$params = self::splitUrl($uri);
+                // We found it, so we can break the loop now!
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static function splitUrl($url) {
         return preg_split('/\//', $url, -1, PREG_SPLIT_NO_EMPTY);
     }
