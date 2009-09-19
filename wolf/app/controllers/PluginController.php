@@ -45,6 +45,35 @@
  * @since 0.9
  */
 class PluginController extends Controller {
+
+    // Provides compatibility with Page class.
+    // TODO - cleaner way of doing multiple inheritance?
+    public function __call($function, $args) {
+        if (!defined('CMS_VERSION')) {
+            $args = implode(', ', $args);
+            return Page::$function($args);
+            //print "Forum plugin: Call to $function() with args '$args' failed!<br/>\n";
+        }
+        else
+            return false;
+    }
+
+    // Provides compatibility with Page class.
+    // TODO - cleaner way of doing multiple inheritance?
+    public function __get($variable) {
+        if (!defined('CMS_VERSION')) {
+            if (isset(Page::$$variable))
+                return Page::$$variable;
+            else
+                return false;
+        }
+    }
+
+    // Provides compatibility with Page class.
+    // TODO - cleaner way of doing multiple inheritance?
+    public $url;
+
+    // Normal class stuff continues here.
     public $plugin;
 
     function __construct() {
@@ -81,6 +110,10 @@ class PluginController extends Controller {
 
             // set content-type and charset of the page
             header('Content-Type: '.$layout->content_type.'; charset=UTF-8');
+
+            // Provides compatibility with the Page class.
+            // TODO - cleaner way of doing multiple inheritance?
+            $this->url = CURRENT_URI;
 
             // execute the layout code
             eval('?>'.$layout->content);
