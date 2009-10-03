@@ -41,4 +41,8 @@
  */
 class PageTag extends Record {
     const TABLE_NAME = 'page_tag';
+
+    public static function deleteByPageId($id) {
+        return self::$__CONN__->exec('DELETE FROM '.self::tableNameFromClassName(self::TABLE_NAME).' WHERE page_id='.(int)$id) === false ? false: true;
+    }
 }

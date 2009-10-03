@@ -449,7 +449,13 @@ class Page extends Record {
     }
 
     public function beforeDelete() {
-        return self::deleteChildrenOf($this->id);
+        $ret = false;
+        
+        $ret = self::deleteChildrenOf($this->id);
+        $ret = PagePart::deleteByPageId($this->id);
+        $ret = PageTag::deleteByPageId($this->id);
+
+        return $ret;
     }
 
     public function getUri() {
@@ -486,7 +492,7 @@ class Page extends Record {
         return $tags;
     }
 
-    public function saveTags($tags) {
+    public function setTags($tags) {
         if (is_string($tags))
             $tags = explode(',', $tags);
 
@@ -537,6 +543,14 @@ class Page extends Record {
                 $tag->save();
             }
         }
+    }
+
+    /**
+     * @deprecated
+     * @see setTags()
+     */
+    public function saveTags($tags) {
+        return $this->setTags($tags);
     }
 
     public static function find_page_by_uri($uri) {
