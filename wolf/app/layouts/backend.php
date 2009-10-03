@@ -62,6 +62,7 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
       <div id="mainTabs">
         <ul>
           <li><a href="<?php echo get_url('page'); ?>"<?php if ($ctrl=='page') echo ' class="current"'; ?>><?php echo __('Pages'); ?></a></li>
+          <li><a href="<?php echo get_url('test'); ?>"<?php if ($ctrl=='test') echo ' class="current"'; ?>><?php echo __('Test'); ?></a></li>
 <?php if (AuthUser::hasPermission('administrator,developer') ): ?>
           <li><a href="<?php echo get_url('snippet'); ?>"<?php if ($ctrl=='snippet') echo ' class="current"'; ?>><?php echo __('Snippets'); ?></a></li>
           <li><a href="<?php echo get_url('layout'); ?>"<?php if ($ctrl=='layout') echo ' class="current"'; ?>><?php echo __('Layouts'); ?></a></li>

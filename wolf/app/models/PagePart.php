@@ -40,7 +40,7 @@
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @since Wolf version 0.1
  */
-class PagePart extends Record {
+class PagePart extends Record implements PagePartInterface {
     const TABLE_NAME = 'page_part';
 
     public $name = 'body';
@@ -65,6 +65,51 @@ class PagePart extends Record {
 
     public static function deleteByPageId($id) {
         return self::$__CONN__->exec('DELETE FROM '.self::tableNameFromClassName('PagePart').' WHERE page_id='.(int)$id) === false ? false: true;
+    }
+
+    // NEW FUNCTIONALITY
+
+    /**
+     * Checks if the value is valid.
+     * Must be overridden.
+     *
+     * @return boolean
+     */
+    public function isValid() {
+        if (preg_match('/[<>]+/', $this->content))
+            return false;
+        else
+            return true;
+    }
+
+    public function getFormElement($class=null, $id=null, $size=255) {
+        $form = '<input';
+
+        if (null !== $class)
+            $form .= ' class="'.$class.'"';
+
+        if (null !== $id)
+            $form .= ' id="'.$id.'"';
+
+        $form .= ' maxlength="255" name="pagepart['.$this->name.']" size="'.$size.'" type="text" value="'.$this->content.'" />';
+
+        return $form;
+    }
+
+    public function set($value) {
+        $this->content = $value;
+    }
+
+    public function get() {
+        return $this->content;
+    }
+
+    public function findPagePartById($id) {
+        $name = 'body';
+        $filter_id = '';
+        $page_id = 0;
+        $content = '';
+        $content_html = '';
     }
 
 } // end PagePart class
