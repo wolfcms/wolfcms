@@ -23,6 +23,7 @@ Sigla:
 - Fixed problem where child pages were not deleted when deleting parent. - issue 45 - thanks gilles
 - Fixed duplicate IDs in Administration / Settings tab - issue 37 - thanks slowgary
 - Fixed atom:link reference in rss.xml
+. Removed base href tag. - issue 19
 . Prevent usage of set_magic_quotes_runtime() from PHP 5.3 and up - issue 56
 . Removed outer DIV produced by breadcrumbs() function - issue 18
 . File Manager - show folders before files - issue 38 - thanks slowgary
