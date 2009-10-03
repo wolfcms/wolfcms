@@ -64,7 +64,7 @@ if (!defined('DEFAULT_ACTION'))     define('DEFAULT_ACTION', 'index');
 error_reporting((DEBUG ? E_ALL : 0));
 
 // No more quotes escaped with a backslash
-if (PHP_VERSION < 6)
+if (PHP_VERSION < 5.3)
     set_magic_quotes_runtime(0);
 
 if ( ! isset($_SESSION))
