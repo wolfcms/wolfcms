@@ -192,7 +192,7 @@ if ( ! defined('DEBUG') && isset($_POST['commit']) && (file_exists($config_file)
                             </tr>
                             <tr id="row-db-name">
                                 <td class="label"><label for="config_db_name">Database name</label></td>
-                                <td class="field"><input class="textbox" id="config_db_name" maxlength="40" name="config[db_name]" size="40" type="text" value="wolf" /></td>
+                                <td class="field"><input class="textbox" id="config_db_name" maxlength="120" name="config[db_name]" size="40" type="text" value="wolf" /></td>
                                 <td class="help" id="help-db-name">Required. You have to create a database manually and enter its name here.</td>
                             </tr>
                             <tr id="row-table-prefix">
