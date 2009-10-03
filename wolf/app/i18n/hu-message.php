@@ -33,7 +33,6 @@ return array(
 'Are you sure you wish to delete' => 'Biztos, hogy törölni akarod?',
 'Published' => 'Publikálva',
 'Draft' => 'Vázlat',
-'Reviewed' => 'Ellenőrizve',
 'Hidden' => 'Rejtett',
 'More' => 'Több',
 'Less' => 'Kevesebb',

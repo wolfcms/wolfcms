@@ -33,7 +33,6 @@ return array(
 'Are you sure you wish to delete' => 'Er du sikker du vil slette',
 'Published'       => 'Publisert',
 'Draft'           => 'Kladd',
-'Reviewed'        => 'Revidert',
 'Hidden'          => 'Gjemt',
 'More'            => 'Mer',
 'Less'            => 'Mindre',

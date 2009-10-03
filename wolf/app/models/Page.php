@@ -46,7 +46,7 @@ class Page extends Record {
     const TABLE_NAME = 'page';
 
     const STATUS_DRAFT = 1;
-    const STATUS_REVIEWED = 50;
+    const STATUS_PREVIEW = 10;
     const STATUS_PUBLISHED = 100;
     const STATUS_HIDDEN = 101;
 
@@ -162,7 +162,7 @@ class Page extends Record {
 
         // Prepare SQL
         $sql = 'SELECT COUNT(*) AS nb_rows FROM '.TABLE_PREFIX.'page '
-            . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_REVIEWED.' OR status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
+            . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
             . "$where_string ORDER BY $order $limit_string";
 
         $stmt = $__CMS_CONN__->prepare($sql);
@@ -323,7 +323,7 @@ class Page extends Record {
             . 'FROM '.TABLE_PREFIX.'page AS page '
             . 'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
             . 'LEFT JOIN '.TABLE_PREFIX.'user AS updater ON updater.id = page.updated_by_id '
-            . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_REVIEWED.' OR status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
+            . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
             . "$where_string ORDER BY $order $limit_string";
 
         $pages = array();
@@ -543,7 +543,7 @@ class Page extends Record {
         return Page::findByUri($uri);
     }
 
-    public static function findByUri($uri) {
+    public static function findByUri($uri, $all = false) {
         global $__CMS_CONN__;
 
         $uri = trim($uri, '/');
@@ -562,7 +562,7 @@ class Page extends Record {
         foreach ($urls as $page_slug) {
             $url = ltrim($url . '/' . $page_slug, '/');
 
-            if ($page = find_page_by_slug($page_slug, $parent)) {
+            if ($page = find_page_by_slug($page_slug, $parent, $all)) {
             // check for behavior
                 if ($page->behavior_id != '') {
                 // add a instance of the behavior with the name of the behavior

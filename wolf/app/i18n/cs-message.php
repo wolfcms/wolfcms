@@ -54,7 +54,6 @@ return array(
 'Are you sure you wish to delete' => 'Opravdu odstranit?',
 'Published' => 'Zveřejněno',
 'Draft' => 'Koncept',
-'Reviewed' => 'Hodnoceno',
 'Hidden' => 'Skryto',
 'More' => 'Více',
 'Less' => 'Méně',

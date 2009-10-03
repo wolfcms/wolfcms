@@ -34,7 +34,6 @@ return array(
 'Are you sure you wish to delete' => 'Är du säker på att du vill radera',
 'Published' => 'Publicerad',
 'Draft' => 'Utkast',
-'Reviewed' => 'Granskad',
 'Hidden' => 'Dold',
 'More' => 'Visa mer',
 'Less' => 'Visa mindre',

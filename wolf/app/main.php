@@ -48,7 +48,7 @@ function explode_uri($uri) {
 }
 
 
-function find_page_by_slug($slug, &$parent) {
+function find_page_by_slug($slug, &$parent, $all = false) {
     global $__CMS_CONN__;
 
     $page_class = 'Page';
@@ -58,8 +58,14 @@ function find_page_by_slug($slug, &$parent) {
     $sql = 'SELECT page.*, author.name AS author, updater.name AS updater '
         . 'FROM '.TABLE_PREFIX.'page AS page '
         . 'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
-        . 'LEFT JOIN '.TABLE_PREFIX.'user AS updater ON updater.id = page.updated_by_id '
-        . 'WHERE slug = ? AND parent_id = ? AND (status_id='.Page::STATUS_REVIEWED.' OR status_id='.Page::STATUS_PUBLISHED.' OR status_id='.Page::STATUS_HIDDEN.')';
+        . 'LEFT JOIN '.TABLE_PREFIX.'user AS updater ON updater.id = page.updated_by_id ';
+
+    if ($all) {
+        $sql .= 'WHERE slug = ? AND parent_id = ? AND (status_id='.Page::STATUS_PREVIEW.' OR status_id='.Page::STATUS_PUBLISHED.' OR status_id='.Page::STATUS_HIDDEN.')';
+    }
+    else {
+        $sql .= 'WHERE slug = ? AND parent_id = ? AND (status_id='.Page::STATUS_PUBLISHED.' OR status_id='.Page::STATUS_HIDDEN.')';
+    }
 
     $stmt = $__CMS_CONN__->prepare($sql);
 
@@ -169,11 +175,18 @@ function main() {
     Observer::notify('page_requested', $uri);
 
     // this is where 80% of the things is done
-    $page = Page::findByUri($uri);
+    $page = Page::findByUri($uri, true);
 
     // if we fund it, display it!
     if (is_object($page)) {
-    // If page needs login, redirect to login
+        // If a page is in preview status, only display to logged in users
+        if (Page::STATUS_PREVIEW == $page->status_id) {
+            AuthUser::load();
+            if (!AuthUser::isLoggedIn() || !AuthUser::hasPermission('administrator, developer, editor'))
+                page_not_found();
+        }
+
+        // If page needs login, redirect to login
         if ($page->getLoginNeeded() == Page::LOGIN_REQUIRED) {
             AuthUser::load();
             if (!AuthUser::isLoggedIn()) {

@@ -34,7 +34,6 @@ return array(
 'Are you sure you wish to delete' => 'Anda yakin ingin menghapus',
 'Published'       => 'Terpublikasi',
 'Draft'           => 'Naskah',
-'Reviewed'        => 'Ditinjau',
 'Hidden'          => 'Tersembunyi',
 'More'            => 'Selebihnya',
 'Less'            => 'Kurang',

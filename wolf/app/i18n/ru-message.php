@@ -130,7 +130,6 @@
 	'Remove Tab' 											=> 'Удалить Вкладку',
 	'Remove page' 											=> 'Удалить Страницу',
 	'Required.' 											=> 'Обязательно.',
-	'Reviewed' 												=> 'Просмотрено',
 	'Roles' 												=> 'Роли',
 	'Roles restrict user privileges and turn parts of the administrative interface on or off.' => 'Роли ограничивают пользовательские привилегии и включают или отключают части административного интерфейса.',
 	'Save' 													=> 'Сохранить',

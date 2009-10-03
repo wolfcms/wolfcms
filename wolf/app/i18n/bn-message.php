@@ -32,7 +32,6 @@ return array(
 'Are you sure you wish to delete' => 'আপনি কি মুছে ফেলার ব্যপারে নিশ্চিত',
 'Published' => 'সার্বজনীন',
 'Draft' => 'খসড়া',
-'Reviewed' => '',
 'Hidden' => 'লুক্কায়িত',
 'More' => 'আরও',
 'Less' => 'কমাও',

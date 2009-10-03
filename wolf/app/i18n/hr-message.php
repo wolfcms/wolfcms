@@ -123,7 +123,6 @@
 	'Remove Tab' => 'Ukloni Karticu',
 	'Remove page' => 'Ukloni stranicu',
 	'Required.' => 'Potrebno',
-	'Reviewed' => 'Pregledano',
 	'Roles' => 'Uloge',
 	'Roles restrict user privileges and turn parts of the administrative interface on or off.' => 'Uloge ograničavaju korisničke ovlasti i isključuju ili uključuju dijelove administracijskog sučelja.',
 	'Save' => 'Spremi',

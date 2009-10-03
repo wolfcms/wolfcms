@@ -32,7 +32,6 @@ return array(
 'Are you sure you wish to delete' => '削除してもよろしいですか',
 'Published' => '公開',
 'Draft' => '下書き',
-'Reviewed' => '承認待ち',
 'Hidden' => '非公開',
 'More' => '追加情報を開く',
 'Less' => '追加情報を閉じる',

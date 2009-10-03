@@ -18,17 +18,19 @@ Sigla:
 + Added sitewide sender email address. - issue 11
 + Added use of site title for reminder mail - issue 10
 + Added number of translatable strings - issue 15
++ Added STATUS_PREVIEW to Page which allows administrator, developer, editor to preview page. - issue 65
 - Fixed bug in Framework where afterSave() was never called. - issue 16
 - Fixed spelling problem by replacing updator() and updatorId() by updater() and updaterId() - issue 1
 - Fixed problem where child pages were not deleted when deleting parent. - issue 45 - thanks gilles
 - Fixed duplicate IDs in Administration / Settings tab - issue 37 - thanks slowgary
 - Fixed atom:link reference in rss.xml
-. Change max DB name from 40 to 120 - issue 58
+. Removed STATUS_REVIEWED from Page - issue 65.
 . Removed base href tag. - issue 19
-. Prevent usage of set_magic_quotes_runtime() from PHP 5.3 and up - issue 56
 . Removed outer DIV produced by breadcrumbs() function - issue 18
-. File Manager - show folders before files - issue 38 - thanks slowgary
 . Removed last remnants of split (classes/Page) - issue 33
+. Change max DB name from 40 to 120 - issue 58
+. Prevent usage of set_magic_quotes_runtime() from PHP 5.3 and up - issue 56
+. File Manager - show folders before files - issue 38 - thanks slowgary
 . Minor text, css edits
 
 0.5.5 - released 2009-08-04

@@ -33,7 +33,6 @@ return array(
 'Are you sure you wish to delete' => 'Czy na pewno chcesz usunąć',
 'Published' => 'Opublikowany',
 'Draft' => 'Szkic',
-'Reviewed' => 'Obejrzany',
 'Hidden' => 'Ukryty',
 'More' => 'Więcej',
 'Less' => 'Mniej',

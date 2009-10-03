@@ -34,7 +34,6 @@ return array(
 'Are you sure you wish to delete' => 'Weet u zeker dat u wilt verwijderen',
 'Published' => 'Gepubliceerd',
 'Draft' => 'Ontwerp',
-'Reviewed' => 'Beoordeeld',
 'Hidden' => 'Verborgen',
 'More' => 'Meer',
 'Less' => 'Minder',

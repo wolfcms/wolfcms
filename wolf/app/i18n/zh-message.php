@@ -122,7 +122,6 @@
         'Remove Tab' => '移除标签',
         'Remove page' => '移除页面',
         'Required.' => '必填.',
-        'Reviewed' => '检查',
         'Roles' => '角色',
         'Roles restrict user privileges and turn parts of the administrative interface on or off.' => '角色限制用户权限并控制相关管理项的显示.',
         'Save' => '保存',

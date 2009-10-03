@@ -50,7 +50,7 @@
       </div>
 <?php switch ($child->status_id) {
       case Page::STATUS_DRAFT: echo '<div class="status draft-status">'.__('Draft').'</div>'; break;
-      case Page::STATUS_REVIEWED: echo '<div class="status reviewed-status">'.__('Reviewed').'</div>'; break;
+      case Page::STATUS_PREVIEW: echo '<div class="status preview-status">'.__('Preview').'</div>'; break;
       case Page::STATUS_PUBLISHED: echo '<div class="status published-status">'.__('Published').'</div>'; break;
       case Page::STATUS_HIDDEN: echo '<div class="status hidden-status">'.__('Hidden').'</div>'; break;
 } ?> 
