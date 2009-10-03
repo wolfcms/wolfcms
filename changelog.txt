@@ -7,7 +7,7 @@ Sigla:
 . other development
 ======
 
-0.6.0 - released 2009-0?-??
+0.6.0 - released 2009-10-??
 + Added support for frontend PluginController availability. Fixes issue 64.
 + Added basic cron support.
 + Added user-specific language setting for back-end. - issue 13
@@ -19,6 +19,7 @@ Sigla:
 + Added use of site title for reminder mail - issue 10
 + Added number of translatable strings - issue 15
 + Added STATUS_PREVIEW to Page which allows administrator, developer, editor to preview page. - issue 65
+- Fixed bug where get_request_method() returned GET instead of POST - issue 17
 - Fixed bug in deleting a page with children where page_part and page_tag entries were not removed. - issue 73
 - Fixed bug in Framework where afterSave() was never called. - issue 16
 - Fixed spelling problem by replacing updator() and updatorId() by updater() and updaterId() - issue 1

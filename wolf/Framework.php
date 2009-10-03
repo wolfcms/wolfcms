@@ -1066,9 +1066,10 @@ function get_url() {
  * @return string possible value: GET, POST or AJAX
  */
 function get_request_method() {
-    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') return 'AJAX';
-    else if ( ! empty($_POST)) return 'POST';
-        else return 'GET';
+    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest')
+        return 'AJAX';
+    else
+        return $_SERVER['REQUEST_METHOD'];
 }
 
 /**
