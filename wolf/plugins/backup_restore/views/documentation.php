@@ -55,7 +55,7 @@
 <h2><?php echo __('Restoring a backup'); ?></h2>
 <p>
     To upload and restore a backup, simply select the
-    "<?php echo __('Zet een backup terug'); ?>" option.
+    "<?php echo __('Restore a backup'); ?>" option.
 </p>
 <p>
     You can set a default password to enter into any password fields if the backup
