@@ -79,7 +79,7 @@
 						<option value="0" <?php if($numlabel == "0") echo 'selected ="";' ?>><?php echo __('No'); ?></option>
 					</select>
 				</td>
-                <td class="help"><?php echo __("Choose yes if you want to display the number of to-be-moderated &amp; total number of comment in the Comment plugin's tab."); ?></td>
+                <td class="help"><?php echo __("Choose yes if you want to display the number of to-be-moderated &amp; total number of comment in the tab of the Comment plugin."); ?></td>
             </tr>
         </table>
     </fieldset>
