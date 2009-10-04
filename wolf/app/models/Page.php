@@ -110,7 +110,6 @@ class Page extends Record {
     public function description() { return $this->description; }
     public function keywords() { return $this->keywords; }
     public function url() { return BASE_URL . $this->url . ($this->url != '' ? URL_SUFFIX: ''); }
-    public function getUri() { return $this-url; }
     public function slug() { return $this->slug; }
     public function breadcrumb() { return $this->breadcrumb; }
     public function updater() { return $this->updater; }
@@ -459,6 +458,11 @@ class Page extends Record {
         return $ret;
     }
 
+    /**
+     * TODO - improve
+     *
+     * @return <type>
+     */
     public function getUri() {
         $result = null;
 
