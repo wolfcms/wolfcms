@@ -20,6 +20,7 @@ Sigla:
 + Added number of translatable strings - issue 15
 + Added STATUS_PREVIEW to Page which allows administrator, developer, editor to preview page. - issue 65
 + Added getUri() function to Page.
++ Added install/requirements.php to allow checking of prerequisites. - issue 71
 - Fixed bug where get_request_method() returned GET instead of POST - issue 17
 - Fixed bug in deleting a page with children where page_part and page_tag entries were not removed. - issue 73
 - Fixed bug in Framework where afterSave() was never called. - issue 16
