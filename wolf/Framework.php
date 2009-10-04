@@ -885,7 +885,7 @@ if ( ! function_exists('__autoload')) {
 final class Flash {
     const SESSION_KEY = 'framework_flash';
 
-    private static $_previous = array(); // Data that prevous page left in the Flash
+    private static $_flashstore = array(); // Data that prevous page left in the Flash
 
     /**
      * Return specific variable from the flash. If value is not found NULL is
@@ -895,7 +895,7 @@ final class Flash {
      * @return mixed
      */
     public static function get($var) {
-        return isset(self::$_previous[$var]) ? self::$_previous[$var] : null;
+        return isset(self::$_flashstore[$var]) ? self::$_flashstore[$var] : null;
     }
 
     /**
@@ -908,7 +908,18 @@ final class Flash {
      */
     public static function set($var, $value) {
         $_SESSION[self::SESSION_KEY][$var] = $value;
-    } // set
+    }
+
+    /**
+     * Add specific variable to the flash. This variable will be available on the
++    * current page only.
+     *
+     * @param string $var Variable name
+     * @param mixed $value Variable value
+     */
+    public static function setNow($var, $value) {
+        self::$_flashstore[$var] = $value;
+    }
 
     /**
      * Call this function to clear flash. Note that data that previous page
@@ -920,7 +931,7 @@ final class Flash {
      */
     public static function clear() {
         $_SESSION[self::SESSION_KEY] = array();
-    } // clear
+    }
 
     /**
      * This function will read flash data from the $_SESSION variable
@@ -930,9 +941,9 @@ final class Flash {
      * @return void
      */
     public static function init() {
-    // Get flash data...
+        // Get flash data...
         if ( ! empty($_SESSION[self::SESSION_KEY]) && is_array($_SESSION[self::SESSION_KEY])) {
-            self::$_previous = $_SESSION[self::SESSION_KEY];
+            self::$_flashstore = $_SESSION[self::SESSION_KEY];
         }
         $_SESSION[self::SESSION_KEY] = array();
     }

@@ -123,12 +123,24 @@ class PageController extends Controller {
 
             $tags = $_POST['page_tag'];
 
-            Flash::set('page', (object) $page);
-            Flash::set('page_parts', (object) $part);
-            Flash::set('page_tag', $tags);
+            //Flash::setNow('page', (object) $page);
+            //Flash::setNow('page_parts', (object) $part);
+            //Flash::setNow('page_tag', $tags);
 
-            Flash::set('error', __('You have to specify a title!'));
-            redirect(get_url('page/add'));
+            Flash::setNow('error', __('You have to specify a title!'));
+            //redirect(get_url('page/add'));
+            // display things ...
+            $this->setLayout('backend');
+            $this->display('page/edit', array(
+                'action'     => 'add',
+                'page'       => (object) $page,
+                'tags'       => $tags,
+                'filters'    => Filter::findAll(),
+                'behaviors'  => Behavior::findAll(),
+                'page_parts' => (object) $part,
+                'layouts'    => Record::findAllFrom('Layout'))
+            );
+
         }
 
         /**

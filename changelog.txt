@@ -8,6 +8,7 @@ Sigla:
 ======
 
 0.6.0 - released 2009-10-??
++ Added Flash::setNow() function to allow flash messages in current request. - issue 67
 + Added support for frontend PluginController availability. Fixes issue 64.
 + Added basic cron support.
 + Added user-specific language setting for back-end. - issue 13
