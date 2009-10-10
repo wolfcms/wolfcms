@@ -27,6 +27,10 @@ define('CHECK_TIMEOUT', 3);
 // The full URL of your Wolf CMS install
 define('URL_PUBLIC', 'http://<?php echo substr(dirname($_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']), 0, strrpos(dirname($_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']), '/')); ?>/');
 
+// Use httpS for the backend?
+// Before enabling this, please make sure you have a working HTTP+SSL installation.
+define('USE_HTTPS, false);
+
 // The directory name of your Wolf CMS administration (you will need to change it manually)
 define('ADMIN_DIR', 'admin');
 

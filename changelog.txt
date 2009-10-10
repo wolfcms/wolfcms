@@ -8,6 +8,7 @@ Sigla:
 ======
 
 0.6.0 - released 2009-10-??
++ Added support for HTTPS in the backend. Set USE_HTTPS to true in config.php. - issue 4
 + Added Flash::setNow() function to allow flash messages in current request. - issue 67
 + Added support for frontend PluginController availability. Fixes issue 64.
 + Added basic cron support.

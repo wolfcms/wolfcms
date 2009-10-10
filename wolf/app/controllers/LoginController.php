@@ -51,6 +51,13 @@ class LoginController extends Controller {
  * Sets up the LoginController.
  */
     function __construct() {
+        // Redirect to HTTPS for login purposes if requested
+        if (defined('USE_HTTPS') && USE_HTTPS && (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != "on")) {
+            $url = "https://". $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+            header("Location: $url");
+            exit;
+        }
+
         AuthUser::load();
     }
 

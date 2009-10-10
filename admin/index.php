@@ -68,7 +68,13 @@ define('COOKIE_PATH', '/');
 define('COOKIE_DOMAIN', '');
 define('COOKIE_SECURE', false);
 
-define('BASE_URL', URL_PUBLIC . (endsWith(URL_PUBLIC, '/') ? '': '/') . ADMIN_DIR . (endsWith(ADMIN_DIR, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?/'));
+$url = URL_PUBLIC;
+
+if (defined('CMS_BACKEND') && CMS_BACKEND && defined('USE_HTTPS') && USE_HTTPS) {
+    $url = str_replace('http://', 'https://', $url);
+}
+
+define('BASE_URL', $url . (endsWith($url, '/') ? '': '/') . ADMIN_DIR . (endsWith(ADMIN_DIR, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?/'));
 
 require CORE_ROOT.'/Framework.php';
 
