@@ -24,6 +24,8 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title><?php use_helper('Kses'); echo kses(Setting::get('admin_title'), array()) . ' - ' . $title; ?></title>
 
+    <base href="<?php echo trim(BASE_URL, '?/').'/'; ?>" />
+
     <link rel="favourites icon" href="<?php echo URL_PUBLIC; ?>favicon.ico" />
     <link href="stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
     <link href="stylesheets/toolbar.css" media="screen" rel="Stylesheet" type="text/css" />

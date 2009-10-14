@@ -33,7 +33,6 @@ Sigla:
 - Fixed duplicate IDs in Administration / Settings tab - issue 37 - thanks slowgary
 - Fixed atom:link reference in rss.xml
 . Removed STATUS_REVIEWED from Page - issue 65.
-. Removed base href tag. - issue 19
 . Removed outer DIV produced by breadcrumbs() function - issue 18
 . Removed last remnants of split (classes/Page) - issue 33
 . Change max DB name from 40 to 120 - issue 58
