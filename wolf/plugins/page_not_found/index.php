@@ -63,7 +63,7 @@ function behavior_page_not_found()
     
     if ($page = $stmt->fetchObject())
     {
-        $page = find_page_by_uri($page->slug);
+        $page = Page::find_page_by_uri($page->slug);
         
         // if we fund it, display it!
         if (is_object($page))
