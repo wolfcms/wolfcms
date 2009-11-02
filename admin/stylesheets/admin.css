@@ -112,6 +112,15 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   color: #222;
   background-color: #eee;
   border-bottom: 2px solid #ccc;
+
+  /* Border-radius not implemented yet */
+  -moz-border-radius: 6px;
+  -moz-border-bottom-radius: 0px;
+  -moz-border-radius-bottomright: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-radius: 6px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
 }
 #mainTabs a:hover {
   color: #000;
@@ -146,6 +155,11 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   font-size: 95%;
   background-color: #fff;
   border-bottom: 2px solid #76A83A; /*#58b;*/
+
+  /* Border-radius not implemented yet */
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
 }
 
 #installation #content-wrapper,
@@ -167,6 +181,27 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 
 #content {
   padding: 20px;
+
+  /* Border-radius not implemented yet */
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+
+  box-shadow: 5px 3px 4px #aaa;
+  -moz-box-shadow: 5px 3px 4px #aaa;
+  -webkit-box-shadow: 5px 3px 4px #aaa;
+}
+
+#content h1 {
+  /* Border-radius not implemented yet */
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius-bottom: 0px;
+  -moz-border-radius-bottom: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  -moz-border-radius-bottomright: 0px;
+  -webkit-border-radius-bottom: 0px;
 }
 
 #content .logo {
@@ -209,6 +244,13 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   padding: 10px 20px;
   background: #fff;
   border-bottom: 2px solid #58b;
+
+  /* Border-radius not implemented yet */
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  box-shadow: 5px 3px 4px #aaa;
+  -moz-box-shadow: 5px 3px 4px #aaa;
+  -webkit-box-shadow: 5px 3px 4px #aaa;
 }
 #sidebar p,
 #sidebar td,
@@ -219,16 +261,40 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   margin: 0 0 10px;
   padding: 10px 20px 0;
   background: #59c;
+
+  /* Border-radius not implemented yet */
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  box-shadow: 5px 3px 4px #aaa;
+  -moz-box-shadow: 5px 3px 4px #aaa;
+  -webkit-box-shadow: 5px 3px 4px #aaa;
 }
+#sidebar p.button:hover {
+  box-shadow: 0px 0px 0px #aaa;
+  -moz-box-shadow: 0px 0px 0px #aaa;
+  -webkit-box-shadow: 0px 0px 0px #aaa;
+}
+
 #sidebar p.button img {
   margin: -10px 10px 0 -20px;
   padding: 6px 10px;
   background: #9ce;
+
+  /* Border-radius not implemented yet */
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
 }
 #sidebar p.button a {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
+
+  /* Border-radius not implemented yet */
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
 }
 #sidebar p.button a:hover {
   color: #123;
@@ -665,6 +731,15 @@ table.fieldset .error-with-field small {
   text-transform: none;
   background-color: #ddd;
   color: #000;
+
+  /* Border-radius not implemented yet */
+  -moz-border-radius: 6px;
+  -moz-border-bottom-radius: 0px;
+  -moz-border-radius-bottomright: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-radius: 6px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
 }
 .tabs .tab.here {
   background-color: #fff;
@@ -679,6 +754,15 @@ table.fieldset .error-with-field small {
   background-color: #fff;
   width: 100%;
   clear: both;
+
+
+  /* Border-radius not implemented yet */
+  -moz-border-radius: 6px;
+  -moz-border-radius-topleft: 0px;
+  -webkit-border-radius: 6px;
+  -webkit-border-topleft-radius: 0px;
+
+  text-shadow: black;
 }
 .pages .page {
   padding: 20px;
