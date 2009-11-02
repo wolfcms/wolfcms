@@ -24,6 +24,7 @@ Sigla:
 + Added getUri() function to Page.
 + Added install/requirements.php to allow checking of prerequisites. - issue 71
 + Added Portugese translation for Wolf core. Thanks Walker de Alencar.
++ Added Polish translation for core plugins (comment, skeleton). Thanks piotr.fuz.
 - Fixed issue with not being able to edit layouts with SQLite. - issue 3
 - Fixed bug where get_request_method() returned GET instead of POST - issue 17
 - Fixed bug in deleting a page with children where page_part and page_tag entries were not removed. - issue 73
@@ -39,6 +40,7 @@ Sigla:
 . Prevent usage of set_magic_quotes_runtime() from PHP 5.3 and up - issue 56
 . File Manager - show folders before files - issue 38 - thanks slowgary
 . Minor text, css edits
+. Updated Polish translation for core. Thanks piotr.fuz.
 
 0.5.5 - released 2009-08-04
 + Added new Wolf layout.

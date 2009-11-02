@@ -8,6 +8,8 @@
  *
  * @author Marcin Chwedziak
  * @version Wolf x.y.z
+ *
+ * @..updated by Piotr Fuz to fit version Wolf 0.5.5
  */
 
 return array(
@@ -33,6 +35,7 @@ return array(
 'Are you sure you wish to delete' => 'Czy na pewno chcesz usunąć',
 'Published' => 'Opublikowany',
 'Draft' => 'Szkic',
+'Reviewed' => 'Obejrzany',
 'Hidden' => 'Ukryty',
 'More' => 'Więcej',
 'Less' => 'Mniej',
@@ -41,6 +44,8 @@ return array(
 'Optional.' => 'Opcjonalne.',
 'yes' => 'tak',
 'no' => 'nie',
+'Required.' => 'Wymagane',
+'required.' => 'wymagane',
 
 // layouts
 'Layout' => 'Szablon',
@@ -60,6 +65,7 @@ return array(
 // pages
 'Page' => 'Strona',
 'reorder' => 'przegrupuj',
+'copy' => 'kopiuj',
 'Add Page' => 'Dodaj stronę',
 'Edit Page' => 'Edytuj stronę',
 'Status' => 'Status',
@@ -85,7 +91,6 @@ return array(
 'Admin Site title' => 'Tytuł strony',
 'Language' => 'Język',
 'Administration Theme' => 'Styl administracji',
-'Page options' => 'Opcje stron',
 'Default Status' => 'Domyślny status',
 'Default Filter' => 'Domyślny filtr',
 'Optional component' => 'Komponenty opcjonalne',
@@ -97,6 +102,10 @@ return array(
 'This will set your language for the backend.' => 'Ta opcja ustawi język dla administracji.',
 'This will change your Administration theme.' => 'Ta opcja zmieni styl administracji.',
 'Only for filter in pages, NOT in snippets' => 'Tylko dla filtrów stron, NIE skrawków.',
+'Allow HTML in Title' => 'Zezwól na HTML w tytułach',
+'This allows you to specify which tab (controller) you will see by default after login.' => 'Ta opcja pozwala na wybranie, która zakładka ma być otwarta po zalogowaniu.',
+'Default tab' => '',
+'Default tab' => '',
 
 // snippets
 'New Snippet' => 'Nowy skrawek',
@@ -107,7 +116,7 @@ return array(
 'Add Snippet' => 'Dodaj skrawek',
 'Edit Snippet' => 'Edytuj skrawek',
 'Remove Snippet' => 'Usuń skrawek',
-
+'Tag to use this snippet' => 'Jak używać skrawków?',
 
 // users
 'Add User' => 'Dodaj użytkownika',
@@ -187,5 +196,8 @@ return array(
 // Comments
 'Delete' => 'Usuń',
 'Reject' => 'Odrzuć',
+'Moderation' => 'Moderacja',
+'Documentation' => 'Dokumentacja',
+'Comments' => 'Komentarze',
 
 );
