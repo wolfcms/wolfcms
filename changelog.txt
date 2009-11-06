@@ -33,7 +33,8 @@ Sigla:
 - Fixed problem where child pages were not deleted when deleting parent. - issue 45 - thanks gilles
 - Fixed duplicate IDs in Administration / Settings tab - issue 37 - thanks slowgary
 - Fixed atom:link reference in rss.xml
-. Removed STATUS_REVIEWED from Page - issue 65.
+- Fixed admin theme name - issue 98
+. Removed STATUS_REVIEWED from Page - issue 65
 . Removed outer DIV produced by breadcrumbs() function - issue 18
 . Removed last remnants of split (classes/Page) - issue 33
 . Change max DB name from 40 to 120 - issue 58
