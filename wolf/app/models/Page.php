@@ -709,6 +709,16 @@ class Page extends Record {
             }
         }
 
+        /* Also clone the page tags. */
+        $page_tags = $page->getTags();
+        if (count($page_tags)) {
+           foreach($page_tags as $tag_id => $tag_name) {
+              // create the relation between the page and the tag
+              $tag = new PageTag(array('page_id' => $clone->id, 'tag_id' => $tag_id));
+              $tag->save();
+           }
+        }
+
         /* This gets set only once even when called recursively. */
         if (!$new_root_id) {
             $new_root_id = $clone->id;
