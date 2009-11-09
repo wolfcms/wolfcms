@@ -79,16 +79,9 @@ define('BASE_URL', $url . (endsWith($url, '/') ? '': '/') . ADMIN_DIR . (endsWit
 require CORE_ROOT.'/Framework.php';
 
 //  Database connection  -----------------------------------------------------
-
-if (USE_PDO) {
-    $__CMS_CONN__ = new PDO(DB_DSN, DB_USER, DB_PASS);
-    if ($__CMS_CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) == 'mysql')
-        $__CMS_CONN__->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
-}
-else {
-    require_once CORE_ROOT . '/libraries/DoLite.php';
-    $__CMS_CONN__ = new DoLite(DB_DSN, DB_USER, DB_PASS);
-}
+$__CMS_CONN__ = new PDO(DB_DSN, DB_USER, DB_PASS);
+if ($__CMS_CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) == 'mysql')
+    $__CMS_CONN__->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
 
 // DEFINED ONLY FOR BACKWARDS SUPPORT - to be taken out before 0.9.0
 $__FROG_CONN__ = $__CMS_CONN__;

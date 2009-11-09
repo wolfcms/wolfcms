@@ -24,6 +24,12 @@
  * See exception.txt for details and the full text.
  */
 
+/* Make sure we've been called using index.php */
+if (!defined('INSTALL_SEQUENCE')) {
+    echo '<p>Illegal call. Terminating.</p>';
+    exit();
+}
+
 // Table structure for table: cron -----------------------------------------
 
 $PDO->exec("CREATE TABLE cron (

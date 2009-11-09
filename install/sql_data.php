@@ -28,9 +28,10 @@
  * This file will insert all basic data to database
  */
 
-// Securtiy feature - make sure this is called from the install sequence
+/* Make sure we've been called using index.php */
 if (!defined('INSTALL_SEQUENCE') || !isset($admin_name) || !isset($admin_passwd)) {
-    die('Attempt to call setup file outside of install sequence!');
+    echo '<p>Illegal call. Terminating.</p>';
+    exit();
 }
 
 function wolf_datetime_incrementor() {

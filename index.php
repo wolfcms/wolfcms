@@ -61,21 +61,15 @@ define('BASE_URL', URL_PUBLIC . (endsWith(URL_PUBLIC, '/') ? '': '/') . (USE_MOD
 
 require CORE_ROOT.'/Framework.php';
 
-if (USE_PDO) {
-    try {
-        $__CMS_CONN__ = new PDO(DB_DSN, DB_USER, DB_PASS);
-    }
-    catch (PDOException $error) {
-        die('DB Connection failed: '.$error->getMessage());
-    }
+try {
+    $__CMS_CONN__ = new PDO(DB_DSN, DB_USER, DB_PASS);
+}
+catch (PDOException $error) {
+    die('DB Connection failed: '.$error->getMessage());
+}
 
-    if ($__CMS_CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) == 'mysql')
-        $__CMS_CONN__->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
-}
-else {
-    require_once CORE_ROOT . '/libraries/DoLite.php';
-    $__CMS_CONN__ = new DoLite(DB_DSN, DB_USER, DB_PASS);
-}
+if ($__CMS_CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) == 'mysql')
+    $__CMS_CONN__->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
 
 // DEFINED ONLY FOR BACKWARDS SUPPORT - to be taken out before 0.9.0
 $__FROG_CONN__ = $__CMS_CONN__;

@@ -8,6 +8,7 @@ Sigla:
 ======
 
 0.6.0 - released 2009-10-??
++ Added improved install sequence.
 + Added patch where page tags are now also cloned. - issue 46 - thanks gilles
 + Added support for HTTPS in the backend. Set USE_HTTPS to true in config.php. - issue 4
 + Added Flash::setNow() function to allow flash messages in current request. - issue 67
@@ -35,6 +36,7 @@ Sigla:
 - Fixed duplicate IDs in Administration / Settings tab - issue 37 - thanks slowgary
 - Fixed atom:link reference in rss.xml
 - Fixed admin theme name - issue 98
+. Removed PDO support
 . Removed STATUS_REVIEWED from Page - issue 65
 . Removed outer DIV produced by breadcrumbs() function - issue 18
 . Removed last remnants of split (classes/Page) - issue 33
