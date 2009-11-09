@@ -133,7 +133,9 @@ if ($action == 'edit') { ?>
       ?>
       </div>
     </div>
-    
+
+    <?php Observer::notify('view_page_after_edit_tabs', $page); ?>
+
     <div class="row">
       <p><label for="page_layout_id"><?php echo __('Layout'); ?></label>
         <select id="page_layout_id" name="page[layout_id]">
@@ -209,7 +211,7 @@ if ($action == 'edit') { ?>
     </form>
   </div>
 
-<?php Observer::notify('view_page_edit_popup'); ?>
+<?php Observer::notify('view_page_edit_popup', $page); ?>
 
 </div>
 
