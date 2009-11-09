@@ -32,7 +32,7 @@
 
 ## Optional
 
-### To remove the ? in the url
+### To remove the ? in the url post install.
 
 1. Edit file _.htaccess and correct (if necessary) the RewriteBase setting for
    your installation.

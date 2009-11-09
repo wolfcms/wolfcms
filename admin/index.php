@@ -28,7 +28,7 @@
 
 define('CMS_BACKEND', true);
 
-define('CMS_VERSION', '0.6.0');
+define('CMS_VERSION', '0.6.0 RC1');
 define('FROG_VERSION', CMS_VERSION); // DEFINED ONLY FOR BACKWARDS SUPPORT - to be taken out before 0.9.0
 
 define('CMS_ROOT', dirname(__FILE__).'/..');
