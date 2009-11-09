@@ -36,10 +36,10 @@
  * @copyright Martijn van der Kleijn, 2009
  */
 ?>
-<p class="button"><a href="<?php echo get_url('plugin/backup_restore/documentation'); ?>"><img src="../wolf/plugins/backup_restore/images/page.png" align="middle" alt="documentation icon" /> <?php echo __('Documentation'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/backup_restore/backup'); ?>"><img src="../wolf/plugins/backup_restore/images/snippet.png" align="middle" alt="xml icon" /> <?php echo __('Create a backup'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/backup_restore/restore'); ?>"><img src="../wolf/plugins/backup_restore/images/upload.png" align="middle" alt="xml icon" /> <?php echo __('Restore a backup'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/backup_restore/settings'); ?>"><img src="../wolf/plugins/backup_restore/images/settings.png" align="middle" alt="settings icon" /> <?php echo __('Settings'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/backup_restore/documentation'); ?>"><img src="<?php echo BACKUPRESTORE_ROOT;?>/images/page.png" align="middle" alt="documentation icon" /> <?php echo __('Documentation'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/backup_restore/backup'); ?>"><img src="<?php echo BACKUPRESTORE_ROOT;?>/images/snippet.png" align="middle" alt="xml icon" /> <?php echo __('Create a backup'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/backup_restore/restore'); ?>"><img src="<?php echo BACKUPRESTORE_ROOT;?>/images/upload.png" align="middle" alt="xml icon" /> <?php echo __('Restore a backup'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/backup_restore/settings'); ?>"><img src="<?php echo BACKUPRESTORE_ROOT;?>/images/settings.png" align="middle" alt="settings icon" /> <?php echo __('Settings'); ?></a></p>
 <div class="box">
 <h2><?php echo __('Backup/Restore plugin');?></h2>
 <p>

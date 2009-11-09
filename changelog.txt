@@ -39,7 +39,8 @@ Sigla:
 - Fixed duplicate IDs in Administration / Settings tab - issue 37 - thanks slowgary
 - Fixed atom:link reference in rss.xml
 - Fixed admin theme name - issue 98
-. Removed PDO support
+. Removed BASE HREF tag from backend layout. May need updates to plugins! - issue 19
+. Removed PDO lite support. (supported use of PDO in case you had no PDO)
 . Removed STATUS_REVIEWED from Page - issue 65
 . Removed outer DIV produced by breadcrumbs() function - issue 18
 . Removed last remnants of split (classes/Page) - issue 33

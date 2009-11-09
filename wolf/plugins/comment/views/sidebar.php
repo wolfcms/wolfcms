@@ -38,7 +38,7 @@
  * @copyright Philippe Archambault, Bebliuc George & Martijn van der Kleijn, 2008
  */
 ?>
-<p class="button"><a href="<?php echo get_url('plugin/comment/'); ?>"><img src="../wolf/plugins/comment/images/comment.png" align="middle" alt="page icon" /> <?php echo __('Comments'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/comment/moderation/'); ?>"><img src="../wolf/plugins/comment/images/moderation.png" align="middle" alt="page icon" /> <?php echo __('Moderation'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/comment/settings'); ?>"><img src="../wolf/plugins/comment/images/settings.png" align="middle" alt="page icon" /> <?php echo __('Settings'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/comment/documentation/'); ?>"><img src="../wolf/plugins/comment/images/documentation.png" align="middle" alt="page icon" /> <?php echo __('Documentation'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/comment/'); ?>"><img src="<?php echo COMMENT_ROOT;?>/images/comment.png" align="middle" alt="page icon" /> <?php echo __('Comments'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/comment/moderation/'); ?>"><img src="<?php echo COMMENT_ROOT;?>/images/moderation.png" align="middle" alt="page icon" /> <?php echo __('Moderation'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/comment/settings'); ?>"><img src="<?php echo COMMENT_ROOT;?>/images/settings.png" align="middle" alt="page icon" /> <?php echo __('Settings'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/comment/documentation/'); ?>"><img src="<?php echo COMMENT_ROOT;?>/images/documentation.png" align="middle" alt="page icon" /> <?php echo __('Documentation'); ?></a></p>

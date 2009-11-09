@@ -38,6 +38,11 @@
 
 
 if (!defined('BR_VERSION')) { define('BR_VERSION', '0.6.0'); }
+/**
+ *
+ * Root location where Comment plugin lives.
+ */
+define('BACKUPRESTORE_ROOT', URI_PUBLIC.'/wolf/plugins/backup_restore');
 
 Plugin::setInfos(array(
     'id'          => 'backup_restore',

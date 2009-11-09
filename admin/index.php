@@ -43,6 +43,17 @@ $config_file = CMS_ROOT.'/config.php';
 
 require_once($config_file);
 
+// Figure out what the public URI is based on URL_PUBLIC.
+// TODO - improve
+$changedurl = str_replace('//','|',URL_PUBLIC);
+$lastslash = strpos($changedurl, '/');
+if (false === $lastslash) {
+    define('URI_PUBLIC', '/');
+}
+else {
+    define('URI_PUBLIC', substr($changedurl, $lastslash));
+}
+
 // Security checks -----------------------------------------------------------
 if (DEBUG == false && isWritable($config_file)) {
 // Windows systems always have writable config files... skip those.

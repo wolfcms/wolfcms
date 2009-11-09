@@ -49,6 +49,10 @@ Plugin::setInfos(array(
 	'require_wolf_version' => '0.5.5'
 ));
 
+/**
+ * Root location where Comment plugin lives.
+ */
+define('COMMENT_ROOT', URI_PUBLIC.'/wolf/plugins/comment');
 
 // Load the Comment class into the system.
 AutoLoader::addFile('Comment', CORE_ROOT.'/plugins/comment/Comment.php');
