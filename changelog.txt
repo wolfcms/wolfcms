@@ -27,6 +27,8 @@ Sigla:
 + Added install/requirements.php to allow checking of prerequisites. - issue 71
 + Added Portugese translation for Wolf core. Thanks Walker de Alencar.
 + Added Polish translation for core plugins (comment, skeleton). Thanks piotr.fuz.
++ Added support for setting users preferred language to system default upon creation.
+- Fixed issue where user gets default permission of 'editor'.
 - Fixed issue with not being able to edit layouts with SQLite. - issue 3
 - Fixed bug where get_request_method() returned GET instead of POST - issue 17
 - Fixed bug in deleting a page with children where page_part and page_tag entries were not removed. - issue 73

@@ -81,8 +81,10 @@ class UserController extends Controller {
         // check if user have already enter something
         $user = Flash::get('post_data');
 
-        if (empty($user))
+        if (empty($user)) {
             $user = new User;
+            $user->language = Setting::get('language');
+        }
 
         $this->display('user/edit', array(
             'action' => 'add',
@@ -96,7 +98,7 @@ class UserController extends Controller {
 
         Flash::set('post_data', (object) $data);
 
-        // check if pass and confirm are egal and >= 5 chars
+        // check if pass and confirm are equal and >= 5 chars
         if (strlen($data['password']) >= 5 && $data['password'] == $data['confirm']) {
             $data['password'] = sha1($data['password']);
             unset($data['confirm']);
