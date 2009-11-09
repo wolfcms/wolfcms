@@ -37,7 +37,7 @@ define('ADMIN_DIR', 'admin');
 // Change this setting to enable mod_rewrite. Set to "true" to remove the "?" in the URL.
 // To enable mod_rewrite, you must also change the name of "_.htaccess" in your
 // Wolf CMS root directory to ".htaccess"
-define('USE_MOD_REWRITE', false);
+define('USE_MOD_REWRITE', <?php echo (isset($mod_rewrite) && ($mod_rewrite == 'on' || $mod_rewrite == 1)) ? 'true' : 'false'; ?>);
 
 // Add a suffix to pages (simluating static pages '.html')
 define('URL_SUFFIX', '<?php echo $url_suffix; ?>');

@@ -36,8 +36,6 @@ $PDO = false;
 
 // Setup default admin user name in case admin username is not entered in install screen
 $admin_name = DEFAULT_ADMIN_USER;
-//$admin_passwd = DEFAULT_ADMIN_PWD;
-//$admin_passwd_precrypt = 'password';
 
 // Create config.php template
 $config_tmpl = new Template('config.tmpl');

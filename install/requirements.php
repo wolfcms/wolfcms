@@ -78,6 +78,17 @@ $check = is_writable('../public/');
 $public_writable = '<span class="'.($check ? 'check' : 'notcheck').'">'.($check ? 'true' : 'false').'</span>';
 if (!$check) $errors = true;
 
+// Test for mod_rewrite availability (is not mandatory)
+$check = false;
+if (isset($_GET['rewrite']) && $_GET['rewrite'] == 1) {
+    $check = true;
+}
+$modrewrite = '<span class="'.($check ? 'check' : 'notcheck').'">'.($check ? 'true' : 'false').'</span>';
+
+// Test for HTTPS support, only possible if user goes to this page with https
+$check = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == "on" || $_SERVER['HTTPS'] == "1"));
+$https = '<span class="'.($check ? 'check' : 'notcheck').'">'.($check ? 'true' : 'false').'</span>';
+
 ?>
 
     <h1>Requirements check <img src="install-logo.png" alt="Wolf CMS logo" class="logo" /></h1>
@@ -124,6 +135,10 @@ if (!$check) $errors = true;
                 <td>Public directory is writable <sup>3)</sup></td>
                 <td class="available"><?php echo $public_writable; ?></td>
             </tr>
+            <tr>
+                <td>Clean URLs support available <sup>4)</sup></td>
+                <td class="available"><?php echo $modrewrite; ?></td>
+            </tr>
         </tbody>
     </table>
     <p class="footnotes">
@@ -132,7 +147,9 @@ if (!$check) $errors = true;
 
         <sup>2)</sup> - "config.php" at install root.<br/>
         
-        <sup>3)</sup> - "public" at install root.
+        <sup>3)</sup> - "public" at install root.<br/>
+
+        <sup>4)</sup> - You only need clean URLs support if you want to remove the question mark from the URLs. (mod_rewrite)
     </p>
 
     <p>

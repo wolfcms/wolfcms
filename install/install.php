@@ -113,6 +113,11 @@ if (!defined('INSTALL_SEQUENCE')) {
                 <td class="field"><input class="textbox" id="config_url_suffix" maxlength="40" name="config[url_suffix]" size="50" type="text" value=".html" /></td>
                 <td class="help">Optional. Add a suffix to simulate static html files.</td>
             </tr>
+            <tr>
+                <td class="label"><label class="optional" for="config_mod_rewrite">Use clean URLs</label></td>
+                <td class="field"><input class="checkbox" id="config_mod_rewrite" name="config[mod_rewrite]" type="checkbox"<?php echo (isset($_GET['rewrite']) && $_GET['rewrite'] == 1) ? ' checked="checked"' : ' disabled="disabled"'; ?>/></td>
+                <td class="help">Optional. Use clean URLs without the question mark.</td>
+            </tr>
         </table>
         <p class="buttons">
             <button class="button" name="commit" type="submit">Install now!</button>
