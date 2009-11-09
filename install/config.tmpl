@@ -46,3 +46,12 @@ define('URL_SUFFIX', '<?php echo $url_suffix; ?>');
 // Go here for more information on the available timezones:
 // http://php.net/timezones
 define('DEFAULT_TIMEZONE', '<?php $tz = date('e'); echo $tz != 'e' ? $tz: 'GMT'; ?>');
+
+// Use poormans cron solution instead of real one.
+// Only use if cron is truly not available, this works better in terms of timing
+// if you have a lot of traffic.
+define('USE_POORMANSCRON', false);
+
+// Rough interval in seconds at which poormans cron should trigger.
+// No traffic == no poormans cron run.
+define('POORMANSCRON_INTERVAL', 3600);

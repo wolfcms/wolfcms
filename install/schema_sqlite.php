@@ -34,7 +34,7 @@ if (!defined('INSTALL_SEQUENCE')) {
 
 $PDO->exec("CREATE TABLE cron (
     id INTEGER NOT NULL PRIMARY KEY,
-    lastrun text,
+    lastrun text
 )");
 
 
