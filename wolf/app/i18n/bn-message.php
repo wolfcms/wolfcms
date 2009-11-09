@@ -77,4 +77,5 @@ return array(
 'Remove page' => 'পৃষ্ঠা সরিয়ে নাও',
 'Remove page disable' => 'পৃষ্ঠা সরিয়ে নেওয়ার ব্যাপারটি নিস্ক্রিয় কর',
 'Drag and Drop' => 'টেনে নাও আর ছেড়ে দাও',
-'Drag and Drop disable' => 'টেনে নাও আর ছেড়ে �
+'Drag and Drop disable' => 'টেনে নাও আর ছেড়ে �'
+);
