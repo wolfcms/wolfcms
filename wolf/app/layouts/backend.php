@@ -27,31 +27,31 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
     <!-- base href="<?php echo trim(BASE_URL, '?/').'/'; ?>" / -->
 
     <link rel="favourites icon" href="<?php echo URL_PUBLIC; ?>favicon.ico" />
-    <link href="<?php echo URI_PUBLIC; ?>/admin/stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
-    <link href="<?php echo URI_PUBLIC; ?>/admin/stylesheets/toolbar.css" media="screen" rel="Stylesheet" type="text/css" />
-    <link href="<?php echo URI_PUBLIC; ?>/admin/themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
+    <link href="<?php echo URI_PUBLIC; ?>admin/stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
+    <link href="<?php echo URI_PUBLIC; ?>admin/stylesheets/toolbar.css" media="screen" rel="Stylesheet" type="text/css" />
+    <link href="<?php echo URI_PUBLIC; ?>admin/themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
 
     <!-- IE6 PNG support fix -->
     <!--[if lt IE 7]>
         <script type="text/javascript" charset="utf-8" src="<?php echo URL_PUBLIC; ?>/admin/javascripts/unitpngfix.js"></script>
     <![endif]-->
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>/admin/javascripts/prototype.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>/admin/javascripts/effects.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>/admin/javascripts/dragdrop.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>/admin/javascripts/cp-datepicker.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>/admin/javascripts/wolf.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>/admin/javascripts/control.textarea.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/prototype.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/effects.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/dragdrop.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/cp-datepicker.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/wolf.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/control.textarea.js"></script>
     
 <?php foreach(Plugin::$plugins as $plugin_id => $plugin): ?>
 <?php if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $plugin_id . '.js')): ?>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>/wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.js"></script>
 <?php endif; ?>
 <?php if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $plugin_id . '.css')): ?>
-    <link href="<?php echo URI_PUBLIC; ?>/wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.css" media="screen" rel="Stylesheet" type="text/css" />
+    <link href="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.css" media="screen" rel="Stylesheet" type="text/css" />
 <?php endif; ?>
 <?php endforeach; ?>
 <?php foreach(Plugin::$javascripts as $jscript_plugin_id => $javascript): ?>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>/wolf/plugins/<?php echo $javascript; ?>"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $javascript; ?>"></script>
 <?php endforeach; ?>
 
 <?php $action = Dispatcher::getAction(); ?>

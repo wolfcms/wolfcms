@@ -52,7 +52,7 @@ Plugin::setInfos(array(
 /**
  * Root location where Comment plugin lives.
  */
-define('COMMENT_ROOT', URI_PUBLIC.'/wolf/plugins/comment');
+define('COMMENT_ROOT', URI_PUBLIC.'wolf/plugins/comment');
 
 // Load the Comment class into the system.
 AutoLoader::addFile('Comment', CORE_ROOT.'/plugins/comment/Comment.php');

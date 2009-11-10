@@ -90,12 +90,12 @@ if ($action == 'edit') { ?>
                   <td class="label"><label for="page_created_on"><?php echo __('Created date'); ?></label></td>
                   <td class="field">
                     <input id="page_created_on" maxlength="10" name="page[created_on]" size="10" type="text" value="<?php echo substr($page->created_on, 0, 10); ?>" /> 
-                    <img onclick="displayDatePicker('page[created_on]');" src="<?php echo URI_PUBLIC;?>/admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
+                    <img onclick="displayDatePicker('page[created_on]');" src="<?php echo URI_PUBLIC;?>admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
                     <input id="page_created_on_time" maxlength="5" name="page[created_on_time]" size="5" type="text" value="<?php echo substr($page->created_on, 11); ?>" />
                 <?php if (isset($page->published_on)): ?>
                     &nbsp; <label for="page_published_on"><?php echo __('Published date'); ?></label>
                     <input id="page_published_on" maxlength="10" name="page[published_on]" size="10" type="text" value="<?php echo substr($page->published_on, 0, 10); ?>" /> 
-                    <img onclick="displayDatePicker('page[published_on]');" src="<?php echo URI_PUBLIC;?>/admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
+                    <img onclick="displayDatePicker('page[published_on]');" src="<?php echo URI_PUBLIC;?>admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
                     <input id="page_published_on_time" maxlength="5" name="page[published_on_time]" size="5" type="text" value="<?php echo substr($page->published_on, 11); ?>" /> 
                 <?php endif; ?>
                   </td>
@@ -118,8 +118,8 @@ if ($action == 'edit') { ?>
     <div id="tab-control" class="tab_control">
       <div id="tabs" class="tabs">
         <div id="tab-toolbar" class="tab_toolbar">
-          <a href="#" onclick="toggle_popup('add-part-popup', 'part-name-field'); return false;" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>/admin/images/plus.png" alt="plus icon" /></a>
-          <a href="#" onclick="if (confirm('<?php echo __('Delete the current tab?'); ?>')) { tabControl.removeTab(tabControl.selected) }; return false;" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>/admin/images/minus.png" alt="minus icon" /></a>
+          <a href="#" onclick="toggle_popup('add-part-popup', 'part-name-field'); return false;" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>admin/images/plus.png" alt="plus icon" /></a>
+          <a href="#" onclick="if (confirm('<?php echo __('Delete the current tab?'); ?>')) { tabControl.removeTab(tabControl.selected) }; return false;" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>admin/images/minus.png" alt="minus icon" /></a>
         </div>
       </div>
       <div id="pages" class="pages">
@@ -199,7 +199,7 @@ if ($action == 'edit') { ?>
 </form>
 <div id="popups">
   <div class="popup" id="add-part-popup" style="display: none;">
-    <div id="busy" class="busy" style="display: none;"><img alt="Spinner" src="<?php echo URI_PUBLIC;?>/admin/images/spinner.gif" /></div>
+    <div id="busy" class="busy" style="display: none;"><img alt="Spinner" src="<?php echo URI_PUBLIC;?>admin/images/spinner.gif" /></div>
     <h3><?php echo __('Add Part'); ?></h3>
     <form action="<?php echo get_url('page/addPart'); ?>" method="post" onsubmit="if (valid_part_name()) { new Ajax.Updater('pages', '<?php echo get_url('page/addPart'); ?>', {asynchronous:true, evalScripts:true, insertion:Insertion.Bottom, onComplete:function(request){part_added()}, onLoading:function(request){part_loading()}, parameters:Form.serialize(this)}); }; return false;"> 
       <div>

@@ -41,7 +41,7 @@
 /**
  * Root location where Files plugin lives.
  */
-define('FILES_ROOT', URI_PUBLIC.'/wolf/plugins/file_manager');
+define('FILES_ROOT', URI_PUBLIC.'wolf/plugins/file_manager');
 
 /**
  * Root location where files get uploaded to as an absolute path.
