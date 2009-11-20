@@ -72,7 +72,7 @@ function behavior_page_not_found()
             header("Status: 404 Not Found");
               
             $page->_executeLayout();
-            exit(); // need to exit here otherwise the true error page will be sended
+            exit(); // need to exit here otherwise the true error page will be sent
         }
     }
 }

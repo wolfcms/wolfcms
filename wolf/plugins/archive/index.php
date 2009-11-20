@@ -32,7 +32,7 @@
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @version 1.0
- * @since Wolf version 0.9.0
+ * @since Wolf version 0.5.0
  * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Philippe Archambault, 2008
  */

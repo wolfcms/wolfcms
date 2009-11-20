@@ -1,10 +1,19 @@
 == NOTES:
 
-It can only have one Page not found by site, otherwise, we can say which one
-will be choosed.
+Only one "Page-not-found" page is permitted.
 
-The Page HAVE TO be et has hidden to be hidden from children list.
+The "Not Found" page MUST be have the status of "Hidden" in order not to be found by the sitemap generator.
 
+== INSTALLATION:
+
+1. Go to “Pages” tab and create child page of “Home Page” (green "+" on the right).
+2.1 Put the name your new page (e.g. "Page not found" or similar) in the "Page Title" box.
+2.2 Put your message the "body" area (e.g., "Sorry, the page you were looking for does not exist." or similar).
+3. Below the text-editing area, set the dropdown menus to read:
+   - Layout: -inherit-
+   - Page Type: "Page not found"
+   - Status: "Hidden" (MUST be set to "Hidden" for plugin to function properly!)
+4. Click the "Save and Close" button. Done!
 
 == LICENSE:
 

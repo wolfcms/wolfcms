@@ -34,7 +34,7 @@
  * @author Bebliuc George <bebliuc.george@gmail.com>
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @version 1.2.0
- * @since Wolf version 0.9.3
+ * @since Wolf version 0.5.0
  * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Philippe Archambault, Bebliuc George & Martijn van der Kleijn, 2008
  */

@@ -19,7 +19,7 @@ options (none, open and close).
 You will need to add this little code in your layout:
 
 <?php
-    if (Plugins::isEnabled('comment'))
+    if (Plugin::isEnabled('comment'))
     {
         if ($this->comment_status != Comment::NONE)
             $this->includeSnippet('comment-each');

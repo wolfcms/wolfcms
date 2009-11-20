@@ -1,7 +1,7 @@
 == NOTES:
 
-Archive year, month, day index need to be a children page of the archive page
-itself
+Archive year, month, day index needs to be a child page of the Archive page
+itself.
 
 == LICENSE:
 

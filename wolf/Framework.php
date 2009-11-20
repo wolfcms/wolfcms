@@ -1050,7 +1050,7 @@ function use_model() {
  * Create a really nice url like http://www.example.com/controller/action/params#anchor
  *
  * you can put as many params as you want,
- * if a params start with # it is considered to be an Anchor
+ * if a param starts with # it is considered to be an Anchor
  *
  * get_url('controller/action/param1/param2') // I always use this method
  * get_url('controller', 'action', 'param1', 'param2');
