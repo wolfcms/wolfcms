@@ -46,6 +46,9 @@ $pdo .= '">'.(($check) ? 'true' : 'false').'</span>';
 if (!$check) $errors = true;
 
 // Check if proper PDO drivers are available
+$mcheck = false;
+$scheck = false;
+
 if ($check) {
     $drivers = PDO::getAvailableDrivers();
 

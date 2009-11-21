@@ -7,11 +7,11 @@
      * @subpackage translations
      *
      * @author Dejan Andjelkovic <dejan79@gmail.com>
-     * @version Wolf 0.5.5
+     * @version Wolf 0.6.0
      */
 
     return array(
-    	'&#8212; naslijedi &#8212;' => '',
+    '&#8212; inherit &#8212;' => '&#8212; naslijedi &#8212;',
 	'<b>Information!</b> New Wolf version available (v. <b>:version</b>)! Visit <a href="http://www.wolfcms.org/">http://www.wolfcms.org/</a> to upgrade your version!' => '<b>Obavijest!</b> Nova verzija Wolf CMS-a je dostupna (v. <b>:version</b>)! Posjetite <a href="http://www.wolfcms.org/">http://www.wolfcms.org/</a> kako biste ažurirali na novu verziju!',
 	'A translatable string with a %param% system.' => 'Niz za prijevod sa %param% sustavom.',
 	'A translatable string.' => 'Niz za prijevod',
@@ -31,6 +31,7 @@
 	'Approve' => 'Odobri',
 	'Are you sure you wish to delete' => 'Jeste li sigurni da želite obrisati',
 	'Are you sure you wish to delete it?' => 'Jeste li sigurni da ovo želite obrisati?',
+	'Are you sure you wish to uninstall this plugin?' => 'Jeste li sigurni da želite deinstalirati ovaj plugin?',
 	'At least 3 characters. Must be unique.' => 'Minimalno 3 znaka. Mora biti jedinstveno.',
 	'At least 5 characters.' => 'Minimalno 5 znakova',
 	'Body' => 'Tijelo',
@@ -40,7 +41,7 @@
 	'Close' => 'Zatvori',
 	'Comments' => 'Komentari',
 	'Confirm Password' => 'Potvrdi Lozinku',
-	'Content-Type' => 'Content-Type',
+	'Content-Type' => 'Tip Sadržaja',
 	'Create Core template' => 'Kreiraj predložak Jezgre',
 	'Create Plugin templates' => 'Kreiraj predložak Plugin-a',
 	'Created date' => 'Datum kreiranja',
@@ -69,7 +70,7 @@
 	'Forgot password?' => 'Zaboravili ste lozinku?',
 	'Help us <a href=":url">translate Wolf</a>!' => 'Pomozite nam <a href=":url">prevesti Wolf</a>!',
 	'Hidden' => 'Skriveno',
-	'Just replace <b>snippet</b> by the snippet name you want to include.' => 'Jednostavno zamijenite <b>komadić</b> sa nazivom komadića koji želite ubaciti u kod',
+	'Just replace <b>snippet</b> by the snippet name you want to include.' => 'Jednostavno zamijenite <b>komadić</b> sa nazivom komadića koda koji želite ubaciti u kod',
 	'Keywords' => 'Ključne riječi',
 	'Language' => 'Jezik',
 	'Last updated by' => 'Zadnje ažuriranje',
@@ -98,7 +99,7 @@
 	'New User' => 'Novi Korisnik',
 	'No comments found.' => 'Komentari nisu pronađeni.',
 	'Only for filter in pages, NOT in snippets' => 'Samo za filtere u stranicama, NE u komadićima koda',
-	'Optional. Please use a valid e-mail address.' => 'Opcionalno. Koristite valjanu e-mail adresu.',
+	'Optional. Please use a valid e-mail address.' => 'Opcionalno. Koristite ispravnu e-mail adresu.',
 	'Page' => 'Stranica',
 	'Page :title has been deleted!' => 'Stranica :title je obrisana!',
 	'Page :title has not been deleted!' => 'Stranica :title nije obrisana!',
@@ -123,7 +124,8 @@
 	'Remove Tab' => 'Ukloni Karticu',
 	'Remove page' => 'Ukloni stranicu',
 	'Required.' => 'Potrebno',
-	'Roles' => 'Uloge',
+	'Reviewed' => 'Pregledano',
+	'Roles' => 'Uloga',
 	'Roles restrict user privileges and turn parts of the administrative interface on or off.' => 'Uloge ograničavaju korisničke ovlasti i isključuju ili uključuju dijelove administracijskog sučelja.',
 	'Save' => 'Spremi',
 	'Save and Close' => 'Spremi i Zatvori',
@@ -132,6 +134,7 @@
 	'Settings' => 'Postavke',
 	'Settings has been saved!' => 'Postavke su spremljene!',
 	'Show Calendar' => 'Pokaži Kalendar',
+	'Site email' => 'Email stranice',
 	'Slug' => 'Slug',
 	'Snippet' => 'Komadić koda',
 	'Snippet :name has been deleted!' => 'Komadić koda :name je obrisan!',
@@ -152,6 +155,8 @@
 	'This plugin CANNOT be enabled! It requires Wolf version :v.' => 'Ovaj plugin se NE MOŽE omogućiti! Zahtjeva verziju Wolf-a :v.',
 	'This will change your Administration theme.' => 'Ovo će izmjeniti temu Administracijskog sučelja.',
 	'This will set your language for the backend.' => 'Ovo će izmjeniti jezik sučelja.',
+	'This will set your preferred language for the backend.' => 'Ovo će postaviti vaš jezik za admin sučelje. ',
+	'Uninstall' => 'Deinstaliraj',
 	'Use layouts to apply a visual look to a Web page. Layouts can contain special tags to include
   page content and other elements such as the header or footer. Click on a layout name below to
   edit it or click <strong>Remove</strong> to delete it.' => 'Koristite izglede kako biste izmjenili i postavili vizualni izgled vaše stranice. Izgledi mogu sadržavati posebne oznake kako bi uključili sadržaj stranica i druge elemente kao što su header i footer. Kliknite na naziv izgleda za uređivanje ili <strong>Ukloni</strong> da biste ga obrisali.',
@@ -171,14 +176,16 @@
 	'Website' => 'Stranica',
 	'What is a Layout?' => 'Što je Izgled?',
 	'What is a Snippet?' => 'Što je Komadić koda?',
+	'When emails are sent by Wolf CMS, this email address will be used as the sender. Default: do-not-reply@wolfcms.org' => 'Kada se email šalje putem Wolf CMS-a, ova adresa će biti korištena kao pošiljatelj. Zadano: do-not-reply@wolfcms.org',
 	'When enabled, only users who are an administor can edit the page.' => 'Kada je omogućeno, samo korisnici koji administriraju mogu uređivati sadržaj stranice.',
 	'When enabled, users have to login before they can view the page.' => 'Kada je omogućeno, korisnici se moraju prijaviti kako bi vidjeli stranicu.',
 	'Where do the avatars come from?' => 'Odakle dolaze avatari?',
 	'You are currently logged in as' => 'Trenutno ste prijavljeni kao',
 	'You do not have permission to access the requested page!' => 'Nemate dovoljno ovlasti za pristup traženoj stranici!',
-	'You have to specify a content-type!' => 'Morate odrediti content-type!',
+	'You have to specify a content-type!' => 'Morate odrediti tip sadržaja!',
 	'You have to specify a name!' => 'Morate odrediti naziv!',
 	'You have to specify a title!' => 'Morate odrediti naslov!',
+	'and its underlying pages' => 'i njegove pripadajuće stranice',
 	'by' => 'od',
 	'copy' => 'kopiraj',
 	'error' => 'greška',

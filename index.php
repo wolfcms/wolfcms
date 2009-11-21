@@ -103,7 +103,6 @@ if (defined('USE_POORMANSCRON') && USE_POORMANSCRON && defined('POORMANSCRON_INT
         $last = $cron->getLastRunTime();
 
         if ($now - $last > POORMANSCRON_INTERVAL) {
-            $cron->save();
             echo $cron->generateWebBug();
         }
     }
