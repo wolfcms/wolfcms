@@ -66,6 +66,10 @@ use_helper('I18n');
 Setting::init();
 Plugin::init();
 
+// Update cron run time
+$cron = Cron::findByIdFrom('Cron', '1');
+$cron->save();
+
 // Run cron items
 Observer::notify('cron_run');
 
