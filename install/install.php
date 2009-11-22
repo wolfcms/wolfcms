@@ -31,6 +31,24 @@ if (!defined('INSTALL_SEQUENCE')) {
 ?>
 
     <script type="text/javascript" charset="utf-8" src="../admin/javascripts/prototype.js"></script>
+    <script type="text/javascript">
+        function db_driver_change(driver) {
+            Element.toggle('row-db-host');
+            Element.toggle('row-db-port');
+            Element.toggle('row-db-user');
+            Element.toggle('row-db-pass');
+            Element.toggle('row-table-prefix');
+
+            if (driver == 'sqlite') {
+                $('config_db_name').value = '/your/path/to/wolf.sq3';
+                $('help-db-name').innerHTML = 'Required. Enter the <strong>absolute</strong> path to the database file.';
+            }
+            else if (driver == 'mysql') {
+                $('help-db-name').innerHTML = 'Required. You have to create a database manually and enter its name here.';
+            }
+        }
+    </script>
+
     <h1>Installation information <img src="install-logo.png" alt="Wolf CMS logo" class="logo" /></h1>
     <p>
         When setting up Wolf CMS for use with multiple sites, please remember to either choose a site specific
@@ -56,22 +74,6 @@ if (!defined('INSTALL_SEQUENCE')) {
                         <option value="sqlite">SQLite 3</option>
                         <?php } ?>
                     </select>
-                    <script type="text/javascript" language="javascript">
-                        function db_driver_change(driver) {
-                            Element.toggle('row-db-host');
-                            Element.toggle('row-db-port');
-                            Element.toggle('row-db-user');
-                            Element.toggle('row-db-pass');
-                            Element.toggle('row-table-prefix');
-
-                            if (driver == 'sqlite') {
-                                $('help-db-name').innerHTML = 'Required. Enter the <strong>absolute</strong> path to the database file.';
-                            }
-                            else if (driver == 'mysql') {
-                                $('help-db-name').innerHTML = 'Required. You have to create a database manually and enter its name here.';
-                            }
-                        }
-                    </script>
                 </td>
                 <td class="help">Required. PDO support and the SQLite 3 plugin are required to use SQLite 3.</td>
             </tr>

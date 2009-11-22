@@ -72,6 +72,28 @@ if (false === $error) {
         }
     }
 
+    // If DB is SQLite, check that DB directory is writable.
+    if (false === $error && $_POST['config']['db_driver'] == 'sqlite') {
+        $sqlite_db = $_POST['config']['db_name'];
+
+        if (false !== strrpos($sqlite_db, '/')) {
+            $sqlite_dir = substr($sqlite_db, 0, strrpos($sqlite_db, '/'));
+        }
+        else {
+            $sqlite_dir = substr($sqlite_db, 0, strrpos($sqlite_db, '\\'));
+        }
+        
+        if (!file_exists($sqlite_db) && !is_writable($sqlite_dir)) {
+            $error = 'Wolf CMS could not access the specified SQLite directory in order to create the SQLite DB.';
+            file_put_contents(CFG_FILE, '');
+        }
+
+        if (file_exists($sqlite_db) && !is_writable($sqlite_db)) {
+            $error = 'Wolf CMS could not access the specified SQLite DB.';
+            file_put_contents(CFG_FILE, '');
+        }
+    }
+
     // Try creating a new PDO object to connect to DB
     if (false === $error) {
         try {
