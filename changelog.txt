@@ -8,6 +8,7 @@ Sigla:
 ======
 
 0.6.0 - released 2009-11-??
++ Added basic PHP 5.3.0 support - issue 95
 + Added view_page_after_edit_tabs event to fire just after rendering of tab-control div in edit page view. - issue 12
 + Added improved install sequence.
 + Added patch where page tags are now also cloned. - issue 46 - thanks gilles

@@ -794,8 +794,14 @@ final class Observer {
     public static function notify($event_name) {
         $args = array_slice(func_get_args(), 1); // removing event name from the arguments
 
-        foreach(self::getObserverList($event_name) as $callback)
+        foreach(self::getObserverList($event_name) as $callback) {
+            // XXX - For some strange reason, this works... figure out later.
+            $Args = array();
+            foreach($args as $k => &$arg){
+                $Args[$k] = &$arg;
+            }
             call_user_func_array($callback, $args);
+        }
     }
 }
 
