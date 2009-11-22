@@ -23,6 +23,9 @@
  * See exception.txt for details and the full text.
  */
 
+// Make sure we hide ugly errrors
+error_reporting(0);
+
 define('INSTALL_SEQUENCE', true);
 
 define('CORE_ROOT', dirname(__FILE__).'/../wolf');

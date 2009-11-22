@@ -162,8 +162,10 @@ $https = '<span class="'.($check ? 'check' : 'notcheck').'">'.($check ? 'true' :
             echo 'Please fix these problems and <button>test again</button>';
         } else {
             if (file_exists(CFG_FILE) && filesize(CFG_FILE) == 0) {
-                if ((!mcheck && scheck))
+                if ((!$mcheck && $scheck))
                     echo '<input type="hidden" name="dbtype" value="sqlite"/>';
+                else if (($mcheck && !$scheck))
+                    echo '<input type="hidden" name="dbtype" value="mysql"/>';
                 echo '<button name="install" value="1">Continue to install</button>';
             }
         }

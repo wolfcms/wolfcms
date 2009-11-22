@@ -32,7 +32,7 @@ if (!defined('INSTALL_SEQUENCE')) {
 
     <script type="text/javascript" charset="utf-8" src="../admin/javascripts/prototype.js"></script>
     <h1>Installation result <img src="install-logo.png" alt="Wolf CMS logo" class="logo" /></h1>
-    <?php if (isset($error)): ?>
+    <?php if (isset($error) && false !== $error): ?>
         <p style="color: red;"><?php echo $error; ?></p>
         <p><a href="index.php">Click here to try again</a></p>
     <?php else: ?>

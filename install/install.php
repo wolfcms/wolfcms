@@ -47,8 +47,14 @@ if (!defined('INSTALL_SEQUENCE')) {
                 <td class="label"><label for="config_db_driver">Database driver</label></td>
                 <td class="field">
                     <select id="config_db_driver" name="config[db_driver]" onchange="db_driver_change(this[this.selectedIndex].value);">
+                        <?php if (isset($_POST['dbtype']) && !empty($_POST['dbtype']) && $_POST['dbtype'] == 'sqlite') { ?>
+                        <option value="sqlite">SQLite 3</option>
+                        <?php } else if (isset($_POST['dbtype']) && !empty($_POST['dbtype']) && $_POST['dbtype'] == 'mysql') { ?>
+                        <option value="mysql">MySQL</option>
+                        <?php } else { ?>
                         <option value="mysql">MySQL</option>
                         <option value="sqlite">SQLite 3</option>
+                        <?php } ?>
                     </select>
                     <script type="text/javascript" language="javascript">
                         function db_driver_change(driver) {

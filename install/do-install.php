@@ -32,6 +32,7 @@ if (!defined('INSTALL_SEQUENCE')) {
 require 'Template.php';
 
 $msg = '';
+$error = false;
 $PDO = false;
 
 // Setup default admin user name in case admin username is not entered in install screen
@@ -52,59 +53,65 @@ else {
     $msg .= "<ul><li>Config file successfully written.</li>\n";
 }
 
-// Include generated config.php
-require CFG_FILE;
 
-// Generate admin name (defaults to 'admin') and pwd
-if (isset($_POST['config']['admin_username'])) {
-    $admin_name = $_POST['config']['admin_username'];
-    $admin_name = trim($admin_name);
+if (false === $error) {
+    // Include generated config.php
+    require CFG_FILE;
 
-    try {
-        $admin_passwd_precrypt = '12'.dechex(rand(100000000, 4294967295)).'K';
-        $admin_passwd = sha1($admin_passwd_precrypt);
-    } catch (Exception $e) {
-        $error = 'Wolf CMS could not generate a default administration password and has not been installed.<br />The following error has occured: <p><strong>'. $e->getMessage() ."</strong></p>\n";
-        file_put_contents(CFG_FILE, '');
+    // Generate admin name (defaults to 'admin') and pwd
+    if (isset($_POST['config']['admin_username'])) {
+        $admin_name = $_POST['config']['admin_username'];
+        $admin_name = trim($admin_name);
+
+        try {
+            $admin_passwd_precrypt = '12'.dechex(rand(100000000, 4294967295)).'K';
+            $admin_passwd = sha1($admin_passwd_precrypt);
+        } catch (Exception $e) {
+            $error = 'Wolf CMS could not generate a default administration password and has not been installed.<br />The following error has occured: <p><strong>'. $e->getMessage() ."</strong></p>\n";
+            file_put_contents(CFG_FILE, '');
+        }
+    }
+
+    // Try creating a new PDO object to connect to DB
+    if (false === $error) {
+        try {
+            $PDO = new PDO(DB_DSN, DB_USER, DB_PASS);
+        } catch (PDOException $e) {
+            $error = 'Wolf CMS could not connect to the database and has not been installed.<br />The following error has occured: <p><strong>'. $e->getMessage() ."</strong></p>\n";
+            file_put_contents(CFG_FILE, '');
+        }
+    }
+
+    // Run the SQL to setup DB contents
+    if (false === $error) {
+        if ($PDO) {
+            $msg .= '<li>Database connection successfull.</li>';
+
+            try {
+                require_once 'schema_'.$_POST['config']['db_driver'].'.php';
+            }
+            catch (Exception $e) {
+                $error = 'Wolf CMS could not create the database schema and has not been installed properly.<br />The following error has occured: <p><strong>'. $e->getMessage() ."</strong></p>\n";
+            }
+
+            try {
+                require_once 'sql_data.php';
+            }
+            catch (Exception $e) {
+                $error = 'Wolf CMS could not create the default database contents and has not been installed properly.<br />The following error has occured: <p><strong>'. $e->getMessage() ."</strong></p>\n";
+            }
+
+            $msg .= '<li>Tables loaded successfully</li></ul>
+                     <p>You can now login at <a href="../admin/">the login page</a> with: </p>
+                     <p>
+                        <strong>Login</strong> - '.$admin_name.'<br />
+                        <strong>Password <sup>1)</sup></strong> - '.$admin_passwd_precrypt.'
+                     </p>
+                    ';
+        }
+        else {
+            $error = 'Wolf CMS could not connect to the database and was unable to create its database tables!';
+        }
     }
 }
-
-// Try creating a new PDO object to connect to DB
-try {
-    $PDO = new PDO(DB_DSN, DB_USER, DB_PASS);
-} catch (PDOException $e) {
-    $error = 'Wolf CMS could not connect to the database and has not been installed.<br />The following error has occured: <p><strong>'. $e->getMessage() ."</strong></p>\n";
-    file_put_contents(CFG_FILE, '');
-}
-
-// Run the SQL to setup DB contents
-if ($PDO) {
-    $msg .= '<li>Database connection successfull.</li>';
-
-    try {
-        require_once 'schema_'.$_POST['config']['db_driver'].'.php';
-    }
-    catch (Exception $e) {
-        $error = 'Wolf CMS could not create the database schema and has not been installed properly.<br />The following error has occured: <p><strong>'. $e->getMessage() ."</strong></p>\n";
-    }
-
-    try {
-        require_once 'sql_data.php';
-    }
-    catch (Exception $e) {
-        $error = 'Wolf CMS could not create the default database contents and has not been installed properly.<br />The following error has occured: <p><strong>'. $e->getMessage() ."</strong></p>\n";
-    }
-
-    $msg .= '<li>Tables loaded successfully</li></ul>
-             <p>You can now login at <a href="../admin/">the login page</a> with: </p>
-             <p>
-                <strong>Login</strong> - '.$admin_name.'<br />
-                <strong>Password <sup>1)</sup></strong> - '.$admin_passwd_precrypt.'
-             </p>
-            ';
-}
-else {
-    $error = 'Wolf CMS could not connect to the database and was unable to create its database tables!';
-}
-
 ?>

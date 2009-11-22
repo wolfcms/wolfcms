@@ -31,6 +31,7 @@ Sigla:
 + Added Portugese translation for Wolf core. Thanks Walker de Alencar.
 + Added Polish translation for core plugins (comment, skeleton). Thanks piotr.fuz.
 + Added support for setting users preferred language to system default upon creation.
+- Fixed issue with PDO bug starting from PHP 5.3 where localhost equated to using unix socket that may be misconfigured. - issue 110
 - Fixed issue where user gets default permission of 'editor'.
 - Fixed issue with not being able to edit layouts with SQLite. - issue 3
 - Fixed bug where get_request_method() returned GET instead of POST - issue 17
