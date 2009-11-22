@@ -1268,6 +1268,42 @@ function even_odd() {
 }
 
 /**
+ * Intended to retrieve content from a URL by any means.
+ * Uses file_get_contents by default if possible for speed reasons.
+ * Otherwise it attempts to use CURL
+ *
+ * @param string $url URL to retrieve content from.
+ * @param int $flags Optional flags to be passed onto file_get_contents.
+ * @param resource $context A context resource to be passed to file_get_contents. Optional.
+ * @return mixed Either the URL's contents as string or FALSE on failure.
+ */
+function getContentFromUrl($url, $flags=0, $context=false) {
+
+    if (!defined('CHECK_TIMEOUT')) define('CHECK_TIMEOUT', 5);
+
+    // Use file_get_contents when possible... is faster.
+    if (ini_get('allow_url_fopen') && function_exists('file_get_contents')) {    
+        if ($context === false) $context = stream_context_create(array('http' => array('timeout' => CHECK_TIMEOUT)));
+
+        return file_get_contents($url, $flags, $context);
+    }
+    else if (function_exists('curl_version')) {
+        $ch = curl_init();
+        curl_setopt ($ch, CURLOPT_URL, $url);
+        curl_setopt ($ch, CURLOPT_HEADER, false);
+        curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, CHECK_TIMEOUT);
+        curl_setopt ($ch, CURLOPT_TIMEOUT, CHECK_TIMEOUT);
+        ob_start();
+        curl_exec ($ch);
+        curl_close ($ch);
+        return ob_get_clean();
+    }
+
+    // If neither file_get_contents nor CURL are availabe, return FALSE.
+    return false;
+}
+
+/**
  * Provides a nice print out of the stack trace when an exception is thrown.
  *
  * @param Exception $e Exception object.

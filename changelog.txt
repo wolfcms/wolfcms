@@ -8,6 +8,7 @@ Sigla:
 ======
 
 0.6.0 - released 2009-11-??
++ Added getContentFromUrl() function to Framework. - issue 54
 + Added basic PHP 5.3.0 support - issue 95
 + Added view_page_after_edit_tabs event to fire just after rendering of tab-control div in edit page view. - issue 12
 + Added improved install sequence.

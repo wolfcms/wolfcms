@@ -182,11 +182,9 @@ class LoginController extends Controller {
         if (!defined('CHECK_UPDATES') || !CHECK_UPDATES)
             return;
 
-        if (!defined('CHECK_TIMEOUT')) define('CHECK_TIMEOUT', 5);
-        $ctx = stream_context_create(array('http' => array('timeout' => CHECK_TIMEOUT)));
+        $v = getContentFromUrl('http://www.wolfcms.org/version/');
 
-        $v = file_get_contents('http://www.wolfcms.org/version/', 0, $ctx);
-        if ($v > CMS_VERSION) {
+        if (false !== $v && $v > CMS_VERSION) {
             Flash::set('error', __('<b>Information!</b> New Wolf version available (v. <b>:version</b>)! Visit <a href="http://www.wolfcms.org/">http://www.wolfcms.org/</a> to upgrade your version!',
                 array(':version' => $v )));
         }
