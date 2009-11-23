@@ -168,7 +168,10 @@ function main() {
 
     if ($uri != null && $uri[0] != '/') $uri = '/'.$uri;
 
+    // Check if there's a custom route defined for this URI,
+    // otherwise continue and assume page was requested.
     if (Dispatcher::hasRoute($uri)) {
+        Observer::notify('dispatch_route_found', $uri);
         Dispatcher::dispatch($uri);
     }
 
