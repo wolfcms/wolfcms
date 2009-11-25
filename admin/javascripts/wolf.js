@@ -57,14 +57,17 @@ Object.extend(String.prototype, {
 
 /* Pages.js ----------------------------------------------------------------*/
 
-function toggle_popup(id, focus_field)
-{
-  var popup = $(id);
-  focus_field = $(focus_field);
-  center(popup);
-  Element.toggle(popup);
-  Field.focus(focus_field);
+// UPDATED
+function toggle_popup(id, focus_field) {
+    //var popup = $(id);
+    //focus_field = $(focus_field);
+    //center(popup);
+    //Element.toggle(popup);
+    $("#"+id).toggle("normal");
+    //Field.focus(focus_field);
+    $("#"+focus_field).focus();
 }
+
 function allowTab(event, obj)
 {
   var keyCode = event.which ? event.which: event.keyCode;
@@ -98,7 +101,7 @@ function allowTab(event, obj)
         // license and I will do it for you!
         // here is my site to contact me: www.philworks.com
         document.selection.createRange().text = '\t';
-        obj.onblur = function() { this.focus(); this.onblur = null; };
+        obj.onblur = function() {this.focus();this.onblur = null;};
       }
       // else unsupported browsers
     }
@@ -114,25 +117,24 @@ function allowTab(event, obj)
   return true;
 }
 
-function setTextAreaToolbar(textarea, filter)
-{
-  filter = ('-'+filter.dasherize()).camelize();
+function setTextAreaToolbar(textarea, filter) {
+    filter = ('-'+filter.dasherize()).camelize();
 
-  var toolbar_name = textarea + '_toolbar';
+    var toolbar_name = textarea + '_toolbar';
   
-  // make sure the textarea is display 
-  //(maybe some filter will choose to use a iframe like tinycme)
-  $(textarea).style.display = 'block';
+    // make sure the textarea is display
+    //(maybe some filter will choose to use a iframe like tinycme)
+    $(textarea).style.display = 'block';
   
-  var ul_toolbar = document.getElementById(toolbar_name);
-  if (ul_toolbar != null)
-    ul_toolbar.parentNode.removeChild(ul_toolbar);
+    var ul_toolbar = document.getElementById(toolbar_name);
+    if (ul_toolbar != null)
+        ul_toolbar.parentNode.removeChild(ul_toolbar);
   
-  if (Control.TextArea.ToolBar[filter] != null)
-  {
-    var tb = new Control.TextArea.ToolBar[filter](textarea);
-    tb.toolbar.container.id = toolbar_name;
-  }
+    if (Control.TextArea.ToolBar[filter] != null)
+    {
+        var tb = new Control.TextArea.ToolBar[filter](textarea);
+        tb.toolbar.container.id = toolbar_name;
+    }
 }
 
 
@@ -346,12 +348,12 @@ var SiteMap = Class.create(RuledList, {
         evalScripts: true,
         asynchronous: true,
         insertion:  "bottom",
-        onLoading:  function() { spinner.show(); this.updating = true; }.bind(this),
+        onLoading:  function() {spinner.show();this.updating = true;}.bind(this),
         onComplete: function() {
           this.sortablize();
           spinner.fade();
           this.updating = false;
-          $$('.handle').each(function(e) { e.style.display = toggle_handle ? 'inline': 'none'; });
+          $$('.handle').each(function(e) {e.style.display = toggle_handle ? 'inline': 'none';});
         }.bind(this)
       }
     );
@@ -408,7 +410,7 @@ var SiteMap = Class.create(RuledList, {
     for(var i=0; i<pages.length; i++)
       data += 'pages[]='+SiteMap.prototype.extractPageId(pages[i])+'&';
   
-    new Ajax.Request('index.php?/page/reorder/'+parent_id, {method: 'post', parameters: { 'data': data }});
+    new Ajax.Request('index.php?/page/reorder/'+parent_id, {method: 'post', parameters: {'data': data}});
   },
   
   copy: function(element) 
@@ -432,7 +434,7 @@ var SiteMap = Class.create(RuledList, {
   
     new Ajax.Request('index.php?/page/copy/'+parent_id, {
       method: 'post',
-      parameters: { 'data': data },
+      parameters: {'data': data},
       onSuccess: function(transport) {
         /* Ugly hack until I figure out how to update only the sitemap. */
         window.location.reload();
@@ -543,7 +545,7 @@ TabControl.Tab = Class.create({
 
   createElement: function()
   {
-    return this.element = new Element('a', { className: 'tab', href: '#' }).
+    return this.element = new Element('a', {className: 'tab', href: '#'}).
       update("<span>" + this.label + "</span>").
       observe('click', function(event){
         this.control.select(this.id);
@@ -575,7 +577,7 @@ TabControl.Tab = Class.create({
 /* Admin.js ----------------------------------------------------------------*/
 
 document.observe('dom:loaded', function() {
-  when('site-map', function(table) { new SiteMap(table) });
+  when('site-map', function(table) {new SiteMap(table)});
 
   when('page_title', function(title) {
     var slug = $('page_slug'),
@@ -627,16 +629,16 @@ function when(obj, fn) {
 }
 
 function part_added() {
-  var partNameField = $('part-name-field');
-  var partIndexField = $('part-index-field');
+  var partNameField = $('#part-name-field');
+  var partIndexField = $('#part-index-field');
   var index = parseInt(partIndexField.value);
-  tabControl.addTab('tab-' + index,  partNameField.value, 'page-' + index);
-  Element.toggle('busy');
-  Element.hide('add-part-popup');
+  tabControl.addTab('#tab-' + index,  partNameField.value, '#page-' + index);
+  $('#busy').toggle();
+  $('#add-part-popup').hide();
   partNameField.value = '';
   partIndexField.value = (index + 1).toString();
-  $('add-part-button').disabled = false;
-  Field.focus(partNameField);
+  $('#add-part-button').disabled = false;
+  $(partNameField).focus();
   tabControl.select(tab);
 }
 
@@ -646,7 +648,7 @@ function part_loading() {
 }
 
 function valid_part_name() {
-  var partNameField = $('part-name-field');
+  var partNameField = $('#part-name-field');
   var name = partNameField.value.downcase().strip();
   var result = true;
   if (name == '') {

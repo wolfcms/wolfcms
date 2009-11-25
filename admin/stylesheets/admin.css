@@ -182,14 +182,14 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 #content {
   padding: 20px;
 
-  /* Border-radius not implemented yet */
+  /* Border-radius not implemented yet 
   border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
 
   box-shadow: 5px 3px 4px #aaa;
   -moz-box-shadow: 5px 3px 4px #aaa;
-  -webkit-box-shadow: 5px 3px 4px #aaa;
+  -webkit-box-shadow: 5px 3px 4px #aaa;*/
 }
 
 #content h1 {
@@ -599,7 +599,7 @@ table.index td.note {
   margin-right: -20px;
   padding: 20px;
   padding-top: 15px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 }
 .form-area h3 {
   font-size: 100%;
@@ -715,21 +715,19 @@ table.fieldset .error-with-field small {
 
 .tabs {
   float: left;
-  width: 100%;
-  margin-top: 10px;
   margin-right: -4px;
+  width: 100%;
+  argin-top: -3px;
 }
 .tabs .tab {
   display: inline-block;
-  font-size: 100%;
-  text-align: left;
+}
+.tabs .tab a {
   margin-right: 3px;
   padding: 15px;
   padding-top: 6px;
   padding-bottom: 4px;
   text-decoration: none;
-  text-transform: none;
-  background-color: #ddd;
   color: #000;
 
   /* Border-radius not implemented yet */
@@ -741,7 +739,7 @@ table.fieldset .error-with-field small {
   -webkit-border-bottom-right-radius: 0px;
   -webkit-border-bottom-left-radius: 0px;
 }
-.tabs .tab.here {
+.tabs .tab a.here {
   background-color: #fff;
   font-weight: bold;
 }
