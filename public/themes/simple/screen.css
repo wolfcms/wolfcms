@@ -280,4 +280,9 @@ pre, code { font-size: 1.1em; line-height: normal; background: #eee; color: #444
 /* comment */
 .comment-form-body {
   width: 450px;
+  margin-top: 6px;
+}
+/* captcha image placement */
+#comment-captcha {
+  vertical-align:middle;
 }

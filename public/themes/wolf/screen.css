@@ -268,3 +268,7 @@ blockquote {
 .comment-form-body {
   width: 450px;
 }
+/* captcha image placement */
+#comment-captcha {
+  vertical-align:middle;
+}

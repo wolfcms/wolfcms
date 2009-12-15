@@ -52,6 +52,7 @@ Sigla:
 . Change max DB name from 40 to 120 - issue 58
 . Prevent usage of set_magic_quotes_runtime() from PHP 5.3 and up - issue 56
 . File Manager - show folders before files - issue 38 - thanks slowgary
+. Minor enhancements of Comments core plugin
 . Minor text, css edits
 . Updated Polish translation for core. Thanks piotr.fuz.
 
