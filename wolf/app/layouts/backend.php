@@ -68,7 +68,87 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
         <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/dragdrop.js"></script>
         <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/cp-datepicker.js"></script-->
         <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/wolf.js"></script>
-        <!--script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/control.textarea.js"></script-->
+        <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/showdown.js"></script>
+        <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/jquery.string.js"></script>
+        <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/control.textarea.js"></script>
+
+        <style>/*
+            		#filter_example {
+				    width:100%;
+				    height:200px;
+				}
+
+				.filter_toolbar {
+				    position:relative;
+				    list-style:none;
+				    border:1px solid #d7d7d7;
+				    background-color:#F6F6F6;
+				    margin:0;
+				    padding:0;
+				    height:18px;
+				    margin-bottom:2px;
+				}
+
+				.filter_toolbar li {
+				    list-style:none;
+				    margin:0;
+				    padding:0;
+				    float:left;
+				}
+
+				.filter_toolbar li a {
+				    width:24px;
+				    height:16px;
+				    float:left;
+				    display:block;
+				    background-image:url("http://localhost/wolfcms/wolf/plugins/markdown/images/markdown_icons.gif");
+				    border:1px solid #fff;
+				    border-right-color:#d7d7d7;
+				}
+
+				.filter_toolbar li a:hover {
+				    border-color:#900;
+				}
+
+				.filter_toolbar li span {
+				    display:none;
+				}
+
+				.filter_toolbar li a#filter_help_button {
+				    position:absolute;
+				    top:0;
+				    right:0;
+				    border-left-color:#d7d7d7;
+				    border-right-color:#fff;
+				}
+
+				.filter_toolbar li a#filter_help_button:hover {
+				    border-left-color:#900;
+				    border-right-color:#900;
+				}
+
+				#filter_italics_button { background-position: -119px 0; }
+				#filter_bold_button { background-position: 0 -102px; }
+				#filter_link_button { background-position: 0 0; }
+				#filter_image_button { background-position: 0 -170px; }
+				#filter_unordered_list_button { background-position: 0 -34px; }
+				#filter_ordered_list_button { background-position: 0 -51px; }
+				#filter_quote_button { background-position: 0 -68px; }
+				#filter_code_button { background-position: 0 -136px; }
+				#filter_help_button { background-position: 0 -153px; }
+				#filter_heading_button { background-position: 0 -85px; }
+
+				.resizeHandle {
+					overflow:hidden;
+					width:22px; height:5px;
+					margin-left:auto;
+					margin-right:auto;
+					background-image:url(http://localhost/wolfcms/wolf/plugins/markdown/images/handle.png);
+					cursor:n-resize;
+				}
+        */</style>
+
+
 
         <script type="text/javascript">
             // <![CDATA[

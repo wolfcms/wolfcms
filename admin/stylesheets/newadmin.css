@@ -252,13 +252,14 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   margin-bottom: 6px;
 }
 .tabs .tab {
-  display: inline-block;
+  display: inline;
 }
 .tabs .tab a {
-  margin-right: 3px;
-  padding: 15px;
-  padding-top: 6px;
-  padding-bottom: 4px;
+  margin-right: 0.35em;
+  padding: 0.35em 1em;
+  adding: 15px;
+  adding-top: 6px;
+  adding-bottom: 4px;
   text-decoration: none;
   color: #000;
 
@@ -773,13 +774,14 @@ table.fieldset .error-with-field small {
 #meta-pages td.label .optional {
   color: #929488;
 }
-#meta-pages #div-title,
-#meta-pages #div-metadata {
+#meta-pages #page-title,
+#meta-pages #page-metadata,
+#meta-pages #page-settings {
   padding: 20px;
   margin-top: .30em;
   margin-bottom: 20px;
 }
-#meta-pages #div-metadata #page_description {
+#meta-pages #page-metadata #page_description {
   height: 40px;
 }
 

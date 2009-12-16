@@ -92,16 +92,17 @@ if ($action == 'edit') { ?>
     <div class="form-area">
         <div id="toptabs" class="content tabs">
             <ul class="tabNavigation">
-                <li class="tab"><a href="#div-title"><?php echo __('Page Title'); ?></a></li>
-                <li class="tab"><a href="#div-metadata"><?php echo __('Metadata'); ?></a></li>
+                <li class="tab"><a href="#page-title"><?php echo __('Page Title'); ?></a></li>
+                <li class="tab"><a href="#page-metadata"><?php echo __('Metadata'); ?></a></li>
+                <li class="tab"><a href="#page-settings"><?php echo __('Settings'); ?></a></li>
             </ul>
 
             <div id="meta-pages" class="pages">
-                <div id="div-title" class="title">
+                <div id="page-title" class="title">
                     <input class="textbox" id="page_title" maxlength="255" name="page[title]" size="255" type="text" value="<?php echo $page->title; ?>" />
                 </div>
 
-                <div id="div-metadata">
+                <div id="page-metadata">
                     <table cellpadding="0" cellspacing="0" border="0">
                     <?php if ($page->parent_id != 0) : ?>
                         <tr>
@@ -125,6 +126,11 @@ if ($action == 'edit') { ?>
                             <td class="label optional"><label for="page_tags"><?php echo __('Tags'); ?></label></td>
                             <td class="field"><input class="textbox" id="page_tags" maxlength="255" name="page_tag[tags]" size="255" type="text" value="<?php echo join(', ', $tags); ?>" /></td>
                         </tr>
+                    </table>
+                </div>
+
+                <div id="page-settings">
+                    <table cellpadding="0" cellspacing="0" border="0">
                     <?php if (isset($page->created_on)): ?>
                         <tr>
                             <td class="label"><label for="page_created_on"><?php echo __('Created date'); ?></label></td>
@@ -132,12 +138,16 @@ if ($action == 'edit') { ?>
                                 <input id="page_created_on" maxlength="10" name="page[created_on]" size="10" type="text" value="<?php echo substr($page->created_on, 0, 10); ?>" />
                                 <img onclick="displayDatePicker('page[created_on]');" src="<?php echo URI_PUBLIC;?>admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
                                 <input id="page_created_on_time" maxlength="5" name="page[created_on_time]" size="5" type="text" value="<?php echo substr($page->created_on, 11); ?>" />
-                            <?php if (isset($page->published_on)): ?>
-                                &nbsp; <label for="page_published_on"><?php echo __('Published date'); ?></label>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+                    <?php if (isset($page->published_on)): ?>
+                        <tr>
+                            <td class="label"><label for="page_published_on"><?php echo __('Published date'); ?></label></td>
+                            <td class="field">
                                 <input id="page_published_on" maxlength="10" name="page[published_on]" size="10" type="text" value="<?php echo substr($page->published_on, 0, 10); ?>" />
                                 <img onclick="displayDatePicker('page[published_on]');" src="<?php echo URI_PUBLIC;?>admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
                                 <input id="page_published_on_time" maxlength="5" name="page[published_on_time]" size="5" type="text" value="<?php echo substr($page->published_on, 11); ?>" />
-                            <?php endif; ?>
                             </td>
                         </tr>
                     <?php endif; ?>
@@ -150,7 +160,7 @@ if ($action == 'edit') { ?>
                                     <option value="<?php echo $layout->id; ?>"<?php echo $layout->id == $page->layout_id ? ' selected="selected"': ''; ?>><?php echo $layout->name; ?></option>
                                   <?php endforeach; ?>
                                 </select>
-                                <label for="page_behavior_id"><?php echo __('Page Type'); ?></label>
+                                &nbsp; <label for="page_behavior_id"><?php echo __('Page Type'); ?></label>
                                 <select id="page_behavior_id" name="page[behavior_id]">
                                     <option value=""<?php if ($page->behavior_id == '') echo ' selected="selected"'; ?>>&#8212; <?php echo __('none'); ?> &#8212;</option>
                                   <?php foreach ($behaviors as $behavior): ?>
@@ -158,13 +168,13 @@ if ($action == 'edit') { ?>
                                   <?php endforeach; ?>
                                 </select>
                               <?php if (AuthUser::hasPermission('administrator') || AuthUser::hasPermission('developer')): ?>
-                                <label for="page_needs_login"><?php echo __('Login:'); ?></label>
+                                &nbsp; <label for="page_needs_login"><?php echo __('Login:'); ?></label>
                                 <select id="page_needs_login" name="page[needs_login]" title="<?php echo __('When enabled, users have to login before they can view the page.'); ?>">
                                     <option value="<?php echo Page::LOGIN_INHERIT; ?>"<?php echo $page->needs_login == Page::LOGIN_INHERIT ? ' selected="selected"': ''; ?>><?php echo __('&#8212; inherit &#8212;'); ?></option>
                                     <option value="<?php echo Page::LOGIN_NOT_REQUIRED; ?>"<?php echo $page->needs_login == Page::LOGIN_NOT_REQUIRED ? ' selected="selected"': ''; ?>><?php echo __('not required'); ?></option>
                                     <option value="<?php echo Page::LOGIN_REQUIRED; ?>"<?php echo $page->needs_login == Page::LOGIN_REQUIRED ? ' selected="selected"': ''; ?>><?php echo __('required'); ?></option>
                                 </select>
-                                <label for="page_is_protected" title="<?php echo __('When enabled, only users who are an administrator can edit the page.'); ?>"> <?php echo __('Protected'); ?> </label>
+                                &nbsp; <label for="page_is_protected" title="<?php echo __('When enabled, only users who are an administrator can edit the page.'); ?>"> <?php echo __('Protected'); ?> </label>
                                 <input id="page_is_protected" name="page[is_protected]" class="checkbox" type="checkbox" value="1"<?php if ($page->is_protected) echo ' checked="checked"'; ?>/>
                               <?php endif; ?>
                             </td>

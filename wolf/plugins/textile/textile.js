@@ -7,6 +7,7 @@
  * @version 1.0.0
  */
 
+/*
 Control.TextArea.ToolBar.Textile = Class.create();
 Object.extend(Control.TextArea.ToolBar.Textile.prototype,{
 	textarea: false,
@@ -27,22 +28,23 @@ Object.extend(Control.TextArea.ToolBar.Textile.prototype,{
 				this.options.afterPreview();
 			}.bind(this));
 		}
-		
+*/
+function setupTextileToolbar(toolbar, textarea) {
 		//buttons
-		this.toolbar.addButton('Bold',function(){
+		toolbar.addButton('Bold',function(){
 			this.wrapSelection('*','*');
 		},{
 			id: 'filter_bold_button'
 		});
-		
-		this.toolbar.addButton('Italic',function(){
+        
+		toolbar.addButton('Italic',function(){
 			this.wrapSelection('_','_');
 		},{
 			id: 'filter_italic_button'
 		});
 		
-		this.toolbar.addButton('Ordered List',function(event){
-			this.injectEachSelectedLine(function(lines,line){
+		toolbar.addButton('Ordered List',function(event){
+            this.collectFromEachSelectedLine(function(line){
 				if (line.match(/^\#+\s/))
 					lines.push(line.replace(/^(\#+\s)/, ''));
 				else if (line.match(/^\*+\s/))
@@ -50,12 +52,12 @@ Object.extend(Control.TextArea.ToolBar.Textile.prototype,{
 				else
 					lines.push('# ' + line);
 				return lines;
-			});
+		    });
 		},{
 			id: 'filter_ordered_list_button'
 		});
 		
-		this.toolbar.addButton('Unordered List',function(event){
+		toolbar.addButton('Unordered List',function(event){
 			this.injectEachSelectedLine(function(lines,line){
 				if (line.match(/^\*+\s/))
 					lines.push(line.replace(/^(\*+\s)/, ''));
@@ -69,7 +71,7 @@ Object.extend(Control.TextArea.ToolBar.Textile.prototype,{
 			id: 'filter_unordered_list_button'
 		});
 		
-		this.toolbar.addButton('Heading 1',function(){
+		toolbar.addButton('Heading 1',function(){
 			this.injectEachSelectedLine(function(lines,line){
 				if (line.match(/(p|h[1-6]|bq)(>|=|<|<>)?\. /))
 					lines.push(line.replace(/(p|h[1-6]|bq)(>|=|<|<>)?\. /, 'h1$2. '));
@@ -83,7 +85,7 @@ Object.extend(Control.TextArea.ToolBar.Textile.prototype,{
 			id: 'filter_h1_button'
 		});
 		
-		this.toolbar.addButton('Heading 2',function(){
+		toolbar.addButton('Heading 2',function(){
 			this.injectEachSelectedLine(function(lines,line){
 				if (line.match(/(p|h[1-6]|bq)(>|=|<|<>)?\. /))
 					lines.push(line.replace(/(p|h[1-6]|bq)(>|=|<|<>)?\. /, 'h2$2. '));
@@ -97,7 +99,7 @@ Object.extend(Control.TextArea.ToolBar.Textile.prototype,{
 			id: 'filter_h2_button'
 		});
 		
-		this.toolbar.addButton('Heading 3',function(){
+		toolbar.addButton('Heading 3',function(){
 			this.injectEachSelectedLine(function(lines,line){
 				if (line.match(/(p|h[1-6]|bq)(>|=|<|<>)?\. /))
 					lines.push(line.replace(/(p|h[1-6]|bq)(>|=|<|<>)?\. /, 'h3$2. '));
@@ -111,7 +113,7 @@ Object.extend(Control.TextArea.ToolBar.Textile.prototype,{
 			id: 'filter_h3_button'
 		});
 		
-		this.toolbar.addButton('Heading 4',function(){
+		toolbar.addButton('Heading 4',function(){
 			this.injectEachSelectedLine(function(lines,line){
 				if (line.match(/(p|h[1-6]|bq)(>|=|<|<>)?\. /))
 					lines.push(line.replace(/(p|h[1-6]|bq)(>|=|<|<>)?\. /, 'h4$2. '));
@@ -125,7 +127,7 @@ Object.extend(Control.TextArea.ToolBar.Textile.prototype,{
 			id: 'filter_h4_button'
 		});
 		
-		this.toolbar.addButton('Block Quote',function(){
+		toolbar.addButton('Block Quote',function(){
 			this.injectEachSelectedLine(function(lines,line){
 				if (line.match(/(p|h[1-6]|bq)(>|=|<|<>)?\. /))
 					lines.push(line.replace(/(p|h[1-6]|bq)(>|=|<|<>)?\. /, 'bq$2. '));
@@ -139,7 +141,7 @@ Object.extend(Control.TextArea.ToolBar.Textile.prototype,{
 			id: 'filter_quote_button'
 		});
 		
-		this.toolbar.addButton('Link',function(){
+		toolbar.addButton('Link',function(){
 			selection = this.getSelection();
 			response = prompt('Enter Link URL','');
 			if(response == null)
@@ -149,14 +151,14 @@ Object.extend(Control.TextArea.ToolBar.Textile.prototype,{
 			id: 'filter_link_button'
 		});
 		
-		this.toolbar.addButton('Image',function(){
+		toolbar.addButton('Image',function(){
 			selection = this.getSelection();
 			this.replaceSelection('!' + (selection == '' ? 'image_url' : selection) + '!');
 		},{
 			id: 'filter_image_button'
 		});
 		
-		this.toolbar.addButton('Left Justify',function(){
+		toolbar.addButton('Left Justify',function(){
 			this.injectEachSelectedLine(function(lines,line){
 				if (line.match(/(p|h[1-6]|bq)(>|=|<|<>)?\. /))
 					lines.push(line.replace(/(p|h[1-6]|bq)(>|=|<|<>)?\. /, '$1. '));
@@ -170,7 +172,7 @@ Object.extend(Control.TextArea.ToolBar.Textile.prototype,{
 			id: 'filter_left_justify_button'
 		});
 		
-		this.toolbar.addButton('Center Text',function(){
+		toolbar.addButton('Center Text',function(){
 			this.injectEachSelectedLine(function(lines,line){
 				if (line.match(/(p|h[1-6]|bq)(>|=|<|<>)?\. /))
 					lines.push(line.replace(/(p|h[1-6]|bq)(>|=|<|<>)?\. /, '$1=. '));
@@ -184,7 +186,7 @@ Object.extend(Control.TextArea.ToolBar.Textile.prototype,{
 			id: 'filter_center_text_button'
 		});
 		
-		this.toolbar.addButton('Right Justify',function(){
+		toolbar.addButton('Right Justify',function(){
 			this.injectEachSelectedLine(function(lines,line){
 				if (line.match(/(p|h[1-6]|bq)(>|=|<|<>)?\. /))
 					lines.push(line.replace(/(p|h[1-6]|bq)(>|=|<|<>)?\. /, '$1>. '));
@@ -198,7 +200,7 @@ Object.extend(Control.TextArea.ToolBar.Textile.prototype,{
 			id: 'filter_right_justify_button'
 		});
 		
-		this.toolbar.addButton('Justify',function(){
+		toolbar.addButton('Justify',function(){
 			this.injectEachSelectedLine(function(lines,line){
 				if (line.match(/(p|h[1-6]|bq)(>|=|<|<>)?\. /))
 					lines.push(line.replace(/(p|h[1-6]|bq)(>|=|<|<>)?\. /, '$1<>. '));
@@ -212,13 +214,15 @@ Object.extend(Control.TextArea.ToolBar.Textile.prototype,{
 			id: 'filter_justify_button'
 		});
 		
-		this.toolbar.addButton('Help',function(){
+		toolbar.addButton('Help',function(){
 			window.open('http://www.textism.com/tools/textile/');
 		},{
 			id: 'filter_help_button'
 		});
 	}
-});
+/*
+
+ });
 
 Control.TextArea.ToolBar.Textile.format = function(s){
    var r = s;
@@ -302,3 +306,5 @@ Control.TextArea.ToolBar.Textile.format = function(s){
 
     return r;	
 }
+
+*/

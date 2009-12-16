@@ -125,16 +125,16 @@ function setTextAreaToolbar(textarea, filter) {
     // make sure the textarea is display
     //(maybe some filter will choose to use a iframe like tinycme)
     $(textarea).style.display = 'block';
-  
+  /*
     var ul_toolbar = document.getElementById(toolbar_name);
     if (ul_toolbar != null)
         ul_toolbar.parentNode.removeChild(ul_toolbar);
   
-    if (Control.TextArea.ToolBar[filter] != null)
-    {
+    if (Control.TextArea.ToolBar[filter] != null) {
         var tb = new Control.TextArea.ToolBar[filter](textarea);
         tb.toolbar.container.id = toolbar_name;
     }
+    */
 }
 
 

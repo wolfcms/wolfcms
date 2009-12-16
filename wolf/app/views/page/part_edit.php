@@ -33,6 +33,24 @@
  * @copyright Philippe Archambault, 2008
  */
 ?>
+
+<!--[if IE]>
+
+    		<script>
+        		// allow IE to recognize HTMl5 elements
+        		document.createElement('section');
+        		document.createElement('article');
+        		document.createElement('aside');
+        		document.createElement('footer');
+        		document.createElement('header');
+        		document.createElement('nav');
+        		document.createElement('time');
+
+    		</script>
+    		<![endif]-->
+
+
+
 <div class="page" id="page-<?php echo $index; ?>">
     <div class="part" id="part-<?php echo $index; ?>">
         <input id="part_<?php echo ($index-1); ?>_name" name="part[<?php echo ($index-1); ?>][name]" type="hidden" value="<?php echo $page_part->name; ?>" />
@@ -49,14 +67,36 @@
             </select>
         </p>
         <div>
-            <div id="part_<?php echo ($index-1); ?>_content_toolbar">TEST</div>
+            <!--div class="markdown_toolbar" id="part_<?php echo ($index-1); ?>_content_toolbar"></div-->
             <textarea class="textarea" id="part_<?php echo ($index-1); ?>_content" name="part[<?php echo ($index-1); ?>][content]" rows="20" cols="40"
-                   onkeydown="return allowTab(event, this);"
-                   onkeyup="return allowTab(event,this);"
-                   onkeypress="return allowTab(event,this);"><?php echo htmlentities($page_part->content, ENT_COMPAT, 'UTF-8'); ?></textarea>
+                   nkeydown="return allowTab(event, this);"
+                   nkeyup="return allowTab(event,this);"
+                   nkeypress="return allowTab(event,this);"><?php echo htmlentities($page_part->content, ENT_COMPAT, 'UTF-8'); ?></textarea>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    setTextAreaToolbar('part_<?php echo ($index-1); ?>_content', '<?php echo $page_part->filter_id; ?>');
+<script type="text/javascript" charset="utf-8">
+
+    $("select[id^='part_'][id$='_filter_id']").bind("change", function(e) {
+        var filter = $(this).val();
+        filter = $.string(filter).dasherize().str;
+        filter = '-'+filter;
+        filter = $.string(filter).camelize().str;
+
+        $("ul.filter_toolbar").remove();
+
+        var textarea = $("textarea[id^='part_'][id$='_content']");
+        var textarea = $("textarea[id^='part_'][id$='_content']").TextArea(textarea, {});
+
+        if (filter != "") {
+            var toolbar = $.Toolbar(textarea, {
+                className: "filter_toolbar"
+            });
+        }
+
+        func = eval("setup" + filter + "Toolbar");
+        func(toolbar, textarea);
+    }
+);
+
 </script>
