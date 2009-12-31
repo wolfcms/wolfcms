@@ -154,7 +154,7 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   width: 70%;
   font-size: 95%;
   background-color: #fff;
-  border-bottom: 2px solid #76A83A; /*#58b;*/
+  border-bottom: 2px solid #58b; /*#76A83A;*/
 
   /* Border-radius not implemented yet */
   border-radius: 6px;
