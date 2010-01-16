@@ -1004,8 +1004,8 @@ class Controller {
      * 
      * TODO Remove? Is this proper OO/good idea?
      *
-     * @param <type> $view
-     * @param <type> $vars
+     * @param string $view Name of the view to render
+     * @param array $vars Array of variables
      * @return View 
      */
     public function render($view, $vars=array()) {
@@ -1711,10 +1711,10 @@ function even_odd() {
  * Intended to retrieve content from a URL by any means. Uses file_get_contents
  * by default if possible for speed reasons. Otherwise it attempts to use CURL.
  *
- * @param string $url URL to retrieve content from.
- * @param int $flags Optional flags to be passed onto file_get_contents.
+ * @param string $url       URL to retrieve content from.
+ * @param int $flags        Optional flags to be passed onto file_get_contents.
  * @param resource $context A context resource to be passed to file_get_contents. Optional.
- * @return mixed Either the URL's contents as string or FALSE on failure.
+ * @return mixed            Either the URL's contents as string or FALSE on failure.
  */
 function getContentFromUrl($url, $flags=0, $context=false) {
 
