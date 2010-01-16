@@ -1,7 +1,7 @@
                        Wolf CMS exception to GNU GPL
-                         Version 1, 15 April 2009
+                        Version 1, 15 January 2010
 
-      Copyright (C) 2009 Philippe Archambault and Martijn van der Kleijn
+                Copyright (C) 2010 Martijn van der Kleijn
                         <http://www.wolfcms.org/>
 
 Everyone is permitted to copy and distribute verbatim copies of this license

@@ -1,45 +1,34 @@
 <?php
 
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2008,2009 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
- * This file is part of Wolf CMS.
- *
- * Wolf CMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Wolf CMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Wolf CMS has made an exception to the GNU General Public License for plugins.
- * See exception.txt for details and the full text.
+ * Please see license.txt for the full license text.
  */
 
 /**
- * The Framework file is a modified version of the so-called Green Framework.
+ * The main framework belonging to Wolf CMS.
  *
- * @package framework
+ * The Framework and its associated framework.php file is a customized version
+ * of an early pre-release version of the so-called "Green Framework".
  *
- * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @version 1.6
- * @license http://www.gnu.org/licenses/gpl.html GPL License
- * @copyright Philippe Archambault, 2008
+ * However, a lot of changes have been made and the two are no longer on a
+ * similar development path.
  *
- * @todo Replace the customized Framework with the latest uncustomized Green Framework?
+ * LICENSE: see license.txt and exception.txt for the full license texts.
+ *
+ * @category   framework
+ * @package    wolf/framework
+ * @author     Philippe Archambault <philippe.archambault@gmail.com>
+ * @author     Martijn van der Kleijn <martijn.niji@gmail.com>
+ * @copyright  2008-2010 Martijn van der Kleijn, Philippe Archambault
+ * @license    http://www.wolfcms.org/about/wolf-cms-licensing.html
+ * @version    SVN: $Id$
+ * @since      Available since release 0.0.1
  */
 
-/**
- *
- */
 define('FRAMEWORK_STARTING_MICROTIME', get_microtime());
 
 // All constants that can be defined before customizing your framework
@@ -77,7 +66,7 @@ else
     putenv('TZ='.DEFAULT_TIMEZONE);
 
 /**
- * The Dispatcher main Core class is responsible for mapping urls/routes to Controller methods.
+ * The Dispatcher class is responsible for mapping urls/routes to Controller methods.
  *
  * Each route that has the same number of directory components as the current
  * requested url is tried, and the first method that returns a response with a
@@ -85,15 +74,17 @@ else
  *
  * For example:
  *
- * A route string can be a literal url such as '/pages/about' or can contain
+ * A route string can be a literal uri such as '/pages/about' or can contain
  * wildcards (:any or :num) and/or regex like '/blog/:num' or '/page/:any'.
  *
- * <code>Dispatcher::addRoute(array(
- *  '/' => 'page/index',
- *  '/about' => 'page/about,
- *  '/blog/:num' => 'blog/post/$1',
- *  '/blog/:num/comment/:num/delete' => 'blog/deleteComment/$1/$2'
- * ));</code>
+ * <code>
+ * Dispatcher::addRoute(array(
+ *      '/' => 'page/index',
+ *      '/about' => 'page/about,
+ *      '/blog/:num' => 'blog/post/$1',
+ *      '/blog/:num/comment/:num/delete' => 'blog/deleteComment/$1/$2'
+ * ));
+ * </code>
  *
  * Visiting /about/ would call PageController::about(),
  * visiting /blog/5 would call BlogController::post(5)
@@ -108,6 +99,12 @@ final class Dispatcher {
     private static $status = array();
     private static $requested_url = '';
 
+    /**
+     * Adds a route.
+     *
+     * @param string $route - A route string.
+     * @param string $destination - URI that the request should be sent to.
+     */
     public static function addRoute($route, $destination=null) {
         if ($destination != null && !is_array($route)) {
             $route = array($route => $destination);
@@ -115,6 +112,12 @@ final class Dispatcher {
         self::$routes = array_merge(self::$routes, $route);
     }
 
+    /**
+     * Checks if a route exists for a specified URI.
+     *
+     * @param string $requested_url
+     * @return boolean Returns true when a route was found, otherwise false.
+     */
     public static function hasRoute($requested_url) {
         if (!self::$routes || count(self::$routes) == 0) {
             return false;
@@ -125,9 +128,10 @@ final class Dispatcher {
             if (strpos($route, ':') !== false) {
                 $route = str_replace(':any', '(.+)', str_replace(':num', '([0-9]+)', $route));
             }
+
             // Does the regex match?
             if (preg_match('#^'.$route.'$#', $requested_url)) {
-            // Do we have a back-reference?
+                // Do we have a back-reference?
                 if (strpos($uri, '$') !== false && strpos($route, '(') !== false) {
                     $uri = preg_replace('#^'.$route.'$#', $uri, $requested_url);
                 }
@@ -140,10 +144,23 @@ final class Dispatcher {
         return false;
     }
 
+    /**
+     * Splits a URL into an array of its components.
+     *
+     * @param string $url - A URL.
+     * @return array An array of URL components.
+     */
     public static function splitUrl($url) {
         return preg_split('/\//', $url, -1, PREG_SPLIT_NO_EMPTY);
     }
 
+    /**
+     * Handles the request for a URL and provides a response.
+     *
+     * @param string $requested_url - The URL that was requested.
+     * @param string $default - Default URL to access if now URL was requested.
+     * @return string A response.
+     */
     public static function dispatch($requested_url = null, $default = null) {
         Flash::init();
 
@@ -160,7 +177,7 @@ final class Dispatcher {
         }
 
         // If no URL is requested (due to someone accessing admin section for the first time)
-        // AND $default is setAllow for a default tab
+        // AND $default is set. Allow for a default tab.
         if ($requested_url == null && $default != null) {
             $requested_url = $default;
         }
@@ -210,13 +227,23 @@ final class Dispatcher {
         return self::executeAction(self::getController(), self::getAction(), self::getParams());
     } // Dispatch
 
+    /**
+     * Returns the currently requested URL.
+     *
+     * @return string The currently requested URL.
+     */
     public static function getCurrentUrl() {
         return self::$requested_url;
     }
 
+    /**
+     * Returns a reference to a controller class.
+     *
+     * @return string Reference to controller.
+     */
     public static function getController() {
-    // Check for settable default controller
-    // if it's a plugin and not activated, revert to Wolf hardcoded default
+        // Check for settable default controller
+        // if it's a plugin and not activated, revert to Wolf hardcoded default
         if (isset(self::$params[0]) && self::$params[0] == 'plugin' ) {
             $loaded_plugins = Plugin::$plugins;
             if (isset(self::$params[1]) && !isset($loaded_plugins[self::$params[1]])) {
@@ -228,18 +255,43 @@ final class Dispatcher {
         return isset(self::$params[0]) ? self::$params[0]: DEFAULT_CONTROLLER;
     }
 
+    /**
+     * Returns the action that was requested from a controller.
+     *
+     * @return string Reference to a controller's action.
+     */
     public static function getAction() {
         return isset(self::$params[1]) ? self::$params[1]: DEFAULT_ACTION;
     }
 
+    /**
+     * Returns an array of parameters that should be passed to an action.
+     *
+     * @return array The action's parameters.
+     */
     public static function getParams() {
         return array_slice(self::$params, 2);
     }
 
+    /**
+     * ???
+     * 
+     * TODO Finish docblock
+     *
+     * @param <type> $key
+     * @return <type> 
+     */
     public static function getStatus($key=null) {
         return ($key === null) ? self::$status: (isset(self::$status[$key]) ? self::$status[$key]: null);
     }
 
+    /**
+     * Executes a specified action for a specified controller class.
+     *
+     * @param string $controller
+     * @param string $action
+     * @param array $params 
+     */
     public static function executeAction($controller, $action, $params) {
         self::$status['controller'] = $controller;
         self::$status['action'] = $action;
@@ -265,10 +317,10 @@ final class Dispatcher {
 
 
 /**
- * The Record class represents a database record.
+ * The Record class represents a single database record.
  *
- * It is used as an abstraction layer so classes don't need to implement their own
- * database functionality.
+ * It is used as an abstraction layer so classes don't need to implement their
+ * own database functionality.
  */
 class Record {
     const PARAM_BOOL = 5;
@@ -354,26 +406,58 @@ class Record {
     public static $__CONN__ = false;
     public static $__QUERIES__ = array();
 
+    /**
+     * Sets a static reference for the connection to the database.
+     *
+     * @param <type> $connection 
+     */
     final public static function connection($connection) {
         self::$__CONN__ = $connection;
     }
 
+    /**
+     * Returns a reference to a database connection.
+     *
+     * @return <type>
+     */
     final public static function getConnection() {
         return self::$__CONN__;
     }
 
+    /**
+     * Logs an SQL query.
+     *
+     * @param string $sql SQL query string.
+     */
     final public static function logQuery($sql) {
         self::$__QUERIES__[] = $sql;
     }
 
+    /**
+     * Retrieves all logged queries.
+     *
+     * @return array An array of queries.
+     */
     final public static function getQueryLog() {
         return self::$__QUERIES__;
     }
 
+    /**
+     * Returns the number of logged queries.
+     *
+     * @return int Number of logged queries.
+     */
     final public static function getQueryCount() {
         return count(self::$__QUERIES__);
     }
 
+    /**
+     * Executes an SQL query.
+     *
+     * @param string $sql SQL query to execute.
+     * @param array $values Values belonging to the SQL query if its a prepared statement.
+     * @return <type> SQL result set.
+     */
     final public static function query($sql, $values=false) {
         self::logQuery($sql);
 
@@ -386,6 +470,15 @@ class Record {
         }
     }
 
+    /**
+     * Returns a database table name.
+     * 
+     * The name that is returned is based on the classname or on the TABLE_NAME
+     * constant in that class if that constant exists.
+     *
+     * @param string $class_name
+     * @return string Database table name.
+     */
     final public static function tableNameFromClassName($class_name) {
         try {
             if (class_exists($class_name) && defined($class_name.'::TABLE_NAME'))
@@ -396,20 +489,44 @@ class Record {
         }
     }
 
+    /**
+     * Escapes quotes in a query string.
+     *
+     * @param string $value The query string to escape.
+     * @return string The escaped string.
+     */
     final public static function escape($value) {
         return self::$__CONN__->quote($value);
     }
 
+    /**
+     * Retrieves the autogenerated primary key for the last inserted record.
+     *
+     * @return string A key.
+     */
     final public static function lastInsertId() {
         return self::$__CONN__->lastInsertId();
     }
 
+    /**
+     * Constructor for the Record class.
+     *
+     * If the $data parameter is given and is an array, the constructor sets
+     * the class's variables based on the key=>value pairs found in the array.
+     *
+     * @param array $data An array of key,value pairs.
+     */
     public function __construct($data=false) {
         if (is_array($data)) {
             $this->setFromData($data);
         }
     }
 
+    /**
+     * Sets the class's variables based on the key=>value pairs in the given array.
+     *
+     * @param array $data An array of key,value pairs.
+     */
     public function setFromData($data) {
         foreach($data as $key => $value) {
             $this->$key = $value;
@@ -419,7 +536,7 @@ class Record {
     /**
      * Generates an insert or update string from the supplied data and executes it
      *
-     * @return boolean
+     * @return boolean True when the insert or update succeeded.
      */
     public function save() {
         if ( ! $this->beforeSave()) return false;
@@ -476,11 +593,11 @@ class Record {
     }
 
     /**
-     * Generates a delete string and executes it
+     * Generates a delete string and executes it.
      *
-     * @param string $table the table name
-     * @param string $where the query condition
-     * @return boolean
+     * @param string $table The table name.
+     * @param string $where The query condition.
+     * @return boolean True if delete was successful.
      */
     public function delete() {
         if ( ! $this->beforeDelete()) return false;
@@ -499,24 +616,80 @@ class Record {
         return $return;
     }
 
+    /**
+     * Allows sub-classes do stuff before a Record is saved.
+     *
+     * @return boolean True if the actions succeeded.
+     */
     public function beforeSave() { return true; }
+
+    /**
+     * Allows sub-classes do stuff before a Record is inserted.
+     *
+     * @return boolean True if the actions succeeded.
+     */
     public function beforeInsert() { return true; }
+
+    /**
+     * Allows sub-classes do stuff before a Record is updated.
+     *
+     * @return boolean True if the actions succeeded.
+     */
     public function beforeUpdate() { return true; }
+
+    /**
+     * Allows sub-classes do stuff before a Record is deleted.
+     *
+     * @return boolean True if the actions succeeded.
+     */
     public function beforeDelete() { return true; }
+
+    /**
+     * Allows sub-classes do stuff after a Record is saved.
+     *
+     * @return boolean True if the actions succeeded.
+     */
     public function afterSave() { return true; }
+
+    /**
+     * Allows sub-classes do stuff after a Record is inserted.
+     *
+     * @return boolean True if the actions succeeded.
+     */
     public function afterInsert() { return true; }
+
+    /**
+     * Allows sub-classes do stuff after a Record is updated.
+     *
+     * @return boolean True if the actions succeeded.
+     */
     public function afterUpdate() { return true; }
+
+    /**
+     * Allows sub-classes do stuff after a Record is deleted.
+     *
+     * @return boolean True if the actions succeeded.
+     */
     public function afterDelete() { return true; }
 
     /**
-     * Return an array of all columns in the table
-     * It is a good idea to rewrite this method in all your model classes;
-     * used in save() for creating the insert and/or update sql query
+     * Returns an array of all columns in the table.
+     *
+     * It is a good idea to rewrite this method in all your model classes.
+     * This function is used in save() for creating the insert and/or update
+     * sql query.
      */
     public function getColumns() {
         return array_keys(get_object_vars($this));
     }
 
+    /**
+     * Inserts a record into the database.
+     *
+     * @param string $class_name The classname of the record that should be inserted.
+     * @param array $data An array of key/value pairs to be inserted.
+     * @return boolean Returns true when successful. 
+     */
     public static function insert($class_name, $data) {
         $keys = array();
         $values = array();
@@ -534,6 +707,15 @@ class Record {
         return self::$__CONN__->exec($sql) !== false;
     }
 
+    /**
+     * Updates an existing record in the database.
+     *
+     * @param string $class_name The classname of the record to be updated.
+     * @param array $data An array of key/value pairs to be updated.
+     * @param string $where An SQL WHERE clause to specify a specific record.
+     * @param array $values An array of values if this is a prepared statement.
+     * @return <type>
+     */
     public static function update($class_name, $data, $where, $values=array()) {
         $setters = array();
 
@@ -550,6 +732,14 @@ class Record {
         return $stmt->execute($values);
     }
 
+    /**
+     * Deletes a specified records from the database.
+     *
+     * @param string $class_name The classname for the record to be deleted.
+     * @param string $where An SQL WHERE clause to specify a specific record.
+     * @param array $values An array of values if this is a prepared statement.
+     * @return boolean True when the delete was successful.
+     */
     public static function deleteWhere($class_name, $where, $values=array()) {
         $sql = 'DELETE FROM '.self::tableNameFromClassName($class_name).' WHERE '.$where;
 
@@ -564,10 +754,28 @@ class Record {
     //       simple no join or anything will only generate simple select * from table ...
     //
 
+    /**
+     * Returns a single Record class instance from the database based on ID.
+     *
+     * @param string $class_name The classname to be returned.
+     * @param string $id The ID of the record to be found.
+     * @return Record A record instance.
+     */
     public static function findByIdFrom($class_name, $id) {
         return self::findOneFrom($class_name, 'id=?', array($id));
     }
 
+    /**
+     * Returns a single Record class instance.
+     *
+     * The instance is retrieved from the database based on a specified field's
+     * value.
+     *
+     * @param string $class_name The classname to be returned.
+     * @param string $where An SQL WHERE clause to find a specific record.
+     * @param array $values An array of values if this is a prepared statement.
+     * @return Record A record instance.
+     */
     public static function findOneFrom($class_name, $where, $values=array()) {
         $sql = 'SELECT * FROM '.self::tableNameFromClassName($class_name).' WHERE '.$where;
 
@@ -579,6 +787,17 @@ class Record {
         return $stmt->fetchObject($class_name);
     }
 
+    /**
+     * Returns an array of Record instances.
+     * 
+     * Retrieves all records, or a subset thereof if the $where parameter is
+     * used, for a specific database table.
+     *
+     * @param string $class_name The classname to be returned.
+     * @param string $where An SQL WHERE clause to specify a subset if desired.
+     * @param array $values An array of values if this is a prepared statement.
+     * @return array An array of Records instances.
+     */
     public static function findAllFrom($class_name, $where=false, $values=array()) {
         $sql = 'SELECT * FROM '.self::tableNameFromClassName($class_name).($where ? ' WHERE '.$where:'');
 
@@ -594,6 +813,17 @@ class Record {
         return $objects;
     }
 
+    /**
+     * Returns the number of records.
+     * 
+     * Returns a total of all records in the specified database table or a count
+     * for a specified subset thereof.
+     *
+     * @param string $class_name The classname to be returned.
+     * @param string $where An SQL WHERE clause to specify a subset if desired.
+     * @param array $values An array of values if this is a prepared statement.
+     * @return int The number of records in the table or a subset thereof.
+     */
     public static function countFrom($class_name, $where=false, $values=array()) {
         $sql = 'SELECT COUNT(*) AS nb_rows FROM '.self::tableNameFromClassName($class_name).($where ? ' WHERE '.$where:'');
 
@@ -608,30 +838,36 @@ class Record {
 }
 
 /**
- * The template object takes a valid path to a template file as the only argument
- * in the constructor. You can then assign properties to the template, which
- * become available as local variables in the template file. You can then call
- * display() to get the output of the template, or just call print on the template
- * directly thanks to PHP 5's __toString magic method.
+ * The View class is used to generate output based on a template.
+ *
+ * The class takes a template file after which you can assign properties to the
+ * template. These properties become available as local variables in the
+ * template.
+ * 
+ * You can then call the display() method to get the output of the template,
+ * or just call print on the template directly thanks to PHP 5's __toString()
+ * magic method.
+ *
+ * Usage example:
  *
  * echo new View('my_template',array(
- *  'title' => 'My Title',
- *  'body' => 'My body content'
- * ));
+ *               'title' => 'My Title',
+ *               'body' => 'My body content'
+ *              ));
  *
- * my_template.php might look like this:
+ * Template file example (in this case my_template.php):
  *
  * <html>
  * <head>
- *  <title><?php echo $title;?></title>
+ *   <title><?php echo $title;?></title>
  * </head>
  * <body>
- *  <h1><?php echo $title;?></h1>
- *  <p><?php echo $body;?></p>
+ *   <h1><?php echo $title;?></h1>
+ *   <p><?php echo $body;?></p>
  * </body>
  * </html>
  *
- * Using view helpers:
+ * You can also use Helpers in the template by loading them as follows:
  *
  * use_helper('HelperName', 'OtherHelperName');
  */
@@ -640,10 +876,14 @@ class View {
     private $vars = array(); // Array of template variables
 
     /**
-     * Assign the template path
+     * Constructor for the View class.
      *
-     * @param string $file Template path (absolute path or path relative to the templates dir)
-     * @return void
+     * The class constructor has one mandatory parameter ($file) which is the
+     * path to a template file and one optional paramater ($vars) which allows
+     * you to make local variables available in the template.
+     *
+     * @param string $file Absolute path or path relative to the templates dir.
+     * @param array $vars Array of key/value pairs to be made available in the template.
      */
     public function __construct($file, $vars=false) {
         $this->file = APP_PATH.'/views/'.ltrim($file, '/').'.php';
@@ -658,11 +898,10 @@ class View {
     }
 
     /**
-     * Assign specific variable to the template
+     * Assigns a specific variable to the template.
      *
-     * @param mixed $name Variable name
-     * @param mixed $value Variable value
-     * @return void
+     * @param mixed $name Variable name.
+     * @param mixed $value Variable value.
      */
     public function assign($name, $value=null) {
         if (is_array($name)) {
@@ -670,12 +909,12 @@ class View {
         } else {
             $this->vars[$name] = $value;
         }
-    } // assign
+    }
 
     /**
-     * Display template and return output as string
+     * Returns the output of a parsed template as a string.
      *
-     * @return string content of compiled view template
+     * @return string Content of parsed template.
      */
     public function render() {
         ob_start();
@@ -688,15 +927,14 @@ class View {
     }
 
     /**
-     * Display the rendered template
+     * Displays the rendered template in the browser.
      */
     public function display() { echo $this->render(); }
 
     /**
-     * Render the content and return it
-     * ex: echo new View('blog', array('title' => 'My title'));
+     * Returns the parsed content of a template.
      *
-     * @return string content of the view
+     * @return string Parsed content of the view.
      */
     public function __toString() { return $this->render(); }
 
@@ -704,20 +942,32 @@ class View {
 
 
 /**
- * The Controller class should be the parent class of all of your Controller sub classes
- * that contain the business logic of your application (render a blog post, log a user in,
- * delete something and redirect, etc).
+ * A main controller class to be subclassed.
  *
- * In the Wolf class you can define what urls / routes map to what Controllers and
- * methods. Each method can either:
+ * The Controller class should be the parent class of all of your Controller
+ * sub classes which contain the business logic of your application like:
+ *      - render a blog post,
+ *      - log a user in,
+ *      - delete something and redirect,
+ *      - etc.
  *
- * - return a string response
- * - redirect to another method
+ * Using the Dispatcher class you can define what URIs/routes map to which
+ * Controllers and their methods.
+ *
+ * Each Controller method should either:
+ *      - return a string response
+ *      - redirect to another method
  */
 class Controller {
     protected $layout = false;
     protected $layout_vars = array();
 
+    /**
+     * Executes a specified action/method for this Controller.
+     *
+     * @param string $action
+     * @param array $params 
+     */
     public function execute($action, $params) {
     // it's a private method of the class or action is not a method of the class
         if (substr($action, 0, 1) == '_' || ! method_exists($this, $action)) {
@@ -726,10 +976,21 @@ class Controller {
         call_user_func_array(array($this, $action), $params);
     }
 
+    /**
+     * Sets which layout to use for output.
+     *
+     * @param string $layout
+     */
     public function setLayout($layout) {
         $this->layout = $layout;
     }
 
+    /**
+     * Assigns a set of key/values pairs to a layout.
+     *
+     * @param mixed $var An array of key/value pairs or the name of a single variable.
+     * @param string $value The value of the single variable.
+     */
     public function assignToLayout($var, $value) {
         if (is_array($var)) {
             array_merge($this->layout_vars, $var);
@@ -738,6 +999,15 @@ class Controller {
         }
     }
 
+    /**
+     * Renders the output.
+     * 
+     * TODO Remove? Is this proper OO/good idea?
+     *
+     * @param <type> $view
+     * @param <type> $vars
+     * @return View 
+     */
     public function render($view, $vars=array()) {
         if ($this->layout) {
             $this->layout_vars['content_for_layout'] = new View($view, $vars);
@@ -747,12 +1017,27 @@ class Controller {
         }
     }
 
+    /**
+     * Displays a rendered layout.
+     *
+     * TODO Remove? Is this proper OO/good idea?
+     *
+     * @param <type> $view
+     * @param <type> $vars
+     * @param <type> $exit
+     */
     public function display($view, $vars=array(), $exit=true) {
         echo $this->render($view, $vars);
 
         if ($exit) exit;
     }
 
+    /**
+     * Renders a JSON encoded response and returns that as a string
+     *
+     * @param mixed $data_to_encode The data being encoded.
+     * @return string The JSON representation of $data_to_encode.
+     */
     public function renderJSON($data_to_encode) {
         if (class_exists('JSON')) {
             return JSON::encode($data_to_encode);
@@ -765,9 +1050,34 @@ class Controller {
 
 } // end Controller class
 
+
+/**
+ * The Observer class allows for a simple but powerfull event system.
+ * 
+ * Example of watching/handling an event:
+ *      // Connecting your event hangling function to an event.
+ *      Observer::observe('page_edit_after_save', 'my_simple_observer');
+ * 
+ *      // The event handling function
+ *      function my_simple_observer($page) {
+ *          // do what you want to do
+ *          var_dump($page);
+ *      }
+ * 
+ * Example of generating an event:
+ * 
+ *      Observer::notify('my_plugin_event', $somevar);
+ * 
+ */
 final class Observer {
     static protected $events = array();
 
+    /**
+     * Allows an event handler to watch/handle for a spefied event.
+     *
+     * @param string $event_name The name of the event to watch for.
+     * @param string $callback The name of the function handling the event.
+     */
     public static function observe($event_name, $callback) {
         if ( ! isset(self::$events[$event_name]))
             self::$events[$event_name] = array();
@@ -775,27 +1085,50 @@ final class Observer {
         self::$events[$event_name][$callback] = $callback;
     }
 
+    /**
+     * Allows an event handler to stop watching/handling a specific event.
+     *
+     * @param string $event_name The name of the event.
+     * @param string $callback The name of the function handling the event.
+     */
     public static function stopObserving($event_name, $callback) {
         if (isset(self::$events[$event_name][$callback]))
             unset(self::$events[$event_name][$callback]);
     }
 
+    /**
+     * Clears all registered event handlers for a specified event.
+     *
+     * @param string $event_name
+     */
     public static function clearObservers($event_name) {
         self::$events[$event_name] = array();
     }
 
+    /**
+     * Returns a list of all event handlers handling a specified event.
+     *
+     * @param string $event_name
+     * @return array An array of names for event handlers.
+     */
     public static function getObserverList($event_name) {
         return (isset(self::$events[$event_name])) ? self::$events[$event_name] : array();
     }
 
     /**
-     * If your event does not need to process the return values from any observers use this instead of getObserverList()
+     * Generates an event with the specified name.
+     *
+     * Note: if your event does not need to process the return values from any
+     *       observers, use this instead of getObserverList().
+     *
+     * @param string $event_name
      */
     public static function notify($event_name) {
-        $args = array_slice(func_get_args(), 1); // removing event name from the arguments
+        $args = array_slice(func_get_args(), 1); // remove event name from arguments
 
         foreach(self::getObserverList($event_name) as $callback) {
-            // XXX - For some strange reason, this works... figure out later.
+            // XXX For some strange reason, this works... figure out later.
+            // FIXME Make this proper PHP 5.3 stuff.
             $Args = array();
             foreach($args as $k => &$arg){
                 $Args[$k] = &$arg;
@@ -805,23 +1138,36 @@ final class Observer {
     }
 }
 
+
 /**
- * The AutoLoader class is an object oriented hook into PHP's __autoload functionality. You can add
+ * The AutoLoader class is an OO hook into PHP's __autoload functionality.
  *
- * - Single Files AutoLoader::addFile('Blog','/path/to/Blog.php');
- * - Multiple Files AutoLoader::addFile(array('Blog'=>'/path/to/Blog.php','Post'=>'/path/to/Post.php'));
- * - Whole Folders AutoLoader::addFolder('path');
+ * You can add use the AutoLoader class to add singe and multiple files as well
+ * entire folders.
  *
- * When adding a whole folder each file should contain one class named the same as the file without ".php" (Blog => Blog.php)
+ * Examples:
+ *
+ * Single Files   - AutoLoader::addFile('Blog','/path/to/Blog.php');
+ * Multiple Files - AutoLoader::addFile(array('Blog'=>'/path/to/Blog.php','Post'=>'/path/to/Post.php'));
+ * Whole Folders  - AutoLoader::addFolder('path');
+ *
+ * When adding an entire folder, each file should contain one class having the
+ * same name as the file without ".php" (Blog.php should contain one class Blog)
+ *
+ *
  */
 class AutoLoader {
     protected static $files = array();
     protected static $folders = array();
 
     /**
-     * AutoLoader::addFile('Blog','/path/to/Blog.php');
-     * AutoLoader::addFile(array('Blog'=>'/path/to/Blog.php','Post'=>'/path/to/Post.php'));
-     * @param mixed $class_name string class name, or array of class name => file path pairs.
+     * Adds a (set of) file(s) for autoloading.
+     *
+     * Examples:
+     *      AutoLoader::addFile('Blog','/path/to/Blog.php');
+     *      AutoLoader::addFile(array('Blog'=>'/path/to/Blog.php','Post'=>'/path/to/Post.php'));
+     *
+     * @param mixed $class_name Classname or array of classname/path pairs.
      * @param mixed $file Full path to the file that contains $class_name.
      */
     public static function addFile($class_name, $file=null) {
@@ -833,9 +1179,13 @@ class AutoLoader {
     }
 
     /**
-     * AutoLoader::addFolder('/path/to/my_classes/');
-     * AutoLoader::addFolder(array('/path/to/my_classes/','/more_classes/over/here/'));
-     * @param mixed $folder string, full path to a folder containing class files, or array of paths.
+     * Adds an entire folder or set of folders for autoloading.
+     *
+     * Examples:
+     *      AutoLoader::addFolder('/path/to/classes/');
+     *      AutoLoader::addFolder(array('/path/to/classes/','/more/here/'));
+     *
+     * @param mixed $folder Full path to a folder or array of paths.
      */
     public static function addFolder($folder) {
         if ( ! is_array($folder)) {
@@ -844,6 +1194,11 @@ class AutoLoader {
         self::$folders = array_merge(self::$folders, $folder);
     }
 
+    /**
+     * Loads a requested class.
+     *
+     * @param string $class_name
+     */
     public static function load($class_name) {
         if (isset(self::$files[$class_name])) {
             if (file_exists(self::$files[$class_name])) {
@@ -874,19 +1229,22 @@ if ( ! function_exists('__autoload')) {
 }
 
 /**
- * Flash service
+ * Flash service.
  *
- * Purpose of this service is to make some data available across pages. Flash
- * data is available on the next page but deleted when execution reach its end.
+ * The purpose of this service is to make some data available across pages.
+ * Flash data is available on the next page but deleted when execution reaches
+ * its end.
  *
- * Usual use of Flash is to make it possible for the current page to pass some data
- * to the next one (for instance success or error message before HTTP redirect).
+ * Usual use of Flash is to make it possible for the current page to pass some
+ * data to the next one (for instance success or error message before an HTTP
+ * redirect).
  *
- * Flash::set('errors', 'Blog not found!');
- * Flass::set('success', 'Blog has been saved with success!');
- * Flash::get('success');
+ * Example usage:
+ *      Flash::set('errors', 'Blog not found!');
+ *      Flass::set('success', 'Blog has been saved with success!');
+ *      Flash::get('success');
  *
- * Flash service as a concept is taken from Rails. This thing is really useful!
+ * The Flash service as a concept is taken from Rails.
  */
 final class Flash {
     const SESSION_KEY = 'framework_flash';
@@ -894,31 +1252,35 @@ final class Flash {
     private static $_flashstore = array(); // Data that prevous page left in the Flash
 
     /**
-     * Return specific variable from the flash. If value is not found NULL is
-     * returned
+     * Returns a specific variable from the Flash service.
+     * 
+     * If the value is not found, NULL is returned instead.
+     * TODO Return false instead?
      *
      * @param string $var Variable name
-     * @return mixed
+     * @return mixed Value of the variable stored in the Flash service.
      */
     public static function get($var) {
         return isset(self::$_flashstore[$var]) ? self::$_flashstore[$var] : null;
     }
 
     /**
-     * Add specific variable to the flash. This variable will be available on the
-     * next page unless removed with the removeVariable() or clear() method
+     * Adds specific variable to the Flash service.
+     * 
+     * This variable will be available on the next page unless removed with the
+     * removeVariable() or clear() methods.
      *
      * @param string $var Variable name
      * @param mixed $value Variable value
-     * @return void
      */
     public static function set($var, $value) {
         $_SESSION[self::SESSION_KEY][$var] = $value;
     }
 
     /**
-     * Add specific variable to the flash. This variable will be available on the
-+    * current page only.
+     * Adds specific variable to the Flash service.
+     *
+     * This variable will be available on the current page only.
      *
      * @param string $var Variable name
      * @param mixed $value Variable value
@@ -928,20 +1290,20 @@ final class Flash {
     }
 
     /**
-     * Call this function to clear flash. Note that data that previous page
-     * stored will not be deleted - just the data that this page saved for
-     * the next page
+     * Clears the Flash service.
      *
-     * @param none
-     * @return void
+     * Data that previous pages stored will not be deleted, just the data that
+     * this page stored itself.
      */
     public static function clear() {
         $_SESSION[self::SESSION_KEY] = array();
     }
 
     /**
-     * This function will read flash data from the $_SESSION variable
-     * and load it into $this->previous array
+     * Initializes the Flash service.
+     *
+     * This will read flash data from the $_SESSION variable and load it into
+     * the $this->previous array.
      *
      * @param none
      * @return void
@@ -957,21 +1319,34 @@ final class Flash {
 } // end Flash class
 
 
-final class Inflector {
 /**
- *  Return an CamelizeSyntaxed (LikeThisDearReader) from something like_this_dear_reader.
+ * The Inflector class allows for strings to be reformated.
  *
- * @param string $string Word to camelize
- * @return string Camelized word. LikeThis.
+ * For example:
+ *
+ * A string using underscore syntax ("camel_case") could be reformatted to
+ * use camelcase syntax ("CamelCase").
  */
+final class Inflector {
+
+    /**
+     * Returns a camelized string from a string using underscore syntax.
+     * 
+     * Example: "like_this_dear_reader" becomes "LikeThisDearReader"
+     * 
+     * @param string $string Word to camelize.
+     * @return string Camelized word. 
+     */
     public static function camelize($string) {
         return str_replace(' ','',ucwords(str_replace('_',' ', $string)));
     }
 
     /**
-     * Return an underscore_syntaxed (like_this_dear_reader) from something LikeThisDearReader.
+     * Returns a string using underscore syntax from a camelized string.
      *
-     * @param  string $string CamelCased word to be "underscorized"
+     * Example: "LikeThisDearReader" becomes "like_this_dear_reader"
+     *
+     * @param  string $string CamelCased word
      * @return string Underscored version of the $string
      */
     public static function underscore($string) {
@@ -979,29 +1354,32 @@ final class Inflector {
     }
 
     /**
-     * Return a Humanized syntaxed (Like this dear reader) from something like_this_dear_reader.
+     * Returns a humanized string from a string using underscore syntax.
      *
-     * @param  string $string CamelCased word to be "underscorized"
-     * @return string Underscored version of the $string
+     * Example: "like_this_dear_reader" becomes "Like this dear reader"
+     *
+     * @param  string $string String using underscore syntax.
+     * @return string Humanized version of the $string
      */
     public static function humanize($string) {
         return ucfirst(str_replace('_', ' ', $string));
     }
-}
+} // end Inflector class
+
+
 
 // ----------------------------------------------------------------
 //   global function
 // ----------------------------------------------------------------
 
 /**
- * Load all functions from the helper file
+ * Loads all functions from a speficied helper file.
  *
- * syntax:
- * use_helper('Cookie');
- * use_helper('Number', 'Javascript', 'Cookie', ...);
+ * Example:
+ *      use_helper('Cookie');
+ *      use_helper('Number', 'Javascript', 'Cookie', ...);
  *
- * @param  string helpers in CamelCase
- * @return void
+ * @param  string One or more helpers in CamelCase format.
  */
 function use_helper() {
     static $_helpers = array();
@@ -1023,14 +1401,16 @@ function use_helper() {
 }
 
 /**
- * Load model class from the model file (faster than waiting for the __autoload function)
+ * Loads a model class from the model's file.
  *
- * syntax:
- * use_model('Blog');
- * use_model('Post', 'Category', 'Tag', ...);
+ * Note: this is faster than waiting for the __autoload function and can be used
+ *       for speed improvements.
  *
- * @param  string models in CamelCase
- * @return void
+ * Example:
+ *      use_model('Blog');
+ *      use_model('Post', 'Category', 'Tag', ...);
+ *
+ * @param  string One or more Models in CamelCase format.
  */
 function use_model() {
     static $_models = array();
@@ -1053,16 +1433,19 @@ function use_model() {
 
 
 /**
- * Create a really nice url like http://www.example.com/controller/action/params#anchor
+ * Creates a url.
  *
- * you can put as many params as you want,
- * if a param starts with # it is considered to be an Anchor
+ * Example output: http://www.example.com/controller/action/params#anchor
  *
- * get_url('controller/action/param1/param2') // I always use this method
- * get_url('controller', 'action', 'param1', 'param2');
+ * You can add as many parameters as you want. If a param starts with # it is
+ * considered to be an anchor.
  *
- * @param string conrtoller, action, param and/or #anchor
- * @return string
+ * Example:
+ *      get_url('controller/action/param1/param2');
+ *      get_url('controller', 'action', 'param1', 'param2');
+ *
+ * @param string controller, action, param and/or #anchor
+ * @return string A generated URL
  */
 function get_url() {
     $params = func_get_args();
@@ -1078,9 +1461,9 @@ function get_url() {
 }
 
 /**
- * Get the request method used to send this page
+ * Retrieves the request method used to access this page.
  *
- * @return string possible value: GET, POST or AJAX
+ * @return string Possible values: GET, POST or AJAX
  */
 function get_request_method() {
     if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest')
@@ -1090,26 +1473,44 @@ function get_request_method() {
 }
 
 /**
- * Redirect this page to the url passed in param
+ * Redirects this page to a specified URL.
+ *
+ * @param string $url
  */
 function redirect($url) {
     header('Location: '.$url); exit;
 }
 
 /**
- * Alias for redirect
+ * An alias for redirect()
+ *
+ * @deprecated
+ * @param <type> $url
  */
 function redirect_to($url) {
     header('Location: '.$url); exit;
 }
 
 /**
- * Encodes HTML safely for UTF-8. Use instead of htmlentities.
+ * Encodes HTML safely in UTF-8 format.
+ *
+ * You should use instead of htmlentities.
+ *
+ * @param string $string HTML to encode.
+ * @return string Encoded HTML
  */
 function html_encode($string) {
     return htmlentities($string, ENT_QUOTES, 'UTF-8') ;
 }
 
+/**
+ * Experimental anti XSS function.
+ * 
+ * TODO Improve or remove.
+ *
+ * @param <type> $string
+ * @return <type> 
+ */
 function remove_xss($string) {
 // Remove all non-printable characters. CR(0a) and LF(0b) and TAB(9) are allowed
 // This prevents some character re-spacing such as <java\0script>
@@ -1173,7 +1574,12 @@ function remove_xss($string) {
 } // remove_xss
 
 /**
- * Prevent some basic XSS attacks, filters arrays
+ * Prevent some basic XSS attacks, filters arrays.
+ *
+ * Experimental.
+ *
+ * @param <type> $ar
+ * @return <type>
  */
 function cleanArrayXSS($ar) {
     $ret = array();
@@ -1225,7 +1631,7 @@ function cleanXSS() {
 }
 
 /**
- * Display a 404 page not found and exit
+ * Displays a "404 - page not found" message and exits.
  */
 function page_not_found() {
     Observer::notify('page_not_found');
@@ -1235,6 +1641,14 @@ function page_not_found() {
     exit;
 }
 
+/**
+ * Converts a disk- or filesize number into a human readable format.
+ *
+ * Example: "1024" become "1 kb"
+ *
+ * @param int $num The number to represent.
+ * @return string Human readable representation of the disk/filesize.
+ */
 function convert_size($num) {
     if ($num >= 1073741824) $num = round($num / 1073741824 * 100) / 100 .' gb';
     else if ($num >= 1048576) $num = round($num / 1048576 * 100) / 100 .' mb';
@@ -1243,34 +1657,59 @@ function convert_size($num) {
     return $num;
 }
 
+
 // Information about time and memory
 
+/**
+ * TODO Finish doc
+ *
+ * @return <type>
+ */
 function memory_usage() {
     return convert_size(memory_get_usage());
 }
 
+/**
+ * TODO Finish doc
+ *
+ * @return <type>
+ */
 function execution_time() {
     return sprintf("%01.4f", get_microtime() - FRAMEWORK_STARTING_MICROTIME);
 }
 
+/**
+ * TODO Finish doc
+ *
+ * @return <type>
+ */
 function get_microtime() {
     $time = explode(' ', microtime());
     return doubleval($time[0]) + $time[1];
 }
 
+/**
+ * TODO Finish doc
+ *
+ * @return <type>
+ */
 function odd_even() {
     static $odd = true;
     return ($odd = !$odd) ? 'even': 'odd';
 }
 
+/**
+ * Alias for odd_even().
+ */
 function even_odd() {
     return odd_even();
 }
 
 /**
- * Intended to retrieve content from a URL by any means.
- * Uses file_get_contents by default if possible for speed reasons.
- * Otherwise it attempts to use CURL
+ * Retrieves content from a URL by any means possible.
+ *
+ * Intended to retrieve content from a URL by any means. Uses file_get_contents
+ * by default if possible for speed reasons. Otherwise it attempts to use CURL.
  *
  * @param string $url URL to retrieve content from.
  * @param int $flags Optional flags to be passed onto file_get_contents.
@@ -1361,6 +1800,14 @@ function framework_exception_handler($e) {
     debug_table($_SERVER, 'SERVER');
 }
 
+/**
+ * Prints an HTML table with debug information.
+ *
+ * @param <type> $array
+ * @param <type> $label
+ * @param <type> $key_label
+ * @param <type> $value_label 
+ */
 function debug_table($array, $label, $key_label='Variable', $value_label='Value') {
     echo '<h2>'.$label.'</h2>';
     echo '<table cellpadding="3" cellspacing="0" style="width: 800px; border: 1px solid #ccc">';
