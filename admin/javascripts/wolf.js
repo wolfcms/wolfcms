@@ -59,12 +59,12 @@ Object.extend(String.prototype, {
 
 // UPDATED
 function toggle_popup(id, focus_field) {
-    //var popup = $(id);
-    //focus_field = $(focus_field);
-    //center(popup);
-    //Element.toggle(popup);
+    var height = $(document).height();
+    var popup_height = $("#"+id).height();
+    var width = $(document).width();
+    var popup_width = $("#"+id).width();
+    $("#"+id).css({"position" : "absolute", "top" : height/3 - popup_height/2, "left" : width/3 - popup_width/2});
     $("#"+id).toggle("normal");
-    //Field.focus(focus_field);
     $("#"+focus_field).focus();
 }
 

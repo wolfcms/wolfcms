@@ -89,56 +89,55 @@
   <div class="popup" id="create-file-popup" style="display:none;">
     <h3><?php echo __('Create new file'); ?></h3>
     <form action="<?php echo get_url('plugin/file_manager/create_file'); ?>" method="post"> 
-      <div>
-        <input id="create_file_path" name="file[path]" type="hidden" value="<?php echo ($dir == '') ? '/': $dir; ?>" />
-        <input id="create_file_name" maxlength="255" name="file[name]" type="text" value="" /> 
-        <input id="create_file_button" name="commit" type="submit" value="<?php echo __('Create'); ?>" />
-      </div>
-      <p><a class="close-link" href="#" onclick="Element.hide('create-file-popup'); return false;"><?php echo __('Close'); ?></a></p>
+      <input id="create_file_path" name="file[path]" type="hidden" value="<?php echo ($dir == '') ? '/': $dir; ?>" />
+      <input id="create_file_name" maxlength="255" name="file[name]" type="text" value="" /> 
+      <input id="create_file_button" name="commit" type="submit" value="<?php echo __('Create'); ?>" />
+      <p><a class="close-link" href="#"><?php echo __('Close'); ?></a></p>
     </form>
   </div>
   <div class="popup" id="create-directory-popup" style="display:none;">
     <h3><?php echo __('Create new directory'); ?></h3>
     <form action="<?php echo get_url('plugin/file_manager/create_directory'); ?>" method="post">
-      <div>
-        <input id="create_directory_path" name="directory[path]" type="hidden" value="<?php echo ($dir == '') ? '/': $dir; ?>" />
-        <input id="create_directory_name" maxlength="255" name="directory[name]" type="text" value="" /> 
-        <input id="file_button" name="commit" type="submit" value="<?php echo __('Create'); ?>" />
-      </div>
-      <p><a class="close-link" href="#" onclick="Element.hide('create-directory-popup'); return false;"><?php echo __('Close'); ?></a></p>
+      <input id="create_directory_path" name="directory[path]" type="hidden" value="<?php echo ($dir == '') ? '/': $dir; ?>" />
+      <input id="create_directory_name" maxlength="255" name="directory[name]" type="text" value="" /> 
+      <input id="file_button" name="commit" type="submit" value="<?php echo __('Create'); ?>" />
+      <p><a class="close-link" href="#"><?php echo __('Close'); ?></a></p>
     </form>
   </div>
   <div class="popup" id="upload-file-popup" style="display:none;">
+    <h3><?php echo __('Upload file'); ?> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input id="upload_overwrite" name="upload[overwrite]" type="checkbox" value="1" /><label for="upload_overwrite"><small><?php echo __('overwrite it?'); ?></small></label></h3>
     <form action="<?php echo get_url('plugin/file_manager/upload'); ?>" method="post" enctype="multipart/form-data"> 
-      <h3><?php echo __('Upload file'); ?> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input id="upload_overwrite" name="upload[overwrite]" type="checkbox" value="1" /><label for="upload_overwrite"><small><?php echo __('overwrite it?'); ?></small></label></h3>
-      <div>
-        <input id="upload_path" name="upload[path]" type="hidden" value="<?php echo ($dir == '') ? '/': $dir; ?>" />
-        <input id="upload_file" name="upload_file" type="file" />
-        <input id="upload_file_button" name="commit" type="submit" value="<?php echo __('Upload'); ?>" />
-      </div>
-      <p><a class="close-link" href="#" onclick="Element.hide('upload-file-popup'); return false;"><?php echo __('Close'); ?></a></p>
+      <input id="upload_path" name="upload[path]" type="hidden" value="<?php echo ($dir == '') ? '/': $dir; ?>" />
+      <input id="upload_file" name="upload_file" type="file" />
+      <input id="upload_file_button" name="commit" type="submit" value="<?php echo __('Upload'); ?>" />
+      <p><a class="close-link" href="#"><?php echo __('Close'); ?></a></p>
     </form>
   </div>
   <div class="popup" id="chmod-popup" style="display:none;">
     <h3><?php echo __('Change mode'); ?></h3>
     <form action="<?php echo get_url('plugin/file_manager/chmod'); ?>" method="post"> 
-      <div>
-        <input id="chmod_file_name" name="file[name]" type="hidden" value="" />
-        <input id="chmod_file_mode" maxlength="4" name="file[mode]" type="text" value="" /> 
-        <input id="chmod_file_button" name="commit" type="submit" value="<?php echo __('Change mode'); ?>" />
-      </div>
-      <p><a class="close-link" href="#" onclick="Element.hide('chmod-popup'); return false;"><?php echo __('Close'); ?></a></p>
+      <input id="chmod_file_name" name="file[name]" type="hidden" value="" />
+      <input id="chmod_file_mode" maxlength="4" name="file[mode]" type="text" value="" /> 
+      <input id="chmod_file_button" name="commit" type="submit" value="<?php echo __('Change mode'); ?>" />
+      <p><a class="close-link" href="#"><?php echo __('Close'); ?></a></p>
     </form>
   </div>
   <div class="popup" id="rename-popup" style="display:none;">
       <h3><?php echo __('Rename'); ?></h3>
       <form action="<?php echo get_url('plugin/file_manager/rename'); ?>" method="post"> 
-        <div>
-          <input id="rename_file_current_name" name="file[current_name]" type="hidden" value="" />
-          <input id="rename_file_new_name" maxlength="50" name="file[new_name]" type="text" value="" /> 
-          <input id="rename_file_button" name="commit" type="submit" value="<?php echo __('Rename'); ?>" />
-        </div>
-        <p><a class="close-link" href="#" onclick="Element.hide('rename-popup'); return false;"><?php echo __('Close'); ?></a></p>
+        <input id="rename_file_current_name" name="file[current_name]" type="hidden" value="" />
+        <input id="rename_file_new_name" maxlength="50" name="file[new_name]" type="text" value="" /> 
+        <input id="rename_file_button" name="commit" type="submit" value="<?php echo __('Rename'); ?>" />
+        <p><a class="close-link" href="#"><?php echo __('Close'); ?></a></p>
       </form>
     </div>
 </div>
+
+<script type="text/javascript">
+    // <![CDATA[
+    $(".close-link").click(function () {
+        toggle_popup($(this).parent().parent().parent().get(0).id);
+        return false;
+    })
+    // ]]>
+</script>

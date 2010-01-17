@@ -290,6 +290,13 @@ class Plugin {
             return false;
     }
 
+    /**
+     * TODO remove daft null allowance in parameters
+     *
+     * @global <type> $__CMS_CONN__
+     * @param <type> $plugin_id
+     * @return <type>
+     */
     static function deleteAllSettings($plugin_id) {
         if ($plugin_id === null || $plugin_id === '') return false;
 
@@ -306,6 +313,8 @@ class Plugin {
 
     /**
      * Stores all settings from a name<->value pair array in the database.
+     *
+     * TODO remove daft null allowance in parameters
      *
      * @param array $settings Array of name-value pairs
      * @param string $plugin_id     The folder name of the plugin
@@ -350,6 +359,9 @@ class Plugin {
     /**
      * Allows you to store a single setting in the database.
      *
+     * FIXME should return true/false on execute of sql
+     * TODO remove daft null allowance in parameters
+     *
      * @param string $name          Setting name
      * @param string $value         Setting value
      * @param string $plugin_id     Plugin folder name
@@ -389,6 +401,8 @@ class Plugin {
      * Retrieves all settings for a plugin and returns an array of name-value pairs.
      * Returns empty array when unsuccessful in retrieving the settings.
      *
+     * TODO remove daft null allowance in parameters
+     *
      * @param <type> $plugin_id
      */
     static function getAllSettings($plugin_id=null) {
@@ -414,6 +428,8 @@ class Plugin {
     /**
      * Returns the value for a specified setting.
      * Returns false when unsuccessful in retrieving the setting.
+     *
+     * TODO remove daft null allowance in parameters
      *
      * @param <type> $name
      * @param <type> $plugin_id

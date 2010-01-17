@@ -352,16 +352,16 @@ class PageController extends Controller {
     }
 
     function children($parent_id, $level, $return=false) {
-        $expanded_rows = isset($_COOKIE['expanded_rows']) ? explode(',', $_COOKIE['expanded_rows']): array();
+        //$expanded_rows = isset($_COOKIE['expanded_rows']) ? explode(',', $_COOKIE['expanded_rows']): array();
 
         // get all children of the page (parent_id)
         $childrens = Page::childrenOf($parent_id);
 
         foreach ($childrens as $index => $child) {
             $childrens[$index]->has_children = Page::hasChildren($child->id);
-            $childrens[$index]->is_expanded = in_array($child->id, $expanded_rows);
+            $childrens[$index]->is_expanded = true;//in_array($child->id, $expanded_rows);
 
-            if ($childrens[$index]->is_expanded)
+            if (true)//$childrens[$index]->is_expanded)
                 $childrens[$index]->children_rows = $this->children($child->id, $level+1, true);
         }
 

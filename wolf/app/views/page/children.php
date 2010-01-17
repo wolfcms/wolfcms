@@ -34,6 +34,7 @@
  */
 ?>
 <ul<?php if ($level == 1) echo ' id="site-map"'; ?>>
+    <?php //echo 'TEST-'.print_r($childrens, true); ?>
 <?php foreach($childrens as $child): ?> 
     <li id="page_<?php echo $child->id; ?>" class="node level-<?php echo $level; if ( ! $child->has_children) echo ' no-children'; else if ($child->is_expanded) echo ' children-visible'; else echo ' children-hidden'; ?>">
       <div class="page">
@@ -64,3 +65,65 @@
     </li>
 <?php endforeach; ?>
 </ul>
+
+<script type="text/javascript">
+// <![CDATA[
+// When the document is ready set up our sortable with it's inherant function(s)
+$(document).ready(function() {
+  $("#site-map").sortable({
+    //containment: $('#site-map'),
+    axis: 'y',
+    distance: 15,
+    forceHelperSize: true,
+    forcePlaceholderSize: true,
+    //cursor: 'crosshair',
+    //connectWith: ".myList",
+    //appendTo: 'body',
+    helper: 'clone',
+    items: 'li',
+    //handle : '.handle',
+    opacity: '0.5',
+    placeholder: 'site-map-placeholder',
+    revert: true,
+    stop : function () {
+      var order = $('#site-map').sortable('serialize');
+      //alert("Order: "+order);
+      //$("#info").load("process-sortable.php?"+order);
+    }
+  });
+
+  $('ul#site-map').quickTree();
+
+  // Find list items representing folders and turn them
+  // into links that can expand/collapse the tree leaf.
+/*  $('li.node').each(function(i) {
+      // Temporarily decouple the child list, wrap the
+      // remaining text in an anchor, then reattach it.
+      var sub_ul = $(this).children().remove();
+      //$(this).wrapInner('<a/>').find('.expander').click(function() {
+      $('.expander').click(function() {
+          // Make the anchor toggle the leaf display.
+          sub_ul.toggle();
+      });
+      $(this).append(sub_ul);
+  });
+  // Hide all lists except the outermost.
+  $('ul ul').hide();
+*/
+
+});
+// ]]>
+</script>
+
+
+<script type="text/javascript">
+    // <![CDATA[
+
+//$("#site-map").sortable(); /*{stop:function(i) {
+/*$.ajax({
+type: "GET",
+url: "server_items_reorder.php",
+data: $("#item_list").sortable("serialize")
+});*/
+    // ]]>
+</script>

@@ -599,6 +599,11 @@ table.index td.note {
   position: relative;
   top: 5px;
 }
+.site-map-placeholder {
+    height: 30px;
+    background-color: #eee;
+    margin: 0px;
+}
 #site-map .page img.expander {
   padding: 3px;
   padding-top: 6px;
@@ -802,6 +807,11 @@ table.fieldset .error-with-field small {
   padding: 2em;
   padding-top: 1em;
   padding-bottom: .5em;
+  
+  /* Border-radius not implemented yet */
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
 }
 #content .popup .busy {
   float: right;

@@ -64,6 +64,7 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
         <!--script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/prototype.js"></script-->
         <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/jquery-1.3.2.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/jquery-ui-1.7.2.custom.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/jquery.quickTree.min.js"></script>
         <!--script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/effects.js"></script>
         <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/dragdrop.js"></script>
         <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/cp-datepicker.js"></script-->
