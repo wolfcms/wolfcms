@@ -76,9 +76,9 @@ if ($action == 'edit') { ?>
             }).filter(':first').click();
 
             // Setup modal dialog
-            $("#add-part-popup").dialog({
+            /*$("#add-part-popup").dialog({
                 bgiframe: true, autoOpen: false, height: 100, modal: true
-            });
+            });*/
 
         });
         // ]]>
@@ -185,17 +185,19 @@ if ($action == 'edit') { ?>
             </div>
         </div>
     
-        <script type="text/javascript">
+        <!--script type="text/javascript">
+            /*
             var tabControlMeta = new TabControl('tab-control-meta');
             $('meta-pages').childElements().each(function(item) {
                 tabControlMeta.addTab('tab-'+item.id, item.title, item.id);
             });
             tabControlMeta.select(tabControlMeta.firstTab());
-        </script>
+            */
+        </script-->
 
         <div id="tab-toolbar" class="tab_toolbar">
-            <a href="#" onclick="$('#add-part-popup').dialog('open'); return false;" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>admin/images/plus.png" alt="plus icon" /></a>
-            <a href="#" onclick="if (confirm('<?php echo __('Delete the current tab?'); ?>')) { tabControl.removeTab(tabControl.selected) }; return false;" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>admin/images/minus.png" alt="minus icon" /></a>
+            <a id="add-tab" class="popupLink" href="#addPartPopup" nclick="$('#add-part-popup').dialog('open'); return false;" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>admin/images/plus.png" alt="plus icon" /></a>
+            <a id="delete-tab" class="popupLink" href="#deletePartPopup" nclick="if (confirm('<?php echo __('Delete the current tab?'); ?>')) { tabControl.removeTab(tabControl.selected) }; return false;" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>admin/images/minus.png" alt="minus icon" /></a>
         </div>
 
         <div id="bottomtabs" class="content tabs">
@@ -253,7 +255,7 @@ if ($action == 'edit') { ?>
     </p>
 </form>
 
-<div id="popups">
+<!--div id="popups">
     <div class="popup" id="add-part-popup" style="display: none;">
         <div id="busy" class="busy" style="display: none;"><img alt="Spinner" src="<?php echo URI_PUBLIC;?>admin/images/spinner.gif" /></div>
         <h3><?php echo __('Add Part'); ?></h3>
@@ -263,9 +265,131 @@ if ($action == 'edit') { ?>
                 <input id="part-name-field" maxlength="100" name="part[name]" type="text" value="" />
                 <input id="add-part-button" name="commit" type="submit" value="<?php echo __('Add'); ?>" />
             </div>
-            <!--p><a class="close-link" href="#" onclick="toggle_popup('add-part-popup', 'part-name-field'); return false;"><?php echo __('Close'); ?></a></p-->
+            <p><a class="close-link" href="#" onclick="toggle_popup('add-part-popup', 'part-name-field'); return false;"><?php echo __('Close'); ?></a></p>
         </form>
     </div>
 
+
+
     <?php Observer::notify('view_page_edit_popup', $page); ?>
+</div-->
+
+<div id="boxes">
+	<!-- #Demo dialog -->
+	<div id="dialog" class="window">
+		<div class="titlebar">
+            Demo dialog
+            <a href="#" class="close">[x]</a>
+        </div>
+        <div class="content">
+            <p>This is just a demo.</p>
+        </div>
+	</div>
+
+    <!--div id="add-part-popup" class="window"-->
+	<div id="addPartPopup" class="window">
+		<div class="titlebar">
+            <?php echo __('Add Part'); ?>
+            <a href="#" class="close">[x]</a>
+        </div>
+        <div class="content">
+            <form action="#<?php echo get_url('page/addPart'); ?>" method="post" nsubmit="if (valid_part_name()) { $('#pages').load("<?php echo get_url('page/addPart'); ?> "); return false;">
+                <input id="part-index-field" name="part[index]" type="hidden" value="<?php echo $index; ?>" />
+                <input id="part-name-field" maxlength="100" name="part[name]" type="text" value="" />
+                <input id="add-part-button" name="commit" type="submit" value="<?php echo __('Add'); ?>" />
+            </form>
+        </div>
+	</div>
+
+    <div id="deletePartPopup" class="window">
+		<div class="titlebar">
+            <?php echo __('Confirmation requested'); ?>
+            <a href="#" class="close">[x]</a>
+        </div>
+        <div class="content">
+            <p><?php echo __('Delete the current tab?'); ?></p>
+            <button class="confirmButton">Yes</button>
+            <button>No</button>
+        </div>
+	</div>
+
+	<!-- Do not remove div#mask, because you'll need it to fill the whole screen -->
+ 	<div id="mask"></div>
 </div>
+
+
+<script>
+
+$(document).ready(function() {
+
+    $('#deletePartPopup button').click(function(e) {
+        if (this.className == 'confirmButton') {
+            var bottomTabContainers = $('div#bottomtabs > div.pages > div');
+            var removeContent = $('div#bottomtabs ul.tabNavigation a.here').get(0).hash;
+            bottomTabContainers.hide().filter(removeContent).remove();
+            $('div#bottomtabs ul.tabNavigation a.here').remove();
+            $('div#bottomtabs ul.tabNavigation a').filter(':first').click();
+        }
+
+        e.preventDefault();
+		$('#mask, .window').hide();
+
+        return false;
+    })
+    
+    // Make all modal dialogs draggable
+    $("#boxes .window").draggable({
+        addClasses: false,
+        containment: 'window',
+        scroll: false,
+        handle: '.titlebar'
+    });
+    
+	//select all the a tag with name equal to modal
+	//$('a#add-tab').click(function(e) {
+    $('a.popupLink').click(function(e) {
+		//Cancel the link behavior
+		e.preventDefault();
+		//Get the A tag
+		var id = $(this).attr('href');
+
+		//Get the screen height and width
+		var maskHeight = $(document).height();
+		var maskWidth = $(window).width();
+
+		//Set height and width to mask to fill up the whole screen
+		$('#mask').css({'width':maskWidth,'height':maskHeight,'top':0,'left':0});
+
+		//transition effect
+		$('#mask').show();//fadeIn(10000);
+		$('#mask').fadeTo("slow",0.5);
+
+		//Get the window height and width
+		var winH = $(window).height();
+		var winW = $(window).width();
+
+		//Set the popup window to center
+		$(id).css('top',  winH/2-$(id).height()/2);
+		$(id).css('left', winW/2-$(id).width()/2);
+
+		//transition effect
+		$(id).fadeIn(500); //2000
+
+	});
+
+	//if close button is clicked
+	$('#boxes .window .close').click(function (e) {
+		//Cancel the link behavior
+		e.preventDefault();
+		$('#mask, .window').hide();
+	});
+
+	//if mask is clicked
+	/*$('#mask').click(function () {
+		$(this).hide();
+		$('.window').hide();
+	});*/
+
+});
+
+</script>

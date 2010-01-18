@@ -77,7 +77,7 @@ $(document).ready(function() {
     forceHelperSize: true,
     forcePlaceholderSize: true,
     //cursor: 'crosshair',
-    //connectWith: ".myList",
+    //connectWith: "#site-map",
     //appendTo: 'body',
     helper: 'clone',
     items: 'li',
@@ -86,13 +86,26 @@ $(document).ready(function() {
     placeholder: 'site-map-placeholder',
     revert: true,
     stop : function () {
-      var order = $('#site-map').sortable('serialize');
+        //var order = $('#site-map').sortable('serialize',{'key':'pages[]'});
+        var order = $(':selected').parent.children.sortable('serialize',{'key':'pages[]'});
+        var parent_id = 1;
+
+//        if (parent && parent.)
+//            parent_id = RegExp.$1.toInteger();
+
       //alert("Order: "+order);
       //$("#info").load("process-sortable.php?"+order);
+      $.ajax({
+        url: 'index.php?/page/reorder/'+parent_id,
+        type: 'POST',
+        data: {data : order},
+        success: function(msg) {
+            alert( "Data Saved: " + msg );
+        }
+      });
     }
   });
 
-  $('ul#site-map').quickTree();
 
   // Find list items representing folders and turn them
   // into links that can expand/collapse the tree leaf.
