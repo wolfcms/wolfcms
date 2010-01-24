@@ -1,0 +1,30 @@
+# Wolf CMS - INFORMATION ABOUT UPDATING
+
+
+## GENERAL ##
+
+Please be aware that we only support single version upgrades.
+
+### Upgrading from 0.5.5 => 0.6.0 ###
+
+These are version specific notes. Please see www.wolfcms.org/wiki/upgrading for
+a more detailed general upgrade scenario. Follow that (or your own) and apply
+the following version specific notes.
+
+Apply the following database changes:
+
+- Add a field to the 'user' table;
+    language varchar(40) default NULL
+
+- Add a table called 'cron';
+    CREATE TABLE cron (
+        id int(11) unsigned NOT NULL auto_increment,
+        lastrun text,
+        PRIMARY KEY  (id)) ENGINE=MyISAM  DEFAULT CHARSET=utf8
+
+
+## TROUBLESHOOTING / NOTES ##
+
+It is recommended for security purposes to delete the following:
+    - the install/ directory
+    - the docs/ directory
