@@ -58,7 +58,7 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
   </head>
   <body id="body_<?php echo $ctrl.'_'.Dispatcher::getAction(); ?>">
     <div id="header">
-      <div id="site-title"><a href="<?php echo get_url(); ?>"><?php echo Setting::get('admin_title'); ?></a></div>
+      <div id="site-title"><a href="<?php echo URL_PUBLIC; ?>"><?php echo Setting::get('admin_title'); ?></a></div>
       <div id="mainTabs">
         <ul>
           <li><a href="<?php echo get_url('page'); ?>"<?php if ($ctrl=='page') echo ' class="current"'; ?>><?php echo __('Pages'); ?></a></li>
@@ -136,7 +136,7 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
         <span class="separator"> | </span>
         <a href="<?php echo get_url('login/logout'); ?>"><?php echo __('Log Out'); ?></a>
         <span class="separator"> | </span>
-        <a href="<?php echo URL_PUBLIC . (USE_MOD_REWRITE ? '': '?/'); ?>" target="_blank"><?php echo __('View Site'); ?></a>
+        <a id="site-view-link" href="<?php echo URL_PUBLIC; ?>" target="_blank"><?php echo __('View Site'); ?></a>
       </p>
     </div>
   </body>

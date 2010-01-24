@@ -38,6 +38,7 @@
 <div id="site-map-def">
     <div class="page"><?php echo __('Page'); ?> (<a href="#" id="toggle_reorder" onclick="toggle_reorder = !toggle_reorder; toggle_copy = false; $$('.handle_reorder').each(function(e) { e.style.display = toggle_reorder ? 'inline': 'none'; }); $$('.handle_copy').each(function(e) { e.style.display = toggle_copy ? 'inline': 'none'; }); return false;"><?php echo __('reorder'); ?></a> <?php echo __('or'); ?> <a id="toggle_copy" href="#" onclick="toggle_copy = !toggle_copy; toggle_reorder = false; $$('.handle_copy').each(function(e) { e.style.display = toggle_copy ? 'inline': 'none'; }); $$('.handle_reorder').each(function(e) { e.style.display = toggle_reorder ? 'inline': 'none'; }); return false;"><?php echo __('copy'); ?></a>)</div>
     <div class="status"><?php echo __('Status'); ?></div>
+    <div class="view"><?php echo __('View'); ?></div>
     <div class="modify"><?php echo __('Modify'); ?></div>
 </div>
 
@@ -53,6 +54,7 @@
         </span>
       </div>
       <div class="status published-status"><?php echo __('Published'); ?></div>
+      <div class="view-page"><a href="<?php echo URL_PUBLIC; ?>" target="_blank"><img src="images/magnify.png" align="middle" alt="view page" title="View Page" /></a></div>
       <div class="modify">
           <a href="<?php echo get_url('page/add/1'); ?>"><img src="images/plus.png" align="middle" title="<?php echo __('Add child'); ?>" alt="<?php echo __('Add child'); ?>" /></a>&nbsp; 
           <img class="remove" src="images/icon-remove-disabled.gif" align="middle" alt="remove icon disabled" />

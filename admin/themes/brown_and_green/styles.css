@@ -72,6 +72,21 @@ h2 { }
 #site-links a, #site-links a:visited { color: #e5e5e5; }
 #site-view-page { color: #fff; }
 
+a#site-view-link {
+  background-color:#A28C6A;
+  padding: 0.2em 0.4em;
+  vertical-align: middle;
+
+  border-radius: 3px; /* CSS3 */
+  -moz-border-radius: 3px; /* Mozilla Firefox */
+  -webkit-border-radius: 3px; /* All WebKit Browsers, Safari, Chrome */
+}
+
+a#site-view-link:hover {
+    background-color: #76A83A;
+    color: #000;
+}
+
 /* Messages --------------------------------------------------------------- */
 
 #info { background: #EDFE86; }

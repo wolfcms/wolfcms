@@ -35,8 +35,8 @@
 ?>
 <h1><?php echo __('Layouts'); ?></h1>
 
-<div id="layouts-def" class="index-def">
-  <div class="layout"><?php echo __('Layout'); ?> (<a href="#" onclick="$$('.handle').each(function(e) { e.style.display = e.style.display != 'inline' ? 'inline': 'none'; }); return false;"><?php echo __('reorder'); ?></a>)</div>
+<div id="site-map-def" class="index-def">
+  <div class="layout"><?php echo __('Layout'); ?> (<a href="#" onclick="$$('.handle').each(function(e) { e.style.display = e.style.display != 'inline' ? 'inline': 'none'; }); return false;"><?php echo __('reorder'); ?></a>)</div><div class="modify"><?php echo __('Modify'); ?></div>
 </div>
 
 <ul id="layouts" class="index">

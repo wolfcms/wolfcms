@@ -554,9 +554,10 @@ table.index td.note {
 }
 #site-map-def { margin-top: 20px; position: relative; }
 #site-map-def .page {}
-#site-map-def .status { position: absolute; top: 0; right: 75px; width: 70px }
+#site-map-def .status { position: absolute; text-align: center; top: 0; right: 120px; width: 70px }
+#site-map-def .view { position: absolute; text-align: center; top: 0; right: 65px; width: 50px }
+#site-map-def .modify { position: absolute; text-align: center; top: 0; right: 5px; width: 50px; }
 #site-map-def .tag { position: absolute; top: 0; right: 375px; width: 150px; }
-#site-map-def .modify { position: absolute; top: 0; right: 5px; width: 50px; }
 #site-map-def div {
   padding: 2px 4px;
   font-size: 90%;
@@ -584,8 +585,10 @@ table.index td.note {
 }
 #site-map ul { list-style: none; margin:0; padding:0; background: #fff; }
 #site-map .page, #site-map-root .page {}
-#site-map .status, #site-map-root .status { position: absolute; top: 10px; right: 79px; width: 70px }
-#site-map .modify, #site-map-root .modify { position: absolute; top: 5px; right: 9px; width: 50px }
+#site-map .status, #site-map-root .status { position: absolute; text-align: center; top: 10px; right: 120px; width: 70px }
+#site-map .view-page, #site-map-root .view-page { position: absolute; text-align: center; top: 10px; right: 65px; width: 50px }
+#site-map .modify, #site-map-root .modify { position: absolute; text-align: center; top: 10px; right: 10px; width: 50px }
+#site-map .modify img, #site-map-root .modify img {vertical-align: middle;}
 #site-map .status { color: #9eb3bf; }
 #site-map .status.draft-status { color: #c00; }
 #site-map .status.published-status { color: #000; }

@@ -8,6 +8,7 @@ Sigla:
 ======
 
 0.6.0 - released 2009-11-??
++ Added preview function to pages list.
 + Added dispatch_route_found event with uri as parameter - issue 111
 + Added getContentFromUrl() function to Framework. - issue 54
 + Added basic PHP 5.3.0 support - issue 95
@@ -44,6 +45,7 @@ Sigla:
 - Fixed duplicate IDs in Administration / Settings tab - issue 37 - thanks slowgary
 - Fixed atom:link reference in rss.xml
 - Fixed admin theme name - issue 98
+. Improved View Site link.
 . Removed BASE HREF tag from backend layout. May need updates to plugins! - issue 19
 . Removed PDO lite support. (supported use of PDO in case you had no PDO)
 . Removed STATUS_REVIEWED from Page - issue 65
