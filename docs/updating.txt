@@ -11,6 +11,8 @@ These are version specific notes. Please see www.wolfcms.org/wiki/upgrading for
 a more detailed general upgrade scenario. Follow that (or your own) and apply
 the following version specific notes.
 
+Make sure to update your htaccess file.
+
 Apply the following database changes:
 
 - Add a field to the 'user' table;

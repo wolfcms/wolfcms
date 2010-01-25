@@ -150,12 +150,12 @@ function main() {
             $uri='';
         }
 
-    // If we're using mod_rewrite, we should have a PAGE entry.
-    if (USE_MOD_REWRITE && array_key_exists('PAGE', $_GET)) {
-        $uri = $_GET['PAGE'];
-        unset($_GET['PAGE']);
+    // If we're using mod_rewrite, we should have a WOLFPAGE entry.
+    if (USE_MOD_REWRITE && array_key_exists('WOLFPAGE', $_GET)) {
+        $uri = $_GET['WOLFPAGE'];
+        unset($_GET['WOLFPAGE']);
     }
-    else if (USE_MOD_REWRITE)   // We're using mod_rewrite but don't have a PAGE entry, assume site root.
+    else if (USE_MOD_REWRITE)   // We're using mod_rewrite but don't have a WOLFPAGE entry, assume site root.
             $uri = '';
 
     // END processing $_GET variables

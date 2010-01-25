@@ -33,6 +33,6 @@ Options -Indexes +FollowSymLinks
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l
   # Main URL rewriting.
-  RewriteRule ^(.*)$ index.php?PAGE=$1 [L,QSA]
+  RewriteRule ^(.*)$ index.php?WOLFPAGE=$1 [L,QSA]
 
 </IfModule>
