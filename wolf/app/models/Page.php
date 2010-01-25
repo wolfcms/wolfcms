@@ -320,6 +320,42 @@ class Page extends Record {
     }
 
 
+    /**
+     * Allow user to link to a page by ID.
+     *
+     * This function will always produce a correct and current link to the page
+     * despite it possibly having moved from its original position in the page
+     * hierarchy.
+     *
+     * Usage: <?php echo Page::linkById(3); ?>
+     *
+     * @param int $id The id of the page to link to.
+     * @param string $label The label or title of the link.
+     * @param string $options Any other HTML options you want to use.
+     * @return string XHTML compliant link code or error message.
+     */
+    public static function linkById($id, $label=null, $options='') {
+        $result = null;
+
+        if (!is_numeric($id) || !is_int($id) || $id <= 0) {
+            return '[linkById: id NAN or id <= 0]';
+        }
+
+        $page = self::findById($id);
+        $url = BASE_URL.$page->getUri().URL_SUFFIX;
+
+        if ($label == null) {
+            $label = $page->title();
+        }
+
+        return sprintf('<a href="%s" %s>%s</a>',
+            $url,
+            $options,
+            $label
+            );
+    }
+
+
     public function children($args=null, $value=array(), $include_hidden=false) {
         global $__CMS_CONN__;
 

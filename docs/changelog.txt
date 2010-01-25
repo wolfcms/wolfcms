@@ -8,6 +8,7 @@ Sigla:
 ======
 
 0.6.0 - released 2010-01-31
++ Added Page::linkById() function to allow for self-updating links. - issue 131
 + Added preview function to pages list.
 + Added dispatch_route_found event with uri as parameter - issue 111
 + Added getContentFromUrl() function to Framework. - issue 54
