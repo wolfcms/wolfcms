@@ -1,6 +1,34 @@
-<?php if (!AuthUser::hasPermission('administrator,developer,editor')) { header('Location: '.URL_PUBLIC.' '); exit(); } ?>
-
 <?php
+/**
+ * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
+ *
+ * This file is part of Wolf CMS.
+ *
+ * Wolf CMS is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Wolf CMS is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Wolf CMS has made an exception to the GNU General Public License for plugins.
+ * See exception.txt for details and the full text.
+ */
+
+// Redirect to front page if user doesn't have appropriate roles.
+if (!AuthUser::hasPermission('administrator,developer,editor')) {
+    header('Location: '.URL_PUBLIC.' ');
+    exit();
+}
+
 // Setup some stuff...
 $ctrl = Dispatcher::getController(Setting::get('default_tab'));
 
@@ -17,14 +45,11 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
 }
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title><?php use_helper('Kses'); echo kses(Setting::get('admin_title'), array()) . ' - ' . $title; ?></title>
-
-    <!-- base href="<?php echo trim(BASE_URL, '?/').'/'; ?>" / -->
 
     <link rel="favourites icon" href="<?php echo URL_PUBLIC; ?>favicon.ico" />
     <link href="<?php echo URI_PUBLIC; ?>admin/stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
@@ -41,6 +66,26 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/cp-datepicker.js"></script>
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/wolf.js"></script>
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/control.textarea.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/jquery-ui-1.7.2.custom.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+     var $j = jQuery.noConflict();
+    </script>
+
+    <script type="text/javascript">
+            // <![CDATA[
+            $j(document).ready(function() {
+                $j(".message")
+                    .fadeIn('slow')
+                    .animate({opacity: 1.0}, 1500)
+                    .fadeOut('slow', function() {
+                        $j(this).remove();
+                    });
+
+                $j("input:visible:enabled:first").focus();
+            });
+            // ]]>
+        </script>
     
 <?php foreach(Plugin::$plugins as $plugin_id => $plugin): ?>
 <?php if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $plugin_id . '.js')): ?>
@@ -82,53 +127,40 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
       </div>
     </div>
     <div id="main">
-      <div id="content-wrapper"><div id="content">
+        <div id="content-wrapper">
+            <div id="content">
 <?php if (Flash::get('error') !== null): ?>
-        <div id="error" style="display: none"><?php echo Flash::get('error'); ?></div>
-        <script type="text/javascript" language="javascript">
-        // <![CDATA[
-            Effect.Appear('error', { queue: {scope: 'fadeovers', position: 'end' }});
-            Effect.Fade('error',{ queue: {scope: 'fadeovers', position: 'end'}, delay: 1.5 });
-        // ]]>
-        </script>
+                <div id="error" class="message" style="display: none;"><?php echo Flash::get('error'); ?></div>
 <?php endif; ?>
 <?php if (Flash::get('success') !== null): ?>
-        <div id="success" style="display: none"><?php echo Flash::get('success'); ?></div>
-        <script type="text/javascript" language="javascript">
-        // <![CDATA[
-            Effect.Appear('success', { queue: {scope: 'fadeovers', position: 'end' }});
-            Effect.Fade('success',{ queue: {scope: 'fadeovers', position: 'end'}, delay: 1.5 });
-        // ]]>
-        </script>
+                <div id="success" class="message" style="display: none"><?php echo Flash::get('success'); ?></div>
 <?php endif; ?>
 <?php if (Flash::get('info') !== null): ?>
-        <div id="info" style="display: none"><?php echo Flash::get('info'); ?></div>
-        <script type="text/javascript" language="javascript">
-        // <![CDATA[
-            Effect.Appear('info', { queue: {scope: 'fadeovers', position: 'end' }});
-            Effect.Fade('info',{ queue: {scope: 'fadeovers', position: 'end'}, delay: 1.5 });
-        // ]]>
-        </script>
+                <div id="info" class="message" style="display: none"><?php echo Flash::get('info'); ?></div>
 <?php endif; ?>
         <!-- content -->
         <?php echo $content_for_layout; ?>
         <!-- end content -->
-      </div></div>
-      <div id="sidebar-wrapper"><div id="sidebar">
+            </div>
+        </div>
+        <div id="sidebar-wrapper">
+            <div id="sidebar">
           <!-- sidebar -->
           <?php echo isset($sidebar) ? $sidebar: '&nbsp;'; ?>
           <!-- end sidebar -->
-        </div></div>
+    </div>
+        </div>
     </div>
 
-    <hr class="hidden" />
     <div id="footer">
       <p>
       <?php echo __('Thank you for using'); ?> <a href="http://www.wolfcms.org/" target="_blank">Wolf CMS</a> <?php echo CMS_VERSION; ?> | <a href="http://forum.wolfcms.org/" target="_blank"><?php echo __('Feedback'); ?></a>
       </p>
 <?php if (DEBUG): ?>
-      <p class="stats"> <?php echo __('Page rendered in'); ?> <?php echo execution_time(); ?> <?php echo __('seconds'); ?>
-      | <?php echo __('Memory usage:'); ?> <?php echo memory_usage(); ?></p>
+        <p class="stats">
+            <?php echo __('Page rendered in'); ?> <?php echo execution_time(); ?> <?php echo __('seconds'); ?>
+            | <?php echo __('Memory usage:'); ?> <?php echo memory_usage(); ?>
+        </p>
 <?php endif; ?>
 
       <p id="site-links">

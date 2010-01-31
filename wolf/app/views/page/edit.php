@@ -65,10 +65,6 @@ if ($action == 'edit') { ?>
               <table cellpadding="0" cellspacing="0" border="0">
                 <?php if ($page->parent_id != 0) : ?>
                 <tr>
-                  <td class="label"><label for="page_id"><?php echo __('Page id'); ?></label></td>
-                  <td class="field"><input class="textbox" id="page_id" maxlength="100" name="unused" size="100" type="text" value="<?php echo $page->id; ?>" disabled="disabled"/></td>
-                </tr>
-                <tr>
                   <td class="label"><label for="page_slug"><?php echo __('Slug'); ?></label></td>
                   <td class="field"><input class="textbox" id="page_slug" maxlength="100" name="page[slug]" size="100" type="text" value="<?php echo $page->slug; ?>" /></td>
                 </tr>
@@ -89,22 +85,68 @@ if ($action == 'edit') { ?>
                   <td class="label optional"><label for="page_tags"><?php echo __('Tags'); ?></label></td>
                   <td class="field"><input class="textbox" id="page_tags" maxlength="255" name="page_tag[tags]" size="255" type="text" value="<?php echo join(', ', $tags); ?>" /></td>
                 </tr>
+              </table>
+            </div>
+            <div id="div-settings" title="<?php echo __('Settings'); ?>">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <?php if ($page->parent_id != 0) : ?>
+                <tr>
+                  <td class="label"><label for="page_id"><?php echo __('Page id'); ?></label></td>
+                  <td class="field"><input class="textbox" id="page_id" maxlength="100" name="unused" size="100" type="text" value="<?php echo $page->id; ?>" disabled="disabled"/></td>
+                </tr>
+                <?php endif; ?>
+                <tr>
+                  <td class="label"><label for="page_layout_id"><?php echo __('Layout'); ?></label></td>
+                  <td class="field">
+                      <select id="page_layout_id" name="page[layout_id]">
+                        <option value="">&#8212; <?php echo __('inherit'); ?> &#8212;</option>
+                      <?php foreach ($layouts as $layout): ?>
+                        <option value="<?php echo $layout->id; ?>"<?php echo $layout->id == $page->layout_id ? ' selected="selected"': ''; ?>><?php echo $layout->name; ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="label"><label for="page_behavior_id"><?php echo __('Page Type'); ?></label></td>
+                  <td class="field">
+                    <select id="page_behavior_id" name="page[behavior_id]">
+                        <option value=""<?php if ($page->behavior_id == '') echo ' selected="selected"'; ?>>&#8212; <?php echo __('none'); ?> &#8212;</option>
+                    <?php foreach ($behaviors as $behavior): ?>
+                        <option value="<?php echo $behavior; ?>"<?php if ($page->behavior_id == $behavior) echo ' selected="selected"'; ?>><?php echo Inflector::humanize($behavior); ?></option>
+                    <?php endforeach; ?>
+                    </select>
+                  </td>
+                </tr>
               <?php if (isset($page->created_on)): ?>
                 <tr>
                   <td class="label"><label for="page_created_on"><?php echo __('Created date'); ?></label></td>
                   <td class="field">
-                    <input id="page_created_on" maxlength="10" name="page[created_on]" size="10" type="text" value="<?php echo substr($page->created_on, 0, 10); ?>" /> 
+                    <input id="page_created_on" maxlength="10" name="page[created_on]" size="10" type="text" value="<?php echo substr($page->created_on, 0, 10); ?>" />
                     <img onclick="displayDatePicker('page[created_on]');" src="<?php echo URI_PUBLIC;?>admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
                     <input id="page_created_on_time" maxlength="5" name="page[created_on_time]" size="5" type="text" value="<?php echo substr($page->created_on, 11); ?>" />
                 <?php if (isset($page->published_on)): ?>
                     &nbsp; <label for="page_published_on"><?php echo __('Published date'); ?></label>
-                    <input id="page_published_on" maxlength="10" name="page[published_on]" size="10" type="text" value="<?php echo substr($page->published_on, 0, 10); ?>" /> 
+                    <input id="page_published_on" maxlength="10" name="page[published_on]" size="10" type="text" value="<?php echo substr($page->published_on, 0, 10); ?>" />
                     <img onclick="displayDatePicker('page[published_on]');" src="<?php echo URI_PUBLIC;?>admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
-                    <input id="page_published_on_time" maxlength="5" name="page[published_on_time]" size="5" type="text" value="<?php echo substr($page->published_on, 11); ?>" /> 
+                    <input id="page_published_on_time" maxlength="5" name="page[published_on_time]" size="5" type="text" value="<?php echo substr($page->published_on, 11); ?>" />
                 <?php endif; ?>
                   </td>
                 </tr>
               <?php endif; ?>
+              <?php if (AuthUser::hasPermission('administrator') || AuthUser::hasPermission('developer')): ?>
+                <tr>
+                  <td class="label"><label for="page_needs_login"><?php echo __('Login:'); ?></label></td>
+                  <td class="field">
+                    <select id="page_needs_login" name="page[needs_login]" title="<?php echo __('When enabled, users have to login before they can view the page.'); ?>">
+                        <option value="<?php echo Page::LOGIN_INHERIT; ?>"<?php echo $page->needs_login == Page::LOGIN_INHERIT ? ' selected="selected"': ''; ?>><?php echo __('&#8212; inherit &#8212;'); ?></option>
+                        <option value="<?php echo Page::LOGIN_NOT_REQUIRED; ?>"<?php echo $page->needs_login == Page::LOGIN_NOT_REQUIRED ? ' selected="selected"': ''; ?>><?php echo __('not required'); ?></option>
+                        <option value="<?php echo Page::LOGIN_REQUIRED; ?>"<?php echo $page->needs_login == Page::LOGIN_REQUIRED ? ' selected="selected"': ''; ?>><?php echo __('required'); ?></option>
+                    </select>
+                    <input id="page_is_protected" name="page[is_protected]" class="checkbox" type="checkbox" value="1"<?php if ($page->is_protected) echo ' checked="checked"'; ?>/><label for="page_is_protected" title="<?php echo __('When enabled, only users who are an administrator can edit the page.'); ?>"> <?php echo __('Protected'); ?> </label>
+                  </td>
+                </tr>
+              <?php endif; ?>
+
               </table>
             </div>
             <?php Observer::notify('view_page_edit_tabs', $page); ?>
@@ -141,23 +183,7 @@ if ($action == 'edit') { ?>
     <?php Observer::notify('view_page_after_edit_tabs', $page); ?>
 
     <div class="row">
-      <p><label for="page_layout_id"><?php echo __('Layout'); ?></label>
-        <select id="page_layout_id" name="page[layout_id]">
-          <option value="">&#8212; <?php echo __('inherit'); ?> &#8212;</option>
-<?php foreach ($layouts as $layout): ?>
-          <option value="<?php echo $layout->id; ?>"<?php echo $layout->id == $page->layout_id ? ' selected="selected"': ''; ?>><?php echo $layout->name; ?></option>
-<?php endforeach; ?>
-        </select>
-      </p>
 
-      <p><label for="page_behavior_id"><?php echo __('Page Type'); ?></label>
-        <select id="page_behavior_id" name="page[behavior_id]">
-          <option value=""<?php if ($page->behavior_id == '') echo ' selected="selected"'; ?>>&#8212; <?php echo __('none'); ?> &#8212;</option>
-<?php foreach ($behaviors as $behavior): ?>
-          <option value="<?php echo $behavior; ?>"<?php if ($page->behavior_id == $behavior) echo ' selected="selected"'; ?>><?php echo Inflector::humanize($behavior); ?></option>
-<?php endforeach; ?>
-        </select>
-      </p>
 
 <?php if ( ! isset($page->id) || $page->id != 1): ?>
       <p><label for="page_status_id"><?php echo __('Status'); ?></label>
@@ -173,19 +199,7 @@ if ($action == 'edit') { ?>
 <?php Observer::notify('view_page_edit_plugins', $page); ?>
 
     </div>
-    <p class="clear">&nbsp;</p>
     
-<?php if (AuthUser::hasPermission('administrator') || AuthUser::hasPermission('developer')): ?>
-    <p style="float: right">
-        <label for="page_needs_login"><?php echo __('Login:'); ?></label>
-        <select id="page_needs_login" name="page[needs_login]" title="<?php echo __('When enabled, users have to login before they can view the page.'); ?>">
-          <option value="<?php echo Page::LOGIN_INHERIT; ?>"<?php echo $page->needs_login == Page::LOGIN_INHERIT ? ' selected="selected"': ''; ?>><?php echo __('&#8212; inherit &#8212;'); ?></option>
-          <option value="<?php echo Page::LOGIN_NOT_REQUIRED; ?>"<?php echo $page->needs_login == Page::LOGIN_NOT_REQUIRED ? ' selected="selected"': ''; ?>><?php echo __('not required'); ?></option>
-          <option value="<?php echo Page::LOGIN_REQUIRED; ?>"<?php echo $page->needs_login == Page::LOGIN_REQUIRED ? ' selected="selected"': ''; ?>><?php echo __('required'); ?></option>          
-        </select>
-        <input id="page_is_protected" name="page[is_protected]" class="checkbox" type="checkbox" value="1"<?php if ($page->is_protected) echo ' checked="checked"'; ?>/><label for="page_is_protected" title="<?php echo __('When enabled, only users who are an administrator can edit the page.'); ?>"> <?php echo __('Protected'); ?> </label>
-    </p>
-<?php endif; ?>
     <p><small>
 <?php if (isset($page->updated_on)): ?>
     <?php echo __('Last updated by'); ?> <?php echo $page->updated_by_name; ?> <?php echo __('on'); ?> <?php echo date('D, j M Y', strtotime($page->updated_on)); ?>

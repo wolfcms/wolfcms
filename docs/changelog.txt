@@ -47,6 +47,8 @@ Sigla:
 - Fixed duplicate IDs in Administration / Settings tab - issue 37 - thanks slowgary
 - Fixed atom:link reference in rss.xml
 - Fixed admin theme name - issue 98
+. Added settings tab to edit page screeen
+. Partial migration from Prototype to JQuery
 . Improved View Site link.
 . Removed BASE HREF tag from backend layout. May need updates to plugins! - issue 19
 . Removed PDO lite support. (supported use of PDO in case you had no PDO)
