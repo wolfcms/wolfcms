@@ -1,4 +1,3 @@
-
 /**
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
@@ -43,6 +42,7 @@ body {
   color: #000;
 }
 
+/* TODO - cleanup */
 img { border: 0; }
 h3 { font-size: 130%; margin: 1.25em 0 .5em; }
 a { color: #147; }
@@ -92,7 +92,7 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 
 #mainTabs {
   margin: 0 17px 0 20px;
-  height: 29px;
+  height: 28px;
 }
 #mainTabs ul {}
 #mainTabs li {
@@ -146,6 +146,8 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   width: 100%;
 }
 
+#content-wrapper { idth: 100%; }
+
 /* Content ---------------------------------------------------------------- */
 
 #content-wrapper {
@@ -154,29 +156,12 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   width: 70%;
   font-size: 95%;
   background-color: #fff;
-  border-bottom: 2px solid #58b; /*#76A83A;*/
+  border-bottom: 2px solid #76A83A; /*#58b;*/
 
   /* Border-radius not implemented yet */
   border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
-}
-
-#installation #content-wrapper,
-#body_setting_index #content-wrapper,
-#body_page_index #content-wrapper,
-#body_page_add #content-wrapper,
-#body_page_edit #content-wrapper,
-#body_snippet_add #content-wrapper,
-#body_snippet_edit #content-wrapper,
-#body_layout_add #content-wrapper,
-#body_layout_edit #content-wrapper,
-#body_user_add #content-wrapper,
-#body_user_edit #content-wrapper,
-#body_comment_edit #content-wrapper,
-#body_plugin_index #content-wrapper {
-  margin-right: 0;
-  width: 98%;
 }
 
 #content {
@@ -209,6 +194,112 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
     margin-top: 1em;
 }
 
+/* Footer ----------------------------------------------------------------- */
+
+#footer {
+    clear: both;
+    font-size: 80%;
+    margin: 0em 1.5em;
+}
+#footer .stats {
+    margin-top: -0.5em;
+    font-size: 90%;
+}
+
+/* Plugins tables */
+#plugins th, #plugins td {
+    text-align: center;
+}
+#plugins th.plugin, #plugins td.plugin {
+    text-align: left;
+}
+#plugins .disabled td {
+	color: #a22;
+}
+#plugins td .notes {
+	padding: 2px 5px;
+	border: 1px solid #ddd;
+	background-color: #eee;
+	font-size: .83em;
+	color: #222;
+}
+#plugins .plugin h4 .from
+{
+	font-size: .83em;
+	font-weight: normal;
+	color: #999;
+}
+
+/* Form Elements ---------------------------------------------------------- */
+
+.form-area {
+  background-color: #9ce;
+  margin-left: -20px;
+  margin-right: -20px;
+  padding: 20px;
+  padding-top: 15px;
+  padding-bottom: 20px;
+}
+
+
+/* Tabs ------------------------------------------------------------------- */
+
+.tabs {
+  loat: left;
+  margin-right: -4px;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 6px;
+}
+.tabs .tab {
+  display: inline;
+}
+.tabs .tab a {
+  margin-right: 0.35em;
+  padding: 0.35em 1em;
+  adding: 15px;
+  adding-top: 6px;
+  adding-bottom: 4px;
+  text-decoration: none;
+  color: #000;
+
+  /* Border-radius not implemented yet */
+  -moz-border-radius: 6px;
+  -moz-border-bottom-radius: 0px;
+  -moz-border-radius-bottomright: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-radius: 6px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+}
+.tabs .tab a.here {
+  background-color: #fff;
+  font-weight: bold;
+}
+.tab_toolbar {
+  float: right;
+  margin-top: .28em;
+}
+.tab_toolbar img { padding-bottom: 2px; }
+.pages {
+  background-color: #fff;
+  idth: 100%;
+  lear: both;
+  margin-top: 4px;
+
+
+  /* Border-radius not implemented yet */
+  -moz-border-radius: 6px;
+  -moz-border-radius-topleft: 0px;
+  -webkit-border-radius: 6px;
+  -webkit-border-topleft-radius: 0px;
+
+  text-shadow: black;
+}
+.pages .page {
+  padding: 20px;
+}
+
 /* Sidebar ---------------------------------------------------------------- */
 
 #sidebar-wrapper {
@@ -217,6 +308,24 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   width: 27%;
 }
 
+#installation #content-wrapper,
+#body_setting_index #content-wrapper,
+#body_page_index #content-wrapper,
+#body_page_add #content-wrapper,
+#body_page_edit #content-wrapper,
+#body_snippet_add #content-wrapper,
+#body_snippet_edit #content-wrapper,
+#body_layout_add #content-wrapper,
+#body_layout_edit #content-wrapper,
+#body_user_add #content-wrapper,
+#body_user_edit #content-wrapper,
+#body_comment_edit #content-wrapper,
+#body_plugin_index #content-wrapper {
+  margin-right: 0;
+  width: 98%;
+}
+
+#installation #sidebar-wrapper,
 #body_setting_index #sidebar-wrapper,
 #body_page_index #sidebar-wrapper,
 #body_page_add #sidebar-wrapper,
@@ -229,7 +338,7 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 #body_user_edit #sidebar-wrapper,
 #body_comment_edit #sidebar-wrapper,
 #body_plugin_index #sidebar-wrapper {
-  display: none;
+    display: none;
 }
 
 #sidebar h2 {
@@ -306,32 +415,15 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   color: #666;
 }
 
-/* Footer ----------------------------------------------------------------- */
 
-#footer {
-  color: #000;
-  font-size: 80%;
-  float: left;
-  width: 100%;
-}
-#footer p {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-#footer .stats {
-  margin-top: -5px;
-  font-size: .9em;
-  color: #def;
-}
-
-/* Site links ------------------------------------------------------------- */
+/* Site links top right --------------------------------------------------- */
 
 #site-links {
   color: #899;
   font-size: 90%;
   margin: 0;
   position: absolute;
-  right: 0;
+  right: 20px;
   top: 20px;
 }
 #site-links a,
@@ -376,25 +468,6 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   border-right: 2px solid #afa;
   border-bottom: 2px solid #afa;
 }
-
-/*
-#error, #success {
-  margin: -20px -20px 20px;
-  padding: 10px 20px;
-  text-align: left;
-}
-#info {
-  background: #EDFE86;
-}
-#error {
-  background: #a22;
-  color: #fff;
-}
-#success {
-  background: #cfc;
-  color: #051;
-}
-*/
 
 /* Index table, list ------------------------------------------------------ */
 
@@ -460,7 +533,7 @@ table.index td, .index li {
   color: #000;
   text-decoration: none;
 }
-.index .node a:hover, 
+.index .node a:hover,
 .index .node a:visited:hover {
   text-decoration: underline;
 }
@@ -480,28 +553,7 @@ table.index td.note {
   right: 10px;
 }
 
-#plugins th, #plugins td {
-    text-align: center;
-}
-#plugins th.plugin, #plugins td.plugin {
-    text-align: left;
-}
-#plugins .disabled td {
-	color: #a22;
-}
-#plugins td .notes {
-	padding: 2px 5px;
-	border: 1px solid #ddd;
-	background-color: #eee;
-	font-size: .83em;
-	color: #222;
-}
-#plugins .plugin h4 .from
-{
-	font-size: .83em;
-	font-weight: normal;
-	color: #999;
-}
+
 /* Site Map --------------------------------------------------------------- */
 
 #site-map-root .node.level-0 .page,
@@ -531,7 +583,7 @@ table.index td.note {
   color: #9eb3bf;
 }
 #site-map-root .node .page a:hover .title,
-#site-map .node .page a:hover .title, 
+#site-map .node .page a:hover .title,
 #site-map .node .page a:visited:hover .title {
   text-decoration: underline;
 }
@@ -546,6 +598,11 @@ table.index td.note {
 #site-map .page .info {
   position: relative;
   top: 5px;
+}
+.site-map-placeholder {
+    height: 30px;
+    background-color: #eee;
+    margin: 0px;
 }
 #site-map .page img.expander {
   padding: 3px;
@@ -594,16 +651,9 @@ table.index td.note {
 #site-map .status.published-status { color: #000; }
 #site-map .status.hidden-stats { color: #0c0; }
 #snippet_1 .tag, #snippets .tag { font-size:10px; position: absolute; top: 10px; right: 237px; width:300px }
-/* Form Elements ---------------------------------------------------------- */
 
-.form-area {
-  background-color: #9ce;
-  margin-left: -20px;
-  margin-right: -20px;
-  padding: 20px;
-  padding-top: 15px;
-  padding-bottom: 10px;
-}
+
+/* TODO - CLEANUP */
 .form-area h3 {
   font-size: 100%;
   margin-bottom: 0;
@@ -714,25 +764,24 @@ table.fieldset .error-with-field small {
   color: red;
 }
 
-/* Tabs ------------------------------------------------------------------- */
+/* Tabs TO BE REMOVED ------------------------------------------------------------------- */
 
 .tabs {
-  float: left;
   width: 100%;
   margin-top: 10px;
   margin-right: -4px;
 }
-.tabs .tab {
+
+.tabs a.tab {
   display: inline-block;
   font-size: 100%;
   text-align: left;
-  margin-right: 3px;
-  padding: 15px;
-  padding-top: 6px;
-  padding-bottom: 4px;
+  margin-right: 10px;
+  margin-bottom: -6px;
+  padding: 6px 15px;
   text-decoration: none;
-  text-transform: none;
-  background-color: #ddd;
+  ext-transform: none;
+  background-color: #e5e5e5;
   color: #000;
 
   /* Border-radius not implemented yet */
@@ -744,7 +793,7 @@ table.fieldset .error-with-field small {
   -webkit-border-bottom-right-radius: 0px;
   -webkit-border-bottom-left-radius: 0px;
 }
-.tabs .tab.here {
+.tabs a.tab.here {
   background-color: #fff;
   font-weight: bold;
 }
@@ -753,11 +802,11 @@ table.fieldset .error-with-field small {
   margin-top: .28em;
 }
 .tab_toolbar img { padding-bottom: 2px; }
+
 .pages {
   background-color: #fff;
   width: 100%;
   clear: both;
-
 
   /* Border-radius not implemented yet */
   -moz-border-radius: 6px;
@@ -767,9 +816,16 @@ table.fieldset .error-with-field small {
 
   text-shadow: black;
 }
+
+#div-title, #div-metadata {
+    margin: 0px 20px;
+    padding: 10px 0px;
+}
+
 .pages .page {
   padding: 20px;
 }
+
 .pages label {
   font-size: 85%;
   font-weight: normal;
@@ -788,13 +844,14 @@ table.fieldset .error-with-field small {
 #meta-pages td.label .optional {
   color: #929488;
 }
-#meta-pages #div-title,
-#meta-pages #div-metadata {
+#meta-pages #page-title,
+#meta-pages #page-metadata,
+#meta-pages #page-settings {
   padding: 20px;
   margin-top: .30em;
   margin-bottom: 20px;
 }
-#meta-pages #div-metadata #page_description {
+#meta-pages #page-metadata #page_description {
   height: 40px;
 }
 
@@ -815,6 +872,11 @@ table.fieldset .error-with-field small {
   padding: 2em;
   padding-top: 1em;
   padding-bottom: .5em;
+
+  /* Border-radius not implemented yet */
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
 }
 #content .popup .busy {
   float: right;
@@ -914,7 +976,7 @@ table.fieldset .error-with-field small {
 }
 
 
-/* additional style information for the cell that holds a highlighted day (usually either today's date or the current date field value) */ 
+/* additional style information for the cell that holds a highlighted day (usually either today's date or the current date field value) */
 .dpDayHighlight {
   color: #47a;
   font-weight: bold;
@@ -940,3 +1002,62 @@ table.fieldset .error-with-field small {
   color: #666;
   cursor: pointer;
 }
+
+
+
+/* Z-index of #mask must lower than #boxes .window */
+#mask {
+  position:absolute;
+  z-index:9000;
+  background-color:#000;
+  display:none;
+}
+
+#boxes .window {
+  position:absolute;
+  display:none;
+  z-index:9999;
+
+  background-color: white;
+  border: 5px solid silver;
+
+  /* Border-radius not implemented yet */
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+#boxes .window .titlebar {
+    background-color: #988060;
+    color: #fff;
+    padding: 0.5em;
+    font-size: 130%;
+    text-shadow: -1px 2px 3px #000;
+}
+
+#boxes .window .titlebar .close {
+    color: #fff;
+    text-decoration: none;
+    float: right;
+    font-size: 80%;
+    text-shadow: none;
+    margin-left: 0.5em;
+}
+
+#boxes .window .content {
+    padding: 1em;
+}
+
+#boxes .window .content p {
+    margin: 0em 0.2em 0em 0.2em;
+    padding: 0;
+}
+
+/* Customize your modal window here, you can add background image too */
+#boxes #dialog {
+  idth:375px;
+  eight:203px;
+  background-color: #fff;
+  color: #000;
+}
+

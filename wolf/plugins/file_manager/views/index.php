@@ -86,39 +86,7 @@
 </table>
 
 <div id="popups">
-  <div class="popup" id="create-file-popup" style="display:none;">
-    <h3><?php echo __('Create new file'); ?></h3>
-    <form action="<?php echo get_url('plugin/file_manager/create_file'); ?>" method="post"> 
-      <div>
-        <input id="create_file_path" name="file[path]" type="hidden" value="<?php echo ($dir == '') ? '/': $dir; ?>" />
-        <input id="create_file_name" maxlength="255" name="file[name]" type="text" value="" /> 
-        <input id="create_file_button" name="commit" type="submit" value="<?php echo __('Create'); ?>" />
-      </div>
-      <p><a class="close-link" href="#" onclick="Element.hide('create-file-popup'); return false;"><?php echo __('Close'); ?></a></p>
-    </form>
-  </div>
-  <div class="popup" id="create-directory-popup" style="display:none;">
-    <h3><?php echo __('Create new directory'); ?></h3>
-    <form action="<?php echo get_url('plugin/file_manager/create_directory'); ?>" method="post">
-      <div>
-        <input id="create_directory_path" name="directory[path]" type="hidden" value="<?php echo ($dir == '') ? '/': $dir; ?>" />
-        <input id="create_directory_name" maxlength="255" name="directory[name]" type="text" value="" /> 
-        <input id="file_button" name="commit" type="submit" value="<?php echo __('Create'); ?>" />
-      </div>
-      <p><a class="close-link" href="#" onclick="Element.hide('create-directory-popup'); return false;"><?php echo __('Close'); ?></a></p>
-    </form>
-  </div>
-  <div class="popup" id="upload-file-popup" style="display:none;">
-    <form action="<?php echo get_url('plugin/file_manager/upload'); ?>" method="post" enctype="multipart/form-data"> 
-      <h3><?php echo __('Upload file'); ?> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input id="upload_overwrite" name="upload[overwrite]" type="checkbox" value="1" /><label for="upload_overwrite"><small><?php echo __('overwrite it?'); ?></small></label></h3>
-      <div>
-        <input id="upload_path" name="upload[path]" type="hidden" value="<?php echo ($dir == '') ? '/': $dir; ?>" />
-        <input id="upload_file" name="upload_file" type="file" />
-        <input id="upload_file_button" name="commit" type="submit" value="<?php echo __('Upload'); ?>" />
-      </div>
-      <p><a class="close-link" href="#" onclick="Element.hide('upload-file-popup'); return false;"><?php echo __('Close'); ?></a></p>
-    </form>
-  </div>
+
   <div class="popup" id="chmod-popup" style="display:none;">
     <h3><?php echo __('Change mode'); ?></h3>
     <form action="<?php echo get_url('plugin/file_manager/chmod'); ?>" method="post"> 
@@ -141,4 +109,66 @@
         <p><a class="close-link" href="#" onclick="Element.hide('rename-popup'); return false;"><?php echo __('Close'); ?></a></p>
       </form>
     </div>
+</div>
+
+<div id="boxes">
+	<!-- #Demo dialog -->
+	<div id="dialog" class="window">
+		<div class="titlebar">
+            Demo dialog
+            <a href="#" class="close">[x]</a>
+        </div>
+        <div class="content">
+            <p>This is just a demo.</p>
+        </div>
+	</div>
+
+    <div id="create-file-popup" class="window">
+		<div class="titlebar">
+            <?php echo __('Create new file'); ?>
+            <a href="#" class="close">[x]</a>
+        </div>
+        <div class="content">
+            <form action="<?php echo get_url('plugin/file_manager/create_file'); ?>" method="post">
+                <input id="create_file_path" name="file[path]" type="hidden" value="<?php echo ($dir == '') ? '/': $dir; ?>" />
+                <input id="create_file_name" maxlength="255" name="file[name]" type="text" value="" />
+                <input id="create_file_button" name="commit" type="submit" value="<?php echo __('Create'); ?>" />
+            </form>
+        </div>
+    </div>
+
+    <div id="create-directory-popup" class="window">
+		<div class="titlebar">
+            <?php echo __('Create new directory'); ?>
+            <a href="#" class="close">[x]</a>
+        </div>
+        <div class="content">
+            <form action="<?php echo get_url('plugin/file_manager/create_directory'); ?>" method="post">
+                <input id="create_directory_path" name="directory[path]" type="hidden" value="<?php echo ($dir == '') ? '/': $dir; ?>" />
+                <input id="create_directory_name" maxlength="255" name="directory[name]" type="text" value="" />
+                <input id="file_button" name="commit" type="submit" value="<?php echo __('Create'); ?>" />
+            </form>
+        </div>
+    </div>
+
+    <div id="upload-file-popup" class="window">
+		<div class="titlebar">
+            <?php echo __('Upload file'); ?>
+            <a href="#" class="close">[x]</a>
+        </div>
+        <div class="content">
+            <form action="<?php echo get_url('plugin/file_manager/upload'); ?>" method="post" enctype="multipart/form-data">
+                <input id="upload_overwrite" name="upload[overwrite]" type="checkbox" value="1" /> <label for="upload_overwrite"><small><?php echo __('overwrite it?'); ?></small></label><br />
+                <input id="upload_path" name="upload[path]" type="hidden" value="<?php echo ($dir == '') ? '/': $dir; ?>" />
+                <input id="upload_file" name="upload_file" type="file" />
+                <input id="upload_file_button" name="commit" type="submit" value="<?php echo __('Upload'); ?>" />
+            </form>
+        </div>
+    </div>
+
+
+
+    <!-- Do not remove div#mask, because you'll need it to fill the whole screen -->
+ 	<div id="mask"></div>
+
 </div>

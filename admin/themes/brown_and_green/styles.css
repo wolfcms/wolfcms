@@ -132,13 +132,13 @@ form fieldset { margin-top: 1em; }
 
 /* Tabs ------------------------------------------------------------------- */
 
-#tabs-meta .tab, #tabs .tab { background-color: #e5e5e5; color: #000; }
-#tabs-meta .tab:hover, #tabs .tab:hover { background-color: #988060; color: #fff; }
-#tabs-meta .tab.here,
-#tabs .tab.here { background-color: #fff; color: #000; }
-.tabs .tab { background-color: #e5e5e5; }
-.tabs .tab:hover { background-color: #988060; color: #fff; }
-.tabs .tab.here:hover { background-color: #fff; color: #000; }
+#tabs-meta .tab a, #tabs .tab a { background-color: #e5e5e5; color: #000; }
+#tabs-meta .tab a:hover, #tabs .tab a:hover { background-color: #988060; color: #fff; }
+#tabs-meta .tab a.here,
+#tabs .tab a.here { background-color: #fff; color: #000; }
+.tabs .tab a { background-color: #e5e5e5; }
+.tabs .tab a:hover { background-color: #988060; color: #fff; }
+.tabs .tab a.here:hover { background-color: #fff; color: #000; }
 #tab-toolbar img { padding-bottom: 2px; }
 #meta-divs td { background-color: #fff; }
 #meta-divs td.label .optional { color: #929488; }
