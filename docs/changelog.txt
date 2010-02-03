@@ -7,6 +7,10 @@ Sigla:
 . other development
 ======
 
+0.7.0 - released 2010-??-??
+
+- Fixed issue where some server might throw error about URL_PUBLIC - issue 119
+
 0.6.0 - released 2010-01-31
 + Added Page::linkById() function to allow for self-updating links. - issue 131
 + Added preview function to pages list.

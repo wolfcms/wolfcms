@@ -39,6 +39,9 @@ $config_file = CMS_ROOT.'/config.php';
 
 require_once($config_file);
 
+// if you have installed wolf and see this line, you can comment it or delete it :)
+if ( ! defined('DEBUG')) { header('Location: install/'); exit(); }
+
 // Figure out what the public URI is based on URL_PUBLIC.
 // TODO - improve
 $changedurl = str_replace('//','|',URL_PUBLIC);
@@ -49,9 +52,6 @@ if (false === $lastslash) {
 else {
     define('URI_PUBLIC', substr($changedurl, $lastslash));
 }
-
-// if you have installed wolf and see this line, you can comment it or delete it :)
-if ( ! defined('DEBUG')) { header('Location: install/'); exit(); }
 
 // Security checks -----------------------------------------------------------
 if (DEBUG == false && isWritable($config_file)) {
