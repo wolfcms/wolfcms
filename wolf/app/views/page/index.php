@@ -54,10 +54,10 @@
         </span>
       </div>
       <div class="status published-status"><?php echo __('Published'); ?></div>
-      <div class="view-page"><a href="<?php echo URL_PUBLIC; ?>" target="_blank"><img src="images/magnify.png" align="middle" alt="view page" title="View Page" /></a></div>
+      <div class="view-page"><a href="<?php echo URL_PUBLIC; ?>" target="_blank"><img src="images/magnify.png" align="middle" alt="<?php echo __('View Page'); ?>" title="<?php echo __('View Page'); ?>" /></a></div>
       <div class="modify">
           <a href="<?php echo get_url('page/add/1'); ?>"><img src="images/plus.png" align="middle" title="<?php echo __('Add child'); ?>" alt="<?php echo __('Add child'); ?>" /></a>&nbsp; 
-          <img class="remove" src="images/icon-remove-disabled.gif" align="middle" alt="remove icon disabled" />
+          <img class="remove" src="images/icon-remove-disabled.gif" align="middle" alt="<?php echo __('remove icon disabled'); ?>" title="<?php echo __('Remove unavailable'); ?>"/>
       </div>
     </li>
 </ul>

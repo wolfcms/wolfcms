@@ -57,9 +57,9 @@
       <td><?php echo implode(', ', $user->getPermissions()); ?></td>
       <td>
 <?php if ($user->id > 1): ?>
-        <a href="<?php echo get_url('user/delete/'.$user->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete it?'); ?>');"><img src="images/icon-remove.gif" alt="remove icon" /></a>
+        <a href="<?php echo get_url('user/delete/'.$user->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete').' '.$user->name.'?'; ?>');"><img src="images/icon-remove.gif" alt="<?php echo __('delete user icon'); ?>" title="<?php echo __('Delete user'); ?>" /></a>
 <?php else: ?>
-        <img src="images/icon-remove-disabled.gif" alt="remove icon disabled" />
+        <img src="images/icon-remove-disabled.gif" alt="<?php echo __('delete user icon disabled'); ?>" title="<?php echo __('Delete user unavailable'); ?>" />
 <?php endif; ?>
       </td>
     </tr>
