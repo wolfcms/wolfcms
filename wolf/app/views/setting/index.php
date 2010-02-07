@@ -177,7 +177,7 @@
                         <tr>
                             <td class="label"><label for="setting_allow_html_title"><?php echo __('Allow HTML in Title'); ?></label></td>
                             <td class="field">
-                                <input type="checkbox" name="setting[allow_html_title]" <?php if (Setting::get('allow_html_title') == 'on') echo ' checked="checked"'; ?> />
+                                <input type="checkbox" id="setting_allow_html_title" name="setting[allow_html_title]" <?php if (Setting::get('allow_html_title') == 'on') echo ' checked="checked"'; ?> />
                             </td>
                             <td class="help"><?php echo __('Determines whether or not HTML code is allowed in a page\'s title.'); ?></td>
                         </tr>

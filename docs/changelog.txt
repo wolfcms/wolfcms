@@ -11,6 +11,7 @@ Sigla:
 
 + Added alt and title strings to address accessibility concerns - issue 138
 - Fixed issue where some server might throw error about URL_PUBLIC - issue 119
+- Fixed missing id string in settings file - issue 129
 
 0.6.0 - released 2010-01-31
 + Added Page::linkById() function to allow for self-updating links. - issue 131
