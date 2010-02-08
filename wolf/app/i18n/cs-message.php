@@ -9,13 +9,16 @@
  * @author David Vlcek
  * @version Wolf x.y.z
  */
+ // updated by Wlk; Iva Pelcová 2010.02.07
 
 return array(
 
-// not in original lang file - added by Wlk
 'Administration' => 'Administrace',
 'Website' => 'Stránky autora',
 'Enabled' => 'Instalováno',
+'Uninstall' => 'Odinstalovat',
+'Latest' => 'Nejnovější',
+'latest' => 'nejnovější',
 'Version' => 'Verze',
 'Plugin' => 'Doplněk',
 'Plugins' => 'Doplňky',
@@ -31,19 +34,23 @@ return array(
 'Permissions' => 'Atributy',
 'Create' => 'Vytvořit',
 'overwrite it?' => '&nbsp;Přepsat původní?',
+'View page' => 'Shlédnout stránku',
+
 // end ---------------------------------------------------------
 
 // general
 'Pages' => 'Stránky',
 'Snippets' => 'Výstřižky',
-'Layouts' => 'Šalony',
+'Layouts' => 'Šablony',
 'Files' => 'Soubory',
 'Users' => 'Uživatelé',
 'Modify' => 'Změnit',
+'View' => 'Shlédnout',
+'copy' => 'kopírovat',
 'Action' => 'Akce',
 'Close' => 'Zavřít',
 'Save' => 'Uložit',
-'Save and Close' => 'Uložit a Zavřít',
+'Save and Close' => 'Uložit a zavřít',
 'Save and Continue Editing' => 'Uložit a pokračovat v úpravách',
 'or' => 'nebo',
 'Cancel' => 'Zrušit',
@@ -67,10 +74,8 @@ return array(
 // layouts
 'Layout' => 'Šablona',
 'New Layout' => 'Nová šablona',
-'What is a Layout?' => 'Ce ja tato šablona?',
-'Use layouts to apply a visual look to a Web page. Layouts can contain special tags to include
-  page content and other elements such as the header or footer. Click on a layout name below to
-  edit it or click <strong>Remove</strong> to delete it.' =>'Šablony mohou obsahovat zvláštní prvky, které výrazně změní obsah stránky a další elementy jako například hlavičku nebo patku. Kliknutím na název můžete šablonu editovat, nebo na <strong>ikonu koše</strong> pro její odstranění.',
+'What is a Layout?' => 'Co je to šablona?',
+'Use layouts to apply a visual look to a Web page. Layouts can contain special tags to include page content and other elements such as the header or footer. Click on a layout name below to edit it or click <strong>Remove</strong> to delete it.' => 'Šablony mohou obsahovat zvláštní prvky, které výrazně změní obsah stránky a další elementy jako například hlavičku nebo patku. Kliknutím na název můžete šablonu editovat, nebo na <strong>ikonu koše</strong> pro její odstranění.',
 'Add Layout' => 'Nová šablona',
 'Edit Layout' => 'Upravit šablonu',
 'Remove Layout' => 'Odstranit šablonu',
@@ -98,14 +103,24 @@ return array(
 'none' => 'není',
 'Page Type' => 'Typ stránky',
 'Comments' => 'Komentáře',
+'Keywords' => 'Klíčová slova',
+'Description' => 'Popis',
+'Login:' => 'Přihlášení',
+'required' => 'vyžadováno',
+'not required' => 'nevyžadováno',
+'Protected' => 'Chráněno',
+'View this page' => 'Shlédnout tuto stránku',
 
 // settings
 'Settings' => 'Nastavení',
 'Admin Site title' => 'Titulek administrátorské části',
+'Site email' => 'Webový email',
 'Language' => 'Jazyk',
 'Administration Theme' => 'Vzhled administrace',
 'Page options' => 'Nastavení stránky',
 'Default Status' => 'Standardní status',
+'Default tab' => 'Výchozí záložka',
+'This allows you to specify which tab (controller) you will see by default after login.' => 'Zde si nastavte, kterou záložku uvidíte po přihlášení jako první.',
 'Default Filter' => 'Standardní filtr',
 'Optional component' => 'Volitelná součást',
 'Enable comments' => 'Povolit komentáře',
@@ -117,6 +132,9 @@ Použitím <strong>&lt;img src="img_path" /&gt;</strong> můžete nahradit text 
 'This will set your language for the backend.' => 'Zde nastavte jazyk pro Administraci.',
 'This will change your Administration theme.' => 'Zde si vyberte vzhled Administrace.',
 'Only for filter in pages, NOT in snippets' => 'Filtr pouze pro stránky, NE pro výstřižky.',
+'When emails are sent by Wolf CMS, this email address will be used as the sender. Default: do-not-reply@wolfcms.org' => 'Tato adresa bude použita jako odesílatel v případě, že redakční systém odešle email. Výchozí: do-not-reply@wolfcms.org',
+'Allow HTML in Title' => 'Povolit HTML v názvu',
+'Determines whether or not HTML code is allowed in a page\'s title.' => 'Určuje, zda bude používání kódu HTML v názvech stránek povoleno či nikoliv.',
 
 // snippets
 'New Snippet' => 'Nový výstřižek',
@@ -127,6 +145,8 @@ Použitím <strong>&lt;img src="img_path" /&gt;</strong> můžete nahradit text 
 'Add Snippet' => 'Přidat výstřižek',
 'Edit Snippet' => 'Upravit výstřižek',
 'Remove Snippet' => 'Smazat výstřižek',
+'Tag to use this snippet' => 'Kód pro vložení výstřižku',
+'Just replace <b>snippet</b> by the snippet name you want to include.' => 'Jen nahraďte <b>snippet</b> jménem výstřižku, který chcete vložit.',
 
 
 // users
@@ -153,9 +173,10 @@ Použitím <strong>&lt;img src="img_path" /&gt;</strong> můžete nahradit text 
 'Leave password blank for it to remain unchanged.' => 'Nechcete-li změnit heslo, ponechte pole prázdné.',
 'Roles restrict user privileges and turn parts of the administrative interface on or off.' => 'Oprávnění omezí uživatelská práva a zamezí zněužití některých funkcí administrace.',
 'New User' => 'Nový uživatel',
-'Where do the avatars come from?' => 'Odkud pocházejí awatary?',
+'Where do the avatars come from?' => 'Odkud pocházejí avatary?',
 'The avatars are automatically linked for those with a <a href="http://www.gravatar.com/" target="_blank">Gravatar</a> (a free service) account.' =>
-'Awatary jsou automaticky získávány z konta uživatelů na webu <a href="http://www.gravatar.com" target="_blank">Gravatar</a>! Tato služba je zdarma.',
+'Avatary jsou automaticky získávány z konta uživatelů na webu <a href="http://www.gravatar.com" target="_blank">Gravatar</a>! Tato služba je zdarma.',
+'This will set your preferred language for the backend.' => 'Toto nastaví vámi preferovaný jazyk pro administraci.',
 
 
 // errors and success
