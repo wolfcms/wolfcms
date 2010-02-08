@@ -52,22 +52,22 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
     <title><?php use_helper('Kses'); echo kses(Setting::get('admin_title'), array()) . ' - ' . $title; ?></title>
 
     <link rel="favourites icon" href="<?php echo URL_PUBLIC; ?>favicon.ico" />
-    <link href="<?php echo URI_PUBLIC; ?><?php echo ADMIN_DIR; ?>/stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
-    <link href="<?php echo URI_PUBLIC; ?><?php echo ADMIN_DIR; ?>/stylesheets/toolbar.css" media="screen" rel="Stylesheet" type="text/css" />
-    <link href="<?php echo URI_PUBLIC; ?><?php echo ADMIN_DIR; ?>/themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
+    <link href="<?php echo URI_PUBLIC . ADMIN_DIR; ?>/stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
+    <link href="<?php echo URI_PUBLIC . ADMIN_DIR; ?>/stylesheets/toolbar.css" media="screen" rel="Stylesheet" type="text/css" />
+    <link href="<?php echo URI_PUBLIC . ADMIN_DIR; ?>/themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
 
     <!-- IE6 PNG support fix -->
     <!--[if lt IE 7]>
-        <script type="text/javascript" charset="utf-8" src="<?php echo URL_PUBLIC; ?>/<?php echo ADMIN_DIR; ?>javascripts/unitpngfix.js"></script>
+        <script type="text/javascript" charset="utf-8" src="<?php echo URL_PUBLIC . ADMIN_DIR; ?>/javascripts/unitpngfix.js"></script>
     <![endif]-->
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?><?php echo ADMIN_DIR; ?>/javascripts/prototype.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?><?php echo ADMIN_DIR; ?>/javascripts/effects.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?><?php echo ADMIN_DIR; ?>/javascripts/dragdrop.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?><?php echo ADMIN_DIR; ?>/javascripts/cp-datepicker.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?><?php echo ADMIN_DIR; ?>/javascripts/wolf.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?><?php echo ADMIN_DIR; ?>/javascripts/control.textarea.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?><?php echo ADMIN_DIR; ?>/javascripts/jquery-1.3.2.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?><?php echo ADMIN_DIR; ?>/javascripts/jquery-ui-1.7.2.custom.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC . ADMIN_DIR; ?>/javascripts/prototype.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC . ADMIN_DIR; ?>/javascripts/effects.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC . ADMIN_DIR; ?>/javascripts/dragdrop.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC . ADMIN_DIR; ?>/javascripts/cp-datepicker.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC . ADMIN_DIR; ?>/javascripts/wolf.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC . ADMIN_DIR; ?>/javascripts/control.textarea.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC . ADMIN_DIR; ?>/javascripts/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC . ADMIN_DIR; ?>/javascripts/jquery-ui-1.7.2.custom.min.js"></script>
     <script type="text/javascript" charset="utf-8">
      var $j = jQuery.noConflict();
     </script>
