@@ -17,6 +17,7 @@ Sigla:
 - Fixed missing id string in settings file - issue 129
 . Updated Russian translation for core and plugins - thanks Kostromind
 . Updated Czech translation for core - thanks Iva Pelcová
+. Updated default layout taglines
 
 0.6.0 - released 2010-01-31
 + Added Page::linkById() function to allow for self-updating links. - issue 131
