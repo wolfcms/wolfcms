@@ -13,6 +13,7 @@ Sigla:
 + Added alt and title strings to improve i18n consistency - issue 138
 - Fixed issue where some server might throw error about URL_PUBLIC - issue 119
 - Fixed backend layout call for dynamic admin directory name
+- Fixed system files to call dynamic admin directory name
 - Fixed missing id string in settings file - issue 129
 . Updated Russian translation for core and plugins - thanks Kostromind
 . Updated Czech translation for core - thanks Iva Pelcová

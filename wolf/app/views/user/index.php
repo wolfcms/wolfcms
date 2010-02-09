@@ -49,7 +49,7 @@
 <?php foreach($users as $user): ?> 
     <tr class="node <?php echo odd_even(); ?>">
       <td class="user">
-        <img src="http://www.gravatar.com/avatar.php?gravatar_id=<?php echo md5($user->email); ?>&amp;default=<?php echo URL_PUBLIC; ?>admin/images/user.png&amp;size=32" align="middle" alt="user icon" />
+        <img src="http://www.gravatar.com/avatar.php?gravatar_id=<?php echo md5($user->email); ?>&amp;default=<?php echo URL_PUBLIC . ADMIN_DIR; ?>/images/user.png&amp;size=32" align="middle" alt="user icon" />
         <a href="<?php echo get_url('user/edit/'.$user->id); ?>"><?php echo $user->name; ?></a>
         <small><?php echo $user->username; ?></small>
       </td>
