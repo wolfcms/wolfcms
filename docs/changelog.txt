@@ -15,6 +15,7 @@ Sigla:
 - Fixed backend layout call for dynamic admin directory name
 - Fixed system files to call dynamic admin directory name
 - Fixed missing id string in settings file - issue 129
+- Fixed trailing slash issue with Pagination.php helper
 . Updated Russian translation for core and plugins - thanks Kostromind
 . Updated Czech translation for core - thanks Iva Pelcová
 . Updated default layout taglines
