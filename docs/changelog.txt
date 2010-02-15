@@ -9,6 +9,8 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Added PLUGINS constant which refers to plugins home.
++ Added BASE_URI constant
 + Added Russian translation for plugins - thanks Kostromind
 + Added alt and title strings to improve i18n consistency - issue 138
 - Fixed issue where some server might throw error about URL_PUBLIC - issue 119
@@ -17,7 +19,7 @@ Sigla:
 - Fixed missing id string in settings file - issue 129
 - Fixed trailing slash issue with Pagination.php helper
 . Updated Russian translation for core and plugins - thanks Kostromind
-. Updated Czech translation for core - thanks Iva Pelcová
+. Updated Czech translation for core - thanks Iva Pelcovï¿½
 . Updated default layout taglines
 
 0.6.0 - released 2010-01-31

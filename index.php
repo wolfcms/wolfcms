@@ -53,6 +53,8 @@ else {
     define('URI_PUBLIC', substr($changedurl, $lastslash));
 }
 
+define('PLUGINS_URI', URI_PUBLIC.'wolf/plugins/');
+
 // Security checks -----------------------------------------------------------
 if (DEBUG == false && isWritable($config_file)) {
 // Windows systems always have writable config files... skip those.
@@ -69,6 +71,7 @@ if (DEBUG == false && isWritable($config_file)) {
 //  Init  --------------------------------------------------------------------
 
 define('BASE_URL', URL_PUBLIC . (endsWith(URL_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
+define('BASE_URI', URI_PUBLIC . (endsWith(URI_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
 
 require CORE_ROOT.'/Framework.php';
 
