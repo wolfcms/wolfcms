@@ -309,9 +309,13 @@ class Plugin {
      *
      * @param array $settings Array of name-value pairs
      * @param string $plugin_id     The folder name of the plugin
+     * @return bool Returns true if successful otherwise returns false.
      */
-    static function setAllSettings($array=null, $plugin_id=null) {
-        if ($array == null || $plugin_id == null) return false;
+    static function setAllSettings($array, $plugin_id) {
+
+        // Perform sanity checks
+        if (!is_array($array) || !isstring($plugin_id)) return false;
+        if (empty($array) || empty($plugin_id)) return false;
 
         global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
@@ -353,9 +357,13 @@ class Plugin {
      * @param string $name          Setting name
      * @param string $value         Setting value
      * @param string $plugin_id     Plugin folder name
+     * @return bool Returns true upon success otherwise false.
      */
-    static function setSetting($name=null, $value=null, $plugin_id=null) {
-        if ($name == null || $value == null || $plugin_id == null) return false;
+    static function setSetting($name, $value, $plugin_id) {
+
+        // Perform sanity checks
+        if (!isstring($name) || !isstring($value) || !isstring($plugin_id)) return false;
+        if (empty($name) || empty($value) || empty($plugin_id)) return false;
 
         global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
@@ -382,7 +390,7 @@ class Plugin {
         }
 
         $stmt = $__CMS_CONN__->prepare($sql);
-        $stmt->execute();
+        return $stmt->execute();
     }
 
     /**

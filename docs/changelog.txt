@@ -13,6 +13,7 @@ Sigla:
 + Added BASE_URI constant
 + Added Russian translation for plugins - thanks Kostromind
 + Added alt and title strings to improve i18n consistency - issue 138
+- Fixed issue where Plugin::setSetting did not return boolean. - issue 134
 - Fixed issue in default content where no articles caused error. - issue 122
 - Fixed issue where some server might throw error about URL_PUBLIC - issue 119
 - Fixed backend layout call for dynamic admin directory name
