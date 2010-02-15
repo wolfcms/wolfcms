@@ -256,7 +256,13 @@ class Page extends Record {
         return $this->tags;
     }
 
-
+    /**
+     * Return a numerical representation of this page's place in the page hierarchy.
+     *
+     * Note: uses the page url to check level. Might not always be what you'd expect.
+     *
+     * @return int The page's level.
+     */
     public function level() {
         if ($this->level === false)
             $this->level = empty($this->url) ? 0 : substr_count($this->url, '/')+1;
@@ -266,11 +272,19 @@ class Page extends Record {
 
 
     /**
-     * http://php.net/strftime
-     * exemple (can be useful):
-     *  '%a, %e %b %Y'      -> Wed, 20 Dec 2006 <- (default)
-     *  '%A, %e %B %Y'      -> Wednesday, 20 December 2006
+     * Return formatted date for page. Defaults to 'created on' date.
+     *
+     * This function works through PHP's strftime() function. Please see
+     * http://php.net/strftime for more details on formatting options.
+     *
+     * Example usage:
+     *  '%a, %e %b %Y'        -> Wed, 20 Dec 2006 <- (default)
+     *  '%A, %e %B %Y'        -> Wednesday, 20 December 2006
      *  '%B %e, %Y, %H:%M %p' -> December 20, 2006, 08:30 pm
+     *
+     * @param string    Format string.
+     * @param which_one The date field to be used.
+     * @return string   Formatted date.
      */
     public function date($format='%a, %e %b %Y', $which_one='created') {
         if ($which_one == 'update' || $which_one == 'updated')
@@ -282,6 +296,13 @@ class Page extends Record {
     }
 
 
+    /**
+     * Return content of the page or a specific part of the page.
+     *
+     * @param string $part      Part to retrieve content for. Defaults to 'body'.
+     * @param bool   $inherit   Check parents for part content if true.
+     * @return string           Actual contents of the part.
+     */
     public function content($part='body', $inherit=false) {
         // if part exist we generate the content en execute it!
         if (isset($this->part->$part)) {
@@ -295,6 +316,16 @@ class Page extends Record {
         }
     }
 
+    /**
+     * Check if a part exists.
+     *
+     * If inherit is set to true, it checks for the part
+     * in this page's parents.
+     *
+     * @param string $part      Part name.
+     * @param bool   $inherit   Check parents for part if true.
+     * @return bool             Returns true if part was found.
+     */
     public function hasContent($part, $inherit=false) {
         if ( isset($this->part->$part) ) {
             return true;
@@ -308,6 +339,13 @@ class Page extends Record {
         $this->url = trim($this->parent->url .'/'. $this->slug, '/');
     }
 
+    /**
+     * Return an HTML anchor element for this page.
+     *
+     * @param string $label     A custom label. Defaults to page title.
+     * @param array $options    Array containing attributes to add.
+     * @return string           The actual anchor element.
+     */
     public function link($label=null, $options='') {
         if ($label == null)
             $label = $this->title();
@@ -355,7 +393,16 @@ class Page extends Record {
             );
     }
 
-
+    /**
+     * Return an array of this page's children.
+     * 
+     * Note: returns a single Page object if only one child exists.
+     *
+     * @param array $args               Array of key=>value pairs.
+     * @param array $value
+     * @param boolean $include_hidden   True if children with hidden status should be included.
+     * @return mixed                    False, array of Page objects or single Page object.
+     */
     public function children($args=null, $value=array(), $include_hidden=false) {
         global $__CMS_CONN__;
 

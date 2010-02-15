@@ -26,6 +26,7 @@ Sigla:
 . Updated Russian translation for core and plugins - thanks Kostromind
 . Updated Czech translation for core - thanks Iva Pelcov�
 . Updated default layout taglines
+. Added more comments for developers & PHPdoc
 
 0.6.0 - released 2010-01-31
 + Added Page::linkById() function to allow for self-updating links. - issue 131
