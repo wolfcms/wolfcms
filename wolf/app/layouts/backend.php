@@ -75,12 +75,16 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
     <script type="text/javascript">
             // <![CDATA[
             $j(document).ready(function() {
-                $j(".message")
-                    .fadeIn('slow')
-                    .animate({opacity: 1.0}, 1500)
-                    .fadeOut('slow', function() {
+                (function showMessages(e) {
+                    e.fadeIn('slow')
+                     .animate({opacity: 1.0}, 1500)
+                     .fadeOut('slow', function() {
+                        if ($j(this).next().attr('class') == 'message') {
+                            showMessages($j(this).next());
+                        }
                         $j(this).remove();
-                    });
+                     })
+                })( $j(".message:first") );
 
                 $j("input:visible:enabled:first").focus();
             });
@@ -126,9 +130,6 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
         </ul>
       </div>
     </div>
-    <div id="main">
-        <div id="content-wrapper">
-            <div id="content">
 <?php if (Flash::get('error') !== null): ?>
                 <div id="error" class="message" style="display: none;"><?php echo Flash::get('error'); ?></div>
 <?php endif; ?>
@@ -138,6 +139,9 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
 <?php if (Flash::get('info') !== null): ?>
                 <div id="info" class="message" style="display: none"><?php echo Flash::get('info'); ?></div>
 <?php endif; ?>
+    <div id="main">
+        <div id="content-wrapper">
+            <div id="content">
         <!-- content -->
         <?php echo $content_for_layout; ?>
         <!-- end content -->

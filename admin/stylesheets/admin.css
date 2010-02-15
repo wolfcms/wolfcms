@@ -245,7 +245,6 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 /* Tabs ------------------------------------------------------------------- */
 
 .tabs {
-  loat: left;
   margin-right: -4px;
   width: 100%;
   margin-top: 5px;
@@ -256,10 +255,7 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 }
 .tabs .tab a {
   margin-right: 0.35em;
-  padding: 0.35em 1em;
-  adding: 15px;
-  adding-top: 6px;
-  adding-bottom: 4px;
+  padding: 0.35em 1em 0.35em 1em;
   text-decoration: none;
   color: #000;
 
@@ -283,8 +279,6 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 .tab_toolbar img { padding-bottom: 2px; }
 .pages {
   background-color: #fff;
-  idth: 100%;
-  lear: both;
   margin-top: 4px;
 
 
@@ -441,32 +435,39 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 #info, #error, #success {
 /* css for fade positioning -- start */
   position: absolute;
-/* css for fade positioning -- end */
-  margin: auto;
+  left: 10%;
+  width: 75%;
+  margin: 0 auto;
   padding: 1em 1.5em 0.9em 1.5em;
-/* centered text for fade -- default is left */
   text-align: center;
+  
+  /* Border-radius not implemented yet */
+  border-radius: 6px;
+  border-radius-topright: 0px;
+  border-radius-topleft: 0px;
+  -moz-border-radius: 6px;
+  -moz-border-radius-topright: 0px;
+  -moz-border-radius-topleft: 0px;
+  -webkit-border-radius: 6px;
+  -webkit-border-top-right-radius: 0px;
+  -webkit-border-top-left-radius: 0px;
+
+  box-shadow: 5px 3px 4px #333;
+  -moz-box-shadow: 5px 3px 4px #333;
+  -webkit-box-shadow: 5px 3px 4px #333;
 }
+
 #info {
   background: #EDFE86;
   color: #000;
-  border: 1px solid #bbb;
-  border-right: 2px solid #ffffa8;
-  border-bottom: 2px solid #ffffa8;
 }
 #error {
   background: #a22;
   color: #fff;
-  border: 1px solid #999;
-  border-right: 2px solid #c66;
-  border-bottom: 2px solid #c66;
 }
 #success {
   background: #cfc;
   color: #000;
-  border: 1px solid #999;
-  border-right: 2px solid #afa;
-  border-bottom: 2px solid #afa;
 }
 
 /* Index table, list ------------------------------------------------------ */
@@ -780,7 +781,6 @@ table.fieldset .error-with-field small {
   margin-bottom: -6px;
   padding: 6px 15px;
   text-decoration: none;
-  ext-transform: none;
   background-color: #e5e5e5;
   color: #000;
 

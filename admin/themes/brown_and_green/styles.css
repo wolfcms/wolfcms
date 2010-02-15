@@ -89,6 +89,10 @@ a#site-view-link:hover {
 
 /* Messages --------------------------------------------------------------- */
 
+#info, #error, #success {
+    border-top: 3px solid #76a83a;
+}
+
 #info { background: #EDFE86; }
 #error { background: #a22; color: #fff; }
 #error a { color: #fff; font-weight: bold; }

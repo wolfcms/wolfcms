@@ -20,3 +20,7 @@
  * Wolf CMS has made an exception to the GNU General Public License for plugins.
  * See exception.txt for details and the full text.
  */
+
+.tabs .tab a {
+    background-color: #dcdcdc;
+}
