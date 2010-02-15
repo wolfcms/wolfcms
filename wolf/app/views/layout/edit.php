@@ -51,7 +51,7 @@
     
     <p class="content">
       <label for="layout_content"><?php echo __('Body'); ?></label>
-      <textarea class="textarea" cols="40" id="layout_content" name="layout[content]" rows="20" style="width: 100%" onkeydown="return allowTab(event, this);"><?php echo htmlentities($layout->content, ENT_COMPAT, 'UTF-8'); ?></textarea>
+      <textarea class="textarea" cols="40" id="layout_content" name="layout[content]" rows="20" style="width: 100%"><?php echo htmlentities($layout->content, ENT_COMPAT, 'UTF-8'); ?></textarea>
     </p>
 <?php if (isset($layout->updated_on)) { ?>
     <p style="clear: left"><small><?php echo __('Last updated by'); ?> <?php echo $layout->updated_by_name; ?> <?php echo __('on'); ?> <?php echo date('D, j M Y', strtotime($layout->updated_on)); ?></small></p>

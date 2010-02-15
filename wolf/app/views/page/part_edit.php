@@ -48,10 +48,7 @@
 <?php endforeach; ?> 
       </select>
     </p>
-    <div><textarea class="textarea" id="part_<?php echo ($index-1); ?>_content" name="part[<?php echo ($index-1); ?>][content]" style="width: 100%" rows="20" cols="40"
-                   onkeydown="return allowTab(event, this);"
-                   onkeyup="return allowTab(event,this);"
-                   onkeypress="return allowTab(event,this);"><?php echo htmlentities($page_part->content, ENT_COMPAT, 'UTF-8'); ?></textarea></div>
+    <div><textarea class="textarea" id="part_<?php echo ($index-1); ?>_content" name="part[<?php echo ($index-1); ?>][content]" style="width: 100%" rows="20" cols="40"><?php echo htmlentities($page_part->content, ENT_COMPAT, 'UTF-8'); ?></textarea></div>
   </div>
 </div>
 <script type="text/javascript">

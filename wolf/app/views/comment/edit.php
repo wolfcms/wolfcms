@@ -39,7 +39,7 @@
   <div class="form-area">
     <p class="content">
       <label for="comment_body"><?php echo __('Body'); ?></label>
-      <textarea class="textarea" cols="40" id="comment_body" name="comment[body]" rows="20" style="width: 100%" onkeydown="return allowTab(event, this);"><?php echo htmlentities($comment->body, ENT_COMPAT, 'UTF-8'); ?></textarea>
+      <textarea class="textarea" cols="40" id="comment_body" name="comment[body]" rows="20" style="width: 100%"><?php echo htmlentities($comment->body, ENT_COMPAT, 'UTF-8'); ?></textarea>
     </p>
   </div>
   <p class="buttons">

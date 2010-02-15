@@ -57,10 +57,7 @@
 <?php endforeach; ?>
       </select>
     </p>
-	  <textarea class="textarea" cols="40" id="snippet_content" name="snippet[content]" rows="20" style="width: 100%" 
-                onkeydown="return allowTab(event, this);"
-                onkeyup="return allowTab(event,this);"
-                onkeypress="return allowTab(event,this);"><?php echo htmlentities($snippet->content, ENT_COMPAT, 'UTF-8'); ?></textarea>
+	  <textarea class="textarea" cols="40" id="snippet_content" name="snippet[content]" rows="20" style="width: 100%"><?php echo htmlentities($snippet->content, ENT_COMPAT, 'UTF-8'); ?></textarea>
     </p>
 <?php if (isset($snippet->updated_on)): ?>
     <p style="clear: left"><small><?php echo __('Last updated by'); ?> <?php echo $snippet->updated_by_name; ?> <?php echo __('on'); ?> <?php echo date('D, j M Y', strtotime($snippet->updated_on)); ?></small></p>

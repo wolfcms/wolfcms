@@ -65,54 +65,6 @@ function toggle_popup(id, focus_field)
   Element.toggle(popup);
   Field.focus(focus_field);
 }
-function allowTab(event, obj)
-{
-  var keyCode = event.which ? event.which: event.keyCode;
-  
-  // 9 is the tab key code
-  if (keyCode == 9)
-  {
-    if (event.type == "keydown")
-    {
-      if (obj.setSelectionRange) // mozilla, safari
-      {
-        var content = '\t';
-        var start = obj.selectionStart;
-        var end = obj.selectionEnd;
-      
-        // with selection
-        if (end - start > 1)
-        {
-          content += obj.value.substring(start, end);
-          content = content.replace(/\n/g, '\n\t');
-        }
-      
-        obj.value = obj.value.substring(0, start) + content + obj.value.substr(end);
-        obj.setSelectionRange(start + 1, start + 1);
-        obj.focus();
-      }
-      else if (obj.createTextRange) // ie
-      {
-        // sorry selection tab doesn't work because I can develop
-        // for internet explorer. if you want me do to it, buy me a windows
-        // license and I will do it for you!
-        // here is my site to contact me: www.philworks.com
-        document.selection.createRange().text = '\t';
-        obj.onblur = function() { this.focus(); this.onblur = null; };
-      }
-      // else unsupported browsers
-    }
-    
-    if (event.returnValue) // ie
-      event.returnValue = false;
-      
-    if (event.preventDefault) // dom
-      event.preventDefault();
-
-    return false; // should work in all browsers
-  }
-  return true;
-}
 
 function setTextAreaToolbar(textarea, filter)
 {

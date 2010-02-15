@@ -59,7 +59,7 @@
     <div class="form-area">
         <p class="content">
             <input type="hidden" name="file[name]" value="<?php echo $filename; ?>" />
-            <textarea class="textarea" id="file_content" name="file[content]" style="width: 100%; height: 400px;" onkeydown="return allowTab(event, this);" rows="20" cols="40"><?php echo htmlentities($content, ENT_COMPAT, 'UTF-8'); ?></textarea><br />
+            <textarea class="textarea" id="file_content" name="file[content]" style="width: 100%; height: 400px;" rows="20" cols="40"><?php echo htmlentities($content, ENT_COMPAT, 'UTF-8'); ?></textarea><br />
         </p>
     </div>
     <p class="buttons">

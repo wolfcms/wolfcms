@@ -19,6 +19,7 @@ Sigla:
 - Fixed system files to call dynamic admin directory name
 - Fixed missing id string in settings file - issue 129
 - Fixed trailing slash issue with Pagination.php helper
+. Removed tab feature in edit screens. Tab no longer inserts tab into textarea. - issue 125
 . Updated Russian translation for core and plugins - thanks Kostromind
 . Updated Czech translation for core - thanks Iva Pelcov�
 . Updated default layout taglines
