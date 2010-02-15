@@ -55,7 +55,7 @@ if ($check) {
     $mcheck = in_array('mysql', $drivers);
     $mysql = '<span class="'.($mcheck ? 'check' : 'notcheck').'">'.($mcheck ? 'true' : 'false').'</span>';
 
-    $scheck = in_array('sqlite2', $drivers);
+    $scheck = in_array('sqlite', $drivers);
     $sqlite = '<span class="'.($scheck ? 'check' : 'notcheck').'">'.($scheck ? 'true' : 'false').'</span>';
 
     // Make sure EITHER MySQL or SQLite is supported
