@@ -16,6 +16,8 @@ license details that apply to Wolf CMS.
 You can find all documentation including installation and upgrade instructions
 in the docs/ subdirectory.
 
+IMPORTANT - always check your security by viewing security.php post update!
+
 ## Required
 
 - An HTTP server

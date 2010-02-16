@@ -22,13 +22,19 @@
 
    This page also shows you the administrator's username and password.
 
-5. Delete the /install directory.
+5. Please view and then remove security.php after you installed Wolf CMS!
+   (e.g. http://www.mysite.com/security.php if Wolf is in the root;
+      or http://www.mysite.com/wolf/security.php if Wolf is in a subdirectory)
 
-6. Remove all write permissions for the config.php file.
+6. Delete the /install directory.
+
+7. Remove all write permissions for the config.php file.
    Wolf will refuse to execute until you do this.
 
-7. Login with the admin username/password.
+8. Login with the admin username/password.
    You should change your admin passsword to something private and secure!
+
+IMPORTANT - always check your security by viewing security.php post install!
 
 ## Optional
 
