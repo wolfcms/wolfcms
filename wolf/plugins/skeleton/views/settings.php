@@ -23,6 +23,9 @@
  * See exception.txt for details and the full text.
  */
 
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
+
 /**
  * The skeleton plugin serves as a basic plugin template.
  *

@@ -23,6 +23,9 @@
  * See exception.txt for details and the full text.
  */
 
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
+
 /**
  * Provides function to run Wolf CMS with SQLite 3 database.
  *

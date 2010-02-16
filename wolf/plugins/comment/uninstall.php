@@ -22,6 +22,9 @@
  * See exception.txt for details and the full text.
  */
 
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
+
 /**
  * The Comment plugin provides an interface to enable adding and moderating page comments.
  *

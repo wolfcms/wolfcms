@@ -24,6 +24,9 @@
  * See exception.txt for details and the full text.
  */
 
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
+
 /**
  * The Archive plugin provides an Archive pagetype behaving similar to a blog or news archive.
  *

@@ -24,6 +24,9 @@
  * See exception.txt for details and the full text.
  */
 
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
+
 /**
  * The Markdown plugin allows users edit pages using the markdown syntax.
  *

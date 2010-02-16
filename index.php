@@ -25,6 +25,7 @@
  */
 
 //  Constants  ---------------------------------------------------------------
+define('IN_CMS', true);
 
 define('CMS_ROOT', dirname(__FILE__));
 define('FROG_ROOT', CMS_ROOT); // DEFINED ONLY FOR BACKWARDS SUPPORT - to be taken out before 0.9.0

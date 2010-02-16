@@ -25,6 +25,7 @@
  */
 
 //  Constantes  --------------------------------------------------------------
+define('IN_CMS', true);
 
 define('CMS_BACKEND', true);
 

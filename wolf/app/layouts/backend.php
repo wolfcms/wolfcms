@@ -23,6 +23,9 @@
  * See exception.txt for details and the full text.
  */
 
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
+
 // Redirect to front page if user doesn't have appropriate roles.
 if (!AuthUser::hasPermission('administrator,developer,editor')) {
     header('Location: '.URL_PUBLIC.' ');

@@ -22,6 +22,9 @@
  * See exception.txt for details and the full text.
  */
 
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
+
 /**
  * The BackupRestore plugin provides administrators with the option of backing
  * up their pages and settings to an XML file.

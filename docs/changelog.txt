@@ -9,6 +9,7 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Added overzealous IN_CMS check for added security - issue 62
 + Added PLUGINS constant which refers to plugins home.
 + Added BASE_URI constant
 + Added Russian translation for plugins - thanks Kostromind

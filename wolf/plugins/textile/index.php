@@ -24,6 +24,9 @@
  * See exception.txt for details and the full text.
  */
 
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
+
 /**
  * The Textile plugin allows users to edit pages using the textile syntax.
  *

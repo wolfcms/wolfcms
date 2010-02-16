@@ -24,6 +24,9 @@
  * See exception.txt for details and the full text.
  */
 
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
+
 /**
  * The FileManager allows users to upload and manipulate files.
  *
