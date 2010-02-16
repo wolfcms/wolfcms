@@ -314,7 +314,7 @@ class Plugin {
     static function setAllSettings($array, $plugin_id) {
 
         // Perform sanity checks
-        if (!is_array($array) || !isstring($plugin_id)) return false;
+        if (!is_array($array) || !is_string($plugin_id)) return false;
         if (empty($array) || empty($plugin_id)) return false;
 
         global $__CMS_CONN__;
@@ -362,7 +362,7 @@ class Plugin {
     static function setSetting($name, $value, $plugin_id) {
 
         // Perform sanity checks
-        if (!isstring($name) || !isstring($value) || !isstring($plugin_id)) return false;
+        if (!is_string($name) || !is_string($value) || !is_string($plugin_id)) return false;
         if (empty($name) || empty($value) || empty($plugin_id)) return false;
 
         global $__CMS_CONN__;
