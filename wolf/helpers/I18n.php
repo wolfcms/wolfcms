@@ -113,4 +113,27 @@ class I18n {
             self::$array = array_merge(self::$array, $array);
     }
 
+    /**
+     * Determines preferred languages set by the user in the browser.
+     *
+     * Returns empty array when unable to determine language preferences.
+     *
+     * @return array Array of iso 639-1 language codes.
+     */
+    public static function getPreferredLanguages() {
+        $languages = array();
+
+        if ( isset( $_SERVER["HTTP_ACCEPT_LANGUAGE"] ) ) {
+            $list = strtolower( $_SERVER["HTTP_ACCEPT_LANGUAGE"] );
+            $list = str_replace( ' ', '', $list );
+            $list = explode( ",", $list );
+
+            foreach ( $list as $language ) {
+                $languages[] = substr( $language, 0, 2 );
+            }
+        }
+
+        return $languages;
+    }
+
 } // end I18n class

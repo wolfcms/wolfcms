@@ -150,13 +150,15 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
         <!-- end content -->
             </div>
         </div>
+        <?php if (isset($sidebar)) { ?>
         <div id="sidebar-wrapper">
             <div id="sidebar">
-          <!-- sidebar -->
-          <?php echo isset($sidebar) ? $sidebar: '&nbsp;'; ?>
-          <!-- end sidebar -->
-    </div>
+            <!-- sidebar -->
+            <?php echo $sidebar; ?>
+            <!-- end sidebar -->
+            </div>
         </div>
+        <?php } ?>
     </div>
 
     <div id="footer">
