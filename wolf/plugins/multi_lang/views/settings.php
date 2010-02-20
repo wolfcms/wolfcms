@@ -58,7 +58,7 @@ if (!defined('IN_CMS')) { exit(); }
                 <td class="field">
 					<select name="settings[style]">
 						<option value="tab" <?php if($settings['style'] == "tab") echo 'selected ="";' ?>><?php echo __('Translations as tab'); ?></option>
-						<option value="tab" alue="page" <?php if($settings['style'] == "page") echo 'selected ="";' ?>><?php echo __('Translations as page copy').' (not implemented yet)'; ?></option>
+						<option value="page" <?php if($settings['style'] == "page") echo 'selected ="";' ?>><?php echo __('Translations as page copy'); ?></option>
 					</select>
 				</td>
                 <td class="help"><?php echo __('Do you want to create a translated version of a page as a tab of the same page or as a copy of the page in a language specific subtree? (i.e. Home->nl->About as a Dutch translation of Home->About)'); ?></td>

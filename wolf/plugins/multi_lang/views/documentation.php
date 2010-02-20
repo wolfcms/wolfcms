@@ -56,7 +56,11 @@ if (!defined('IN_CMS')) { exit(); }
     choose the preferred method of determining what translation (if any) should be used for a particular request.
 </p>
 <p>
-    Currently, the plugin can only store translations as separate tabs on the page.
+    The plugin can store translations as separate tabs on the page where the name of each tab equals the iso 369-1 language
+    code of that translation.
+</p>
+<p>
+    The plugin can also store translations as translated copies of the page in a special language subtree of the root.
 </p>
 <p>
     When you choose "URI" as the language source, it means the Multi Languages plugin will capture the URL that
@@ -67,7 +71,7 @@ if (!defined('IN_CMS')) { exit(); }
     As an example, in this case a Japanese version of the page is requested: http://www.example.com/ja/page.html
 </p>
 <p>
-    To add a translation for a page, just:
+    To add a translation for a page as a tab, just:
 </p>
 <ul style="list-style-position: inside; list-style-type: disc; margin-left: 1em;">
     <li>create a new tab</li>
@@ -75,6 +79,24 @@ if (!defined('IN_CMS')) { exit(); }
     <li>add the translation to the content of the tab</li>
     <li>save the page</li>
 </ul>
+<p>
+    To add a translation for a page as translated copy of the page, just:
+</p>
+<ul style="list-style-position: inside; list-style-type: disc; margin-left: 1em;">
+    <li>create a new page underneath the root or Home page of the site</li>
+    <li>give it a iso 639-1 code as its name (see examples below)</li>
+    <li>use the drag-to-copy feature to copy the original page to underneath the new "translation root"</li>
+    <li>translate the content of the page</li>
+    <li>save the page</li>
+    <li><strong>Note:</strong> make sure the translated copy of the page has the same name & same slug as the original.</li>
+</ul>
+<p>The above instructions should give you a page structure similar to the one below if you translate "My Page" into Dutch (nl).</p>
+<pre>
+    Home Page
+       |- My Page
+       |- nl
+           |- My Page
+</pre>
 <p>
     Examples of iso 639-1 codes for languages are:
 </p>

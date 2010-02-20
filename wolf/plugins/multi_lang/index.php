@@ -65,13 +65,19 @@ Plugin::addController('multi_lang', __('Multiple Languages'), 'administrator', f
 
 // Observe the necessary events.
 $style = Plugin::getSetting('style', 'multi_lang');
+$source = Plugin::getSetting('langsource', 'multi_lang');
 if (false !== $style && $style == 'tab') {
 
-    if (Plugin::getSetting('langsource', 'multi_lang') == 'uri') {
+    if ($source == 'uri') {
         Observer::observe('page_requested', 'replaceUri');
         Observer::observe('page_found', 'replaceContentByUri');
     }
     else {
+        Observer::observe('page_found', 'replaceContent');
+    }
+}
+else if (false !== $style && $style == 'page') {
+    if ($source == 'header' || $source == 'preferences') {
         Observer::observe('page_found', 'replaceContent');
     }
 }
@@ -83,9 +89,10 @@ if (false !== $style && $style == 'tab') {
  */
 function replaceContent($page) {
     $source = Plugin::getSetting('langsource', 'multi_lang');
-    if (!$source) return;
+    $style = Plugin::getSetting('style', 'multi_lang');
+    if (!$source || !$style) return;
 
-    if ($source == 'header') {
+    if ($source == 'header' && $style == 'tab') {
         use_helper('I18n');
         $found = false;
 
@@ -100,13 +107,40 @@ function replaceContent($page) {
             if ($found) break;
         }
     }
-    else if ($source == 'preferences') {
+    else if ($source == 'preferences' && $style == 'tab') {
         AuthUser::load();
         if (AuthUser::isLoggedIn()) {
             $lang = AuthUser::getRecord()->language;
 
             if ( isset($page->part->$lang) && !empty($page->part->$lang->content_html) && $page->part->$lang->content_html != '' ) {
                 $page->part->body->content_html = $page->part->$lang->content_html;
+            }
+        }
+    }
+    else if ($source == 'header' && $style == 'page') {
+        use_helper('I18n');
+
+        foreach (I18n::getPreferredLanguages() as $lang) {
+            if ( Setting::get('language') == $lang) { break; }
+
+            $uri = $lang.'/'.CURRENT_URI;
+            $page = Page::findByUri($uri);
+
+            if ( false !== $page ) {
+                redirect(BASE_URL.$uri);
+            }
+        }
+    }
+    else if ($source == 'preferences' && $style == 'page') {
+        AuthUser::load();
+        if (AuthUser::isLoggedIn()) {
+            $lang = AuthUser::getRecord()->language;
+
+            $uri = $lang.'/'.CURRENT_URI;
+            $page = Page::findByUri($uri);
+
+            if ( false !== $page ) {
+                redirect(BASE_URL.$uri);
             }
         }
     }
