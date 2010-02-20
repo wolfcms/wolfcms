@@ -47,6 +47,8 @@ if (!defined('IN_CMS')) { exit(); }
  * @copyright Martijn van der Kleijn, 2010
  */
 
+$urilang = false;
+
 Plugin::setInfos(array(
     'id'          => 'multi_lang',
     'title'       => __('Multiple Languages'),
@@ -64,7 +66,14 @@ Plugin::addController('multi_lang', __('Multiple Languages'), 'administrator', f
 // Observe the necessary events.
 $style = Plugin::getSetting('style', 'multi_lang');
 if (false !== $style && $style == 'tab') {
-    Observer::observe('page_found', 'replaceContent');
+
+    if (Plugin::getSetting('langsource', 'multi_lang') == 'uri') {
+        Observer::observe('page_requested', 'replaceUri');
+        Observer::observe('page_found', 'replaceContentByUri');
+    }
+    else {
+        Observer::observe('page_found', 'replaceContent');
+    }
 }
 
 /**
@@ -102,6 +111,36 @@ function replaceContent($page) {
             if ( isset($page->part->$lang) && !empty($page->part->$lang->content_html) && $page->part->$lang->content_html != '' ) {
                 $page->part->body->content_html = $page->part->$lang->content_html;
             }
+        }
+    }
+}
+
+function replaceUri($uri) {    
+    if (startsWith($uri, '/')) {
+        $uri = substr($uri, 1);
+    }
+
+    global $urilang;
+    $tmp = explode('/', $uri, 2);
+
+    if (array_key_exists($tmp[0], SettingController::$iso_639_1)) {
+        $urilang = $tmp[0];
+        $uri = substr($uri, 2);
+    }
+    else $urilang = false;
+
+    return $uri;
+}
+
+function replaceContentByUri($page) {
+    $source = Plugin::getSetting('langsource', 'multi_lang');
+    if (!$source) return;
+
+    global $urilang;
+
+    if ($source == 'uri' && $urilang !== false) {
+        if ( isset($page->part->$urilang) && !empty($page->part->$urilang->content_html) && $page->part->$urilang->content_html != '' ) {
+            $page->part->body->content_html = $page->part->$urilang->content_html;
         }
     }
 }

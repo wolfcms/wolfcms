@@ -175,12 +175,14 @@ function main() {
         Dispatcher::dispatch($uri);
     }
 
-    Observer::notify('page_requested', $uri);
+    foreach(Observer::getObserverList('page_requested') as $callback) {
+        $uri = call_user_func_array($callback, array(&$uri));
+    }
 
     // this is where 80% of the things is done
     $page = Page::findByUri($uri, true);
 
-    // if we fund it, display it!
+    // if we found it, display it!
     if (is_object($page)) {
         // If a page is in preview status, only display to logged in users
         if (Page::STATUS_PREVIEW == $page->status_id) {

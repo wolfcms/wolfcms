@@ -50,6 +50,7 @@ if (!defined('IN_CMS')) { exit(); }
 /**
  */
 class MultiLangController extends PluginController {
+    static public $urilang = false;
 
     private static function _checkPermission() {
         AuthUser::load();

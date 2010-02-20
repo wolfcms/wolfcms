@@ -68,11 +68,11 @@ if (!defined('IN_CMS')) { exit(); }
                 <td class="field">
 					<select name="settings[langsource]">
 						<option value="header" <?php if($settings['langsource'] == "header") echo 'selected ="";' ?>><?php echo __('HTTP_ACCEPT_LANG header'); ?></option>
-						<option value="header" alue="url" <?php if($settings['langsource'] == "url") echo 'selected ="";' ?>><?php echo __('URL').' (not implemented yet)'; ?></option>
+						<option value="uri" <?php if($settings['langsource'] == "uri") echo 'selected ="";' ?>><?php echo __('URI'); ?></option>
                         <option value="preferences" <?php if($settings['langsource'] == "preferences") echo 'selected ="";' ?>><?php echo __('Wolf CMS user preferences'); ?></option>
 					</select>
 				</td>
-                <td class="help"><?php echo __('Get the language preference from the HTTP header (default), the url (/nl/about.html for the Dutch version of about.html) or from the stored preference of a logged in user.'); ?></td>
+                <td class="help"><?php echo __('Get the language preference from the HTTP header (default), the uri (/nl/about.html for the Dutch version of about.html) or from the stored preference of a logged in user.'); ?></td>
             </tr>
         </table>
     </fieldset>
