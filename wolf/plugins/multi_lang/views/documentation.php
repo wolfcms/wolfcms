@@ -52,18 +52,18 @@ if (!defined('IN_CMS')) { exit(); }
     The multiple languages plugin allows you to provide language specific content for your end users.
 </p>
 <p>
-    The plugin allows you to choose a preffered method of storing your translations. It also allows you to
-    choose the preffered method of determining what translation (if any) should be used for a particular request.
+    The plugin allows you to choose a preferred method of storing your translations. It also allows you to
+    choose the preferred method of determining what translation (if any) should be used for a particular request.
 </p>
 <p>
-    Currently, the plugin can only store translations as seperate tabs on the page. It can also only use the HTTP_ACCEPT_LANG header
+    Currently, the plugin can only store translations as separate tabs on the page. It can also only use the HTTP_ACCEPT_LANG header
     method for determining which translation to choose.
 </p>
 <p>
     To add a translation for a page, just:
 </p>
 <ul style="list-style-position: inside; list-style-type: disc; margin-left: 1em;">
-    <li>create an new tab</li>
+    <li>create a new tab</li>
     <li>give it a iso 639-1 code as its name (see examples below)</li>
     <li>add the translation to the content of the tab</li>
     <li>save the page</li>

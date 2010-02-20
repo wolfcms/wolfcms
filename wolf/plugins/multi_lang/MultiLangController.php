@@ -89,7 +89,7 @@ class MultiLangController extends PluginController {
         if ($ret)
             Flash::set('success', __('The settings have been updated.'));
         else
-            Flash::set('error', 'An error has occured while trying to save the settings.');
+            Flash::set('error', 'An error has occurred while trying to save the settings.');
 
         redirect(get_url('plugin/multi_lang/settings'));
 	}
