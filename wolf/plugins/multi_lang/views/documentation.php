@@ -56,8 +56,15 @@ if (!defined('IN_CMS')) { exit(); }
     choose the preferred method of determining what translation (if any) should be used for a particular request.
 </p>
 <p>
-    Currently, the plugin can only store translations as separate tabs on the page. It can also only use the HTTP_ACCEPT_LANG header
-    method for determining which translation to choose.
+    Currently, the plugin can only store translations as separate tabs on the page.
+</p>
+<p>
+    When you choose "URI" as the language source, it means the Multi Languages plugin will capture the URL that
+    is requested by the user. If the URI of the URL contains a valid language code and a translation of the page
+    exists in that language, it will display that language.
+</p>
+<p>
+    As an example, in this case a Japanese version of the page is requested: http://www.example.com/ja/page.html
 </p>
 <p>
     To add a translation for a page, just:

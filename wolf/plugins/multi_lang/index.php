@@ -100,9 +100,6 @@ function replaceContent($page) {
             if ($found) break;
         }
     }
-    else if ($source == 'url') {
-        // not implemented yet
-    }
     else if ($source == 'preferences') {
         AuthUser::load();
         if (AuthUser::isLoggedIn()) {
