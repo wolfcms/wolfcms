@@ -17,6 +17,7 @@ Sigla:
 + Added BASE_URI constant
 + Added Russian translation for plugins - thanks Kostromind
 + Added alt and title strings to improve i18n consistency - issue 138
+- Fixed a problem with inherit option for layout. (might be DB bug)
 - Fixed issue of multiple message not being shown - issue 136
 - Fixed issue with requirements checking for SQLite 2 instead of SQLite 3. - issue 135
 - Fixed issue where Plugin::setSetting did not return boolean. - issue 134
