@@ -64,7 +64,7 @@ $rowspage = Plugin::getSetting('rowspage', 'comment');
 $start = $CurPage * $rowspage;
 
 $totalrecords = $comments_count;
-$sql = "SELECT comment.is_approved, comment.id, comment.page_id, comment.author_name, comment.body, comment.created_on, page.title FROM " .
+$sql = "SELECT comment.is_approved, comment.id, comment.page_id, comment.author_name, comment.author_email, comment.body, comment.created_on, page.title FROM " .
     TABLE_PREFIX . "comment AS comment, " . TABLE_PREFIX .
     "page AS page WHERE comment.is_approved = 1 AND comment.page_id = page.id LIMIT " . $start . "," . $rowspage;
 
@@ -78,7 +78,7 @@ if ($comments_count > 0) { ?>
 <ol id="comments">
     <?php while ($comment = $stmt->fetchObject()): ?>
     <li class="<?php echo odd_even(); ?> moderate">
-          <strong><a href="<?php echo get_url('plugin/comment/edit/' . $comment->id); ?>"><?php echo $comment->author_name.' '.__('about').' "'.$comment->title.'"'; ?></a></strong>
+          <strong><?php echo $comment->author_name; ?></strong> (<?php echo $comment->author_email; ?>) <a href="<?php echo get_url('plugin/comment/edit/' . $comment->id); ?>"><?php echo __('about'); ?> <strong><?php echo $comment->title; ?></strong></a>
           <p><?php echo $comment->body; ?></p>
           <div class="infos">
               <?php echo date('D, j M Y', strtotime($comment->created_on)); ?> &#8212; 

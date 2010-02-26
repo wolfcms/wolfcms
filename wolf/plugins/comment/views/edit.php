@@ -41,7 +41,7 @@ if (!defined('IN_CMS')) { exit(); }
  * @copyright Philippe Archambault, Bebliuc George & Martijn van der Kleijn, 2008
  */
 ?>
-<h1><?php echo __('Edit comment'); ?></h1>
+<h1><?php echo __('Edit comment by'); ?> <strong><?php echo $comment->author_name; ?></strong></h1>
 
 <form action="<?php echo get_url('plugin/comment/edit/'.$comment->id); ?>" method="post">
   <div class="form-area">
