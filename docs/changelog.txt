@@ -9,7 +9,8 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
-+ Added new core plugin: multi language support
++ Added basic support for non-western glyphs in url and slug. (turns off slug generation for non-western glyphs)
++ Added new core plugin: multi language support.
 + Added getPreferredLanguages() function to I18n helper.
 + Added basic security check page (security.php) - issue 113
 + Added overzealous IN_CMS check for added security - issue 62

@@ -44,12 +44,19 @@ Object.extend(String.prototype, {
   /* TODO - the replace commands here should still be optimized. */
   toSlug: function()
   {
-    return this.strip().downcase()
+      // Test for non western characters
+      var rx=/[a-z]|[A-Z]|[0-9]|[àâôäæßéèêëùûöøåîïñü]/;
+
+      if (!rx.test(this)) {
+        return this;
+      } else {
+        return this.strip().downcase()
         .replace(/[àâ]/g,"a").replace(/[éèêë]/g,"e").replace(/[îï]/g,"i")
         .replace(/[ô]/g,"o").replace(/[ùû]/g,"u").replace(/[ñ]/g,"n")
         .replace(/[äæ]/g,"ae").replace(/[öø]/g,"oe").replace(/[ü]/g,"ue")
         .replace(/[ß]/g,"ss").replace(/[å]/g,"aa")
         .replace(/[^-a-z0-9~\s\.:;+=_]/g, '').replace(/[\s\.:;=+]+/g, '-');
+      }
   }
 
 });
