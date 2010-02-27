@@ -1215,7 +1215,7 @@ class AutoLoader {
                 }
             }
         }
-        throw new Exception("AutoLoader did not find file for '{$class_name}'!");
+        throw new Exception("AutoLoader could not find file for '{$class_name}'.");
     }
 
 } // end AutoLoader class
@@ -1224,7 +1224,12 @@ if ( ! function_exists('__autoload')) {
     AutoLoader::addFolder(array(APP_PATH.DIRECTORY_SEPARATOR.'models',
         APP_PATH.DIRECTORY_SEPARATOR.'controllers'));
     function __autoload($class_name) {
-        AutoLoader::load($class_name);
+        try {
+            AutoLoader::load($class_name);
+        }
+        catch (Exception $e) {
+            throw $e;
+        }
     }
 }
 
@@ -1748,16 +1753,21 @@ function getContentFromUrl($url, $flags=0, $context=false) {
  * @param Exception $e Exception object.
  */
 function framework_exception_handler($e) {
-    if ( ! DEBUG) page_not_found();
+    if (!DEBUG) page_not_found();
 
     echo '<style>h1,h2,h3,p,td {font-family:Verdana; font-weight:lighter;}</style>';
-    echo '<p>Uncaught '.get_class($e).'</p>';
-    echo '<h1>'.$e->getMessage().'</h1>';
+    echo '<h1>Wolf CMS - Uncaught '.get_class($e).'</h1>';
+    echo '<h2>Description</h2>';
+    echo '<p>'.$e->getMessage().'</p>';
+    echo '<h2>Location</h2>';
+    echo '<p>Exception thrown on line <code>'
+    . $e->getLine() . '</code> in <code>'
+    . $e->getFile() . '</code></p>';
 
+    echo '<h2>Stack trace</h2>';
     $traces = $e->getTrace();
     if (count($traces) > 1) {
-        echo '<p><b>Trace in execution order:</b></p>'.
-            '<pre style="font-family:Verdana; line-height: 20px">';
+        echo '<pre style="font-family:Verdana; line-height: 20px">';
 
         $level = 0;
         foreach (array_reverse($traces) as $trace) {
@@ -1780,16 +1790,13 @@ function framework_exception_handler($e) {
                                     }
                 }
             }
-            echo '<b>'.$trace['function'].'</b>('.implode(', ',$args).')  ';
+            echo '<strong>'.$trace['function'].'</strong>('.implode(', ',$args).')  ';
             echo 'on line <code>'.(isset($trace['line']) ? $trace['line'] : 'unknown').'</code> ';
             echo 'in <code>'.(isset($trace['file']) ? $trace['file'] : 'unknown')."</code>\n";
             echo str_repeat("   ", $level);
         }
-        echo '</pre>';
+        echo '</pre><hr/>';
     }
-    echo "<p>Exception was thrown on line <code>"
-        . $e->getLine() . "</code> in <code>"
-        . $e->getFile() . "</code></p>";
 
     $dispatcher_status = Dispatcher::getStatus();
     $dispatcher_status['request method'] = get_request_method();
@@ -1809,10 +1816,10 @@ function framework_exception_handler($e) {
  * @param <type> $value_label 
  */
 function debug_table($array, $label, $key_label='Variable', $value_label='Value') {
-    echo '<h2>'.$label.'</h2>';
-    echo '<table cellpadding="3" cellspacing="0" style="width: 800px; border: 1px solid #ccc">';
-    echo '<tr><td style="border-right: 1px solid #ccc; border-bottom: 1px solid #ccc;">'.$key_label.'</td>'.
-        '<td style="border-bottom: 1px solid #ccc;">'.$value_label.'</td></tr>';
+    echo '<table cellpadding="3" cellspacing="0" style="margin: 1em auto; border: 1px solid #000; width: 90%;">';
+    echo '<thead><tr><th colspan="2" style="font-family: Verdana, Arial, sans-serif; background-color: #2a2520; color: #fff;">'.$label.'</th></tr>';
+    echo '<tr><td style="border-right: 1px solid #000; border-bottom: 1px solid #000;">'.$key_label.'</td>'.
+        '<td style="border-bottom: 1px solid #000;">'.$value_label.'</td></tr></thead>';
 
     foreach ($array as $key => $value) {
         if (is_null($value)) $value = 'null';

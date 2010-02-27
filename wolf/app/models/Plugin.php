@@ -238,16 +238,25 @@ class Plugin {
         if (!isset(self::$plugins_infos[$plugin_id])) return;
 
         $class_name = Inflector::camelize($plugin_id).'Controller';
+        $file = CORE_ROOT.'/plugins/'.$plugin_id.'/'.$class_name.'.php';
+
+        if (!file_exists($file)) {
+            if (defined('DEBUG') && DEBUG)
+                throw new Exception('Plugin controller file not found: '.$file);
+            return false;
+        }
 
         self::$controllers[$plugin_id] = (object) array(
             'label' => ucfirst($label),
             'class_name' => $class_name,
-            'file'	=> CORE_ROOT.'/plugins/'.$plugin_id.'/'.$class_name.'.php',
+            'file'	=> $file,
             'permissions' => $permissions,
             'show_tab' => $show_tab
         );
 
         AutoLoader::addFile($class_name, self::$controllers[$plugin_id]->file);
+
+        return true;
     }
 
 

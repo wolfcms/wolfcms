@@ -45,6 +45,7 @@ Object.extend(String.prototype, {
   toSlug: function()
   {
       // Test for non western characters
+      // Need to do this in a better way
       var rx=/[a-z]|[A-Z]|[0-9]|[àâôäæßéèêëùûöøåîïñü]/;
 
       if (!rx.test(this)) {
