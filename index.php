@@ -55,6 +55,9 @@ else {
 }
 
 define('PLUGINS_URI', URI_PUBLIC.'wolf/plugins/');
+if (!defined('THEMES_ROOT')) { define('THEMES_ROOT', CMS_ROOT.'/public/themes'); }
+if (!defined('THEMES_URI')) { define('THEMES_URI', URI_PUBLIC.'public/themes/'); }
+
 
 // Security checks -----------------------------------------------------------
 if (DEBUG == false && isWritable($config_file)) {

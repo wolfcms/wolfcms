@@ -36,7 +36,7 @@ define('CMS_ROOT', dirname(__FILE__).'/..');
 define('FROG_ROOT', CMS_ROOT); // DEFINED ONLY FOR BACKWARDS SUPPORT - to be taken out before 0.9.0
 define('CORE_ROOT', CMS_ROOT.'/wolf');
 define('PLUGINS_ROOT', CORE_ROOT.'/plugins');
-
+define('THEMES_ROOT', CMS_ROOT.'/public/themes');
 
 require_once(CORE_ROOT.'/utils.php');
 
@@ -56,6 +56,8 @@ else {
 }
 
 define('PLUGINS_URI', URI_PUBLIC.'wolf/plugins/');
+if (!defined('THEMES_ROOT')) { define('THEMES_ROOT', CMS_ROOT.'/public/themes'); }
+if (!defined('THEMES_URI')) { define('THEMES_URI', URI_PUBLIC.'public/themes/'); }
 
 // Security checks -----------------------------------------------------------
 if (DEBUG == false && isWritable($config_file)) {

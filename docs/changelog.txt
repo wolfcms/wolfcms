@@ -9,6 +9,7 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Added optional THEMES_URI and THEMES_ROOT setting for config.php - issue 145
 + Added basic support for non-western glyphs in url and slug. (turns off slug generation for non-western glyphs)
 + Added new core plugin: multi language support.
 + Added getPreferredLanguages() function to I18n helper.
