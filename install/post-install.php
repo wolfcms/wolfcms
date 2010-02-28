@@ -43,6 +43,7 @@ if (!defined('INSTALL_SEQUENCE')) {
             To enhance security <b>you should now:</b>
         </p>
         <ol>
+            <li><strong>Run <a href="../security.php">the security check</a>.</strong></li>
             <li>Delete the <em>install/</em> folder!</li>
             <li>Remove all write permissions from the <em>config.php</em> file! <sup>2)</sup></li>
             <li>Remove changelog.txt and similar text files to enhance security.</li>

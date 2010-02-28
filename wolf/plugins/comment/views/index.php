@@ -64,7 +64,7 @@ $rowspage = Plugin::getSetting('rowspage', 'comment');
 $start = $CurPage * $rowspage;
 
 $totalrecords = $comments_count;
-$sql = "SELECT comment.is_approved, comment.id, comment.page_id, comment.author_name, comment.author_email, comment.body, comment.created_on, page.title FROM " .
+$sql = "SELECT comment.is_approved, comment.id, comment.page_id, comment.author_name, comment.author_email, comment.author_link, comment.body, comment.created_on, page.title FROM " .
     TABLE_PREFIX . "comment AS comment, " . TABLE_PREFIX .
     "page AS page WHERE comment.is_approved = 1 AND comment.page_id = page.id LIMIT " . $start . "," . $rowspage;
 
@@ -78,10 +78,18 @@ if ($comments_count > 0) { ?>
 <ol id="comments">
     <?php while ($comment = $stmt->fetchObject()): ?>
     <li class="<?php echo odd_even(); ?> moderate">
-          <strong><?php echo $comment->author_name; ?></strong> (<?php echo $comment->author_email; ?>) <a href="<?php echo get_url('plugin/comment/edit/' . $comment->id); ?>"><?php echo __('about'); ?> <strong><?php echo $comment->title; ?></strong></a>
+          <strong><?php if ($comment->author_link != '') {
+            echo '<a href="'.$comment->author_link.'" title="'.$comment->author_name.'">'.$comment->author_name.'</a>';
+        }  else { echo $comment->author_name; } ?></strong> <?php
+        if ($comment->author_email != '') {
+            echo '('.$comment->author_email.')';
+        }  else {}
+    ?>
+ <?php echo __('about'); ?> <strong><?php echo $comment->title; ?></strong>
           <p><?php echo $comment->body; ?></p>
           <div class="infos">
-              <?php echo date('D, j M Y', strtotime($comment->created_on)); ?> &#8212; 
+              <?php echo date('D, j M Y', strtotime($comment->created_on)); ?> &#8212;
+              <a href="<?php echo get_url('plugin/comment/edit/' . $comment->id); ?>"><?php echo __('Edit'); ?></a> |
               <a href="<?php echo get_url('plugin/comment/delete/' . $comment->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete it?'); ?>');"><?php echo
 __('Delete'); ?></a> | <?php if ($comment->is_approved): ?>
               <a href="<?php echo get_url('plugin/comment/unapprove/' . $comment->id); ?>"><?php echo __('Reject'); ?></a>
