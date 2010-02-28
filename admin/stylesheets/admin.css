@@ -146,10 +146,7 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   width: 100%;
 }
 
-#content-wrapper { idth: 100%; }
-
 /* Content ---------------------------------------------------------------- */
-
 #content-wrapper {
   float: left;
   margin: 1%;
@@ -158,7 +155,7 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   background-color: #fff;
   border-bottom: 2px solid #76A83A; /*#58b;*/
 
-  /* Border-radius not implemented yet */
+  /* Border-radius implemented. */
   border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -167,11 +164,12 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 #content {
   padding: 20px;
 
-  /* Border-radius not implemented yet */
+  /* Border-radius - implemented. */
   border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
 
+  /* Box-shadow - implemented. */
   box-shadow: 5px 3px 4px #aaa;
   -moz-box-shadow: 5px 3px 4px #aaa;
   -webkit-box-shadow: 5px 3px 4px #aaa;
@@ -179,14 +177,11 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 
 #content h1 {
   /* Border-radius not implemented yet */
-  border-radius: 6px;
-  -moz-border-radius: 6px;
+  border-radius: 6px 6px 0px 0px;
+  -moz-border-radius: 6px 6px 0px 0px;
   -webkit-border-radius: 6px;
-  border-radius-bottom: 0px;
-  -moz-border-radius-bottom: 0px;
-  -moz-border-radius-bottomleft: 0px;
-  -moz-border-radius-bottomright: 0px;
-  -webkit-border-radius-bottom: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
 }
 
 #content .logo {
@@ -680,7 +675,7 @@ table.index td.note {
 }
 .form-area .title .textbox {
   font-family: Georgia, Palatino, "Times New Roman", Times, serif;
-  font-size: 200%;
+  font-size: 170%;
   width: 100%;
 }
 .form-area .content {
@@ -771,6 +766,11 @@ table.fieldset .error-with-field small {
   width: 100%;
   margin-top: 10px;
   margin-right: -4px;
+  margin-bottom: 6px;
+}
+
+.tabs .tab {
+  display: inline;
 }
 
 .tabs a.tab {
@@ -779,16 +779,14 @@ table.fieldset .error-with-field small {
   text-align: left;
   margin-right: 10px;
   margin-bottom: -6px;
-  padding: 6px 15px;
+  padding: 0.40em 1em;
   text-decoration: none;
   background-color: #e5e5e5;
   color: #000;
+  outline: none;
 
-  /* Border-radius not implemented yet */
-  -moz-border-radius: 6px;
-  -moz-border-bottom-radius: 0px;
-  -moz-border-radius-bottomright: 0px;
-  -moz-border-radius-bottomleft: 0px;
+  /* Border-radius - implemented. */
+  -moz-border-radius: 6px 6px 0px 0px;
   -webkit-border-radius: 6px;
   -webkit-border-bottom-right-radius: 0px;
   -webkit-border-bottom-left-radius: 0px;
@@ -812,7 +810,7 @@ table.fieldset .error-with-field small {
   -moz-border-radius: 6px;
   -moz-border-radius-topleft: 0px;
   -webkit-border-radius: 6px;
-  -webkit-border-topleft-radius: 0px;
+  -webkit-border-top-left-radius: 0px;
 
   text-shadow: black;
 }

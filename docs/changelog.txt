@@ -33,6 +33,7 @@ Sigla:
 - Fixed missing id string in settings file - issue 129
 - Fixed trailing slash issue with Pagination.php helper
 - Fixed small issue Wolf layout had with frontend controllers - issue 141
+. Cleaned up admin.css - thanks Axjezzy
 . Removed tab feature in edit screens. Tab no longer inserts tab into textarea. - issue 125
 . Updated Russian translation for core and plugins - thanks Kostromind
 . Updated Czech translation for core - thanks Iva Pelcova
