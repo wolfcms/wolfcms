@@ -77,14 +77,6 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
 
     <script type="text/javascript">
     // <![CDATA[
-        function setConfirmUnload(on) {
-            window.onbeforeunload = (on) ? unloadMessage : null;
-        }
-
-        function unloadMessage() {
-            return '<?php echo __('You have modified this page.  If you navigate away from this page without first saving your data, the changes will be lost.'); ?>';
-        }
-
         $j(document).ready(function() {
             (function showMessages(e) {
                 e.fadeIn('slow')
@@ -96,8 +88,6 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
                     $j(this).remove();
                  })
             })( $j(".message:first") );
-
-            $j('input').bind("change", function() { setConfirmUnload(true); }); // Prevent accidental navigation away
 
             $j("input:visible:enabled:first").focus();
         });

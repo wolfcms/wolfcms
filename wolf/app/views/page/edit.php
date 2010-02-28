@@ -47,6 +47,7 @@ if ($pagetmp != null && !empty($pagetmp) && $parttmp != null && !empty($parttmp)
 if ($action == 'edit') { ?>
     <span style="float: right;"><a id="site-view-page" onclick="target='_blank'" onkeypress="target='_blank'" href="<?php echo URL_PUBLIC; echo (USE_MOD_REWRITE == false) ? '?' : ''; echo $page->getUri().URL_SUFFIX; ?>"><?php echo __('View this page'); ?></a></span>
 <?php } ?>
+
 <h1><?php echo __(ucfirst($action).' Page'); ?></h1>
 
 <form action="<?php if ($action == 'add') echo get_url('page/add'); else echo  get_url('page/edit/'.$page->id); ?>" method="post">
@@ -235,6 +236,21 @@ if ($action == 'edit') { ?>
 
 <script type="text/javascript">
 // <![CDATA[
+    function setConfirmUnload(on, msg) {
+        window.onbeforeunload = (on) ? unloadMessage : null;
+        return true;
+    }
+
+    function unloadMessage() {
+        return '<?php echo __('You have modified this page.  If you navigate away from this page without first saving your data, the changes will be lost.'); ?>';
+    }
+
+    $j(document).ready(function() {
+        // Prevent accidentally navigating away
+        $j(':input').bind('change', function() { setConfirmUnload(true); });
+        $j('form').submit(function() { setConfirmUnload(false); return true; });
+    });
+    
     Field.activate('page_title');
 // ]]>
 </script>

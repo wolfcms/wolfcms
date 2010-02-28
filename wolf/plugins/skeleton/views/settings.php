@@ -54,3 +54,22 @@ if (!defined('IN_CMS')) { exit(); }
 <p>
 <?php echo __('Display settings page here!'); ?>
 </p>
+
+<script type="text/javascript">
+// <![CDATA[
+    function setConfirmUnload(on, msg) {
+        window.onbeforeunload = (on) ? unloadMessage : null;
+        return true;
+    }
+
+    function unloadMessage() {
+        return '<?php echo __('You have modified this page.  If you navigate away from this page without first saving your data, the changes will be lost.'); ?>';
+    }
+
+    $j(document).ready(function() {
+        // Prevent accidentally navigating away
+        $j(':input').bind('change', function() { setConfirmUnload(true); });
+        $j('form').submit(function() { setConfirmUnload(false); return true; });
+    });
+// ]]>
+</script>
