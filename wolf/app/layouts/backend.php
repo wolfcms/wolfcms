@@ -76,22 +76,32 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
     </script>
 
     <script type="text/javascript">
-            // <![CDATA[
-            $j(document).ready(function() {
-                (function showMessages(e) {
-                    e.fadeIn('slow')
-                     .animate({opacity: 1.0}, 1500)
-                     .fadeOut('slow', function() {
-                        if ($j(this).next().attr('class') == 'message') {
-                            showMessages($j(this).next());
-                        }
-                        $j(this).remove();
-                     })
-                })( $j(".message:first") );
+    // <![CDATA[
+        function setConfirmUnload(on) {
+            window.onbeforeunload = (on) ? unloadMessage : null;
+        }
 
-                $j("input:visible:enabled:first").focus();
-            });
-            // ]]>
+        function unloadMessage() {
+            return '<?php echo __('You have modified this page.  If you navigate away from this page without first saving your data, the changes will be lost.'); ?>';
+        }
+
+        $j(document).ready(function() {
+            (function showMessages(e) {
+                e.fadeIn('slow')
+                 .animate({opacity: 1.0}, 1500)
+                 .fadeOut('slow', function() {
+                    if ($j(this).next().attr('class') == 'message') {
+                        showMessages($j(this).next());
+                    }
+                    $j(this).remove();
+                 })
+            })( $j(".message:first") );
+
+            $j('input').bind("change", function() { setConfirmUnload(true); }); // Prevent accidental navigation away
+
+            $j("input:visible:enabled:first").focus();
+        });
+        // ]]>
         </script>
     
 <?php foreach(Plugin::$plugins as $plugin_id => $plugin): ?>

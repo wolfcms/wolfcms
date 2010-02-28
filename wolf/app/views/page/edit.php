@@ -234,5 +234,7 @@ if ($action == 'edit') { ?>
 </div>
 
 <script type="text/javascript">
+// <![CDATA[
     Field.activate('page_title');
+// ]]>
 </script>

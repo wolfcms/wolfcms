@@ -51,6 +51,25 @@
     <div><textarea class="textarea" id="part_<?php echo ($index-1); ?>_content" name="part[<?php echo ($index-1); ?>][content]" style="width: 100%" rows="20" cols="40"><?php echo htmlentities($page_part->content, ENT_COMPAT, 'UTF-8'); ?></textarea></div>
   </div>
 </div>
+
+
+<div id="boxes">
+	<div id="dialog" class="window">
+		<div class="titlebar">
+            Demo dialog
+            <a href="#" class="close">[x]</a>
+        </div>
+        <div class="content">
+            <p>This is just a demo.</p>
+        </div>
+	</div>
+</div>
+
+<!-- Do not remove div#mask, because you'll need it to fill the whole screen -->
+<div id="mask"></div>
+
 <script type="text/javascript">
+// <![CDATA[
     setTextAreaToolbar('part_<?php echo ($index-1); ?>_content', '<?php echo $page_part->filter_id; ?>');
+// ]]>
 </script>
