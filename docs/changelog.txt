@@ -21,6 +21,7 @@ Sigla:
 + Added alt and title strings to improve i18n consistency - issue 138
 + Enhanced backend views for comments plugin - thanks Iva Pelcova
 + Added check to prevent users from accidentally leaving a screen. - issue 25
+- Fixed problem with multiple dashes showing up in slug - issue 132
 - Fixed a problem with faulty plugins messing up plugin list - issue 94
 - Fixed a problem with inherit option for layout. (might be DB bug)
 - Fixed issue of multiple message not being shown - issue 136

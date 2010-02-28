@@ -58,6 +58,20 @@ Object.extend(String.prototype, {
         .replace(/[ß]/g,"ss").replace(/[å]/g,"aa")
         .replace(/[^-a-z0-9~\s\.:;+=_]/g, '').replace(/[\s\.:;=+]+/g, '-');
       }
+  },
+
+  /* TODO - the replace commands here should still be optimized. */
+  deDash: function()
+  {
+      // Test for non western characters
+      // Need to do this in a better way
+      var rx=/[a-z]|[A-Z]|[0-9]|[àâôäæßéèêëùûöøåîïñü]/;
+
+      if (!rx.test(this)) {
+        return this;
+      } else {
+        return this.replace(/[-]+/g, '-');
+      }
   }
 
 });
@@ -545,7 +559,7 @@ document.observe('dom:loaded', function() {
     if (!slug || !breadcrumb) return;
     
     new Form.Element.Observer(title, 0.15, function() {
-      if (oldTitle.toSlug() == slug.value) slug.value = title.value.toSlug();
+      if (oldTitle.toSlug().deDash() == slug.value) slug.value = title.value.toSlug().deDash();
       if (oldTitle == breadcrumb.value) breadcrumb.value = title.value;
       oldTitle = title.value;
     });
