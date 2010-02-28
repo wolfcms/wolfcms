@@ -214,6 +214,10 @@ ol, ul {
         $warnings['docs, directory present'] = 'The documenation directory ("docs/") is still present. You may want to remove it for added security since this is probably a production system. (DEBUG was set to FALSE)';
     }
 
+    if (defined('DB_DSN') && startsWith(DB_DSN, 'sqlite:'.realpath(dirname(__FILE__)))) {
+        $warnings['db, sqlite location'] = 'It would appear that the SQLite database file is stored inside of web accessible directory. We strongly recommend that you move the database files.';
+    }
+
     /* RUN CHECKS - fatals */
     if (isWritable(CFG_FILE) && true !== DEBUG) {
         $fatals['config file writable, debug off'] = 'Wolf CMS has automatically made itself unavailable because the configuration file was found to be writable. Until this problem is corrected, only this screen will be available.';

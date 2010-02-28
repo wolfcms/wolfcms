@@ -40,8 +40,8 @@ if (!defined('INSTALL_SEQUENCE')) {
             Element.toggle('row-table-prefix');
 
             if (driver == 'sqlite') {
-                $('config_db_name').value = '/your/path/to/wolf.sq3';
-                $('help-db-name').innerHTML = 'Required. Enter the <strong>absolute</strong> path to the database file.';
+                $('config_db_name').value = '<?php echo realpath(dirname(__FILE__).'/../../').'/db/wolf.sq3' ?>';
+                $('help-db-name').innerHTML = 'Required. Enter the <strong>absolute</strong> path to the database file.<br/>You are <strong>strongly</strong> advised to keep the Wolf CMS SQLite database outside of the webserver root.';
             }
             else if (driver == 'mysql') {
                 $('help-db-name').innerHTML = 'Required. You have to create a database manually and enter its name here.';
