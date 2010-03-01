@@ -39,6 +39,7 @@ Sigla:
 . Removed tab feature in edit screens. Tab no longer inserts tab into textarea. - issue 125
 . Updated Russian translation for core and plugins - thanks Kostromind
 . Updated Czech translation for core - thanks Iva Pelcova
+. Updated Hungarian translation for core - thanks Gabor Rezso
 . Updated default layout taglines
 . Added more comments for developers & PHPdoc
 
