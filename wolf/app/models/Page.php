@@ -219,16 +219,14 @@ class Page extends Record {
     }
 
     public function includeSnippet($name) {
-        global $__CMS_CONN__;
+        $snippet = Snippet::findByName($name);
 
-        $sql = 'SELECT content_html FROM '.TABLE_PREFIX.'snippet WHERE name LIKE ?';
-
-        $stmt = $__CMS_CONN__->prepare($sql);
-        $stmt->execute(array($name));
-
-        if ($snippet = $stmt->fetchObject()) {
+        if (false !== $snippet) {
             eval('?>'.$snippet->content_html);
+            return true;
         }
+
+        return false;
     }
 
 

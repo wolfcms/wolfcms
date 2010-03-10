@@ -126,5 +126,11 @@ class Snippet extends Record {
         ));
     }
 
+    public static function findByName($name) {
+        $snippet = self::findOneFrom(self::tableNameFromClassName('Snippet'), "name LIKE '$name'");
+
+        return $snippet;
+    }
+
 } // end Snippet class
 
