@@ -21,7 +21,7 @@ Sigla:
 + Added alt and title strings to improve i18n consistency - issue 138
 + Enhanced backend views for comments plugin - thanks Iva Pelcova
 + Added check to prevent users from accidentally leaving a screen. - issue 25
-+ Replaced Czech translation for core - thanks Iva Pelcova - issue 150
++ Replaced Czech translation for core, comments, and file-manager - thanks Iva Pelcova - issues 150, 151, 152
 + Added Czech translation for comment plugin - thanks Iva Pelcova
 - Fixed problem with multiple dashes showing up in slug - issue 132
 - Fixed a problem with faulty plugins messing up plugin list - issue 94

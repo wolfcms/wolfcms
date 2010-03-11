@@ -1,43 +1,49 @@
 <?php
 
-/**
- * Czech language file for plugin file_manager
- *
- * @package wolf
- * @subpackage plugin.file_manager.translations
- *
- * @author David Vlcek <email@domain.something>
- * @version Wolf 0.9.4
- */
+    /**
+     * Czech file for plugin file_manager
+     *
+     * @package wolf
+     * @subpackage plugin.file_manager.translations
+     *
+     * @author Iva Pelcová <ivy046@gmail.com>
+     * @version Wolf 0.6.0
+     */
 
     return array(
-        'Action' => 'Akce',
-        'Are you sure you wish to delete' => 'Opravdu odstranit?',
-        'Cancel' => 'Zrušit',
-        'Change mode' => 'Upravit mód',
-        'Close' => 'Zavřít',
-        'Create' => 'Vytvořit',
-        'Create new directory' => 'Vytvořit nový adresář',
-        'Create new file' => 'Vytvořit nový soubor',
-        'Directory :name has not been created!' => 'Adresář <strong>:name</strong> nebylo možno vytvořit!',
-        'Directory is not writable! File has not been saved!' => 'Nelze zapisovat do adresáře. Soubor nebyl uložen.',
-        'File' => 'Soubor',
-        'File :name has been created with success!' => 'Soubor<strong>:name</strong> byl vytvořen!',
-        'File :name has not been created!' => 'Soubor <strong>:name</strong> nebylo možno vytvořit!',
-//      'File has been saved with success!' => '',
-        'File has not been uploaded!' => 'Soubor nebylo možno uložit!',
-//      'File is not writable! File has not been saved!' => '',
-        'File or directory not found!' => 'Soubor nebo adresář nenalezen!',
-        'Modify' => 'Změnit',
-//      'Permission denied!' => '',
-        'Permissions' => 'Práva',
-        'Rename' => 'Přejmenovat',
-        'Save' => 'Uložit',
-        'Save and Continue Editing' => 'Uložit a pokračovat v úpravách',
-        'Size' => 'Velikost',
-        'Upload' => 'Odeslat',
-        'Upload file' => 'Nahrát soubor',
-        'You do not have permission to access the requested page!' => 'Nemáte oprávnění pro úpravu této stránky!',
-        'or' => 'nebo',
-        'overwrite it?' => '&nbsp;Přepsat původní?',
+    	'A possible hack attempt was detected.' => 'Byl detekován možný pokus o hack.',
+	    'Action' => '',
+      'Are you sure you wish to delete?' => 'Opravdu smazat?',
+      'Cancel' => 'Zrušit',
+      'Change mode' => 'Změna atributů',
+      'Close' => 'Zavřít',
+      'Create' => 'Vytvořit',
+      'Create new directory' => 'Vytvořit novou složku',
+      'Create new file' => 'Vytvořit nový soubor',
+      'Delete file' => 'Smazat soubor',
+      'Directory :name has not been created!' => 'Složka :name nebyla vytvořena!',
+      'Directory is not writable! File has not been saved!' => 'Složka není zapisovatelná! Soubor nebyl uložen!',
+      'File' => 'Soubor',
+      'File :name has been created with success!' => 'Soubor :name byl úspěšně vytvořen!',
+      'File :name has not been created!' => 'Soubor :name nebyl vytvořen!',
+      'File Manager' => 'Správce souborů',
+      'File has been saved with success!' => 'Soubor byl úspěšně uložen!',
+      'File has not been uploaded!' => 'Soubor nebyl nahrán!',
+      'File is not writable! File has not been saved!' => 'Soubor není zapisovatelný! Nebyl uložen!',
+      'File or directory not found!' => 'Soubor nebo složka nebyly nalezeny.',
+      'Files' => 'Soubory',
+      'Modify' => 'Upravit',
+      'Permission denied!' => 'Oprávnění zamítnuto!',
+      'Permissions' => 'Oprávnění',
+      'Provides interface to manage files from the administration.' => 'Poskytuje rozhraní pro správu souborů z administrace.',
+      'Rename' => 'Přejmenovat',
+      'Save' => 'Uložit',
+      'Save and Continue Editing' => 'Uložit a pokračovat v úpravách',
+      'Size' => 'Velikost',
+      'Upload' => 'Nahrát',
+      'Upload file' => 'Nahrát soubor',
+      'You do not have permission to access the requested page!' => 'Nemáte oprávnění k přístupu na tuto stránku!',
+      'delete file icon' => 'ikonka ke smazání souboru',
+      'or' => 'nebo',
+      'overwrite it?' => 'přepsat původní?',
     );
