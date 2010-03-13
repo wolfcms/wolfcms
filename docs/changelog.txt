@@ -23,6 +23,7 @@ Sigla:
 + Added check to prevent users from accidentally leaving a screen. - issue 25
 + Replaced Czech translation for core, comments, and file-manager - thanks Iva Pelcova - issues 150, 151, 152
 + Added Czech translation for comment plugin - thanks Iva Pelcova
++ Added Romanian translation for core and core plugins - thanks urecheatu007 - issue 155
 - Fixed problem with multiple dashes showing up in slug - issue 132
 - Fixed a problem with faulty plugins messing up plugin list - issue 94
 - Fixed a problem with inherit option for layout. (might be DB bug)
