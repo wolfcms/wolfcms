@@ -45,8 +45,8 @@
 class AuthUser {
     const SESSION_KEY               = 'wolf_auth_user';
     const COOKIE_KEY                = 'wolf_auth_user';
+    const COOKIE_LIFE               = 1209600; // two weeks
     const ALLOW_LOGIN_WITH_EMAIL    = false;
-    const COOKIE_LIFE               = 1209600; // 2 weeks
     const DELAY_ON_INVALID_LOGIN    = true;
 
     static protected $is_logged_in  = false;
@@ -55,7 +55,12 @@ class AuthUser {
     static protected $record        = false;
     static protected $permissions   = array();
 
-    static public function load() {
+    /**
+     * Attempts to load information about the current user.
+     *
+     * @return boolean Returns true when logged in user was found, otherwise false.
+     */
+    static public final function load() {
         if (isset($_SESSION[self::SESSION_KEY]) && isset($_SESSION[self::SESSION_KEY]['username']))
             $user = User::findBy('username', $_SESSION[self::SESSION_KEY]['username']);
         else if (isset($_COOKIE[self::COOKIE_KEY]))
@@ -67,9 +72,16 @@ class AuthUser {
             return self::logout();
 
         self::setInfos($user);
+
+        return true;
     }
 
-    static public function setInfos(Record $user) {
+    /**
+     * Sets the various bits of information pertaining to a user when logged in.
+     *
+     * @param Record $user User object instance.
+     */
+    static private final function setInfos(Record $user) {
         $_SESSION[self::SESSION_KEY] = array('username' => $user->username);
 
         self::$record = $user;
@@ -78,33 +90,58 @@ class AuthUser {
         self::$is_admin = self::hasPermission('administrator');
     }
 
-    static public function isLoggedIn() {
+    /**
+     * Is a user logged in or not?
+     *
+     * @return boolean True when logged in, otherwise false.
+     */
+    static public final function isLoggedIn() {
         return self::$is_logged_in;
     }
 
-    static public function getRecord() {
+    /**
+     * Returns a full User object instance.
+     *
+     * @return User An object instance of type User.
+     */
+    static public final function getRecord() {
         return self::$record ? self::$record: false;
     }
 
-    static public function getId() {
+    /**
+     * Returns the user's id.
+     *
+     * @return string User id.
+     */
+    static public final function getId() {
         return self::$record ? self::$record->id: false;
     }
 
-    static public function getUserName() {
+    /**
+     * Returns the user's username.
+     *
+     * @return string Username.
+     */
+    static public final function getUserName() {
         return self::$record ? self::$record->username: false;
     }
 
-    static public function getPermissions() {
+    /**
+     * Returns all permissions associated with the user.
+     *
+     * @return array Array of permission names.
+     */
+    static public final function getPermissions() {
         return self::$permissions;
     }
 
     /**
      * Checks if user has (one of) the required permissions.
      *
-     * @param string $permission Can contain a single permission or comma seperated list of permissions.
-     * @return boolean
+     * @param string $permission    Single permission or comma seperated list.
+     * @return boolean              Returns true is user has one or more permissions.
      */
-    static public function hasPermission($permissions) {
+    static public final function hasPermission($permissions) {
         if ($permissions == null || $permissions == '')
             return true;
 
@@ -116,7 +153,15 @@ class AuthUser {
         return false;
     }
 
-    static public function login($username, $password, $set_cookie=false) {
+    /**
+     * Attempts to log in a user based on the username and password they provided.
+     *
+     * @param string  $username     User provided username.
+     * @param string  $password     User provided password.
+     * @param boolean $set_cookie   Set a "remember me" cookie? Defaults to false.
+     * @return boolean              Returns true when successful, otherwise false.
+     */
+    static public final function login($username, $password, $set_cookie=false) {
         self::logout();
 
         $user = User::findBy('username', $username);
@@ -124,7 +169,7 @@ class AuthUser {
         if ( ! $user instanceof User && self::ALLOW_LOGIN_WITH_EMAIL)
             $user = User::findBy('email', $username);
 
-        if ($user instanceof User && $user->password == sha1($password)) {
+        if ($user instanceof User && self::validatePassword($user, $password)) {
             $user->last_login = date('Y-m-d H:i:s');
             $user->save();
 
@@ -149,7 +194,10 @@ class AuthUser {
         }
     }
 
-    static public function logout() {
+    /**
+     * Logs out a user.
+     */
+    static public final function logout() {
         unset($_SESSION[self::SESSION_KEY]);
 
         self::eatCookie();
@@ -159,7 +207,13 @@ class AuthUser {
         self::$permissions = array();
     }
 
-    static protected function challengeCookie($cookie) {
+    /**
+     * Checks if the cookie is still valid.
+     *
+     * @param string $cookie    Cookie's content.
+     * @return boolean          True if cookie is valid, otherwise false.
+     */
+    static private final function challengeCookie($cookie) {
         $params = self::explodeCookie($cookie);
         if (isset($params['exp'], $params['id'], $params['digest'])) {
             if ( ! $user = Record::findByIdFrom('User', $params['id']))
@@ -172,7 +226,13 @@ class AuthUser {
         return false;
     }
 
-    static protected function explodeCookie($cookie) {
+    /**
+     * Explodes a cookie's content for easy manipulation.
+     * 
+     * @param string $cookie    Cookie's content.
+     * @return array            Exploded cookie.
+     */
+    static private final function explodeCookie($cookie) {
         $pieces = explode('&', $cookie);
 
         if (count($pieces) < 2)
@@ -185,12 +245,50 @@ class AuthUser {
         return $params;
     }
 
-    static protected function eatCookie() {
+    /**
+     * Eats (destroys) a cookie.
+     */
+    static private final function eatCookie() {
         setcookie(self::COOKIE_KEY, false, $_SERVER['REQUEST_TIME']-self::COOKIE_LIFE, '/', null, (isset($_ENV['SERVER_PROTOCOL']) && (strpos($_ENV['SERVER_PROTOCOL'],'https') || strpos($_ENV['SERVER_PROTOCOL'],'HTTPS'))));
     }
 
-    static protected function bakeUserCookie($time, $user) {
-        return 'exp='.$time.'&id='.$user->id.'&digest='.md5($user->username.$user->password);
+    /**
+     * Creates content for a cookie. (enjoy...)
+     *
+     * @param string    $time   The time.
+     * @param User      $user   A User object.
+     * @return string           The actual cookie content.
+     */
+    static private final function bakeUserCookie($time, User $user) {
+        return 'exp='.$time.'&id='.$user->id.'&digest='.sha1($user->username.$user->salt);
+    }
+
+    /**
+     * Generates an alpha-numerical salt with a default of 32 characters.
+     *
+     * @param   int     $max  The maximum number of characters in the salt.
+     * @return  string        The salt.
+     */
+    static public final function generateSalt($max = 32) {
+        $base = rand(0, 1000000) . microtime(true) . rand(0, 1000000) . rand(0, microtime(true));
+        $salt = sha1($base);
+
+        if($max < 32){
+            $salt = substr($salt, 0, $max);
+        }
+
+        return $salt;
+    }
+
+    /**
+     * Validates a given password for a given user.
+     *
+     * @param User      $user   User to validate password against.
+     * @param string    $pwd    Password to validate.
+     * @return boolean          True when valid, otherwise false.
+     */
+    static public final function validatePassword(User $user, $pwd) {
+        return $user->password == sha1($pwd.$user->salt);
     }
 
 } // end AuthUser class

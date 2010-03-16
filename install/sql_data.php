@@ -29,7 +29,7 @@
  */
 
 /* Make sure we've been called using index.php */
-if (!defined('INSTALL_SEQUENCE') || !isset($admin_name) || !isset($admin_passwd)) {
+if (!defined('INSTALL_SEQUENCE') || !isset($admin_name) || !isset($admin_passwd) || !isset($admin_salt)) {
     echo '<p>Illegal call. Terminating.</p>';
     exit();
 }
@@ -106,7 +106,7 @@ $PDO->exec("INSERT INTO ".TABLE_PREFIX."snippet (id, name, filter_id, content, c
 
 //  Dumping data for table: user ---------------------------------------------
 
-$PDO->exec("INSERT INTO ".TABLE_PREFIX."user (id, name, email, username, password, language, created_on, updated_on, created_by_id, updated_by_id) VALUES (1, 'Administrator', 'admin@yoursite.com', '".$admin_name."', '".$admin_passwd."', 'en', '".wolf_datetime_incrementor()."', '".wolf_datetime_incrementor()."', 1, 1)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."user (id, name, email, username, password, salt, language, created_on, updated_on, created_by_id, updated_by_id) VALUES (1, 'Administrator', 'admin@yoursite.com', '".$admin_name."', '".$admin_passwd."', '".$admin_salt."', 'en', '".wolf_datetime_incrementor()."', '".wolf_datetime_incrementor()."', 1, 1)");
 
 
 //  Dumping data for table: user_permission ----------------------------------

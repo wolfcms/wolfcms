@@ -100,7 +100,7 @@ class UserController extends Controller {
 
         // check if pass and confirm are equal and >= 5 chars
         if (strlen($data['password']) >= 5 && $data['password'] == $data['confirm']) {
-            $data['password'] = sha1($data['password']);
+            //$data['password'] = sha1($data['password']);
             unset($data['confirm']);
         }
         else {
@@ -115,6 +115,10 @@ class UserController extends Controller {
         }
 
         $user = new User($data);
+
+        // Generate a salt and create encrypted password
+        $user->salt = AuthUser::generateSalt();
+        $user->password = sha1($user->password.$user->salt);
 
         if ($user->save()) {
         // now we need to add permissions if needed
@@ -159,7 +163,7 @@ class UserController extends Controller {
         if (strlen($data['password']) > 0) {
         // check if pass and confirm are egal and >= 5 chars
             if (strlen($data['password']) >= 5 && $data['password'] == $data['confirm']) {
-                $data['password'] = sha1($data['password']);
+                //$data['password'] = sha1($data['password']);
                 unset($data['confirm']);
             }
             else {
@@ -170,6 +174,7 @@ class UserController extends Controller {
         else unset($data['password'], $data['confirm']);
 
         $user = Record::findByIdFrom('User', $id);
+        $data['password'] = sha1($data['password'].$user->salt);
         $user->setFromData($data);
 
         if ($user->save()) {

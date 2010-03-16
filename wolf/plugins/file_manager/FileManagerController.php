@@ -259,6 +259,10 @@ class FileManagerController extends PluginController {
         redirect(get_url('plugin/file_manager/browse/'.$paths));
     }
     
+    // TODO clean filenames
+    // $clean_file_name = preg_replace('/ /', '_', $_FILES['upload_file']['name'] );
+    // $clean_file_name = preg_replace('/[^A-Za-z0-9_.]/', '', $clean_file_name );
+    // $file = upload_file( $clean_file_name, FILES_DIR.'/'.$path.'/', $_FILES['upload_file']['tmp_name'], $overwrite);
     public function upload() {
         $data = $_POST['upload'];
         $path = str_replace('..', '', $data['path']);

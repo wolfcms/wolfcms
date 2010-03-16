@@ -299,6 +299,13 @@ class Plugin {
             return false;
     }
 
+    /**
+     * Returns true when all settings for $plugin_id where deleted.
+     *
+     * @global constant $__CMS_CONN__
+     * @param string    $plugin_id
+     * @return boolean  True when successful
+     */
     static function deleteAllSettings($plugin_id) {
         if ($plugin_id === null || $plugin_id === '') return false;
 

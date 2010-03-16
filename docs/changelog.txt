@@ -9,6 +9,7 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Added salted passwords.
 + Added optional THEMES_URI and THEMES_ROOT setting for config.php - issue 145
 + Added basic support for non-western glyphs in url and slug. (turns off slug generation for non-western glyphs)
 + Added new core plugin: multi language support.
@@ -37,6 +38,7 @@ Sigla:
 - Fixed missing id string in settings file - issue 129
 - Fixed trailing slash issue with Pagination.php helper
 - Fixed small issue Wolf layout had with frontend controllers - issue 141
+. Locked down AuthUser class.
 . Page::includeSnippet now returns true or false.
 . Cleaned up admin.css - thanks Axjezzy
 . Removed tab feature in edit screens. Tab no longer inserts tab into textarea. - issue 125
