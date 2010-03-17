@@ -9,6 +9,7 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Added support for CSRF tokens in forms. Included csrf check in user add/edit screens.
 + Added salted passwords.
 + Added optional THEMES_URI and THEMES_ROOT setting for config.php - issue 145
 + Added basic support for non-western glyphs in url and slug. (turns off slug generation for non-western glyphs)

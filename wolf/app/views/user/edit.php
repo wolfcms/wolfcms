@@ -37,6 +37,7 @@
 <h1><?php echo __(ucfirst($action).' user'); ?></h1>
 
 <form action="<?php echo $action=='edit' ? get_url('user/edit/'.$user->id): get_url('user/add'); ; ?>" method="post">
+    <input id="csrf_token" name="csrf_token" type="hidden" value="<?php echo $csrf_token; ?>" />
   <table class="fieldset" cellpadding="0" cellspacing="0" border="0">
     <tr>
 

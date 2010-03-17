@@ -88,6 +88,7 @@ class UserController extends Controller {
 
         $this->display('user/edit', array(
             'action' => 'add',
+            'csrf_token' => SecureToken::generateToken(BASE_URL.'user/add'),
             'user' => $user,
             'permissions' => Record::findAllFrom('Permission')
         ));
@@ -95,6 +96,19 @@ class UserController extends Controller {
 
     private function _add() {
         $data = $_POST['user'];
+
+        // CSRF checks
+        if (isset($_POST['csrf_token'])) {
+            $csrf_token = $_POST['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'user/add')) {
+                Flash::set('error', __('Invalid CSRF token found!'));
+                redirect(get_url('user/add'));
+            }
+        }
+        else {
+            Flash::set('error', __('No CSRF token found!'));
+            redirect(get_url('user/add'));
+        }
 
         Flash::set('post_data', (object) $data);
 
@@ -146,6 +160,7 @@ class UserController extends Controller {
         if ($user = User::findById($id)) {
             $this->display('user/edit', array(
                 'action' => 'edit',
+                'csrf_token' => SecureToken::generateToken(BASE_URL.'user/edit'),
                 'user' => $user,
                 'permissions' => Record::findAllFrom('Permission')
             ));
@@ -158,6 +173,19 @@ class UserController extends Controller {
 
     private function _edit($id) {
         $data = $_POST['user'];
+
+        // CSRF checks
+        if (isset($_POST['csrf_token'])) {
+            $csrf_token = $_POST['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'user/edit')) {
+                Flash::set('error', __('Invalid CSRF token found!'));
+                redirect(get_url('user/add'));
+            }
+        }
+        else {
+            Flash::set('error', __('No CSRF token found!'));
+            redirect(get_url('user/edit'));
+        }
 
         // check if user want to change the password
         if (strlen($data['password']) > 0) {
@@ -174,7 +202,9 @@ class UserController extends Controller {
         else unset($data['password'], $data['confirm']);
 
         $user = Record::findByIdFrom('User', $id);
-        $data['password'] = sha1($data['password'].$user->salt);
+        if (isset($data['password'])) {
+            $data['password'] = sha1($data['password'].$user->salt);
+        }
         $user->setFromData($data);
 
         if ($user->save()) {

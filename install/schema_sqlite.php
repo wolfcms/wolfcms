@@ -30,6 +30,17 @@ if (!defined('INSTALL_SEQUENCE')) {
     exit();
 }
 
+// Table structure for table: secure_token -----------------------------------
+
+$PDO->exec("CREATE TABLE secure_token (
+    id INTEGER NOT NULL PRIMARY KEY,
+    username varchar(40) default NULL ,
+    url varchar(255) default NULL ,
+    time varchar(100) default NULL
+)");
+$PDO->exec("CREATE UNIQUE INDEX username_url ON secure_token (username,url)");
+
+
 // Table structure for table: cron -----------------------------------------
 
 $PDO->exec("CREATE TABLE cron (

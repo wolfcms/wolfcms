@@ -30,7 +30,19 @@ if (!defined('INSTALL_SEQUENCE')) {
     exit();
 }
 
-// Table structure for table: cron -----------------------------------------
+// Table structure for table: secure_token -----------------------------------
+
+$PDO->exec("CREATE TABLE ".TABLE_PREFIX."secure_token (
+  id int(11) unsigned NOT NULL auto_increment,
+  username varchar(40) default NULL,
+  url varchar(255) default NULL,
+  time varchar(100) default NULL,
+  PRIMARY KEY  (id),
+  UNIQUE KEY username_url (username,url)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8");
+
+
+// Table structure for table: cron -------------------------------------------
 
 $PDO->exec("CREATE TABLE ".TABLE_PREFIX."cron (
   id int(11) unsigned NOT NULL auto_increment,
@@ -122,7 +134,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."setting (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8");
 
 
-// Table structure for table: plugin_settings ----------------------------------------
+// Table structure for table: plugin_settings --------------------------------
 
 $PDO->exec("CREATE TABLE ".TABLE_PREFIX."plugin_settings (
   plugin_id varchar(40) NOT NULL,
