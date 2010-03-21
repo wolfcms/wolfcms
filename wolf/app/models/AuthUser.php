@@ -1,6 +1,5 @@
 <?php
-
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008,2009,2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
@@ -37,12 +36,11 @@
  */
 
 /**
- * Class AuthUser
+ * Used to keep track of login status.
  *
- * All informations of the logged in user, plug all method for login, login
- * and permissions
+ * Tracks information of the logged in user, has login/logout method and
+ * permission related functionality.
  *
- * @since Wolf version 0.5
  */
 class AuthUser {
     const SESSION_KEY               = 'wolf_auth_user';
