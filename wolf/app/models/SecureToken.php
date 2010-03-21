@@ -1,6 +1,5 @@
 <?php
-
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
@@ -32,7 +31,6 @@
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  * @copyright Martijn van der Kleijn, 2010
  */
-
 final class SecureToken extends Record {
     const TABLE_NAME = 'secure_token';
     const EXPIRES    = 300; // token expires after 5 min.

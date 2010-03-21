@@ -1,7 +1,7 @@
 <?php
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009,2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
  * This file is part of Wolf CMS.
  *
@@ -27,11 +27,16 @@
  * @subpackage models
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @version 0.1
+ * @version 1.0
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
- * @copyright Martijn van der Kleijn, 2010
+ * @copyright Martijn van der Kleijn, 2009,2010
  */
 
+/**
+ * Keeps track of cron related information.
+ *
+ * Also generates the webbug needed for use of the poor man's cron functionality.
+ */
 final class Cron extends Record {
     const TABLE_NAME = 'cron';
 
