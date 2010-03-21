@@ -185,6 +185,12 @@ class AuthUser {
             return true;
         }
         else {
+            if ($user instanceof User) {
+                $user->last_failure = date('Y-m-d H:i:s');
+                $user->failure_count = ++$user->failure_count;
+                $user->save();
+            }
+
             if (self::DELAY_ON_INVALID_LOGIN) {
                 if ( ! isset($_SESSION[self::SESSION_KEY.'_invalid_logins']))
                     $_SESSION[self::SESSION_KEY.'_invalid_logins'] = 1;
