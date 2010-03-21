@@ -18,15 +18,16 @@
  *
  * LICENSE: see license.txt and exception.txt for the full license texts.
  *
- * @category   framework
  * @package    wolf
  * @subpackage framework
+ *
  * @author     Philippe Archambault <philippe.archambault@gmail.com>
  * @author     Martijn van der Kleijn <martijn.niji@gmail.com>
  * @copyright  2008-2010 Martijn van der Kleijn, Philippe Archambault
- * @license    http://www.wolfcms.org/about/wolf-cms-licensing.html
- * @version    SVN: $Id$
+ * @license    GPLv3
+ *
  * @since      Available since release 0.0.1
+ * @version    SVN: $Id$
  */
 
 define('FRAMEWORK_STARTING_MICROTIME', get_microtime());
@@ -107,8 +108,8 @@ final class Dispatcher {
     /**
      * Adds a route.
      *
-     * @param string $route - A route string.
-     * @param string $destination - URI that the request should be sent to.
+     * @param string $route         A route string.
+     * @param string $destination   URI that the request should be sent to.
      */
     public static function addRoute($route, $destination=null) {
         if ($destination != null && !is_array($route)) {
@@ -152,8 +153,8 @@ final class Dispatcher {
     /**
      * Splits a URL into an array of its components.
      *
-     * @param string $url - A URL.
-     * @return array An array of URL components.
+     * @param string $url   A URL.
+     * @return array        An array of URL components.
      */
     public static function splitUrl($url) {
         return preg_split('/\//', $url, -1, PREG_SPLIT_NO_EMPTY);
@@ -162,9 +163,9 @@ final class Dispatcher {
     /**
      * Handles the request for a URL and provides a response.
      *
-     * @param string $requested_url - The URL that was requested.
-     * @param string $default - Default URL to access if now URL was requested.
-     * @return string A response.
+     * @param string $requested_url The URL that was requested.
+     * @param string $default       Default URL to access if now URL was requested.
+     * @return string               A response.
      */
     public static function dispatch($requested_url = null, $default = null) {
         Flash::init();
@@ -459,9 +460,9 @@ class Record {
     /**
      * Executes an SQL query.
      *
-     * @param string $sql SQL query to execute.
+     * @param string $sql   SQL query to execute.
      * @param array $values Values belonging to the SQL query if its a prepared statement.
-     * @return <type> SQL result set.
+     * @return <type>       SQL result set.
      */
     final public static function query($sql, $values=false) {
         self::logQuery($sql);
@@ -498,7 +499,7 @@ class Record {
      * Escapes quotes in a query string.
      *
      * @param string $value The query string to escape.
-     * @return string The escaped string.
+     * @return string       The escaped string.
      */
     final public static function escape($value) {
         return self::$__CONN__->quote($value);
@@ -602,7 +603,7 @@ class Record {
      *
      * @param string $table The table name.
      * @param string $where The query condition.
-     * @return boolean True if delete was successful.
+     * @return boolean      True if delete was successful.
      */
     public function delete() {
         if ( ! $this->beforeDelete()) return false;
@@ -691,9 +692,9 @@ class Record {
     /**
      * Inserts a record into the database.
      *
-     * @param string $class_name The classname of the record that should be inserted.
-     * @param array $data An array of key/value pairs to be inserted.
-     * @return boolean Returns true when successful. 
+     * @param string $class_name    The classname of the record that should be inserted.
+     * @param array $data           An array of key/value pairs to be inserted.
+     * @return boolean              Returns true when successful.
      */
     public static function insert($class_name, $data) {
         $keys = array();
@@ -715,10 +716,10 @@ class Record {
     /**
      * Updates an existing record in the database.
      *
-     * @param string $class_name The classname of the record to be updated.
-     * @param array $data An array of key/value pairs to be updated.
-     * @param string $where An SQL WHERE clause to specify a specific record.
-     * @param array $values An array of values if this is a prepared statement.
+     * @param string $class_name    The classname of the record to be updated.
+     * @param array $data           An array of key/value pairs to be updated.
+     * @param string $where         An SQL WHERE clause to specify a specific record.
+     * @param array $values         An array of values if this is a prepared statement.
      * @return <type>
      */
     public static function update($class_name, $data, $where, $values=array()) {
@@ -740,10 +741,10 @@ class Record {
     /**
      * Deletes a specified records from the database.
      *
-     * @param string $class_name The classname for the record to be deleted.
-     * @param string $where An SQL WHERE clause to specify a specific record.
-     * @param array $values An array of values if this is a prepared statement.
-     * @return boolean True when the delete was successful.
+     * @param string $class_name    The classname for the record to be deleted.
+     * @param string $where         An SQL WHERE clause to specify a specific record.
+     * @param array $values         An array of values if this is a prepared statement.
+     * @return boolean              True when the delete was successful.
      */
     public static function deleteWhere($class_name, $where, $values=array()) {
         $sql = 'DELETE FROM '.self::tableNameFromClassName($class_name).' WHERE '.$where;
@@ -762,9 +763,9 @@ class Record {
     /**
      * Returns a single Record class instance from the database based on ID.
      *
-     * @param string $class_name The classname to be returned.
-     * @param string $id The ID of the record to be found.
-     * @return Record A record instance.
+     * @param string $class_name    The classname to be returned.
+     * @param string $id            The ID of the record to be found.
+     * @return Record               A record instance.
      */
     public static function findByIdFrom($class_name, $id) {
         return self::findOneFrom($class_name, 'id=?', array($id));
@@ -776,10 +777,10 @@ class Record {
      * The instance is retrieved from the database based on a specified field's
      * value.
      *
-     * @param string $class_name The classname to be returned.
-     * @param string $where An SQL WHERE clause to find a specific record.
-     * @param array $values An array of values if this is a prepared statement.
-     * @return Record A record instance.
+     * @param string $class_name    The classname to be returned.
+     * @param string $where         An SQL WHERE clause to find a specific record.
+     * @param array $values         An array of values if this is a prepared statement.
+     * @return Record               A record instance.
      */
     public static function findOneFrom($class_name, $where, $values=array()) {
         $sql = 'SELECT * FROM '.self::tableNameFromClassName($class_name).' WHERE '.$where;
@@ -798,10 +799,10 @@ class Record {
      * Retrieves all records, or a subset thereof if the $where parameter is
      * used, for a specific database table.
      *
-     * @param string $class_name The classname to be returned.
-     * @param string $where An SQL WHERE clause to specify a subset if desired.
-     * @param array $values An array of values if this is a prepared statement.
-     * @return array An array of Records instances.
+     * @param string $class_name    The classname to be returned.
+     * @param string $where         An SQL WHERE clause to specify a subset if desired.
+     * @param array $values         An array of values if this is a prepared statement.
+     * @return array                An array of Records instances.
      */
     public static function findAllFrom($class_name, $where=false, $values=array()) {
         $sql = 'SELECT * FROM '.self::tableNameFromClassName($class_name).($where ? ' WHERE '.$where:'');
@@ -824,10 +825,10 @@ class Record {
      * Returns a total of all records in the specified database table or a count
      * for a specified subset thereof.
      *
-     * @param string $class_name The classname to be returned.
-     * @param string $where An SQL WHERE clause to specify a subset if desired.
-     * @param array $values An array of values if this is a prepared statement.
-     * @return int The number of records in the table or a subset thereof.
+     * @param string $class_name    The classname to be returned.
+     * @param string $where         An SQL WHERE clause to specify a subset if desired.
+     * @param array $values         An array of values if this is a prepared statement.
+     * @return int                  The number of records in the table or a subset thereof.
      */
     public static function countFrom($class_name, $where=false, $values=array()) {
         $sql = 'SELECT COUNT(*) AS nb_rows FROM '.self::tableNameFromClassName($class_name).($where ? ' WHERE '.$where:'');
@@ -887,8 +888,8 @@ class View {
      * path to a template file and one optional paramater ($vars) which allows
      * you to make local variables available in the template.
      *
-     * @param string $file Absolute path or path relative to the templates dir.
-     * @param array $vars Array of key/value pairs to be made available in the template.
+     * @param string $file  Absolute path or path relative to the templates dir.
+     * @param array $vars   Array of key/value pairs to be made available in the template.
      */
     public function __construct($file, $vars=false) {
         $this->file = APP_PATH.'/views/'.ltrim($file, '/').'.php';
@@ -905,8 +906,8 @@ class View {
     /**
      * Assigns a specific variable to the template.
      *
-     * @param mixed $name Variable name.
-     * @param mixed $value Variable value.
+     * @param mixed $name   Variable name.
+     * @param mixed $value  Variable value.
      */
     public function assign($name, $value=null) {
         if (is_array($name)) {
@@ -993,7 +994,7 @@ class Controller {
     /**
      * Assigns a set of key/values pairs to a layout.
      *
-     * @param mixed $var An array of key/value pairs or the name of a single variable.
+     * @param mixed $var    An array of key/value pairs or the name of a single variable.
      * @param string $value The value of the single variable.
      */
     public function assignToLayout($var, $value) {
@@ -1009,8 +1010,8 @@ class Controller {
      * 
      * @todo Remove? Is this proper OO/good idea?
      *
-     * @param string $view Name of the view to render
-     * @param array $vars Array of variables
+     * @param string $view  Name of the view to render
+     * @param array $vars   Array of variables
      * @return View 
      */
     public function render($view, $vars=array()) {
@@ -1041,7 +1042,7 @@ class Controller {
      * Renders a JSON encoded response and returns that as a string
      *
      * @param mixed $data_to_encode The data being encoded.
-     * @return string The JSON representation of $data_to_encode.
+     * @return string               The JSON representation of $data_to_encode.
      */
     public function renderJSON($data_to_encode) {
         if (class_exists('JSON')) {
@@ -1080,8 +1081,8 @@ final class Observer {
     /**
      * Allows an event handler to watch/handle for a spefied event.
      *
-     * @param string $event_name The name of the event to watch for.
-     * @param string $callback The name of the function handling the event.
+     * @param string $event_name    The name of the event to watch for.
+     * @param string $callback      The name of the function handling the event.
      */
     public static function observe($event_name, $callback) {
         if ( ! isset(self::$events[$event_name]))
@@ -1093,8 +1094,8 @@ final class Observer {
     /**
      * Allows an event handler to stop watching/handling a specific event.
      *
-     * @param string $event_name The name of the event.
-     * @param string $callback The name of the function handling the event.
+     * @param string $event_name    The name of the event.
+     * @param string $callback      The name of the function handling the event.
      */
     public static function stopObserving($event_name, $callback) {
         if (isset(self::$events[$event_name][$callback]))
@@ -1159,7 +1160,6 @@ final class Observer {
  * When adding an entire folder, each file should contain one class having the
  * same name as the file without ".php" (Blog.php should contain one class Blog)
  *
- *
  */
 class AutoLoader {
     protected static $files = array();
@@ -1173,7 +1173,7 @@ class AutoLoader {
      *      AutoLoader::addFile(array('Blog'=>'/path/to/Blog.php','Post'=>'/path/to/Post.php'));
      *
      * @param mixed $class_name Classname or array of classname/path pairs.
-     * @param mixed $file Full path to the file that contains $class_name.
+     * @param mixed $file       Full path to the file that contains $class_name.
      */
     public static function addFile($class_name, $file=null) {
         if ($file == null && is_array($class_name)) {
@@ -1267,8 +1267,8 @@ final class Flash {
      * If the value is not found, NULL is returned instead.
      * @todo Return false instead?
      *
-     * @param string $var Variable name
-     * @return mixed Value of the variable stored in the Flash service.
+     * @param string $var   Variable name
+     * @return mixed        Value of the variable stored in the Flash service.
      */
     public static function get($var) {
         return isset(self::$_flashstore[$var]) ? self::$_flashstore[$var] : null;
@@ -1280,8 +1280,8 @@ final class Flash {
      * This variable will be available on the next page unless removed with the
      * removeVariable() or clear() methods.
      *
-     * @param string $var Variable name
-     * @param mixed $value Variable value
+     * @param string $var   Variable name
+     * @param mixed $value  Variable value
      */
     public static function set($var, $value) {
         $_SESSION[self::SESSION_KEY][$var] = $value;
@@ -1292,8 +1292,8 @@ final class Flash {
      *
      * This variable will be available on the current page only.
      *
-     * @param string $var Variable name
-     * @param mixed $value Variable value
+     * @param string $var   Variable name
+     * @param mixed $value  Variable value
      */
     public static function setNow($var, $value) {
         self::$_flashstore[$var] = $value;
@@ -1314,9 +1314,6 @@ final class Flash {
      *
      * This will read flash data from the $_SESSION variable and load it into
      * the $this->previous array.
-     *
-     * @param none
-     * @return void
      */
     public static function init() {
         // Get flash data...
@@ -1344,8 +1341,8 @@ final class Inflector {
      * 
      * Example: "like_this_dear_reader" becomes "LikeThisDearReader"
      * 
-     * @param string $string Word to camelize.
-     * @return string Camelized word. 
+     * @param string $string    Word to camelize.
+     * @return string           Camelized word.
      */
     public static function camelize($string) {
         return str_replace(' ','',ucwords(str_replace('_',' ', $string)));
@@ -1356,8 +1353,8 @@ final class Inflector {
      *
      * Example: "LikeThisDearReader" becomes "like_this_dear_reader"
      *
-     * @param  string $string CamelCased word
-     * @return string Underscored version of the $string
+     * @param  string $string   CamelCased word
+     * @return string           Underscored version of the $string
      */
     public static function underscore($string) {
         return strtolower(preg_replace('/(?<=\\w)([A-Z])/', '_\\1', $string));
@@ -1368,8 +1365,8 @@ final class Inflector {
      *
      * Example: "like_this_dear_reader" becomes "Like this dear reader"
      *
-     * @param  string $string String using underscore syntax.
-     * @return string Humanized version of the $string
+     * @param  string $string   String using underscore syntax.
+     * @return string           Humanized version of the $string
      */
     public static function humanize($string) {
         return ucfirst(str_replace('_', ' ', $string));
@@ -1454,8 +1451,8 @@ function use_model() {
  *      get_url('controller/action/param1/param2');
  *      get_url('controller', 'action', 'param1', 'param2');
  *
- * @param string controller, action, param and/or #anchor
- * @return string A generated URL
+ * @param string    controller, action, param and/or #anchor
+ * @return string   A generated URL
  */
 function get_url() {
     $params = func_get_args();
@@ -1506,8 +1503,8 @@ function redirect_to($url) {
  *
  * You should use instead of htmlentities.
  *
- * @param string $string HTML to encode.
- * @return string Encoded HTML
+ * @param string $string    HTML to encode.
+ * @return string           Encoded HTML
  */
 function html_encode($string) {
     return htmlentities($string, ENT_QUOTES, 'UTF-8') ;
@@ -1656,8 +1653,8 @@ function page_not_found() {
  *
  * Example: "1024" become "1 kb"
  *
- * @param int $num The number to represent.
- * @return string Human readable representation of the disk/filesize.
+ * @param int $num      The number to represent.
+ * @return string       Human readable representation of the disk/filesize.
  */
 function convert_size($num) {
     if ($num >= 1073741824) $num = round($num / 1073741824 * 100) / 100 .' gb';
