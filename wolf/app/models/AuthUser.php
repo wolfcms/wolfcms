@@ -178,6 +178,9 @@ class AuthUser {
                 setcookie(self::COOKIE_KEY, self::bakeUserCookie($time, $user), $time, '/', null, (isset($_ENV['SERVER_PROTOCOL']) && ((strpos($_ENV['SERVER_PROTOCOL'],'https') || strpos($_ENV['SERVER_PROTOCOL'],'HTTPS')))));
             }
 
+            // Regenerate Session ID upon login
+            session_regenerate_id(true);
+
             self::setInfos($user);
             return true;
         }

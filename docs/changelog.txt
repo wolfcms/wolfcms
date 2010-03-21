@@ -9,6 +9,7 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Added session regeneration upon user privilege increase. (login for now)
 + Added support for CSRF tokens in forms. Included csrf check in user add/edit screens.
 + Added salted passwords.
 + Added optional THEMES_URI and THEMES_ROOT setting for config.php - issue 145

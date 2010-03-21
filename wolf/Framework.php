@@ -59,6 +59,11 @@ if (PHP_VERSION < 5.3)
 if ( ! isset($_SESSION))
     session_start();
 
+if ( ! isset($_SESSION['initiated'])) {
+    session_regenerate_id(true);
+    $_SESSION['initiated'] = true;
+}
+
 ini_set('date.timezone', DEFAULT_TIMEZONE);
 if(function_exists('date_default_timezone_set'))
     date_default_timezone_set(DEFAULT_TIMEZONE);
