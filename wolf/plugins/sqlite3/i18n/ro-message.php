@@ -3,8 +3,9 @@
     /**
      * Romanian file for plugin sqlite3
      *
-     * @package wolf
-     * @subpackage plugin.sqlite3.translations
+     * @package plugins
+     * @subpackage sqlite3
+     * @category translations
      *
      * @author Cosmin Huţanu <urecheatu007@gmail.com>
      * @version Wolf 0.6.0

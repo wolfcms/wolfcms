@@ -3,8 +3,9 @@
     /**
      * Russian language file
      *
-     * @package wolf
-	 * @subpackage plugin.skeleton.translations
+     * @package plugins
+	 * @subpackage skeleton
+     * @category translations
      *
      * @author Dmitry Kostromin <kostromind@gmail.com>
      * @version Wolf 0.6.0

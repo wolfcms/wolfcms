@@ -24,6 +24,11 @@
  * See exception.txt for details and the full text.
  */
 
+/**
+ * @package wolf
+ * @subpackage installer
+ */
+
 /* Make sure we've been called using index.php */
 if (!defined('INSTALL_SEQUENCE')) {
     echo '<p>Illegal call. Terminating.</p>';

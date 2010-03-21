@@ -24,6 +24,10 @@
  * See exception.txt for details and the full text.
  */
 
+/**
+ * @package wolf
+ */
+
 //  Constantes  --------------------------------------------------------------
 define('IN_CMS', true);
 

@@ -15,7 +15,8 @@
  *
  * LICENSE: see license.txt and exception.txt for the full license texts.
  *
- * @package    wolf/helpers
+ * @package    wolf
+ * @subpackage helpers
  * @author     Philippe Archambault <philippe.archambault@gmail.com>
  * @author     Martijn van der Kleijn <martijn.niji@gmail.com>
  * @copyright  2008-2010 Martijn van der Kleijn, Philippe Archambault

@@ -22,6 +22,10 @@
  * See exception.txt for details and the full text.
  */
 
+/**
+ * @package wolf
+ */
+
 // Start by outputting the image and then severing the browser connection.
 // Any output in a cron run should NOT be done.
 

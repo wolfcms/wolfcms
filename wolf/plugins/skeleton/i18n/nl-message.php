@@ -3,8 +3,9 @@
     /**
      * Dutch file for plugin skeleton
      *
-     * @package wolf
-     * @subpackage plugin.skeleton.translations
+     * @package plugins
+     * @subpackage skeleton
+     * @category translations
      *
      * @author Martijn van der Kleijn <martijn.niji@gmail.com>
      * @version Wolf 0.5.5

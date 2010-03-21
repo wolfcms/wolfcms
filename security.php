@@ -23,6 +23,10 @@
  * See exception.txt for details and the full text.
  */
 
+/**
+ * @package wolf
+ */
+
 // Make sure we hide ugly errrors
 error_reporting(0);
 

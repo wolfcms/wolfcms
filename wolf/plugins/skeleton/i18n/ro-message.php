@@ -3,8 +3,9 @@
     /**
      * Romanian file for plugin skeleton
      *
-     * @package wolf
-     * @subpackage plugin.skeleton.translations
+     * @package plugins
+     * @subpackage skeleton
+     * @category translations
      *
      * @author Cosmin Huţanu <urecheatu007@gmail.com>
      * @version Wolf 0.6.0

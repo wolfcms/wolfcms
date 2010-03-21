@@ -3,8 +3,9 @@
 /**
  * Dutch language file for plugin file_manager
  *
- * @package wolf
- * @subpackage plugin.file_manager.translations
+ * @package plugins
+ * @subpackage file_manager
+ * @category translations
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @version Wolf 0.9.4

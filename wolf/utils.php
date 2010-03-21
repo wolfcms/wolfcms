@@ -22,6 +22,10 @@
  * See exception.txt for details and the full text.
  */
 
+/**
+ * @package wolf
+ */
+
 /*
  * This file contains some usefull utility functions which we would like to be
  * available outside the Framework.

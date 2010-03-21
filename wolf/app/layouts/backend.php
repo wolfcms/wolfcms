@@ -23,6 +23,11 @@
  * See exception.txt for details and the full text.
  */
 
+/**
+ * @package wolf
+ * @subpackage layouts
+ */
+
 /* Security measure */
 if (!defined('IN_CMS')) { exit(); }
 

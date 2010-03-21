@@ -23,6 +23,11 @@
  * See exception.txt for details and the full text.
  */
 
+/**
+ * @package wolf
+ * @subpackage installer
+ */
+
 // Make sure we hide ugly errrors
 error_reporting(0);
 

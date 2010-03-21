@@ -26,6 +26,9 @@
 
 /**
  * This file will insert all basic data to database
+ *
+ * @package wolf
+ * @subpackage installer
  */
 
 /* Make sure we've been called using index.php */

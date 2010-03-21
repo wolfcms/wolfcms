@@ -3,8 +3,9 @@
     /**
      * Dutch file for plugin backup_restore
      *
-     * @package wolf
-     * @subpackage plugin.backup_restore.translations
+     * @package plugins
+     * @subpackage backup_restore
+     * @category translations
      *
      * @author Martijn van der Kleijn <martijn.niji@gmail.com>
      * @version Wolf 0.5.5

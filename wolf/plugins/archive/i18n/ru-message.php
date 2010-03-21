@@ -4,8 +4,9 @@
     /**
      * Russian language file
      *
-     * @package wolf
-     * @subpackage plugin.archive.translations
+     * @package plugins
+     * @subpackage archive
+     * @category translations
      *
      * @author Dmitry Kostromin <kostromind@gmail.com>
      * @version Wolf 0.6.0

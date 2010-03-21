@@ -30,8 +30,8 @@ if (!defined('IN_CMS')) { exit(); }
 /**
  * Provides Page not found page types.
  *
- * @package wolf
- * @subpackage plugin.page_not_found
+ * @package plugins
+ * @subpackage page_not_found
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @version 1.0

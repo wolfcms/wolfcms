@@ -29,8 +29,8 @@ if (!defined('IN_CMS')) { exit(); }
 /**
  * Provides function to run Wolf CMS with SQLite 3 database.
  *
- * @package wolf
- * @subpackage plugin.sqlite3
+ * @package plugins
+ * @subpackage sqlite3
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @author Philippe Archambault <philippe.archambault@gmail.com>

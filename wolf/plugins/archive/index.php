@@ -30,8 +30,8 @@ if (!defined('IN_CMS')) { exit(); }
 /**
  * The Archive plugin provides an Archive pagetype behaving similar to a blog or news archive.
  *
- * @package wolf
- * @subpackage plugin.archive
+ * @package plugins
+ * @subpackage archive
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @version 1.0

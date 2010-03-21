@@ -25,6 +25,10 @@
  */
 
 /**
+ * @package wolf
+ */
+
+/**
    Simple 404 Not Found file display
  */
 

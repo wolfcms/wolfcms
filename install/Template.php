@@ -24,6 +24,11 @@
  * See exception.txt for details and the full text.
  */
 
+/**
+ * @package wolf
+ * @subpackage installer
+ */
+
 class Template {
 
     public $template;         // String of template file

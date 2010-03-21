@@ -3,8 +3,9 @@
     /**
      * Polish file for plugin comment
      *
-     * @package wolf
-     * @subpackage plugin.comment.translations
+     * @package plugins
+     * @subpackage comment
+     * @category translations
      *
      * @author Piotr Fuz <piotr.fuz@gmail.com>
      * @version Wolf 0.5.5

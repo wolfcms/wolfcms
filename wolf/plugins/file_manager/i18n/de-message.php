@@ -3,8 +3,9 @@
 /**
  * German language file for plugin file_manager
  *
- * @package wolf
- * @subpackage plugin.file_manager.translations
+ * @package plugins
+ * @subpackage file_manager
+ * @category translations
  *
  * @author unknown <email@domain.something>
  * @version Wolf 0.9.4

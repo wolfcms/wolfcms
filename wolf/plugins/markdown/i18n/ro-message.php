@@ -3,8 +3,9 @@
     /**
      * Romanian file for plugin markdown
      *
-     * @package wolf
-     * @subpackage plugin.markdown.translations
+     * @package plugins
+     * @subpackage markdown
+     * @category translations
      *
      * @author Cosmin Huţanu <urecheatu007@gmail.com>
      * @version Wolf 0.6.0

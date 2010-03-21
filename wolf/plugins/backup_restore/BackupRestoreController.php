@@ -29,8 +29,8 @@ if (!defined('IN_CMS')) { exit(); }
  * The BackupRestore plugin provides administrators with the option of backing
  * up their pages and settings to an XML file.
  *
- * @package wolf
- * @subpackage plugin.backup_restore
+ * @package plugins
+ * @subpackage backup_restore
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @version 0.0.1

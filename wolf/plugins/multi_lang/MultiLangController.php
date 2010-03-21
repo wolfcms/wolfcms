@@ -37,8 +37,8 @@ if (!defined('IN_CMS')) { exit(); }
  * - URI based language hint (for example: http://www.example.com/en/page.html
  * - Preferred language setting of logged in users
  *
- * @package wolf
- * @subpackage plugin.multi_lang
+ * @package plugins
+ * @subpackage multi_lang
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @version 1.0.0

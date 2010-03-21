@@ -3,8 +3,9 @@
     /**
      * Czech file for plugin file_manager
      *
-     * @package wolf
-     * @subpackage plugin.file_manager.translations
+     * @package plugins
+     * @subpackage file_manager
+     * @category translations
      *
      * @author Iva Pelcová <ivy046@gmail.com>
      * @version Wolf 0.6.0

@@ -3,8 +3,9 @@
     /**
      * Romanian file for plugin archive
      *
-     * @package wolf
-     * @subpackage plugin.archive.translations
+     * @package plugins
+     * @subpackage archive
+     * @category translations
      *
      * @author Cosmin Huţanu <urecheatu007@gmail.com>
      * @version Wolf 0.6.0

@@ -2,8 +2,8 @@
 
 /**
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2008,2009,2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
- * Copyright (C) 2008,2009 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
  * This file is part of Wolf CMS.
  *
@@ -28,9 +28,11 @@
  * @package wolf
  * @subpackage controllers
  *
+ * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @version 0.1
+ * @version 1.0
  * @license http://www.gnu.org/licenses/gpl.html GPL License
+ * @copyright Martijn van der Kleijn, 2008, 2009, 2010
  * @copyright Philippe Archambault, 2008
  */
 

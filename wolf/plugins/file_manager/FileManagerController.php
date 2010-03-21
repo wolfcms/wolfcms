@@ -30,8 +30,8 @@ if (!defined('IN_CMS')) { exit(); }
 /**
  * The FileManager allows users to upload and manipulate files.
  *
- * @package wolf
- * @subpackage plugin.file_manager
+ * @package plugins
+ * @subpackage file_manager
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>

@@ -40,8 +40,8 @@ if (!defined('IN_CMS')) { exit(); }
  * Note: to use the settings and documentation pages, you will first need to enable
  * the plugin!
  *
- * @package wolf
- * @subpackage plugin.skeleton
+ * @package plugins
+ * @subpackage skeleton
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @version 1.0.1

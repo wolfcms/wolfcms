@@ -30,8 +30,8 @@ if (!defined('IN_CMS')) { exit(); }
 /**
  * Markdown Extra  -  A text-to-HTML conversion tool for web writers.
  *
- * @package wolf
- * @subpackage plugin.markdown
+ * @package plugins
+ * @subpackage markdown
  *
  * @author Michel Fortin <philippe.archambault@gmail.com>
  * @version 1.0.0

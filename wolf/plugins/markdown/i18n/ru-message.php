@@ -3,8 +3,9 @@
    /**
      * Russian language file
      *
-     * @package wolf
-	 * @subpackage plugin.markdown.translations
+     * @package plugins
+	 * @subpackage markdown
+    *  @category translations
      *
      * @author Dmitry Kostromin <kostromind@gmail.com>
      * @version Wolf 0.6.0

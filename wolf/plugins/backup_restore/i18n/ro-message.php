@@ -3,8 +3,9 @@
     /**
      * Romanian file for plugin backup_restore
      *
-     * @package wolf
-     * @subpackage plugin.backup_restore.translations
+     * @package plugins
+     * @subpackage backup_restore
+     * @category translations
      *
      * @author Cosmin Huţanu <urecheatu007@gmail.com>
      * @version Wolf 0.6.0

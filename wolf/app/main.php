@@ -24,6 +24,10 @@
  * See exception.txt for details and the full text.
  */
 
+/**
+ * @package wolf
+ */
+
 require APP_PATH . '/models/Plugin.php';
 require APP_PATH . '/models/Page.php';
 

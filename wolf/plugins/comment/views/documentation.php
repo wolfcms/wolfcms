@@ -29,8 +29,8 @@ if (!defined('IN_CMS')) { exit(); }
 /**
  * The Comment plugin provides an interface to enable adding and moderating page comments.
  *
- * @package wolf
- * @subpackage plugin.comment
+ * @package plugins
+ * @subpackage comment
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author Bebliuc George <bebliuc.george@gmail.com>

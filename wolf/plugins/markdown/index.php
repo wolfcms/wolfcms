@@ -30,8 +30,8 @@ if (!defined('IN_CMS')) { exit(); }
 /**
  * The Markdown plugin allows users edit pages using the markdown syntax.
  *
- * @package wolf
- * @subpackage plugin.markdown
+ * @package plugins
+ * @subpackage markdown
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @version 1.0.0

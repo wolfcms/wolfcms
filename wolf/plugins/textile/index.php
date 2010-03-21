@@ -30,8 +30,8 @@ if (!defined('IN_CMS')) { exit(); }
 /**
  * The Textile plugin allows users to edit pages using the textile syntax.
  *
- * @package wolf
- * @subpackage plugin.textile
+ * @package plugins
+ * @subpackage textile
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @version 1.0.0

@@ -3,12 +3,13 @@
    /**
      * Russian language file
      *
-     * @package wolf
-	 * @subpackage plugin.page_not_found.translations
+     * @package plugins
+	 * @subpackage page_not_found
+    *  @category translations
      *
      * @author Dmitry Kostromin <kostromind@gmail.com>
      * @version Wolf 0.6.0
-     * @last modifed from 07 February 2010
+     * @last modified from 07 February 2010
      */
 	 
 	 

@@ -3,8 +3,9 @@
     /**
      * Romanian file for plugin comment
      *
-     * @package wolf
-     * @subpackage plugin.comment.translations
+     * @package plugins
+     * @subpackage comment
+     * @category translations
      *
      * @author Cosmin Huţanu <urecheatu007@gmail.com>
      * @version Wolf 0.6.0

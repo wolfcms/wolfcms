@@ -3,8 +3,9 @@
     /**
      * Slovenian file for plugin comment
      *
-     * @package wolf
-     * @subpackage plugin.comment.translations
+     * @package plugins
+     * @subpackage comment
+     * @category translations
      *
      * @author Andrej Čremožnik <andrej.cremoznik@gmail.com>
      * @version Wolf 0.5.5

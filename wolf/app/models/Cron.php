@@ -22,6 +22,16 @@
  * See exception.txt for details and the full text.
  */
 
+/**
+ * @package wolf
+ * @subpackage models
+ *
+ * @author Martijn van der Kleijn <martijn.niji@gmail.com>
+ * @version 0.1
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
+ * @copyright Martijn van der Kleijn, 2010
+ */
+
 final class Cron extends Record {
     const TABLE_NAME = 'cron';
 
