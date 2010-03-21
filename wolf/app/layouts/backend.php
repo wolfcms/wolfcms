@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
@@ -25,7 +25,6 @@
 
 /**
  * @package wolf
- * @subpackage layouts
  */
 
 /* Security measure */
@@ -40,7 +39,8 @@ if (!AuthUser::hasPermission('administrator,developer,editor')) {
 // Setup some stuff...
 $ctrl = Dispatcher::getController(Setting::get('default_tab'));
 
-// Allow for nice title. TODO - improve/clean this up.
+// Allow for nice title.
+// @todo improve/clean this up.
 $title = ($ctrl == 'plugin') ? Plugin::$controllers[Dispatcher::getAction()]->label : ucfirst($ctrl).'s';
 if (isset($this->vars['content_for_layout']->vars['action'])) {
     $tmp = $this->vars['content_for_layout']->vars['action'];

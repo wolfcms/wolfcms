@@ -1,6 +1,5 @@
 <?php 
-
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008,2009,2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  *

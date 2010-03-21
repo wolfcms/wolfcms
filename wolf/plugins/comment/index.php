@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  * Copyright (C) 2008,2009 Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -233,7 +233,7 @@ function comment_save(&$page)
 
     $__CMS_CONN__->exec($sql);
 
-    // FIXME - If code above used Comment object for saving data there would be
+    // @todo FIXME - If code above used Comment object for saving data there would be
     // no need to reload it from database. Using lastInsertId() is unrealiable anyway.
     $comment_id = Record::lastInsertId();
     $comment    = Comment::findById($comment_id);

@@ -42,7 +42,7 @@ body {
   color: #000;
 }
 
-/* TODO - cleanup */
+/* @todo cleanup */
 img { border: 0; }
 h3 { font-size: 130%; margin: 1.25em 0 .5em; }
 a { color: #147; }
@@ -649,7 +649,7 @@ table.index td.note {
 #snippet_1 .tag, #snippets .tag { font-size:10px; position: absolute; top: 10px; right: 237px; width:300px }
 
 
-/* TODO - CLEANUP */
+/* @todo CLEANUP */
 .form-area h3 {
   font-size: 100%;
   margin-bottom: 0;

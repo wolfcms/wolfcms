@@ -27,12 +27,12 @@
  * @package wolf
  * @subpackage models
  *
- * @autho Martijn van der Kleijn <martijn.niji@gmail.com>
  * @author Philippe Archambault <philippe.archambault@gmail.com>
+ * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @version 1.0
  * @license http://www.gnu.org/licenses/gpl.html GPL License
- * @copyright Martijn van der Kleijn, 2008, 2009, 2010
  * @copyright Philippe Archambault, 2008
+ * @copyright Martijn van der Kleijn, 2008, 2009, 2010
  */
 
 /**

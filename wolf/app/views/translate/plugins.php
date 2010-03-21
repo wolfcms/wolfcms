@@ -1,6 +1,5 @@
 <?php
-
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
@@ -84,8 +83,9 @@ function writeTemplate($pluginname, $strings) {
     /**
      * YourLanguage file for plugin '.$pluginname.'
      *
-     * @package wolf
-     * @subpackage plugin.'.$pluginname.'.translations
+     * @package plugins
+     * @subpackage '.$pluginname.'
+     * @category translations
      *
      * @author Your Name <email@domain.something>
      * @version Wolf x.y.z

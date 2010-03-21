@@ -1,6 +1,5 @@
 <?php
-
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  * Copyright (C) 2008,2009 Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -45,8 +44,6 @@ if (!defined('IN_CMS')) { exit(); }
 /**
  * class CommentController
  *
- * @package wolf
- * @subpackage plugin.comment
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @since Wolf version 0.6
  */

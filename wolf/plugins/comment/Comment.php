@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  * Copyright (C) 2008,2009 Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -67,7 +67,7 @@ class Comment extends Record
         $tablename = self::tableNameFromClassName('Comment');
 
         // Prepare SQL
-        // FIXME - do this in a better way (sqlite doesn't like empty WHEREs)
+        // @todo FIXME - do this in a better way (sqlite doesn't like empty WHEREs)
         if ($where != '')
         {
             $sql = "SELECT * FROM $tablename AS comment " .

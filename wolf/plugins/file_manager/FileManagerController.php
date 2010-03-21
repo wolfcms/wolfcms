@@ -1,6 +1,5 @@
 <?php
-
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  * Copyright (C) 2008,2009 Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -259,7 +258,7 @@ class FileManagerController extends PluginController {
         redirect(get_url('plugin/file_manager/browse/'.$paths));
     }
     
-    // TODO clean filenames
+    // @todo clean filenames
     // $clean_file_name = preg_replace('/ /', '_', $_FILES['upload_file']['name'] );
     // $clean_file_name = preg_replace('/[^A-Za-z0-9_.]/', '', $clean_file_name );
     // $file = upload_file( $clean_file_name, FILES_DIR.'/'.$path.'/', $_FILES['upload_file']['tmp_name'], $overwrite);

@@ -1,6 +1,5 @@
 <?php
-
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  * Copyright (C) 2008,2009 Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -49,7 +48,7 @@ $config_file = CMS_ROOT.'/config.php';
 require_once($config_file);
 
 // Figure out what the public URI is based on URL_PUBLIC.
-// TODO - improve
+// @todo improve
 $changedurl = str_replace('//','|',URL_PUBLIC);
 $lastslash = strpos($changedurl, '/');
 if (false === $lastslash) {

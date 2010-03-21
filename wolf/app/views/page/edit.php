@@ -34,7 +34,7 @@
  * @copyright Philippe Archambault, Martijn van der Kleijn, 2008
  */
 
-// TODO: clean up code/solution
+// @todo clean up code/solution
 $pagetmp = Flash::get('page');
 $parttmp = Flash::get('page_parts');
 $tagstmp = Flash::get('page_tag');

@@ -1,6 +1,5 @@
 <?php
-
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008,2009,2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
@@ -322,7 +321,7 @@ class PageController extends Controller {
     /**
      * Used to delete a page.
      *
-     * TODO - make sure we not only delete the page but also all parts and all children!
+     * @todo make sure we not only delete the page but also all parts and all children!
      *
      * @param int $id Id of page to delete
      */

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -282,7 +281,7 @@ final class Dispatcher {
     /**
      * ???
      * 
-     * TODO Finish docblock
+     * @todo Finish docblock
      *
      * @param <type> $key
      * @return <type> 
@@ -1008,7 +1007,7 @@ class Controller {
     /**
      * Renders the output.
      * 
-     * TODO Remove? Is this proper OO/good idea?
+     * @todo Remove? Is this proper OO/good idea?
      *
      * @param string $view Name of the view to render
      * @param array $vars Array of variables
@@ -1026,7 +1025,7 @@ class Controller {
     /**
      * Displays a rendered layout.
      *
-     * TODO Remove? Is this proper OO/good idea?
+     * @todo Remove? Is this proper OO/good idea?
      *
      * @param <type> $view
      * @param <type> $vars
@@ -1134,7 +1133,7 @@ final class Observer {
 
         foreach(self::getObserverList($event_name) as $callback) {
             // XXX For some strange reason, this works... figure out later.
-            // FIXME Make this proper PHP 5.3 stuff.
+            // @todo FIXME Make this proper PHP 5.3 stuff.
             $Args = array();
             foreach($args as $k => &$arg){
                 $Args[$k] = &$arg;
@@ -1266,7 +1265,7 @@ final class Flash {
      * Returns a specific variable from the Flash service.
      * 
      * If the value is not found, NULL is returned instead.
-     * TODO Return false instead?
+     * @todo Return false instead?
      *
      * @param string $var Variable name
      * @return mixed Value of the variable stored in the Flash service.
@@ -1517,7 +1516,7 @@ function html_encode($string) {
 /**
  * Experimental anti XSS function.
  * 
- * TODO Improve or remove.
+ * @todo Improve or remove.
  *
  * @param <type> $string
  * @return <type> 
@@ -1672,7 +1671,7 @@ function convert_size($num) {
 // Information about time and memory
 
 /**
- * TODO Finish doc
+ * @todo Finish doc
  *
  * @return <type>
  */
@@ -1681,7 +1680,7 @@ function memory_usage() {
 }
 
 /**
- * TODO Finish doc
+ * @todo Finish doc
  *
  * @return <type>
  */
@@ -1690,7 +1689,7 @@ function execution_time() {
 }
 
 /**
- * TODO Finish doc
+ * @todo Finish doc
  *
  * @return <type>
  */
@@ -1700,7 +1699,7 @@ function get_microtime() {
 }
 
 /**
- * TODO Finish doc
+ * @todo Finish doc
  *
  * @return <type>
  */

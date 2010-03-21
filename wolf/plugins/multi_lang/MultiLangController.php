@@ -1,6 +1,5 @@
 <?php
-
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
@@ -80,7 +79,7 @@ class MultiLangController extends PluginController {
     /**
      * Save the settings
      *
-     * TODO Add a sanity check for input.
+     * @todo Add a sanity check for input.
      */
     function save() {
 		$settings = $_POST['settings'];

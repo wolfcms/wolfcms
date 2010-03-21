@@ -1,6 +1,5 @@
 <?php
-
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
@@ -25,11 +24,9 @@
  */
 
 /**
+ * Simple 404 Not Found file display
+ *
  * @package wolf
- */
-
-/**
-   Simple 404 Not Found file display
  */
 
 header("HTTP/1.0 404 Not Found");

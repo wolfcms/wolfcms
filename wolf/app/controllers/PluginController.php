@@ -1,6 +1,5 @@
 <?php
-
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008,2009,2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
@@ -49,7 +48,7 @@
 class PluginController extends Controller {
 
     // Provides compatibility with Page class.
-    // TODO - cleaner way of doing multiple inheritance?
+    // @todo cleaner way of doing multiple inheritance?
     public function __call($function, $args) {
         if (!defined('CMS_VERSION')) {
             $args = implode(', ', $args);
@@ -61,7 +60,7 @@ class PluginController extends Controller {
     }
 
     // Provides compatibility with Page class.
-    // TODO - cleaner way of doing multiple inheritance?
+    // @todo cleaner way of doing multiple inheritance?
     public function __get($variable) {
         if (!defined('CMS_VERSION')) {
             if (isset(Page::$$variable))
@@ -72,7 +71,7 @@ class PluginController extends Controller {
     }
 
     // Provides compatibility with Page class.
-    // TODO - cleaner way of doing multiple inheritance?
+    // @todo cleaner way of doing multiple inheritance?
     public $url;
 
     // Normal class stuff continues here.
@@ -114,7 +113,7 @@ class PluginController extends Controller {
             header('Content-Type: '.$layout->content_type.'; charset=UTF-8');
 
             // Provides compatibility with the Page class.
-            // TODO - cleaner way of doing multiple inheritance?
+            // @todo cleaner way of doing multiple inheritance?
             $this->url = CURRENT_URI;
 
             // execute the layout code
