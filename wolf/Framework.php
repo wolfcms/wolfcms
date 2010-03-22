@@ -26,8 +26,7 @@
  * @copyright  2008-2010 Martijn van der Kleijn, Philippe Archambault
  * @license    GPLv3
  *
- * @since      Available since release 0.0.1
- * @version    SVN: $Id$
+ * @version    $Id$
  */
 
 define('FRAMEWORK_STARTING_MICROTIME', get_microtime());

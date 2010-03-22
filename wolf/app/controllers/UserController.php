@@ -29,10 +29,11 @@
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @version 1.0
- * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Martijn van der Kleijn, 2008,2009,2010
  * @copyright Philippe Archambault, 2008
+ * @license http://www.gnu.org/licenses/gpl.html GPL License
+ *
+ * @version $Id$
  */
 
 /**
@@ -47,8 +48,9 @@ class UserController extends Controller {
 
     public function __construct() {
         AuthUser::load();
-        if ( ! AuthUser::isLoggedIn())
+        if ( ! AuthUser::isLoggedIn()) {
             redirect(get_url('login'));
+        }
 
         $this->setLayout('backend');
         $this->assignToLayout('sidebar', new View('user/sidebar'));
@@ -58,10 +60,12 @@ class UserController extends Controller {
         if ( ! AuthUser::hasPermission('administrator')) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
 
-            if (Setting::get('default_tab') === 'user')
+            if (Setting::get('default_tab') === 'user') {
                 redirect(get_url('page'));
-            else
+            }
+            else {
                 redirect(get_url());
+            }
         }
 
         $this->display('user/index', array(
@@ -76,8 +80,9 @@ class UserController extends Controller {
         }
 
         // check if trying to save
-        if (get_request_method() == 'POST')
+        if (get_request_method() == 'POST') {
             return $this->_add();
+        }
 
         // check if user have already enter something
         $user = Flash::get('post_data');
@@ -136,14 +141,16 @@ class UserController extends Controller {
         $user->password = sha1($user->password.$user->salt);
 
         if ($user->save()) {
-        // now we need to add permissions if needed
+            // now we need to add permissions if needed
             if ( ! empty($_POST['user_permission']))
                 UserPermission::setPermissionsFor($user->id, $_POST['user_permission']);
 
             Flash::set('success', __('User has been added!'));
             Observer::notify('user_after_add', $user->name);
         }
-        else Flash::set('error', __('User has not been added!'));
+        else {
+            Flash::set('error', __('User has not been added!'));
+        }
 
         redirect(get_url('user'));
     }
@@ -155,8 +162,9 @@ class UserController extends Controller {
         }
 
         // check if trying to save
-        if (get_request_method() == 'POST')
+        if (get_request_method() == 'POST') {
             return $this->_edit($id);
+        }
 
         if ($user = User::findById($id)) {
             $this->display('user/edit', array(
@@ -166,7 +174,9 @@ class UserController extends Controller {
                 'permissions' => Record::findAllFrom('Permission')
             ));
         }
-        else Flash::set('error', __('User not found!'));
+        else {
+            Flash::set('error', __('User not found!'));
+        }
 
         redirect(get_url('user'));
 
@@ -190,7 +200,7 @@ class UserController extends Controller {
 
         // check if user want to change the password
         if (strlen($data['password']) > 0) {
-        // check if pass and confirm are egal and >= 5 chars
+            // check if pass and confirm are egal and >= 5 chars
             if (strlen($data['password']) >= 5 && $data['password'] == $data['confirm']) {
                 //$data['password'] = sha1($data['password']);
                 unset($data['confirm']);
@@ -200,17 +210,20 @@ class UserController extends Controller {
                 redirect(get_url('user/edit/'.$id));
             }
         }
-        else unset($data['password'], $data['confirm']);
+        else {
+            unset($data['password'], $data['confirm']);
+        }
 
         $user = Record::findByIdFrom('User', $id);
         if (isset($data['password'])) {
             $data['password'] = sha1($data['password'].$user->salt);
         }
+
         $user->setFromData($data);
 
         if ($user->save()) {
             if (AuthUser::hasPermission('administrator')) {
-            // now we need to add permissions
+                // now we need to add permissions
                 $data = isset($_POST['user_permission']) ? $_POST['user_permission']: array();
                 UserPermission::setPermissionsFor($user->id, $data);
             }
@@ -218,12 +231,16 @@ class UserController extends Controller {
             Flash::set('success', __('User has been saved!'));
             Observer::notify('user_after_edit', $user->name);
         }
-        else Flash::set('error', __('User has not been saved!'));
+        else {
+            Flash::set('error', __('User has not been saved!'));
+        }
 
-        if (AuthUser::getId() == $id)
+        if (AuthUser::getId() == $id) {
             redirect(get_url('user/edit/'.$id));
-        else
+        }
+        else {
             redirect(get_url('user'));
+        }
 
     }
 
@@ -235,20 +252,25 @@ class UserController extends Controller {
 
         // security (dont delete the first admin)
         if ($id > 1) {
-        // find the user to delete
+            // find the user to delete
             if ($user = Record::findByIdFrom('User', $id)) {
                 if ($user->delete()) {
                     Flash::set('success', __('User <strong>:name</strong> has been deleted!', array(':name' => $user->name)));
                     Observer::notify('user_after_delete', $user->name);
                 }
-                else
+                else {
                     Flash::set('error', __('User <strong>:name</strong> has not been deleted!', array(':name' => $user->name)));
+                }
             }
-            else Flash::set('error', __('User not found!'));
+            else {
+                Flash::set('error', __('User not found!'));
+            }
         }
-        else Flash::set('error', __('Action disabled!'));
+        else {
+            Flash::set('error', __('Action disabled!'));
+        }
 
         redirect(get_url('user'));
     }
 
-} // end UserController class
+}

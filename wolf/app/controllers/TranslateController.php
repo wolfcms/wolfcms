@@ -27,9 +27,10 @@
  * @subpackage controllers
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @version 1.0
+ * @copyright Martijn van der Kleijn, 2008-2010
  * @license http://www.gnu.org/licenses/gpl.html GPL License
- * @copyright Martijn van der Kleijn, 2008, 2009, 2010
+ *
+ * @version $Id$
  */
 
 /**
@@ -42,22 +43,23 @@
  *
  * @since 0.9.4
  */
-class TranslateController extends Controller {
+final class TranslateController extends Controller {
 
-    public function __construct() {
+    public final function __construct() {
         AuthUser::load();
-        if ( ! AuthUser::isLoggedIn())
+        if ( ! AuthUser::isLoggedIn()) {
             redirect(get_url('login'));
+        }
 
         $this->assignToLayout('sidebar', new View('translate/sidebar'));
     }
 
-    function index() {
+    public final function index() {
         $this->setLayout('backend');
         $this->display('translate/index');
     }
 
-    function core() {
+    public final function core() {
         $complete = array();
         $basedir = CMS_ROOT.'';
         $dirs = $this->listdir($basedir);
@@ -84,8 +86,9 @@ class TranslateController extends Controller {
                         $strings[] = substr($string, 0, $endpos);
                     }
 
-                    if (sizeof($strings) > 0)
+                    if (sizeof($strings) > 0) {
                         $complete = array_merge($complete, $strings);
+                    }
                 }
 
                 if (strpos($data, '__("')) {
@@ -100,8 +103,9 @@ class TranslateController extends Controller {
                         $strings[] = substr($string, 0, $endpos);
                     }
 
-                    if (sizeof($strings) > 0)
+                    if (sizeof($strings) > 0) {
                         $files[$path] = $strings;
+                    }
                 }
             }
         }
@@ -116,7 +120,7 @@ class TranslateController extends Controller {
         $this->display('translate/core', array('complete' => $complete));
     }
 
-    function plugins() {
+    public final function plugins() {
         $files = array();
         $basedir = CMS_ROOT.'/wolf/plugins';
         $dirs = $this->listdir($basedir, true);
@@ -143,8 +147,9 @@ class TranslateController extends Controller {
                         $strings[] = substr($string, 0, $endpos);
                     }
 
-                    if (sizeof($strings) > 0)
+                    if (sizeof($strings) > 0) {
                         $files[$path] = $strings;
+                    }
                 }
 
                 if (strpos($data, '__("')) {
@@ -159,8 +164,9 @@ class TranslateController extends Controller {
                         $strings[] = substr($string, 0, $endpos);
                     }
 
-                    if (sizeof($strings) > 0)
+                    if (sizeof($strings) > 0) {
                         $files[$path] = $strings;
+                    }
                 }
             }
         }
@@ -168,37 +174,45 @@ class TranslateController extends Controller {
         $this->display('translate/plugins', array('files' => $files));
     }
 
-    function listdir($start_dir='.', $plugins = false) {
+    private final function listdir($start_dir='.', $plugins = false) {
         $files = array();
         if (is_dir($start_dir)) {
             $fh = opendir($start_dir);
             while (($file = readdir($fh)) !== false) {
-            # loop through the files, skipping . and .., and recursing if necessary
-                if (strcmp($file, '.')==0 || strcmp($file, '..')==0) continue;
+                # loop through the files, skipping . and .., and recursing if necessary
+                if (strcmp($file, '.')==0 || strcmp($file, '..')==0) {
+                    continue;
+                }
                 $filepath = $start_dir . '/' . $file;
                 if ($plugins) {
-                    if ( is_dir($filepath) && !strpos($filepath, 'i18n') )
+                    if ( is_dir($filepath) && !strpos($filepath, 'i18n') ) {
                         $files = array_merge($files, $this->listdir($filepath, $plugins));
-                    else {
-                        if (!strpos($filepath, 'I18n') && strpos($filepath, '.php', strlen($filepath) - 5) || strpos($filepath, '.phtml', strlen($filepath) - 7))
-                            array_push($files, $filepath);
                     }
-                } else {
-                    if ( is_dir($filepath) && !strpos($filepath, 'i18n') && !strpos($filepath, 'plugins') )
-                        $files = array_merge($files, $this->listdir($filepath, $plugins));
                     else {
-                        if (!strpos($filepath, 'I18n') && strpos($filepath, '.php', strlen($filepath) - 5) || strpos($filepath, '.phtml', strlen($filepath) - 7))
+                        if (!strpos($filepath, 'I18n') && strpos($filepath, '.php', strlen($filepath) - 5) || strpos($filepath, '.phtml', strlen($filepath) - 7)) {
                             array_push($files, $filepath);
+                        }
+                    }
+                }
+                else {
+                    if ( is_dir($filepath) && !strpos($filepath, 'i18n') && !strpos($filepath, 'plugins') ) {
+                        $files = array_merge($files, $this->listdir($filepath, $plugins));
+                    }
+                    else {
+                        if (!strpos($filepath, 'I18n') && strpos($filepath, '.php', strlen($filepath) - 5) || strpos($filepath, '.phtml', strlen($filepath) - 7)) {
+                            array_push($files, $filepath);
+                        }
                     }
                 }
             }
             closedir($fh);
-        } else {
-        # false if the function was called with an invalid non-directory argument
+        }
+        else {
+            # false if the function was called with an invalid non-directory argument
             $files = false;
         }
 
         return $files;
     }
 
-} // TranslateController
+}

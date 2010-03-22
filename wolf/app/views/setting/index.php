@@ -1,7 +1,7 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009,2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
  * This file is part of Wolf CMS.
@@ -29,7 +29,11 @@
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @author Philippe Archambault <philippe.archambault@gmail.com>
+ * @copyright Martijn van der Kleijn, 2009-2010
+ * @copyright Philippe Archambault, 2008
  * @license http://www.gnu.org/licenses/gpl.html GPL License
+ *
+ * @version $Id$
  */
 ?>
 
@@ -114,6 +118,7 @@
 
             <div id="settings" class="page">
                 <form action="<?php echo get_url('setting'); ?>" method="post">
+                    <input id="csrf_token" name="csrf_token" type="hidden" value="<?php echo $csrf_token; ?>" />
                     <table class="fieldset">
                         <tr>
                             <td class="label"><label for="setting_admin_title"><?php echo __('Admin Site title'); ?></label></td>

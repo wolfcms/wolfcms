@@ -21,10 +21,12 @@
  *
  * Wolf CMS has made an exception to the GNU General Public License for plugins.
  * See exception.txt for details and the full text.
- */
+*/
 
 /* Security measure */
-if (!defined('IN_CMS')) { exit(); }
+if (!defined('IN_CMS')) {
+    exit();
+}
 
 /**
  * Provides Page not found page types.
@@ -33,48 +35,44 @@ if (!defined('IN_CMS')) { exit(); }
  * @subpackage page_not_found
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @version 1.0
- * @since Wolf version 0.9.0
- * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Philippe Archambault, 2008
+ * @license http://www.gnu.org/licenses/gpl.html GPL License
+ *
+ * @version $Id$
  */
 
 Plugin::setInfos(array(
-    'id'          => 'page_not_found',
-    'title'       => __('Page not found'),
-    'description' => __('Provides Page not found page types.'),
-    'version'     => '1.0.0', 
-    'website'     => 'http://www.wolfcms.org/',
-    'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml'
+        'id'          => 'page_not_found',
+        'title'       => __('Page not found'),
+        'description' => __('Provides Page not found page types.'),
+        'version'     => '1.0.0',
+        'website'     => 'http://www.wolfcms.org/',
+        'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml'
 ));
 
 Behavior::add('page_not_found', '');
 Observer::observe('page_not_found', 'behavior_page_not_found');
 
 /**
- *
- * @global <type> $__CMS_CONN__ 
+ * Presents browser with a custom 404 page.
  */
-function behavior_page_not_found()
-{
-    global $__CMS_CONN__;
-    
+function behavior_page_not_found() {
     $sql = 'SELECT * FROM '.TABLE_PREFIX."page WHERE behavior_id='page_not_found'";
-    $stmt = $__CMS_CONN__->prepare($sql);
+
+    $stmt = Record::getConnection()->prepare($sql);
     $stmt->execute();
-    
-    if ($page = $stmt->fetchObject())
-    {
+
+    $page = $stmt->fetchObject();
+
+    if ($page) {
         $page = Page::find_page_by_uri($page->slug);
-        
-        // if we fund it, display it!
-        if (is_object($page))
-        {
+
+        if (is_object($page)) {
             header("HTTP/1.0 404 Not Found");
             header("Status: 404 Not Found");
-              
+
             $page->_executeLayout();
-            exit(); // need to exit here otherwise the true error page will be sent
+            exit(); // need to exit otherwise true error page will be sent
         }
     }
 }
