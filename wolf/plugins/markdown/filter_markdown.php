@@ -34,7 +34,7 @@ if (!defined('IN_CMS')) { exit(); }
  *
  * @author Michel Fortin <philippe.archambault@gmail.com>
  * @version 1.0.0
- * @since Wolf version 0.9.0
+ * @since Wolf version 0.5.0
  * @license unknown
  * @copyright Michel Fortin, 2004-2007
  */

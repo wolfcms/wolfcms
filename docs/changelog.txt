@@ -41,6 +41,7 @@ Sigla:
 - Fixed missing id string in settings file - issue 129
 - Fixed trailing slash issue with Pagination.php helper
 - Fixed small issue Wolf layout had with frontend controllers - issue 141
+- Minor correction to @since info in some core plugins
 . Locked down AuthUser class.
 . Page::includeSnippet now returns true or false.
 . Cleaned up admin.css - thanks Axjezzy

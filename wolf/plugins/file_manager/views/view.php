@@ -35,7 +35,7 @@ if (!defined('IN_CMS')) { exit(); }
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @version 1.0.0
- * @since Wolf version 0.9.0
+ * @since Wolf version 0.5.0
  * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Philippe Archambault & Martijn van der Kleijn, 2008
  */

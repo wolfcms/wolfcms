@@ -32,7 +32,7 @@ if (!defined('IN_CMS')) { exit(); }
  *
  * @author Dean Allen <dean@textism.com>
  * @version 1.0.0
- * @since Wolf version 0.9.0
+ * @since Wolf version 0.5.0
  * @license custom license, see source file
  * @copyright Dean Allen, 2003-2004
  */
