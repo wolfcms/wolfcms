@@ -48,6 +48,7 @@ Sigla:
 . Cleaned up admin.css - thanks Axjezzy
 . Removed tab feature in edit screens. Tab no longer inserts tab into textarea. - issue 125
 . Updated Russian translation for core and plugins - thanks Kostromind
+. Updated Dutch translation for core and file manager - thanks Fortron
 . Updated Hungarian translation for core - thanks Gabor Rezso
 . Updated default layout taglines
 . Added more comments for developers & PHPdoc
