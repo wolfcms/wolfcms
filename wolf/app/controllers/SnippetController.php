@@ -103,6 +103,7 @@ class SnippetController extends Controller {
      */
     private function _add() {
         $data = $_POST['snippet'];
+        Flash::set('post_data', (object) $data);
 
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
@@ -118,8 +119,6 @@ class SnippetController extends Controller {
             Observer::notify('csrf_token_not_found', AuthUser::getUserName());
             redirect(get_url('snippet/add'));
         }
-
-        Flash::set('post_data', (object) $data);
 
         $snippet = new Snippet($data);
 
@@ -149,9 +148,14 @@ class SnippetController extends Controller {
      * @param string $id Snippet id.
      */
     public function edit($id) {
-        if ( ! $snippet = Snippet::findById($id)) {
-            Flash::set('error', __('Snippet not found!'));
-            redirect(get_url('snippet'));
+        // check if user have already enter something
+        $snippet = Flash::get('post_data');
+
+        if (empty($snippet)) {
+            if ( ! $snippet = Snippet::findById($id)) {
+                Flash::set('error', __('Snippet not found!'));
+                redirect(get_url('snippet'));
+            }
         }
 
         // check if trying to save
@@ -176,23 +180,24 @@ class SnippetController extends Controller {
      */
     private function _edit($id) {
         $data = $_POST['snippet'];
+        $data['id'] = $id;
 
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
             $csrf_token = $_POST['csrf_token'];
             if (!SecureToken::validateToken($csrf_token, BASE_URL.'snippet/edit')) {
+                Flash::set('post_data', (object) $data);
                 Flash::set('error', __('Invalid CSRF token found!'));
                 Observer::notify('csrf_token_invalid', AuthUser::getUserName());
-                redirect(get_url('snippet/edit'));
+                redirect(get_url('snippet/edit/'.$id));
             }
         }
         else {
+            Flash::set('post_data', (object) $data);
             Flash::set('error', __('No CSRF token found!'));
             Observer::notify('csrf_token_not_found', AuthUser::getUserName());
-            redirect(get_url('snippet/edit'));
+            redirect(get_url('snippet/edit/'.$id));
         }
-
-        $data['id'] = $id;
 
         $snippet = new Snippet($data);
 
