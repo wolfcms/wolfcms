@@ -29,6 +29,7 @@ Sigla:
 + Added Czech translation for comment plugin - thanks Iva Pelcovajoe.hergott, 
 + Added Romanian translation for core and core plugins - thanks urecheatu007 - issue 155
 + Added Slovak translation for core and file manager plugin - thanks joe.hergott - issues 163, 164
+- Fixed problem with FileManager plugin chmod and file rename - issue 168
 - Fixed problem with multiple dashes showing up in slug - issue 132
 - Fixed a problem with faulty plugins messing up plugin list - issue 94
 - Fixed a problem with inherit option for layout. (might be DB bug)
