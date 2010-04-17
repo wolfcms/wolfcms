@@ -154,7 +154,7 @@ class LoginController extends Controller {
             use_helper('Email');
 
             $new_pass = '12'.dechex(rand(100000000, 4294967295)).'K';
-            $user->password = sha1($new_pass);
+            $user->password = sha1($new_pass.$user->salt);
             $user->save();
 
             $email = new Email();
