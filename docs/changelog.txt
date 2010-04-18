@@ -45,6 +45,7 @@ Sigla:
 - Fixed trailing slash issue with Pagination.php helper
 - Fixed small issue Wolf layout had with frontend controllers - issue 141
 - Minor correction to @since info in some core plugins
+. Removed blank line before doctype from backend.php to prevent IE from rendering in quirks mode - issue 170
 . Locked down AuthUser class.
 . Page::includeSnippet now returns true or false.
 . Cleaned up admin.css - thanks Axjezzy
