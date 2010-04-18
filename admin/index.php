@@ -100,8 +100,21 @@ require CORE_ROOT.'/Framework.php';
 
 //  Database connection  -----------------------------------------------------
 $__CMS_CONN__ = new PDO(DB_DSN, DB_USER, DB_PASS);
-if ($__CMS_CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) == 'mysql')
+
+$driver = $__CMS_CONN__->getAttribute(PDO::ATTR_DRIVER_NAME);
+if ($driver === 'mysql') {
     $__CMS_CONN__->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+}
+
+if ($driver === 'sqlite') {
+    // Adding date_format function to SQLite 3 'mysql date_format function'
+    if (! function_exists('mysql_date_format_function')) {
+        function mysql_function_date_format($date, $format) {
+            return strftime($format, strtotime($date));
+        }
+    }
+    $__CMS_CONN__->sqliteCreateFunction('date_format', 'mysql_function_date_format', 2);
+}
 
 // DEFINED ONLY FOR BACKWARDS SUPPORT - to be taken out before 0.9.0
 $__FROG_CONN__ = $__CMS_CONN__;
