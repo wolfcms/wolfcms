@@ -164,7 +164,7 @@ class LoginController extends Controller {
             $email->message('username: '.$user->username."\npassword: ".$new_pass);
             $email->send();
 
-            Flash::set('success', 'An email has been send with your new password!');
+            Flash::set('success', 'An email has been sent with your new password!');
             redirect(get_url('login'));
         }
         else {
