@@ -455,8 +455,6 @@ class Plugin {
         $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute();
 
-        if ($value = $stmt->fetchColumn()) return $value;
-        else return false;
-
+        return $stmt->fetchColumn();
     }
 } // end Plugin class
