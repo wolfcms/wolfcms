@@ -1176,7 +1176,7 @@ class AutoLoader {
      */
     public static function addFile($class_name, $file=null) {
         if ($file == null && is_array($class_name)) {
-            array_merge(self::$files, $class_name);
+            self::$files = array_merge(self::$files, $class_name);
         } else {
             self::$files[$class_name] = $file;
         }
