@@ -29,6 +29,7 @@ Sigla:
 + Added Czech translation for comment plugin - thanks Iva Pelcovajoe.hergott, 
 + Added Romanian translation for core and core plugins - thanks urecheatu007 - issue 155
 + Added Slovak translation for core and file manager plugin - thanks joe.hergott - issues 163, 164
++ Added display for whitespace in comments on front end (plugin) - issue 147
 - Fixed redundant URL_SUFFIX being added to view page url for root page - issue 153
 - Fixed bug in Framework not allowing array argument for AutoLoader::addFile - issue 171
 - Fixed issue with comment moderation and comment plugin - issue 158
