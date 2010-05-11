@@ -144,6 +144,7 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 
 #main {
   width: 100%;
+  overflow:hidden;
 }
 
 /* Content ---------------------------------------------------------------- */
