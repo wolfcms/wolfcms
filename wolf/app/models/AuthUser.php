@@ -154,6 +154,16 @@ class AuthUser {
     }
 
     /**
+     * 
+     *
+     * @param <type> $username
+     * @return <type> 
+     */
+    static public final function forceLogin($username, $set_cookie=false) {
+        return self::login($username, null, $set_cookie, false);
+    }
+
+    /**
      * Attempts to log in a user based on the username and password they provided.
      *
      * @param string  $username     User provided username.
@@ -161,7 +171,7 @@ class AuthUser {
      * @param boolean $set_cookie   Set a "remember me" cookie? Defaults to false.
      * @return boolean              Returns true when successful, otherwise false.
      */
-    static public final function login($username, $password, $set_cookie=false) {
+    static public final function login($username, $password, $set_cookie=false, $validate_password=true) {
         self::logout();
 
         $user = User::findBy('username', $username);
@@ -169,7 +179,7 @@ class AuthUser {
         if ( ! $user instanceof User && self::ALLOW_LOGIN_WITH_EMAIL)
             $user = User::findBy('email', $username);
 
-        if ($user instanceof User && self::validatePassword($user, $password)) {
+        if ($user instanceof User && (false === $validate_password || self::validatePassword($user, $password))) {
             $user->last_login = date('Y-m-d H:i:s');
             $user->save();
 

@@ -153,7 +153,7 @@ function main() {
     }
     // We're NOT using mod_rewrite, and there's no question mark wich points to GET variables in combination with site root.
     else if (!USE_MOD_REWRITE && (strpos($uri, '&') !== false || strpos($uri, '=') !== false)) {
-            $uri='';
+            $uri='/';
         }
 
     // If we're using mod_rewrite, we should have a WOLFPAGE entry.
@@ -162,7 +162,7 @@ function main() {
         unset($_GET['WOLFPAGE']);
     }
     else if (USE_MOD_REWRITE)   // We're using mod_rewrite but don't have a WOLFPAGE entry, assume site root.
-            $uri = '';
+            $uri = '/';
 
     // END processing $_GET variables
 

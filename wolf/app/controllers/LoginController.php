@@ -67,13 +67,16 @@ class LoginController extends Controller {
      * to the login screen.
      */
     function index() {
-    // already log in ?
+        // already log in ?
         if (AuthUser::isLoggedIn()) {
             if (Flash::get('redirect') != null)
                 redirect(Flash::get('redirect'));
             else
                 redirect(get_url());
         }
+
+        // Allow plugins to handle login
+        Observer::notify('login_required', Flash::get('redirect'));
 
         // show it!
         $this->display('login/login', array(
@@ -86,7 +89,10 @@ class LoginController extends Controller {
      * Allows a user to login.
      */
     function login() {
-    // already log in ?
+        // Allow plugins to handle login
+        Observer::notify('login_requested', Flash::get('redirect'));
+
+        // already log in ?
         if (AuthUser::isLoggedIn())
             if (Flash::get('redirect') != null)
                 redirect(Flash::get('redirect'));
@@ -125,6 +131,9 @@ class LoginController extends Controller {
      * Allows a user to logout.
      */
     function logout() {
+        // Allow plugins to handle logout events
+        Observer::notify('logout_requested');
+
         $username = AuthUser::getUserName();
         AuthUser::logout();
         Observer::notify('admin_after_logout', $username);
