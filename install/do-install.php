@@ -36,6 +36,9 @@ if (!defined('INSTALL_SEQUENCE')) {
 require 'Template.php';
 require '../wolf/app/models/AuthUser.php';
 
+use_helper('Hash');
+$hash = new Crypt_Hash('sha256');
+
 $msg = '';
 $error = false;
 $PDO = false;
@@ -61,7 +64,6 @@ else {
     $msg .= "<ul><li>Config file successfully written.</li>\n";
 }
 
-
 if (false === $error) {
     // Include generated config.php
     require CFG_FILE;
@@ -73,7 +75,7 @@ if (false === $error) {
 
         try {
             $admin_passwd_precrypt = '12'.dechex(rand(100000000, 4294967295)).'K';
-            $admin_passwd = sha1($admin_passwd_precrypt.$admin_salt);
+            $admin_passwd = AuthUser::generateHashedPassword($admin_passwd_precrypt,$admin_salt);
         } catch (Exception $e) {
             $error = 'Wolf CMS could not generate a default administration password and has not been installed.<br />The following error has occured: <p><strong>'. $e->getMessage() ."</strong></p>\n";
             file_put_contents(CFG_FILE, '');

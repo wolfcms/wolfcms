@@ -45,7 +45,7 @@
 class AuthUser {
     const SESSION_KEY               = 'wolf_auth_user';
     const COOKIE_KEY                = 'wolf_auth_user';
-    const COOKIE_LIFE               = 1209600; // two weeks
+    const COOKIE_LIFE               = 1800;  // 30 minutes
     const ALLOW_LOGIN_WITH_EMAIL    = false;
     const DELAY_ON_INVALID_LOGIN    = true;
 
@@ -279,7 +279,10 @@ class AuthUser {
      * @return string           The actual cookie content.
      */
     static private final function bakeUserCookie($time, User $user) {
-        return 'exp='.$time.'&id='.$user->id.'&digest='.sha1($user->username.$user->salt);
+        use_helper('Hash');
+        $hash = new Crypt_Hash('sha256');
+
+        return 'exp='.$time.'&id='.$user->id.'&digest='.bin2hex($hash->hash($user->username.$user->salt));
     }
 
     /**
@@ -289,14 +292,38 @@ class AuthUser {
      * @return  string        The salt.
      */
     static public final function generateSalt($max = 32) {
+        use_helper('Hash');
+        $hash = new Crypt_Hash('sha256');
+
         $base = rand(0, 1000000) . microtime(true) . rand(0, 1000000) . rand(0, microtime(true));
-        $salt = sha1($base);
+        $salt = bin2hex($hash->hash($base));
 
         if($max < 32){
             $salt = substr($salt, 0, $max);
         }
 
+        if($max > 32){
+            $salt = substr($salt, 0, $max);
+        }
+
         return $salt;
+    }
+
+    /**
+     * Generates a hashed version of a password.
+     *
+     * @see Hash Helper
+     *
+     * @param <type> $password
+     * @param <type> $salt
+     * @return <type>
+     */
+    static public final function generateHashedPassword($password, $salt) {
+        use_helper('Hash');
+
+        $hash = new Crypt_Hash('sha512');
+
+        return bin2hex($hash->hash($password.$salt));
     }
 
     /**
@@ -307,7 +334,7 @@ class AuthUser {
      * @return boolean          True when valid, otherwise false.
      */
     static public final function validatePassword(User $user, $pwd) {
-        return $user->password == sha1($pwd.$user->salt);
+        return $user->password == self::generateHashedPassword($pwd, $user->salt);
     }
 
 } // end AuthUser class

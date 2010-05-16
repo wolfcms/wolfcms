@@ -46,24 +46,29 @@ final class SecureToken extends Record {
      * The token is generated to be as secure as possible. It consists of:
      * - the username,
      * - the time at which the token was generated,
-     * - a partial sha1() result of the user's password,
+     * - a partial sha256 result of the user's password,
      * - the url for which the token is valid,
      * - a random salt generated during user creation
      *
-     * The token is the sha1 of: <username>.<time>.<url>.<salt>.<partial_pwd>
+     * The token is the sha256 of: <username>.<time>.<url>.<salt>.<partial_pwd>
      *
      * The validateToken() method should always be used to check a token's validity.
+     *
+     * @see Hash Helper
      *
      * @param string    $url
      * @return mixed    Returns a valid token or false upon error.
      */
     public static final function generateToken($url) {
+        use_helper('Hash');
+        $hash = new Crypt_Hash('sha256');
         AuthUser::load();
+        
         if (AuthUser::isLoggedIn()) {
             $user = AuthUser::getRecord();
             $time = microtime(true);
             $target_url = str_replace('&amp;', '&', $url);
-            $pwdsha1 = substr(sha1($user->password), 5, 20);
+            $pwd = substr(bin2hex($hash->hash($user->password)), 5, 20);
 
             $oldtoken = SecureToken::getToken($user->username, $target_url);
 
@@ -71,20 +76,20 @@ final class SecureToken extends Record {
                 $oldtoken = new SecureToken();
                 
                 $oldtoken->username = $user->username;
-                $oldtoken->url = sha1($target_url);
+                $oldtoken->url = bin2hex($hash->hash($target_url));
                 $oldtoken->time = $time;
 
                 $oldtoken->save();
             }
             else {
                 $oldtoken->username = $user->username;
-                $oldtoken->url = sha1($target_url);
+                $oldtoken->url = bin2hex($hash->hash($target_url));
                 $oldtoken->time = $time;
 
                 $oldtoken->save();
             }
 
-            return sha1($user->username.$time.$target_url.$pwdsha1.$user->salt);
+            return bin2hex($hash->hash($user->username.$time.$target_url.$pwd.$user->salt));
         }
         
         return false;
@@ -110,11 +115,14 @@ final class SecureToken extends Record {
      * @return boolean      True if the token is valid, otherwise false.
      */
     public static final function validateToken($token, $url) {
+        use_helper('Hash');
+        $hash = new Crypt_Hash('sha256');
         AuthUser::load();
+
         if (AuthUser::isLoggedIn()) {
             $user = AuthUser::getRecord();
             $target_url = str_replace('&amp;', '&', $url);
-            $pwdsha1 = substr(sha1($user->password), 5, 20);
+            $pwd = substr(bin2hex($hash->hash($user->password)), 5, 20);
 
             $time = SecureToken::getTokenTime($user->username, $target_url);
 
@@ -122,15 +130,18 @@ final class SecureToken extends Record {
                 return false;
             }
 
-            return (sha1($user->username.$time.$target_url.$pwdsha1.$user->salt) === $token);
+            return (bin2hex($hash->hash($user->username.$time.$target_url.$pwd.$user->salt)) === $token);
         }
 
         return false;
     }
 
     private static final function getToken($username, $url) {
+        use_helper('Hash');
+        $hash = new Crypt_Hash('sha256');
+
         $token = false;
-        $token = Record::findOneFrom('SecureToken',"username = ? AND url = ?", array($username, sha1($url)));
+        $token = Record::findOneFrom('SecureToken',"username = ? AND url = ?", array($username, bin2hex($hash->hash($url))));
 
         if ($token !== null && $token !== false && $token instanceof SecureToken) {
             return $token;
@@ -140,21 +151,14 @@ final class SecureToken extends Record {
     }
 
     private static final function getTokenTime($username, $url) {
+        use_helper('Hash');
+        $hash = new Crypt_Hash('sha256');
         $time = 0;
 
-        if ($token = Record::findOneFrom('SecureToken',"username = ? AND url = ?", array($username, sha1($url)))) {
+        if ($token = Record::findOneFrom('SecureToken',"username = ? AND url = ?", array($username, bin2hex($hash->hash($url))))) {
             $time = $token->time;
         }
 
         return $time;
     }
-
-    /*
-    public function getColumns() {
-        return array('username', 'url', 'time');
-    }
-     * 
-     */
 }
-
-

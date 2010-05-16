@@ -38,7 +38,7 @@ Apache : http://www.apache.org/
 
 ## Notes
 
-Password is in sha1 so if you change it manually in the database, you know how!!
+Password is in sha512 + salt so you know how to change it manually in the database!
 
 Enjoy,
 

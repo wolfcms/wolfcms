@@ -102,6 +102,7 @@ class UserController extends Controller {
 
     private function _add() {
         $data = $_POST['user'];
+        Flash::set('post_data', (object) $data);
 
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
@@ -115,8 +116,6 @@ class UserController extends Controller {
             Flash::set('error', __('No CSRF token found!'));
             redirect(get_url('user/add'));
         }
-
-        Flash::set('post_data', (object) $data);
 
         // check if pass and confirm are equal and >= 5 chars
         if (strlen($data['password']) >= 5 && $data['password'] == $data['confirm']) {
@@ -138,7 +137,7 @@ class UserController extends Controller {
 
         // Generate a salt and create encrypted password
         $user->salt = AuthUser::generateSalt();
-        $user->password = sha1($user->password.$user->salt);
+        $user->password = AuthUser::generateHashedPassword($user->password, $user->salt);
 
         if ($user->save()) {
             // now we need to add permissions if needed
@@ -202,7 +201,6 @@ class UserController extends Controller {
         if (strlen($data['password']) > 0) {
             // check if pass and confirm are egal and >= 5 chars
             if (strlen($data['password']) >= 5 && $data['password'] == $data['confirm']) {
-                //$data['password'] = sha1($data['password']);
                 unset($data['confirm']);
             }
             else {
@@ -216,7 +214,7 @@ class UserController extends Controller {
 
         $user = Record::findByIdFrom('User', $id);
         if (isset($data['password'])) {
-            $data['password'] = sha1($data['password'].$user->salt);
+            $data['password'] = AuthUser::generateHashedPassword($data['password'],$user->salt);
         }
 
         $user->setFromData($data);

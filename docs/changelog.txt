@@ -9,10 +9,11 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Added new Helper, Hash, which basically is Crypt_Hash from phpseclib.
 + Added tracking of failed login count and last failed login attempt.
 + Added session regeneration upon user privilege increase. (login for now)
-+ Added support for CSRF tokens in forms. Included csrf check in user add/edit screens.
-+ Added salted passwords.
++ Added support for CSRF tokens in forms using sha256. Included csrf check in user add/edit screens.
++ Added salted sha512 passwords.
 + Added optional THEMES_URI and THEMES_ROOT setting for config.php - issue 145
 + Added basic support for non-western glyphs in url and slug. (turns off slug generation for non-western glyphs)
 + Added new core plugin: multi language support.
@@ -25,7 +26,6 @@ Sigla:
 + Added alt and title strings to improve i18n consistency - issue 138
 + Enhanced backend views for comments plugin - thanks Iva Pelcova
 + Added check to prevent users from accidentally leaving a screen. - issue 25
-+ Replaced Czech translation for core, comments, and file-manager - thanks Iva Pelcova - issues 150, 151, 152
 + Added Czech translation for comment plugin - thanks Iva Pelcovajoe.hergott, 
 + Added Romanian translation for core and core plugins - thanks urecheatu007 - issue 155
 + Added Slovak translation for core and file manager plugin - thanks joe.hergott - issues 163, 164
@@ -49,6 +49,8 @@ Sigla:
 - Fixed trailing slash issue with Pagination.php helper
 - Fixed small issue Wolf layout had with frontend controllers - issue 141
 - Minor correction to @since info in some core plugins
+. Changed cookie life time from two weeks to 30 minutes.
+. Replaced Czech translation for core, comments, and file-manager - thanks Iva Pelcova - issues 150, 151, 152
 . Removed blank line before doctype from backend.php to prevent IE from rendering in quirks mode - issue 170
 . Locked down AuthUser class.
 . Page::includeSnippet now returns true or false.

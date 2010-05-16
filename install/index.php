@@ -35,7 +35,7 @@ define('INSTALL_SEQUENCE', true);
 define('CORE_ROOT', dirname(__FILE__).'/../wolf');
 define('CFG_FILE', '../config.php');
 define('DEFAULT_ADMIN_USER', 'admin');
-define('DEFAULT_ADMIN_PWD', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8');
+require_once CORE_ROOT.'/Framework.php';
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
