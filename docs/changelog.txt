@@ -49,6 +49,7 @@ Sigla:
 - Fixed trailing slash issue with Pagination.php helper
 - Fixed small issue Wolf layout had with frontend controllers - issue 141
 - Minor correction to @since info in some core plugins
+. Moved install directory to wolf/install
 . Changed cookie life time from two weeks to 30 minutes.
 . Replaced Czech translation for core, comments, and file-manager - thanks Iva Pelcova - issues 150, 151, 152
 . Removed blank line before doctype from backend.php to prevent IE from rendering in quirks mode - issue 170

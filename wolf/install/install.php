@@ -34,7 +34,7 @@ if (!defined('INSTALL_SEQUENCE')) {
 }
 ?>
 
-    <script type="text/javascript" charset="utf-8" src="../admin/javascripts/prototype.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../admin/javascripts/prototype.js"></script>
     <script type="text/javascript">
         function db_driver_change(driver) {
             Element.toggle('row-db-host');
@@ -44,7 +44,7 @@ if (!defined('INSTALL_SEQUENCE')) {
             Element.toggle('row-table-prefix');
 
             if (driver == 'sqlite') {
-                $('config_db_name').value = '<?php echo realpath(dirname(__FILE__).'/../../').'/db/wolf.sq3' ?>';
+                $('config_db_name').value = '<?php echo realpath(dirname(__FILE__).'/../../../').'/db/wolf.sq3' ?>';
                 $('help-db-name').innerHTML = 'Required. Enter the <strong>absolute</strong> path to the database file.<br/>You are <strong>strongly</strong> advised to keep the Wolf CMS SQLite database outside of the webserver root.';
             }
             else if (driver == 'mysql') {

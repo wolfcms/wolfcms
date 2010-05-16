@@ -37,7 +37,7 @@ if (!defined('INSTALL_SEQUENCE')) {
 $errors = false;
 
 // Check PHP version
-$check = (PHP_VERSION >= '5.1');
+$check = (PHP_VERSION >= '5.1.2');
 $php = '<span class="'.($check ? 'check' : 'notcheck');
 $php .= '">PHP '.PHP_VERSION.'</span>';
 if (!$check) $errors = true;
@@ -81,7 +81,7 @@ $cfg_writable = '<span class="'.($check ? 'check' : 'notcheck').'">'.($check ? '
 if (!$check) $errors = true;
 
 // Check public directory is writable
-$check = is_writable('../public/');
+$check = is_writable(PUBLIC_ROOT);
 $public_writable = '<span class="'.($check ? 'check' : 'notcheck').'">'.($check ? 'true' : 'false').'</span>';
 if (!$check) $errors = true;
 
@@ -90,7 +90,7 @@ $check = false;
 if (isset($_GET['rewrite']) && $_GET['rewrite'] == 1) {
     $check = true;
 }
-$modrewrite = '<span class="'.($check ? 'check' : 'notcheck').'">'.($check ? 'true' : 'false').'</span>';
+$modrewrite = '<span class="'.($check ? 'check' : 'warning').'">'.($check ? 'true' : 'not detected').'</span>';
 
 // Test for HTTPS support, only possible if user goes to this page with https
 $check = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == "on" || $_SERVER['HTTPS'] == "1"));
@@ -115,7 +115,7 @@ $https = '<span class="'.($check ? 'check' : 'notcheck').'">'.($check ? 'true' :
         </thead>
         <tbody>
             <tr>
-                <td>PHP 5.1</td>
+                <td>PHP 5.1.2</td>
                 <td class="available"><?php echo $php; ?></td>
             </tr>
             <tr>

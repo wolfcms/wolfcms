@@ -7,11 +7,11 @@
 
 // Database settings:
 <?php if ($db_driver == 'mysql'): ?>
-    <?php if (PHP_VERSION >= '5.3.0' && $db_host == 'localhost'): ?>
+<?php if (PHP_VERSION >= '5.3.0' && $db_host == 'localhost'): ?>
 define('DB_DSN', 'mysql:dbname=<?php echo $db_name; ?>;host=127.0.0.1;port=<?php echo $db_port; ?>');
-    <?php else: ?>
+<?php else: ?>
 define('DB_DSN', 'mysql:dbname=<?php echo $db_name; ?>;host=<?php echo $db_host; ?>;port=<?php echo $db_port; ?>');
-    <?php endif; ?>
+<?php endif; ?>
 <?php else: ?>
 define('DB_DSN', 'sqlite:<?php echo $db_name; ?>');
 <?php endif; ?>
@@ -29,7 +29,7 @@ define('CHECK_UPDATES', true);
 define('CHECK_TIMEOUT', 3);
 
 // The full URL of your Wolf CMS install
-define('URL_PUBLIC', 'http://<?php echo substr(dirname($_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']), 0, strrpos(dirname($_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']), '/')); ?>/');
+define('URL_PUBLIC', 'http://<?php echo substr(dirname($_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']), 0, strrpos(dirname($_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']), '/wolf')); ?>/');
 
 // Use httpS for the backend?
 // Before enabling this, please make sure you have a working HTTP+SSL installation.

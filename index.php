@@ -44,7 +44,7 @@ $config_file = CMS_ROOT.'/config.php';
 require_once($config_file);
 
 // if you have installed wolf and see this line, you can comment it or delete it :)
-if ( ! defined('DEBUG')) { header('Location: install/'); exit(); }
+if ( ! defined('DEBUG')) { header('Location: wolf/install/'); exit(); }
 
 // Figure out what the public URI is based on URL_PUBLIC.
 // @todo improve

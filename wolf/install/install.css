@@ -35,13 +35,17 @@ body {
   color: #000;
 }
 
-.check, .notcheck {
+.check, .notcheck, .warning {
     color: green;
     font-weight: bold;
 }
 
 .notcheck {
     color: red;
+}
+
+.warning {
+    color: orange;
 }
 
 p { margin: 1.2em 0 0.6em; }

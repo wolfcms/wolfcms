@@ -19,9 +19,9 @@ Options -Indexes +FollowSymLinks
   RewriteBase /wolfcms/
 
   # Rules to allow install sequence to test for mod_rewrite support
-  RewriteRule ^install/index.html$ install/index.php?rewrite=1 [L,QSA]
-  RewriteRule ^install/index.php$ install/index.php?rewrite=1 [L,QSA]
-  RewriteRule ^install/$ install/index.php?rewrite=1 [L,QSA]
+  RewriteRule ^wolf/install/index.html$ wolf/install/index.php?rewrite=1 [L,QSA]
+  RewriteRule ^wolf/install/index.php$ wolf/install/index.php?rewrite=1 [L,QSA]
+  RewriteRule ^wolf/install/$ wolf/install/index.php?rewrite=1 [L,QSA]
   
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d

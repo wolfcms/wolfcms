@@ -34,7 +34,7 @@ if (!defined('INSTALL_SEQUENCE')) {
 }
 ?>
 
-    <script type="text/javascript" charset="utf-8" src="../admin/javascripts/prototype.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../admin/javascripts/prototype.js"></script>
     <h1>Installation result <img src="install-logo.png" alt="Wolf CMS logo" class="logo" /></h1>
     <?php if (isset($error) && false !== $error): ?>
         <p style="color: red;"><?php echo $error; ?></p>
@@ -47,7 +47,7 @@ if (!defined('INSTALL_SEQUENCE')) {
             To enhance security <b>you should now:</b>
         </p>
         <ol>
-            <li><strong>Run <a href="../security.php">the security check</a>.</strong></li>
+            <li><strong>Run <a href="../../security.php">the security check</a>.</strong></li>
             <li>Delete the <em>install/</em> folder!</li>
             <li>Remove all write permissions from the <em>config.php</em> file! <sup>2)</sup></li>
             <li>Remove changelog.txt and similar text files to enhance security.</li>

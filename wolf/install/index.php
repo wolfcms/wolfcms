@@ -32,8 +32,9 @@ error_reporting(0);
 
 define('INSTALL_SEQUENCE', true);
 
-define('CORE_ROOT', dirname(__FILE__).'/../wolf');
-define('CFG_FILE', '../config.php');
+define('CORE_ROOT', dirname(__FILE__).'/../../wolf');
+define('CFG_FILE', '../../config.php');
+define('PUBLIC_ROOT', '../../public/');
 define('DEFAULT_ADMIN_USER', 'admin');
 require_once CORE_ROOT.'/Framework.php';
 ?>
