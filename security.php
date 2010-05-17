@@ -209,8 +209,8 @@ ol, ul {
         $warnings['config file writable, debug on'] = 'The configuration file should never be writable in production systems. We advise you to remove write permissions on config.php';
     }
     
-    if (defined('DEBUG') && false === DEBUG && file_exists(CORE_ROOT.'/../install/')) {
-        $warnings['install, directory present'] = 'The installation directory ("install/") is still present. You may want to remove it for added security since this is probably a production system. (DEBUG was set to FALSE)';
+    if (defined('DEBUG') && false === DEBUG && file_exists(CORE_ROOT.'/install/')) {
+        $warnings['install, directory present'] = 'The installation directory ("wolf/install/") is still present. You may want to remove it for added security since this is probably a production system. (DEBUG was set to FALSE)';
     }
 
     if (defined('DEBUG') && false === DEBUG && file_exists(CORE_ROOT.'/../docs/')) {

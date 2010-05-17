@@ -34,7 +34,7 @@ if (!defined('INSTALL_SEQUENCE')) {
 }
 ?>
 
-    <script type="text/javascript" charset="utf-8" src="../../admin/javascripts/prototype.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../admin/javascripts/prototype.js"></script>
     <script type="text/javascript">
         function db_driver_change(driver) {
             Element.toggle('row-db-host');

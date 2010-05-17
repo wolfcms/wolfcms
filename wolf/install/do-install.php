@@ -134,7 +134,7 @@ if (false === $error) {
             }
 
             $msg .= '<li>Tables loaded successfully</li></ul>
-                     <p>You can now login at <a href="../../admin/">the login page</a> with: </p>
+                     <p>You can now login at <a href="'.URL_PUBLIC.(USE_MOD_REWRITE ? '' : '?/').ADMIN_DIR.'">the login page</a> with: </p>
                      <p>
                         <strong>Login</strong> - '.$admin_name.'<br />
                         <strong>Password <sup>1)</sup></strong> - '.$admin_passwd_precrypt.'
