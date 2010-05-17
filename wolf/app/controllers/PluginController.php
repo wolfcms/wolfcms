@@ -58,7 +58,7 @@ class PluginController extends Controller {
      * @return mixed            Result of function or false.
      */
     public function __call($function, $args) {
-        if (!defined('CMS_VERSION')) {
+        if (!defined('CMS_BACKEND')) {
             $args = implode(', ', $args);
             return Page::$function($args);
         }
