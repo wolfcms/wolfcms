@@ -27,8 +27,8 @@
  * @package wolf
  */
 
-require APP_PATH . '/models/Plugin.php';
-require APP_PATH . '/models/Page.php';
+//require APP_PATH . '/models/Plugin.php';
+//require APP_PATH . '/models/Page.php';
 
 if ( ! defined('HELPER_PATH')) define('HELPER_PATH', CORE_ROOT.'/helpers');
 if ( ! defined('URL_SUFFIX')) define('URL_SUFFIX', '');
@@ -40,8 +40,8 @@ else
     putenv('TZ='.DEFAULT_TIMEZONE);
 
 // Intialize Setting and Plugin
-Setting::init();
-Plugin::init();
+//Setting::init();
+//Plugin::init();
 
 /**
  * Explode an URI and make a array of params
@@ -164,6 +164,11 @@ function main() {
     else if (USE_MOD_REWRITE)   // We're using mod_rewrite but don't have a WOLFPAGE entry, assume site root.
             $uri = '/';
 
+    // Needed to allow for ajax calls to backend
+    if (array_key_exists('WOLFAJAX', $_GET)) {
+        $uri = '/'.ADMIN_DIR.$_GET['WOLFAJAX'];
+        unset($_GET['WOLFAJAX']);
+    }
     // END processing $_GET variables
 
     // remove suffix page if founded
@@ -179,6 +184,7 @@ function main() {
     if (Dispatcher::hasRoute($uri)) {
         Observer::notify('dispatch_route_found', $uri);
         Dispatcher::dispatch($uri);
+        exit;
     }
 
     foreach(Observer::getObserverList('page_requested') as $callback) {
