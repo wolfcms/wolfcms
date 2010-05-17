@@ -26,12 +26,6 @@ Options -Indexes +FollowSymLinks
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l
-  # Administration URL rewriting.
-  RewriteRule ^admin(.*)$ admin/index.php?$1 [L,QSA]
-  
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME} !-l
   # Main URL rewriting.
   RewriteRule ^(.*)$ index.php?WOLFPAGE=$1 [L,QSA]
 

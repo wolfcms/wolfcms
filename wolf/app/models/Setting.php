@@ -104,7 +104,7 @@ class Setting extends Record {
 
     public static function getThemes() {
         $themes = array();
-        $dir = CMS_ROOT.'/'.ADMIN_DIR.'/themes/';
+        $dir = CORE_ROOT.'/admin/themes/';
         if ($handle = opendir($dir)) {
             while (false !== ($file = readdir($handle))) {
                 if (strpos($file, '.') !== 0 && is_dir($dir.$file)) {

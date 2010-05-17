@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 	/**
 	 * Danish language file [DA/dk]

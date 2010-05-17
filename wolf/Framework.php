@@ -112,6 +112,7 @@ final class Dispatcher {
      */
     public static function addRoute($route, $destination=null) {
         if ($destination != null && !is_array($route)) {
+        //if (!is_array($route)) {
             $route = array($route => $destination);
         }
         self::$routes = array_merge(self::$routes, $route);

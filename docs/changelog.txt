@@ -9,6 +9,7 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Changed admin area to make full use of Dispatcher and moved admin directory.
 + Added new Helper, Hash, which basically is Crypt_Hash from phpseclib.
 + Added tracking of failed login count and last failed login attempt.
 + Added session regeneration upon user privilege increase. (login for now)

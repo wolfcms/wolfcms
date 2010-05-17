@@ -146,7 +146,7 @@
                         <tr>
                             <td class="label"><label for="setting_theme"><?php echo __('Administration Theme'); ?></label></td>
                             <td class="field">
-                                <select class="select" id="setting_theme" name="setting[theme]" onchange="$('css_theme').href = 'themes/' + this[this.selectedIndex].value + '/styles.css';">
+                                <select class="select" id="setting_theme" name="setting[theme]" onchange="$('css_theme').href = 'wolf/admin/themes/' + this[this.selectedIndex].value + '/styles.css';">
                                     <?php
                                         $current_theme = Setting::get('theme');
                                         foreach (Setting::getThemes() as $code => $label): ?>

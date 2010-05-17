@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
     /**
      * Croatian language file for plugin comment

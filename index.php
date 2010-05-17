@@ -30,21 +30,21 @@
 //  Constants  ---------------------------------------------------------------
 define('IN_CMS', true);
 
+define('CMS_VERSION', '0.6.0');
 define('CMS_ROOT', dirname(__FILE__));
-define('FROG_ROOT', CMS_ROOT); // DEFINED ONLY FOR BACKWARDS SUPPORT - to be taken out before 0.9.0
 define('CORE_ROOT', CMS_ROOT.'/wolf');
 define('PLUGINS_ROOT', CORE_ROOT.'/plugins');
-
 define('APP_PATH', CORE_ROOT.'/app');
 
 require_once(CORE_ROOT.'/utils.php');
 
 $config_file = CMS_ROOT.'/config.php';
-
 require_once($config_file);
 
 // if you have installed wolf and see this line, you can comment it or delete it :)
 if ( ! defined('DEBUG')) { header('Location: wolf/install/'); exit(); }
+
+$url = URL_PUBLIC;
 
 // Figure out what the public URI is based on URL_PUBLIC.
 // @todo improve
@@ -55,6 +55,28 @@ if (false === $lastslash) {
 }
 else {
     define('URI_PUBLIC', substr($changedurl, $lastslash));
+}
+
+// Determine URI for backend check
+if (USE_MOD_REWRITE && isset($_GET['WOLFPAGE'])) {
+    $admin_check = $_GET['WOLFPAGE'];
+}
+else {
+    $admin_check = urldecode($_SERVER['QUERY_STRING']);
+}
+
+// Are we in frontend or backend?
+if (startsWith($admin_check, 'admin') || startsWith($admin_check, '/admin') || isset($_GET['WOLFAJAX'])) {
+    define('CMS_BACKEND', true);
+    if (defined('USE_HTTPS') && USE_HTTPS) {
+        $url = str_replace('http://', 'https://', $url);
+    }
+    define('BASE_URL', $url . (endsWith($url, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?/') . ADMIN_DIR . (endsWith(ADMIN_DIR, '/') ? '': '/'));
+    define('BASE_URI', URI_PUBLIC . (endsWith($url, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?/') . ADMIN_DIR . (endsWith(ADMIN_DIR, '/') ? '': '/'));
+}
+else {
+    define('BASE_URL', URL_PUBLIC . (endsWith(URL_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
+    define('BASE_URI', URI_PUBLIC . (endsWith(URI_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
 }
 
 define('PLUGINS_URI', URI_PUBLIC.'wolf/plugins/');
@@ -77,8 +99,11 @@ if (DEBUG == false && isWritable($config_file)) {
 
 //  Init  --------------------------------------------------------------------
 
-define('BASE_URL', URL_PUBLIC . (endsWith(URL_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
-define('BASE_URI', URI_PUBLIC . (endsWith(URI_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
+define('SESSION_LIFETIME', 3600);
+define('REMEMBER_LOGIN_LIFETIME', 1209600); // two weeks
+
+define('DEFAULT_CONTROLLER', 'page');
+define('DEFAULT_ACTION', 'index');
 
 require CORE_ROOT.'/Framework.php';
 
@@ -114,7 +139,13 @@ Record::getConnection()->exec("set names 'utf8'");
 Setting::init();
 
 use_helper('I18n');
-I18n::setLocale(Setting::get('language'));
+AuthUser::load();
+if (AuthUser::isLoggedIn()) {
+    I18n::setLocale(AuthUser::getRecord()->language);
+}
+else {
+    I18n::setLocale(Setting::get('language'));
+}
 
 // Only add the cron web bug when necessary
 if (defined('USE_POORMANSCRON') && USE_POORMANSCRON && defined('POORMANSCRON_INTERVAL')) {
@@ -130,6 +161,17 @@ if (defined('USE_POORMANSCRON') && USE_POORMANSCRON && defined('POORMANSCRON_INT
         }
     }
 }
+
+Plugin::init();
+
+// Setup admin routes
+$admin_routes = array (
+    '/'.ADMIN_DIR          => Setting::get('default_tab'),
+    '/'.ADMIN_DIR.'/'      => Setting::get('default_tab'),
+    '/'.ADMIN_DIR.'/:any'  => '$1'
+);
+
+Dispatcher::addRoute($admin_routes);
 
 // run everything!
 require APP_PATH.'/main.php';

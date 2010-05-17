@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Português-brasileiro language file
  * based on translation: Frog CMS v0.9.5 portuguese

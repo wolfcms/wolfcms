@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
     /**
      * Polish file for plugin comment

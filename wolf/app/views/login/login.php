@@ -39,10 +39,10 @@
 <head>
   <title><?php echo __('Login').' - '.Setting::get('admin_title'); ?></title>
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <link href="stylesheets/login.css" rel="Stylesheet" type="text/css" />
-  <link href="themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
-  <script src="javascripts/prototype.js" type="text/javascript"></script>
-  <script src="javascripts/effects.js" type="text/javascript"></script>
+  <link href="<?php echo URI_PUBLIC;?>wolf/admin/stylesheets/login.css" rel="Stylesheet" type="text/css" />
+  <link href="<?php echo URI_PUBLIC;?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
+  <script src="<?php echo URI_PUBLIC;?>wolf/admin/javascripts/prototype.js" type="text/javascript"></script>
+  <script src="<?php echo URI_PUBLIC;?>wolf/admin/javascripts/effects.js" type="text/javascript"></script>
 </head>
 <body>
   <div id="dialog">
@@ -76,7 +76,7 @@
       </div>
     </form>
   </div>
-  <p><?php echo __('website:').' <a href="'.URL_PUBLIC.'">'.URL_PUBLIC.'</a>'; ?></p>
+  <p><?php echo __('website:').' <a href="'.URL_PUBLIC.'">'.Setting::get('admin_title').'</a>'; ?></p>
   <script type="text/javascript" language="javascript" charset="utf-8">
   // <![CDATA[
   var loginUsername = document.getElementById('login-username');

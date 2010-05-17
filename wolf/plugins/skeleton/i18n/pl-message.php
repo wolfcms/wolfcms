@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
     /**
      * YourLanguage file for plugin skeleton

@@ -35,8 +35,8 @@
 if (Dispatcher::getAction() == 'index'):
 ?>
 
-<p class="button"><a href="<?php echo get_url('translate/core'); ?>"><img src="images/file.png" align="middle" alt="document icon" /> <?php echo __('Create Core template'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('translate/plugins'); ?>"><img src="images/file.png" align="middle" alt="document icon" /> <?php echo __('Create Plugin templates'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('translate/core'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/file.png" align="middle" alt="document icon" /> <?php echo __('Create Core template'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('translate/plugins'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/file.png" align="middle" alt="document icon" /> <?php echo __('Create Plugin templates'); ?></a></p>
 
 <div class="box">
     <h2>What is the difference...</h2>
