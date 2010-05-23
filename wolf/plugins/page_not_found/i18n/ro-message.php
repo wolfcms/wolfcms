@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
     /**
      * Romanian file for plugin page_not_found

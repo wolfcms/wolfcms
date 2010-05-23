@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
     /**
      * Romanian file for plugin skeleton
@@ -20,4 +20,5 @@
 	'Put something here, or leave out the sidebar entirely.' => 'Pune ceva aici, sau scoate complet sidebarul.',
 	'Settings' => 'Setări',
 	'Skeleton' => 'Skeleton',
+	'You have modified this page.  If you navigate away from this page without first saving your data, the changes will be lost.' => 'Această pagină a fost modificată. Dacă se navighează în altă pagină fără a salva modificările, acestea vor fi pierdute.',
     );

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
     /**
      * Romanian file for plugin backup_restore
@@ -51,4 +51,5 @@
 	'What style of timestamp should be encorporated into the filename.' => 'Ce stil de scriere a timpului ar trebui încorporat în numele fişierului.',
 	'Yes' => 'Da',
 	'You do not have permission to access the requested page!' => 'Nu ai permisiuni suficiente pentru a putea accesa pagina dorită!',
+	'You have modified this page.  If you navigate away from this page without first saving your data, the changes will be lost.' => 'Această pagină a fost modificată. Dacă se navighează în altă pagină fără a salva modificările, acestea vor fi pierdute.',
     );
