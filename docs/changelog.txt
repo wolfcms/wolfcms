@@ -51,6 +51,7 @@ Sigla:
 - Fixed small issue Wolf layout had with frontend controllers - issue 141
 - Minor correction to @since info in some core plugins
 . Moved install directory to wolf/install
+. Moved default favicon to three different locations. One for admin, one per frontend theme.
 . Changed cookie life time from two weeks to 30 minutes.
 . Replaced Czech translation for core, comments, and file-manager - thanks Iva Pelcova - issues 150, 151, 152
 . Removed blank line before doctype from backend.php to prevent IE from rendering in quirks mode - issue 170

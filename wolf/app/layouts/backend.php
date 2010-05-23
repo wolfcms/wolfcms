@@ -58,7 +58,7 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title><?php use_helper('Kses'); echo kses(Setting::get('admin_title'), array()) . ' - ' . $title; ?></title>
 
-    <link rel="favourites icon" href="<?php echo URI_PUBLIC; ?>favicon.ico" />
+    <link rel="favourites icon" href="<?php echo URI_PUBLIC; ?>wolf/admin/images/favicon.ico" />
     <link href="<?php echo URI_PUBLIC; ?>wolf/admin/stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
     <link href="<?php echo URI_PUBLIC; ?>wolf/admin/stylesheets/toolbar.css" media="screen" rel="Stylesheet" type="text/css" />
     <link href="<?php echo URI_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
