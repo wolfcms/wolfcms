@@ -69,7 +69,20 @@ class Plugin {
     }
 
     /**
-     * Set plugin informations (id, title, description, version and website)
+     * Sets plugin information. Parameters include:
+     *
+     * Mandatory
+     * - id,
+     * - title,
+     * - description,
+     * - author,
+     * - version,
+     *
+     * Optional
+     * - license,
+     * - update_url,
+     * - require_wolf_version,
+     * - website
      *
      * @param infos array Assoc array with plugin informations
      */
