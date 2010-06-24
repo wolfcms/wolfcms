@@ -3,42 +3,41 @@
 /**
  * French language file for plugin file_manager
  *
- * @package plugins
- * @subpackage file_manager
- * @category translations
+ * @package wolf
+ * @subpackage plugin.file_manager.translations
  *
- * @author Philippe Archambault <email@domain.something>
- * @version Wolf 0.9.4
+ * @author Dimitri “Diti” Torterat <diti@adelieland.eu>
+ * @version Wolf 0.6.0
  */
 
     return array(
         'Action' => 'Action',
-        'Are you sure you wish to delete' => 'Êtes-vous certain de vouloir supprimer',
+        'Are you sure you wish to delete' => 'Confirmez-vous la suppression&nbsp;?',
         'Cancel' => 'Annuler',
         'Change mode' => 'Changer le mode',
         'Close' => 'Fermer',
-//        'Create' => '',
-        'Create new directory' => 'Créer un répertoire',
-        'Create new file' => 'Créer un fichier',
-        'Directory :name has not been created!' => 'Le répertoire <strong>:name</strong> n\'a pas été créé!',
-        'Directory is not writable! File has not been saved!' => 'Vous ne détenez pas les droits d\'écriture sur le répertoire. Le fichier na pas été enregistré',
+        'Create' => 'Créer',
+        'Create new directory' => 'Nouveau dossier',
+        'Create new file' => 'Nouveau fichier',
+        'Directory :name has not been created!' => 'Le dossier :name n’a pas été créé&nbsp;!',
+        'Directory is not writable! File has not been saved!' => 'Le dossier n’est pas accessible en écriture ; le fichier n’a pas été enregistré&nbsp;!',
         'File' => 'Fichier',
-        'File :name has been created with success!' => 'Le fichier <strong>:name</strong> a été créé avec succès!',
-        'File :name has not been created!' => 'Le fichier <strong>:name</strong> n\'a pas été créé!',
-//        'File has been saved with success!' => '',
-        'File has not been uploaded!' => 'Le fichier n\'a pas été téléchargé!',
-//        'File is not writable! File has not been saved!' => '',
-        'File or directory not found!' => 'Le fichier ou le répertoire n\'a pas été trouvé!',
-        'Modify' => 'Modification',
-//        'Permission denied!' => '',
-        'Permissions' => 'Permission',
+        'File :name has been created with success!' => 'Le fichier :name a bien été créé&nbsp;!',
+        'File :name has not been created!' => 'Le fichier :name n’a pas été créé&nbsp;!',
+        'File has been saved with success!' => '',
+        'File has not been uploaded!' => 'Le fichier n’a pas pu être importé&nbsp;!',
+        'File is not writable! File has not been saved!' => '',
+        'File or directory not found!' => 'Le fichier ou le dossier n’a pas été trouvé&nbsp;!',
+        'Modify' => 'Modifier',
+        'Permission denied!' => 'Permission refusée&nbsp;!',
+        'Permissions' => 'Permissions',
         'Rename' => 'Renommer',
         'Save' => 'Enregistrer',
-        'Save and Continue Editing' => 'Enregistrer et continuer à éditer',
+        'Save and Continue Editing' => 'Enregistrer et continuer les modifications',
         'Size' => 'Taille',
-        'Upload' => 'Télécharger',
-        'Upload file' => 'Télécharger un fichier',
-        'You do not have permission to access the requested page!' => 'Vous n\'avez pas les permissions requissent pour accéder à cette page!',
+        'Upload' => 'Importer',
+        'Upload file' => 'Importer un fichier',
+        'You do not have permission to access the requested page!' => 'Vous n’avez pas les permissions nécessaires pour accéder à la page requise&nbsp;!',
         'or' => 'ou',
-//        'overwrite it?' => '',
+        'overwrite it?' => 'Écraser l’ancienne version&nbsp;?',
     );
