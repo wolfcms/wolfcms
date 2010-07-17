@@ -32,6 +32,7 @@ Sigla:
 + Added Slovak translation for core and file manager plugin - thanks joe.hergott - issues 163, 164
 + Added French translation for core plugins - thanks diti - issues 191, 192, 193
 + Added display for whitespace in comments on front end (plugin) - issue 147
+- Fixed View class to allow for absolute path conforming to docs. - issue 185
 - Fixed a div height issue - thanks siforster - issue 174
 - Fixed redundant URL_SUFFIX being added to view page url for root page - issue 153
 - Fixed bug in Framework not allowing array argument for AutoLoader::addFile - issue 171

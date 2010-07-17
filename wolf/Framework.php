@@ -888,11 +888,18 @@ class View {
      * path to a template file and one optional paramater ($vars) which allows
      * you to make local variables available in the template.
      *
+     * The View class automatically adds ".php" to the $file argument.
+     *
      * @param string $file  Absolute path or path relative to the templates dir.
      * @param array $vars   Array of key/value pairs to be made available in the template.
      */
     public function __construct($file, $vars=false) {
-        $this->file = APP_PATH.'/views/'.ltrim($file, '/').'.php';
+        if (strpos($file, '/') === 0 || strpos($file, ':') !== 1) {
+            $this->file = $file.'.php';
+        }
+        else {
+            $this->file = APP_PATH.'/views/'.ltrim($file, '/').'.php';
+        }
 
         if ( ! file_exists($this->file)) {
             throw new Exception("View '{$this->file}' not found!");
