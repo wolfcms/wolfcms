@@ -120,8 +120,11 @@ class Plugin {
         if (file_exists($file))
             include $file;
 
-        $class_name = Inflector::camelize($plugin_id).'Controller';
-        AutoLoader::addFile($class_name, self::$controllers[$plugin_id]->file);
+        // TODO Check if we actually need this, gets rid of E_NOTICE for now
+        if (isset(self::$controllers[$plugin_id])) {
+            $class_name = Inflector::camelize($plugin_id).'Controller';
+            AutoLoader::addFile($class_name, self::$controllers[$plugin_id]->file);
+        }
     }
 
     /**

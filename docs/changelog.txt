@@ -33,6 +33,7 @@ Sigla:
 + Added French translation for core plugins - thanks diti - issues 191, 192, 193
 + Added display for whitespace in comments on front end (plugin) - issue 147
 + Added BigInteger helper in case there's no native Math_BigInteger class. - Issue 188
+- Fixed E_NOTICE issue - issue 195
 - Fixed View class to allow for absolute path conforming to docs. - issue 185
 - Fixed a div height issue - thanks siforster - issue 174
 - Fixed redundant URL_SUFFIX being added to view page url for root page - issue 153
