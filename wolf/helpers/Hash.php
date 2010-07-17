@@ -3,6 +3,9 @@
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  *
  * The following code was copied as-is from the phphseclib library version 0.2.1a
+ * apart from the following changes:
+ *     - changed include of BigInteger.php to Wolf CMS specific include.
+ *
  * Please see the original licence and copyright statements below.
  */
 
@@ -556,7 +559,7 @@ class Crypt_Hash {
     function _sha512($m)
     {
         if (!class_exists('Math_BigInteger')) {
-            require_once('Math/BigInteger.php');
+            use_helper('BigInteger');
         }
 
         static $init384, $init512, $k;
