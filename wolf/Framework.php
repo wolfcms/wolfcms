@@ -894,7 +894,7 @@ class View {
      * @param array $vars   Array of key/value pairs to be made available in the template.
      */
     public function __construct($file, $vars=false) {
-        if (strpos($file, '/') === 0 || strpos($file, ':') !== 1) {
+        if (strpos($file, '/') === 0 || strpos($file, ':') === 1) {
             $this->file = $file.'.php';
         }
         else {
