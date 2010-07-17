@@ -30,7 +30,7 @@
 //  Constants  ---------------------------------------------------------------
 define('IN_CMS', true);
 
-define('CMS_VERSION', '0.6.0');
+define('CMS_VERSION', '0.7.0 beta');
 define('CMS_ROOT', dirname(__FILE__));
 define('CORE_ROOT', CMS_ROOT.'/wolf');
 define('PLUGINS_ROOT', CORE_ROOT.'/plugins');
