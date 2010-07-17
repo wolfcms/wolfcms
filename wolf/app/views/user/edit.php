@@ -93,6 +93,8 @@
 
   </table>
 
+<?php Observer::notify('user_edit_view_after_details', $user); ?>
+
   <p class="buttons">
     <input class="button" name="commit" type="submit" accesskey="s" value="<?php echo __('Save'); ?>" />
     <?php echo __('or'); ?> <a href="<?php echo (AuthUser::hasPermission('administrator')) ? get_url('user') : get_url(); ?>"><?php echo __('Cancel'); ?></a>
