@@ -128,8 +128,8 @@ class Email {
         $this->_headers      = array();
         $this->_debug_msg    = array();
 
-        $this->_set_header('User-Agent', $this->useragent);
-        $this->_set_header('Date', $this->_setDate());
+        $this->_setHeader('User-Agent', $this->useragent);
+        $this->_setHeader('Date', $this->_setDate());
 
         if ($clear_attachments !== false) {
             $this->_attach_name = array();
