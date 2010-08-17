@@ -33,8 +33,9 @@ Sigla:
 + Added French translation for core plugins - thanks diti - issues 191, 192, 193
 + Added display for whitespace in comments on front end (plugin) - issue 147
 + Added BigInteger helper in case there's no native Math_BigInteger class. - Issue 188
-+ Added dutch translation for comment plugin - Thanks Rinus - issue 187
-+ Added hebrew translation for core - Thanks BermanEyal - issue 196
++ Added Dutch translation for comment plugin - Thanks Rinus - issue 187
++ Added Hebrew translation for core - Thanks BermanEyal - issue 196
++ Added Thai translation for core - Thanks nateetorn.l - issue 220
 - Fixed E_NOTICE issue - issue 195
 - Fixed View class to allow for absolute path conforming to docs. - issue 185
 - Fixed a div height issue - thanks siforster - issue 174
