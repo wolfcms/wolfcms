@@ -36,7 +36,7 @@
 <h1><?php echo __('Pages'); ?></h1>
 
 <div id="site-map-def">
-    <div class="page"><?php echo __('Page'); ?> (<a href="#" id="toggle_reorder" onclick="toggle_reorder = !toggle_reorder; toggle_copy = false; $$('.handle_reorder').each(function(e) { e.style.display = toggle_reorder ? 'inline': 'none'; }); $$('.handle_copy').each(function(e) { e.style.display = toggle_copy ? 'inline': 'none'; }); return false;"><?php echo __('reorder'); ?></a> <?php echo __('or'); ?> <a id="toggle_copy" href="#" onclick="toggle_copy = !toggle_copy; toggle_reorder = false; $$('.handle_copy').each(function(e) { e.style.display = toggle_copy ? 'inline': 'none'; }); $$('.handle_reorder').each(function(e) { e.style.display = toggle_reorder ? 'inline': 'none'; }); return false;"><?php echo __('copy'); ?></a>)</div>
+    <div class="page"><?php echo __('Page'); ?> (<a href="#" id="toggle_reorder" nclick="toggle_reorder = !toggle_reorder; toggle_copy = false; $$('.handle_reorder').each(function(e) { e.style.display = toggle_reorder ? 'inline': 'none'; }); $$('.handle_copy').each(function(e) { e.style.display = toggle_copy ? 'inline': 'none'; }); return false;"><?php echo __('reorder'); ?></a> <?php echo __('or'); ?> <a id="toggle_copy" href="#" onclick="toggle_copy = !toggle_copy; toggle_reorder = false; $$('.handle_copy').each(function(e) { e.style.display = toggle_copy ? 'inline': 'none'; }); $$('.handle_reorder').each(function(e) { e.style.display = toggle_reorder ? 'inline': 'none'; }); return false;"><?php echo __('copy'); ?></a>)</div>
     <div class="status"><?php echo __('Status'); ?></div>
     <div class="view"><?php echo __('View'); ?></div>
     <div class="modify"><?php echo __('Modify'); ?></div>
@@ -59,8 +59,128 @@
           <a href="<?php echo get_url('page/add/1'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" align="middle" title="<?php echo __('Add child'); ?>" alt="<?php echo __('Add child'); ?>" /></a>&nbsp;
           <img class="remove" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove-disabled.gif" align="middle" alt="<?php echo __('remove icon disabled'); ?>" title="<?php echo __('Remove unavailable'); ?>"/>
       </div>
-    </li>
-</ul>
 
 <?php echo $content_children; ?>
 
+    </li>
+</ul>
+
+
+<style type="text/css">
+
+    ul {
+        /*
+        list-style: none inside;
+        margin: 0;
+        padding: 0;
+        margin-top: 0.5em;
+        order: 1px solid grey;
+        min-height: 10px;
+        height: auto !important;
+        height: 30px;
+        */
+    }
+
+    .child {
+        min-height: 10px;
+        height: auto !important;
+        height: 30px;
+    }
+
+    .child li {
+/*	    padding: 0;
+	    padding-left: 0.5em;
+	    argin: 1px;
+	    margin: 0;
+	    margin-top: 0.5em;
+        margin-left: 0.5em;*/
+        padding-left: 0.5em;
+        margin-left: 0.5em;
+	    border-left: 10px solid grey;
+	}
+
+	.i-sortable { display: block; background-color: #EDFE86; }
+    .i-sortable li { display: block; background-color: #fff; }
+
+    .placeholder {
+        height: 5px;
+        background: #f00;
+    }
+
+
+</style>
+
+<script type="text/javascript">
+ $j(document).ready(function(){
+
+    $j('#site-map li').each(function(){
+		if($j('ul',this).length) return;
+		var pid = $j(this).attr('id').split('_')[1];
+		$j('<ul class="sortable child" id="pages_'+pid+'"></ul>').appendTo(this);
+	});
+
+    $j(".sortable").sortable({
+            'axis': 'y',
+            'disabled':false,
+			'connectWith':['.sortable'],
+			'tolerance':'intersect',
+//			'containment':'#pages_0',
+			'placeholder':'placeholder',
+			'opacity': 0.75,
+			'revert': true,
+			'cursor':'crosshair',
+			'appendTo':'ul',
+			'distance':'15',
+            stop: function(event, ui) {
+                var parentId = ui.item.parent().attr('id').split('_')[1];
+                var order = $j(ui.item.parent()).sortable('serialize', {key: 'pages[]'});
+                if (parentId == null) parentId = 1;
+                $j.post('<?php echo get_url('page/reorder/'); ?>'+parentId, {data : order});
+            }
+		})
+		.disableSelection();
+
+    $j("#toggle_reorder").click(function() {
+
+        $j(".child").each(function(){
+            if ($j(this).hasClass("reorderable"))
+                $j(this).removeClass("reorderable");
+            else
+                $j(this).addClass("reorderable");
+        });
+
+        var disabled = $j( ".sortable" ).sortable( "option", "disabled" );
+       // if (disabled == false)
+            //$j( ".sortable" ).sortable( "option", "disabled", true );
+        //else
+            //$j( ".sortable" ).sortable( "option", "disabled", false );
+    });
+
+    $j("img.expander").click( function(){
+        //alert('TEST-'+$j(this).parent().parent().parent().attr('id'));
+        var parent = $j(this).parent().parent().parent();
+        var parentId = parent.attr('id').split('_')[1];
+        $j.get("<?php echo get_url('page/children/'); ?>"+parentId+'/'+'1', function(data) {
+            $j('#pages_'+parentId).append(data);
+        });
+
+        //$(obj).attr('src', '<?php echo URI_PUBLIC; ?>wolf/admin/images/collapse.png');
+    });
+
+    //$('ul:empty').remove();
+
+/* $('.child').expandCollapse({ startHidden : true }); */
+
+/*
+$('.child').expandCollapse({
+    updateText        : true,
+    updateClass       : false,
+    startHidden       : true,
+    triggerElement    : $('.trigger'),
+    expandDuration    : "fast",
+    collapseDuration  : "slow"
+});*/
+
+
+});
+</script>

@@ -384,6 +384,7 @@ class PageController extends Controller {
      * and all nested tree has to be rebuild
      */
     function reorder($parent_id) {
+        //throw new Exception('TEST-'.print_r($_POST['data'], true));
         parse_str($_POST['data']);
 
         foreach ($pages as $position => $page_id) {

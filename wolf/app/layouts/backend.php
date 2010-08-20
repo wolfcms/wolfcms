@@ -67,14 +67,15 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
     <!--[if lt IE 7]>
         <script type="text/javascript" charset="utf-8" src="<?php echo URL_PUBLIC . ADMIN_DIR; ?>/javascripts/unitpngfix.js"></script>
     <![endif]-->
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/prototype.js"></script>
+    <!--script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/prototype.js"></script>
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/effects.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/dragdrop.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/dragdrop.js"></script-->
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/cp-datepicker.js"></script>
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/wolf.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/control.textarea.js"></script>
+    <!--script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/control.textarea.js"></script-->
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/jquery-1.3.2.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/jquery-ui-1.7.2.custom.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>admin/javascripts/jquery.cookies.js"></script>
     <script type="text/javascript" charset="utf-8">
      var $j = jQuery.noConflict();
     </script>

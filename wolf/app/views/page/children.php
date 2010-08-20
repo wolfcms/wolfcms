@@ -33,7 +33,7 @@
  * @copyright Philippe Archambault, 2008
  */
 ?>
-<ul<?php if ($level == 1) echo ' id="site-map"'; ?>>
+<ul<?php if ($level == 1) echo ' id="site-map" class="sortable"'; else echo ' class="sortable child"'; ?>>
 <?php foreach($childrens as $child): ?> 
     <li id="page_<?php echo $child->id; ?>" class="node level-<?php echo $level; if ( ! $child->has_children) echo ' no-children'; else if ($child->is_expanded) echo ' children-visible'; else echo ' children-hidden'; ?>">
       <div class="page">
