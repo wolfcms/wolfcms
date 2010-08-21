@@ -179,15 +179,15 @@
                     $j(this).addClass("expanded");
                     var parent = $j(this).parent().parent().parent();
                     var parentId = parent.attr('id').split('_')[1];
-
+//alert('TEST-'+parent.attr('id'));
                     if ($j('#pages_'+parentId).children().length == 0) {
                         $j('#busy-'+parentId).show();
                         $j.get("<?php echo get_url('page/children/'); ?>"+parentId+'/'+'1', function(data) {
                             $j('#pages_'+parentId).append(data);
                             $j('#site-map li').sitemapSetup();
-                            $j(".sortable").sortableSetup();
-                            $j("img.expander").expandableSetup();
-                            $j(".busy").spinnerSetup();
+                            $j('.sortable').sortableSetup();
+                            $j('.busy').spinnerSetup();
+                            $j('img.expander').expandableSetup();
                         });
                     }
                     else {
