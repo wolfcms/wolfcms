@@ -111,37 +111,100 @@
 </style>
 
 <script type="text/javascript">
+    jQuery(function() {
+        jQuery.fn.spinnerSetup = function spinnerSetup() {
+            this.each(function() {
+                //alert('Test-'+$j(this).attr('id'));
+                var pid = $j(this).attr('id')
+                $j('#'+pid).hide()  // hide it initially
+                /*.ajaxStart(function() {
+                    $j('#'+pid).show();
+                })*/
+                .ajaxStop(function() {
+                    $j('#'+pid).hide();
+                });
+            });
+
+            return this;
+        };
+
+        jQuery.fn.sitemapSetup = function sitemapSetup() {
+            this.each(function () {
+            	if($j('ul',this).length) return;
+                var pid = $j(this).attr('id').split('_')[1];
+                $j('<ul class="sortable child" id="pages_'+pid+'"></ul>').appendTo(this);
+            });
+
+            return this;
+        };
+
+        jQuery.fn.sortableSetup = function sortableSetup() {
+           // this.each(function() {
+                this.sortable({
+                    'axis': 'y',
+                    'disabled':false,
+        			'connectWith':['.sortable'],
+                	'tolerance':'intersect',
+        //			'containment':'#pages_0',
+        			'placeholder':'placeholder',
+                	'opacity': 0.75,
+        			'revert': true,
+                	'cursor':'crosshair',
+        			'appendTo':'ul',
+        			'distance':'15',
+                    stop: function(event, ui) {
+                        var parentId = ui.item.parent().attr('id').split('_')[1];
+                        var order = $j(ui.item.parent()).sortable('serialize', {key: 'pages[]'});
+                        if (parentId == null) parentId = 1;
+                        $j.post('<?php echo get_url('page/reorder/'); ?>'+parentId, {data : order});
+                    }
+                })
+                .disableSelection();
+         //   });
+
+            return this;
+        };
+
+        jQuery.fn.expandableSetup = function expandableSetup() {
+            $j(this).click(function() {
+                if ($j(this).hasClass("expanded")) {
+                    $j(this).removeClass("expanded");
+
+                    var parent = $j(this).parent().parent().parent();
+                    var parentId = parent.attr('id').split('_')[1];
+
+                    $j('#pages_'+parentId).children().hide();
+                }
+                else {
+                    $j(this).addClass("expanded");
+                    var parent = $j(this).parent().parent().parent();
+                    var parentId = parent.attr('id').split('_')[1];
+
+                    if ($j('#pages_'+parentId).children().length == 0) {
+                        $j('#busy-'+parentId).show();
+                        $j.get("<?php echo get_url('page/children/'); ?>"+parentId+'/'+'1', function(data) {
+                            $j('#pages_'+parentId).append(data);
+                            $j('#site-map li').sitemapSetup();
+                            $j(".sortable").sortableSetup();
+                            $j("img.expander").expandableSetup();
+                            $j(".busy").spinnerSetup();
+                        });
+                    }
+                    else {
+                        $j('#pages_'+parentId).children().show();
+                    }
+                }
+            });
+        };
+    });
+
  $j(document).ready(function(){
-
-    $j('#site-map li').each(function(){
-		if($j('ul',this).length) return;
-		var pid = $j(this).attr('id').split('_')[1];
-		$j('<ul class="sortable child" id="pages_'+pid+'"></ul>').appendTo(this);
-	});
-
-    $j(".sortable").sortable({
-            'axis': 'y',
-            'disabled':false,
-			'connectWith':['.sortable'],
-			'tolerance':'intersect',
-//			'containment':'#pages_0',
-			'placeholder':'placeholder',
-			'opacity': 0.75,
-			'revert': true,
-			'cursor':'crosshair',
-			'appendTo':'ul',
-			'distance':'15',
-            stop: function(event, ui) {
-                var parentId = ui.item.parent().attr('id').split('_')[1];
-                var order = $j(ui.item.parent()).sortable('serialize', {key: 'pages[]'});
-                if (parentId == null) parentId = 1;
-                $j.post('<?php echo get_url('page/reorder/'); ?>'+parentId, {data : order});
-            }
-		})
-		.disableSelection();
+    $j('#site-map li').sitemapSetup();
+    $j(".sortable").sortableSetup();
+    $j("img.expander").expandableSetup();
+    $j(".busy").spinnerSetup();
 
     $j("#toggle_reorder").click(function() {
-
         $j(".child").each(function(){
             if ($j(this).hasClass("reorderable"))
                 $j(this).removeClass("reorderable");
@@ -156,16 +219,6 @@
             //$j( ".sortable" ).sortable( "option", "disabled", false );
     });
 
-    $j("img.expander").click( function(){
-        //alert('TEST-'+$j(this).parent().parent().parent().attr('id'));
-        var parent = $j(this).parent().parent().parent();
-        var parentId = parent.attr('id').split('_')[1];
-        $j.get("<?php echo get_url('page/children/'); ?>"+parentId+'/'+'1', function(data) {
-            $j('#pages_'+parentId).append(data);
-        });
-
-        //$(obj).attr('src', '<?php echo URI_PUBLIC; ?>wolf/admin/images/collapse.png');
-    });
 
     //$('ul:empty').remove();
 

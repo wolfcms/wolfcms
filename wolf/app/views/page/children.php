@@ -45,7 +45,7 @@
 <a href="<?php echo get_url('page/edit/'.$child->id); ?>" title="<?php echo $child->id.' | '.$child->slug; ?>"><img align="middle" class="icon" src="<?php echo URI_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" /> <span class="title"><?php echo $child->title; ?></span></a> <img class="handle_reorder" src="<?php echo URI_PUBLIC;?>wolf/admin/images/drag_to_sort.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" /> <img class="handle_copy" src="<?php echo URI_PUBLIC;?>wolf/admin/images/drag_to_copy.gif" alt="<?php echo __('Drag to Copy'); ?>" align="middle" />
 <?php endif; ?>
           <?php if (! empty($child->behavior_id)): ?> <small class="info">(<?php echo Inflector::humanize($child->behavior_id); ?>)</small><?php endif; ?> 
-          <img align="middle" alt="" class="busy" id="busy-<?php echo $child->id; ?>" src="<?php echo URI_PUBLIC;?>wolf/admin/images/spinner.gif" style="display: none;" title="" />
+          <img align="middle" alt="" class="busy" id="busy-<?php echo $child->id; ?>" src="<?php echo URI_PUBLIC;?>wolf/admin/images/spinner.gif" tyle="display: none;" title="" />
         </span>
       </div>
 <?php switch ($child->status_id) {
