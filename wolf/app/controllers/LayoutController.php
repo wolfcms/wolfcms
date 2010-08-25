@@ -158,13 +158,13 @@ class LayoutController extends Controller {
     }
 
     function delete($id) {
-    // find the user to delete
+    // find the layout to delete
         if ($layout = Record::findByIdFrom('Layout', $id)) {
             if ($layout->isUsed())
                 Flash::set('error', __('Layout <b>:name</b> is in use! It CAN NOT be deleted!', array(':name'=>$layout->name)));
             else if ($layout->delete()) {
                     Flash::set('success', __('Layout <b>:name</b> has been deleted!', array(':name'=>$layout->name)));
-                    Observer::notify('layout_after_edit', $layout);
+                    Observer::notify('layout_after_delete', $layout);
                 }
                 else
                     Flash::set('error', __('Layout <b>:name</b> has not been deleted!', array(':name'=>$layout->name)));

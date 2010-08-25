@@ -57,6 +57,7 @@ Sigla:
 - Fixed trailing slash issue with Pagination.php helper
 - Fixed clear function in Email.php helper - thanks snsmurf - issue 218
 - Fixed small issue Wolf layout had with frontend controllers - issue 141
+- Fixed delete layout observer event - issue 222 - thanks Jules
 - Minor correction to @since info in some core plugins
 . Moved install directory to wolf/install
 . Moved default favicon to three different locations. One for admin, one per frontend theme.
