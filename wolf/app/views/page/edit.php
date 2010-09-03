@@ -54,14 +54,20 @@ if ($action == 'edit') { ?>
 
   <input id="page_parent_id" name="page[parent_id]" type="hidden" value="<?php echo $page->parent_id; ?>" />
   <div class="form-area">
-    <div id="tab-control-meta" class="tab_control">
-        <div id="tabs-meta" class="tabs">
-            <div id="tab-meta-toolbar" class="tab_toolbar">&nbsp;</div>
-        </div>
-        <div id="meta-pages" class="pages">
+    <div id="metainfo-tabs" class="content tabs">
+        <ul class="tabNavigation">
+            <li class="tab"><a href="#pagetitle"><?php echo __('Page Title'); ?></a></li>
+            <li class="tab"><a href="#metadata"><?php echo __('Metadata'); ?></a></li>
+            <li class="tab"><a href="#settings"><?php echo __('Settings'); ?></a></li>
+        </ul>
+    </div>
+    <div id="metainfo-content" class="pages">
+        <div id="pagetitle" class="page">
             <div id="div-title" class="title" title="<?php echo __('Page Title'); ?>">
-              <input class="textbox" id="page_title" maxlength="255" name="page[title]" size="255" type="text" value="<?php echo $page->title; ?>" />
+            <input class="textbox" id="page_title" maxlength="255" name="page[title]" size="255" type="text" value="<?php echo $page->title; ?>" />
             </div>
+        </div>
+        <div id="metadata" class="page">
             <div id="div-metadata" title="<?php echo __('Metadata'); ?>">
               <table cellpadding="0" cellspacing="0" border="0">
                 <?php if ($page->parent_id != 0) : ?>
@@ -88,6 +94,8 @@ if ($action == 'edit') { ?>
                 </tr>
               </table>
             </div>
+        </div>
+        <div id="settings" class="page">
             <div id="div-settings" title="<?php echo __('Settings'); ?>">
               <table cellpadding="0" cellspacing="0" border="0">
                 <?php if ($page->parent_id != 0) : ?>
@@ -150,42 +158,36 @@ if ($action == 'edit') { ?>
 
               </table>
             </div>
-            <?php Observer::notify('view_page_edit_tabs', $page); ?>
         </div>
+        <?php Observer::notify('view_page_edit_tabs', $page); ?>
     </div>
-    
-    <script type="text/javascript">
-      var tabControlMeta = new TabControl('tab-control-meta');
-      $('meta-pages').childElements().each(function(item) {
-        tabControlMeta.addTab('tab-'+item.id, item.title, item.id);
-      });
-      tabControlMeta.select(tabControlMeta.firstTab());
-    </script>
 
-    <div id="tab-control" class="tab_control">
-      <div id="tabs" class="tabs">
+    <div id="part-tabs" class="content tabs">
         <div id="tab-toolbar" class="tab_toolbar">
-          <a href="#" onclick="toggle_popup('add-part-popup', 'part-name-field'); return false;" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" alt="plus icon" /></a>
-          <a href="#" onclick="if (confirm('<?php echo __('Delete the current tab?'); ?>')) { tabControl.removeTab(tabControl.selected) }; return false;" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/minus.png" alt="minus icon" /></a>
+          <a href="#" id="add-part" nclick="toggle_popup('add-part-popup', 'part-name-field'); return false;" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" alt="plus icon" /></a>
+          <a href="#" id="delete-part" nclick="if (confirm('<?php echo __('Delete the current tab?'); ?>')) { tabControl.removeTab(tabControl.selected) }; return false;" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/minus.png" alt="minus icon" /></a>
         </div>
-      </div>
-      <div id="pages" class="pages">
+        <ul class="tabNavigation">
+            <?php foreach ($page_parts as $key => $page_part) { ?>
+            <li id="part-<?php echo $key+1; ?>-tab" class="tab"><a href="#part-<?php echo $key+1; ?>-content"><?php echo $page_part->name; ?></a></li>
+            <?php } ?>
+        </ul>
+    </div>
+    <div id="part-content" class="pages">
       <?php
       $index = 1;
-      foreach ($page_parts as $page_part)
-      {
+      foreach ($page_parts as $page_part) {
+          echo '<div id="part-'.$index.'-content" class="page">';
           echo new View('page/part_edit', array('index' => $index, 'page_part' => $page_part));
-          $index++; 
+          echo '</div>';
+          $index++;
       }
       ?>
-      </div>
     </div>
 
     <?php Observer::notify('view_page_after_edit_tabs', $page); ?>
 
     <div class="row">
-
-
 <?php if ( ! isset($page->id) || $page->id != 1): ?>
       <p><label for="page_status_id"><?php echo __('Status'); ?></label>
         <select id="page_status_id" name="page[status_id]">
@@ -196,9 +198,7 @@ if ($action == 'edit') { ?>
         </select>
       </p>
 <?php endif; ?>
-
 <?php Observer::notify('view_page_edit_plugins', $page); ?>
-
     </div>
     
     <p><small>
@@ -230,6 +230,19 @@ if ($action == 'edit') { ?>
     </form>
   </div>
 
+<div id="boxes">
+	<!-- #Demo dialog -->
+	<div id="dialog" class="window">
+		<div class="titlebar">
+            Demo dialog
+            <a href="#" class="close">[x]</a>
+        </div>
+        <div class="content">
+            <p>This is just a demo.</p>
+        </div>
+	</div>
+</div>
+
 <?php Observer::notify('view_page_edit_popup', $page); ?>
 
 </div>
@@ -246,9 +259,97 @@ if ($action == 'edit') { ?>
     }
 
     $j(document).ready(function() {
+        // Store PHP value for later reference
+        var partIndex = <?php echo $index; ?>;
+
         // Prevent accidentally navigating away
         $j(':input').bind('change', function() { setConfirmUnload(true); });
         $j('form').submit(function() { setConfirmUnload(false); return true; });
+
+        // Do the metainfo tab thing
+        $j('div#metainfo-tabs ul.tabNavigation a').live('click', function() {
+            $j('div#metainfo-content > div.page').hide().filter(this.hash).show();
+            $j('div#metainfo-tabs ul.tabNavigation a').removeClass('here');
+            $j(this).addClass('here');
+            return false;
+        }).filter(':first').click();
+
+        // Do the parts tab thing
+        $j('div#part-tabs ul.tabNavigation a').live('click', function() {
+            $j('div#part-content > div.page').hide().filter(this.hash).show();
+            $j('div#part-tabs ul.tabNavigation a').removeClass('here');
+            $j(this).addClass('here');
+            return false;
+        }).filter(':first').click();
+
+        // Do the add part button thing
+        $j('#add-part').click(function() {
+
+            // START show popup
+            var id = 'div#boxes div#dialog';
+
+            //Get the screen height and width
+            var maskHeight = $j(document).height();
+            var maskWidth = $j(window).width();
+
+            //Set height and width to mask to fill up the whole screen
+            $j('#mask').css({'width':maskWidth,'height':maskHeight,'top':0,'left':0});
+
+            //transition effect
+            $j('#mask').show();
+            $j('#mask').fadeTo("slow",0.5);
+
+            //Get the window height and width
+            var winH = $j(window).height();
+            var winW = $j(window).width();
+
+            //Set the popup window to center
+            $j(id).css('top',  winH/2-$j(id).height()/2);
+            $j(id).css('left', winW/2-$j(id).width()/2);
+
+            //transition effect
+            $j(id).fadeIn(500); //2000
+
+            $j(id+" :input:visible:enabled:first").focus();
+            // END show popup
+
+            $j('div#part-tabs ul.tabNavigation').append('<li id="part-'+partIndex+'-tab" class="tab"><a href="#part-'+partIndex+'">TEST PART</a></li>');
+            $j('div#part-content').append('<div id="part-'+partIndex+'" class="page">JUST TEST PART CONTENT. Index is '+partIndex+'</div>');
+            $j('div#part-tabs ul.tabNavigation li#part-'+partIndex+'-tab a').click();
+            partIndex++;
+        });
+
+        // Do the delete part button thing
+        $j('#delete-part').click(function() {
+            // Delete the tab
+            var partRegEx = /part-(\d+)-tab/i;
+            var myRegEx = new RegExp(partRegEx);
+            var matched = myRegEx.exec($j('div#part-tabs ul.tabNavigation li.tab a.here').parent().attr('id'));
+            var removePart = matched[1];
+
+            $j('div#part-tabs ul.tabNavigation li.tab a.here').remove();
+            $j('div#part-tabs ul.tabNavigation a').filter(':first').click();
+
+            // Delete the content section
+            $j('div#part-'+removePart+'-content').remove();
+        });
+
+
+        // Make all modal dialogs draggable
+        $j("#boxes .window").draggable({
+            addClasses: false,
+            containment: 'window',
+            scroll: false,
+            handle: '.titlebar'
+        })
+
+        //if close button is clicked
+        $j('#boxes .window .close').click(function (e) {
+            //Cancel the link behavior
+            e.preventDefault();
+            $j('#mask, .window').hide();
+        });
+
     });
     
     Field.activate('page_title');

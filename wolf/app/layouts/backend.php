@@ -114,6 +114,9 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
 <?php $action = Dispatcher::getAction(); ?>
   </head>
   <body id="body_<?php echo $ctrl.'_'.Dispatcher::getAction(); ?>">
+    <!-- Div to allow for modal dialogs -->
+    <div id="mask"></div>
+
     <div id="header">
       <div id="site-title"><a href="<?php echo URL_PUBLIC; ?>"><?php echo Setting::get('admin_title'); ?></a></div>
       <div id="mainTabs">
