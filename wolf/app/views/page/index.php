@@ -166,9 +166,10 @@
         };
 
         jQuery.fn.expandableSetup = function expandableSetup() {
-            $j(this).click(function() {
+            $j(this).live('click', function() {
                 if ($j(this).hasClass("expanded")) {
                     $j(this).removeClass("expanded");
+                    $j(this).attr('src', 'wolf/admin/images/expand.png');
 
                     var parent = $j(this).parent().parent().parent();
                     var parentId = parent.attr('id').split('_')[1];
@@ -177,6 +178,7 @@
                 }
                 else {
                     $j(this).addClass("expanded");
+                    $j(this).attr('src', 'wolf/admin/images/collapse.png');
                     var parent = $j(this).parent().parent().parent();
                     var parentId = parent.attr('id').split('_')[1];
 //alert('TEST-'+parent.attr('id'));
@@ -187,7 +189,7 @@
                             $j('#site-map li').sitemapSetup();
                             $j('.sortable').sortableSetup();
                             $j('.busy').spinnerSetup();
-                            $j('img.expander').expandableSetup();
+                            //$j('img.expander').expandableSetup();
                         });
                     }
                     else {
