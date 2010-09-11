@@ -36,6 +36,7 @@ Sigla:
 + Added Dutch translation for comment plugin - Thanks Rinus - issue 187
 + Added Hebrew translation for core - Thanks BermanEyal - issue 196
 + Added Thai translation for core - Thanks nateetorn.l - issue 220
+- Fixed rogue \n character in breadcrumbs.
 - Fixed E_NOTICE issue - issue 195
 - Fixed View class to allow for absolute path conforming to docs. - issue 185
 - Fixed a div height issue - thanks siforster - issue 174

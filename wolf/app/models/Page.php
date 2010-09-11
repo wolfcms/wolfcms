@@ -146,7 +146,7 @@ class Page extends Record {
         if ($this->parent)
             $out .= $this->parent->_inversedBreadcrumbs($separator);
 
-        return $out . '<span class="breadcrumb-current">'.$this->breadcrumb().'</span>'."\n";
+        return $out . '<span class="breadcrumb-current">'.$this->breadcrumb().'</span>';
 
     }
 
@@ -209,7 +209,7 @@ class Page extends Record {
     }
 
     private function _inversedBreadcrumbs($separator) {
-        $out = '<a href="'.$this->url().'" title="'.$this->breadcrumb.'">'.$this->breadcrumb.'</a> <span class="breadcrumb-separator">'.$separator.'</span> '."\n";
+        $out = '<a href="'.$this->url().'" title="'.$this->breadcrumb.'">'.$this->breadcrumb.'</a><span class="breadcrumb-separator">'.$separator.'</span>';
 
         if ($this->parent)
             return $this->parent->_inversedBreadcrumbs($separator) . $out;
