@@ -462,7 +462,7 @@ class Record {
      *
      * @param string $sql   SQL query to execute.
      * @param array $values Values belonging to the SQL query if its a prepared statement.
-     * @return <type>       SQL result set.
+     * @return <type>       An array of objects, PDOStatement object or FALSE on failure.
      */
     final public static function query($sql, $values=false) {
         self::logQuery($sql);
