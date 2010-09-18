@@ -50,7 +50,7 @@ if ($action == 'edit') { ?>
 
 <h1><?php echo __(ucfirst($action).' Page'); ?></h1>
 
-<form action="<?php if ($action == 'add') echo get_url('page/add'); else echo  get_url('page/edit/'.$page->id); ?>" method="post">
+<form id="page_edit_form" action="<?php if ($action == 'add') echo get_url('page/add'); else echo  get_url('page/edit/'.$page->id); ?>" method="post">
 
   <input id="page_parent_id" name="page[parent_id]" type="hidden" value="<?php echo $page->parent_id; ?>" />
   <div class="form-area">
@@ -177,9 +177,7 @@ if ($action == 'edit') { ?>
       <?php
       $index = 1;
       foreach ($page_parts as $page_part) {
-          echo '<div id="part-'.$index.'-content" class="page">';
           echo new View('page/part_edit', array('index' => $index, 'page_part' => $page_part));
-          echo '</div>';
           $index++;
       }
       ?>
@@ -216,19 +214,6 @@ if ($action == 'edit') { ?>
   </p>
 
 </form>
-<div id="popups">
-  <div class="popup" id="add-part-popup" style="display: none;">
-    <div id="busy" class="busy" style="display: none;"><img alt="Spinner" src="<?php echo URI_PUBLIC;?>wolf/admin/images/spinner.gif" /></div>
-    <h3><?php echo __('Add Part'); ?></h3>
-    <form action="<?php echo get_url('page/addPart'); ?>" method="post" onsubmit="if (valid_part_name()) { new Ajax.Updater('pages', '<?php echo get_url('page/addPart'); ?>', {asynchronous:true, evalScripts:true, insertion:Insertion.Bottom, onComplete:function(request){part_added()}, onLoading:function(request){part_loading()}, parameters:Form.serialize(this)}); }; return false;"> 
-      <div>
-        <input id="part-index-field" name="part[index]" type="hidden" value="<?php echo $index; ?>" />
-        <input id="part-name-field" maxlength="100" name="part[name]" type="text" value="" /> 
-        <input id="add-part-button" name="commit" type="submit" value="<?php echo __('Add'); ?>" />
-      </div>
-      <p><a class="close-link" href="#" onclick="Element.hide('add-part-popup'); return false;"><?php echo __('Close'); ?></a></p>
-    </form>
-  </div>
 
 <div id="boxes">
 	<!-- #Demo dialog -->
@@ -241,8 +226,24 @@ if ($action == 'edit') { ?>
             <p>This is just a demo.</p>
         </div>
 	</div>
-</div>
 
+	<!-- Add part dialog -->
+	<div id="add-part-dialog" class="window">
+		<div class="titlebar">
+            <div id="busy" class="busy" style="display: none;"><img alt="Spinner" src="<?php echo URI_PUBLIC;?>wolf/admin/images/spinner.gif" /></div>
+            <?php echo __('Add Part'); ?>
+            <a href="" class="close">[x]</a>
+        </div>
+        <div class="content">
+            <form action="<?php //echo get_url('page/addPart'); ?>" method="post">
+            <div>
+                <input id="part-index-field" name="part[index]" type="hidden" value="<?php echo $index; ?>" />
+                <input id="part-name-field" maxlength="100" name="part[name]" type="text" value="" />
+                <input id="add-part-button" name="commit" type="submit" value="<?php echo __('Add'); ?>" />
+            </div>
+            </form>
+        </div>
+	</div>
 <?php Observer::notify('view_page_edit_popup', $page); ?>
 
 </div>
@@ -258,13 +259,27 @@ if ($action == 'edit') { ?>
         return '<?php echo __('You have modified this page.  If you navigate away from this page without first saving your data, the changes will be lost.'); ?>';
     }
 
+    jQuery.fn.spinnerSetup = function spinnerSetup() {
+        this.each(function() {
+            var pid = $j(this).attr('id')
+            $j('#'+pid).hide()  // hide it initially
+            .ajaxStop(function() {
+                $j('#'+pid).hide();
+            });
+        });
+
+        return this;
+    };
+
     $j(document).ready(function() {
+        $j(".busy").spinnerSetup();
+
         // Store PHP value for later reference
         var partIndex = <?php echo $index; ?>;
 
         // Prevent accidentally navigating away
-        $j(':input').bind('change', function() { setConfirmUnload(true); });
-        $j('form').submit(function() { setConfirmUnload(false); return true; });
+        $j('form#page_edit_form :input').bind('change', function() { setConfirmUnload(true); });
+        $j('form#page_edit_form').submit(function() { setConfirmUnload(false); return true; });
 
         // Do the metainfo tab thing
         $j('div#metainfo-tabs ul.tabNavigation a').live('click', function() {
@@ -286,7 +301,7 @@ if ($action == 'edit') { ?>
         $j('#add-part').click(function() {
 
             // START show popup
-            var id = 'div#boxes div#dialog';
+            var id = 'div#boxes div#add-part-dialog';
 
             //Get the screen height and width
             var maskHeight = $j(document).height();
@@ -312,11 +327,36 @@ if ($action == 'edit') { ?>
 
             $j(id+" :input:visible:enabled:first").focus();
             // END show popup
+        });
 
-            $j('div#part-tabs ul.tabNavigation').append('<li id="part-'+partIndex+'-tab" class="tab"><a href="#part-'+partIndex+'">TEST PART</a></li>');
-            $j('div#part-content').append('<div id="part-'+partIndex+'" class="page">JUST TEST PART CONTENT. Index is '+partIndex+'</div>');
-            $j('div#part-tabs ul.tabNavigation li#part-'+partIndex+'-tab a').click();
-            partIndex++;
+        // Do the submit add part window thing
+        $j('div#add-part-dialog div.content form').submit(function(e) {
+            e.preventDefault();
+
+            if (valid_part_name($j('div#add-part-dialog div.content form input#part-name-field').val())) {
+                $j('div#part-tabs ul.tabNavigation').append('<li id="part-'+partIndex+'-tab" class="tab">\n\
+                                                             <a href="#part-'+partIndex+'-content">'+$j('div#add-part-dialog div.content form input#part-name-field').val()+'</a></li>');
+
+                $j('div#part-tabs ul.tabNavigation li#part-'+partIndex+'-tab a').click();
+
+                $j('#busy').show();
+
+                $j.post('<?php echo get_url('page/addPart'); ?>',
+                        $j('div#add-part-dialog div.content form').serialize(),
+                        function(data) {
+                                $j('div#part-content').append(data);
+                                $j('#busy').hide();
+                            });
+
+                partIndex++;
+
+                // Make sure users save changes
+                setConfirmUnload(true);
+           }
+
+           $j('#mask, .window').hide();
+
+           return false;
         });
 
         // Do the delete part button thing
@@ -332,6 +372,9 @@ if ($action == 'edit') { ?>
 
             // Delete the content section
             $j('div#part-'+removePart+'-content').remove();
+
+            // Make sure users save changes
+            setConfirmUnload(true);
         });
 
 

@@ -619,21 +619,25 @@ function part_loading() {
   Element.toggle('busy');
 }
 
-function valid_part_name() {
-  var partNameField = $('part-name-field');
-  var name = partNameField.value.downcase().strip();
+// Updated valid_part_name function for JQuery
+function valid_part_name(name) {
+  name = name.toLowerCase();
+  name = $j.trim(name);
   var result = true;
+
   if (name == '') {
     alert('Part name cannot be empty.');
     return false;
   }
-  tabControl.tabs.each(function(pair){
-    if (tabControl.tabs.get(pair.key).label == name) {
+
+  $j('#part-tabs .tabNavigation .tab a').each(function(){
+    if (this.text == name) {
       result = false;
       alert('Part name must be unique.');
       throw $break;
     }
   })
+
   return result;
 }
 

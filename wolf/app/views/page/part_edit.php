@@ -33,6 +33,7 @@
  * @copyright Philippe Archambault, 2008
  */
 ?>
+<div id="part-<?php echo $index; ?>-content" class="page">
 <div class="page" id="page-<?php echo $index; ?>">
   <div class="part" id="part-<?php echo $index; ?>">
     <input id="part_<?php echo ($index-1); ?>_name" name="part[<?php echo ($index-1); ?>][name]" type="hidden" value="<?php echo $page_part->name; ?>" />
@@ -52,24 +53,9 @@
   </div>
 </div>
 
-
-<div id="boxes">
-	<div id="dialog" class="window">
-		<div class="titlebar">
-            Demo dialog
-            <a href="#" class="close">[x]</a>
-        </div>
-        <div class="content">
-            <p>This is just a demo.</p>
-        </div>
-	</div>
-</div>
-
-<!-- Do not remove div#mask, because you'll need it to fill the whole screen -->
-<div id="mask"></div>
-
 <script type="text/javascript">
 // <![CDATA[
     setTextAreaToolbar('part_<?php echo ($index-1); ?>_content', '<?php echo $page_part->filter_id; ?>');
 // ]]>
 </script>
+</div>
