@@ -36,7 +36,10 @@
 <h1><?php echo __('Snippets'); ?></h1>
 
 <div id="site-map-def" class="index-def">
-  <div class="snippet"><?php echo __('Snippet'); ?> (<a href="#" onclick="$$('.handle').each(function(e) { e.style.display = e.style.display != 'inline' ? 'inline': 'none'; }); return false;"><?php echo __('reorder'); ?></a>)</div><div class="modify"><?php echo __('Modify'); ?></div>
+    <div class="snippet">
+        <?php echo __('Snippet'); ?> (<a href="#" id="reorder-toggle"><?php echo __('reorder'); ?></a>)
+    </div>
+    <div class="modify"><?php echo __('Modify'); ?></div>
 </div>
 
 <ul id="snippets" class="index">
@@ -50,13 +53,50 @@
 <?php endforeach; ?>
 </ul>
 
-<script type="text/javascript" language="javascript" charset="utf-8">
-Sortable.create('snippets', {
-    constraint: 'vertical',
-    scroll: window,
-    handle: 'handle',
-    onUpdate: function() {
-        new Ajax.Request('<?php echo get_url('snippet/reorder');?>', {method: 'post', parameters: {data: Sortable.serialize('snippets')}});
+<style type="text/css" >
+    .placeholder {
+        height: 2.4em;
+        line-height: 1.2em;
+        border: 1px solid #fcefa1;
+        background-color: #fbf9ee;
+        color: #363636;
     }
-});
+</style>
+
+<script type="text/javascript">
+// <![CDATA[
+    jQuery.fn.sortableSetup = function sortableSetup() {
+        this.sortable({
+            'disabled':true,
+            'tolerance':'intersect',
+       		'containment':'#main',
+       		'placeholder':'placeholder',
+       		'revert': true,
+            'cursor':'crosshair',
+       		'distance':'15',
+            stop: function(event, ui) {
+                var order = $j(ui.item.parent()).sortable('serialize', {key: 'snippets[]'});
+                $j.post('<?php echo get_url('snippet/reorder/'); ?>', {data : order});
+            }
+        })
+        .disableSelection();
+
+        return this;
+    };
+
+    $j(document).ready(function() {
+        $j('ul#snippets').sortableSetup();
+        $j('#reorder-toggle').toggle(
+            function(){
+                $j('ul#snippets').sortable('option', 'disabled', false);
+                $j('#reorder-toggle').text('<?php echo __('disable reorder');?>');
+            },
+            function() {
+                $j('ul#snippets').sortable('option', 'disabled', true);
+                $j('#reorder-toggle').text('<?php echo __('reorder');?>');
+            }
+        )
+    });
+
+// ]]>
 </script>
