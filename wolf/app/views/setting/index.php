@@ -37,23 +37,6 @@
  */
 ?>
 
-<script type="text/javascript">
-    // <![CDATA[
-    $j(function () {
-        var tabContainers = $j('div.tabs > div.pages > div');
-
-        $j('div.tabs ul.tabNavigation a').click(function () {
-            tabContainers.hide().filter(this.hash).show();
-
-            $j('div.tabs ul.tabNavigation a').removeClass('here');
-            $j(this).addClass('here');
-
-            return false;
-        }).filter(':first').click();
-    });
-    // ]]>
-</script>
-
 <h1><?php echo __('Administration'); ?></h1>
 
 <div id="admin-area" class="form-area">
@@ -108,8 +91,8 @@
                             <td class="website"><a href="<?php echo $plugin->website; ?>" target="_blank"><?php echo __('Website') ?></a></td>
                             <td class="version"><?php echo $plugin->version; ?></td>
                             <td class="latest"><?php echo Plugin::checkLatest($plugin); ?></td>
-                            <td class="enabled"><input type="checkbox" name="enabled_<?php echo $plugin->id; ?>" value="<?php echo $plugin->id; ?>"<?php if (isset($loaded_plugins[$plugin->id])) echo ' checked="checked"'; if ($disabled) echo ' disabled="disabled"'; ?> onclick="new Ajax.Request('<?php echo get_url('setting'); ?>'+(this.checked ? '/activate_plugin/':'/deactivate_plugin/')+this.value, {method: 'get'});" /></td>
-                            <td class="uninstall"><a href="<?php echo get_url('setting'); ?>" name="uninstall_<?php echo $plugin->id; ?>" onclick="if (confirm('<?php echo __('Are you sure you wish to uninstall this plugin?'); ?>')) { new Ajax.Request('<?php echo get_url('setting/uninstall_plugin/'.$plugin->id); ?>', {method: 'get'}); }"><?php echo __('Uninstall'); ?></a></td>
+                            <td class="enabled"><input type="checkbox" name="enabled_<?php echo $plugin->id; ?>" value="<?php echo $plugin->id; ?>"<?php if (isset($loaded_plugins[$plugin->id])) echo ' checked="checked"'; if ($disabled) echo ' disabled="disabled"'; ?> /></td>
+                            <td class="uninstall"><a href="<?php echo get_url('setting'); ?>" name="uninstall_<?php echo $plugin->id; ?>"><?php echo __('Uninstall'); ?></a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -146,7 +129,7 @@
                         <tr>
                             <td class="label"><label for="setting_theme"><?php echo __('Administration Theme'); ?></label></td>
                             <td class="field">
-                                <select class="select" id="setting_theme" name="setting[theme]" onchange="$('css_theme').href = 'wolf/admin/themes/' + this[this.selectedIndex].value + '/styles.css';">
+                                <select class="select" id="setting_theme" name="setting[theme]">
                                     <?php
                                         $current_theme = Setting::get('theme');
                                         foreach (Setting::getThemes() as $code => $label): ?>
@@ -220,3 +203,66 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+// <![CDATA[
+
+function toSentenceCase(s) {
+  return s.toLowerCase().replace(/^(.)|\s(.)/g,
+          function($1) { return $1.toUpperCase(); });
+}
+
+function toLabelCase(s) {
+  return s.toLowerCase().replace(/^(.)|\s(.)|_(.)/g,
+          function($1) { return $1.toUpperCase(); });
+}
+
+
+$j(document).ready(function() {
+
+    // Setup tabs
+    $j(function () {
+        var tabContainers = $j('div.tabs > div.pages > div');
+
+        $j('div.tabs ul.tabNavigation a').click(function () {
+            tabContainers.hide().filter(this.hash).show();
+
+            $j('div.tabs ul.tabNavigation a').removeClass('here');
+            $j(this).addClass('here');
+
+            return false;
+        }).filter(':first').click();
+    });
+
+    // Dynamically change look-and-feel
+    $j('#setting_theme').change(function() {
+        $j('#css_theme').attr({href : 'wolf/admin/themes/' + this.value + '/styles.css'});
+    });
+
+    // Dynamically change enabled state
+    $j('.enabled input').change(function() {
+        $j.get('<?php echo get_url('setting'); ?>'+(this.checked ? '/activate_plugin/':'/deactivate_plugin/')+this.value);
+
+        // Add or remove tab for plugin
+        if (this.checked) {
+            var label = toLabelCase(this.value).replace(/_/g," ");
+            $j('#mainTabs ul').append('<li id="'+this.value+'-plugin" class="plugin"><a href="?/admin/plugin/'+this.value+'">'+label+'</a></li>');
+        }
+        else {
+            $j('#mainTabs ul li#'+this.value+'-plugin').remove();
+        }
+    });
+
+    // Dynamically uninstall
+    $j('.uninstall a').click(function() {
+        if (confirm('<?php echo __('Are you sure you wish to uninstall this plugin?'); ?>')) {
+            var pluginId = this.name.replace('uninstall_', '');
+            //alert('TEST-<?php echo get_url('setting/uninstall_plugin/'); ?>'+pluginId);
+            $j.get('<?php echo get_url('setting/uninstall_plugin/'); ?>'+pluginId);
+        }
+    });
+
+});
+
+// ]]>
+</script>
