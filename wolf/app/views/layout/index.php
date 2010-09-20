@@ -67,13 +67,14 @@
 // <![CDATA[
     jQuery.fn.sortableSetup = function sortableSetup() {
         this.sortable({
-            'disabled':true,
-            'tolerance':'intersect',
-       		'containment':'#main',
-       		'placeholder':'placeholder',
-       		'revert': true,
-            'cursor':'crosshair',
-       		'distance':'15',
+            disabled:true,
+            tolerance:'intersect',
+       		containment:'#main',
+       		placeholder:'placeholder',
+       		revert: true,
+            handle: '.handle',
+            cursor:'crosshair',
+       		distance:'15',
             stop: function(event, ui) {
                 var order = $j(ui.item.parent()).sortable('serialize', {key: 'layouts[]'});
                 $j.post('<?php echo get_url('layout/reorder/'); ?>', {data : order});
@@ -89,10 +90,12 @@
         $j('#reorder-toggle').toggle(
             function(){
                 $j('ul#layouts').sortable('option', 'disabled', false);
+                $j('.handle').show();
                 $j('#reorder-toggle').text('<?php echo __('disable reorder');?>');
             },
             function() {
                 $j('ul#layouts').sortable('option', 'disabled', true);
+                $j('.handle').hide();
                 $j('#reorder-toggle').text('<?php echo __('reorder');?>');
             }
         )
