@@ -103,23 +103,24 @@
     .i-sortable li { display: block; background-color: #fff; }
 
     .placeholder {
-        height: 5px;
-        background: #f00;
+        height: 2.4em;
+        line-height: 1.2em;
+        border: 1px solid #fcefa1;
+        background-color: #fbf9ee;
+        color: #363636;
+        /*height: 5px;
+        background: #f00;*/
     }
 
 
 </style>
 
 <script type="text/javascript">
-    jQuery(function() {
+    //jQuery(function() {
         jQuery.fn.spinnerSetup = function spinnerSetup() {
             this.each(function() {
-                //alert('Test-'+$j(this).attr('id'));
                 var pid = $j(this).attr('id')
                 $j('#'+pid).hide()  // hide it initially
-                /*.ajaxStart(function() {
-                    $j('#'+pid).show();
-                })*/
                 .ajaxStop(function() {
                     $j('#'+pid).hide();
                 });
@@ -138,17 +139,30 @@
             return this;
         };
 
+        jQuery.fn.copyableSetup = function copyableSetup() {
+            this.draggable({
+                disabled: false,
+                 connectToSortable: 'ul.sortable',
+                 handle: '.handle_copy',
+                 opacity: 0.75,
+                 revert: true,
+                 helper: 'clone',
+                 placeholder: 'placeholder'
+             });
+        };
+
         jQuery.fn.sortableSetup = function sortableSetup() {
-           // this.each(function() {
                 this.sortable({
-                    'axis': 'y',
+                    //'axis': 'y',
                     'disabled':false,
-        			'connectWith':['.sortable'],
+        			'connectWith':'.sortable',
                 	'tolerance':'intersect',
-        //			'containment':'#pages_0',
+        			'containment':'#main',
         			'placeholder':'placeholder',
+                    'handle': '.handle_reorder',
                 	'opacity': 0.75,
         			'revert': true,
+                    //helper: 'clone',
                 	'cursor':'crosshair',
         			'appendTo':'ul',
         			'distance':'15',
@@ -160,7 +174,6 @@
                     }
                 })
                 .disableSelection();
-         //   });
 
             return this;
         };
@@ -198,14 +211,15 @@
                 }
             });
         };
-    });
+    //});
 
  $j(document).ready(function(){
     $j('#site-map li').sitemapSetup();
-    $j(".sortable").sortableSetup();
+    //$j(".sortable").sortableSetup();
     $j("img.expander").expandableSetup();
     $j(".busy").spinnerSetup();
 
+/*
     $j("#toggle_reorder").click(function() {
         $j(".child").each(function(){
             if ($j(this).hasClass("reorderable"))
@@ -220,6 +234,41 @@
         //else
             //$j( ".sortable" ).sortable( "option", "disabled", false );
     });
+        */
+
+    $j('#toggle_reorder').toggle(
+            function(){
+                //$j('.sortable').sortable('option', 'disabled', false);
+                $j('.sortable').sortableSetup();
+                $j('.sortable li').copyableSetup();
+                $j('img.handle_reorder').show();
+                $j('#toggle_reorder').text('<?php echo __('disable reorder');?>');
+            },
+            function() {
+                //$j('.sortable').sortable('option', 'disabled', true);
+                $j('.sortable').sortable('destroy');
+                $j('.sortable li').draggable('destroy');
+                $j('img.handle_reorder').hide();
+                $j('#toggle_reorder').text('<?php echo __('reorder');?>');
+            }
+    )
+
+    $j('#toggle_copy').toggle(
+            function(){
+                //$j('.sortable').sortable('option', 'disabled', false);
+                $j('.sortable').sortableSetup();
+                $j('.sortable li').copyableSetup();
+                $j('img.handle_copy').show();
+                $j('#toggle_copy').text('<?php echo __('disable copy');?>');
+            },
+            function() {
+                //$j('.sortable').sortable('option', 'disabled', true);
+                $j('.sortable').sortable('destroy');
+                $j('.sortable li').draggable('destroy');
+                $j('img.handle_copy').hide();
+                $j('#toggle_copy').text('<?php echo __('copy');?>');
+            }
+    )
 
 
     //$('ul:empty').remove();
