@@ -144,9 +144,13 @@
                 disabled: false,
                  connectToSortable: 'ul.sortable',
                  handle: '.handle_copy',
+                 snap: 'ul.sortable',
+                 snapMode: 'inner',
+                 snapTolerance: 30,
                  opacity: 0.75,
-                 revert: true,
+                 //revert: true,
                  helper: 'clone',
+                 distance:'15',
                  placeholder: 'placeholder'
              });
         };
@@ -257,6 +261,18 @@
             function(){
                 //$j('.sortable').sortable('option', 'disabled', false);
                 $j('.sortable').sortableSetup();
+                /*$j('.sortable').droppable({
+                	'tolerance':'intersect',
+        			'placeholder':'placeholder',
+                    'handle': '.handle_copy',
+                	'opacity': 0.75,
+        			'revert': true,
+                	'cursor':'crosshair',
+        			'appendTo':'ul',
+                    drop: function(){
+                        alert('DROPPED!');
+                    }
+                });*/
                 $j('.sortable li').copyableSetup();
                 $j('img.handle_copy').show();
                 $j('#toggle_copy').text('<?php echo __('disable copy');?>');
@@ -264,6 +280,7 @@
             function() {
                 //$j('.sortable').sortable('option', 'disabled', true);
                 $j('.sortable').sortable('destroy');
+                //$j('.sortable').droppable('destroy');
                 $j('.sortable li').draggable('destroy');
                 $j('img.handle_copy').hide();
                 $j('#toggle_copy').text('<?php echo __('copy');?>');
