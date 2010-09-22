@@ -731,12 +731,16 @@ class Page extends Record {
 
         // Run!
         if ($limit == 1) {
-            return $stmt->fetchObject('Page');
+            $object = $stmt->fetchObject('Page');
+            $object->part = get_parts($object->id);
+            return $object;
         } else {
             $objects = array();
             while ($object = $stmt->fetchObject('Page'))
+            {
+            	$object->part = get_parts($object->id);
                 $objects[] = $object;
-
+			}
             return $objects;
         }
     }
