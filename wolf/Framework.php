@@ -755,6 +755,27 @@ class Record {
         return $stmt->execute($values);
     }
 
+
+    /**
+     * Returns true if a record exists in the database.
+     *
+     * @param string $class_name    The classname to be returned.
+     * @param string $where         An SQL WHERE clause to specify a subset if desired.
+     * @param array $values         An array of values if this is a prepared statement.
+     * @return boolean              TRUE if record exists, FALSE if it doesn't.
+     */
+	public static function existsIn($class_name, $where=false, $values=array()) {
+		$sql = 'SELECT EXISTS(SELECT 1 FROM '.self::tableNameFromClassName($class_name).($where ? ' WHERE '.$where:'').' LIMIT 1)';
+
+        $stmt = self::$__CONN__->prepare($sql);
+		$stmt->execute($values);
+
+        self::logQuery($sql);
+
+        return (bool) $stmt->fetchColumn();
+	}
+
+
     //
     // Note: lazy finder or getter method. Pratical when you need something really
     //       simple no join or anything will only generate simple select * from table ...
