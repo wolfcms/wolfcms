@@ -72,6 +72,7 @@ Sigla:
 . Updated Russian translation for core and plugins - thanks Kostromind
 . Updated Dutch translation for core and file manager - thanks Fortron
 . Updated Hungarian translation for core - thanks Gabor Rezso
+. Updated Polish translation for core - thanks Piotr.Fuz - issue 213
 . Updated Polish translation for Skeleton plugin - thanks Piotr.Fuz - issue 89
 . Updated Romanian translation for everything - thanks Cosmin Huţanu - issue 182
 . Updated default layout taglines
