@@ -1,24 +1,23 @@
 <?php
 
     /**
-     * YourLanguage file for plugin skeleton
+     * Polish file for plugin skeleton
      *
      * @package wolf
      * @subpackage plugin.skeleton.translations
      *
-     * @author Piotr Fuz <piotr.fuz@gmail.com>
-     * @version Wolf 0.6
+     * @author Piotr Fuz <piotr.fuz@gmail.com> and Paweł Balicki <kilab1@o2.pl>
+     * @version Wolf 0.6.0
      */
 
     return array(
-    'A sidebar' => 'Panel boczny',
-	'Display settings page here!' => 'Tutaj wyświetl stronę z ustawieniami!',
-	'Display your documentation here!' => 'Tutaj wyświetl dokumentację!',
-	'Documentation' => 'Dokumentacja',
-	'Provides a basic plugin implementation. (try enabling it!)' => 'Umożliwia podstawową implementację dodatków. (spróbuj to włączyć!)',
-	'Put something here, or leave out the sidebar entirely.' => 'Dodaj coś w panelu bocznym lub zostaw cały pusty.',
-	'Settings' => 'Ustawienia',
-	'Skeleton' => 'Szkielet',
+    	'A sidebar' => '',
+	'Display settings page here!' => '',
+	'Display your documentation here!' => '',
+	'Documentation' => '',
+	'Provides a basic plugin implementation. (try enabling it!)' => '',
+	'Put something here, or leave out the sidebar entirely.' => '',
+	'Settings' => '',
+	'Skeleton' => '',
     );
-
 
