@@ -23,36 +23,31 @@
  * See exception.txt for details and the full text.
  */
 
-function toggle_chmod_popup(file, chmod) {
-	var popup = $j('#chmod-popup');
+function toggle_chmod_popup(filename) {
+    var popup = $j('#chmod-popup');
+    $j('#chmod_file_name').val(filename);
 
     var height = $j(document).height();
     var popup_height = popup.height();
     var width = $j(document).width();
     var popup_width = popup.width();
-
     popup.css({"position" : "absolute", "top" : height/3 - popup_height/2, "left" : width/3 - popup_width/2});
     popup.toggle("normal");
-
-    $j('#chmod_file_name').val(file);
-    $j('#chmod_file_mode').val(chmod);
     $j("#chmod_file_mode").focus();
 }
 
 function toggle_rename_popup(file, filename) {
-	var popup = $j('#rename-popup');
-	var file_mode = $j('#rename_file_new_name');
+    var popup = $j('#rename-popup');
+    var file_mode = $j('#rename_file_new_name');
+    $j('#rename_file_current_name').val(file);
+    file_mode.val(filename);
 
     var height = $j(document).height();
     var popup_height = popup.height();
     var width = $j(document).width();
     var popup_width = popup.width();
-
     popup.css({"position" : "absolute", "top" : height/3 - popup_height/2, "left" : width/3 - popup_width/2});
     popup.toggle("normal");
-
-    $j('#rename_file_current_name').val(file);
-	file_mode.val(filename);
     file_mode.focus();
 }
 
