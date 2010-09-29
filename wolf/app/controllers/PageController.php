@@ -155,6 +155,8 @@ class PageController extends Controller {
         }
 
         $page = new Page($data);
+        
+        Observer::notify('page_add_before_save', $page);
 
         // save page data
         if ($page->save()) {
@@ -260,6 +262,8 @@ class PageController extends Controller {
         }
 
         $page->setFromData($data);
+
+		Observer::notify('part_edit_before_save', $part);
 
         if ($page->save()) {
         // get data for parts of this page
