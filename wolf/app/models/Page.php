@@ -314,6 +314,27 @@ class Page extends Record {
     }
 
     /**
+     * Check if a part exists and it has content
+     *
+     * If inherit is set to true, it checks for the part
+     * in this page's parents.
+     *
+     * @param string $part      Part name.
+     * @param bool   $inherit   Check parents for part if true.
+     * @return bool             Returns true if part was found or false if nothing was found
+     */
+    public function hasContent($part, $inherit=false) {
+    	$trim = trim($this->part->$part);    
+        if ( isset($this->part->$part) && !empty($trim) ) {
+            return true;
+        }
+        else if ( $inherit && $this->parent ) {
+            return $this->parent->hasContent($part, true);
+        }
+        return false;
+    }
+    
+    /**
      * Check if a part exists.
      *
      * If inherit is set to true, it checks for the part
@@ -321,16 +342,17 @@ class Page extends Record {
      *
      * @param string $part      Part name.
      * @param bool   $inherit   Check parents for part if true.
-     * @return bool             Returns true if part was found.
+     * @return bool             Returns true if part was found or false if nothing was found
      */
-    public function hasContent($part, $inherit=false) {
+    public function partExists($part, $inherit=false) {
         if ( isset($this->part->$part) ) {
             return true;
         }
         else if ( $inherit && $this->parent ) {
-            return $this->parent->hasContent($part, true);
+            return $this->parent->partExists($part, true);
         }
-    }
+        return false;
+    }    
 
     protected function setUrl() {
         $this->url = trim($this->parent->url .'/'. $this->slug, '/');
