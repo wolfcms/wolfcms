@@ -57,7 +57,7 @@ Plugin::setInfos(array(
 	'author'      => 'Martijn van der Kleijn',
     'website'     => 'http://www.wolfcms.org/',
     'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml',
-    'require_wolf_version' => '0.6.0'
+    'require_wolf_version' => '0.7.0'
 ));
 
 Plugin::addController('multi_lang', __('Multiple Languages'), 'administrator', false);
