@@ -219,6 +219,9 @@ class PageController extends Controller {
         if (get_request_method() == 'POST')
             return $this->_edit($id);
 
+		// encode the quotes to prevent page title input break
+		$page->title = htmlentities($page->title, ENT_QUOTES);
+
         // find all page_part of this pages
         $page_parts = PagePart::findByPageId($id);
 
