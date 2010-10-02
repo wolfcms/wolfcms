@@ -859,7 +859,7 @@ table.fieldset .error-with-field small {
   width: 100%;
   height: 280px;
   border: 1px solid #ccc;
-  font-family: Monaco, "Courier New", Courier, monospace;
+  font-family: Monaco, Consolas, "Courier New", monospace, serif;
   font-size: 85%;
 }
 
