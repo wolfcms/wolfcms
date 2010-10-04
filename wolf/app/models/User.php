@@ -99,7 +99,8 @@ class User extends Record {
         // Prepare query parts
         $where_string = empty($where) ? '' : "WHERE $where";
         $order_by_string = empty($order_by) ? '' : "ORDER BY $order_by";
-        $limit_string = $limit > 0 ? "LIMIT $offset, $limit" : '';
+        $limit_string = $limit > 0 ? "LIMIT $limit" : '';
+        $offset_string = $offset > 0 ? "OFFSET $offset" : '';
 
         $tablename = self::tableNameFromClassName('User');
 
@@ -107,7 +108,7 @@ class User extends Record {
         $sql = "SELECT $tablename.*, creator.name AS created_by_name, updater.name AS updated_by_name FROM $tablename".
             " LEFT JOIN $tablename AS creator ON $tablename.created_by_id = creator.id".
             " LEFT JOIN $tablename AS updater ON $tablename.updated_by_id = updater.id".
-            " $where_string $order_by_string $limit_string";
+            " $where_string $order_by_string $limit_string $offset_string";
 
         $stmt = self::$__CONN__->prepare($sql);
         $stmt->execute();

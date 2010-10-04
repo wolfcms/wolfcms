@@ -179,12 +179,13 @@ class Page extends Record {
 
         // Prepare query parts
         $where_string = trim($where) == '' ? '' : "AND ".$where;
-        $limit_string = $limit > 0 ? "LIMIT $offset, $limit" : '';
+        $limit_string = $limit > 0 ? "LIMIT $limit" : '';
+        $offset_string = $offset > 0 ? "OFFSET $offset" : '';
 
         // Prepare SQL
         $sql = 'SELECT COUNT(*) AS nb_rows FROM '.TABLE_PREFIX.'page '
                 . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
-                . "$where_string ORDER BY $order $limit_string";
+                . "$where_string ORDER BY $order $limit_string $offset_string";
 
         $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute($value);
@@ -439,7 +440,9 @@ class Page extends Record {
 
         // Prepare query parts
         $where_string = trim($where) == '' ? '' : "AND ".$where;
-        $limit_string = $limit > 0 ? "LIMIT $offset, $limit" : '';
+        $limit_string = $limit > 0 ? "LIMIT $limit" : '';
+        $offset_string = $offset > 0 ? "OFFSET $offset" : '';
+
 
         // Prepare SQL
         $sql = 'SELECT page.*, author.name AS author, author.id AS author_id, updater.name AS updater, updater.id AS updater_id '
@@ -447,7 +450,7 @@ class Page extends Record {
                 . 'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
                 . 'LEFT JOIN '.TABLE_PREFIX.'user AS updater ON updater.id = page.updated_by_id '
                 . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
-                . "$where_string ORDER BY $order $limit_string";
+                . "$where_string ORDER BY $order $limit_string $offset_string";
 
         $pages = array();
 
@@ -737,7 +740,8 @@ class Page extends Record {
         // Prepare query parts
         $where_string = empty($where) ? '' : "WHERE $where";
         $order_by_string = empty($order_by) ? '' : "ORDER BY $order_by";
-        $limit_string = $limit > 0 ? "LIMIT $offset, $limit" : '';
+        $limit_string = $limit > 0 ? "LIMIT $limit" : '';
+        $offset_string = $offset > 0 ? "OFFSET $offset" : '';
 
         $tablename = self::tableNameFromClassName('Page');
         $tablename_user = self::tableNameFromClassName('User');
@@ -746,7 +750,7 @@ class Page extends Record {
         $sql = "SELECT page.*, creator.name AS created_by_name, updater.name AS updated_by_name FROM $tablename AS page".
                 " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id".
                 " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id".
-                " $where_string $order_by_string $limit_string";
+                " $where_string $order_by_string $limit_string $offset_string";
 
         $stmt = self::$__CONN__->prepare($sql);
         $stmt->execute();

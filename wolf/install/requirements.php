@@ -52,6 +52,7 @@ if (!$check) $errors = true;
 // Check if proper PDO drivers are available
 $mcheck = false;
 $scheck = false;
+$pcheck = false;
 
 if ($check) {
     $drivers = PDO::getAvailableDrivers();
@@ -62,12 +63,16 @@ if ($check) {
     $scheck = in_array('sqlite', $drivers);
     $sqlite = '<span class="'.($scheck ? 'check' : 'notcheck').'">'.($scheck ? 'true' : 'false').'</span>';
 
-    // Make sure EITHER MySQL or SQLite is supported
-    if (!$mcheck && !$scheck) $errors = true;
+    $pcheck = in_array('pgsql', $drivers);
+    $pgsql = '<span class="'.($pcheck ? 'check' : 'notcheck').'">'.($pcheck ? 'true' : 'false').'</span>';
+
+    // Make sure EITHER MySQL, SQLite or PostgreSQL is supported
+    if (!$mcheck && !$scheck && !$pcheck) $errors = true;
 }
 else {
     $mysql = '-- n/a --';
     $sqlite = '-- n/a --';
+    $pgsql = '-- n/a --';
 }
 
 // Check existence of config file
@@ -131,6 +136,10 @@ $https = '<span class="'.($check ? 'check' : 'notcheck').'">'.($check ? 'true' :
                 <td class="available"><?php echo $sqlite; ?></td>
             </tr>
             <tr>
+                <td>PDO supports PostgreSQL <sup>1)</sup></td>
+                <td class="available"><?php echo $pgsql; ?></td>
+            </tr>
+            <tr>
                 <td>Config file exists <sup>2)</sup></td>
                 <td class="available"><?php echo $cfg_exists; ?></td>
             </tr>
@@ -150,7 +159,7 @@ $https = '<span class="'.($check ? 'check' : 'notcheck').'">'.($check ? 'true' :
     </table>
     <p class="footnotes">
         <sup>1)</sup> - Only one database <strong>has</strong> to be supported by PDO.
-        If you use MySQL, you don't need a SQLite driver and visa versa.<br/>
+        If you use MySQL, you don't need a SQLite or PostgreSQL driver and visa versa.<br/>
 
         <sup>2)</sup> - "config.php" at install root.<br/>
         
@@ -166,10 +175,12 @@ $https = '<span class="'.($check ? 'check' : 'notcheck').'">'.($check ? 'true' :
             echo 'Please fix these problems and <button>test again</button>';
         } else {
             if (file_exists(CFG_FILE) && filesize(CFG_FILE) == 0) {
-                if ((!$mcheck && $scheck))
+                if ($scheck && !$mcheck && !$pcheck)
                     echo '<input type="hidden" name="dbtype" value="sqlite"/>';
-                else if (($mcheck && !$scheck))
+                else if ($mcheck && !$scheck && !$pcheck)
                     echo '<input type="hidden" name="dbtype" value="mysql"/>';
+                else if ($pcheck && !$mcheck && !$scheck)
+                    echo '<input type="hidden" name="dbtype" value="pgsql"/>';
                 echo '<button name="install" value="1">Continue to install</button>';
             }
         }

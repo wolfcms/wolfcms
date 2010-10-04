@@ -72,7 +72,8 @@ class Layout extends Record {
         // Prepare query parts
         $where_string = empty($where) ? '' : "WHERE $where";
         $order_by_string = empty($order_by) ? '' : "ORDER BY $order_by";
-        $limit_string = $limit > 0 ? "LIMIT $offset, $limit" : '';
+        $limit_string = $limit > 0 ? "LIMIT $limit" : '';
+        $offset_string = $offset > 0 ? "OFFSET $offset" : '';
 
         $tablename = self::tableNameFromClassName('Layout');
         $tablename_user = self::tableNameFromClassName('User');
@@ -88,7 +89,7 @@ class Layout extends Record {
                 FROM $tablename
                 LEFT JOIN $tablename_user AS creator ON $tablename.created_by_id =creator.id
                 LEFT JOIN $tablename_user AS updator ON $tablename.updated_by_id =updator.id
-                $where_string $order_by_string $limit_string";
+                $where_string $order_by_string $limit_string $offset_string";
 
         $stmt = self::$__CONN__->prepare($sql);
         $stmt->execute();

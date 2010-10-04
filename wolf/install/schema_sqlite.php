@@ -80,7 +80,7 @@ $PDO->exec("CREATE TABLE page (
     description text , 
     parent_id int(11) default NULL , 
     layout_id int(11) default NULL , 
-    behavior_id varchar(25) NOT NULL , 
+    behavior_id varchar(25) NOT NULL default '' ,
     status_id int(11) NOT NULL default '100' , 
     created_on datetime default NULL , 
     published_on datetime default NULL , 

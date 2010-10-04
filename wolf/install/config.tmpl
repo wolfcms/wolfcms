@@ -12,11 +12,20 @@ define('DB_DSN', 'mysql:dbname=<?php echo $db_name; ?>;host=127.0.0.1;port=<?php
 <?php else: ?>
 define('DB_DSN', 'mysql:dbname=<?php echo $db_name; ?>;host=<?php echo $db_host; ?>;port=<?php echo $db_port; ?>');
 <?php endif; ?>
+<?php elseif ($db_driver == 'pgsql'): ?>
+<?php if (PHP_VERSION >= '5.3.0' && $db_host == 'localhost'): ?>
+define('DB_DSN', 'pgsql:dbname=<?php echo $db_name; ?>;host=127.0.0.1;port=<?php echo $db_port; ?>');
+<?php else: ?>
+define('DB_DSN', 'pgsql:dbname=<?php echo $db_name; ?>;host=<?php echo $db_host; ?>;port=<?php echo $db_port; ?>');
+<?php endif; ?>
 <?php else: ?>
 define('DB_DSN', 'sqlite:<?php echo $db_name; ?>');
 <?php endif; ?>
 define('DB_USER', '<?php echo $db_user; ?>');
 define('DB_PASS', '<?php echo $db_pass; ?>');
+<?php if ($db_driver == 'pgsql'): ?>
+// When using PostgreSQL, a table prefix is mandatory.
+<?php endif; ?>
 define('TABLE_PREFIX', '<?php echo $table_prefix; ?>');
 
 // Should Wolf produce PHP error messages for debugging?

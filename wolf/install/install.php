@@ -32,25 +32,53 @@ if (!defined('INSTALL_SEQUENCE')) {
     echo '<p>Illegal call. Terminating.</p>';
     exit();
 }
+
+$drivers = PDO::getAvailableDrivers();
 ?>
 
-    <script type="text/javascript" charset="utf-8" src="../admin/javascripts/prototype.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../admin/javascripts/jquery-1.3.2.min.js"></script>
     <script type="text/javascript">
-        function db_driver_change(driver) {
-            Element.toggle('row-db-host');
-            Element.toggle('row-db-port');
-            Element.toggle('row-db-user');
-            Element.toggle('row-db-pass');
-            Element.toggle('row-table-prefix');
+    // <![CDATA[
+        $(document).ready(function() {
+            $('#config_db_driver').change(function() {
+                
+                if (this.value == 'sqlite') {
+                    $('#config_db_name').val('<?php echo realpath(dirname(__FILE__).'/../../../').'/db/wolf.sq3' ?>');
+                    $('#help-db-name').html('Required. Enter the <strong>absolute</strong> path to the database file.<br/>You are <strong>strongly</strong> advised to keep the Wolf CMS SQLite database outside of the webserver root.');
+                    $('#help-db-prefix').html('Optional. Usefull to prevent conflicts if you have, or plan to have, multiple Wolf installations with a single database.');
+                    $('#row-table-prefix label').addClass('optional');
+                    $('#row-db-host').hide();
+                    $('#row-db-port').hide();
+                    $('#row-db-user').hide();
+                    $('#row-db-pass').hide();
+                    $('#row-table-prefix').hide();
+                }
+                else {
+                    $('#config_db_name').val('wolf');
+                    $('#help-db-name').html('Required. You have to create a database manually and enter its name here.');
+                    if (this.value == 'mysql') {
+                        $('#config_db_port').val('3306');
+                        $('#row-table-prefix label').addClass('optional');
+                        $('#help-db-prefix').html('Optional. Usefull to prevent conflicts if you have, or plan to have, multiple Wolf installations with a single database.');
+                    }
+                    if (this.value == 'pgsql') {
+                        $('#config_db_port').val('5432');
+                        $('#row-table-prefix label').removeClass('optional');
+                        $('#config_table_prefix').val('wolf_');
+                        $('#help-db-prefix').html('<strong>Required.</strong> When using PostgreSQL, you have to specify a table prefix.');
+                    }
+                    $('#row-db-host').show();
+                    $('#row-db-port').show();
+                    $('#row-db-user').show();
+                    $('#row-db-pass').show();
+                    $('#row-table-prefix').show();
+                }
+            });
 
-            if (driver == 'sqlite') {
-                $('config_db_name').value = '<?php echo realpath(dirname(__FILE__).'/../../../').'/db/wolf.sq3' ?>';
-                $('help-db-name').innerHTML = 'Required. Enter the <strong>absolute</strong> path to the database file.<br/>You are <strong>strongly</strong> advised to keep the Wolf CMS SQLite database outside of the webserver root.';
-            }
-            else if (driver == 'mysql') {
-                $('help-db-name').innerHTML = 'Required. You have to create a database manually and enter its name here.';
-            }
-        }
+            $('#config_db_driver').trigger('change');
+        });
+        
+    // ]]>
     </script>
 
     <h1>Installation information <img src="install-logo.png" alt="Wolf CMS logo" class="logo" /></h1>
@@ -69,32 +97,42 @@ if (!defined('INSTALL_SEQUENCE')) {
                 <td class="label"><label for="config_db_driver">Database driver</label></td>
                 <td class="field">
                     <select id="config_db_driver" name="config[db_driver]" onchange="db_driver_change(this[this.selectedIndex].value);">
-                        <?php if (isset($_POST['dbtype']) && !empty($_POST['dbtype']) && $_POST['dbtype'] == 'sqlite') { ?>
-                        <option value="sqlite">SQLite 3</option>
-                        <?php } else if (isset($_POST['dbtype']) && !empty($_POST['dbtype']) && $_POST['dbtype'] == 'mysql') { ?>
-                        <option value="mysql">MySQL</option>
-                        <?php } else { ?>
-                        <option value="mysql">MySQL</option>
-                        <option value="sqlite">SQLite 3</option>
-                        <?php } ?>
+                        <?php /*if (isset($_POST['dbtype']) && !empty($_POST['dbtype']) && $_POST['dbtype'] == 'sqlite') {
+                            echo '<option value="sqlite">SQLite 3</option>';
+                        }
+                        else if (isset($_POST['dbtype']) && !empty($_POST['dbtype']) && $_POST['dbtype'] == 'mysql') {
+                            echo '<option value="mysql">MySQL</option>';
+                        }
+                        else if (isset($_POST['dbtype']) && !empty($_POST['dbtype']) && $_POST['dbtype'] == 'pgsql') {
+                            echo '<option value="pgsql">PostgreSQL</option>';
+                        } else {*/
+                            if (in_array('mysql', $drivers)) {
+                                echo '<option value="mysql">MySQL</option>';
+                            }
+                            if (in_array('pgsql', $drivers)) {
+                                echo '<option value="pgsql">PostgreSQL</option>';
+                            }
+                            if (in_array('sqlite', $drivers)) {
+                                echo '<option value="sqlite">SQLite 3</option>';
+                            //}
+                        } ?>
                     </select>
                 </td>
-                <td class="help">Required. PDO support and the SQLite 3 plugin are required to use SQLite 3.</td>
+                <td class="help">Required.</td>
             </tr>
             <tr id="row-db-host">
                 <td class="label"><label for="config_db_host">Database server</label></td>
                 <td class="field"><input class="textbox" id="config_db_host" maxlength="100" name="config[db_host]" size="50" type="text" value="localhost" /></td>
                 <td class="help">Required.</td>
             </tr>
-                <tr id="row-db-port">
-                <td class="label"><label for="config_db_port">Port</label></td>
-                <td class="field"><input class="textbox" id="config_db_port" maxlength="10" name="config[db_port]" size="50" type="text" value="3306" /></td>
-                <td class="help">Optional. Default: 3306</td>
+            <tr id="row-db-port">
+                <td class="label"><label class="optional" for="config_db_port">Port</label></td>
+                <td class="field"><input class="textbox" id="config_db_port" maxlength="10" name="config[db_port]" size="50" type="text" value="" /></td>
+                <td class="help">Optional. Default MySQL: 3306; default PostgreSQL: 5432</td>
             </tr>
             <tr id="row-db-user">
                 <td class="label"><label for="config_db_user">Database user</label></td>
                 <td class="field"><input class="textbox" id="config_db_user" maxlength="255" name="config[db_user]" size="50" type="text" value="root" /></td>
-
                 <td class="help">Required.</td>
             </tr>
             <tr id="row-db-pass">
@@ -110,13 +148,13 @@ if (!defined('INSTALL_SEQUENCE')) {
             <tr id="row-table-prefix">
                 <td class="label"><label class="optional" for="config_table_prefix">Table prefix</label></td>
                 <td class="field"><input class="textbox" id="config_table_prefix" maxlength="40" name="config[table_prefix]" size="50" type="text" value="" /></td>
-                <td class="help">Optional. Usefull to prevent conflicts if you have, or plan to have, multiple Wolf installations with a single database.</td>
+                <td class="help" id="help-db-prefix">Optional. Useful to prevent conflicts if you have, or plan to have, multiple Wolf installations with a single database.</td>
             </tr>
             <tr>
                 <td colspan="3"><h3>Other information</h3></td>
             </tr>
             <tr>
-                <td class="label"><label class="optional" for="config_admin_username">Administrator username</label></td>
+                <td class="label"><label for="config_admin_username">Administrator username</label></td>
                 <td class="field"><input class="textbox" id="config_admin_username" maxlength="40" name="config[admin_username]" size="50" type="text" value="<?php echo DEFAULT_ADMIN_USER; ?>" /></td>
                 <td class="help">Required. Allows you to specify a custom username for the administrator. Default: admin</td>
             </tr>
@@ -135,10 +173,3 @@ if (!defined('INSTALL_SEQUENCE')) {
             <button class="button" name="commit" type="submit">Install now!</button>
         </p>
     </form>
-<?php if (isset($_POST['dbtype']) && !empty($_POST['dbtype']) && $_POST['dbtype'] != 'mysql') { ?>
-    <script type="text/javascript">
-        // DOM is ready, do scripty stuff now
-        $('config_db_driver').value = '<?php echo trim($_POST['dbtype']);?>';
-        db_driver_change($('config_db_driver').value);
-    </script>
-<?php } ?>

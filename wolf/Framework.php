@@ -556,9 +556,13 @@ class Record {
             $columns = $this->getColumns();
 
             // Escape and format for SQL insert query
+            // @todo check if we like this new method of escaping and defaulting
             foreach ($columns as $column) {
-                if (isset($this->$column)) {
+                if (!empty($this->$column) || is_numeric($this->$column)) { // Do include 0 as value
                     $value_of[$column] = self::$__CONN__->quote($this->$column);
+                }
+                elseif (isset($this->$column)) { // Properly fallback to the default column value instead of relying on an empty string
+                    $value_of[$column] = 'DEFAULT';
                 }
             }
 
@@ -577,8 +581,11 @@ class Record {
 
             // Escape and format for SQL update query
             foreach ($columns as $column) {
-                if (isset($this->$column)) {
+                if (!empty($this->$column) || is_numeric($this->$column)) { // Do include 0 as value
                     $value_of[$column] = $column.'='.self::$__CONN__->quote($this->$column);
+                }
+                elseif (isset($this->$column)) { // Properly fallback to the default column value instead of relying on an empty string
+                    $value_of[$column] = $column.'=DEFAULT';
                 }
             }
 

@@ -62,7 +62,8 @@ class Comment extends Record
 
         // Prepare query parts
         $order_by_string = empty($order_by) ? '' : "ORDER BY $order_by";
-        $limit_string = $limit > 0 ? "LIMIT $offset, $limit" : '';
+        $limit_string = $limit > 0 ? "LIMIT $limit" : '';
+        $offset_string = $offset > 0 ? "OFFSET $offset" : '';
 
         $tablename = self::tableNameFromClassName('Comment');
 
@@ -71,12 +72,12 @@ class Comment extends Record
         if ($where != '')
         {
             $sql = "SELECT * FROM $tablename AS comment " .
-                "WHERE $where $order_by_string $limit_string";
+                "WHERE $where $order_by_string $limit_string $offset_string";
         }
         else
         {
             $sql = "SELECT * FROM $tablename AS comment " .
-                "$order_by_string $limit_string";
+                "$order_by_string $limit_string $offset_string";
         }
 
         $stmt = self::$__CONN__->prepare($sql);

@@ -64,8 +64,7 @@ $start = $CurPage * $rowspage;
 $totalrecords = $comments_count;
 $sql = "SELECT comment.is_approved, comment.id, comment.page_id, comment.author_name, comment.author_link, comment.author_email, comment.body, comment.created_on, page.title FROM " .
     TABLE_PREFIX . "comment AS comment, " . TABLE_PREFIX .
-    "page AS page WHERE comment.is_approved = 0 AND comment.page_id = page.id LIMIT " .
-    $start . "," . $rowspage;
+    "page AS page WHERE comment.is_approved = 0 AND comment.page_id = page.id LIMIT ".$rowspage." OFFSET ".$start;
 
 $stmt = $__CMS_CONN__->prepare($sql);
 $stmt->execute();

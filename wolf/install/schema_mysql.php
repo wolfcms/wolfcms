@@ -83,7 +83,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."page (
   description text,
   parent_id int(11) unsigned default NULL,
   layout_id int(11) unsigned default NULL,
-  behavior_id varchar(25) NOT NULL,
+  behavior_id varchar(25) NOT NULL default '',
   status_id int(11) unsigned NOT NULL default '100',
   created_on datetime default NULL,
   published_on datetime default NULL,
