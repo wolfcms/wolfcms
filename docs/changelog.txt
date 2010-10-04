@@ -39,6 +39,7 @@ Sigla:
 + Added Hebrew translation for core - Thanks BermanEyal - issue 196
 + Added Thai translation for core - Thanks nateetorn.l - issue 220
 + Added Lithuanian translation for core - Thanks Remigijus Jarmalavicius - issue 236
++ Added expanded footnote on renaming htaccess file on requirements check screen. - issue 175
 - Fixed rogue \n character in breadcrumbs.
 - Fixed E_NOTICE issue - issue 195
 - Fixed View class to allow for absolute path conforming to docs. - issue 185

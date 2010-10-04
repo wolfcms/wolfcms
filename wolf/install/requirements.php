@@ -165,7 +165,7 @@ $https = '<span class="'.($check ? 'check' : 'notcheck').'">'.($check ? 'true' :
         
         <sup>3)</sup> - "public" at install root.<br/>
 
-        <sup>4)</sup> - You only need clean URLs support if you want to remove the question mark from the URLs. (mod_rewrite)
+        <sup>4)</sup> - If "clean urls support available" says "not detected", make sure you have renamed the _.htaccess file into .htaccess. You only need clean URLs support if you want to remove the question mark from the URLs. (mod_rewrite)
     </p>
 
     <p>
