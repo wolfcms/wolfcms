@@ -58,11 +58,18 @@ class PageController extends Controller {
         ));
     }
 
+    /**
+     * Action to add a page.
+     *
+     * @param int $parent_id The page id for the new page's parent. Defaults to page 1.
+     * @return <type>
+     */
     public function add($parent_id=1) {
-    // check if trying to save
+        // Check if trying to save.
         if (get_request_method() == 'POST')
-            return $this->_add();
+            return $this->_store('add');
 
+        // If not trying to save, display "Add page" view.
         $data = Flash::get('post_data');
         $page = new Page($data);
         $page->parent_id = $parent_id;
@@ -72,10 +79,10 @@ class PageController extends Controller {
         $page_parts = Flash::get('post_parts_data');
 
         if (empty($page_parts)) {
-        // check if we have a big sister ...
+            // Check if we have a big sister.
             $big_sister = Record::findOneFrom('Page', 'parent_id=? ORDER BY id DESC', array($parent_id));
             if ($big_sister) {
-            // get all is part and create the same for the new little sister
+                // Get list of parts create the same for the new little sister
                 $big_sister_parts = Record::findAllFrom('PagePart', 'page_id=? ORDER BY id', array($big_sister->id));
                 $page_parts = array();
                 foreach ($big_sister_parts as $parts) {
@@ -85,11 +92,12 @@ class PageController extends Controller {
                     ));
                 }
             }
-            else
+            else {
                 $page_parts = array(new PagePart(array('filter_id' => Setting::get('default_filter_id'))));
+            }
         }
 
-        // display things ...
+        // Display actual view.
         $this->setLayout('backend');
         $this->display('page/edit', array(
             'action'     => 'add',
@@ -102,94 +110,9 @@ class PageController extends Controller {
         );
     }
 
-    private function _add() {
-        $data = $_POST['page'];
-        Flash::set('post_data', (object) $data);
-
-        if (empty($data['title'])) {
-        // Rebuilding original page
-            $part = $_POST['part'];
-            if (!empty($part)) {
-                $tmp = false;
-                foreach ($part as $key => $val) {
-                    $tmp[$key] = (object) $val;
-                }
-                $part = $tmp;
-            }
-
-            $page = $_POST['page'];
-            if (!empty($page) && !array_key_exists('is_protected', $page)) {
-                $page = array_merge($page, array ('is_protected' => 0));
-            }
-
-            $tags = $_POST['page_tag'];
-
-            //Flash::setNow('page', (object) $page);
-            //Flash::setNow('page_parts', (object) $part);
-            //Flash::setNow('page_tag', $tags);
-
-            Flash::setNow('error', __('You have to specify a title!'));
-            //redirect(get_url('page/add'));
-            // display things ...
-            $this->setLayout('backend');
-            $this->display('page/edit', array(
-                'action'     => 'add',
-                'page'       => (object) $page,
-                'tags'       => $tags,
-                'filters'    => Filter::findAll(),
-                'behaviors'  => Behavior::findAll(),
-                'page_parts' => (object) $part,
-                'layouts'    => Record::findAllFrom('Layout'))
-            );
-
-        }
-
-        /**
-         * Make sure the title doesn't contain HTML
-         *
-         * @todo Replace this by HTML Purifier?
-         */
-        if (Setting::get('allow_html_title') == 'off') {
-            use_helper('Kses');
-            $data['title'] = kses(trim($data['title']), array());
-        }
-
-        $page = new Page($data);
-        
-        Observer::notify('page_add_before_save', $page);
-
-        // save page data
-        if ($page->save()) {
-        // get data from user
-            $data_parts = $_POST['part'];
-            Flash::set('post_parts_data', (object) $data_parts);
-
-            foreach ($data_parts as $data) {
-                $data['page_id'] = $page->id;
-                $data['name'] = trim($data['name']);
-                $page_part = new PagePart($data);
-                $page_part->save();
-            }
-
-            // save tags
-            $page->saveTags($_POST['page_tag']['tags']);
-
-            Flash::set('success', __('Page has been saved!'));
-        }
-        else {
-            Flash::set('error', __('Page has not been saved!'));
-            redirect(get_url('page/add'));
-        }
-
-        Observer::notify('page_add_after_save', $page);
-
-        // save and quit or save and continue editing ?
-        if (isset($_POST['commit']))
-            redirect(get_url('page'));
-        else
-            redirect(get_url('page/edit/'.$page->id));
-    }
-
+    /**
+     * Ajax action to add a part.
+     */
     public function addPart() {
         header('Content-Type: text/html; charset: utf-8');
 
@@ -200,9 +123,20 @@ class PageController extends Controller {
         echo $this->_getPartView($data['index'], $data['name']);
     }
 
-    public function edit($id=null) {
-        if (is_null($id))
+    /**
+     * Action to edit a page.
+     *
+     * @aram int $id Page ID for page to edit.
+     * @return <type>
+     */
+    public function edit($id) {
+        if (!is_numeric($id)) {
             redirect(get_url('page'));
+        }
+
+        // Check if trying to save.
+        if (get_request_method() == 'POST')
+            return $this->_store('edit', $id);
 
         $page = Page::findById($id);
 
@@ -216,10 +150,6 @@ class PageController extends Controller {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url('page'));
         }
-
-        // check if trying to save
-        if (get_request_method() == 'POST')
-            return $this->_edit($id);
 
 		// encode the quotes to prevent page title input break
 		$page->title = htmlentities($page->title, ENT_QUOTES);
@@ -241,88 +171,6 @@ class PageController extends Controller {
             'page_parts' => $page_parts,
             'layouts'    => Record::findAllFrom('Layout', '1=1 ORDER BY position'))
         );
-    }
-
-    private function _edit($id) {
-        $data = $_POST['page'];
-
-        $page = Record::findByIdFrom('Page', $id);
-
-        // need to do this because the use of a checkbox
-        $data['is_protected'] = !empty($data['is_protected']) ? 1: 0;
-
-        /**
-         * Make sure the title doesn't contain HTML
-         *
-         * @todo Replace this by HTML Purifier?
-         */
-        if (Setting::get('allow_html_title') == 'off') {
-            use_helper('Kses');
-            $data['title'] = kses(trim($data['title']), array());
-        }
-
-        $page->setFromData($data);
-
-		Observer::notify('part_edit_before_save', $part);
-
-        if ($page->save()) {
-        // get data for parts of this page
-            $data_parts = $_POST['part'];
-
-            $old_parts = PagePart::findByPageId($id);
-
-            // check if all old page part are passed in POST
-            // if not ... we need to delete it!
-            foreach ($old_parts as $old_part) {
-                $not_in = true;
-                foreach ($data_parts as $part_id => $data) {
-                    $data['name'] = trim($data['name']);
-                    if ($old_part->name == $data['name']) {
-                        $not_in = false;
-
-                        // this will not really create a new page part because
-                        // the id of the part is passed in $data
-                        $part = new PagePart($data);
-                        $part->page_id = $id;
-                        $part->save();
-
-                        Observer::notify('part_edit_after_save', $part);
-
-                        unset($data_parts[$part_id]);
-
-                        break;
-                    }
-                }
-
-                if ($not_in)
-                    $old_part->delete();
-            }
-
-            // add the new ones
-            foreach ($data_parts as $part_id => $data) {
-                $data['name'] = trim($data['name']);
-                $part = new PagePart($data);
-                $part->page_id = $id;
-                $part->save();
-            }
-
-            // save tags
-            $page->saveTags($_POST['page_tag']['tags']);
-
-            Flash::set('success', __('Page has been saved!'));
-        }
-        else {
-            Flash::set('error', __('Page has not been saved!'));
-            redirect(get_url('page/edit/'.$id));
-        }
-
-        Observer::notify('page_edit_after_save', $page);
-
-        // save and quit or save and continue editing ?
-        if (isset($_POST['commit']))
-            redirect(get_url('page'));
-        else
-            redirect(get_url('page/edit/'.$id));
     }
 
     /**
@@ -359,6 +207,16 @@ class PageController extends Controller {
         redirect(get_url('page'));
     }
 
+    /**
+     * Action to return a list View of all first level children of a page.
+     *
+     * @todo improve phpdoc desc
+     *
+     * @param <type> $parent_id
+     * @param <type> $level
+     * @param <type> $return
+     * @return View
+     */
     function children($parent_id, $level, $return=false) {
         $expanded_rows = isset($_COOKIE['expanded_rows']) ? explode(',', $_COOKIE['expanded_rows']): array();
 
@@ -385,10 +243,12 @@ class PageController extends Controller {
     }
 
     /**
-     * Ajax action to reorder (page->position) a page
+     * Ajax action to reorder (page->position) a page.
      *
-     * all the child of the new page->parent_id have to be updated
-     * and all nested tree has to be rebuild
+     * All the children of the new page->parent_id have to be updated
+     * and all nested tree have to be rebuild.
+     *
+     * @param <type> $parent_id
      */
     function reorder($parent_id) {
         //throw new Exception('TEST-'.print_r($_POST['data'], true));
@@ -404,8 +264,9 @@ class PageController extends Controller {
     }
 
     /**
-     * Ajax action to copy a page or page tree
+     * Ajax action to copy a page or page tree.
      *
+     * @param <type> $parent_id
      */
     function copy($parent_id) {
         parse_str($_POST['data']);
@@ -428,10 +289,18 @@ class PageController extends Controller {
 
     }
 
+
     //  Private methods  -----------------------------------------------------
 
-
-    function _getPartView($index=1, $name='', $filter_id='', $content='') {
+    /**
+     *
+     * @param <type> $index
+     * @param <type> $name
+     * @param <type> $filter_id
+     * @param <type> $content
+     * @return <type>
+     */
+    private function _getPartView($index=1, $name='', $filter_id='', $content='') {
         $page_part = new PagePart(array(
             'name' => $name,
             'filter_id' => $filter_id,
@@ -442,6 +311,167 @@ class PageController extends Controller {
         'index'     => $index,
         'page_part' => $page_part
         ));
+    }
+
+    /**
+     * Runs checks and stores a page.
+     *
+     * @param string $action   What kind of action this is: add or edit.
+     * @param mixed $id        Page to edit if any.
+     */
+    private function _store($action, $id=false) {
+        // Sanity check
+        if ($action == 'edit' && !$id)
+            throw new Exception ('Trying to edit page when $id is false.');
+
+        $data = $_POST['page'];
+        $data['is_protected'] = !empty($data['is_protected']) ? 1: 0;
+        Flash::set('post_data', (object) $data);
+
+        // Add pre-save checks here
+        $errors = false;
+
+        if (empty($data['title'])) {
+            $errors[] = __('You have to specify a title!');
+        }
+
+        if (empty($data['slug'])) {
+            $errors[] = __('You have to specify a slug!');
+        }
+        else {
+            if (trim($data['slug']) == ADMIN_DIR) {
+                $errors[] = __('You cannot have a slug named :slug!', array(':slug' => ADMIN_DIR));
+            }
+        }
+
+        // Make sure the title doesn't contain HTML
+        if (Setting::get('allow_html_title') == 'off') {
+            use_helper('Kses');
+            $data['title'] = kses(trim($data['title']), array());
+        }
+
+        // Create the page object to be manipulated and populate data
+        if ($action == 'add') {
+            $page = new Page($data);
+        }
+        else {
+            $page = Record::findByIdFrom('Page', $id);
+            $page->setFromData($data);
+        }
+
+        // Upon errors, rebuild original page and return to screen with errors
+        if (false !== $errors) {
+            $tags = $_POST['page_tag'];
+
+            // Rebuild parts
+            $part = $_POST['part'];
+            if (!empty($part)) {
+                $tmp = false;
+                foreach ($part as $key => $val) {
+                    $tmp[$key] = (object) $val;
+                }
+                $part = $tmp;
+            }
+
+            // Set the errors to be displayed.
+            Flash::setNow('error', implode('<br/>', $errors));
+
+            // display things ...
+            $this->setLayout('backend');
+            $this->display('page/edit', array(
+                'action'     => $action,
+                'page'       => (object) $page,
+                'tags'       => $tags,
+                'filters'    => Filter::findAll(),
+                'behaviors'  => Behavior::findAll(),
+                'page_parts' => (object) $part,
+                'layouts'    => Record::findAllFrom('Layout'))
+            );
+        }
+
+        // Notify
+        if ($action == 'add') {
+            Observer::notify('page_add_before_save', $page);
+        }
+        else {
+            Observer::notify('page_edit_before_save', $page);
+        }
+
+        // Time to actually save the page
+        // @todo rebuild this so parts are already set before save?
+        // @todo determine lazy init impact
+        if ($page->save()) {
+            // Get data for parts of this page
+            $data_parts = $_POST['part'];
+            Flash::set('post_parts_data', (object) $data_parts);
+
+            if ($action == 'edit') {
+                $old_parts = PagePart::findByPageId($id);
+
+                // check if all old page part are passed in POST
+                // if not ... we need to delete it!
+                foreach ($old_parts as $old_part) {
+                    $not_in = true;
+                    foreach ($data_parts as $part_id => $data) {
+                        $data['name'] = trim($data['name']);
+                        if ($old_part->name == $data['name']) {
+                            $not_in = false;
+
+                            // this will not really create a new page part because
+                            // the id of the part is passed in $data
+                            $part = new PagePart($data);
+                            $part->page_id = $id;
+
+                            Observer::notify('part_edit_before_save', $part);
+                            $part->save();
+                            Observer::notify('part_edit_after_save', $part);
+
+                            unset($data_parts[$part_id]);
+
+                            break;
+                        }
+                    }
+
+                    if ($not_in)
+                        $old_part->delete();
+                }
+            }
+
+            // add the new parts
+            foreach ($data_parts as $data) {
+                $data['name'] = trim($data['name']);
+                $part = new PagePart($data);
+                $part->page_id = $page->id;
+                Observer::notify('part_add_before_save', $part);
+                $part->save();
+                Observer::notify('part_add_after_save', $part);
+            }
+
+            // save tags
+            $page->saveTags($_POST['page_tag']['tags']);
+
+            Flash::set('success', __('Page has been saved!'));
+        }
+        else {
+            Flash::set('error', __('Page has not been saved!'));
+            echo 'TEST1';
+            redirect(get_url('page'.($action == 'edit') ? 'edit/'.$id : 'add/'));
+        }
+
+        if ($action == 'add') {
+            Observer::notify('page_add_after_save', $page);
+        }
+        else {
+            Observer::notify('page_edit_after_save', $page);
+        }
+
+        // save and quit or save and continue editing ?
+        if (isset($_POST['commit'])) {
+            redirect(get_url('page'));
+        }
+        else {
+            redirect(get_url('page/edit/'.$page->id));
+        }
     }
 
 } // end PageController class
