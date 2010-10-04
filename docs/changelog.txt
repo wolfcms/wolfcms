@@ -9,6 +9,7 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Added Page::urlById() - thanks age, webmasterkubes - issue 225
 + Added PostgreSQL support - thanks age - issue 183
 + Added Record::existsIn() - thanks christopher - issue 232
 + Changed admin area to make full use of Dispatcher and moved admin directory.

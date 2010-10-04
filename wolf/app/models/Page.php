@@ -120,9 +120,45 @@ class Page extends Record {
     public function keywords() {
         return $this->keywords;
     }
+
+    /**
+     * Returns the current page object's url.
+     *
+     * Usage: <?php echo $this->url(); ?> or <?php echo $page->url(); ?>
+     *
+     * @return string   The url of the page object.
+     */
     public function url() {
         return BASE_URL . $this->url . ($this->url != '' ? URL_SUFFIX: '');
     }
+
+    /**
+     * Allows user to get the url of a page by page ID.
+     *
+     * This function will always produce a correct and current url to the page
+     * despite it possibly having moved from its original position in the page
+     * hierarchy.
+     *
+     * Usage: <?php echo Page::urlById(3); ?>
+     *
+     * @param   int     $id The id of the page to link to.
+     * @return  mixed       Full url of page or error message.
+     */
+    public static function urlById($id) {
+        if (!is_numeric($id) || !is_int($id) || $id <= 0) {
+            return '[urlById: id NAN or id <= 0]';
+        }
+
+        $page = self::findById($id);
+
+        if (!$page) return '[urlById: no page with that id]';
+
+        $suffix = ($page->getUri() != '') ? URL_SUFFIX : '';
+        $url = BASE_URL.$page->getUri().$suffix;
+
+        return $url;
+    }
+
     public function slug() {
         return $this->slug;
     }
