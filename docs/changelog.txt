@@ -1,4 +1,4 @@
-Wolf CMS - Change Log
+﻿Wolf CMS - Change Log
 
 ======
 Sigla:
@@ -9,6 +9,8 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Added page_add_before_save and page_edit_before_save Observer Events - issue 215
++ Added Page::partExists() Updated Page::hasContent - issue 200
 + Added Page::urlById() - thanks age, webmasterkubes - issue 225
 + Added PostgreSQL support - thanks age - issue 183
 + Added Record::existsIn() - thanks christopher - issue 232
@@ -41,6 +43,8 @@ Sigla:
 + Added Thai translation for core - Thanks nateetorn.l - issue 220
 + Added Lithuanian translation for core - Thanks Remigijus Jarmalavicius - issue 236
 + Added expanded footnote on renaming htaccess file on requirements check screen. - issue 175
+- Fixed quote issue with page title fields - issue 35
+- Fixed issue with page content not being returned when using Page::find() - issue 205
 - Fixed rogue \n character in breadcrumbs.
 - Fixed E_NOTICE issue - issue 195
 - Fixed View class to allow for absolute path conforming to docs. - issue 185
