@@ -360,10 +360,16 @@ class Page extends Record {
      * @param bool   $inherit   Check parents for part if true.
      * @return bool             Returns true if part was found or false if nothing was found
      */
-    public function hasContent($part, $inherit=false) {
-    	$trim = trim($this->part->$part);    
-        if ( isset($this->part->$part) && !empty($trim) ) {
-            return true;
+    public function hasContent($part, $inherit=false) { 
+        if(isset($this->part->$part))
+        {
+			$trim = trim($this->part->$part);
+        	if(!empty($trim)) 
+        	{
+            	return true;
+            }
+            
+            return false;
         }
         else if ( $inherit && $this->parent ) {
             return $this->parent->hasContent($part, true);
