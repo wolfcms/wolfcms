@@ -4,6 +4,7 @@
  * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
  * Please see license.txt for the full license text.
  */
 
@@ -793,7 +794,7 @@ class Record {
      *
      * @param string $class_name    The classname to be returned.
      * @param string $id            The ID of the record to be found.
-     * @return Record               A record instance.
+     * @return Record               A record instance or false on failure.
      */
     public static function findByIdFrom($class_name, $id) {
         return self::findOneFrom($class_name, 'id=?', array($id));
@@ -808,7 +809,7 @@ class Record {
      * @param string $class_name    The classname to be returned.
      * @param string $where         An SQL WHERE clause to find a specific record.
      * @param array $values         An array of values if this is a prepared statement.
-     * @return Record               A record instance.
+     * @return Record               A record instance or false on failure.
      */
     public static function findOneFrom($class_name, $where, $values=array()) {
         $sql = 'SELECT * FROM '.self::tableNameFromClassName($class_name).' WHERE '.$where;
