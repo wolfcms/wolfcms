@@ -1405,7 +1405,7 @@ final class Inflector {
      * @return string           Humanized version of the $string
      */
     public static function humanize($string) {
-        return ucfirst(str_replace('_', ' ', $string));
+        return ucfirst(strtolower(str_replace('_', ' ', $string)));
     }
 } // end Inflector class
 
