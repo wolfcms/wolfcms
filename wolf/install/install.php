@@ -36,7 +36,7 @@ if (!defined('INSTALL_SEQUENCE')) {
 $drivers = PDO::getAvailableDrivers();
 ?>
 
-    <script type="text/javascript" charset="utf-8" src="../admin/javascripts/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../admin/javascripts/jquery-1.4.2.min.js"></script>
     <script type="text/javascript">
     // <![CDATA[
         $(document).ready(function() {
