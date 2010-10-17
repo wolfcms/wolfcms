@@ -81,7 +81,7 @@ class Role extends Record {
      * @param int $id
      * @return mixed A Role or false on failure.
      */
-    public static function findById(int $id) {
+    public static function findById($id) {
         return self::findByIdFrom('Role', $id);
     }
 
@@ -91,14 +91,14 @@ class Role extends Record {
      * @param string $name
      * @return mixed A Role or false on failure.
      */
-    public static function findByName(string $name) {
+    public static function findByName($name) {
         $where = 'name=?';
         $values = array($name);
 
         return self::findOneFrom('Role', $where, $values);
     }
 
-    public static function findByUserId(int $id) {
+    public static function findByUserId($id) {
         $userroles = UserRole::findAllFrom('UserRole', 'user_id=?', array((int) $id));
 
         if (count($userroles) <= 0)

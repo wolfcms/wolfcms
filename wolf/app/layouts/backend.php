@@ -16,7 +16,6 @@
 if (!defined('IN_CMS')) { exit(); }
 
 // Redirect to front page if user doesn't have appropriate roles.
-//if (!AuthUser::hasPermission('administrator,developer,editor')) {
 if (!AuthUser::hasPermission('view_admin')) {
     header('Location: '.URL_PUBLIC.' ');
     exit();
