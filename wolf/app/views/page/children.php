@@ -36,6 +36,7 @@
 <ul<?php if ($level == 1) echo ' id="site-map" class="sortable"'; else echo ' class="sortable child"'; ?>>
 <?php foreach($childrens as $child): ?> 
     <li id="page_<?php echo $child->id; ?>" class="node level-<?php echo $level; if ( ! $child->has_children) echo ' no-children'; else if ($child->is_expanded) echo ' children-visible'; else echo ' children-hidden'; ?>">
+      <span>
       <div class="page">
         <span class="w1">
           <?php if ($child->has_children): ?><img align="middle" alt="toggle children" class="expander" src="<?php echo URI_PUBLIC;?>wolf/admin/images/<?php echo $child->is_expanded ? 'collapse': 'expand'; ?>.png" title="" /><?php endif; ?>
@@ -61,6 +62,7 @@
         <a class="remove" href="<?php echo get_url('page/delete/'.$child->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $child->title; ?> <?php echo __('and its underlying pages'); ?>?');"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove.gif" align="middle" alt="<?php echo __('Remove page'); ?>" title="<?php echo __('Remove page'); ?>" /></a>
 <?php endif; ?>
       </div>
+      </span>
 <?php if ($child->is_expanded) echo $child->children_rows; ?>
     </li>
 <?php endforeach; ?>

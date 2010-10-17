@@ -248,18 +248,23 @@ class PageController extends Controller {
      * All the children of the new page->parent_id have to be updated
      * and all nested tree have to be rebuild.
      *
-     * @param <type> $parent_id
      */
-    function reorder($parent_id) {
+    function reorder() {
         //throw new Exception('TEST-'.print_r($_POST['data'], true));
-        parse_str($_POST['data']);
+		$pages = $_POST['page'];
 
-        foreach ($pages as $position => $page_id) {
+		$i = 1;
+        foreach ($pages as $page_id => $parent_id) {
+        	if($parent_id == 0)
+        	{
+        		$parent_id = 1;
+        	}
+        	
             $page = Record::findByIdFrom('Page', $page_id);
-            $page->position = (int) $position;
+            $page->position = (int) $i;
             $page->parent_id = (int) $parent_id;
             $page->save();
-
+            $i++;
         }
     }
 
