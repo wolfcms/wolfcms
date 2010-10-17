@@ -142,7 +142,7 @@
             $j(this).live('click', function() {
                 if ($j(this).hasClass("expanded")) {
                     $j(this).removeClass("expanded");
-                    $j(this).attr('src', '/wolf/admin/images/expand.png');
+                    $j(this).attr('src', '<?php echo URI_PUBLIC; ?>wolf/admin/images/expand.png');
 
                     var parent = $j(this).parents("li.node:first")
                     var parentId = parent.attr('id').split('_')[1];
@@ -151,7 +151,7 @@
                 }
                 else {
                     $j(this).addClass("expanded");
-                    $j(this).attr('src', '/wolf/admin/images/collapse.png');
+                    $j(this).attr('src', '<?php echo URI_PUBLIC; ?>wolf/admin/images/collapse.png');
                     var parent = $j(this).parents("li.node:first");
                     var parentId = parent.attr('id').split('_')[1];
                     if ($j('#page_'+parentId).children('ul').length == 0) {
