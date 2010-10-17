@@ -90,6 +90,9 @@ class Permission extends Record {
             self::getPermissions();
         }
 
+        if (!array_key_exists((int) $id, self::$permissions))
+            return false;
+
         return self::$permissions[(int) $id];
     }
 
@@ -104,14 +107,5 @@ class Permission extends Record {
         $values = array($name);
 
         return self::findOneFrom('Permission', $where, $values);
-    }
-
-    /**
-     * Make sure we only try to save specified columns in the DB.
-     *
-     * @return array Array of column names.
-     */
-    public function getColumnNames() {
-        return array('id', 'name');
     }
 }

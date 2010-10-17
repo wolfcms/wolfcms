@@ -32,19 +32,27 @@ class RolePermission extends Record {
     public $permission_id = false;
 
     public static function savePermissionsFor($role_id, $permissions) {
-        $tablename = self::tableNameFromClassName('RolePermission');
+        if (!Record::existsIn('Role', 'id=?', array($role_id)))
+            return false;
 
-        $sql = 'DELETE FROM '.$tablename.' WHERE role_id='.(int)$role_id;
-        self::$__CONN__->exec($sql);
+        if (!self::deleteWhere('RolePermission', 'role_id=?', array((int) $role_id)))
+            return false;
 
-        foreach ($permissions as $permission) {
-            $sql = 'INSERT INTO '.$tablename.' (role_id, permission_id) VALUES ('.(int)$role_id.','.(int)$permission->id().')';
-            self::$__CONN__->exec($sql);
+        foreach ($permissions as $perm) {
+            $rp = new RolePermission(array('role_id' => $role_id, 'permission_id' => $perm->id));
+            if (!$rp->save())
+                return false;
         }
+
+        return true;
     }
 
     public static function findPermissionsFor(int $role_id) {
         $roleperms = self::findAllFrom('RolePermission', 'role_id='.(int)$role_id);
+
+        if (count($roleperms) <= 0)
+            return false;
+        
         $perms = array();
 
         foreach($roleperms as $role => $perm) {
