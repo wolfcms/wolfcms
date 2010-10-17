@@ -1094,7 +1094,7 @@ class Controller {
 
 
 /**
- * The Observer class allows for a simple but powerfull event system.
+ * The Observer class allows for a simple but powerful event system.
  * 
  * Example of watching/handling an event:
  *      // Connecting your event hangling function to an event.
@@ -1287,7 +1287,7 @@ if ( ! function_exists('__autoload')) {
  *
  * Example usage:
  *      Flash::set('errors', 'Blog not found!');
- *      Flass::set('success', 'Blog has been saved with success!');
+ *      Flash::set('success', 'Blog has been saved with success!');
  *      Flash::get('success');
  *
  * The Flash service as a concept is taken from Rails.
@@ -1369,6 +1369,9 @@ final class Flash {
  *
  * A string using underscore syntax ("camel_case") could be reformatted to
  * use camelcase syntax ("CamelCase").
+ *
+ * Example usage:
+ *      echo Inflector::humanize($string);
  */
 final class Inflector {
 
