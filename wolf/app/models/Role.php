@@ -55,10 +55,24 @@ class Role extends Record {
      */
     public function permissions() {
         if (!$this->permissions) {
-            $this->permissions = RolePermission::findPermissionsFor($this->id);
+            foreach (RolePermission::findPermissionsFor($this->id) as $perm) {
+                $this->permissions[$perm->name] = $perm;
+            }
         }
 
         return $this->permissions;
+    }
+
+    public function hasPermission($permissions) {
+        if (!$this->permissions)
+            $this->permissions();
+
+        foreach (explode(',', $permissions) as $permission) {
+            if (array_key_exists($permission, $this->permissions))
+                return true;
+        }
+
+        return false;
     }
 
     /**
@@ -85,11 +99,18 @@ class Role extends Record {
     }
 
     public static function findByUserId(int $id) {
+        $userroles = UserRole::findAllFrom('UserRole', 'user_id=?', array((int) $id));
 
-        $where = 'name=?';
-        $values = array($name);
+        if (count($userroles) <= 0)
+            return false;
 
-        return self::findOneFrom('Role', $where, $values);
+        $roles = array();
+
+        foreach($userroles as $role) {
+            $roles[] = Role::findById($role->role_id);
+        }
+
+        return $roles;
     }
 
     /**
