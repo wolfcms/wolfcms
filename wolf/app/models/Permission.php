@@ -85,7 +85,7 @@ class Permission extends Record {
      * @param int $id
      * @return mixed A Permission object or false on failure.
      */
-    public static function findById(int $id) {
+    public static function findById($id) {
         if (!self::$permissions) {
             self::getPermissions();
         }
@@ -93,7 +93,7 @@ class Permission extends Record {
         if (!array_key_exists((int) $id, self::$permissions))
             return false;
 
-        return self::$permissions[(int) $id];
+        return self::$permissions[$id];
     }
 
     /**
