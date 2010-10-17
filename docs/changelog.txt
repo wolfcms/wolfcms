@@ -9,6 +9,7 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Added initial support for low-level permissions. - issue 74
 + Added page_add_before_save and page_edit_before_save Observer Events - issue 215
 + Added Page::partExists() Updated Page::hasContent - issue 200
 + Added Page::urlById() - thanks age, webmasterkubes - issue 225

@@ -96,7 +96,7 @@ class UserController extends Controller {
             'action' => 'add',
             'csrf_token' => SecureToken::generateToken(BASE_URL.'user/add'),
             'user' => $user,
-            'permissions' => Record::findAllFrom('Permission')
+            'permissions' => Record::findAllFrom('Role')
         ));
     }
 
@@ -142,7 +142,7 @@ class UserController extends Controller {
         if ($user->save()) {
             // now we need to add permissions if needed
             if ( ! empty($_POST['user_permission']))
-                UserPermission::setPermissionsFor($user->id, $_POST['user_permission']);
+                UserRole::setPermissionsFor($user->id, $_POST['user_permission']);
 
             Flash::set('success', __('User has been added!'));
             Observer::notify('user_after_add', $user->name);
@@ -170,7 +170,7 @@ class UserController extends Controller {
                 'action' => 'edit',
                 'csrf_token' => SecureToken::generateToken(BASE_URL.'user/edit'),
                 'user' => $user,
-                'permissions' => Record::findAllFrom('Permission')
+                'permissions' => Record::findAllFrom('Role')
             ));
         }
         else {
@@ -223,7 +223,7 @@ class UserController extends Controller {
             if (AuthUser::hasPermission('user_edit')) {
                 // now we need to add permissions
                 $data = isset($_POST['user_permission']) ? $_POST['user_permission']: array();
-                UserPermission::setPermissionsFor($user->id, $data);
+                UserRole::setPermissionsFor($user->id, $data);
             }
 
             Flash::set('success', __('User has been saved!'));

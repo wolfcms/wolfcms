@@ -53,7 +53,7 @@
         <small><?php echo $user->username; ?></small>
       </td>
       <td><?php echo $user->email; ?></td>
-      <td><?php echo implode(', ', $user->getPermissions()); ?></td>
+      <td><?php echo implode(', ', $user->roles()); ?></td>
       <td>
 <?php if ($user->id > 1): ?>
         <a href="<?php echo get_url('user/delete/'.$user->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete').' '.$user->name.'?'; ?>');"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove.gif" alt="<?php echo __('delete user icon'); ?>" title="<?php echo __('Delete user'); ?>" /></a>
