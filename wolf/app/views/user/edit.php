@@ -66,7 +66,7 @@
 
       <td class="field"><input class="textbox" id="user_confirm" maxlength="40" name="user[confirm]" size="40" type="password" value="" /></td>
     </tr>
-<?php if (AuthUser::hasPermission('administrator')): ?> 
+<?php if (AuthUser::hasPermission('user_edit')): ?>
     <tr>
       <td class="label"><?php echo __('Roles'); ?></td>
       <td class="field">
@@ -97,7 +97,7 @@
 
   <p class="buttons">
     <input class="button" name="commit" type="submit" accesskey="s" value="<?php echo __('Save'); ?>" />
-    <?php echo __('or'); ?> <a href="<?php echo (AuthUser::hasPermission('administrator')) ? get_url('user') : get_url(); ?>"><?php echo __('Cancel'); ?></a>
+    <?php echo __('or'); ?> <a href="<?php echo (AuthUser::hasPermission('user_view')) ? get_url('user') : get_url(); ?>"><?php echo __('Cancel'); ?></a>
   </p>
 
 </form>

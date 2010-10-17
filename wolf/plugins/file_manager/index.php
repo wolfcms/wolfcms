@@ -66,7 +66,7 @@ Plugin::setInfos(array(
     'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml'
 ));
 
-Plugin::addController('file_manager', __('Files'), 'developer,editor');
+Plugin::addController('file_manager', __('Files'), 'file_manager_view');
 
 // Make sure possible hack attempts get registered if the statistics API is available.
 if (Plugin::isEnabled('statistics_api')) {

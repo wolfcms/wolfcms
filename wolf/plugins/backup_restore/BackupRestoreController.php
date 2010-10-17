@@ -51,7 +51,7 @@ class BackupRestoreController extends PluginController {
         if ( ! AuthUser::isLoggedIn()) {
             redirect(get_url('login'));
         }
-        else if ( ! AuthUser::hasPermission('administrator')) {
+        else if ( ! AuthUser::getId() == 1) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url());
         }

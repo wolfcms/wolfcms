@@ -67,10 +67,25 @@ $PDO->exec("INSERT INTO ".TABLE_PREFIX."page_part (id, name, filter_id, content,
 
 //  Dumping data for table: permission ---------------------------------------
 
-$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (1, 'view_admin')");
-$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (2, 'administrator')");
-$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (3, 'developer')");
-$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (4, 'editor')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (1, 'admin_view')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (2, 'admin_edit')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (3, 'user_view')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (4, 'user_add')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (5, 'user_edit')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (6, 'user_delete')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (7, 'layout_view')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (8, 'layout_add')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (9, 'layout_edit')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (10, 'layout_delete')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (11, 'snippet_view')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (12, 'snippet_add')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (13, 'snippet_edit')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (14, 'snippet_delete')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (15, 'page_view')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (16, 'page_add')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (17, 'page_edit')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (18, 'page_delete')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (19, 'file_manager_view')");
 
 
 //  Dumping data for table: role ---------------------------------------
@@ -111,7 +126,47 @@ $PDO->exec("INSERT INTO ".TABLE_PREFIX."user_role (user_id, role_id) VALUES (1, 
 
 //  Dumping data for table: role_permission ----------------------------------
 
+// Role 1 = administrator
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 1)");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 2)");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 3)");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 4)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 5)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 6)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 7)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 8)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 9)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 10)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 11)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 12)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 13)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 14)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 15)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 16)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 17)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 18)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 19)");
+
+// Role 2 = developer
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 1)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 7)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 8)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 9)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 10)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 11)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 12)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 13)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 14)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 15)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 16)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 17)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 18)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 19)");
+
+// Role 2 = editor
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 1)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 15)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 16)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 17)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 18)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 19)");

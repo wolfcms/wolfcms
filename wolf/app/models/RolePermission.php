@@ -50,9 +50,6 @@ class RolePermission extends Record {
     public static function findPermissionsFor($role_id) {
         $roleperms = self::findAllFrom('RolePermission', 'role_id='.(int)$role_id);
 
-        if (count($roleperms) <= 0)
-            return false;
-        
         $perms = array();
 
         foreach($roleperms as $role => $perm) {

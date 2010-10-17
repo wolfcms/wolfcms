@@ -55,6 +55,8 @@ class Role extends Record {
      */
     public function permissions() {
         if (!$this->permissions) {
+            $this->permissions = array();
+
             foreach (RolePermission::findPermissionsFor($this->id) as $perm) {
                 $this->permissions[$perm->name] = $perm;
             }

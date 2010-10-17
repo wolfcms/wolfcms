@@ -10,7 +10,7 @@
 /**
  * @package wolf
  */
-
+error_reporting(E_ALL | E_STRICT);
 //  Constants  ---------------------------------------------------------------
 define('IN_CMS', true);
 

@@ -203,7 +203,7 @@ function main() {
         // If a page is in preview status, only display to logged in users
         if (Page::STATUS_PREVIEW == $page->status_id) {
             AuthUser::load();
-            if (!AuthUser::isLoggedIn() || !AuthUser::hasPermission('administrator, developer, editor'))
+            if (!AuthUser::isLoggedIn() || !AuthUser::hasPermission('page_view'))
                 page_not_found();
         }
 

@@ -142,7 +142,7 @@ if ($action == 'edit') { ?>
                   </td>
                 </tr>
               <?php endif; ?>
-              <?php if (AuthUser::hasPermission('administrator') || AuthUser::hasPermission('developer')): ?>
+              <?php if (AuthUser::hasPermission('page_edit')): ?>
                 <tr>
                   <td class="label"><label for="page_needs_login"><?php echo __('Login:'); ?></label></td>
                   <td class="field">

@@ -146,7 +146,7 @@ class PageController extends Controller {
         }
 
         // check for protected page and editor user
-        if ( ! AuthUser::hasPermission('administrator') && ! AuthUser::hasPermission('developer') && $page->is_protected) {
+        if ( ! AuthUser::hasPermission('page_edit') && $page->is_protected) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url('page'));
         }
@@ -186,7 +186,7 @@ class PageController extends Controller {
         // find the page to delete
             if ($page = Record::findByIdFrom('Page', $id)) {
             // check for permission to delete this page
-                if ( ! AuthUser::hasPermission('administrator') && ! AuthUser::hasPermission('developer') && $page->is_protected) {
+                if ( ! AuthUser::hasPermission('page_delete') && $page->is_protected) {
                     Flash::set('error', __('You do not have permission to access the requested page!'));
                     redirect(get_url('page'));
                 }

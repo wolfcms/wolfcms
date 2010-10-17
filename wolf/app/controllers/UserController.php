@@ -57,7 +57,7 @@ class UserController extends Controller {
     }
 
     public function index() {
-        if ( ! AuthUser::hasPermission('administrator')) {
+        if ( ! AuthUser::hasPermission('user_view')) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
 
             if (Setting::get('default_tab') === 'user') {
@@ -74,7 +74,7 @@ class UserController extends Controller {
     }
 
     public function add() {
-        if ( ! AuthUser::hasPermission('administrator')) {
+        if ( ! AuthUser::hasPermission('user_add')) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url());
         }
@@ -155,7 +155,7 @@ class UserController extends Controller {
     }
 
     public function edit($id) {
-        if ( AuthUser::getId() != $id && ! AuthUser::hasPermission('administrator')) {
+        if ( AuthUser::getId() != $id && ! AuthUser::hasPermission('user_edit')) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url());
         }
@@ -220,7 +220,7 @@ class UserController extends Controller {
         $user->setFromData($data);
 
         if ($user->save()) {
-            if (AuthUser::hasPermission('administrator')) {
+            if (AuthUser::hasPermission('user_edit')) {
                 // now we need to add permissions
                 $data = isset($_POST['user_permission']) ? $_POST['user_permission']: array();
                 UserPermission::setPermissionsFor($user->id, $data);
@@ -243,7 +243,7 @@ class UserController extends Controller {
     }
 
     public function delete($id) {
-        if ( ! AuthUser::hasPermission('administrator')) {
+        if ( ! AuthUser::hasPermission('user_delete')) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url());
         }

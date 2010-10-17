@@ -63,7 +63,12 @@ class User extends Record {
             return array();
         }
 
-        return Role::findByUserId($this->id);
+        $roles = Role::findByUserId($this->id);
+
+        if (!$roles)
+            return array();
+        else
+            return $roles;
     }
 
     public static function findBy($column, $value) {

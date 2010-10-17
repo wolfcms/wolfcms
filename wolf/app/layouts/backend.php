@@ -16,7 +16,7 @@
 if (!defined('IN_CMS')) { exit(); }
 
 // Redirect to front page if user doesn't have appropriate roles.
-if (!AuthUser::hasPermission('view_admin')) {
+if (!AuthUser::hasPermission('admin_view')) {
     header('Location: '.URL_PUBLIC.' ');
     exit();
 }
@@ -108,20 +108,24 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
       <div id="mainTabs">
         <ul>
           <li id="page-plugin" class="plugin"><a href="<?php echo get_url('page'); ?>"<?php if ($ctrl=='page') echo ' class="current"'; ?>><?php echo __('Pages'); ?></a></li>
-<?php if (AuthUser::hasPermission('administrator,developer') ): ?>
+<?php if (AuthUser::hasPermission('snippet_view')): ?>
           <li id="snippet-plugin" class="plugin"><a href="<?php echo get_url('snippet'); ?>"<?php if ($ctrl=='snippet') echo ' class="current"'; ?>><?php echo __('Snippets'); ?></a></li>
+<?php endif; ?>
+<?php if (AuthUser::hasPermission('layout_view')): ?>
           <li id="layout-plugin" class="plugin"><a href="<?php echo get_url('layout'); ?>"<?php if ($ctrl=='layout') echo ' class="current"'; ?>><?php echo __('Layouts'); ?></a></li>
 <?php endif; ?>
 
 <?php foreach (Plugin::$controllers as $plugin_name => $plugin): ?>
-<?php if ($plugin->show_tab && (AuthUser::hasPermission($plugin->permissions) || AuthUser::hasPermission('administrator'))): ?>
+<?php if ($plugin->show_tab && (AuthUser::hasPermission($plugin->permissions))): ?>
           <?php Observer::notify('view_backend_list_plugin', $plugin_name, $plugin); ?>
           <li id="<?php echo $plugin_name;?>-plugin" class="plugin"><a href="<?php echo get_url('plugin/'.$plugin_name); ?>"<?php if ($ctrl=='plugin' && $action==$plugin_name) echo ' class="current"'; ?>><?php echo __($plugin->label); ?></a></li>
     <?php endif; ?>
 <?php endforeach; ?>
 
-<?php if (AuthUser::hasPermission('administrator')): ?> 
+<?php if (AuthUser::hasPermission('admin_edit')): ?>
           <li class="right"><a href="<?php echo get_url('setting'); ?>"<?php if ($ctrl=='setting') echo ' class="current"'; ?>><?php echo __('Administration'); ?></a></li>
+<?php endif; ?>
+<?php if (AuthUser::hasPermission('user_view')): ?>
           <li class="right"><a href="<?php echo get_url('user'); ?>"<?php if ($ctrl=='user') echo ' class="current"'; ?>><?php echo __('Users'); ?></a></li>
 <?php endif; ?>
         </ul>

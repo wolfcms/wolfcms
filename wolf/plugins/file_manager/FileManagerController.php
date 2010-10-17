@@ -52,7 +52,7 @@ class FileManagerController extends PluginController {
         if ( ! AuthUser::isLoggedIn()) {
             redirect(get_url('login'));
         }
-        else if ( ! AuthUser::hasPermission('administrator,developer,editor')) {
+        else if ( ! AuthUser::hasPermission('file_manager_view')) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url());
         }

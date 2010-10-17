@@ -136,8 +136,12 @@ class AuthUser {
      * @return boolean              Returns true is user has one or more permissions.
      */
     static public final function hasPermission($permissions) {
+        if (self::getId() == 1)
+            return true;
+
         foreach (explode(',', $permissions) as $permission) {
             //if (in_array(strtolower($permission), self::$permissions))
+            //foreach (self::$roles as $role) {
             foreach (self::$roles as $role) {
                 if ($role->hasPermission($permission))
                     return true;
