@@ -253,18 +253,17 @@
         
 $j(document).ready(function(){
     $j('#site-map li').sitemapSetup();
-    $j("img.expander").expandableSetup();
-	$j('#site-map').sortableSetup();     
+    $j("img.expander").expandableSetup(); 
     $j(".busy").spinnerSetup();
 
     $j('#toggle_reorder').toggle(
             function(){
-    			$j('#site-map').nestedSortable('enable');  
+    			$j('#site-map').sortableSetup();  
     			$j('img.handle_reorder').show();
                 $j('#toggle_reorder').text('<?php echo __('disable reorder');?>');
             },
             function() {
-                $j('ul#site-map').nestedSortable('disable');
+                $j('#site-map').nestedSortable('destroy');
                 $j('img.handle_reorder').hide();
                 $j('#toggle_reorder').text('<?php echo __('reorder');?>');
             }
