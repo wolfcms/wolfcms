@@ -1,26 +1,11 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2008 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
- * This file is part of Wolf CMS.
- *
- * Wolf CMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Wolf CMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Wolf CMS has made an exception to the GNU General Public License for plugins.
- * See exception.txt for details and the full text.
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
  */
 
 /**
@@ -87,6 +72,13 @@ $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (2, 'develo
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (3, 'editor')");
 
 
+//  Dumping data for table: role ---------------------------------------
+
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role (id, name) VALUES (1, 'administrator')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role (id, name) VALUES (2, 'developer')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role (id, name) VALUES (3, 'editor')");
+
+
 //  Dumping data for table: setting ------------------------------------------
 
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('admin_title', 'Wolf CMS')");
@@ -113,4 +105,9 @@ $PDO->exec("INSERT INTO ".TABLE_PREFIX."user (id, name, email, username, passwor
 
 //  Dumping data for table: user_permission ----------------------------------
 
-$PDO->exec("INSERT INTO ".TABLE_PREFIX."user_permission (user_id, permission_id) VALUES (1, 1)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."user_role (user_id, role_id) VALUES (1, 1)");
+
+
+//  Dumping data for table: role_permission ----------------------------------
+
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 1)");

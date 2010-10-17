@@ -53,7 +53,7 @@ class Role extends Record {
      *
      * @return array An array of Permission objects.
      */
-    public static function permissions() {
+    public function permissions() {
         if (!$this->permissions) {
             $this->permissions = RolePermission::findPermissionsFor($this->id);
         }
@@ -84,12 +84,20 @@ class Role extends Record {
         return self::findOneFrom('Role', $where, $values);
     }
 
+    public static function findByUserId(int $id) {
+
+        $where = 'name=?';
+        $values = array($name);
+
+        return self::findOneFrom('Role', $where, $values);
+    }
+
     /**
      * Make sure we only try to save specified columns in the DB.
      *
      * @return array Array of column names.
      */
-    public function getColumnNames() {
+    public function getColumns() {
         return array('id', 'name');
     }
 }

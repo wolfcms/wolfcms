@@ -54,6 +54,8 @@ class AuthUser {
     static protected $is_admin      = false;
     static protected $record        = false;
     static protected $permissions   = array();
+    static protected $roles         = array();
+
 
     /**
      * Attempts to load information about the current user.
@@ -87,6 +89,7 @@ class AuthUser {
         self::$record = $user;
         self::$is_logged_in = true;
         self::$permissions = $user->getPermissions();
+        self::$roles = $user->roles();
         self::$is_admin = self::hasPermission('administrator');
     }
 
@@ -132,7 +135,13 @@ class AuthUser {
      * @return array Array of permission names.
      */
     static public final function getPermissions() {
-        return self::$permissions;
+        $perms = array();
+
+        foreach(self::$roles as $role) {
+            $perms = array_merge($perms, $role->permissions());
+        }
+
+        return $perms;
     }
 
     /**
@@ -146,8 +155,11 @@ class AuthUser {
             return true;
 
         foreach (explode(',', $permissions) as $permission) {
-            if (in_array(strtolower($permission), self::$permissions))
-                return true;
+            //if (in_array(strtolower($permission), self::$permissions))
+            foreach (self::$roles as $role) {
+                if ($role->hasPermission($permission))
+                    return true;
+            }
         }
 
         return false;
