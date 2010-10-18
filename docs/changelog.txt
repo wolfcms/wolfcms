@@ -44,6 +44,7 @@ Sigla:
 + Added Thai translation for core - Thanks nateetorn.l - issue 220
 + Added Lithuanian translation for core - Thanks Remigijus Jarmalavicius - issue 236
 + Added expanded footnote on renaming htaccess file on requirements check screen. - issue 175
+- Fixed empty slug issue with home page - Thanks razon - issue 242
 - Fixed quote issue with page title fields - issue 35
 - Fixed issue with page content not being returned when using Page::find() - issue 205
 - Fixed rogue \n character in breadcrumbs.
