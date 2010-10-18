@@ -340,7 +340,7 @@ class PageController extends Controller {
             $errors[] = __('You have to specify a title!');
         }
 
-        if (empty($data['slug'])) {
+        if (empty($data['slug']) && $id != '1') {
             $errors[] = __('You have to specify a slug!');
         }
         else {
