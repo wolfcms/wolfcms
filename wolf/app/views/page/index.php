@@ -296,10 +296,12 @@ $j(document).ready(function(){
     $j("img.expander").expandableSetup(); 
     $j(".busy").spinnerSetup();
     $j(".copy-page").copyableSetup();
+    $j('ul#site-map').sortableSetup();
+    $j('ul#site-map').nestedSortable('disable');
 
     $j('#toggle_reorder').toggle(
             function(){
-    			$j('ul#site-map').sortableSetup();  
+    			$j('ul#site-map').nestedSortable('enable');  
     			$j('img.handle_reorder').show();
                 $j('#toggle_reorder').text('<?php echo __('disable reorder');?>');
             },
