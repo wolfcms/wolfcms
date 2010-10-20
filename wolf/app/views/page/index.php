@@ -36,7 +36,7 @@
 <h1><?php echo __('Pages'); ?></h1>
 
 <div id="site-map-def">
-    <div class="page"><?php echo __('Page'); ?> (<a href="#" id="toggle_reorder" nclick="toggle_reorder = !toggle_reorder; toggle_copy = false; $$('.handle_reorder').each(function(e) { e.style.display = toggle_reorder ? 'inline': 'none'; }); $$('.handle_copy').each(function(e) { e.style.display = toggle_copy ? 'inline': 'none'; }); return false;"><?php echo __('reorder'); ?></a> <?php echo __('or'); ?> <a id="toggle_copy" href="#" onclick="toggle_copy = !toggle_copy; toggle_reorder = false; $$('.handle_copy').each(function(e) { e.style.display = toggle_copy ? 'inline': 'none'; }); $$('.handle_reorder').each(function(e) { e.style.display = toggle_reorder ? 'inline': 'none'; }); return false;"><?php echo __('copy'); ?></a>)</div>
+    <div class="page"><?php echo __('Page'); ?> (<a href="#" id="toggle_reorder"><?php echo __('reorder'); ?></a>)</div>
     <div class="status"><?php echo __('Status'); ?></div>
     <div class="view"><?php echo __('View'); ?></div>
     <div class="modify"><?php echo __('Modify'); ?></div>
@@ -57,7 +57,8 @@
       <div class="view-page"><a href="<?php echo URL_PUBLIC; ?>" target="_blank"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/magnify.png" align="middle" alt="<?php echo __('View Page'); ?>" title="<?php echo __('View Page'); ?>" /></a></div>
       <div class="modify">
           <a href="<?php echo get_url('page/add/1'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" align="middle" title="<?php echo __('Add child'); ?>" alt="<?php echo __('Add child'); ?>" /></a>&nbsp;
-          <img class="remove" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove-disabled.gif" align="middle" alt="<?php echo __('remove icon disabled'); ?>" title="<?php echo __('Remove unavailable'); ?>"/>
+          <img class="remove" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove-disabled.gif" align="middle" alt="<?php echo __('remove icon disabled'); ?>" title="<?php echo __('Remove unavailable'); ?>"/>&nbsp;
+      	  <img src="<?php echo URI_PUBLIC;?>wolf/admin/images/copy-disabled.png" align="middle" title="<?php echo __('Copy Page Disabled'); ?>" alt="<?php echo __('Copy Page Disabled'); ?>" />
       </div>
 
 <?php echo $content_children; ?>
@@ -169,7 +170,7 @@
             });
         };
         
-        jQuery.fn.sortableSetup = function sortableSetup() {      	
+        jQuery.fn.sortableSetup = function sortableSetup() { 
 			$j('ul#site-map').nestedSortable({
 				disableNesting: 'no-nest',
 				forcePlaceholderSize: true,
@@ -189,7 +190,7 @@
 						$j("ul#site-map").nestedSortable('cancel');
 					}
 				},
-                stop: function(event, ui) {             
+                stop: function(event, ui) {                    
                 	var order = $j("ul#site-map").nestedSortable('serialize');
                 	
  					$j.ajax({
@@ -249,25 +250,64 @@
                 }
 			});
             return this;
-        };    
+        };
+        
+        jQuery.fn.copyableSetup = function() { 
+        
+			$j(this).live('click', function() {			
+				var id = $j(this).attr('id').split('-');
+				
+				$j.ajax({
+					type: 'post',
+					url: '<?php echo get_url('page/copy'); ?>',
+					data: "&originalid="+id[1],
+					cache: false,
+					success: function(data) {
+					
+						data = data.split('||');
+						var newid = parseInt(data[0]);
+						
+						// setup the new row
+						var newobj = $j("#page_"+id[1]).clone().css('display', 'none');					
+						
+						newobj.attr('id', 'page_'+newid); // set the main li id
+						newobj.find('.edit-link').attr({ // set the edit link
+							'href' : data[1],
+							'title' : newid+' | '+data[3]
+						});	
+						newobj.find('.title').html(data[2]); // set the page title
+						newobj.find('.busy').attr('id', 'busy-'+newid); // set the spinner id
+						newobj.find('.view-link').attr('href', data[4]); // set the view page link
+						newobj.find('.add-child-link').attr('href', data[5]); // set the add child link
+						newobj.find('.remove').attr('href', data[6]); // set the delete link
+						newobj.find('.copy-page').attr('id', 'copy-'+newid); // set the copy id						
+						
+						$j("#page_"+id[1]).after(newobj); // add row to dom and slide down
+						newobj.slideDown();
+					}						
+				});
+			});
+            return this;
+        };        
+         
         
 $j(document).ready(function(){
     $j('#site-map li').sitemapSetup();
     $j("img.expander").expandableSetup(); 
     $j(".busy").spinnerSetup();
+    $j(".copy-page").copyableSetup();
 
     $j('#toggle_reorder').toggle(
             function(){
-    			$j('#site-map').sortableSetup();  
+    			$j('ul#site-map').sortableSetup();  
     			$j('img.handle_reorder').show();
                 $j('#toggle_reorder').text('<?php echo __('disable reorder');?>');
             },
             function() {
-                $j('#site-map').nestedSortable('destroy');
+                $j('ul#site-map').nestedSortable('disable');               
                 $j('img.handle_reorder').hide();
                 $j('#toggle_reorder').text('<?php echo __('reorder');?>');
             }
-    )
-      
+    )      
 });
 </script>

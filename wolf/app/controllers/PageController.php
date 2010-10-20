@@ -271,27 +271,32 @@ class PageController extends Controller {
     /**
      * Ajax action to copy a page or page tree.
      *
-     * @param <type> $parent_id
      */
-    function copy($parent_id) {
-        parse_str($_POST['data']);
+    function copy() {
+        $original_id = $_POST['originalid'];
 
-        $page = Record::findByIdFrom('Page', $dragged_id);
-        $new_root_id = Page::cloneTree($page, $parent_id);
-
-        foreach ($pages as $position => $page_id) {
-            if ($page_id == $dragged_id) {
-                /* Move the cloned tree, not original. */
-                $page = Record::findByIdFrom('Page', $new_root_id);
-            } else {
-                $page = Record::findByIdFrom('Page', $page_id);
-            }
-            $page->position = (int)$position;
-            $page->parent_id = (int)$parent_id;
-            $page->save();
-
-        }
-
+        $page = Record::findByIdFrom('Page', $original_id);
+        $new_root_id = Page::cloneTree($page, $page->parent_id);      
+        
+        $page = Record::findByIdFrom('Page', $new_root_id);
+        $page->position += 1;
+        $page->created_on_time = time();
+        $page->published_on_time = $page->created_on_time;
+        $page->save();
+        
+        $newUrl = URL_PUBLIC; 
+        $newUrl .= (USE_MOD_REWRITE == false) ? '?' : ''; 
+        $newUrl .= $page->getUri(); 
+        $newUrl .= ($page->getUri() != '') ? URL_SUFFIX : '';
+        
+        $newData = array($new_root_id, 
+        				 get_url('page/edit/'.$new_root_id),
+        				 $page->title(),
+        				 $page->slug(),
+        				 $newUrl,
+        				 get_url('page/add', $new_root_id),
+        				 get_url('page/delete/'.$new_root_id));
+       echo implode('||', $newData);
     }
 
 
