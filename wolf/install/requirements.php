@@ -172,7 +172,7 @@ $https = '<span class="'.($check ? 'check' : 'notcheck').'">'.($check ? 'true' :
         <form style="text-align: right;" action="index.php" method="POST">
         <?php
         if ($errors) {
-            echo 'Please fix these problems and <button>test again</button>';
+            echo 'Please fix these problems and <button type="submit">test again</button>';
         } else {
             if (file_exists(CFG_FILE) && filesize(CFG_FILE) == 0) {
                 if ($scheck && !$mcheck && !$pcheck)
@@ -181,7 +181,7 @@ $https = '<span class="'.($check ? 'check' : 'notcheck').'">'.($check ? 'true' :
                     echo '<input type="hidden" name="dbtype" value="mysql"/>';
                 else if ($pcheck && !$mcheck && !$scheck)
                     echo '<input type="hidden" name="dbtype" value="pgsql"/>';
-                echo '<button name="install" value="1">Continue to install</button>';
+                echo '<button name="install" type="submit" value="1">Continue to install</button>';
             }
         }
         ?>
