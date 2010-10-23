@@ -1,8 +1,7 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
- * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
+ * Copyright (C) 2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
  * This file is part of Wolf CMS.
  *
@@ -32,20 +31,21 @@ if (!defined('IN_CMS')) { exit(); }
  * @package plugins
  * @subpackage textile
  *
- * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @version 1.0.0
- * @since Wolf version 0.9.0
+ * @author Martijn van der Kleijn <martijn.niji@gmail.com>
+ * @version 2.0.0
+ * @since Wolf version 0.7.0
  * @license http://www.gnu.org/licenses/gpl.html GPL License
- * @copyright Philippe Archambault, 2008
+ * @copyright Martijn van der Kleijn, 2010
  */
 
 Plugin::setInfos(array(
     'id'          => 'textile',
     'title'       => __('Textile filter'),
     'description' => __('Allows you to compose page parts or snippets using the Textile text filter.'),
-    'version'     => '1.0.0', 
+    'version'     => '2.0.0',
     'website'     => 'http://www.wolfcms.org/',
     'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml'
 ));
 
 Filter::add('textile', 'textile/filter_textile.php');
+Plugin::addController('textile', __('Textile'), 'administrator', false);

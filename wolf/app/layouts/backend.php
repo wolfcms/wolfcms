@@ -62,6 +62,10 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/jquery-ui-1.8.5.custom.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/jquery.cookies.js"></script>
 	<script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/jquery.ui.nestedSortable.js"></script>
+
+    <script type="text/javascript" src="<?php echo URI_PUBLIC; ?>wolf/admin/markitup/jquery.markitup.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo URI_PUBLIC; ?>wolf/admin/markitup/skins/simple/style.css" />
+
     <script type="text/javascript" charset="utf-8">
      var $j = jQuery.noConflict();
     </script>
@@ -81,6 +85,39 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
             })( $j(".message:first") );
 
             $j("input:visible:enabled:first").focus();
+
+
+            // Add markItUp! to your textarea in one line
+            // $('textarea').markItUp( { Settings }, { OptionalExtraSettings } );
+            //$j('#markItUp').markItUp(mySettings);
+            $j('.textarea').markItUp(mySettings);
+
+            // You can add content from anywhere in your page
+            // $.markItUp( { Settings } );
+            /*
+            $('.add').click(function() {
+                $.markItUp( { 	openWith:'<opening tag>',
+                                closeWith:'<\/closing tag>',
+                                placeHolder:"New content"
+                            }
+                        );
+                return false;
+            });
+            */
+
+            // And you can add/remove markItUp! whenever you want
+            // $(textarea).markItUpRemove();
+            /*
+            $('.toggle').click(function() {
+                if ($("#markItUp.markItUpEditor").length === 1) {
+                    $("#markItUp").markItUpRemove();
+                    $("span", this).text("get markItUp! back");
+                } else {
+                    $('#markItUp').markItUp(mySettings);
+                    $("span", this).text("remove markItUp!");
+                }
+                return false;
+            });*/
         });
         // ]]>
         </script>
