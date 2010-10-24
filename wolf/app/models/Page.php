@@ -819,12 +819,16 @@ class Page extends Record {
                 " $where_string $order_by_string $limit_string $offset_string";
 
         $stmt = self::$__CONN__->prepare($sql);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            return false;
+        }
 
         // Run!
         if ($limit == 1) {
             $object = $stmt->fetchObject('Page');
-            $object->part = get_parts($object->id);
+            if ($object !== false) {
+                $object->part = get_parts($object->id);
+            }
             return $object;
         } else {
             $objects = array();
