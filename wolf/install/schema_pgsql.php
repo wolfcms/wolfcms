@@ -42,8 +42,6 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."cron (
   PRIMARY KEY (id)
 )");
 
-$PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."cron_id_seq START WITH 2");
-
 
 // Table structure for table: layout -----------------------------------------
 
@@ -60,8 +58,6 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."layout (
   PRIMARY KEY (id),
   CONSTRAINT layoutname UNIQUE (name)
 )");
-
-$PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."layout_id_seq START WITH 5");
 
 
 // Table structure for table: page -------------------------------------------
@@ -88,8 +84,6 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."page (
   PRIMARY KEY (id)
 )");
 
-$PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."page_id_seq START WITH 8");
-
 
 // Table structure for table: page_part --------------------------------------
 
@@ -102,8 +96,6 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."page_part (
   page_id integer DEFAULT NULL,
   PRIMARY KEY (id)
 )");
-
-$PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."page_part_id_seq START WITH 11");
 
 
 // Table structure for table: page_tag ---------------------------------------
@@ -124,8 +116,6 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."permission (
   CONSTRAINT permissionname UNIQUE (name)
 )");
 
-$PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."permission_id_seq START WITH 4");
-
 
 // Table structure for table: role -------------------------------------
 
@@ -135,8 +125,6 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."role (
   PRIMARY KEY (id),
   CONSTRAINT rolename UNIQUE (name)
 )");
-
-$PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."role_id_seq START WITH 4");
 
 
 // Table structure for table: setting ----------------------------------------
@@ -175,8 +163,6 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."snippet (
   CONSTRAINT snippetname UNIQUE (name)
 )");
 
-$PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."snippet_id_seq START WITH 3");
-
 
 // Table structure for table: tag --------------------------------------------
 
@@ -209,8 +195,6 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user (
   PRIMARY KEY (id),
   CONSTRAINT username UNIQUE (username)
 )");
-
-$PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."user_id_seq START WITH 2");
 
 
 // Table structure for table: user_role --------------------------------

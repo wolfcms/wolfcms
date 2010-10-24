@@ -449,7 +449,9 @@ class PageController extends Controller {
         }
         else {
             Flash::set('error', __('Page has not been saved!'));
-            redirect(get_url('page'.($action == 'edit') ? 'edit/'.$id : 'add/'));
+            $url = 'page/';
+            $url .= ($action == 'edit') ? 'edit/'.$id : 'add/';
+            redirect(get_url($url));
         }
 
         if ($action == 'add') {

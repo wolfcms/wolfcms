@@ -583,6 +583,9 @@ class Page extends Record {
         if ($this->status_id == Page::STATUS_PUBLISHED)
             $this->published_on = date('Y-m-d H:i:s');
 
+        // Make sure we get a default position of 0;
+        $this->position = 0;
+
         // Prevent certain stuff from entering the INSERT statement
         unset($this->parent);
         unset($this->url);

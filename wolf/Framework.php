@@ -563,7 +563,10 @@ class Record {
                     $value_of[$column] = self::$__CONN__->quote($this->$column);
                 }
                 elseif (isset($this->$column)) { // Properly fallback to the default column value instead of relying on an empty string
-                    $value_of[$column] = 'DEFAULT';
+                    // SQLite can't handle the DEFAULT value
+                    if (self::$__CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) != 'sqlite') {
+                        $value_of[$column] = 'DEFAULT';
+                    }
                 }
             }
 
@@ -586,7 +589,10 @@ class Record {
                     $value_of[$column] = $column.'='.self::$__CONN__->quote($this->$column);
                 }
                 elseif (isset($this->$column)) { // Properly fallback to the default column value instead of relying on an empty string
-                    $value_of[$column] = $column.'=DEFAULT';
+                    // SQLite can't handle the DEFAULT value
+                    if (self::$__CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) != 'sqlite') {
+                        $value_of[$column] = $column.'=DEFAULT';
+                    }
                 }
             }
 

@@ -170,3 +170,18 @@ $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id)
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 17)");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 18)");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 19)");
+
+
+
+// If this is a PostgreSQL DB, we need to correct the sequences
+// The RESTART WITH numbers should be equal to last inserted id + 1
+if ($dbdriver == 'pgsql') {
+    $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."cron_id_seq RESTART WITH 2");
+    $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."layout_id_seq RESTART WITH 5");
+    $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."page_id_seq RESTART WITH 8");
+    $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."page_part_id_seq RESTART WITH 11");
+    $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."permission_id_seq RESTART WITH 20");
+    $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."role_id_seq RESTART WITH 4");
+    $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."snippet_id_seq RESTART WITH 3");
+    $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."user_id_seq RESTART WITH 2");
+}

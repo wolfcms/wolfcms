@@ -127,6 +127,7 @@ if (false === $error) {
             }
 
             try {
+                $dbdriver = $_POST['config']['db_driver'];
                 require_once 'sql_data.php';
             }
             catch (Exception $e) {
