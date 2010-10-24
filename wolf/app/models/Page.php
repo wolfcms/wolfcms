@@ -767,6 +767,27 @@ class Page extends Record {
     } // find_page_by_slug
 
 
+    /**
+     * Finds a Page record based on supplied arguments.
+     * 
+     * Usage:
+     *      $page = Page::find('/the/uri/to/your/page');
+     *      $page = Page::find(array('where' => 'created_by_id=12'));
+     * 
+     * Argument array can contain:
+     *      - where
+     *      - order
+     *      - offset
+     *      - limit
+     * 
+     * Return values can be:
+     *      - A single Page object
+     *      - An array of Page objects which can be empty
+     *      - False
+     *
+     * @param mixed $args   Uri string or array of arguments.
+     * @return mixed        Page or array of Pages, otherwise false.
+     */
     public static function find($args = null) {
         if (!is_array($args)) {
             // Assumes find was called with a uri
