@@ -213,7 +213,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user (
 $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."user_id_seq START WITH 2");
 
 
-// Table structure for table: user_permission --------------------------------
+// Table structure for table: user_role --------------------------------
 
 $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user_role (
   user_id integer NOT NULL,

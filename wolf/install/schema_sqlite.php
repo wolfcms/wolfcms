@@ -184,7 +184,7 @@ $PDO->exec("CREATE TABLE user (
 $PDO->exec("CREATE UNIQUE INDEX user_username ON user (username)");
 
 
-// Table structure for table: user_permission --------------------------------
+// Table structure for table: user_role --------------------------------
 
 $PDO->exec("CREATE TABLE user_role (
     user_id int(11) NOT NULL ,

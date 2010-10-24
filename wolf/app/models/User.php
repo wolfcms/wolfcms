@@ -21,6 +21,7 @@
 /**
  * class User
  *
+ * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @since Wolf version 0.1
  */
@@ -38,24 +39,6 @@ class User extends Record {
     public $updated_on;
     public $created_by_id;
     public $updated_by_id;
-
-    public function getPermissions() {
-        if ( !isset($this->id)) {
-            return array();
-        }
-
-        $perms = array();
-        $sql = 'SELECT name FROM '.self::tableNameFromClassName('Permission').' AS permission, '. self::tableNameFromClassName('UserPermission')
-            . ' WHERE permission_id = permission.id AND user_id='.$this->id;
-
-        $stmt = self::$__CONN__->prepare($sql);
-        $stmt->execute();
-
-        while ($perm = $stmt->fetchObject())
-            $perms[] = $perm->name;
-
-        return $perms;
-    }
 
 
     public function roles() {

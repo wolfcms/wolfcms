@@ -38,7 +38,6 @@ class AuthUser {
     static protected $user_id       = false;
     static protected $is_admin      = false;
     static protected $record        = false;
-    static protected $permissions   = array();
     static protected $roles         = array();
 
 
@@ -73,7 +72,6 @@ class AuthUser {
 
         self::$record = $user;
         self::$is_logged_in = true;
-        self::$permissions = $user->getPermissions();
         self::$roles = $user->roles();
         self::$is_admin = self::hasPermission('administrator');
     }
@@ -140,8 +138,6 @@ class AuthUser {
             return true;
 
         foreach (explode(',', $permissions) as $permission) {
-            //if (in_array(strtolower($permission), self::$permissions))
-            //foreach (self::$roles as $role) {
             foreach (self::$roles as $role) {
                 if ($role->hasPermission($permission))
                     return true;
@@ -221,7 +217,7 @@ class AuthUser {
         self::$record = false;
         self::$user_id = false;
         self::$is_admin = false;
-        self::$permissions = array();
+        self::$roles = array();
     }
 
     /**
