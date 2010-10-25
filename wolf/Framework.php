@@ -1546,13 +1546,25 @@ function redirect_to($url) {
 /**
  * Encodes HTML safely in UTF-8 format.
  *
- * You should use instead of htmlentities.
+ * You should use this instead of htmlentities.
  *
  * @param string $string    HTML to encode.
  * @return string           Encoded HTML
  */
 function html_encode($string) {
     return htmlentities($string, ENT_QUOTES, 'UTF-8') ;
+}
+
+/**
+ * Decodes HTML safely in UTF-8 format.
+ *
+ * You should use this instead of html_entity_decode.
+ *
+ * @param string $string    String to decode.
+ * @return string           Decoded HTML
+ */
+function html_decode($string) {
+    return html_entity_decode($string, ENT_QUOTES, 'UTF-8') ;
 }
 
 /**

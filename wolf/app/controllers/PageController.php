@@ -136,8 +136,15 @@ class PageController extends Controller {
             redirect(get_url('page'));
         }
 
-		// encode the quotes to prevent page title input break
-		$page->title = htmlentities($page->title, ENT_QUOTES);
+		// Encode the string to prevent page title input break
+        // Unless people specify "Allow html in title" in the backend.
+        // Then only replace double quotes.
+        if (!Setting::get('allow_html_title')) {
+            $page->title = html_encode($page->title);
+        }
+        else {
+            $page->title = str_replace('"', '&quot;', $page->title);
+        }
 
         // find all page_part of this pages
         $page_parts = PagePart::findByPageId($id);
