@@ -859,8 +859,9 @@ table.fieldset .error-with-field small {
   width: 100%;
   height: 280px;
   border: 1px solid #ccc;
+  /* Remove: conflict with Markitup css:
   font-family: Monaco, Consolas, "Courier New", monospace, serif;
-  font-size: 85%;
+  font-size: 85%; */
 }
 
 /* Popups ----------------------------------------------------------------- */
