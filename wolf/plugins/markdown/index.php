@@ -42,9 +42,10 @@ Plugin::setInfos(array(
     'id'          => 'markdown',
     'title'       => __('Markdown filter'),
     'description' => __('Allows you to compose page parts or snippets using the Markdown text filter.'),
-    'version'     => '1.0.0', 
+    'version'     => '2.0.0', 
     'website'     => 'http://www.wolfcms.org/',
     'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml'
 ));
 
 Filter::add('markdown', 'markdown/filter_markdown.php');
+Plugin::addController('markdown', __('Markdown'), 'administrator', false);

@@ -10,7 +10,8 @@
 // -------------------------------------------------------------------
 // Feel free to add more tags
 // -------------------------------------------------------------------
-mySettings = {
+textileSettings = {
+	nameSpace:			'textile',
 	previewParserPath:	'?/admin/plugin/textile/preview', // path to your Textile parser
 	onShiftEnter:		{keepDefault:false, replaceWith:'\n\n'},
 	markupSet: [
@@ -24,7 +25,7 @@ mySettings = {
 		{separator:'---------------' },
 		{name:'Bold', key:'B', closeWith:'*', openWith:'*'},
 		{name:'Italic', key:'I', closeWith:'_', openWith:'_'},
-		{name:'Stroke through', key:'S', closeWith:'-', openWith:'-'},
+		{name:'Stroke', key:'S', closeWith:'-', openWith:'-'},
 		{separator:'---------------' },
 		{name:'Bulleted list', openWith:'(!(* |!|*)!)'},
 		{name:'Numeric list', openWith:'(!(# |!|#)!)'},

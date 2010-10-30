@@ -57,8 +57,8 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/dragdrop.js"></script-->
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/cp-datepicker.js"></script>
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/wolf.js"></script>
-    <!--script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/control.textarea.js"></script-->
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/jquery-1.4.2.min.js"></script>
+    <!--script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/control.textarea.js"></script-->  
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/jquery-ui-1.8.5.custom.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/jquery.ui.nestedSortable.js"></script>
 
@@ -84,10 +84,6 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
             })( $j(".message:first") );
 
             $j("input:visible:enabled:first").focus();
-
-            // Add markItUp! to your textarea in one line
-            $j('.textarea').markItUp(mySettings);
-
         });
         // ]]>
         </script>
