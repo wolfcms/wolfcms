@@ -57,6 +57,7 @@
 </div>
 
 <script type="text/javascript">
+$j(document).ready(function() {
 	<?php 
 	if($page_part->filter_id != "")
 	{
@@ -76,4 +77,5 @@
 
 		return false;		
 	});
+});
 </script>
