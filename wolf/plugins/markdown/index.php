@@ -49,3 +49,4 @@ Plugin::setInfos(array(
 
 Filter::add('markdown', 'markdown/filter_markdown.php');
 Plugin::addController('markdown', __('Markdown'), 'administrator', false);
+Plugin::addJavascript('markdown', 'markdown.php');

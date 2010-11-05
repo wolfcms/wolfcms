@@ -49,3 +49,4 @@ Plugin::setInfos(array(
 
 Filter::add('textile', 'textile/filter_textile.php');
 Plugin::addController('textile', __('Textile'), 'administrator', false);
+Plugin::addJavascript('textile', 'textile.php');
