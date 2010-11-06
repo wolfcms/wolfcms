@@ -54,6 +54,7 @@
       case Page::STATUS_PREVIEW: echo '<div class="status preview-status">'.__('Preview').'</div>'; break;
       case Page::STATUS_PUBLISHED: echo '<div class="status published-status">'.__('Published').'</div>'; break;
       case Page::STATUS_HIDDEN: echo '<div class="status hidden-status">'.__('Hidden').'</div>'; break;
+      case Page::STATUS_ARCHIVED: echo '<div class="status archived-status">'.__('Archived').'</div>'; break;
 } ?>
       <div class="view-page"><a class="view-link" href="<?php echo URL_PUBLIC; echo (USE_MOD_REWRITE == false) ? '?' : ''; echo $child->getUri(); echo ($child->getUri() != '') ? URL_SUFFIX : ''; ?>" target="_blank"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/magnify.png" align="middle" alt="<?php echo __('View Page'); ?>" title="<?php echo __('View Page'); ?>" /></a></div>
       <div class="modify">

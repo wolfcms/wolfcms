@@ -9,6 +9,7 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Added valid_until field and Archived status for Page. - issue 115
 + Added initial support for low-level permissions. - issue 74
 + Added page_add_before_save and page_edit_before_save Observer Events - issue 215
 + Added Page::partExists() Updated Page::hasContent - issue 200
@@ -72,6 +73,7 @@ Sigla:
 - Fixed small issue Wolf layout had with frontend controllers - issue 141
 - Fixed delete layout observer event - issue 222 - thanks Jules
 - Minor correction to @since info in some core plugins
+. Children of a cloned page no longer have (Copy) in their name or slug. - issue 250
 . Moved install directory to wolf/install
 . Moved default favicon to three different locations. One for admin, one per frontend theme.
 . Changed cookie life time from two weeks to 30 minutes.

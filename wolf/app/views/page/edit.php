@@ -141,6 +141,18 @@ if ($action == 'edit') { ?>
                 <?php endif; ?>
                   </td>
                 </tr>
+                <?php if (isset($page->published_on)): ?>
+                <tr>
+                  <td class="label">
+                    <label for="page_valid_until"><?php echo __('Valid until date'); ?></label>
+                  </td>
+                  <td class="field">
+                    <input id="page_valid_until" maxlength="10" name="page[valid_until]" size="10" type="text" value="<?php echo substr($page->valid_until, 0, 10); ?>" />
+                    <img onclick="displayDatePicker('page[valid_until]');" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
+                    <input id="page_valid_until_time" maxlength="5" name="page[valid_until_time]" size="5" type="text" value="<?php echo substr($page->valid_until, 11); ?>" />
+                  </td>
+                </tr>
+                <?php endif; ?>
               <?php endif; ?>
               <?php if (AuthUser::hasPermission('page_edit')): ?>
                 <tr>
@@ -193,6 +205,7 @@ if ($action == 'edit') { ?>
           <option value="<?php echo Page::STATUS_PREVIEW; ?>"<?php echo $page->status_id == Page::STATUS_PREVIEW ? ' selected="selected"': ''; ?>><?php echo __('Preview'); ?></option>
           <option value="<?php echo Page::STATUS_PUBLISHED; ?>"<?php echo $page->status_id == Page::STATUS_PUBLISHED ? ' selected="selected"': ''; ?>><?php echo __('Published'); ?></option>
           <option value="<?php echo Page::STATUS_HIDDEN; ?>"<?php echo $page->status_id == Page::STATUS_HIDDEN ? ' selected="selected"': ''; ?>><?php echo __('Hidden'); ?></option>
+          <option value="<?php echo Page::STATUS_ARCHIVED; ?>"<?php echo $page->status_id == Page::STATUS_ARCHIVED ? ' selected="selected"': ''; ?>><?php echo __('Archived'); ?></option>
         </select>
       </p>
 <?php endif; ?>

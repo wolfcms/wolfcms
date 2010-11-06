@@ -72,6 +72,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."page (
   status_id int(11) unsigned NOT NULL default '100',
   created_on datetime default NULL,
   published_on datetime default NULL,
+  valid_until datetime default NULL,
   updated_on datetime default NULL,
   created_by_id int(11) default NULL,
   updated_by_id int(11) default NULL,

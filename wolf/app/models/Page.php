@@ -1,53 +1,40 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2008-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
- * Copyright (C) 2008,2009 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
- * This file is part of Wolf CMS.
- *
- * Wolf CMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Wolf CMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Wolf CMS has made an exception to the GNU General Public License for plugins.
- * See exception.txt for details and the full text.
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
  */
 
 /**
  * @package wolf
  * @subpackage models
  *
- * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @version 0.1
+ * @author Philippe Archambault <philippe.archambault@gmail.com>
+ * @version 0.7.0
  * @license http://www.gnu.org/licenses/gpl.html GPL License
- * @copyright Philippe Archambault, Martijn van der Kleijn, 2008
+ * @copyright Martijn van der Kleijn, 2008-2010
+ * @copyright Philippe Archambault, 2008
  */
 
 /**
- * class Page
+ * Model representing a page of content.
  *
- * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @since Wolf version 0.1
+ * @author Philippe Archambault <philippe.archambault@gmail.com>
+ * @since Wolf version 0.5.0
  */
-class Page extends Record {
+class Page extends Node {
     const TABLE_NAME = 'page';
 
     const STATUS_DRAFT = 1;
     const STATUS_PREVIEW = 10;
     const STATUS_PUBLISHED = 100;
     const STATUS_HIDDEN = 101;
+    const STATUS_ARCHIVED = 200;
 
     const LOGIN_NOT_REQUIRED = 0;
     const LOGIN_REQUIRED = 1;
@@ -69,6 +56,7 @@ class Page extends Record {
 
     public $created_on;
     public $published_on;
+    public $valid_until;
     public $updated_on;
     public $created_by_id;
     public $updated_by_id;
@@ -220,7 +208,10 @@ class Page extends Record {
 
         // Prepare SQL
         $sql = 'SELECT COUNT(*) AS nb_rows FROM '.TABLE_PREFIX.'page '
-                . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
+                . 'WHERE parent_id = '.$this->id
+                . " AND (valid_until IS NULL OR CAST('".date('Y-m-d H:i:s')."' AS DATETIME) < valid_until)"
+                . ' AND (status_id='.Page::STATUS_PUBLISHED
+                . ($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
                 . "$where_string ORDER BY $order $limit_string $offset_string";
 
         $stmt = $__CMS_CONN__->prepare($sql);
@@ -325,6 +316,8 @@ class Page extends Record {
             return strftime($format, strtotime($this->updated_on));
         else if ($which_one == 'publish' || $which_one == 'published')
             return strftime($format, strtotime($this->published_on));
+        else if ($which_one == 'valid' || $which_one == 'valid')
+            return strftime($format, strtotime($this->valid_until));
         else
             return strftime($format, strtotime($this->created_on));
     }
@@ -492,6 +485,7 @@ class Page extends Record {
                 . 'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
                 . 'LEFT JOIN '.TABLE_PREFIX.'user AS updater ON updater.id = page.updated_by_id '
                 . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
+                . " AND (valid_until IS NULL OR CAST('".date('Y-m-d H:i:s')."' AS DATETIME) < valid_until)"
                 . "$where_string ORDER BY $order $limit_string $offset_string";
 
         $pages = array();
@@ -605,6 +599,15 @@ class Page extends Record {
         } else if ($this->status_id == Page::STATUS_PUBLISHED) {
             $this->published_on = date('Y-m-d H:i:s');
         }
+
+        if ( ! empty($this->valid_until)) {
+            $this->valid_until = $this->valid_until . ' ' . $this->valid_until_time;
+            unset($this->valid_until_time);
+            if ($this->valid_until < date('Y-m-d H:i:s')) {
+                $this->status_id = Page::STATUS_ARCHIVED;
+            }
+        }
+        unset($this->valid_until_time);
 
         $this->updated_by_id = AuthUser::getId();
         $this->updated_on = date('Y-m-d H:i:s');
@@ -889,8 +892,11 @@ class Page extends Record {
         $clone = Record::findByIdFrom('Page', $page->id);
         $clone->parent_id = (int)$parent_id;
         $clone->id = null;
-        $clone->title .= " (copy)";
-        $clone->slug .= "-copy";
+
+        if (!$new_root_id) {
+            $clone->title .= " (copy)";
+            $clone->slug .= "-copy";
+        }
         $clone->save();
 
         /* Also clone the page parts. */
