@@ -157,7 +157,7 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   border-bottom: 2px solid #76A83A; /*#58b;*/
 
   /* Border-radius implemented. */
-  border-radius: 6px;
+  border-radius: 6px
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
 }
@@ -240,6 +240,8 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 
 /* Tabs ------------------------------------------------------------------- */
 
+#metainfo-tabs { margin: 10px 0 5px 0; }
+#part-tabs { margin: 35px 0 5px 0; }
 .tabs {
   margin-right: -4px;
   width: 100%;
@@ -279,15 +281,13 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 
 
   /* Border-radius not implemented yet */
-  -moz-border-radius: 6px;
-  -moz-border-radius-topleft: 0px;
-  -webkit-border-radius: 6px;
-  -webkit-border-topleft-radius: 0px;
+  -moz-border-radius: 0 6px 6px 6px;
+  -webkit-border-radius: 0 6px 6px 6px;
 
   text-shadow: black;
 }
 .pages .page {
-  padding: 20px;
+  padding:  20px;
 }
 
 /* Sidebar ---------------------------------------------------------------- */
@@ -761,7 +761,7 @@ table.fieldset .error-with-field small {
   color: red;
 }
 
-/* Tabs TO BE REMOVED ------------------------------------------------------------------- */
+/* Tabs TO BE REMOVED -------------------------------------------------------------------
 
 .tabs {
   width: 100%;
@@ -786,7 +786,6 @@ table.fieldset .error-with-field small {
   color: #000;
   outline: none;
 
-  /* Border-radius - implemented. */
   -moz-border-radius: 6px 6px 0px 0px;
   -webkit-border-radius: 6px;
   -webkit-border-bottom-right-radius: 0px;
@@ -807,7 +806,6 @@ table.fieldset .error-with-field small {
   width: 100%;
   clear: both;
 
-  /* Border-radius not implemented yet */
   -moz-border-radius: 6px;
   -moz-border-radius-topleft: 0px;
   -webkit-border-radius: 6px;
@@ -828,7 +826,7 @@ table.fieldset .error-with-field small {
 .pages label {
   font-size: 85%;
   font-weight: normal;
-}
+} */
 
 #meta-pages td {
   background-color: #fff;
