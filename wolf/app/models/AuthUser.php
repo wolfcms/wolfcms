@@ -131,7 +131,7 @@ class AuthUser {
      * Checks if user has (one of) the required permissions.
      *
      * @param string $permission    Single permission or comma seperated list.
-     * @return boolean              Returns true is user has one or more permissions.
+     * @return boolean              Returns true if user has one or more of the permissions.
      */
     static public final function hasPermission($permissions) {
         if (self::getId() == 1)
@@ -142,6 +142,30 @@ class AuthUser {
                 if ($role->hasPermission($permission))
                     return true;
             }
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if user has (one of) the required roles.
+     *
+     * This can be usefull if you have created a lot of custom checks for the
+     * pre-0.7.0 roles: administrator, developer, editor.
+     *
+     * It is preferred to use AuthUser::hasPermission($permissions) since roles
+     * are only containers for permissions and not actual permissions.
+     *
+     * @param string $roles         Single rolename or comma seperated list.
+     * @return boolean              Returns true if user has one or more of the roles.
+     */
+    static public final function hasRole($roles) {
+        if (self::getId() == 1)
+            return true;
+
+        foreach (explode(',', $roles) as $role) {
+            if (in_array($role, self::$roles))
+                return true;
         }
 
         return false;

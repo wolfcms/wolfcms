@@ -43,7 +43,7 @@ require_once CORE_ROOT.'/Framework.php';
 <html>
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title>Wolf CMS - Installation routine</title>
+    <title>Wolf CMS - Install/Upgrade routine</title>
     <link href="install.css" media="screen" rel="Stylesheet" type="text/css" />
 </head>
 <body>
@@ -54,15 +54,23 @@ require_once CORE_ROOT.'/Framework.php';
 
 <?php
 if (isset($_POST['install']) && !isset($_POST['commit']) && file_exists(CFG_FILE) && !(filesize(CFG_FILE) > 1)) {
-    require 'install.php';
+    require_once 'install.php';
 }
 else if (isset($_POST['install']) && isset($_POST['commit']) && isset($_POST['config'])) {
     $config = $_POST['config'];
-    require 'do-install.php';
-    require 'post-install.php';
+    require_once 'do-install.php';
+    require_once 'post-install.php';
+}
+else if (isset($_POST['upgrade']) && isset($_POST['commit']) && file_exists(CFG_FILE) && (filesize(CFG_FILE) > 1)) {
+    require_once CFG_FILE;
+    require_once CORE_ROOT.'/Framework.php';
+    require_once 'do-upgrade.php';
+}
+else if (!isset($_POST['upgrade']) && !isset($_POST['commit']) && file_exists(CFG_FILE) && (filesize(CFG_FILE) > 1)) {
+    require_once 'upgrade.php';
 }
 else {
-    require 'requirements.php';
+    require_once 'requirements.php';
 }
 ?>
 
