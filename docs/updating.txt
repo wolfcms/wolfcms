@@ -10,14 +10,23 @@ IMPORTANT - always check your security by viewing security.php post update!
 
 ### Upgrading from 0.6.0 => 0.7.0 ###
 
-1. Upgrade all of Wolf's files.
+IMPORTANT - Make absolutely sure you have 0.6.0 before doing this.
 
-2. Visit /install/upgrade.php
+1. Create a backup of your files and database. Safe your config.php file!
 
-3. Run /security.php to view the security advisory.
+2. Delete these directories in your old Wolf installation: admin, docs, install, wolf
 
-IMPORTANT - Make absolutely sure you have 0.6.0 final before running upgrade.php
-IMPORTANT - Always make a backup before starting the upgrade.
+4. Remove these files from your Wolf CMS root: index.php, favicon.ico, 404.php
+
+3. Copy the "wolf" directory from the 0.7.0 download to your Wolf CMS root directory.
+
+4. Copy the "index.php" and "security.php" files from the 0.7.0 download to your Wolf CMS root directory.
+
+5. Depending on your situation you may also need to replace the htaccess file.
+
+6. Visit http://www.example.com/wolf/install/index.php and follow instructions.
+
+7. Run /security.php to view the security advisory.
 
 
 ### Upgrading from 0.5.5 => 0.6.0 ###
