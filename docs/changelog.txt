@@ -74,6 +74,7 @@ Sigla:
 - Fixed delete layout observer event - issue 222 - thanks Jules
 - Minor correction to @since info in some core plugins
 . Children of a cloned page no longer have (Copy) in their name or slug. - issue 250
+. Distinct favicons for frontend/backend
 . Moved install directory to wolf/install
 . Moved default favicon to three different locations. One for admin, one per frontend theme.
 . Changed cookie life time from two weeks to 30 minutes.
