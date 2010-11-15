@@ -86,6 +86,7 @@ class PageController extends Controller {
         $this->setLayout('backend');
         $this->display('page/edit', array(
             'action'     => 'add',
+            'csrf_token' => SecureToken::generateToken(BASE_URL.'page/add'),
             'page'       => $page,
             'tags'       => array(),
             'filters'    => Filter::findAll(),
@@ -156,6 +157,7 @@ class PageController extends Controller {
         $this->setLayout('backend');
         $this->display('page/edit', array(
             'action'     => 'edit',
+            'csrf_token' => SecureToken::generateToken(BASE_URL.'page/edit'),
             'page'       => $page,
             'tags'       => $page->getTags(),
             'filters'    => Filter::findAll(),
@@ -322,16 +324,28 @@ class PageController extends Controller {
      * @param mixed $id        Page to edit if any.
      */
     private function _store($action, $id=false) {
-        // Sanity check
+        // Sanity checks
         if ($action == 'edit' && !$id)
             throw new Exception ('Trying to edit page when $id is false.');
 
+        use_helper('Validate');
         $data = $_POST['page'];
         $data['is_protected'] = !empty($data['is_protected']) ? 1: 0;
         Flash::set('post_data', (object) $data);
 
         // Add pre-save checks here
         $errors = false;
+
+        // CSRF checks
+        if (isset($_POST['csrf_token'])) {
+            $csrf_token = $_POST['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'page/'.$action)) {
+                $errors[] = __('Invalid CSRF token found!');
+            }
+        }
+        else {
+            $errors[] = __('No CSRF token found!');
+        }
 
         if (empty($data['title'])) {
             $errors[] = __('You have to specify a title!');
@@ -344,6 +358,46 @@ class PageController extends Controller {
             if (trim($data['slug']) == ADMIN_DIR) {
                 $errors[] = __('You cannot have a slug named :slug!', array(':slug' => ADMIN_DIR));
             }
+            if (!Validate::slug($data['slug'])) {
+                $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'slug'));
+            }
+        }
+
+        // Check all numerical fields for a page
+        $fields = array('parent_id', 'layout_id', 'needs_login');
+        foreach($fields as $field) {
+            if (!Validate::digit($data[$field])) {
+                $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
+            }
+        }
+
+        // Check all date fields for a page
+        $fields = array('created_on', 'published_on', 'valid_until');
+        foreach($fields as $field) {
+            if (!empty($data[$field]) && !(bool) preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/D', (string) $data[$field])) {
+                $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
+            }
+        }
+
+        // Check all time fields for a page
+        $fields = array('created_on_time', 'published_on_time', 'valid_until_time');
+        foreach($fields as $field) {
+            if (!empty($data[$field]) && !(bool) preg_match('/^[0-9]{2}:[0-9]{2}:[0-9]{2}$/D', (string) $data[$field])) {
+                $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
+            }
+        }
+
+        // Check alphanumerical fields
+        $fields = array('keywords', 'description');
+        foreach($fields as $field) {
+            if (!empty($data[$field]) && !Validate::alpha_comma($data[$field])) {
+                $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
+            }
+        }
+
+        // Check behaviour_id field
+        if (!empty($data['behaviour_id']) && !Validate::slug($data['behaviour_id'])) {
+            $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'behaviour_id'));
         }
 
         // Make sure the title doesn't contain HTML
@@ -382,6 +436,7 @@ class PageController extends Controller {
             $this->setLayout('backend');
             $this->display('page/edit', array(
                 'action'     => $action,
+                'csrf_token' => SecureToken::generateToken(BASE_URL.'page/'.$action),
                 'page'       => (object) $page,
                 'tags'       => $tags,
                 'filters'    => Filter::findAll(),

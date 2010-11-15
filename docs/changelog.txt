@@ -9,6 +9,8 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Added Validate helper.
++ Added tougher validation of fields upon form submit.
 + Added valid_until field and Archived status for Page. - issue 115
 + Added initial support for low-level permissions. - issue 74
 + Added page_add_before_save and page_edit_before_save Observer Events - issue 215

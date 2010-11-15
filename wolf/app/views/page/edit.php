@@ -53,6 +53,7 @@ if ($action == 'edit') { ?>
 <form id="page_edit_form" action="<?php if ($action == 'add') echo get_url('page/add'); else echo  get_url('page/edit/'.$page->id); ?>" method="post">
 
   <input id="page_parent_id" name="page[parent_id]" type="hidden" value="<?php echo $page->parent_id; ?>" />
+  <input id="csrf_token" name="csrf_token" type="hidden" value="<?php echo $csrf_token; ?>" />
   <div class="form-area">
     <div id="metainfo-tabs" class="content tabs">
         <ul class="tabNavigation">
