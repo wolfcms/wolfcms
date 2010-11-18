@@ -1,37 +1,23 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2008,2009,2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
- * Copyright (C) 2008,2009 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
- * This file is part of Wolf CMS.
- *
- * Wolf CMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Wolf CMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Wolf CMS has made an exception to the GNU General Public License for plugins.
- * See exception.txt for details and the full text.
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
  */
 
 /**
  * @package wolf
  * @subpackage models
  *
- * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
+ * @author Philippe Archambault <philippe.archambault@gmail.com>
+ * 
  * @version 0.5.5
  * @license http://www.gnu.org/licenses/gpl.html GPL License
- * @copyright Philippe Archambault, Martijn van der Kleijn 2008
+ * @copyright Philippe Archambault 2008, Martijn van der Kleijn 2008-2010
  */
 
 /**
@@ -56,11 +42,11 @@ class Plugin {
     static function init() {
         self::$plugins = unserialize(Setting::get('plugins'));
         foreach (self::$plugins as $plugin_id => $tmp) {
-            $file = CORE_ROOT.'/plugins/'.$plugin_id.'/index.php';
+            $file = PLUGINS_ROOT.'/'.$plugin_id.'/index.php';
             if (file_exists($file))
                 include $file;
 
-            $file = CORE_ROOT.'/plugins/'.$plugin_id.'/i18n/'.I18n::getLocale().'-message.php';
+            $file = PLUGINS_ROOT.'/'.$plugin_id.'/i18n/'.I18n::getLocale().'-message.php';
             if (file_exists($file)) {
                 $array = include $file;
                 I18n::add($array);
@@ -116,7 +102,7 @@ class Plugin {
         self::$plugins[$plugin_id] = 1;
         self::save();
 
-        $file = CORE_ROOT.'/plugins/'.$plugin_id.'/enable.php';
+        $file = PLUGINS_ROOT.'/'.$plugin_id.'/enable.php';
         if (file_exists($file))
             include $file;
 
@@ -137,7 +123,7 @@ class Plugin {
             unset(self::$plugins[$plugin_id]);
             self::save();
 
-            $file = CORE_ROOT.'/plugins/'.$plugin_id.'/disable.php';
+            $file = PLUGINS_ROOT.'/'.$plugin_id.'/disable.php';
             if (file_exists($file))
                 include $file;
         }
@@ -154,7 +140,7 @@ class Plugin {
             self::save();
         }
 
-        $file = CORE_ROOT.'/plugins/'.$plugin_id.'/uninstall.php';
+        $file = PLUGINS_ROOT.'/'.$plugin_id.'/uninstall.php';
         if (file_exists($file)) {
             include $file;
         }
@@ -173,12 +159,12 @@ class Plugin {
      * @return array
      */
     static function findAll() {
-        $dir = CORE_ROOT.'/plugins/';
+        $dir = PLUGINS_ROOT;
 
         if ($handle = opendir($dir)) {
             while (false !== ($plugin_id = readdir($handle))) {
                 if ( ! isset(self::$plugins[$plugin_id]) && is_dir($dir.$plugin_id) && strpos($plugin_id, '.') !== 0) {
-                    $file = CORE_ROOT.'/plugins/'.$plugin_id.'/index.php';
+                    $file = PLUGINS_ROOT.'/'.$plugin_id.'/index.php';
                     if (file_exists($file))
                         include $file;
                 }
@@ -253,7 +239,7 @@ class Plugin {
         if (!isset(self::$plugins_infos[$plugin_id])) return;
 
         $class_name = Inflector::camelize($plugin_id).'Controller';
-        $file = CORE_ROOT.'/plugins/'.$plugin_id.'/'.$class_name.'.php';
+        $file = PLUGINS_ROOT.'/'.$plugin_id.'/'.$class_name.'.php';
 
         if (!file_exists($file)) {
             if (defined('DEBUG') && DEBUG)
@@ -283,7 +269,7 @@ class Plugin {
      * @param $file         string  The path to the javascript file relative to plugin root
      */
     static function addJavascript($plugin_id, $file) {
-        if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $file)) {
+        if (file_exists(PLUGINS_ROOT.'/' . $plugin_id . '/' . $file)) {
             self::$javascripts[] = $plugin_id.'/'.$file;
         }
     }
