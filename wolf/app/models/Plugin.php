@@ -159,7 +159,7 @@ class Plugin {
      * @return array
      */
     static function findAll() {
-        $dir = PLUGINS_ROOT;
+        $dir = PLUGINS_ROOT.'/';
 
         if ($handle = opendir($dir)) {
             while (false !== ($plugin_id = readdir($handle))) {
