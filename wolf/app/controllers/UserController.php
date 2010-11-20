@@ -1,26 +1,11 @@
 <?php 
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2008,2009,2010 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2008-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
- * This file is part of Wolf CMS.
- *
- * Wolf CMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Wolf CMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Wolf CMS has made an exception to the GNU General Public License for plugins.
- * See exception.txt for details and the full text.
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
  */
 
 /**
@@ -32,8 +17,6 @@
  * @copyright Martijn van der Kleijn, 2008,2009,2010
  * @copyright Philippe Archambault, 2008
  * @license http://www.gnu.org/licenses/gpl.html GPL License
- *
- * @version $Id$
  */
 
 /**
@@ -101,8 +84,12 @@ class UserController extends Controller {
     }
 
     private function _add() {
+        use_helper('Validate');
         $data = $_POST['user'];
         Flash::set('post_data', (object) $data);
+
+        // Add pre-save checks here
+        $errors = false;
 
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
@@ -130,6 +117,28 @@ class UserController extends Controller {
         // check if username >= 3 chars
         if (strlen($data['username']) < 3) {
             Flash::set('error', __('Username must contain a minimum of 3 characters!'));
+            redirect(get_url('user/add'));
+        }
+
+        // Check alphanumerical fields
+        $fields = array('username', 'name');
+        foreach($fields as $field) {
+            if (!empty($data[$field]) && !Validate::alphanum_space($data[$field])) {
+                $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
+            }
+        }
+
+        if (!empty($data['email']) && !Validate::email($data['email'])) {
+            $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'email'));
+        }
+
+        if (!empty($data['language']) && !Validate::alpha($data['language'])) {
+            $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'language'));
+        }
+
+        if ($errors !== false) {
+            // Set the errors to be displayed.
+            Flash::set('error', implode('<br/>', $errors));
             redirect(get_url('user/add'));
         }
 
@@ -181,8 +190,18 @@ class UserController extends Controller {
 
     } // edit
 
+    /**
+     * @todo merge _add() and _edit() into one _store()
+     *
+     * @param <type> $id
+     */
     private function _edit($id) {
+        use_helper('Validate');
         $data = $_POST['user'];
+        Flash::set('post_data', (object) $data);
+
+        // Add pre-save checks here
+        $errors = false;
 
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
@@ -210,6 +229,28 @@ class UserController extends Controller {
         }
         else {
             unset($data['password'], $data['confirm']);
+        }
+
+        // Check alphanumerical fields
+        $fields = array('username', 'name');
+        foreach($fields as $field) {
+            if (!empty($data[$field]) && !Validate::alphanum_space($data[$field])) {
+                $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
+            }
+        }
+
+        if (!empty($data['email']) && !Validate::email($data['email'])) {
+            $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'email'));
+        }
+
+        if (!empty($data['language']) && !Validate::alpha($data['language'])) {
+            $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'language'));
+        }
+
+        if ($errors !== false) {
+            // Set the errors to be displayed.
+            Flash::set('error', implode('<br/>', $errors));
+            redirect(get_url('user/edit/'.$id));
         }
 
         $user = Record::findByIdFrom('User', $id);
