@@ -178,8 +178,8 @@ class Page extends Node {
         if ($this->parent)
             return $this->parent->children(array(
                     'limit' => 1,
-                    'where' => 'page.id < '. $this->id,
-                    'order' => 'page.created_on DESC'
+                    'where' => 'page.position < '. $this->position . ' AND page.id < '. $this->id,
+                    'order' => 'page.position DESC'
             ));
     }
 
@@ -187,8 +187,8 @@ class Page extends Node {
         if ($this->parent)
             return $this->parent->children(array(
                     'limit' => 1,
-                    'where' => 'page.id > '. $this->id,
-                    'order' => 'page.created_on ASC'
+                    'where' => 'page.position > '. $this->position . ' AND page.id > '. $this->id,
+                    'order' => 'page.position ASC'
             ));
     }
 

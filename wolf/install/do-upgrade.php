@@ -121,6 +121,10 @@ if ($driver == 'mysql') {
                 MODFIY COLUMN behavior_id varchar(25) NOT NULL default ''
                ");
 
+    $PDO->exec("ALTER TABLE ".TABLE_PREFIX."page
+                MODFIY COLUMN position mediumint(6) unsigned default '0'
+               ");
+
     $PDO->exec("ALTER TABLE ".TABLE_PREFIX."user
                 MODFIY COLUMN password varchar(1024) default NULL,
                 MODFIY COLUMN language varchar(5) default NULL
