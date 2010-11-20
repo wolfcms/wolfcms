@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -29,9 +30,10 @@
  */
 class UserController extends Controller {
 
+
     public function __construct() {
         AuthUser::load();
-        if ( ! AuthUser::isLoggedIn()) {
+        if (!AuthUser::isLoggedIn()) {
             redirect(get_url('login'));
         }
 
@@ -39,8 +41,9 @@ class UserController extends Controller {
         $this->assignToLayout('sidebar', new View('user/sidebar'));
     }
 
+
     public function index() {
-        if ( ! AuthUser::hasPermission('user_view')) {
+        if (!AuthUser::hasPermission('user_view')) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
 
             if (Setting::get('default_tab') === 'user') {
@@ -56,8 +59,9 @@ class UserController extends Controller {
         ));
     }
 
+
     public function add() {
-        if ( ! AuthUser::hasPermission('user_add')) {
+        if (!AuthUser::hasPermission('user_add')) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url());
         }
@@ -82,6 +86,7 @@ class UserController extends Controller {
             'permissions' => Record::findAllFrom('Role')
         ));
     }
+
 
     private function _add() {
         use_helper('Validate');
@@ -122,7 +127,7 @@ class UserController extends Controller {
 
         // Check alphanumerical fields
         $fields = array('username', 'name');
-        foreach($fields as $field) {
+        foreach ($fields as $field) {
             if (!empty($data[$field]) && !Validate::alphanum_space($data[$field])) {
                 $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
             }
@@ -150,7 +155,7 @@ class UserController extends Controller {
 
         if ($user->save()) {
             // now we need to add permissions if needed
-            if ( ! empty($_POST['user_permission']))
+            if (!empty($_POST['user_permission']))
                 UserRole::setPermissionsFor($user->id, $_POST['user_permission']);
 
             Flash::set('success', __('User has been added!'));
@@ -163,8 +168,9 @@ class UserController extends Controller {
         redirect(get_url('user'));
     }
 
+
     public function edit($id) {
-        if ( AuthUser::getId() != $id && ! AuthUser::hasPermission('user_edit')) {
+        if (AuthUser::getId() != $id && !AuthUser::hasPermission('user_edit')) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url());
         }
@@ -187,8 +193,10 @@ class UserController extends Controller {
         }
 
         redirect(get_url('user'));
+    }
 
-    } // edit
+// edit
+
 
     /**
      * @todo merge _add() and _edit() into one _store()
@@ -208,12 +216,12 @@ class UserController extends Controller {
             $csrf_token = $_POST['csrf_token'];
             if (!SecureToken::validateToken($csrf_token, BASE_URL.'user/edit')) {
                 Flash::set('error', __('Invalid CSRF token found!'));
-                redirect(get_url('user/add'));
+                redirect(get_url('user/edit/'.$id));
             }
         }
         else {
             Flash::set('error', __('No CSRF token found!'));
-            redirect(get_url('user/edit'));
+            redirect(get_url('user/edit/'.$id));
         }
 
         // check if user want to change the password
@@ -233,7 +241,7 @@ class UserController extends Controller {
 
         // Check alphanumerical fields
         $fields = array('username', 'name');
-        foreach($fields as $field) {
+        foreach ($fields as $field) {
             if (!empty($data[$field]) && !Validate::alphanum_space($data[$field])) {
                 $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
             }
@@ -255,7 +263,7 @@ class UserController extends Controller {
 
         $user = Record::findByIdFrom('User', $id);
         if (isset($data['password'])) {
-            $data['password'] = AuthUser::generateHashedPassword($data['password'],$user->salt);
+            $data['password'] = AuthUser::generateHashedPassword($data['password'], $user->salt);
         }
 
         $user->setFromData($data);
@@ -263,7 +271,7 @@ class UserController extends Controller {
         if ($user->save()) {
             if (AuthUser::hasPermission('user_edit')) {
                 // now we need to add permissions
-                $data = isset($_POST['user_permission']) ? $_POST['user_permission']: array();
+                $data = isset($_POST['user_permission']) ? $_POST['user_permission'] : array();
                 UserRole::setPermissionsFor($user->id, $data);
             }
 
@@ -280,11 +288,11 @@ class UserController extends Controller {
         else {
             redirect(get_url('user'));
         }
-
     }
 
+
     public function delete($id) {
-        if ( ! AuthUser::hasPermission('user_delete')) {
+        if (!AuthUser::hasPermission('user_delete')) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url());
         }

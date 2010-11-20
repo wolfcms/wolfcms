@@ -1,26 +1,12 @@
 <?php
+
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
- * This file is part of Wolf CMS.
- *
- * Wolf CMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Wolf CMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Wolf CMS has made an exception to the GNU General Public License for plugins.
- * See exception.txt for details and the full text.
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
  */
 
 /**
@@ -42,16 +28,16 @@
  * @version 0.1
  * @since 0.1
  */
-
 class LayoutController extends Controller {
+
 
     function __construct() {
         AuthUser::load();
-        if ( ! AuthUser::isLoggedIn()) {
+        if (!AuthUser::isLoggedIn()) {
             redirect(get_url('login'));
         }
         else {
-            if ( ! AuthUser::hasPermission('layout_view')) {
+            if (!AuthUser::hasPermission('layout_view')) {
                 Flash::set('error', __('You do not have permission to access the requested page!'));
 
                 if (Setting::get('default_tab') === 'layout')
@@ -65,14 +51,16 @@ class LayoutController extends Controller {
         $this->assignToLayout('sidebar', new View('layout/sidebar'));
     }
 
+
     function index() {
         $this->display('layout/index', array(
             'layouts' => Record::findAllFrom('Layout', '1=1 ORDER BY position')
         ));
     }
 
+
     function add() {
-    // check if trying to save
+        // check if trying to save
         if (get_request_method() == 'POST')
             return $this->_add();
 
@@ -83,14 +71,29 @@ class LayoutController extends Controller {
             $layout = new Layout;
 
         $this->display('layout/edit', array(
-            'action'  => 'add',
+            'csrf_token' => SecureToken::generateToken(BASE_URL.'layout/add'),
+            'action' => 'add',
             'layout' => $layout
         ));
     }
 
+
     function _add() {
         $data = $_POST['layout'];
         Flash::set('post_data', (object) $data);
+
+        // CSRF checks
+        if (isset($_POST['csrf_token'])) {
+            $csrf_token = $_POST['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'layout/add')) {
+                Flash::set('error', __('Invalid CSRF token found!'));
+                redirect(get_url('layout/add'));
+            }
+        }
+        else {
+            Flash::set('error', __('No CSRF token found!'));
+            redirect(get_url('layout/add'));
+        }
 
         if (empty($data['name'])) {
             Flash::set('error', __('You have to specify a name!'));
@@ -104,7 +107,7 @@ class LayoutController extends Controller {
 
         $layout = new Layout($data);
 
-        if ( ! $layout->save()) {
+        if (!$layout->save()) {
             Flash::set('error', __('Layout has not been added. Name must be unique!'));
             redirect(get_url('layout/add'));
         }
@@ -120,8 +123,9 @@ class LayoutController extends Controller {
             redirect(get_url('layout/edit/'.$layout->id));
     }
 
+
     function edit($id) {
-        if ( ! $layout = Layout::findById($id)) {
+        if (!$layout = Layout::findById($id)) {
             Flash::set('error', __('Layout not found!'));
             redirect(get_url('layout'));
         }
@@ -132,16 +136,36 @@ class LayoutController extends Controller {
 
         // display things...
         $this->display('layout/edit', array(
-            'action'  => 'edit',
+            'csrf_token' => SecureToken::generateToken(BASE_URL.'layout/edit'),
+            'action' => 'edit',
             'layout' => $layout
         ));
     }
 
+
+    /**
+     * @todo Merge _add() and _edit() into one _store()
+     *
+     * @param <type> $id
+     */
     function _edit($id) {
         $layout = Record::findByIdFrom('Layout', $id);
         $layout->setFromData($_POST['layout']);
 
-        if ( ! $layout->save()) {
+        // CSRF checks
+        if (isset($_POST['csrf_token'])) {
+            $csrf_token = $_POST['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'layout/edit')) {
+                Flash::set('error', __('Invalid CSRF token found!'));
+                redirect(get_url('layout/edit/'.$id));
+            }
+        }
+        else {
+            Flash::set('error', __('No CSRF token found!'));
+            redirect(get_url('layout/edit/'.$id));
+        }
+
+        if (!$layout->save()) {
             Flash::set('error', __('Layout has not been saved. Name must be unique!'));
             redirect(get_url('layout/edit/'.$id));
         }
@@ -157,22 +181,25 @@ class LayoutController extends Controller {
             redirect(get_url('layout/edit/'.$id));
     }
 
+
     function delete($id) {
-    // find the layout to delete
+        // find the layout to delete
         if ($layout = Record::findByIdFrom('Layout', $id)) {
             if ($layout->isUsed())
-                Flash::set('error', __('Layout <b>:name</b> is in use! It CAN NOT be deleted!', array(':name'=>$layout->name)));
+                Flash::set('error', __('Layout <b>:name</b> is in use! It CAN NOT be deleted!', array(':name' => $layout->name)));
             else if ($layout->delete()) {
-                    Flash::set('success', __('Layout <b>:name</b> has been deleted!', array(':name'=>$layout->name)));
-                    Observer::notify('layout_after_delete', $layout);
-                }
-                else
-                    Flash::set('error', __('Layout <b>:name</b> has not been deleted!', array(':name'=>$layout->name)));
+                Flash::set('success', __('Layout <b>:name</b> has been deleted!', array(':name' => $layout->name)));
+                Observer::notify('layout_after_delete', $layout);
+            }
+            else
+                Flash::set('error', __('Layout <b>:name</b> has not been deleted!', array(':name' => $layout->name)));
         }
-        else Flash::set('error', __('Layout not found!'));
+        else
+            Flash::set('error', __('Layout not found!'));
 
         redirect(get_url('layout'));
     }
+
 
     function reorder() {
         parse_str($_POST['data']);
@@ -184,4 +211,4 @@ class LayoutController extends Controller {
         }
     }
 
-} // end LayoutController class
+}

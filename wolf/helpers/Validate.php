@@ -348,6 +348,7 @@ class Validate {
         return (strtotime($str) !== FALSE);
     }
 
+
     /**
      * Tests if a string conforms to a MySQL datetime format.
      *
@@ -434,6 +435,7 @@ class Validate {
         return ($utf8 === TRUE) ? (bool) preg_match('/^[-\pL\pN_]++$/uD', (string) $str) : (bool) preg_match('/^[-a-z0-9_]++$/iD', (string) $str);
     }
 
+
     /**
      * Checks whether a string consists of alphabetical characters, numbers,
      * underscores, commas, spaces and dashes only.
@@ -454,6 +456,7 @@ class Validate {
     public static function alpha_comma($str, $utf8 = FALSE) {
         return ($utf8 === TRUE) ? (bool) preg_match('/^[-\pL\pN_, ]++$/uD', (string) $str) : (bool) preg_match('/^[-a-z0-9_, ]++$/iD', (string) $str);
     }
+
 
     /**
      * Checks wheter a string is a valid slug.
@@ -485,6 +488,7 @@ class Validate {
         return ($utf8 === TRUE) ? (bool) preg_match('/^[\pL\s]++$/uD', (string) $str) : (bool) preg_match('/^[a-z\s]++$/iD', (string) $str);
     }
 
+
     /**
      * Checks whether a string consists of alphanumerical characters and spaces only.
      *
@@ -504,6 +508,7 @@ class Validate {
     public static function alphanum_space($str, $utf8 = FALSE) {
         return ($utf8 === TRUE) ? (bool) preg_match('/^[\pL\pN\s]++$/uD', (string) $str) : (bool) preg_match('/^[a-z0-9\s]++$/iD', (string) $str);
     }
+
 
     /**
      * Checks whether a string consists of digits only (no dots or dashes).
@@ -662,7 +667,7 @@ class Validate {
      */
     public static function multiple($dividend, $divisor) {
         // Note: this needs to be reversed because modulo returns a zero remainder for a true multiple
-        return !(bool) ((int) $dividend % (int) $divisor);
+        return!(bool) ((int) $dividend % (int) $divisor);
     }
 
 }
