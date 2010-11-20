@@ -288,6 +288,14 @@ if ($action == 'edit') { ?>
     $j(document).ready(function() {
         $j(".busy").spinnerSetup();
 
+        var editAction = '<?php echo $action; ?>';
+
+        if (editAction == 'add') {
+            $j('#page_title').change(function (){
+                $j('#page_slug').val(toSlug(this.value));
+            });
+        }
+
         // Store PHP value for later reference
         var partIndex = <?php echo $index; ?>;
 
@@ -408,7 +416,5 @@ if ($action == 'edit') { ?>
         });
 
     });
-    
-    Field.activate('page_title');
 // ]]>
 </script>
