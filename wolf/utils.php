@@ -60,10 +60,7 @@ function endsWith($haystack, $needle) {
  * @param string $file
  * @return boolean
  */
-function isWritable($file=null) {
-    if ($file === null)
-        return false;
-
+function isWritable($file) {
     if (!file_exists($file))
         return false;
 

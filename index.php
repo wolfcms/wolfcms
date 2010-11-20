@@ -70,8 +70,32 @@ if (!defined('THEMES_URI')) { define('THEMES_URI', URI_PUBLIC.'public/themes/');
 
 // Security checks -----------------------------------------------------------
 if (DEBUG == false && isWritable($config_file)) {
-// Windows systems always have writable config files... skip those.
+    $lock = false;
+
+    // Windows systems always have writable config files... skip those.
     if (substr(PHP_OS, 0, 3) != 'WIN') {
+        $fileinfo = posix_getpwuid(fileowner($config_file));
+        $processinfo = posix_getpwuid(posix_getuid());
+        $perms = fileperms($config_file);
+
+        // Is file owned by http server and does it have write permissions?
+        if ($fileinfo['name'] == $processinfo['name'] && ($perms & 0x0080)) {
+            $lock = true;
+        }
+
+        // Does the group have write permissions?
+        // $fileinfo['gid'] == $processinfo['gid']
+        if (($perms & 0x0010)) {
+            $lock = true;
+        }
+
+        // Does the world have write permissions?
+        if (($perms & 0x0002)) {
+            $lock = true;
+        }
+    }
+
+    if ($lock) {
         echo '<html><head><title>Wolf CMS automatically disabled!</title></head><body>';
         echo '<h1>Wolf CMS automatically disabled!</h1>';
         echo '<p>Wolf CMS has been disabled as a security precaution.</p>';
