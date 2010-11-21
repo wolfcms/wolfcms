@@ -30,7 +30,10 @@ if (!defined('INSTALL_SEQUENCE')) {
 }
 ?>
 
-<p>Thank you for your interest. This script is still unfinished. It will be finished before Wolf CMS 0.7.0 RC1 is released.</p>
+<!--p>Thank you for your interest. This script is still unfinished. It will be finished before Wolf CMS 0.7.0 RC1 is released.</p-->
+<p>
+    Upgrading:
+</p>
 <ul>
     
 <?php
@@ -47,6 +50,8 @@ try {
 catch (PDOException $error) {
     die('DB Connection failed: '.$error->getMessage());
 }
+
+echo '<li>Connection to current database made...</li>';
 
 $driver = $__CMS_CONN__->getAttribute(PDO::ATTR_DRIVER_NAME);
 
@@ -71,16 +76,18 @@ Record::getConnection()->exec("set names 'utf8'");
 $user = Record::findOneFrom('User', 'username=?', array($data['username']));
 
 if (!$user) {
-    die('Administrative user not correct.');
+    die('Administrative user not correct...');
 }
+
+echo '<li>Administrative user found.</li>';
 
 // Get the user's permissions from the DB
 $perms = array();
 $sql = 'SELECT name FROM '.TABLE_PREFIX.' permission AS permission, '.TABLE_PREFIX.'user_permission'
      . ' WHERE permission_id = permission.id AND user_id='.$user->id;
 
-$pdo = Record::getConnection();
-$stmt = $pdo->prepare($sql);
+$PDO = Record::getConnection();
+$stmt = $PDO->prepare($sql);
 $stmt->execute();
 
 while ($perm = $stmt->fetchObject())
@@ -90,17 +97,21 @@ if (!in_array('administrator', $perms)) {
     die('Administrative permissions not correct.');
 }
 
+echo '<li>Administrative user has appropriate permissions...</li>';
+
 // Check administrative user's password
 if ($user->password != sha1($data['pwd'])) {
     die('Administrative password not correct.');
 }
 
+echo '<li>Administrative password correct...</li>';
+
 // SCRIPT UNFINISHED, exiting...
-exit();
-?>
-</ul>
-<?php
+//exit();
+
+
 /***** SAFETY CHECKS DONE, CONTINUE WITH ACTUAL UPGRADE ******/
+echo '<li>Starting database upgrade...<ul>';
 
 // MYSQL
 if ($driver == 'mysql') {
@@ -111,12 +122,20 @@ if ($driver == 'mysql') {
                 ADD COLUMN last_failure datetime default NULL,
                 ADD COLUMN failure_count int(11) default NULL
                ");
+    echo '<li>Added fields to user table...</li>';
 
     $PDO->exec("ALTER TABLE ".TABLE_PREFIX."page
                 ADD COLUMN valid_until datetime default NULL
                ");
+    echo '<li>Added fields to page table...</li>';
 
     // CHANGING FIELDS
+    $PDO->exec("ALTER TABLE ".TABLE_PREFIX."user
+                MODFIY COLUMN password varchar(1024) default NULL,
+                MODFIY COLUMN language varchar(5) default NULL
+               ");
+    echo '<li>Modified fields for user table...</li>';
+
     $PDO->exec("ALTER TABLE ".TABLE_PREFIX."page
                 MODFIY COLUMN behavior_id varchar(25) NOT NULL default ''
                ");
@@ -124,11 +143,7 @@ if ($driver == 'mysql') {
     $PDO->exec("ALTER TABLE ".TABLE_PREFIX."page
                 MODFIY COLUMN position mediumint(6) unsigned default '0'
                ");
-
-    $PDO->exec("ALTER TABLE ".TABLE_PREFIX."user
-                MODFIY COLUMN password varchar(1024) default NULL,
-                MODFIY COLUMN language varchar(5) default NULL
-               ");
+    echo '<li>Modified fields for page table...</li>';
 
     // ADDING TABLES
  	$PDO->exec("CREATE TABLE ".TABLE_PREFIX."secure_token (
@@ -140,6 +155,7 @@ if ($driver == 'mysql') {
                     UNIQUE KEY username_url (username,url)
                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8
                ");
+    echo '<li>Added table: secure_token...</li>';
 
     $PDO->exec("CREATE TABLE ".TABLE_PREFIX."role (
                     id int(11) NOT NULL auto_increment,
@@ -148,6 +164,7 @@ if ($driver == 'mysql') {
                     UNIQUE KEY name (name)
                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8
                ");
+    echo '<li>Added table: role...</li>';
 
     $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user_role (
                     user_id int(11) NOT NULL,
@@ -155,6 +172,7 @@ if ($driver == 'mysql') {
                     UNIQUE KEY user_id (user_id,role_id)
                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
                ");
+    echo '<li>Added table: user_role...</li>';
 
     $PDO->exec("CREATE TABLE ".TABLE_PREFIX."role_permission (
                     role_id int(11) NOT NULL,
@@ -162,9 +180,11 @@ if ($driver == 'mysql') {
                     UNIQUE KEY user_id (role_id,permission_id)
                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8
                ");
+    echo '<li>Added table: role_permission...</li>';
 
     // DELETING TABLES
     $PDO->exec("DROP TABLE ".TABLE_PREFIX."user_permission");
+    echo '<li>Removed table: user_permission...</li>';
 }
 
 // SQLITE
@@ -178,3 +198,4 @@ if ($driver == 'pgsql') {
 }
 
 ?>
+</ul></li></ul>

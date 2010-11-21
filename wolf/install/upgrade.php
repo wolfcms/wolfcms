@@ -32,12 +32,12 @@ $drivers = PDO::getAvailableDrivers();
     </p>
     <ul>
         <li>Make sure you have created a BACKUP of your database before proceeding.</li>
-        <li>This will only touch the CORE database tables, not plugin tables.</li>
+        <li>This will only touch the CORE database tables, not third party plugin tables.</li>
         <li>This is only for upgrades from 0.6.0 to 0.7.0.</li>
-        <li>If you have created custom user groups, you should probably <strong>NOT</strong> upgrade using this script.
+        <li>If you have created custom user groups, you will have to <strong>recreate</strong> them after upgrading.
             <ul>
                 <li>A custom user group is any group except: administrator, developer, editor</li>
-                <li>The user_permission table will be <strong>deleted</strong>.</li>
+                <li>The current user_permission table will be <strong>deleted</strong>.</li>
             </ul>
         </li>
 
