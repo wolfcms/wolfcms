@@ -36,7 +36,8 @@ $drivers = PDO::getAvailableDrivers();
         <li>This is only for upgrades from 0.6.0 to 0.7.0.</li>
         <li>If you have created custom user groups, you will have to <strong>recreate</strong> them after upgrading.
             <ul>
-                <li>A custom user group is any group except: administrator, developer, editor</li>
+                <li>A custom user group is any group except: administrator, developer, editor.</li>
+                <li>The current permission table will be emptied.</li>
                 <li>The current user_permission table will be <strong>deleted</strong>.</li>
             </ul>
         </li>
