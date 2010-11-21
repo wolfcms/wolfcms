@@ -9,6 +9,7 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Added unix socket option to installer - issue 204
 + Added Validate helper.
 + Added tougher validation of fields upon form submit.
 + Added valid_until field and Archived status for Page. - issue 115

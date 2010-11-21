@@ -32,6 +32,7 @@ $drivers = PDO::getAvailableDrivers();
                     $('#help-db-name').html('Required. Enter the <strong>absolute</strong> path to the database file.<br/>You are <strong>strongly</strong> advised to keep the Wolf CMS SQLite database outside of the webserver root.');
                     $('#help-db-prefix').html('Optional. Usefull to prevent conflicts if you have, or plan to have, multiple Wolf installations with a single database.');
                     $('#row-table-prefix label').addClass('optional');
+                    $('#row-db-socket').hide();
                     $('#row-db-host').hide();
                     $('#row-db-port').hide();
                     $('#row-db-user').hide();
@@ -52,6 +53,7 @@ $drivers = PDO::getAvailableDrivers();
                         $('#config_table_prefix').val('wolf_');
                         $('#help-db-prefix').html('<strong>Required.</strong> When using PostgreSQL, you have to specify a table prefix.');
                     }
+                    $('#row-db-socket').show();
                     $('#row-db-host').show();
                     $('#row-db-port').show();
                     $('#row-db-user').show();
@@ -114,6 +116,11 @@ $drivers = PDO::getAvailableDrivers();
                 <td class="label"><label class="optional" for="config_db_port">Port</label></td>
                 <td class="field"><input class="textbox" id="config_db_port" maxlength="10" name="config[db_port]" size="50" type="text" value="" /></td>
                 <td class="help">Optional. Default MySQL: 3306; default PostgreSQL: 5432</td>
+            </tr>
+            <tr id="row-db-socket">
+                <td class="label"><label for="config_db_socket">Database unix socket</label></td>
+                <td class="field"><input class="textbox" id="config_db_socket" maxlength="100" name="config[db_socket]" size="50" type="text" value="" /></td>
+                <td class="help">Optional. When filled, database servername and port are ignored. (/path/to/socket)</td>
             </tr>
             <tr id="row-db-user">
                 <td class="label"><label for="config_db_user">Database user</label></td>
