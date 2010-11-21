@@ -263,6 +263,9 @@ class UserController extends Controller {
 
         $user = Record::findByIdFrom('User', $id);
         if (isset($data['password'])) {
+            if (empty($user->salt)) {
+                $user->salt = AuthUser::generateSalt();
+            }
             $data['password'] = AuthUser::generateHashedPassword($data['password'], $user->salt);
         }
 
