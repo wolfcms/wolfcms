@@ -86,18 +86,19 @@ class SnippetController extends Controller {
      */
     private function _add() {
         $data = $_POST['snippet'];
-        Flash::set('post_data', (object) $data);
 
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
             $csrf_token = $_POST['csrf_token'];
             if (!SecureToken::validateToken($csrf_token, BASE_URL.'snippet/add')) {
+                Flash::set('post_data', (object) $data);
                 Flash::set('error', __('Invalid CSRF token found!'));
                 Observer::notify('csrf_token_invalid', AuthUser::getUserName());
                 redirect(get_url('snippet/add'));
             }
         }
         else {
+            Flash::set('post_data', (object) $data);
             Flash::set('error', __('No CSRF token found!'));
             Observer::notify('csrf_token_not_found', AuthUser::getUserName());
             redirect(get_url('snippet/add'));
@@ -106,6 +107,7 @@ class SnippetController extends Controller {
         $snippet = new Snippet($data);
 
         if ( ! $snippet->save()) {
+            Flash::set('post_data', (object) $data);
             Flash::set('error', __('Snippet has not been added. Name must be unique!'));
             redirect(get_url('snippet', 'add'));
         }
@@ -135,7 +137,8 @@ class SnippetController extends Controller {
         $snippet = Flash::get('post_data');
 
         if (empty($snippet)) {
-            if ( ! $snippet = Snippet::findById($id)) {
+            $snippet = Snippet::findById($id);
+            if ( !$snippet ) {
                 Flash::set('error', __('Snippet not found!'));
                 redirect(get_url('snippet'));
             }
@@ -185,6 +188,7 @@ class SnippetController extends Controller {
         $snippet = new Snippet($data);
 
         if ( ! $snippet->save()) {
+            Flash::set('post_data', (object) $data);
             Flash::set('error', __('Snippet :name has not been saved. Name must be unique!', array(':name'=>$snippet->name)));
             redirect(get_url('snippet/edit/'.$id));
         }

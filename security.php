@@ -211,10 +211,12 @@ ol, ul {
         $fatals['config file writable, debug off'] = 'Wolf CMS has automatically made itself unavailable because the configuration file was found to be writable. Until this problem is corrected, only this screen will be available.';
     }
 
-    $fileinfo = posix_getpwuid(fileowner($config_file));
-    $processinfo = posix_getpwuid(posix_getuid());
-    if (substr(PHP_OS, 0, 3) != 'WIN' && ($fileinfo['name'] == $processinfo['name'] || $fileinfo['gid'] == $processinfo['gid'])) {
-        $fatals['config file owned, debug off'] = 'The config file is owned by the same user/group under whom the HTTP server is running. This is never a good idea.';
+    if (substr(PHP_OS, 0, 3) != 'WIN') {
+        $fileinfo = posix_getpwuid(fileowner($config_file));
+        $processinfo = posix_getpwuid(posix_getuid());
+        if (($fileinfo['name'] == $processinfo['name'] || $fileinfo['gid'] == $processinfo['gid'])) {
+            $fatals['config file owned, debug off'] = 'The config file is owned by the same user/group under whom the HTTP server is running. This is never a good idea.';
+        }
     }
 
     if (defined('DEBUG') && false === DEBUG && file_exists(CORE_ROOT.'/../security.php')) {

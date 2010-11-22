@@ -50,7 +50,7 @@ else {
 }
 
 // Are we in frontend or backend?
-if (startsWith($admin_check, 'admin') || startsWith($admin_check, '/admin') || isset($_GET['WOLFAJAX'])) {
+if (startsWith($admin_check, ADMIN_DIR) || startsWith($admin_check, '/'.ADMIN_DIR) || isset($_GET['WOLFAJAX'])) {
     define('CMS_BACKEND', true);
     if (defined('USE_HTTPS') && USE_HTTPS) {
         $url = str_replace('http://', 'https://', $url);
