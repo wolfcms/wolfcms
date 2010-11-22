@@ -1,28 +1,13 @@
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
- * This file is part of Wolf CMS.
- *
- * Wolf CMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Wolf CMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Wolf CMS has made an exception to the GNU General Public License for plugins.
- * See exception.txt for details and the full text.
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
  */
 
 /* Reset ------------------------------------------------------------------ */
-
 body {background-color: #221E1E;}
 html,body,div,ul,ol,li,dl,dt,dd,form,fieldset,input,select,textarea,pre,code,
 h1,h2,h3,h4,h5,h6,p,blockquote,hr,table,th,td {margin: 0; padding: 0;}
@@ -32,13 +17,12 @@ html,body,a img {border: 0;}
 table {border-collapse:collapse; border-spacing:0;}
 
 /* General ---------------------------------------------------------------- */
-
 body {
   font-size: 95%;
   font-family: "Lucida Grande", "Bitstream Vera Sans", Helvetica, Verdana, Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: /*#6ad;*/ #e5e5e5;
+  background-color: #e5e5e5;
   color: #000;
 }
 
@@ -48,7 +32,6 @@ h3 { font-size: 130%; margin: 1.25em 0 .5em; }
 a { color: #147; }
 a:hover { text-decoration: none; }
 p { margin: 1.2em 0 .6em; }
-/*h1 { margin: 0 0 .5em; font-size: 2em; }*/
 h1 { margin: -20px -20px 0; padding: 10px 20px; font-size: 1.5em; text-shadow: -1px 2px 3px #bbb; }
 h2 { margin: 1em 0 .5em; font-size: 1.6em; }
 h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
@@ -62,13 +45,11 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 .handle_copy { display: none; cursor: move; }
 
 /* Header ----------------------------------------------------------------- */
-
 #header {
-  background-color: /*#123;*/ #483E37;
+  background-color: #483E37;
   color: #fff;
   width: 100%;
   padding-top: 1px;
-  /*padding-bottom: 20px;*/
 }
 #header a {
   color: #fff;
@@ -89,7 +70,6 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 }
 
 /* Navigation ------------------------------------------------------------- */
-
 #mainTabs {
   margin: 0 17px 0 20px;
   height: 28px;
@@ -115,7 +95,6 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 
   /* Border-radius not implemented yet */
   -moz-border-radius: 6px;
-  -moz-border-bottom-radius: 0px;
   -moz-border-radius-bottomright: 0px;
   -moz-border-radius-bottomleft: 0px;
   -webkit-border-radius: 6px;
@@ -141,7 +120,6 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 }
 
 /* Main ------------------------------------------------------------------- */
-
 #main {
   width: 100%;
   overflow:hidden;
@@ -154,10 +132,10 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   width: 70%;
   font-size: 95%;
   background-color: #fff;
-  border-bottom: 2px solid #76A83A; /*#58b;*/
+  border-bottom: 2px solid #76A83A;
 
   /* Border-radius implemented. */
-  border-radius: 6px
+  border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
 }
@@ -191,7 +169,6 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 }
 
 /* Footer ----------------------------------------------------------------- */
-
 #footer {
     clear: both;
     font-size: 80%;
@@ -227,7 +204,6 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 }
 
 /* Form Elements ---------------------------------------------------------- */
-
 .form-area {
   background-color: #9ce;
   margin-left: -20px;
@@ -239,7 +215,6 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 
 
 /* Tabs ------------------------------------------------------------------- */
-
 #metainfo-tabs { margin: 10px 0 5px 0; }
 #part-tabs { margin: 35px 0 5px 0; }
 .tabs {
@@ -259,7 +234,6 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 
   /* Border-radius not implemented yet */
   -moz-border-radius: 6px;
-  -moz-border-bottom-radius: 0px;
   -moz-border-radius-bottomright: 0px;
   -moz-border-radius-bottomleft: 0px;
   -webkit-border-radius: 6px;
@@ -279,7 +253,6 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   background-color: #fff;
   margin-top: 4px;
 
-
   /* Border-radius not implemented yet */
   -moz-border-radius: 0 6px 6px 6px;
   -webkit-border-radius: 0 6px 6px 6px;
@@ -291,7 +264,6 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 }
 
 /* Sidebar ---------------------------------------------------------------- */
-
 #sidebar-wrapper {
   float: left;
   margin: 1% 0;
@@ -407,7 +379,6 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 
 
 /* Site links top right --------------------------------------------------- */
-
 #site-links {
   color: #899;
   font-size: 90%;
@@ -427,7 +398,6 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 }
 
 /* Messages --------------------------------------------------------------- */
-
 #info, #error, #success {
 /* css for fade positioning -- start */
   position: absolute;
@@ -467,7 +437,6 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 }
 
 /* Index table, list ------------------------------------------------------ */
-
 .index-def {
   background-color: #f5f5f5;
   font-size: 90%;
@@ -550,9 +519,7 @@ table.index td.note {
   right: 10px;
 }
 
-
 /* Site Map --------------------------------------------------------------- */
-
 #site-map-root .node.level-0 .page,
 #site-map .node.level-1 .page,
 #site-map .node.level-2 .page {
@@ -647,8 +614,8 @@ table.index td.note {
 #site-map .status.draft-status { color: #c00; }
 #site-map .status.published-status { color: #000; }
 #site-map .status.hidden-stats { color: #0c0; }
-#snippet_1 .tag, #snippets .tag { font-size:10px; position: absolute; top: 10px; right: 237px; width:300px }
 
+#snippet_1 .tag, #snippets .tag { font-size:10px; position: absolute; top: 10px; right: 237px; width:300px }
 
 /* @todo CLEANUP */
 .form-area h3 {
@@ -761,73 +728,6 @@ table.fieldset .error-with-field small {
   color: red;
 }
 
-/* Tabs TO BE REMOVED -------------------------------------------------------------------
-
-.tabs {
-  width: 100%;
-  margin-top: 10px;
-  margin-right: -4px;
-  margin-bottom: 6px;
-}
-
-.tabs .tab {
-  display: inline;
-}
-
-.tabs a.tab {
-  display: inline-block;
-  font-size: 100%;
-  text-align: left;
-  margin-right: 10px;
-  margin-bottom: -6px;
-  padding: 0.40em 1em;
-  text-decoration: none;
-  background-color: #e5e5e5;
-  color: #000;
-  outline: none;
-
-  -moz-border-radius: 6px 6px 0px 0px;
-  -webkit-border-radius: 6px;
-  -webkit-border-bottom-right-radius: 0px;
-  -webkit-border-bottom-left-radius: 0px;
-}
-.tabs a.tab.here {
-  background-color: #fff;
-  font-weight: bold;
-}
-.tab_toolbar {
-  float: right;
-  margin-top: .28em;
-}
-.tab_toolbar img { padding-bottom: 2px; }
-
-.pages {
-  background-color: #fff;
-  width: 100%;
-  clear: both;
-
-  -moz-border-radius: 6px;
-  -moz-border-radius-topleft: 0px;
-  -webkit-border-radius: 6px;
-  -webkit-border-top-left-radius: 0px;
-
-  text-shadow: black;
-}
-
-#div-title, #div-metadata {
-    margin: 0px 20px;
-    padding: 10px 0px;
-}
-
-.pages .page {
-  padding: 20px;
-}
-
-.pages label {
-  font-size: 85%;
-  font-weight: normal;
-} */
-
 #meta-pages td {
   background-color: #fff;
   padding: 6px;
@@ -857,13 +757,9 @@ table.fieldset .error-with-field small {
   width: 100%;
   height: 280px;
   border: 1px solid #ccc;
-  /* Remove: conflict with Markitup css:
-  font-family: Monaco, Consolas, "Courier New", monospace, serif;
-  font-size: 85%; */
 }
 
 /* Popups ----------------------------------------------------------------- */
-
 #content .popup {
   background-color: white;
   border: 5px solid silver;
@@ -888,7 +784,6 @@ table.fieldset .error-with-field small {
 }
 
 /* Calendar (Date picker) ------------------------------------------------- */
-
 .dpDiv {
   border: 1px solid #ccc;
   background-color: #eee;
@@ -940,7 +835,6 @@ table.fieldset .error-with-field small {
   color: #fff;
 }
 
-
 /* the table cell that holds the name of the month and the year */
 .dpTitleTD {
 }
@@ -953,12 +847,10 @@ table.fieldset .error-with-field small {
   cursor: pointer;
 }
 
-
 /* the table cell that holds the "This Month" or "Close" button at the bottom */
 .dpTodayButtonTD {
   background: #ddd;
 }
-
 
 /* a table cell that holds the names of days of the week (Mo, Tu, We, etc.) */
 .dpDayTD {
@@ -967,12 +859,10 @@ table.fieldset .error-with-field small {
   border-bottom: 1px solid #ccc;
 }
 
-
 /* additional style information for the text that indicates the month and year */
 .dpTitleText {
   font-weight: bold;
 }
-
 
 /* additional style information for the cell that holds a highlighted day (usually either today's date or the current date field value) */
 .dpDayHighlight {
@@ -980,7 +870,6 @@ table.fieldset .error-with-field small {
   font-weight: bold;
   background: #fff;
 }
-
 
 /* the forward/backward buttons at the top */
 .dpButton {
@@ -991,7 +880,6 @@ table.fieldset .error-with-field small {
   cursor: pointer;
 }
 
-
 /* the "This Month" and "Close" buttons at the bottom */
 .dpTodayButton {
   font-size: 10px;
@@ -1000,8 +888,6 @@ table.fieldset .error-with-field small {
   color: #666;
   cursor: pointer;
 }
-
-
 
 /* Z-index of #mask must lower than #boxes .window */
 #mask {
@@ -1053,9 +939,6 @@ table.fieldset .error-with-field small {
 
 /* Customize your modal window here, you can add background image too */
 #boxes #dialog {
-  idth:375px;
-  eight:203px;
   background-color: #fff;
   color: #000;
 }
-

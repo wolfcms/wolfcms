@@ -45,12 +45,11 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
 
     <link rel="favourites icon" href="<?php echo URI_PUBLIC; ?>wolf/admin/images/favicon.ico" />
     <link href="<?php echo URI_PUBLIC; ?>wolf/admin/stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
-    <link href="<?php echo URI_PUBLIC; ?>wolf/admin/stylesheets/toolbar.css" media="screen" rel="Stylesheet" type="text/css" />
     <link href="<?php echo URI_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
 
     <!-- IE6 PNG support fix -->
     <!--[if lt IE 7]>
-        <script type="text/javascript" charset="utf-8" src="<?php echo URL_PUBLIC . ADMIN_DIR; ?>/javascripts/unitpngfix.js"></script>
+        <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/unitpngfix.js"></script>
     <![endif]-->
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/cp-datepicker.js"></script>
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/wolf.js"></script>

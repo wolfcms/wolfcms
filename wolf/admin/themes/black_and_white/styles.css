@@ -1,28 +1,13 @@
-/**
+/*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
- * This file is part of Wolf CMS.
- *
- * Wolf CMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Wolf CMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Wolf CMS has made an exception to the GNU General Public License for plugins.
- * See exception.txt for details and the full text.
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
  */
 
 /* General ---------------------------------------------------------------- */
-
 body { background-color: #e5e5e5; }
 
 h3 { }
@@ -35,22 +20,18 @@ h2 { }
 .warning { color: #D42B27; }
 
 /* Header ----------------------------------------------------------------- */
-
 #header { color: #fff; background-color: #242424; }
 #header a { color: #fff; }
 
 /* Navigation ------------------------------------------------------------- */
-
 #mainTabs a:link, #mainTabs a:visited { color: #eee; background-color: #323232; border-color: #454545; }
 #mainTabs a:hover { color: #242424; background-color: #999; border-color: #777; }
 #mainTabs a:link.current, #mainTabs a:visited.current { color: #242424; background-color: #e5e5e5; border-color: #e5e5e5; }
 
 /* Content ---------------------------------------------------------------- */
-
 #content-wrapper { background-color: #fff; border-color: #C7C7C7; }
 
 /* Sidebar ---------------------------------------------------------------- */
-
 #sidebar h2 { border-color: #D8E0EC; }
 #sidebar .box { background-color: #fff; border-color: #9BB5D0; }
 #sidebar p.button { background-color: #6184B2; }
@@ -61,24 +42,20 @@ h2 { }
 #sidebar .optional { color: #666; }
 
 /* Footer ----------------------------------------------------------------- */
-
 #footer { color: #555; }
 #footer .stats { color: #777; }
 
 /* Site links ------------------------------------------------------------- */
-
 #site-links { color: #888; }
 #site-links a, #site-links a:visited { color: #e5e5e5; }
 
 /* Messages --------------------------------------------------------------- */
-
 #info { background: #EDFE86; }
 #error { background: #a22; color: #fff; }
 #error a { color: #fff; font-weight: bold; }
 #success { background: #cfc; color: #051; }
 
 /* Index table ------------------------------------------------------------ */
-
 table.index { border-color: #ddd; }
 table.index th { background-color: #f5f5f5; }
 table.index td { border-color: #ddd; }
@@ -88,7 +65,6 @@ table.index .node .snippet a, table.index .node .snippet a:visited, table.index 
 table.index td.note { color: silver; }
 
 /* Site Map --------------------------------------------------------------- */
-
 #site-map-root .page a .title, #site-map .page a .title, #site-map .node .page a:visited .title { color: #000; }
 #site-map .node .page .title.protected { color: #9eb3bf; }
 #site-map .node .page .info { color: #9eb3bf; }
@@ -103,7 +79,6 @@ table.index td.note { color: silver; }
 #site-map .status.hidden-stats { color: #0c0; }
 
 /* Form Elements ---------------------------------------------------------- */
-
 .form-area { background-color: #ddd; }
 .form-area .error-with-field .error { color: #f00; }
 table.fieldset td { background-color: white; border-color: #ccc; }
@@ -112,7 +87,6 @@ table.fieldset td.help { background-color: #eee; }
 table.fieldset .error-with-field small { color: red; }
 
 /* Tabs ------------------------------------------------------------------- */
-
 #tabs-meta .tab, #tabs .tab { background-color: #ddd; color: #000; }
 #tabs-meta .tab.here,
 #tabs .tab.here { background-color: #fff; }
@@ -126,14 +100,12 @@ table.fieldset .error-with-field small { color: red; }
 
 
 /* Popups ----------------------------------------------------------------- */
-
 #content .popup { background-color: white; border-color: silver; }
 #content .popup .busy { }
 #content .popup h3 { }
 #content .popup .close-link { color: #999; }
 
 /* Comments --------------------------------------------------------------- */
-
 #comments-def div { background-color: #f5f5f5; border-color: #ddd; }
 #comments li { border-color: #ddd; }
 #comments li:hover { background-color: #eee; }
@@ -145,7 +117,6 @@ table.fieldset .error-with-field small { color: red; }
 #comments .approve .infos { color: #8b8; }
 
 /* Calendar (Date picker) ------------------------------------------------- */
-
 .dpDiv { background-color: #eee; border-color: #ccc; }
 /* the table (within the div) that holds the date picker calendar */
 .dpTable { color: #333; }

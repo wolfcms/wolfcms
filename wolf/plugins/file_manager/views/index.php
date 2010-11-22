@@ -1,26 +1,11 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2008-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
- * Copyright (C) 2008,2009 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
- * This file is part of Wolf CMS.
- *
- * Wolf CMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Wolf CMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Wolf CMS has made an exception to the GNU General Public License for plugins.
- * See exception.txt for details and the full text.
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
  */
 
 /* Security measure */
@@ -79,8 +64,8 @@ if (!defined('IN_CMS')) { exit(); }
       <td><code><?php echo $file->perms; ?> (<a href="#" onclick="toggle_chmod_popup('<?php echo $dir.$file->name; ?>', '<?php echo $file->chmod; ?>'); return false;" title="<?php echo __('Change mode'); ?>"><?php echo $file->chmod; ?></a>)</code></td>
       <td><code><?php echo $file->mtime; ?></code></td>
       <td>
-        <a href="#" onclick="toggle_rename_popup('<?php echo $dir.$file->name; ?>', '<?php echo $file->name; ?>'); return false;" title="<?php echo __('Rename'); ?>"><img src="/wolf/admin/images/icon-rename.gif" alt="rename icon" /></a>
-        <a href="<?php echo get_url('plugin/file_manager/delete/'.$dir.$file->name); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete?'); ?> <?php echo $file->name; ?>?');"><img src="/wolf/admin/images/icon-remove.gif" alt="<?php echo __('delete file icon'); ?>" title="<?php echo __('Delete file'); ?>" /></a>
+        <a href="#" onclick="toggle_rename_popup('<?php echo $dir.$file->name; ?>', '<?php echo $file->name; ?>'); return false;" title="<?php echo __('Rename'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-rename.gif" alt="rename icon" /></a>
+        <a href="<?php echo get_url('plugin/file_manager/delete/'.$dir.$file->name); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete?'); ?> <?php echo $file->name; ?>?');"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove.gif" alt="<?php echo __('delete file icon'); ?>" title="<?php echo __('Delete file'); ?>" /></a>
       </td>
     </tr>
 <?php endforeach; ?>
