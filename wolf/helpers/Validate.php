@@ -464,7 +464,7 @@ class Validate {
      * @param string $str Slug
      */
     public static function slug($str, $utf8 = FALSE) {
-        return ($utf8 === TRUE) ? (bool) preg_match('/^[-\pLl_]++$/uD', (string) $str) : (bool) preg_match('/^[-a-z_]++$/D', (string) $str);
+        return ($utf8 === TRUE) ? (bool) preg_match('/^[-\pLl\pN_]++$/uD', (string) $str) : (bool) preg_match('/^[-a-z0-9_]++$/D', (string) $str);
     }
 
 
