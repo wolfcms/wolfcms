@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -29,11 +30,14 @@
  * @since 0.1
  */
 class PageController extends Controller {
+
+
     public function __construct() {
         AuthUser::load();
-        if ( ! AuthUser::isLoggedIn())
+        if (!AuthUser::isLoggedIn())
             redirect(get_url('login'));
     }
+
 
     public function index() {
         $this->setLayout('backend');
@@ -42,6 +46,7 @@ class PageController extends Controller {
             'content_children' => $this->children(1, 0, true)
         ));
     }
+
 
     /**
      * Action to add a page.
@@ -72,9 +77,9 @@ class PageController extends Controller {
                 $page_parts = array();
                 foreach ($big_sister_parts as $parts) {
                     $page_parts[] = new PagePart(array(
-                        'name' => $parts->name,
-                        'filter_id' => Setting::get('default_filter_id')
-                    ));
+                                'name' => $parts->name,
+                                'filter_id' => Setting::get('default_filter_id')
+                            ));
                 }
             }
             else {
@@ -85,16 +90,17 @@ class PageController extends Controller {
         // Display actual view.
         $this->setLayout('backend');
         $this->display('page/edit', array(
-            'action'     => 'add',
+            'action' => 'add',
             'csrf_token' => SecureToken::generateToken(BASE_URL.'page/add'),
-            'page'       => $page,
-            'tags'       => array(),
-            'filters'    => Filter::findAll(),
-            'behaviors'  => Behavior::findAll(),
+            'page' => $page,
+            'tags' => array(),
+            'filters' => Filter::findAll(),
+            'behaviors' => Behavior::findAll(),
             'page_parts' => $page_parts,
-            'layouts'    => Record::findAllFrom('Layout'))
+            'layouts' => Record::findAllFrom('Layout'))
         );
     }
+
 
     /**
      * Ajax action to add a part.
@@ -102,12 +108,13 @@ class PageController extends Controller {
     public function addPart() {
         header('Content-Type: text/html; charset: utf-8');
 
-        $data = isset($_POST['part']) ? $_POST['part']: array();
-        $data['name'] = isset($data['name']) ? trim($data['name']): '';
-        $data['index'] = isset($data['index']) ? $data['index']: 1;
+        $data = isset($_POST['part']) ? $_POST['part'] : array();
+        $data['name'] = isset($data['name']) ? trim($data['name']) : '';
+        $data['index'] = isset($data['index']) ? $data['index'] : 1;
 
         echo $this->_getPartView($data['index'], $data['name']);
     }
+
 
     /**
      * Action to edit a page.
@@ -126,18 +133,18 @@ class PageController extends Controller {
 
         $page = Page::findById($id);
 
-        if ( ! $page) {
+        if (!$page) {
             Flash::set('error', __('Page not found!'));
             redirect(get_url('page'));
         }
 
         // check for protected page and editor user
-        if ( ! AuthUser::hasPermission('page_edit') && $page->is_protected) {
+        if (!AuthUser::hasPermission('page_edit') && $page->is_protected) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url('page'));
         }
 
-		// Encode the string to prevent page title input break
+        // Encode the string to prevent page title input break
         // Unless people specify "Allow html in title" in the backend.
         // Then only replace double quotes.
         if (!Setting::get('allow_html_title')) {
@@ -156,16 +163,17 @@ class PageController extends Controller {
         // display things ...
         $this->setLayout('backend');
         $this->display('page/edit', array(
-            'action'     => 'edit',
+            'action' => 'edit',
             'csrf_token' => SecureToken::generateToken(BASE_URL.'page/edit'),
-            'page'       => $page,
-            'tags'       => $page->getTags(),
-            'filters'    => Filter::findAll(),
-            'behaviors'  => Behavior::findAll(),
+            'page' => $page,
+            'tags' => $page->getTags(),
+            'filters' => Filter::findAll(),
+            'behaviors' => Behavior::findAll(),
             'page_parts' => $page_parts,
-            'layouts'    => Record::findAllFrom('Layout', '1=1 ORDER BY position'))
+            'layouts' => Record::findAllFrom('Layout', '1=1 ORDER BY position'))
         );
     }
+
 
     /**
      * Used to delete a page.
@@ -175,12 +183,12 @@ class PageController extends Controller {
      * @param int $id Id of page to delete
      */
     public function delete($id) {
-    // security (dont delete the root page)
+        // security (dont delete the root page)
         if ($id > 1) {
-        // find the page to delete
+            // find the page to delete
             if ($page = Record::findByIdFrom('Page', $id)) {
-            // check for permission to delete this page
-                if ( ! AuthUser::hasPermission('page_delete') && $page->is_protected) {
+                // check for permission to delete this page
+                if (!AuthUser::hasPermission('page_delete') && $page->is_protected) {
                     Flash::set('error', __('You do not have permission to access the requested page!'));
                     redirect(get_url('page'));
                 }
@@ -190,16 +198,20 @@ class PageController extends Controller {
 
                 if ($page->delete()) {
                     Observer::notify('page_delete', $page);
-                    Flash::set('success', __('Page :title has been deleted!', array(':title'=>$page->title)));
+                    Flash::set('success', __('Page :title has been deleted!', array(':title' => $page->title)));
                 }
-                else Flash::set('error', __('Page :title has not been deleted!', array(':title'=>$page->title)));
+                else
+                    Flash::set('error', __('Page :title has not been deleted!', array(':title' => $page->title)));
             }
-            else Flash::set('error', __('Page not found!'));
+            else
+                Flash::set('error', __('Page not found!'));
         }
-        else Flash::set('error', __('Action disabled!'));
+        else
+            Flash::set('error', __('Action disabled!'));
 
         redirect(get_url('page'));
     }
+
 
     /**
      * Action to return a list View of all first level children of a page.
@@ -212,7 +224,7 @@ class PageController extends Controller {
      * @return View
      */
     function children($parent_id, $level, $return=false) {
-        $expanded_rows = isset($_COOKIE['expanded_rows']) ? explode(',', $_COOKIE['expanded_rows']): array();
+        $expanded_rows = isset($_COOKIE['expanded_rows']) ? explode(',', $_COOKIE['expanded_rows']) : array();
 
         // get all children of the page (parent_id)
         $childrens = Page::childrenOf($parent_id);
@@ -222,19 +234,20 @@ class PageController extends Controller {
             $childrens[$index]->is_expanded = in_array($child->id, $expanded_rows);
 
             if ($childrens[$index]->is_expanded)
-                $childrens[$index]->children_rows = $this->children($child->id, $level+1, true);
+                $childrens[$index]->children_rows = $this->children($child->id, $level + 1, true);
         }
 
         $content = new View('page/children', array(
-            'childrens' => $childrens,
-            'level'    => $level+1,
-        ));
+                    'childrens' => $childrens,
+                    'level' => $level + 1,
+                ));
 
         if ($return)
             return $content;
 
         echo $content;
     }
+
 
     /**
      * Ajax action to reorder (page->position) a page.
@@ -245,15 +258,14 @@ class PageController extends Controller {
      */
     function reorder() {
         //throw new Exception('TEST-'.print_r($_POST['data'], true));
-		$pages = $_POST['page'];
+        $pages = $_POST['page'];
 
-		$i = 1;
+        $i = 1;
         foreach ($pages as $page_id => $parent_id) {
-        	if($parent_id == 0)
-        	{
-        		$parent_id = 1;
-        	}
-        	
+            if ($parent_id == 0) {
+                $parent_id = 1;
+            }
+
             $page = Record::findByIdFrom('Page', $page_id);
             $page->position = (int) $i;
             $page->parent_id = (int) $parent_id;
@@ -261,6 +273,7 @@ class PageController extends Controller {
             $i++;
         }
     }
+
 
     /**
      * Ajax action to copy a page or page tree.
@@ -270,31 +283,31 @@ class PageController extends Controller {
         $original_id = $_POST['originalid'];
 
         $page = Record::findByIdFrom('Page', $original_id);
-        $new_root_id = Page::cloneTree($page, $page->parent_id);      
-        
+        $new_root_id = Page::cloneTree($page, $page->parent_id);
+
         $page = Record::findByIdFrom('Page', $new_root_id);
         $page->position += 1;
         $page->created_on_time = time();
         $page->published_on_time = $page->created_on_time;
         $page->save();
-        
-        $newUrl = URL_PUBLIC; 
-        $newUrl .= (USE_MOD_REWRITE == false) ? '?' : ''; 
-        $newUrl .= $page->getUri(); 
-        $newUrl .= ($page->getUri() != '') ? URL_SUFFIX : '';
-        
-        $newData = array($new_root_id, 
-        				 get_url('page/edit/'.$new_root_id),
-        				 $page->title(),
-        				 $page->slug(),
-        				 $newUrl,
-        				 get_url('page/add', $new_root_id),
-        				 get_url('page/delete/'.$new_root_id));
-       echo implode('||', $newData);
+
+        $newUrl = URL_PUBLIC;
+        $newUrl .= ( USE_MOD_REWRITE == false) ? '?' : '';
+        $newUrl .= $page->getUri();
+        $newUrl .= ( $page->getUri() != '') ? URL_SUFFIX : '';
+
+        $newData = array($new_root_id,
+            get_url('page/edit/'.$new_root_id),
+            $page->title(),
+            $page->slug(),
+            $newUrl,
+            get_url('page/add', $new_root_id),
+            get_url('page/delete/'.$new_root_id));
+        echo implode('||', $newData);
     }
 
-
     //  Private methods  -----------------------------------------------------
+
 
     /**
      *
@@ -306,16 +319,17 @@ class PageController extends Controller {
      */
     private function _getPartView($index=1, $name='', $filter_id='', $content='') {
         $page_part = new PagePart(array(
-            'name' => $name,
-            'filter_id' => $filter_id,
-            'content' => $content)
+                    'name' => $name,
+                    'filter_id' => $filter_id,
+                    'content' => $content)
         );
 
         return $this->render('page/part_edit', array(
-        'index'     => $index,
-        'page_part' => $page_part
+            'index' => $index,
+            'page_part' => $page_part
         ));
     }
+
 
     /**
      * Runs checks and stores a page.
@@ -326,11 +340,11 @@ class PageController extends Controller {
     private function _store($action, $id=false) {
         // Sanity checks
         if ($action == 'edit' && !$id)
-            throw new Exception ('Trying to edit page when $id is false.');
+            throw new Exception('Trying to edit page when $id is false.');
 
         use_helper('Validate');
         $data = $_POST['page'];
-        $data['is_protected'] = !empty($data['is_protected']) ? 1: 0;
+        $data['is_protected'] = !empty($data['is_protected']) ? 1 : 0;
         Flash::set('post_data', (object) $data);
 
         // Add pre-save checks here
@@ -365,7 +379,7 @@ class PageController extends Controller {
 
         // Check all numerical fields for a page
         $fields = array('parent_id', 'layout_id', 'needs_login');
-        foreach($fields as $field) {
+        foreach ($fields as $field) {
             if (!Validate::digit($data[$field])) {
                 $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
             }
@@ -373,7 +387,7 @@ class PageController extends Controller {
 
         // Check all date fields for a page
         $fields = array('created_on', 'published_on', 'valid_until');
-        foreach($fields as $field) {
+        foreach ($fields as $field) {
             if (!empty($data[$field]) && !(bool) preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/D', (string) $data[$field])) {
                 $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
             }
@@ -381,7 +395,7 @@ class PageController extends Controller {
 
         // Check all time fields for a page
         $fields = array('created_on_time', 'published_on_time', 'valid_until_time');
-        foreach($fields as $field) {
+        foreach ($fields as $field) {
             if (!empty($data[$field]) && !(bool) preg_match('/^[0-9]{2}:[0-9]{2}:[0-9]{2}$/D', (string) $data[$field])) {
                 $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
             }
@@ -389,7 +403,7 @@ class PageController extends Controller {
 
         // Check alphanumerical fields
         $fields = array('keywords', 'description');
-        foreach($fields as $field) {
+        foreach ($fields as $field) {
             if (!empty($data[$field]) && !Validate::alpha_comma($data[$field])) {
                 $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
             }
@@ -435,14 +449,14 @@ class PageController extends Controller {
             // display things ...
             $this->setLayout('backend');
             $this->display('page/edit', array(
-                'action'     => $action,
+                'action' => $action,
                 'csrf_token' => SecureToken::generateToken(BASE_URL.'page/'.$action),
-                'page'       => (object) $page,
-                'tags'       => $tags,
-                'filters'    => Filter::findAll(),
-                'behaviors'  => Behavior::findAll(),
+                'page' => (object) $page,
+                'tags' => $tags,
+                'filters' => Filter::findAll(),
+                'behaviors' => Behavior::findAll(),
                 'page_parts' => (object) $part,
-                'layouts'    => Record::findAllFrom('Layout'))
+                'layouts' => Record::findAllFrom('Layout'))
             );
         }
 
@@ -512,7 +526,7 @@ class PageController extends Controller {
         else {
             Flash::set('error', __('Page has not been saved!'));
             $url = 'page/';
-            $url .= ($action == 'edit') ? 'edit/'.$id : 'add/';
+            $url .= ( $action == 'edit') ? 'edit/'.$id : 'add/';
             redirect(get_url($url));
         }
 
@@ -532,4 +546,6 @@ class PageController extends Controller {
         }
     }
 
-} // end PageController class
+}
+
+// end PageController class

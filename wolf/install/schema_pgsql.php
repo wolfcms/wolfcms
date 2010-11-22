@@ -79,7 +79,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."page (
   updated_on timestamp DEFAULT NULL,
   created_by_id integer DEFAULT NULL,
   updated_by_id integer DEFAULT NULL,
-  position integer DEFAULT NULL,
+  position integer DEFAULT '0',
   is_protected smallint NOT NULL DEFAULT '0',
   needs_login smallint NOT NULL DEFAULT '2',
   PRIMARY KEY (id)

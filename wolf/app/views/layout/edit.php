@@ -36,6 +36,7 @@
 <h1><?php echo __(ucfirst($action).' layout'); ?></h1>
 
 <form action="<?php echo $action=='edit' ? get_url('layout/edit/'. $layout->id): get_url('layout/add'); ; ?>" method="post">
+    <input id="csrf_token" name="csrf_token" type="hidden" value="<?php echo $csrf_token; ?>" />
   <div class="form-area">
     <p class="title">
       <label for="layout_name"><?php echo __('Name'); ?></label>

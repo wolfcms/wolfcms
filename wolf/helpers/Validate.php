@@ -348,6 +348,7 @@ class Validate {
         return (strtotime($str) !== FALSE);
     }
 
+
     /**
      * Tests if a string conforms to a MySQL datetime format.
      *
@@ -434,6 +435,7 @@ class Validate {
         return ($utf8 === TRUE) ? (bool) preg_match('/^[-\pL\pN_]++$/uD', (string) $str) : (bool) preg_match('/^[-a-z0-9_]++$/iD', (string) $str);
     }
 
+
     /**
      * Checks whether a string consists of alphabetical characters, numbers,
      * underscores, commas, spaces and dashes only.
@@ -454,6 +456,7 @@ class Validate {
     public static function alpha_comma($str, $utf8 = FALSE) {
         return ($utf8 === TRUE) ? (bool) preg_match('/^[-\pL\pN_, ]++$/uD', (string) $str) : (bool) preg_match('/^[-a-z0-9_, ]++$/iD', (string) $str);
     }
+
 
     /**
      * Checks wheter a string is a valid slug.
@@ -485,6 +488,7 @@ class Validate {
         return ($utf8 === TRUE) ? (bool) preg_match('/^[\pL\s]++$/uD', (string) $str) : (bool) preg_match('/^[a-z\s]++$/iD', (string) $str);
     }
 
+
     /**
      * Checks whether a string consists of alphanumerical characters and spaces only.
      *
@@ -504,6 +508,7 @@ class Validate {
     public static function alphanum_space($str, $utf8 = FALSE) {
         return ($utf8 === TRUE) ? (bool) preg_match('/^[\pL\pN\s]++$/uD', (string) $str) : (bool) preg_match('/^[a-z0-9\s]++$/iD', (string) $str);
     }
+
 
     /**
      * Checks whether a string consists of digits only (no dots or dashes).
@@ -662,7 +667,183 @@ class Validate {
      */
     public static function multiple($dividend, $divisor) {
         // Note: this needs to be reversed because modulo returns a zero remainder for a true multiple
-        return !(bool) ((int) $dividend % (int) $divisor);
+        return!(bool) ((int) $dividend % (int) $divisor);
+    }
+
+
+    public static function postcode($postcode, $territory='nl') {
+        if (!is_string($postcode) && !is_int($postcode)) {
+            return false;
+        }
+
+        // Known postal codes for various territories.
+        // See http://www.iso.org/iso/english_country_names_and_code_elements for territory codes
+        $formats = array(
+            'gb' => 'GIR[ ]?0AA|((AB|AL|B|BA|BB|BD|BH|BL|BN|BR|BS|BT|CA|CB|CF|CH|CM|CO|CR|CT|CV|CW|DA|DD|DE|DG|DH|DL|DN|DT|DY|E|EC|EH|EN|EX|FK|FY|G|GL|GY|GU|HA|HD|HG|HP|HR|HS|HU|HX|IG|IM|IP|IV|JE|KA|KT|KW|KY|L|LA|LD|LE|LL|LN|LS|LU|M|ME|MK|ML|N|NE|NG|NN|NP|NR|NW|OL|OX|PA|PE|PH|PL|PO|PR|RG|RH|RM|S|SA|SE|SG|SK|SL|SM|SN|SO|SP|SR|SS|ST|SW|SY|TA|TD|TF|TN|TQ|TR|TS|TW|UB|W|WA|WC|WD|WF|WN|WR|WS|WV|YO|ZE)(\d[\dA-Z]?[]?\d[ABD-HJLN-UW-Z]{2}))|BFPO[ ]?\d{1,4}',
+            'je' => 'JE\d[\dA-Z]?[ ]?\d[ABD-HJLN-UW-Z]{2}',
+            'gg' => 'GY\d[\dA-Z]?[ ]?\d[ABD-HJLN-UW-Z]{2}',
+            'im' => 'IM\d[\dA-Z]?[ ]?\d[ABD-HJLN-UW-Z]{2}',
+            'us' => '\d{5}([ \-]\d{4})?',
+            'ca' => '[ABCEGHJKLMNPRSTVXY]\d[A-Z][ ]?\d[A-Z]\d',
+            'de' => '\d{5}',
+            'jp' => '\d{3}-\d{4}',
+            'fr' => '\d{2}[ ]?\d{3}',
+            'au' => '\d{4}',
+            'it' => '\d{5}',
+            'ch' => '\d{4}',
+            'at' => '\d{4}',
+            'es' => '\d{5}',
+            'nl' => '\d{4}[ ]?[A-Z]{2}',
+            'be' => '\d{4}',
+            'dk' => '\d{4}',
+            'se' => '\d{3}[ ]?\d{2}',
+            'no' => '\d{4}',
+            'br' => '\d{5}[\-]?\d{3}',
+            'pt' => '\d{4}([\-]\d{3})?',
+            'fi' => '\d{5}',
+            'ax' => '22\d{3}',
+            'kr' => '\d{3}[\-]\d{3}',
+            'cn' => '\d{6}',
+            'tw' => '\d{3}(\d{2})?',
+            'sg' => '\d{6}',
+            'dz' => '\d{5}',
+            'ad' => 'AD\d{3}',
+            'ar' => '([A-HJ-NP-Z])?\d{4}([A-Z]{3})?',
+            'am' => '(37)?\d{4}',
+            'az' => '\d{4}',
+            'bh' => '((1[0-2]|[2-9])\d{2})?',
+            'bd' => '\d{4}',
+            'bb' => '(BB\d{5})?',
+            'by' => '\d{6}',
+            'bm' => '[A-Z]{2}[ ]?[A-Z0-9]{2}',
+            'ba' => '\d{5}',
+            'io' => 'BBND 1ZZ',
+            'bn' => '[A-Z]{2}[ ]?\d{4}',
+            'bg' => '\d{4}',
+            'kh' => '\d{5}',
+            'cv' => '\d{4}',
+            'cl' => '\d{7}',
+            'cr' => '\d{4,5}|\d{3}-\d{4}',
+            'hr' => '\d{5}',
+            'cy' => '\d{4}',
+            'cz' => '\d{3}[ ]?\d{2}',
+            'do' => '\d{5}',
+            'ec' => '([A-Z]\d{4}[A-Z]|(?:[A-Z]{2})?\d{6})?',
+            'eg' => '\d{5}',
+            'ee' => '\d{5}',
+            'fo' => '\d{3}',
+            'ge' => '\d{4}',
+            'gr' => '\d{3}[ ]?\d{2}',
+            'gl' => '39\d{2}',
+            'gt' => '\d{5}',
+            'ht' => '\d{4}',
+            'hn' => '(?:\d{5})?',
+            'hu' => '\d{4}',
+            'is' => '\d{3}',
+            'in' => '\d{6}',
+            'id' => '\d{5}',
+            'ie' => '((D|DUBLIN)?([1-9]|6[wW]|1[0-8]|2[024]))?',
+            'il' => '\d{5}',
+            'jo' => '\d{5}',
+            'kz' => '\d{6}',
+            'ke' => '\d{5}',
+            'kw' => '\d{5}',
+            'la' => '\d{5}',
+            'lv' => '\d{4}',
+            'lb' => '(\d{4}([ ]?\d{4})?)?',
+            'li' => '(948[5-9])|(949[0-7])',
+            'lt' => '\d{5}',
+            'lu' => '\d{4}',
+            'mk' => '\d{4}',
+            'my' => '\d{5}',
+            'mv' => '\d{5}',
+            'mt' => '[A-Z]{3}[ ]?\d{2,4}',
+            'mu' => '(\d{3}[A-Z]{2}\d{3})?',
+            'mx' => '\d{5}',
+            'md' => '\d{4}',
+            'mc' => '980\d{2}',
+            'ma' => '\d{5}',
+            'np' => '\d{5}',
+            'nz' => '\d{4}',
+            'ni' => '((\d{4}-)?\d{3}-\d{3}(-\d{1})?)?',
+            'ng' => '(\d{6})?',
+            'om' => '(PC )?\d{3}',
+            'pk' => '\d{5}',
+            'py' => '\d{4}',
+            'ph' => '\d{4}',
+            'pl' => '\d{2}-\d{3}',
+            'pr' => '00[679]\d{2}([ \-]\d{4})?',
+            'ro' => '\d{6}',
+            'ru' => '\d{6}',
+            'sm' => '4789\d',
+            'sa' => '\d{5}',
+            'sn' => '\d{5}',
+            'sk' => '\d{3}[ ]?\d{2}',
+            'si' => '\d{4}',
+            'za' => '\d{4}',
+            'lk' => '\d{5}',
+            'tj' => '\d{6}',
+            'th' => '\d{5}',
+            'tn' => '\d{4}',
+            'tr' => '\d{5}',
+            'tm' => '\d{6}',
+            'ua' => '\d{5}',
+            'uy' => '\d{5}',
+            'uz' => '\d{6}',
+            'va' => '00120',
+            've' => '\d{4}',
+            'zm' => '\d{5}',
+            'as' => '96799',
+            'cc' => '6799',
+            'ck' => '\d{4}',
+            'rs' => '\d{6}',
+            'me' => '8\d{4}',
+            'cs' => '\d{5}',
+            'yu' => '\d{5}',
+            'cx' => '6798',
+            'et' => '\d{4}',
+            'fk' => 'FIQQ 1ZZ',
+            'nf' => '2899',
+            'fm' => '(9694[1-4])([ \-]\d{4})?',
+            'gf' => '9[78]3\d{2}',
+            'gn' => '\d{3}',
+            'gp' => '9[78][01]\d{2}',
+            'gs' => 'SIQQ 1ZZ',
+            'gu' => '969[123]\d([ \-]\d{4})?',
+            'gw' => '\d{4}',
+            'hm' => '\d{4}',
+            'iq' => '\d{5}',
+            'kg' => '\d{6}',
+            'lr' => '\d{4}',
+            'ls' => '\d{3}',
+            'mg' => '\d{3}',
+            'mh' => '969[67]\d([ \-]\d{4})?',
+            'mn' => '\d{6}',
+            'mp' => '9695[012]([ \-]\d{4})?',
+            'mq' => '9[78]2\d{2}',
+            'nc' => '988\d{2}',
+            'ne' => '\d{4}',
+            'vi' => '008(([0-4]\d)|(5[01]))([ \-]\d{4})?',
+            'pf' => '987\d{2}',
+            'pg' => '\d{3}',
+            'pm' => '9[78]5\d{2}',
+            'pn' => 'PCRN 1ZZ',
+            'pw' => '96940',
+            're' => '9[78]4\d{2}',
+            'sh' => 'STHL 1ZZ',
+            'sj' => '\d{4}',
+            'so' => '\d{5}',
+            'sz' => '[HLMS]\d{3}',
+            'tc' => 'TKCA 1ZZ',
+            'wf' => '986\d{2}',
+            'yt' => '976\d{2}'
+        );
+
+        if (!preg_match($format[$territory], $postcode)) {
+            return false;
+        }
+
+        return true;
     }
 
 }

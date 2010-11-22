@@ -352,7 +352,13 @@ class AuthUser {
      * @return boolean          True when valid, otherwise false.
      */
     static public final function validatePassword(User $user, $pwd) {
-        return $user->password == self::generateHashedPassword($pwd, $user->salt);
+        if (empty($user->salt)) {
+            // Pre 070 method
+            return $user->password == sha1($pwd);
+        }
+        else {
+            return $user->password == self::generateHashedPassword($pwd, $user->salt);
+        }
     }
 
 } // end AuthUser class

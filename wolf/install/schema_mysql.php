@@ -76,7 +76,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."page (
   updated_on datetime default NULL,
   created_by_id int(11) default NULL,
   updated_by_id int(11) default NULL,
-  position mediumint(6) unsigned default NULL,
+  position mediumint(6) unsigned default '0',
   is_protected tinyint(1) NOT NULL default '0',
   needs_login tinyint(1) NOT NULL default '2',
   PRIMARY KEY  (id)

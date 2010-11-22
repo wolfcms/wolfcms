@@ -77,7 +77,7 @@ $j(document).ready(function() {
 
 		//transition effect
 		$j('#mask').show();//fadeIn(10000);
-		$j('#mask').fadeTo("slow",0.5);
+		$j('#mask').fadeTo("fast",0.5);
 
 		//Get the window height and width
 		var winH = $j(window).height();
@@ -88,7 +88,7 @@ $j(document).ready(function() {
 		$j(id).css('left', winW/2-$j(id).width()/2);
 
 		//transition effect
-		$j(id).fadeIn(500); //2000
+		$j(id).fadeIn("fast"); //2000
 
         $j(id+" :input:visible:enabled:first").focus();
 

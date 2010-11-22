@@ -1,25 +1,9 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
- * This file is part of Wolf CMS.
- *
- * Wolf CMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Wolf CMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Wolf CMS has made an exception to the GNU General Public License for plugins.
- * See exception.txt for details and the full text.
+ * Please see license.txt for the full license text.
  */
 
 /**
@@ -222,8 +206,15 @@ ol, ul {
     }
 
     /* RUN CHECKS - fatals */
-    if (isWritable(CFG_FILE) && true !== DEBUG) {
+    $perms = fileperms($config_file);
+    if ((($perms & 0x0010) || ($perms & 0x0002)) && true !== DEBUG) {
         $fatals['config file writable, debug off'] = 'Wolf CMS has automatically made itself unavailable because the configuration file was found to be writable. Until this problem is corrected, only this screen will be available.';
+    }
+
+    $fileinfo = posix_getpwuid(fileowner($config_file));
+    $processinfo = posix_getpwuid(posix_getuid());
+    if (substr(PHP_OS, 0, 3) != 'WIN' && ($fileinfo['name'] == $processinfo['name'] || $fileinfo['gid'] == $processinfo['gid'])) {
+        $fatals['config file owned, debug off'] = 'The config file is owned by the same user/group under whom the HTTP server is running. This is never a good idea.';
     }
 
     if (defined('DEBUG') && false === DEBUG && file_exists(CORE_ROOT.'/../security.php')) {

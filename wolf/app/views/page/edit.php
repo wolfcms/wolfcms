@@ -288,6 +288,14 @@ if ($action == 'edit') { ?>
     $j(document).ready(function() {
         $j(".busy").spinnerSetup();
 
+        var editAction = '<?php echo $action; ?>';
+
+        if (editAction == 'add') {
+            $j('#page_title').change(function (){
+                $j('#page_slug').val(toSlug(this.value));
+            });
+        }
+
         // Store PHP value for later reference
         var partIndex = <?php echo $index; ?>;
 
@@ -326,7 +334,7 @@ if ($action == 'edit') { ?>
 
             //transition effect
             $j('#mask').show();
-            $j('#mask').fadeTo("slow",0.5);
+            $j('#mask').fadeTo("fast",0.5);
 
             //Get the window height and width
             var winH = $j(window).height();
@@ -337,7 +345,7 @@ if ($action == 'edit') { ?>
             $j(id).css('left', winW/2-$j(id).width()/2);
 
             //transition effect
-            $j(id).fadeIn(500); //2000
+            $j(id).fadeIn("fast"); //2000
 
             $j(id+" :input:visible:enabled:first").focus();
             // END show popup
@@ -408,7 +416,5 @@ if ($action == 'edit') { ?>
         });
 
     });
-    
-    Field.activate('page_title');
 // ]]>
 </script>

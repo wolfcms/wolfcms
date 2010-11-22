@@ -12,21 +12,23 @@ IMPORTANT - always check your security by viewing security.php post update!
 
 IMPORTANT - Make absolutely sure you have 0.6.0 before doing this.
 
-1. Create a backup of your files and database. Save your config.php file!
+1. Create a backup of your files AND database. Save your config.php file!
 
-2. Delete these directories from your old Wolf installation: admin/, docs/, install/, wolf/
+2. Delete everything from your old Wolf installation. (Make sure you did step 1!)
 
-3. Remove these files from your Wolf CMS root: index.php, favicon.ico, 404.php
+3. Extract the 0.7.0 download as if you would install it normally.
 
-4. Copy the "wolf" directory from the 0.7.0 download to your Wolf CMS root directory.
+4. Make sure to rename the "_.htaccess" file if desired and check its settings.
 
-5. Copy the "index.php" and "security.php" files from the 0.7.0 download to your Wolf CMS root directory.
+5. Copy your OLD config.php into your 0.7.0 installation, overwriting the empty default.
 
-6. Depending on your situation you may also need to replace the ".htaccess" file.
+6. Visit http://www.example.com/wolf/install/index.php and follow the instructions to upgrade your database.
 
-7. Visit http://www.example.com/wolf/install/index.php and follow instructions.
+7. Visit http://www.example.com/security.php to view the security advisory.
 
-8. Run /security.php to view the security advisory.
+8. Test your new installation.
+
+9. Clean up by removing the wolf/install & docs directories as well as readme.txt and security.php
 
 
 ### Upgrading from 0.5.5 => 0.6.0 ###
@@ -52,5 +54,5 @@ Apply the following database changes:
 ## TROUBLESHOOTING / NOTES ##
 
 It is recommended for security purposes to delete the following:
-    - the install/ directory
+    - the wolf/install/ directory
     - the docs/ directory

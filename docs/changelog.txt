@@ -9,6 +9,7 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Added unix socket option to installer - issue 204
 + Added Validate helper.
 + Added tougher validation of fields upon form submit.
 + Added valid_until field and Archived status for Page. - issue 115
@@ -76,6 +77,7 @@ Sigla:
 - Fixed small issue Wolf layout had with frontend controllers - issue 141
 - Fixed delete layout observer event - issue 222 - thanks Jules
 - Minor correction to @since info in some core plugins
+. Relaxed the write permission check on config.php by making it more flexible. - issue 139
 . Children of a cloned page no longer have (Copy) in their name or slug. - issue 250
 . Distinct favicons for frontend/backend
 . Moved install directory to wolf/install
