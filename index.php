@@ -100,6 +100,7 @@ if (DEBUG == false && isWritable($config_file)) {
         echo '<h1>Wolf CMS automatically disabled!</h1>';
         echo '<p>Wolf CMS has been disabled as a security precaution.</p>';
         echo '<p><strong>Reason:</strong> the configuration file was found to be writable.</p>';
+        echo '<p>The broadest rights Wolf CMS allows for config.php are: -rwxr-xr-x</p>';
         echo '</body></html>';
         exit();
     }
