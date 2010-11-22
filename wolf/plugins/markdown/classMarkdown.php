@@ -1,4 +1,8 @@
 <?php
+
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
+
 #
 # Markdown Extra  -  A text-to-HTML conversion tool for web writers
 #

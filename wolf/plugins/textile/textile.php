@@ -14,7 +14,7 @@
 // -------------------------------------------------------------------
 textileSettings = {
 	nameSpace:			'textile',
-	previewParserPath:	'<?php echo (USE_MOD_REWRITE === true) ? '' : '?'; ?>/admin/plugin/textile/preview', // path to your Textile parser
+	previewParserPath:	'<?php echo (USE_MOD_REWRITE === true) ? '' : '?'; ?>/<?php echo ADMIN_DIR; ?>/plugin/textile/preview', // path to your Textile parser
 	onShiftEnter:		{keepDefault:false, replaceWith:'\n\n'},
 	markupSet: [
 		{name:'Heading 1', key:'1', openWith:'h1(!(([![Class]!]))!). ', placeHolder:'Your title here...' },

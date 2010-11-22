@@ -1,5 +1,8 @@
 <?php
 
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
+
 /**
  * Example: get XHTML from a given Textile-markup string ($string)
  *

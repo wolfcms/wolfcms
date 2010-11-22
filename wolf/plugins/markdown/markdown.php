@@ -13,7 +13,7 @@
 // -------------------------------------------------------------------
 markdownSettings = {
 	nameSpace:			'markdown',
-	previewParserPath:	'<?php echo (USE_MOD_REWRITE === true) ? '' : '?'; ?>/admin/plugin/markdown/preview', // path to your markdown parser
+	previewParserPath:	'<?php echo (USE_MOD_REWRITE === true) ? '' : '?'; ?>/<?php echo ADMIN_DIR; ?>/plugin/markdown/preview', // path to your markdown parser
 	onShiftEnter:		{keepDefault:false, openWith:'\n\n'},
 	markupSet: [
 		{name:'First Level Heading', key:'1', placeHolder:'Your title here...', closeWith:function(markItUp) { return miu.markdownTitle(markItUp, '=') } },
