@@ -118,7 +118,7 @@ if ($action == 'edit') { ?>
                   <td class="label"><label for="page_created_on"><?php echo __('Created date'); ?></label></td>
                   <td class="field">
                     <input id="page_created_on" maxlength="10" name="page[created_on]" size="10" type="text" value="<?php echo substr($page->created_on, 0, 10); ?>" />
-                    <img onclick="displayDatePicker('page[created_on]');" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
+                    <img class="datepicker" onclick="displayDatePicker('page[created_on]');" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
                     <input id="page_created_on_time" maxlength="5" name="page[created_on_time]" size="5" type="text" value="<?php echo substr($page->created_on, 11); ?>" />
                 <?php if (isset($page->published_on)): ?>
                     &nbsp; <label for="page_published_on"><?php echo __('Published date'); ?></label>
@@ -163,8 +163,8 @@ if ($action == 'edit') { ?>
 
     <div id="part-tabs" class="content tabs">
         <div id="tab-toolbar" class="tab_toolbar">
-          <a href="#" id="add-part" onclick="toggle_popup('add-part-popup', 'part-name-field'); return false;" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" alt="plus icon" /></a>
-          <a href="#" id="delete-part" onclick="if (confirm('<?php echo __('Delete the current tab?'); ?>')) { tabControl.removeTab(tabControl.selected) }; return false;" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/minus.png" alt="minus icon" /></a>
+          <a href="#" id="add-part" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" alt="plus icon" /></a>
+          <a href="#" id="delete-part" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/minus.png" alt="minus icon" /></a>
         </div>
         <ul class="tabNavigation">
             <?php foreach ($page_parts as $key => $page_part) { ?>
@@ -374,6 +374,10 @@ if ($action == 'edit') { ?>
             var myRegEx = new RegExp(partRegEx);
             var matched = myRegEx.exec($j('div#part-tabs ul.tabNavigation li.tab a.here').parent().attr('id'));
             var removePart = matched[1];
+
+            if (!confirm('<?php echo __('Delete the current tab?'); ?>')) {
+                return;
+            }
 
             $j('div#part-tabs ul.tabNavigation li.tab a.here').remove();
             $j('div#part-tabs ul.tabNavigation a').filter(':first').click();
