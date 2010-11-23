@@ -206,12 +206,15 @@ ol, ul {
     }
 
     /* RUN CHECKS - fatals */
-    $perms = fileperms($config_file);
-    if ((($perms & 0x0010) || ($perms & 0x0002)) && true !== DEBUG) {
-        $fatals['config file writable, debug off'] = 'Wolf CMS has automatically made itself unavailable because the configuration file was found to be writable. Until this problem is corrected, only this screen will be available.';
+
+    if (function_exists('fileperms')) {
+        $perms = fileperms($config_file);
+        if ((($perms & 0x0010) || ($perms & 0x0002)) && true !== DEBUG) {
+            $fatals['config file writable, debug off'] = 'Wolf CMS has automatically made itself unavailable because the configuration file was found to be writable. Until this problem is corrected, only this screen will be available.';
+        }
     }
 
-    if (substr(PHP_OS, 0, 3) != 'WIN') {
+    if (function_exists('posix_getpwuid') && function_exists('posix_getuid') && function_exists('fileowner') && substr(PHP_OS, 0, 3) != 'WIN') {
         $fileinfo = posix_getpwuid(fileowner($config_file));
         $processinfo = posix_getpwuid(posix_getuid());
         if (($fileinfo['name'] == $processinfo['name'] || $fileinfo['gid'] == $processinfo['gid'])) {
