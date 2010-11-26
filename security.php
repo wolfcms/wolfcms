@@ -15,10 +15,11 @@ error_reporting(0);
 
 define('SECURITY_CHECK', true);
 
-define('CORE_ROOT', dirname(__FILE__).'/wolf');
+define('DS', DIRECTORY_SEPARATOR);
+define('CORE_ROOT', dirname(__FILE__).DS.'wolf');
 define('CFG_FILE', 'config.php');
 
-require(CORE_ROOT.'/utils.php');
+require(CORE_ROOT.DS.'utils.php');
 require(CFG_FILE);
 
 if (!defined('DEBUG')) { echo 'Please install Wolf CMS first, thank you.'; exit(); }
@@ -193,7 +194,7 @@ ol, ul {
         $warnings['config file writable, debug on'] = 'The configuration file should never be writable in production systems. We advise you to remove write permissions on config.php';
     }
     
-    if (defined('DEBUG') && false === DEBUG && file_exists(CORE_ROOT.'/install/')) {
+    if (defined('DEBUG') && false === DEBUG && file_exists(CORE_ROOT.DS.'install'.DS)) {
         $warnings['install, directory present'] = 'The installation directory ("wolf/install/") is still present. You may want to remove it for added security since this is probably a production system. (DEBUG was set to FALSE)';
     }
 

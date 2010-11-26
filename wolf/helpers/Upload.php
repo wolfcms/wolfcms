@@ -722,7 +722,7 @@ class Upload {
      */
     function mimesTypes($mime) {
         if (count($this->mimes) == 0) {
-            if (@include(APP_PATH . 'config/mimes.php')) {
+            if (@include(APP_PATH . 'config' . DS . 'mimes.php')) {
                 $this->mimes = $mimes;
                 unset($mimes);
             }

@@ -30,7 +30,7 @@
 //require APP_PATH . '/models/Plugin.php';
 //require APP_PATH . '/models/Page.php';
 
-if ( ! defined('HELPER_PATH')) define('HELPER_PATH', CORE_ROOT.'/helpers');
+if ( ! defined('HELPER_PATH')) define('HELPER_PATH', CORE_ROOT.DS.'helpers');
 if ( ! defined('URL_SUFFIX')) define('URL_SUFFIX', '');
 
 ini_set('date.timezone', DEFAULT_TIMEZONE);

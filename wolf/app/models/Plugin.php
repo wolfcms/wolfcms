@@ -42,11 +42,11 @@ class Plugin {
     static function init() {
         self::$plugins = unserialize(Setting::get('plugins'));
         foreach (self::$plugins as $plugin_id => $tmp) {
-            $file = PLUGINS_ROOT.'/'.$plugin_id.'/index.php';
+            $file = PLUGINS_ROOT.DS.$plugin_id.DS.'index.php';
             if (file_exists($file))
                 include $file;
 
-            $file = PLUGINS_ROOT.'/'.$plugin_id.'/i18n/'.I18n::getLocale().'-message.php';
+            $file = PLUGINS_ROOT.DS.$plugin_id.DS.'i18n'.DS.I18n::getLocale().'-message.php';
             if (file_exists($file)) {
                 $array = include $file;
                 I18n::add($array);

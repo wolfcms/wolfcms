@@ -29,17 +29,18 @@ flush();            // Both need to be called!
 
 // Setup system
 define('IN_CMS', true);
+define('DS', DIRECTORY_SEPARATOR);
 define('CMS_ROOT', dirname(__FILE__).'/../..');
-define('CORE_ROOT', CMS_ROOT.'/wolf');
-define('PLUGINS_ROOT', CORE_ROOT.'/plugins');
-define('APP_PATH',  CORE_ROOT.'/app');
+define('CORE_ROOT', CMS_ROOT.DS.'wolf');
+define('PLUGINS_ROOT', CORE_ROOT.DS.'plugins');
+define('APP_PATH',  CORE_ROOT.DS.'app');
 
-require_once(CORE_ROOT.'/utils.php');
-require_once(CMS_ROOT.'/config.php');
+require_once(CORE_ROOT.DS.'utils.php');
+require_once(CMS_ROOT.DS.'config.php');
 
 define('BASE_URL', URL_PUBLIC . (endsWith(URL_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
 
-require CORE_ROOT.'/Framework.php';
+require CORE_ROOT.DS.'Framework.php';
 
 //  Database connection  -----------------------------------------------------
 

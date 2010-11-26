@@ -46,7 +46,7 @@ if (!defined('IN_CMS')) { exit(); }
 class FileManagerController extends PluginController {
     var $path;
     var $fullpath;
-    
+
     public static function _checkPermission() {
         AuthUser::load();
         if ( ! AuthUser::isLoggedIn()) {
@@ -57,27 +57,27 @@ class FileManagerController extends PluginController {
             redirect(get_url());
         }
     }
-    
+
     public function __construct() {
         self::_checkPermission();
-        
+
         $this->setLayout('backend');
         $this->assignToLayout('sidebar', new View('../../plugins/file_manager/views/sidebar'));
     }
-    
+
     public function index() {
         $this->browse();
     }
-    
+
     public function browse() {
         $params = func_get_args();
-        
+
         $this->path = join('/', $params);
         // make sure there's a / at the end
         if (substr($this->path, -1, 1) != '/') $this->path .= '/';
-        
+
         //security
-        
+
         // we dont allow back link
         if (strpos($this->path, '..') !== false)
         {
@@ -95,24 +95,24 @@ class FileManagerController extends PluginController {
             }
         }
         $this->path = str_replace('..', '', $this->path);
-        
+
         // clean up nicely
         $this->path = str_replace('//', '', $this->path);
-        
+
         // we dont allow leading slashes
         $this->path = preg_replace('/^\//', '', $this->path); 
-        
+
         $this->fullpath = FILES_DIR.'/'.$this->path;
-        
+
         // clean up nicely
         $this->fullpath = preg_replace('/\/\//', '/', $this->fullpath);
-        
+
         $this->display('file_manager/views/index', array(
             'dir'   => $this->path,
             'files' => $this->_getListFiles()
         ));
     } // browse
-    
+
     public function view() {
         $params = func_get_args();
         $content = '';
@@ -150,20 +150,20 @@ class FileManagerController extends PluginController {
         {
             $content = file_get_contents($file);
         }
-        
+
         $this->display('file_manager/views/view', array(
             'is_image' => $this->_isImage($file),
             'filename' => $filename,
             'content'  => $content
         ));
     }
-    
+
     public function save() {
         $data = $_POST['file'];
-        
+
         // security (remove all ..)
         $data['name'] = str_replace('..', '', $data['name']);
-        $file = FILES_DIR.'/'.$data['name'];
+        $file = FILES_DIR.DS.$data['name'];
         if (file_exists($file))
         {
             if (file_put_contents($file, $data['content']))
@@ -186,7 +186,7 @@ class FileManagerController extends PluginController {
                 Flash::set('error', __('Directory is not writable! File has not been saved!'));
             }
         }
-        
+
         // save and quit or save and continue editing ?
         if (isset($_POST['commit']))
         {
@@ -196,16 +196,16 @@ class FileManagerController extends PluginController {
         {
             redirect(get_url('plugin/file_manager/view/'.$data['name']));
         }
-        
+
     }
-    
+
     public function create_file() {
         $data = $_POST['file'];
-        
+
         $path = str_replace('..', '', $data['path']);
         $filename = str_replace('..', '', $data['name']);
-        $file = FILES_DIR."/{$path}/{$filename}";
-        
+        $file = FILES_DIR.DS.$path.DS.$filename;
+
         if (file_put_contents($file, '') !== false)
         {
             chmod($file, 0644);
@@ -216,14 +216,14 @@ class FileManagerController extends PluginController {
         }
         redirect(get_url('plugin/file_manager/browse/'.$path));
     }
-    
+
     public function create_directory() {
         $data = $_POST['directory'];
-        
+
         $path = str_replace('..', '', $data['path']);
         $dirname = str_replace('..', '', $data['name']);
         $dir = FILES_DIR."/{$path}/{$dirname}";
-        
+
         if (mkdir($dir))
         {
             chmod($dir, 0755);
@@ -234,16 +234,16 @@ class FileManagerController extends PluginController {
         }
         redirect(get_url('plugin/file_manager/browse/'.$path));
     }
-    
+
     public function delete() {
         $paths = func_get_args();
-        
+
         $file = urldecode(join('/', $paths));
-        
+
         $file = FILES_DIR.'/'.str_replace('..', '', $file);
         $filename = array_pop($paths);
         $paths = join('/', $paths);
-        
+
         if (is_file($file))
         {
             if ( ! unlink($file))
@@ -254,10 +254,10 @@ class FileManagerController extends PluginController {
             if ( ! rrmdir($file))
                 Flash::set('error', __('Permission denied!'));
         }
-        
+
         redirect(get_url('plugin/file_manager/browse/'.$paths));
     }
-    
+
     // @todo clean filenames
     // $clean_file_name = preg_replace('/ /', '_', $_FILES['upload_file']['name'] );
     // $clean_file_name = preg_replace('/[^A-Za-z0-9_.]/', '', $clean_file_name );
@@ -266,22 +266,22 @@ class FileManagerController extends PluginController {
         $data = $_POST['upload'];
         $path = str_replace('..', '', $data['path']);
         $overwrite = isset($data['overwrite']) ? true: false;
-        
+
         if (isset($_FILES))
         {
             $file = upload_file($_FILES['upload_file']['name'], FILES_DIR.'/'.$path.'/', $_FILES['upload_file']['tmp_name'], $overwrite);
-            
+
             if ($file === false)
                Flash::set('error', __('File has not been uploaded!'));
         }
         redirect(get_url('plugin/file_manager/browse/'.$path));
     }
-    
+
     public function chmod() {
         $data = $_POST['file'];
         $data['name'] = str_replace('..', '', $data['name']);
         $file = FILES_DIR.'/'.$data['name'];
-        
+
         if (file_exists($file))
         {
             if ( ! chmod($file, octdec($data['mode'])))
@@ -291,20 +291,20 @@ class FileManagerController extends PluginController {
         {
             Flash::set('error', __('File or directory not found!'));
         }
-        
+
         $path = substr($data['name'], 0, strrpos($data['name'], '/'));
         redirect(get_url('plugin/file_manager/browse/'.$path));
     }
-    
+
     public function rename() {
         $data = $_POST['file'];
-        
+
         $data['current_name'] = str_replace('..', '', $data['current_name']);
         $data['new_name'] = str_replace('..', '', $data['new_name']);
-        
+
         $path = substr($data['current_name'], 0, strrpos($data['current_name'], '/'));
         $file = FILES_DIR.'/'.$data['current_name'];
-        
+
         if (file_exists($file))
         {
             if ( ! rename($file, FILES_DIR.'/'.$path.'/'.$data['new_name']))
@@ -314,24 +314,24 @@ class FileManagerController extends PluginController {
         {
             Flash::set('error', __('File or directory not found!'.$file));
         }
-        
+
         redirect(get_url('plugin/file_manager/browse/'.$path));
     }
-    
+
     //
     // Privates
     //
-    
+
     public function _getPath()
     {
         $path = join('/', get_params());
         return str_replace('..', '', $path);
     }
-    
+
     public function _getListFiles()
     {
         $files = array();
-        
+
         if (is_dir($this->fullpath) && $handle = opendir($this->fullpath))
         {
             $i = 0;
@@ -341,10 +341,10 @@ class FileManagerController extends PluginController {
                 // do not display . and the root ..
                 if ($file == '.' || $file == '..')
                     continue;
-                
+
                 $object = new stdClass;
                 $file_stat = stat($this->fullpath.$file);
-                
+
                 // make the link depending on if it's a file or a dir
                 if (is_dir($this->fullpath.$file))
                 {
@@ -359,7 +359,7 @@ class FileManagerController extends PluginController {
                     $object->is_file = true;
                     $object->link = '<a href="'.get_url('plugin/file_manager/view/'.$this->path.$file).'">'.$file.'</a>';
                 }
-                
+
                 $object->name = $file;
                 // humain size
                 $object->size = convert_size($file_stat['size']);
@@ -367,14 +367,14 @@ class FileManagerController extends PluginController {
                 list($object->perms, $object->chmod) = $this->_getPermissions($this->fullpath.$file);
                 // date modification
                 $object->mtime = date('D, j M, Y', $file_stat['mtime']);
-                
+
                 $files[$object->name] = $object;
-                
+
                 $i++;
             } // while
             closedir($handle);
         }
-        
+
         uksort($files, 'strnatcmp');
         return $files;
     } // _getListFiles
@@ -439,7 +439,7 @@ class FileManagerController extends PluginController {
             return false;
         else if ( ! preg_match('/^(.*).(jpe?g|gif|png)$/i', $file))
             return false;
-        
+
         return true;
     }
 
@@ -459,7 +459,7 @@ function upload_file($origin, $dest, $tmp_name, $overwrite=false)
             unlink($full_dest);
             continue;
         }
-        
+
         $file_ext = (strpos($origin, '.') === false ? '': '.'.substr(strrchr($origin, '.'), 1));
         $file_name = substr($origin, 0, strlen($origin) - strlen($file_ext)).'_'.$i.$file_ext;
         $full_dest = $dest.$file_name;
@@ -471,7 +471,7 @@ function upload_file($origin, $dest, $tmp_name, $overwrite=false)
         chmod($full_dest, 0644);
         return $file_name;
     }
-    
+
     return false;
 } // upload_file
 
@@ -484,7 +484,7 @@ function rrmdir($dirname)
         // Append slash if necessary
         if (substr($dirname,-1)!='/')
             $dirname.='/';
-        
+
         $handle = opendir($dirname);
         while (false !== ($file = readdir($handle)))
         {

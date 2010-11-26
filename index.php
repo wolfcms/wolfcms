@@ -16,13 +16,14 @@ define('IN_CMS', true);
 
 define('CMS_VERSION', '0.7.0 RC1');
 define('CMS_ROOT', dirname(__FILE__));
-define('CORE_ROOT', CMS_ROOT.'/wolf');
-define('PLUGINS_ROOT', CORE_ROOT.'/plugins');
-define('APP_PATH', CORE_ROOT.'/app');
+define('DS', DIRECTORY_SEPARATOR);
+define('CORE_ROOT', CMS_ROOT.DS.'wolf');
+define('PLUGINS_ROOT', CORE_ROOT.DS.'plugins');
+define('APP_PATH', CORE_ROOT.DS.'app');
 
-require_once(CORE_ROOT.'/utils.php');
+require_once(CORE_ROOT.DS.'utils.php');
 
-$config_file = CMS_ROOT.'/config.php';
+$config_file = CMS_ROOT.DS.'config.php';
 require_once($config_file);
 
 // if you have installed wolf and see this line, you can comment it or delete it :)
@@ -64,7 +65,7 @@ else {
 }
 
 define('PLUGINS_URI', URI_PUBLIC.'wolf/plugins/');
-if (!defined('THEMES_ROOT')) { define('THEMES_ROOT', CMS_ROOT.'/public/themes/'); }
+if (!defined('THEMES_ROOT')) { define('THEMES_ROOT', CMS_ROOT.DS.'public'.DS.'themes'.DS); }
 if (!defined('THEMES_URI')) { define('THEMES_URI', URI_PUBLIC.'public/themes/'); }
 
 
@@ -114,7 +115,7 @@ define('REMEMBER_LOGIN_LIFETIME', 1209600); // two weeks
 define('DEFAULT_CONTROLLER', 'page');
 define('DEFAULT_ACTION', 'index');
 
-require CORE_ROOT.'/Framework.php';
+require CORE_ROOT.DS.'Framework.php';
 
 try {
     $__CMS_CONN__ = new PDO(DB_DSN, DB_USER, DB_PASS);
@@ -183,4 +184,4 @@ $admin_routes = array (
 Dispatcher::addRoute($admin_routes);
 
 // run everything!
-require APP_PATH.'/main.php';
+require APP_PATH.DS.'main.php';
