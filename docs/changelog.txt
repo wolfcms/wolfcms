@@ -9,6 +9,7 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Added Lithuanian translation for Comment plugin - issue 263 - thanks reekenx
 + Added unix socket option to installer - issue 204
 + Added Validate helper.
 + Added tougher validation of fields upon form submit.
