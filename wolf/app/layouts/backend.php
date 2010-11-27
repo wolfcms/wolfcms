@@ -60,25 +60,21 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
     <script type="text/javascript" src="<?php echo URI_PUBLIC; ?>wolf/admin/markitup/jquery.markitup.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo URI_PUBLIC; ?>wolf/admin/markitup/skins/simple/style.css" />
 
-    <script type="text/javascript" charset="utf-8">
-     var $j = jQuery.noConflict();
-    </script>
-
     <script type="text/javascript">
     // <![CDATA[
-        $j(document).ready(function() {
+        $(document).ready(function() {
             (function showMessages(e) {
                 e.fadeIn('slow')
                  .animate({opacity: 1.0}, 1500)
                  .fadeOut('slow', function() {
-                    if ($j(this).next().attr('class') == 'message') {
-                        showMessages($j(this).next());
+                    if ($(this).next().attr('class') == 'message') {
+                        showMessages($(this).next());
                     }
-                    $j(this).remove();
+                    $(this).remove();
                  })
-            })( $j(".message:first") );
+            })( $(".message:first") );
 
-            $j("input:visible:enabled:first").focus();
+            $("input:visible:enabled:first").focus();
         });
         // ]]>
         </script>

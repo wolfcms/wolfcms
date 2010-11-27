@@ -1,26 +1,11 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
- * This file is part of Wolf CMS.
- *
- * Wolf CMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Wolf CMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Wolf CMS has made an exception to the GNU General Public License for plugins.
- * See exception.txt for details and the full text.
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
  */
 
 /**
@@ -76,8 +61,8 @@
             cursor:'crosshair',
        		distance:'15',
             stop: function(event, ui) {
-                var order = $j(ui.item.parent()).sortable('serialize', {key: 'snippets[]'});
-                $j.post('<?php echo get_url('snippet/reorder/'); ?>', {data : order});
+                var order = $(ui.item.parent()).sortable('serialize', {key: 'snippets[]'});
+                $.post('<?php echo get_url('snippet/reorder/'); ?>', {data : order});
             }
         })
         .disableSelection();
@@ -85,18 +70,18 @@
         return this;
     };
 
-    $j(document).ready(function() {
-        $j('ul#snippets').sortableSetup();
-        $j('#reorder-toggle').toggle(
+    $(document).ready(function() {
+        $('ul#snippets').sortableSetup();
+        $('#reorder-toggle').toggle(
             function(){
-                $j('ul#snippets').sortable('option', 'disabled', false);
-                $j('.handle').show();
-                $j('#reorder-toggle').text('<?php echo __('disable reorder');?>');
+                $('ul#snippets').sortable('option', 'disabled', false);
+                $('.handle').show();
+                $('#reorder-toggle').text('<?php echo __('disable reorder');?>');
             },
             function() {
-                $j('ul#snippets').sortable('option', 'disabled', true);
-                $j('.handle').hide();
-                $j('#reorder-toggle').text('<?php echo __('reorder');?>');
+                $('ul#snippets').sortable('option', 'disabled', true);
+                $('.handle').hide();
+                $('#reorder-toggle').text('<?php echo __('reorder');?>');
             }
         )
     });

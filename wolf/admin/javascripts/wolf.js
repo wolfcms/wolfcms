@@ -17,7 +17,7 @@ function toSlug(value) {
         return value;
     }
     else {
-        value = $j.trim(value);
+        value = $.trim(value);
         value = value.toLowerCase();
         value = value.replace(/[àâ]/g,"a").replace(/[éèêë]/g,"e").replace(/[îï]/g,"i")
         .replace(/[ô]/g,"o").replace(/[ùû]/g,"u").replace(/[ñ]/g,"n")
@@ -62,7 +62,7 @@ function part_loading() {
 // Updated valid_part_name function for JQuery
 function valid_part_name(name) {
   name = name.toLowerCase();
-  name = $j.trim(name);
+  name = $.trim(name);
   var result = true;
 
   if (name == '') {
@@ -70,7 +70,7 @@ function valid_part_name(name) {
     return false;
   }
 
-  $j('#part-tabs .tabNavigation .tab a').each(function(){
+  $('#part-tabs .tabNavigation .tab a').each(function(){
     if (this.text == name) {
       result = false;
       alert('Part name must be unique.');

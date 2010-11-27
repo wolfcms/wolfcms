@@ -73,10 +73,10 @@
         return '<?php echo __('You have modified this page.  If you navigate away from this page without first saving your data, the changes will be lost.'); ?>';
     }
 
-    $j(document).ready(function() {
+    $(document).ready(function() {
         // Prevent accidentally navigating away
-        $j(':input').bind('change', function() { setConfirmUnload(true); });
-        $j('form').submit(function() { setConfirmUnload(false); return true; });
+        $(':input').bind('change', function() { setConfirmUnload(true); });
+        $('form').submit(function() { setConfirmUnload(false); return true; });
     });
     
   setTextAreaToolbar('snippet_content', '<?php echo $snippet->filter_id; ?>');

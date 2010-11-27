@@ -1,26 +1,11 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009,2010 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
- * This file is part of Wolf CMS.
- *
- * Wolf CMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Wolf CMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Wolf CMS has made an exception to the GNU General Public License for plugins.
- * See exception.txt for details and the full text.
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
  */
 
 /**
@@ -218,47 +203,47 @@ function toLabelCase(s) {
 }
 
 
-$j(document).ready(function() {
+$(document).ready(function() {
 
     // Setup tabs
-    $j(function () {
-        var tabContainers = $j('div.tabs > div.pages > div');
+    $(function () {
+        var tabContainers = $('div.tabs > div.pages > div');
 
-        $j('div.tabs ul.tabNavigation a').click(function () {
+        $('div.tabs ul.tabNavigation a').click(function () {
             tabContainers.hide().filter(this.hash).show();
 
-            $j('div.tabs ul.tabNavigation a').removeClass('here');
-            $j(this).addClass('here');
+            $('div.tabs ul.tabNavigation a').removeClass('here');
+            $(this).addClass('here');
 
             return false;
         }).filter(':first').click();
     });
 
     // Dynamically change look-and-feel
-    $j('#setting_theme').change(function() {
-        $j('#css_theme').attr({href : 'wolf/admin/themes/' + this.value + '/styles.css'});
+    $('#setting_theme').change(function() {
+        $('#css_theme').attr({href : 'wolf/admin/themes/' + this.value + '/styles.css'});
     });
 
     // Dynamically change enabled state
-    $j('.enabled input').change(function() {
-        $j.get('<?php echo get_url('setting'); ?>'+(this.checked ? '/activate_plugin/':'/deactivate_plugin/')+this.value);
+    $('.enabled input').change(function() {
+        $.get('<?php echo get_url('setting'); ?>'+(this.checked ? '/activate_plugin/':'/deactivate_plugin/')+this.value);
 
         // Add or remove tab for plugin
         if (this.checked) {
             var label = toLabelCase(this.value).replace(/_/g," ");
-            $j('#mainTabs ul').append('<li id="'+this.value+'-plugin" class="plugin"><a href="?/admin/plugin/'+this.value+'">'+label+'</a></li>');
+            $('#mainTabs ul').append('<li id="'+this.value+'-plugin" class="plugin"><a href="?/admin/plugin/'+this.value+'">'+label+'</a></li>');
         }
         else {
-            $j('#mainTabs ul li#'+this.value+'-plugin').remove();
+            $('#mainTabs ul li#'+this.value+'-plugin').remove();
         }
     });
 
     // Dynamically uninstall
-    $j('.uninstall a').click(function() {
+    $('.uninstall a').click(function() {
         if (confirm('<?php echo __('Are you sure you wish to uninstall this plugin?'); ?>')) {
             var pluginId = this.name.replace('uninstall_', '');
             //alert('TEST-<?php echo get_url('setting/uninstall_plugin/'); ?>'+pluginId);
-            $j.get('<?php echo get_url('setting/uninstall_plugin/'); ?>'+pluginId);
+            $.get('<?php echo get_url('setting/uninstall_plugin/'); ?>'+pluginId);
         }
     });
 

@@ -1,26 +1,11 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
- * This file is part of Wolf CMS.
- *
- * Wolf CMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Wolf CMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Wolf CMS has made an exception to the GNU General Public License for plugins.
- * See exception.txt for details and the full text.
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
  */
 
 /**
@@ -120,10 +105,10 @@
     //jQuery(function() {
         jQuery.fn.spinnerSetup = function spinnerSetup() {
             this.each(function() {
-                var pid = $j(this).attr('id')
-                $j('#'+pid).hide()  // hide it initially
+                var pid = $(this).attr('id')
+                $('#'+pid).hide()  // hide it initially
                 .ajaxStop(function() {
-                    $j('#'+pid).hide();
+                    $('#'+pid).hide();
                 });
             });
 
@@ -132,46 +117,46 @@
 
         jQuery.fn.sitemapSetup = function sitemapSetup() {
             this.each(function () {
-            	if($j('ul',this).length) return;
-                var pid = $j(this).attr('id').split('_')[1];
+            	if($('ul',this).length) return;
+                var pid = $(this).attr('id').split('_')[1];
             });
 
             return this;
         };
         
         jQuery.fn.expandableSetup = function expandableSetup() {
-            $j(this).live('click', function() {
-                if ($j(this).hasClass("expanded")) {
-                    $j(this).removeClass("expanded");
-                    $j(this).attr('src', '<?php echo URI_PUBLIC; ?>wolf/admin/images/expand.png');
+            $(this).live('click', function() {
+                if ($(this).hasClass("expanded")) {
+                    $(this).removeClass("expanded");
+                    $(this).attr('src', '<?php echo URI_PUBLIC; ?>wolf/admin/images/expand.png');
 
-                    var parent = $j(this).parents("li.node:first")
+                    var parent = $(this).parents("li.node:first")
                     var parentId = parent.attr('id').split('_')[1];
 
-                    $j('#page_'+parentId).children('ul').hide();
+                    $('#page_'+parentId).children('ul').hide();
                 }
                 else {
-                    $j(this).addClass("expanded");
-                    $j(this).attr('src', '<?php echo URI_PUBLIC; ?>wolf/admin/images/collapse.png');
-                    var parent = $j(this).parents("li.node:first");
+                    $(this).addClass("expanded");
+                    $(this).attr('src', '<?php echo URI_PUBLIC; ?>wolf/admin/images/collapse.png');
+                    var parent = $(this).parents("li.node:first");
                     var parentId = parent.attr('id').split('_')[1];
-                    if ($j('#page_'+parentId).children('ul').length == 0) {
-                        $j('#busy-'+parentId).show();
-                        $j.get("<?php echo get_url('page/children/'); ?>"+parentId+'/'+'1', function(data) {                        
-                            $j('#page_'+parentId).append(data);
-                            $j('#site-map li').sitemapSetup();
-                            $j('.busy').spinnerSetup();
+                    if ($('#page_'+parentId).children('ul').length == 0) {
+                        $('#busy-'+parentId).show();
+                        $.get("<?php echo get_url('page/children/'); ?>"+parentId+'/'+'1', function(data) {                        
+                            $('#page_'+parentId).append(data);
+                            $('#site-map li').sitemapSetup();
+                            $('.busy').spinnerSetup();
                         });
                     }
                     else {
-                        $j('#page_'+parentId).children('ul').show();
+                        $('#page_'+parentId).children('ul').show();
                     }
                 }
             });
         };
         
         jQuery.fn.sortableSetup = function sortableSetup() { 
-			$j('ul#site-map').nestedSortable({
+			$('ul#site-map').nestedSortable({
 				disableNesting: 'no-nest',
 				forcePlaceholderSize: true,
 				handle: 'div',
@@ -187,13 +172,13 @@
 					// quick checks incase they have taken it out of the sitemap tree
 					if(ui.item.parents("#page-0").is('li') === false)
 					{	
-						$j("ul#site-map").nestedSortable('cancel');
+						$("ul#site-map").nestedSortable('cancel');
 					}
 				},
                 stop: function(event, ui) {                    
-                	var order = $j("ul#site-map").nestedSortable('serialize');
+                	var order = $("ul#site-map").nestedSortable('serialize');
                 	
- 					$j.ajax({
+ 					$.ajax({
 						type: 'post',
 						url: '<?php echo get_url('page/reorder'); ?>',
 						data: order,
@@ -254,10 +239,10 @@
         
         jQuery.fn.copyableSetup = function() { 
         
-			$j(this).live('click', function() {			
-				var id = $j(this).attr('id').split('-');
+			$(this).live('click', function() {			
+				var id = $(this).attr('id').split('-');
 				
-				$j.ajax({
+				$.ajax({
 					type: 'post',
 					url: '<?php echo get_url('page/copy'); ?>',
 					data: "&originalid="+id[1],
@@ -268,7 +253,7 @@
 						var newid = parseInt(data[0]);
 						
 						// setup the new row
-						var newobj = $j("#page_"+id[1]).clone().css('display', 'none');					
+						var newobj = $("#page_"+id[1]).clone().css('display', 'none');					
 						
 						newobj.attr('id', 'page_'+newid); // set the main li id
 						newobj.find('.edit-link').attr({ // set the edit link
@@ -282,7 +267,7 @@
 						newobj.find('.remove').attr('href', data[6]); // set the delete link
 						newobj.find('.copy-page').attr('id', 'copy-'+newid); // set the copy id						
 						
-						$j("#page_"+id[1]).after(newobj); // add row to dom and slide down
+						$("#page_"+id[1]).after(newobj); // add row to dom and slide down
 						newobj.slideDown();
 					}						
 				});
@@ -291,24 +276,24 @@
         };        
          
         
-$j(document).ready(function(){
-    $j('#site-map li').sitemapSetup();
-    $j("img.expander").expandableSetup(); 
-    $j(".busy").spinnerSetup();
-    $j(".copy-page").copyableSetup();
-    $j('ul#site-map').sortableSetup();
-    $j('ul#site-map').nestedSortable('disable');
+$(document).ready(function(){
+    $('#site-map li').sitemapSetup();
+    $("img.expander").expandableSetup(); 
+    $(".busy").spinnerSetup();
+    $(".copy-page").copyableSetup();
+    $('ul#site-map').sortableSetup();
+    $('ul#site-map').nestedSortable('disable');
 
-    $j('#toggle_reorder').toggle(
+    $('#toggle_reorder').toggle(
             function(){
-    			$j('ul#site-map').nestedSortable('enable');  
-    			$j('img.handle_reorder').show();
-                $j('#toggle_reorder').text('<?php echo __('disable reorder');?>');
+    			$('ul#site-map').nestedSortable('enable');  
+    			$('img.handle_reorder').show();
+                $('#toggle_reorder').text('<?php echo __('disable reorder');?>');
             },
             function() {
-                $j('ul#site-map').nestedSortable('disable');               
-                $j('img.handle_reorder').hide();
-                $j('#toggle_reorder').text('<?php echo __('reorder');?>');
+                $('ul#site-map').nestedSortable('disable');               
+                $('img.handle_reorder').hide();
+                $('#toggle_reorder').text('<?php echo __('reorder');?>');
             }
     )      
 });

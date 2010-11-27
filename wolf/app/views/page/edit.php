@@ -261,24 +261,24 @@ if ($action == 'edit') { ?>
 
     jQuery.fn.spinnerSetup = function spinnerSetup() {
         this.each(function() {
-            var pid = $j(this).attr('id')
-            $j('#'+pid).hide()  // hide it initially
+            var pid = $(this).attr('id')
+            $('#'+pid).hide()  // hide it initially
             .ajaxStop(function() {
-                $j('#'+pid).hide();
+                $('#'+pid).hide();
             });
         });
 
         return this;
     };
 
-    $j(document).ready(function() {
-        $j(".busy").spinnerSetup();
+    $(document).ready(function() {
+        $(".busy").spinnerSetup();
 
         var editAction = '<?php echo $action; ?>';
 
         if (editAction == 'add') {
-            $j('#page_title').change(function (){
-                $j('#page_slug').val(toSlug(this.value));
+            $('#page_title').change(function (){
+                $('#page_slug').val(toSlug(this.value));
             });
         }
 
@@ -286,74 +286,74 @@ if ($action == 'edit') { ?>
         var partIndex = <?php echo $index; ?>;
 
         // Prevent accidentally navigating away
-        $j('form#page_edit_form :input').bind('change', function() { setConfirmUnload(true); });
-        $j('form#page_edit_form').submit(function() { setConfirmUnload(false); return true; });
+        $('form#page_edit_form :input').bind('change', function() { setConfirmUnload(true); });
+        $('form#page_edit_form').submit(function() { setConfirmUnload(false); return true; });
 
         // Do the metainfo tab thing
-        $j('div#metainfo-tabs ul.tabNavigation a').live('click', function() {
-            $j('div#metainfo-content > div.page').hide().filter(this.hash).show();
-            $j('div#metainfo-tabs ul.tabNavigation a').removeClass('here');
-            $j(this).addClass('here');
+        $('div#metainfo-tabs ul.tabNavigation a').live('click', function() {
+            $('div#metainfo-content > div.page').hide().filter(this.hash).show();
+            $('div#metainfo-tabs ul.tabNavigation a').removeClass('here');
+            $(this).addClass('here');
             return false;
         }).filter(':first').click();
 
         // Do the parts tab thing
-        $j('div#part-tabs ul.tabNavigation a').live('click', function() {
-            $j('div#part-content > div.page').hide().filter(this.hash).show();
-            $j('div#part-tabs ul.tabNavigation a').removeClass('here');
-            $j(this).addClass('here');
+        $('div#part-tabs ul.tabNavigation a').live('click', function() {
+            $('div#part-content > div.page').hide().filter(this.hash).show();
+            $('div#part-tabs ul.tabNavigation a').removeClass('here');
+            $(this).addClass('here');
             return false;
         }).filter(':first').click();
 
         // Do the add part button thing
-        $j('#add-part').click(function() {
+        $('#add-part').click(function() {
 
             // START show popup
             var id = 'div#boxes div#add-part-dialog';
 
             //Get the screen height and width
-            var maskHeight = $j(document).height();
-            var maskWidth = $j(window).width();
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
 
             //Set height and width to mask to fill up the whole screen
-            $j('#mask').css({'width':maskWidth,'height':maskHeight,'top':0,'left':0});
+            $('#mask').css({'width':maskWidth,'height':maskHeight,'top':0,'left':0});
 
             //transition effect
-            $j('#mask').show();
-            $j('#mask').fadeTo("fast",0.5);
+            $('#mask').show();
+            $('#mask').fadeTo("fast",0.5);
 
             //Get the window height and width
-            var winH = $j(window).height();
-            var winW = $j(window).width();
+            var winH = $(window).height();
+            var winW = $(window).width();
 
             //Set the popup window to center
-            $j(id).css('top',  winH/2-$j(id).height()/2);
-            $j(id).css('left', winW/2-$j(id).width()/2);
+            $(id).css('top',  winH/2-$(id).height()/2);
+            $(id).css('left', winW/2-$(id).width()/2);
 
             //transition effect
-            $j(id).fadeIn("fast"); //2000
+            $(id).fadeIn("fast"); //2000
 
-            $j(id+" :input:visible:enabled:first").focus();
+            $(id+" :input:visible:enabled:first").focus();
             // END show popup
         });
 
         // Do the submit add part window thing
-        $j('div#add-part-dialog div.content form').submit(function(e) {
+        $('div#add-part-dialog div.content form').submit(function(e) {
             e.preventDefault();
 
-            if (valid_part_name($j('div#add-part-dialog div.content form input#part-name-field').val())) {
-                $j('div#part-tabs ul.tabNavigation').append('<li id="part-'+partIndex+'-tab" class="tab">\n\
-                                                             <a href="#part-'+partIndex+'-content">'+$j('div#add-part-dialog div.content form input#part-name-field').val()+'</a></li>');
+            if (valid_part_name($('div#add-part-dialog div.content form input#part-name-field').val())) {
+                $('div#part-tabs ul.tabNavigation').append('<li id="part-'+partIndex+'-tab" class="tab">\n\
+                                                             <a href="#part-'+partIndex+'-content">'+$('div#add-part-dialog div.content form input#part-name-field').val()+'</a></li>');
 
-                $j('div#part-tabs ul.tabNavigation li#part-'+partIndex+'-tab a').click();
+                $('div#part-tabs ul.tabNavigation li#part-'+partIndex+'-tab a').click();
 
-                $j('#busy').show();
+                $('#busy').show();
 
-                $j.post('<?php echo get_url('page/addPart'); ?>',
-                        $j('div#add-part-dialog div.content form').serialize(),
+                $.post('<?php echo get_url('page/addPart'); ?>',
+                        $('div#add-part-dialog div.content form').serialize(),
                         function(data) {
-                                $j('div#part-content').append(data);
-                                $j('#busy').hide();
+                                $('div#part-content').append(data);
+                                $('#busy').hide();
                             });
 
                 partIndex++;
@@ -362,28 +362,28 @@ if ($action == 'edit') { ?>
                 setConfirmUnload(true);
            }
 
-           $j('#mask, .window').hide();
+           $('#mask, .window').hide();
 
            return false;
         });
 
         // Do the delete part button thing
-        $j('#delete-part').click(function() {
+        $('#delete-part').click(function() {
             // Delete the tab
             var partRegEx = /part-(\d+)-tab/i;
             var myRegEx = new RegExp(partRegEx);
-            var matched = myRegEx.exec($j('div#part-tabs ul.tabNavigation li.tab a.here').parent().attr('id'));
+            var matched = myRegEx.exec($('div#part-tabs ul.tabNavigation li.tab a.here').parent().attr('id'));
             var removePart = matched[1];
 
             if (!confirm('<?php echo __('Delete the current tab?'); ?>')) {
                 return;
             }
 
-            $j('div#part-tabs ul.tabNavigation li.tab a.here').remove();
-            $j('div#part-tabs ul.tabNavigation a').filter(':first').click();
+            $('div#part-tabs ul.tabNavigation li.tab a.here').remove();
+            $('div#part-tabs ul.tabNavigation a').filter(':first').click();
 
             // Delete the content section
-            $j('div#part-'+removePart+'-content').remove();
+            $('div#part-'+removePart+'-content').remove();
 
             // Make sure users save changes
             setConfirmUnload(true);
@@ -391,7 +391,7 @@ if ($action == 'edit') { ?>
 
 
         // Make all modal dialogs draggable
-        $j("#boxes .window").draggable({
+        $("#boxes .window").draggable({
             addClasses: false,
             containment: 'window',
             scroll: false,
@@ -399,10 +399,10 @@ if ($action == 'edit') { ?>
         })
 
         //if close button is clicked
-        $j('#boxes .window .close').click(function (e) {
+        $('#boxes .window .close').click(function (e) {
             //Cancel the link behavior
             e.preventDefault();
-            $j('#mask, .window').hide();
+            $('#mask, .window').hide();
         });
 
     });

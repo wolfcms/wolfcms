@@ -1,26 +1,11 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
- * This file is part of Wolf CMS.
- *
- * Wolf CMS is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Wolf CMS is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Wolf CMS.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Wolf CMS has made an exception to the GNU General Public License for plugins.
- * See exception.txt for details and the full text.
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
  */
 
 /**
@@ -57,21 +42,21 @@
 </div>
 
 <script type="text/javascript">
-$j(document).ready(function() {
+$(document).ready(function() {
 	<?php 
 	if($page_part->filter_id != "")
 	{
 	?>
-	$j('#part_<?php echo ($index-1); ?>_content').markItUp(<?php echo $page_part->filter_id; ?>Settings);
+	$('#part_<?php echo ($index-1); ?>_content').markItUp(<?php echo $page_part->filter_id; ?>Settings);
 <?php } ?>
 	
-	$j('#part_<?php echo ($index-1); ?>_filter_id').change(function() {
-		$j('#part_<?php echo ($index-1); ?>_content').markItUpRemove();
-			var newfilter = $j(this).val();
+	$('#part_<?php echo ($index-1); ?>_filter_id').change(function() {
+		$('#part_<?php echo ($index-1); ?>_content').markItUpRemove();
+			var newfilter = $(this).val();
 <?php foreach (Filter::findAll() as $filter): ?>	
 			if(newfilter == '<?php echo $filter; ?>')
 			{
-				$j('#part_<?php echo ($index-1); ?>_content').markItUp(<?php echo $filter; ?>Settings);
+				$('#part_<?php echo ($index-1); ?>_content').markItUp(<?php echo $filter; ?>Settings);
 			}
 <?php endforeach; ?>
 
