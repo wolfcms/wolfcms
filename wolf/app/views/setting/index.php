@@ -227,23 +227,15 @@ $(document).ready(function() {
     // Dynamically change enabled state
     $('.enabled input').change(function() {
         $.get('<?php echo get_url('setting'); ?>'+(this.checked ? '/activate_plugin/':'/deactivate_plugin/')+this.value);
-
-        // Add or remove tab for plugin
-        if (this.checked) {
-            var label = toLabelCase(this.value).replace(/_/g," ");
-            $('#mainTabs ul').append('<li id="'+this.value+'-plugin" class="plugin"><a href="?/admin/plugin/'+this.value+'">'+label+'</a></li>');
-        }
-        else {
-            $('#mainTabs ul li#'+this.value+'-plugin').remove();
-        }
+        location.reload(true);
     });
 
     // Dynamically uninstall
     $('.uninstall a').click(function() {
         if (confirm('<?php echo __('Are you sure you wish to uninstall this plugin?'); ?>')) {
             var pluginId = this.name.replace('uninstall_', '');
-            //alert('TEST-<?php echo get_url('setting/uninstall_plugin/'); ?>'+pluginId);
             $.get('<?php echo get_url('setting/uninstall_plugin/'); ?>'+pluginId);
+            location.reload(true);
         }
     });
 

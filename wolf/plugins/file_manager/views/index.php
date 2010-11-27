@@ -82,7 +82,7 @@ if (!defined('IN_CMS')) { exit(); }
         <input id="chmod_file_mode" maxlength="4" name="file[mode]" type="text" value="" /> 
         <input id="chmod_file_button" name="commit" type="submit" value="<?php echo __('Change mode'); ?>" />
       </div>
-      <p><a class="close-link" href="#" onclick="Element.hide('chmod-popup'); return false;"><?php echo __('Close'); ?></a></p>
+      <p><a class="close-link" href="#" onclick="toggle_chmod_popup(); return false;"><?php echo __('Close'); ?></a></p>
     </form>
   </div>
   <div class="popup" id="rename-popup" style="display:none;">
@@ -93,7 +93,7 @@ if (!defined('IN_CMS')) { exit(); }
           <input id="rename_file_new_name" maxlength="50" name="file[new_name]" type="text" value="" /> 
           <input id="rename_file_button" name="commit" type="submit" value="<?php echo __('Rename'); ?>" />
         </div>
-        <p><a class="close-link" href="#" onclick="Element.hide('rename-popup'); return false;"><?php echo __('Close'); ?></a></p>
+        <p><a class="close-link" href="#" onclick="toggle_rename_popup(); return false;"><?php echo __('Close'); ?></a></p>
       </form>
     </div>
 </div>

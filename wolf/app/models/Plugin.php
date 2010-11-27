@@ -315,7 +315,6 @@ class Plugin {
         $plugin_id = $__CMS_CONN__->quote($plugin_id);
 
         $sql = "DELETE FROM $tablename WHERE plugin_id=$plugin_id";
-        echo $sql;
         $stmt = $__CMS_CONN__->prepare($sql);
         return $stmt->execute();
     }
