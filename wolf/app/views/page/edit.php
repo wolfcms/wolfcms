@@ -73,7 +73,7 @@ if ($action == 'edit') { ?>
                 </tr>
                 <tr>
                   <td class="label optional"><label for="page_description"><?php echo __('Description'); ?></label></td>
-                  <td class="field"><textarea class="textarea" id="page_description" name="page[description]" rows="40" cols="3"><?php echo $page->description; ?></textarea></td>
+                  <td class="field"><textarea class="textarea" id="page_description" name="page[description]" rows="2" cols="3"><?php echo $page->description; ?></textarea></td>
                 </tr>
                 <tr>
                   <td class="label optional"><label for="page_tags"><?php echo __('Tags'); ?></label></td>

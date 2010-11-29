@@ -748,14 +748,14 @@ table.fieldset .error-with-field small {
   margin-top: .30em;
   margin-bottom: 20px;
 }
-#meta-pages #page-metadata #page_description {
-  height: 40px;
+
+#metadata table tr td {
+    padding: 0.2em 0.5em;
 }
 
 #content textarea {
   padding: 3px 0;
   width: 100%;
-  height: 280px;
   border: 1px solid #ccc;
 }
 
