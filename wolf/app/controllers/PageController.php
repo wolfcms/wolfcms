@@ -361,18 +361,20 @@ class PageController extends Controller {
             $errors[] = __('No CSRF token found!');
         }
 
+        $data['title'] = trim($data['title']);
         if (empty($data['title'])) {
             $errors[] = __('You have to specify a title!');
         }
 
+        $data['slug'] = trim($data['slug']);
         if (empty($data['slug']) && $id != '1') {
             $errors[] = __('You have to specify a slug!');
         }
         else {
-            if (trim($data['slug']) == ADMIN_DIR) {
+            if ($data['slug'] == ADMIN_DIR) {
                 $errors[] = __('You cannot have a slug named :slug!', array(':slug' => ADMIN_DIR));
             }
-            if ($id != '1' && !Validate::slug($data['slug'])) {
+            if (!Validate::slug($data['slug'])) {
                 $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'slug'));
             }
         }
