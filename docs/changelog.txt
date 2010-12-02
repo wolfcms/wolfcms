@@ -9,6 +9,7 @@ Sigla:
 
 0.7.0 - released 2010-??-??
 
++ Adding Albanian translation for core. - thanks axjezzy
 + Removed hardcoded directory seperators where necessary. - issue 235 - thanks reekenx
 + Added Lithuanian translation for Comment plugin - issue 263 - thanks reekenx
 + Added unix socket option to installer - issue 204
