@@ -374,7 +374,7 @@ class PageController extends Controller {
             if ($data['slug'] == ADMIN_DIR) {
                 $errors[] = __('You cannot have a slug named :slug!', array(':slug' => ADMIN_DIR));
             }
-            if (!Validate::slug($data['slug'])) {
+            if (!Validate::slug($data['slug']) && (!empty($data['slug']) && $id == '1')) {
                 $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'slug'));
             }
         }
