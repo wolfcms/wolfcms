@@ -173,6 +173,7 @@ if (defined('USE_POORMANSCRON') && USE_POORMANSCRON && defined('POORMANSCRON_INT
 }
 
 Plugin::init();
+Flash::init();
 
 // Setup admin routes
 $admin_routes = array (
