@@ -839,7 +839,7 @@ class Validate {
             'yt' => '976\d{2}'
         );
 
-        if (!preg_match($format[$territory], $postcode)) {
+        if (!preg_match('/'.$formats[$territory].'/', $postcode)) {
             return false;
         }
 
