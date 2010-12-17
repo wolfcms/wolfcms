@@ -82,7 +82,7 @@
                         </form>
                     </div>
                     <p><?php echo __('website:').' <a href="'.URL_PUBLIC.'">'.Setting::get('admin_title').'</a>'; ?></p>
-        <script type="text/javascript" language="javascript" charset="utf-8">
+        <script type="text/javascript" charset="utf-8">
             // <![CDATA[
             var loginUsername = document.getElementById('login-username');
             if (loginUsername.value == '') {
