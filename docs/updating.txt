@@ -14,21 +14,28 @@ IMPORTANT - Make absolutely sure you have 0.6.0 before doing this.
 
 1. Create a backup of your files AND database. Save your config.php file!
 
-2. Delete everything from your old Wolf installation. (Make sure you did step 1!)
+2. Login to your old installation and disable all of your plugins.
 
-3. Extract the 0.7.0 download as if you would install it normally.
+3. Delete everything from your old Wolf installation. (Make sure you did step 1!)
+    - You can leave your public directory in place.
 
-4. Make sure to rename the "_.htaccess" file if desired and check its settings.
+4. Extract the 0.7.0 download as if you would install it normally.
 
-5. Copy your OLD config.php into your 0.7.0 installation, overwriting the empty default.
+5. Make sure to rename the "_.htaccess" file if desired and check its settings against your backup.
 
-6. Visit http://www.example.com/wolf/install/index.php and follow the instructions to upgrade your database.
+6. Copy your OLD config.php into your 0.7.0 installation, overwriting the empty default.
 
-7. Visit http://www.example.com/security.php to view the security advisory.
+7. Visit http://www.example.com/wolf/install/index.php and follow the instructions to upgrade your database.
 
-8. Test your new installation.
+8. Visit http://www.example.com/security.php to view the security advisory.
 
-9. Clean up by removing the wolf/install & docs directories as well as readme.txt and security.php
+9. Test your new installation.
+
+10. Copy back your third party plugins.
+
+11. Enable and test each third party plugin one by one.
+
+12. Clean up by removing the wolf/install & docs directories as well as readme.txt and security.php
 
 
 ### Upgrading from 0.5.5 => 0.6.0 ###
