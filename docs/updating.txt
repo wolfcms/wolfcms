@@ -37,6 +37,11 @@ IMPORTANT - Make absolutely sure you have 0.6.0 before doing this.
 
 12. Clean up by removing the wolf/install & docs directories as well as readme.txt and security.php
 
+### Known issues with Wolf CMS 0.7.0
+
+- Snippet and Layout reordering does not work on IE8.
+
+
 
 ### Upgrading from 0.5.5 => 0.6.0 ###
 
