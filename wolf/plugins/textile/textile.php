@@ -1,4 +1,17 @@
-<?php include_once("../../../config.php"); ?>
+<?php
+
+include_once("../../../config.php");
+
+$changedurl = str_replace('//','|',URL_PUBLIC);
+$lastslash = strpos($changedurl, '/');
+if (false === $lastslash) {
+    define('URI_PUBLIC', '/');
+}
+else {
+    define('URI_PUBLIC', substr($changedurl, $lastslash));
+}
+
+?>
 
 // -------------------------------------------------------------------
 // markItUp!
@@ -14,7 +27,7 @@
 // -------------------------------------------------------------------
 textileSettings = {
 	nameSpace:			'textile',
-	previewParserPath:	'<?php echo (USE_MOD_REWRITE === true) ? '' : '?'; ?>/<?php echo ADMIN_DIR; ?>/plugin/textile/preview', // path to your Textile parser
+	previewParserPath:	'<?php echo URI_PUBLIC;?><?php echo (USE_MOD_REWRITE === true) ? '' : '?/'; ?><?php echo ADMIN_DIR; ?>/plugin/textile/preview', // path to your Textile parser
 	onShiftEnter:		{keepDefault:false, replaceWith:'\n\n'},
 	markupSet: [
 		{name:'Heading 1', key:'1', openWith:'h1(!(([![Class]!]))!). ', placeHolder:'Your title here...' },

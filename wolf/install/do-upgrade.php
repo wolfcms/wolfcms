@@ -13,8 +13,6 @@
  *
  * ALWAY MAKE A BACKUP OF THE DB BEFORE UPGRADING!
  *
- * @todo STILL NEED TO TEST THIS!
- *
  * @version 0.7.0
  * @since   0.7.0
  * @author  Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -30,7 +28,6 @@ if (!defined('INSTALL_SEQUENCE')) {
 }
 ?>
 
-<!--p>Thank you for your interest. This script is still unfinished. It will be finished before Wolf CMS 0.7.0 RC1 is released.</p-->
 <p>
     Upgrading:
 </p>
@@ -40,7 +37,7 @@ if (!defined('INSTALL_SEQUENCE')) {
 // Check passwords
 $data = $_POST['upgrade'];
 if ($data['pwd'] != $data['pwd_check']) {
-    die('Passwords do not match each other.');
+    die('<strong>Upgrade failed!</strong> Passwords do not match each other.');
 }
 
 // SETUP BASIC WOLF ENVIRONMENT
@@ -48,7 +45,7 @@ try {
     $__CMS_CONN__ = new PDO(DB_DSN, DB_USER, DB_PASS);
 }
 catch (PDOException $error) {
-    die('DB Connection failed: '.$error->getMessage());
+    die('<strong>Upgrade failed!</strong> DB Connection failed: '.$error->getMessage());
 }
 
 echo '<li>Connection to current database made...</li>';
@@ -72,11 +69,13 @@ if ($driver === 'sqlite') {
 Record::connection($__CMS_CONN__);
 Record::getConnection()->exec("set names 'utf8'");
 
+// START PRE-UPGRADE STUFF
+
 // Get the user from the DB
 $user = Record::findOneFrom('User', 'username=?', array($data['username']));
 
 if (!$user) {
-    die('Administrative user not correct...');
+    die('<strong>Upgrade failed!</strong> Administrative user not correct...');
 }
 
 echo '<li>Administrative user found.</li>';
@@ -94,20 +93,17 @@ while ($perm = $stmt->fetchObject())
     $perms[] = $perm->name;
 
 if (!in_array('administrator', $perms)) {
-    die('Administrative permissions not correct.');
+    die('<strong>Upgrade failed!</strong> Administrative permissions not correct.');
 }
 
 echo '<li>Administrative user has appropriate permissions...</li>';
 
 // Check administrative user's password
 if ($user->password != sha1($data['pwd'])) {
-    die('Administrative password not correct.');
+    die('<strong>Upgrade failed!</strong> Administrative password not correct.');
 }
 
 echo '<li>Administrative password correct...</li>';
-
-// SCRIPT UNFINISHED, exiting...
-//exit();
 
 
 /***** SAFETY CHECKS DONE, CONTINUE WITH ACTUAL UPGRADE ******/
@@ -240,6 +236,12 @@ if ($driver == 'mysql') {
     $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 17)");
     $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 18)");
     $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 19)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 20)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 21)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 22)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 23)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 24)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 25)");
 
     // Role 2 = developer
     $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 1)");
@@ -256,6 +258,12 @@ if ($driver == 'mysql') {
     $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 17)");
     $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 18)");
     $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 19)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 20)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 21)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 22)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 23)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 24)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 25)");
 
     // Role 2 = editor
     $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 1)");
@@ -264,6 +272,12 @@ if ($driver == 'mysql') {
     $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 17)");
     $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 18)");
     $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 19)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 20)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 21)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 22)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 23)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 24)");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 25)");
     echo '<li>Added default role permission mappings...</li>';
 
     // Updating permissions table
@@ -287,6 +301,13 @@ if ($driver == 'mysql') {
     $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (17, 'page_edit')");
     $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (18, 'page_delete')");
     $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (19, 'file_manager_view')");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (20, 'file_manager_upload')");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (21, 'file_manager_mkdir')");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (22, 'file_manager_mkfile')");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (23, 'file_manager_rename')");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (24, 'file_manager_chmod')");
+    $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (25, 'file_manager_delete')");
+
     echo '<li>Emptied permission table and added default permissions...</li>';
 
     // DELETING TABLES
@@ -469,6 +490,12 @@ if ($driver == 'sqlite') {
     $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 17)");
     $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 18)");
     $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 19)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 20)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 21)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 22)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 23)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 24)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 25)");
 
     // Role 2 = developer
     $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 1)");
@@ -485,6 +512,12 @@ if ($driver == 'sqlite') {
     $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 17)");
     $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 18)");
     $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 19)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 20)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 21)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 22)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 23)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 24)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 25)");
 
     // Role 2 = editor
     $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (3, 1)");
@@ -493,6 +526,12 @@ if ($driver == 'sqlite') {
     $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (3, 17)");
     $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (3, 18)");
     $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (3, 19)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (3, 20)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (3, 21)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (3, 22)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (3, 23)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (3, 24)");
+    $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (3, 25)");
     echo '<li>Added default role permission mappings...</li>';
 
     // Updating permissions table
@@ -518,6 +557,13 @@ if ($driver == 'sqlite') {
     $PDO->exec("INSERT INTO permission (id, name) VALUES (17, 'page_edit')");
     $PDO->exec("INSERT INTO permission (id, name) VALUES (18, 'page_delete')");
     $PDO->exec("INSERT INTO permission (id, name) VALUES (19, 'file_manager_view')");
+    $PDO->exec("INSERT INTO permission (id, name) VALUES (20, 'file_manager_upload')");
+    $PDO->exec("INSERT INTO permission (id, name) VALUES (21, 'file_manager_mkdir')");
+    $PDO->exec("INSERT INTO permission (id, name) VALUES (22, 'file_manager_mkfile')");
+    $PDO->exec("INSERT INTO permission (id, name) VALUES (23, 'file_manager_rename')");
+    $PDO->exec("INSERT INTO permission (id, name) VALUES (24, 'file_manager_chmod')");
+    $PDO->exec("INSERT INTO permission (id, name) VALUES (25, 'file_manager_delete')");
+
     echo '<li>Emptied permission table and added default permissions...</li>';
 
     // DELETING TABLES
@@ -535,4 +581,10 @@ if ($driver == 'pgsql') {
 }
 
 ?>
-</ul></li></ul>
+</ul>
+</li>
+<li><strong>Upgrade finished!</strong></li>
+</ul>
+<p>
+    Please check the <a href="../../security.php">security advisory</a> next.
+</p>

@@ -125,6 +125,12 @@ class UserController extends Controller {
             redirect(get_url('user/add'));
         }
 
+        // check if username != password
+        if ($data['username'] == $data['password']) {
+            Flash::set('error', __('The password must not be the same as the username!'));
+            redirect(get_url('user/add'));
+        }
+
         // Check alphanumerical fields
         $fields = array('username', 'name');
         foreach ($fields as $field) {

@@ -102,10 +102,26 @@ class BackupRestoreController extends PluginController {
         $settings = Plugin::getAllSettings('backup_restore');
 
         // All of the tablesnames that belong to Wolf CMS core.
-        $tablenames = array('layout', 'page', 'page_part', 'page_tag', 'permission',
-                            'plugin_settings', 'setting', 'snippet', 'tag', 'user',
-                            'user_permission'
-                           );
+        $tablenames = array();
+
+        if (strpos(DB_DSN,'mysql') !== false) {
+            $sql = 'show tables';
+        }
+
+        if (strpos(DB_DSN,'sqlite') !== false) {
+            $sql = 'SELECT name FROM SQLITE_MASTER WHERE type="table" ORDER BY name';
+        }
+
+        if (strpos(DB_DSN,'pgsql') !== false) {
+            $sql = "select tablename from pg_tables where schemaname='public'";
+        }
+        
+        $pdo = Record::getConnection();
+        $result = $pdo->query($sql);
+
+        while ($col = $result->fetchColumn()) {
+            $tablenames[] = $col;
+        }
 
         // All fields that should be wrapped as CDATA
         $cdata_fields = array('content', 'content_html');
@@ -208,10 +224,26 @@ class BackupRestoreController extends PluginController {
         $settings = Plugin::getAllSettings('backup_restore');
 
         // All of the tablesnames that belong to Wolf CMS core.
-        $tablenames = array('layout', 'page', 'page_part', 'page_tag', 'permission',
-                            'plugin_settings', 'setting', 'snippet', 'tag', 'user',
-                            'user_permission'
-                           );
+        $tablenames = array();
+
+        if (strpos(DB_DSN,'mysql') !== false) {
+            $sql = 'show tables';
+        }
+
+        if (strpos(DB_DSN,'sqlite') !== false) {
+            $sql = 'SELECT name FROM SQLITE_MASTER WHERE type="table" ORDER BY name';
+        }
+
+        if (strpos(DB_DSN,'pgsql') !== false) {
+            $sql = "select tablename from pg_tables where schemaname='public'";
+        }
+
+        $pdo = Record::getConnection();
+        $result = $pdo->query($sql);
+
+        while ($col = $result->fetchColumn()) {
+            $tablenames[] = $col;
+        }
 
         // All fields that should be wrapped as CDATA
         $cdata_fields = array('content', 'content_html');
@@ -235,7 +267,13 @@ class BackupRestoreController extends PluginController {
             $container = $tablename.'s';
 
             if (array_key_exists($container, $xml) && count($xml->$container->$tablename) > 0) {
-                if (false === $__CMS_CONN__->exec('TRUNCATE '.TABLE_PREFIX.$tablename)) {
+                if (strpos(DB_DSN,'sqlite') !== false) {
+                    $sql = 'DELETE FROM '.TABLE_PREFIX.$tablename;
+                }
+                else {
+                    $sql = 'TRUNCATE '.TABLE_PREFIX.$tablename;
+                }
+                if (false === $__CMS_CONN__->exec($sql)) {
                     Flash::set('error', __('Unable to truncate current table :tablename.', array(':tablename' => TABLE_PREFIX.$tablename)));
                     redirect(get_url('plugin/backup_restore'));
                 }

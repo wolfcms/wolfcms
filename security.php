@@ -23,6 +23,9 @@ require(CORE_ROOT.DS.'utils.php');
 require(CFG_FILE);
 
 if (!defined('DEBUG')) { echo 'Please install Wolf CMS first, thank you.'; exit(); }
+
+// Lets make sure we do a valid (uncached) check.
+clearstatcache();
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -180,51 +183,102 @@ ol, ul {
     $warnings = array();
     $fatals   = array();
 
-    /* RUN CHECKS - advisories */
-    if (defined('DEBUG') && false === DEBUG && file_exists(CORE_ROOT.'/../readme.txt')) {
-        $advisories['readme.txt, file present'] = 'The readme.txt is still present. You may want to remove it for added security since this is probably a production system. (DEBUG was set to FALSE)';
+
+    /* RUN CHECKS - ADVISORIES */
+
+    // Does the readme.txt file exist?
+    if (file_exists(CORE_ROOT.DS.'..'.DS.'readme.txt')) {
+        $advisories['readme.txt, file present'] = 'The readme.txt is still present. You may want to remove it for added security.';
     }
 
-    /* RUN CHECKS - warnings */
-    if (true === DEBUG) {
+    // Is the config file writable?
+    if (isWritable(CFG_FILE)) {
+        $advisories['config file, writable'] = 'The configuration file has been found to be writable. We would advise you to remove all write permissions on config.php on production systems. As long as no FATAL level potential security issues were detected with the config.php file, you will still be able to run Wolf CMS.';
+    }
+
+
+    /* RUN CHECKS - WARNINGS */
+
+    // Is DEBUG turned on?
+    if (DEBUG === true) {
         $warnings['debug on'] = 'Due to the type and amount of information an error might give intruders when debug is turned on, we strongly advise setting debug to FALSE in production systems.';
     }
 
-    if (isWritable(CFG_FILE) && true === DEBUG) {
-        $warnings['config file writable, debug on'] = 'The configuration file should never be writable in production systems. We advise you to remove write permissions on config.php';
-    }
-    
-    if (defined('DEBUG') && false === DEBUG && file_exists(CORE_ROOT.DS.'install'.DS)) {
-        $warnings['install, directory present'] = 'The installation directory ("wolf/install/") is still present. You may want to remove it for added security since this is probably a production system. (DEBUG was set to FALSE)';
+    // Does the docs directory exist?
+    if (file_exists(CORE_ROOT.DS.'..'.DS.'docs'.DS)) {
+        $warnings['docs, directory present'] = 'The documenation directory ("docs/") is still present. You may want to remove it for added security.';
     }
 
-    if (defined('DEBUG') && false === DEBUG && file_exists(CORE_ROOT.'/../docs/')) {
-        $warnings['docs, directory present'] = 'The documenation directory ("docs/") is still present. You may want to remove it for added security since this is probably a production system. (DEBUG was set to FALSE)';
-    }
 
-    if (defined('DB_DSN') && startsWith(DB_DSN, 'sqlite:'.realpath(dirname(__FILE__)))) {
-        $warnings['db, sqlite location'] = 'It would appear that the SQLite database file is stored inside of web accessible directory. We strongly recommend that you move the database files.';
-    }
+    /* RUN CHECKS - FATALS */
 
-    /* RUN CHECKS - fatals */
-
+    // fileperms() based checks
     if (function_exists('fileperms')) {
-        $perms = fileperms($config_file);
-        if ((($perms & 0x0010) || ($perms & 0x0002)) && true !== DEBUG) {
-            $fatals['config file writable, debug off'] = 'Wolf CMS has automatically made itself unavailable because the configuration file was found to be writable. Until this problem is corrected, only this screen will be available.';
+        
+        // Does the config file have write permissions for the group or the world?
+        $fileperms = fileperms(CFG_FILE);
+        if ((($fileperms & 0x0010) || ($fileperms & 0x0002))) {
+            $fatals['config file, group owned, world owned, file writable'] = 'Wolf CMS has automatically made itself unavailable because the configuration file was found to be writable for the group / the world. Until this security issue is corrected, only this screen will be available.';
+        }
+
+        // posix_getuid(), fileowner() and filegroup() based checks
+        if (function_exists('posix_getuid') && function_exists('fileowner') && function_exists('filegroup')) {
+            $processowner = posix_getuid();
+
+            // Is the Wolf CMS root directory owned by http server and does it have write permissions?
+            $rootowner = fileowner(CORE_ROOT.DS.'..'.DS);
+            $rootperms = fileperms(CORE_ROOT.DS.'..'.DS);
+            if ($rootowner == $processowner && ($rootperms & 0x0080)) {
+                $fatals['wolf cms root directory, user owned, writable'] = 'The root directory in which Wolf CMS is installed was found to be owned by the same user under whom the HTTP server is running and it has write access.';
+            }
+
+            // Is the Wolf CMS root directory writable for the world?
+            $rootperms = fileperms(CORE_ROOT.DS.'..'.DS);
+            if (($rootperms & 0x0002)) {
+                $fatals['wolf cms root directory, writable'] = 'The root directory in which Wolf CMS is installed was found to have write access for the world.';
+            }
+
+            // Is the Wolf CMS system directory owned by http server and does it have write permissions?
+            $coreowner = fileowner(CORE_ROOT.DS);
+            $coreperms = fileperms(CORE_ROOT.DS);
+            if ($coreowner == $processowner && ($coreperms & 0x0080)) {
+                $fatals['wolf directory, user owned, writable'] = 'The core directory of the Wolf CMS system ("wolf/") was found to be owned by the same user under whom the HTTP server is running and it has write access.';
+            }
+
+            // Is the Wolf CMS system directory has write permissions?
+            $coreperms = fileperms(CORE_ROOT.DS);
+            if (($coreperms & 0x0010) || ($coreperms & 0x0002)) {
+                $fatals['wolf directory, group owned, world owned, writable'] = 'The core directory of the Wolf CMS system ("wolf/") was found to be writable for the group and/or the world.';
+            }
+
+            // Is the config file owned by http server and does it have write permissions?
+            $fileowner = fileowner(CFG_FILE);
+            $fileperms = fileperms(CFG_FILE);
+            if ($fileowner == $processowner && ($fileperms & 0x0080)) {
+                $fatals['config file, user owned, writable'] = 'The config file is owned by the same user under whom the HTTP server is running and has write access.';
+            }
+
+            // Does the public directory have write permissions for the group or the world while its not needed?
+            $publicowner = filegroup(CORE_ROOT.DS.'..'.DS.'public'.DS);
+            $publicperms = fileperms(CORE_ROOT.DS.'..'.DS.'public'.DS);
+            if ($publicowner == $processowner && (($publicperms & 0x0010) || ($publicperms & 0x0002))) {
+                $fatals['public directory, group owned, world owned, writable'] = 'The public directory ("public/") was found to be writable for the group and/or the world. We strongly advise you not to do this since it is usually not necessary for the proper operation of the Filemanager plugin.';
+            }
         }
     }
 
-    if (function_exists('posix_getpwuid') && function_exists('posix_getuid') && function_exists('fileowner') && substr(PHP_OS, 0, 3) != 'WIN') {
-        $fileinfo = posix_getpwuid(fileowner($config_file));
-        $processinfo = posix_getpwuid(posix_getuid());
-        if (($fileinfo['name'] == $processinfo['name'] || $fileinfo['gid'] == $processinfo['gid'])) {
-            $fatals['config file owned, debug off'] = 'The config file is owned by the same user/group under whom the HTTP server is running. This is never a good idea.';
-        }
+    // Does the install directory exist?
+    if (file_exists(CORE_ROOT.DS.'install'.DS)) {
+        $fatals['install, directory present'] = 'The installation directory ("wolf/install/") is still present.';
     }
 
-    if (defined('DEBUG') && false === DEBUG && file_exists(CORE_ROOT.'/../security.php')) {
-        $fatals['security.php, file present'] = 'The security.php file is still present. Please remove it to prevent abuse since this is a production system. (DEBUG was set to FALSE)';
+    // Does the SQlite DB file exist inside the Wolf CMS root directory?
+    if (defined('DB_DSN') && startsWith(DB_DSN, 'sqlite:'.realpath(dirname(__FILE__)))) {
+        $fatals['db, sqlite location'] = 'It would appear that the SQLite database file is stored inside of web accessible directory. This is an insecure practice.';
+    }
+
+    if (file_exists(CORE_ROOT.DS.'..'.DS.'security.php')) {
+        $fatals['security.php, file present'] = 'The security.php file is still present. Please remove it to prevent abuse.';
     }
 
     /* END CHECKS - DUMP OUTPUT */
@@ -232,8 +286,7 @@ ol, ul {
 
     <h1>Overview</h1>
     <p>Once your Wolf CMS installation is running in production status, you are strongly advised to remove this file ("/security.php") to prevent abuse.</p>
-    <?php if (true === DEBUG) { echo '<p><strong>NOTE:</strong> this check is assuming this installation of Wolf CMS is NOT a production system since DEBUG is set to TRUE. Please <strong>make sure to run this check again</strong> with DEBUG set to FALSE.</p>'; } ?>
-    <?php if (count($fatals) > 0) { echo '<p>One or more FATAL level security problems have been detected. You are strongly advised to correct them!</p>'; } ?>
+    <?php if (count($fatals) > 0) { echo '<p>One or more FATAL level potential security issues have been detected. You are strongly advised to correct them!</p>'; } ?>
     <table style="margin: 20px auto; width: 90%;">
         <tbody>
 <?php
@@ -274,6 +327,9 @@ ol, ul {
 ?>
         </tbody>
     </table>
+    <p>
+        Go to your site's <a href="index.php">front page</a> or the <a href="<?php echo (USE_MOD_REWRITE)?'':'?/'; echo ADMIN_DIR;?>">administrative interface</a>.
+    </p>
     <hr/>
     <p><small>DISCLAIMER - neither the Wolf CMS project nor any of its contributors provide any warranty, for details, please see /docs/license.txt in the download package.</small></p>
 
