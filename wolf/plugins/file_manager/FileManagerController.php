@@ -271,7 +271,7 @@ class FileManagerController extends PluginController {
         $filename = preg_replace('/[^a-z0-9_\-\.]/i', '', $filename);
 
         if (isset($_FILES)) {
-            $file = _upload_file($filename, FILES_DIR.'/'.$path.'/', $_FILES['upload_file']['tmp_name'], $overwrite);
+            $file = $this->_upload_file($filename, FILES_DIR.'/'.$path.'/', $_FILES['upload_file']['tmp_name'], $overwrite);
 
             if ($file === false)
                 Flash::set('error', __('File has not been uploaded!'));
@@ -291,7 +291,7 @@ class FileManagerController extends PluginController {
         $file = FILES_DIR.'/'.$data['name'];
 
         if (file_exists($file)) {
-            if (!chmod($file, octdec($data['mode'])))
+            if (@!chmod($file, octdec($data['mode'])))
                 Flash::set('error', __('Permission denied!'));
         }
         else {
@@ -368,11 +368,10 @@ class FileManagerController extends PluginController {
 
                 // make the link depending on if it's a file or a dir
                 if ($cur->isDir()) {
-                    $object->link = '<a href="'.get_url('plugin/file_manager/browse/'.$object->name).'">'.$object->name.'</a>';
-                    $file = '/'.$file;
+                    $object->link = '<a href="'.get_url('plugin/file_manager/browse/'.$this->path.$object->name).'">'.$object->name.'</a>';
                 }
                 else {
-                    $object->link = '<a href="'.get_url('plugin/file_manager/view/'.$object->name).'">'.$object->name.'</a>';
+                    $object->link = '<a href="'.get_url('plugin/file_manager/view/'.$this->path.$object->name).'">'.$object->name.'</a>';
                 }
 
                 $files[$object->name] = $object;
