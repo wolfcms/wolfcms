@@ -115,7 +115,12 @@ final class SecureToken extends Record {
                 return false;
             }
 
-            return (bin2hex($hash->hash($user->username.$time.$target_url.$pwd.$user->salt)) === $token);
+            if (!isset($user->salt)) {
+                return (bin2hex($hash->hash($user->username.$time.$target_url.$pwd)) === $token);
+            }
+            else {
+                return (bin2hex($hash->hash($user->username.$time.$target_url.$pwd.$user->salt)) === $token);
+            }
         }
 
         return false;
