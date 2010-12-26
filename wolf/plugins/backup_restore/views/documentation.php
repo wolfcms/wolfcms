@@ -42,8 +42,8 @@ if (!defined('IN_CMS')) { exit(); }
 <h1><?php echo __('Documentation'); ?></h1>
 <p>
     The Backup/Restore plugin allows you to create complete backups of the Wolf
-    CMS core database. It generates an XML file that contains all records for each
-    of the Wolf CMS core database tables.
+    CMS database. It generates an XML file that contains all records for each
+    of the Wolf CMS database tables.
 </p>
 <h2><?php echo __('Creating the backup'); ?></h2>
 <p>
@@ -67,10 +67,4 @@ if (!defined('IN_CMS')) { exit(); }
 </p>
 <p>
     Example: &lt;password/&gt;
-</p>
-<h2><?php echo __('Notes'); ?></h2>
-<p>
-    Database tables that are created by plugins are currently <strong>not</strong>
-    backed up through this mechanism. However, plugin settings for plugins that use the settings
-    functionality provided by Wolf CMS <strong>are</strong> backed up.
 </p>

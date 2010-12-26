@@ -49,11 +49,11 @@ if (!defined('IN_CMS')) { exit(); }
             <em>version</em> as you are restoring it to.
         </p>
         <p>
-            Please be aware that <strong>all</strong> Wolf CMS <em>core</em> database tables will be truncated when
+            Please be aware that <strong>all</strong> the database tables will be truncated when
             performing a restore. Truncating a table means that all records in that table are deleted.
         </p>
         <p>
-            As such, the contents of your backup file will replace the contents of your core Wolf CMS database tables.
+            As such, the contents of your backup file will replace the contents of your Wolf CMS database tables.
         </p>
         <p style="text-align: center;"><strong>
             Do NOT upload a zip file, only upload a plain text XML file!

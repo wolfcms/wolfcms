@@ -1,4 +1,17 @@
-<?php include_once("../../../config.php"); ?>
+<?php
+
+include_once("../../../config.php");
+
+$changedurl = str_replace('//','|',URL_PUBLIC);
+$lastslash = strpos($changedurl, '/');
+if (false === $lastslash) {
+    define('URI_PUBLIC', '/');
+}
+else {
+    define('URI_PUBLIC', substr($changedurl, $lastslash));
+}
+
+?>
 // -------------------------------------------------------------------
 // markItUp!
 // -------------------------------------------------------------------
@@ -13,7 +26,7 @@
 // -------------------------------------------------------------------
 markdownSettings = {
 	nameSpace:			'markdown',
-	previewParserPath:	'<?php echo (USE_MOD_REWRITE === true) ? '' : '?'; ?>/<?php echo ADMIN_DIR; ?>/plugin/markdown/preview', // path to your markdown parser
+	previewParserPath:	'<?php echo URI_PUBLIC; ?><?php echo (USE_MOD_REWRITE === true) ? '' : '?/'; ?><?php echo ADMIN_DIR; ?>/plugin/markdown/preview', // path to your markdown parser
 	onShiftEnter:		{keepDefault:false, openWith:'\n\n'},
 	markupSet: [
 		{name:'First Level Heading', key:'1', placeHolder:'Your title here...', closeWith:function(markItUp) { return miu.markdownTitle(markItUp, '=') } },

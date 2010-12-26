@@ -28,11 +28,12 @@
  *
  */
 class AuthUser {
-    const SESSION_KEY               = 'wolf_auth_user';
-    const COOKIE_KEY                = 'wolf_auth_user';
-    const COOKIE_LIFE               = 1800;  // 30 minutes
-    const ALLOW_LOGIN_WITH_EMAIL    = false;
-    const DELAY_ON_INVALID_LOGIN    = true;
+    const SESSION_KEY                   = 'wolf_auth_user';
+    const COOKIE_KEY                    = 'wolf_auth_user';
+    const COOKIE_LIFE                   = 1800;  // 30 minutes
+    const ALLOW_LOGIN_WITH_EMAIL        = false;
+    const DELAY_ON_INVALID_LOGIN        = true;
+    const DELAY_ONCE_EVERY              = 30; // 30 seconds
 
     static protected $is_logged_in  = false;
     static protected $user_id       = false;
@@ -194,11 +195,26 @@ class AuthUser {
 
         $user = User::findBy('username', $username);
 
+        if (self::DELAY_ON_INVALID_LOGIN && $user->failure_count > 0) {
+            $last = explode(' ', $user->last_failure);
+            $date = explode('-', $last[0]);
+            $hours = explode(':', $last[1]);
+
+            $last = mktime($hours[0], $hours[1], $hours[2], $date[1], $date[2], $date[0]);
+            // thirty (by default) second delay for every failed attempt
+            $now = time() - (self::DELAY_ONCE_EVERY * $user->failure_count);
+
+            if ($last > $now) {
+                return false;
+            }
+        }
+
         if ( ! $user instanceof User && self::ALLOW_LOGIN_WITH_EMAIL)
             $user = User::findBy('email', $username);
 
         if ($user instanceof User && (false === $validate_password || self::validatePassword($user, $password))) {
             $user->last_login = date('Y-m-d H:i:s');
+            $user->failure_count = 0;
             $user->save();
 
             if ($set_cookie) {
@@ -219,14 +235,6 @@ class AuthUser {
                 $user->save();
             }
 
-            if (self::DELAY_ON_INVALID_LOGIN) {
-                if ( ! isset($_SESSION[self::SESSION_KEY.'_invalid_logins']))
-                    $_SESSION[self::SESSION_KEY.'_invalid_logins'] = 1;
-                else
-                    ++$_SESSION[self::SESSION_KEY.'_invalid_logins'];
-
-                sleep(max(0, min($_SESSION[self::SESSION_KEY.'_invalid_logins'], (ini_get('max_execution_time') - 1))));
-            }
             return false;
         }
     }
