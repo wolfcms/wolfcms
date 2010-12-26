@@ -14,7 +14,7 @@
 //  Constants  ---------------------------------------------------------------
 define('IN_CMS', true);
 
-define('CMS_VERSION', '0.7.0 RC1');
+define('CMS_VERSION', '0.7.2');
 define('CMS_ROOT', dirname(__FILE__));
 define('DS', DIRECTORY_SEPARATOR);
 define('CORE_ROOT', CMS_ROOT.DS.'wolf');
@@ -72,20 +72,18 @@ if (!defined('THEMES_URI')) { define('THEMES_URI', URI_PUBLIC.'public/themes/');
 // Security checks -----------------------------------------------------------
 if (DEBUG == false && isWritable($config_file)) {
     $lock = false;
-
     // Windows systems always have writable config files... skip those.
-    if (substr(PHP_OS, 0, 3) != 'WIN') {
-        $fileinfo = posix_getpwuid(fileowner($config_file));
-        $processinfo = posix_getpwuid(posix_getuid());
+    if (function_exists('posix_getuid') && function_exists('fileowner') && function_exists('fileperms') && substr(PHP_OS, 0, 3) != 'WIN') {
+        $fileowner = fileowner($config_file);
+        $processowner = posix_getuid();
         $perms = fileperms($config_file);
 
         // Is file owned by http server and does it have write permissions?
-        if ($fileinfo['name'] == $processinfo['name'] && ($perms & 0x0080)) {
+        if ($fileowner == $processowner && ($perms & 0x0080)) {
             $lock = true;
         }
 
         // Does the group have write permissions?
-        // $fileinfo['gid'] == $processinfo['gid']
         if (($perms & 0x0010)) {
             $lock = true;
         }

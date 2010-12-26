@@ -13,10 +13,10 @@ their pages and settings to an XML file.
 * To use the settings and documentation pages, you will first need to enable
   the plugin!
 
-* This plugin is only useable by people with the 'administrator' role.
+* This plugin is only useable by the user with user id '1'.
 
 == LICENSE ==
 
-Copyright 2009, Martijn van der Kleijn. <martijn.niji@gmail.com>
+Copyright 2009-2010, Martijn van der Kleijn. <martijn.niji@gmail.com>
 This plugin is licensed under the GPLv3 License.
 <http://www.gnu.org/licenses/gpl.html>
