@@ -47,6 +47,8 @@ Lighttpd   : http://www.lighttpd.net/
 Hiawatha   : http://www.hiawatha-webserver.org/
 Nginx      : http://nginx.org/en/
 
+If you're running Wolf CMS on a different HTTP server, let us know at http://forum.wolfcms.org/
+
 ## Notes
 
 Password is in sha512 + salt so you know how to change it manually in the database!
