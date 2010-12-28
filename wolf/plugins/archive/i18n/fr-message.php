@@ -4,8 +4,8 @@
     /**
      * French language file for plugin archive
      *
-     * @package wolf
-     * @subpackage plugin.archive.translations
+     * @package Plugins
+     * @subpackage archive
      *
      * @author Dimitri “Diti” Torterat <diti@adelieland.eu>
      * @version Wolf 0.6.0

@@ -3,9 +3,8 @@
 /**
  * Spanish language file for plugin file_manager
  *
- * @package plugins
+ * @package Plugins
  * @subpackage file_manager
- * @category translations
  *
  * @author gothw <email@domain.something>
  * @version Wolf 0.9.4

@@ -3,8 +3,8 @@
     /**
      * Polish file for plugin page_not_found
      *
-     * @package wolf
-     * @subpackage plugin.page_not_found.translations
+     * @package Plugins
+     * @subpackage page_not_found
      *
      * @author Piotr Fuz <piotr.fuz@gmail.com> and Pawel Balicki <kilab1@o2.pl>
      * @version Wolf 0.6.0

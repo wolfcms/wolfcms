@@ -3,9 +3,8 @@
     /**
      * Romanian file for plugin page_not_found
      *
-     * @package plugins
+     * @package Plugins
      * @subpackage page_not_found
-     * @category translations
      *
      * @author Cosmin Huţanu <urecheatu007@gmail.com>
      * @version Wolf 0.6.0

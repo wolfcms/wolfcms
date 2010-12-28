@@ -3,9 +3,8 @@
     /**
      * Romanian file for plugin textile
      *
-     * @package plugins
+     * @package Plugins
      * @subpackage textile
-     * @category translations
      *
      * @author Cosmin Huţanu <urecheatu007@gmail.com>
      * @version Wolf 0.6.0

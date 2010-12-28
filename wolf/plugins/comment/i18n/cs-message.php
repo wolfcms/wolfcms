@@ -3,9 +3,8 @@
     /**
      * Czech file for plugin comment
      *
-     * @package plugins
+     * @package Plugins
      * @subpackage comment
-     * @category translations
      *
      * @author Iva Pelcová <ivy046@gmail.com>
      * @version Wolf 0.6.0

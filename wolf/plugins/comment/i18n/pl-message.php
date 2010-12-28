@@ -3,8 +3,8 @@
     /**
      * Polish file for plugin comment
      *
-     * @package wolf
-     * @subpackage plugin.comment.translations
+     * @package Plugins
+     * @subpackage comment
      *
      * @author Piotr Fuz <piotr.fuz@gmail.com> and Pawel Balicki <kilab1@o2.pl>
      * @version Wolf 0.6.0
@@ -36,7 +36,7 @@
 	'Documentation' => 'Dokumentacja',
 	'Edit comment' => 'Edytuj komentarz',
 	'Enhance comments tab' => 'Rozszerzone komentarze',
-	'Incorrect result value. Please try again:' => 'Niepoprawna wartosc. Spróbuj ponownie:',
+	'Incorrect result value. Please try again:' => 'Niepoprawna wartosc. Sprï¿½buj ponownie:',
 	'Moderation' => 'Moderacja',
 	'Modify' => 'Modyfikuj',
 	'No' => 'Nie',

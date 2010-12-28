@@ -3,8 +3,8 @@
     /**
      * Polish file for plugin skeleton
      *
-     * @package wolf
-     * @subpackage plugin.skeleton.translations
+     * @package Plugins
+     * @subpackage skeleton
      *
      * @author Piotr Fuz <piotr.fuz@gmail.com> and Paweł Balicki <kilab1@o2.pl>
      * @version Wolf 0.6.0

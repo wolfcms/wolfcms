@@ -3,9 +3,8 @@
    /**
      * Russian language file
      *
-     * @package plugins
-	 * @subpackage textile
-    *  @category translations
+     * @package Plugins
+     * @subpackage textile
      *
      * @author Dmitry Kostromin <kostromind@gmail.com>
      * @version Wolf 0.6.0

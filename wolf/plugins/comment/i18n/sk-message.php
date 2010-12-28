@@ -3,9 +3,8 @@
   /**
      * Slovak file for plugin comment
      *
-     * @package plugins
+     * @package Plugins
      * @subpackage comment
-     * @category translations
      *
      * @author Pali Petras <payo@creoactive.com>
      * @version Wolf 0.5.5

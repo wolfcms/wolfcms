@@ -3,8 +3,8 @@
     /**
      * Dutch language file for comment plugin
      *
-     * @package wolf
-     * @subpackage plugin.comment.translations
+     * @package Plugins
+     * @subpackage comment
      *
      * @author Rinus <rinus@rosiq.nl>
      * @version Wolf 0.6.0

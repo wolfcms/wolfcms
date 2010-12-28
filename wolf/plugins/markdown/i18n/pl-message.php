@@ -3,8 +3,8 @@
     /**
      * Polish file for plugin markdown
      *
-     * @package wolf
-     * @subpackage plugin.markdown.translations
+     * @package Plugins
+     * @subpackage markdown
      *
      * @author Piotr Fuz <piotr.fuz@gmail.com> and Pawel Balicki <kilab1@o2.pl>
      * @version Wolf 0.6.0

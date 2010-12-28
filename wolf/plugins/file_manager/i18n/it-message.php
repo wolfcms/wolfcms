@@ -3,9 +3,8 @@
 /**
  * Italian language file for plugin file_manager
  *
- * @package plugins
+ * @package Plugins
  * @subpackage file_manager
- * @category translations
  *
  * @author Beres <email@something.com>
  * @version Wolf 0.9.4

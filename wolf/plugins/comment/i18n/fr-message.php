@@ -3,8 +3,8 @@
      /**
      * French language file
      *
-     * @package wolf
-     * @subpackage plugin.comment.translations
+     * @package Plugins
+     * @subpackage comment
      *
      * @author Dimitri “Diti” Torterat <diti@adelieland.eu>
      * @version Wolf 0.6.0

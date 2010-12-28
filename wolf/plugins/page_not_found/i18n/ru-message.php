@@ -3,9 +3,8 @@
    /**
      * Russian language file
      *
-     * @package plugins
-	 * @subpackage page_not_found
-    *  @category translations
+     * @package Plugins
+     * @subpackage page_not_found
      *
      * @author Dmitry Kostromin <kostromind@gmail.com>
      * @version Wolf 0.6.0

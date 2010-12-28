@@ -3,8 +3,8 @@
 /**
  * Slovak language file for plugin file_manager
  *
- * @package wolf
- * @subpackage plugin.file_manager.translations
+ * @package Plugins
+ * @subpackage file_manager
  *
  * @author Jozef Hergott
  * @version Wolf 0.6.0

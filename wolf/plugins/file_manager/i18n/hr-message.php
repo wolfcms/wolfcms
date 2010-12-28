@@ -3,9 +3,8 @@
     /**
      * Croatian language file for plugin file_manager
      *
-     * @package plugins
+     * @package Plugins
      * @subpackage file_manager
-     * @category translations
      *
      * @author Dejan Andjelkovic <dejan79@gmail.com>
      * @version Wolf 0.6.0

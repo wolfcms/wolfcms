@@ -3,8 +3,8 @@
 	/**
 	* French language file
 	*
-	* @package wolf
-	* @subpackage plugin.comment.translations
+	* @package Plugins
+	* @subpackage comment
 	*
 	* @author Jorge Moreno <alterebro@gmail.com>
 	* @version Wolf 0.6.0b

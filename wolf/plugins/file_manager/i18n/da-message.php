@@ -3,9 +3,8 @@
 	/**
 	 * Danish language file for plugin file_manager
 	 *
-	 * @package plugins
+	 * @package Plugins
 	 * @subpackage file_manager
-     * @category translations
 	 *
 	 * @author Kenan Christensen <kenan@devmore.org>
 	 * @version Wolf 0.9.4

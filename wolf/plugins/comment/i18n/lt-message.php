@@ -3,9 +3,8 @@
     /**
      * Lithuanian file for plugin comment
      *
-     * @package plugins
+     * @package Plugins
      * @subpackage comment
-     * @category translations
      *
      * @author Remigijus Jarmalavičius <remigijus@jarmalavicius.lt>
      * @version Wolf 0.7.0

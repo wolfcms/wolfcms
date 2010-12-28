@@ -3,8 +3,8 @@
     /**
      * Polish file for plugin file_manager
      *
-     * @package wolf
-     * @subpackage plugin.file_manager.translations
+     * @package Plugins
+     * @subpackage file_manager
      *
      * @author Piotr Fuz <piotr.fuz@gmail.com> and Pawel Balicki <kilab1@o2.pl>
      * @version Wolf 0.6.0
@@ -17,16 +17,16 @@
 	'Cancel' => 'Anuluh',
 	'Change mode' => 'Zmien tryb',
 	'Close' => 'Zamknij',
-	'Create' => 'Stwórz',
-	'Create new directory' => 'Utwórz nowy folder',
-	'Create new file' => 'Utwórz nowy plik',
+	'Create' => 'Stwï¿½rz',
+	'Create new directory' => 'Utwï¿½rz nowy folder',
+	'Create new file' => 'Utwï¿½rz nowy plik',
 	'Delete file' => 'Usun plik',
 	'Directory :name has not been created!' => 'Folder <strong>:name</strong> nie zostal utworzony!',
 	'Directory is not writable! File has not been saved!' => 'Brak uprawnien do zapisu. Folder nie zostal utworzony!',
 	'File' => 'Plik',
 	'File :name has been created with success!' => 'Plik<strong>:name</strong> zostal utworzony!',
 	'File :name has not been created!' => 'Plik<strong>:name</strong> nie zostal utworzony!',
-	'File Manager' => 'Menedzer plików',
+	'File Manager' => 'Menedzer plikï¿½w',
 	'File has been saved with success!' => 'Plik<strong>:name</strong> zostal zapisany!',
 	'File has not been uploaded!' => 'Nie wgrano zadnego pliku!',
 	'File is not writable! File has not been saved!' => 'Brak uprawnien do zapisu! Plik nie zostal zapisany!',

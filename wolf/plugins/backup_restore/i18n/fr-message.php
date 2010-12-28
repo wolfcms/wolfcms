@@ -3,8 +3,8 @@
     /**
      * Frenc file for plugin backup_restore
      *
-     * @package wolf
-     * @subpackage plugin.backup_restore.translations
+     * @package Plugins
+     * @subpackage backup_restore
      *
      * @author Martijn van der Kleijn <martijn.niji@gmail.com>
      * @version Wolf 0.5.5

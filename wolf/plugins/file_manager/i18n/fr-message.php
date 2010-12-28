@@ -3,8 +3,8 @@
 /**
  * French language file for plugin file_manager
  *
- * @package wolf
- * @subpackage plugin.file_manager.translations
+ * @package Plugins
+ * @subpackage file_manager
  *
  * @author Dimitri “Diti” Torterat <diti@adelieland.eu>
  * @version Wolf 0.6.0

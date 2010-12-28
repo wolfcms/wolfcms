@@ -3,9 +3,8 @@
 /**
  * Indonesian language file for plugin file_manager
  *
- * @package plugins
+ * @package Plugins
  * @subpackage file_manager
- * @category translations
  *
  * @author Rendra Stanfordi <renstanford@gmail.com>
  * @version Wolf 0.9.4
