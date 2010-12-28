@@ -3,8 +3,7 @@
     /**
      * YourLanguage language file
      *
-     * @package wolf
-     * @subpackage translations
+     * @package Translations
      *
      * @author Your Name <email@domain.something>
      * @version Wolf x.y.z

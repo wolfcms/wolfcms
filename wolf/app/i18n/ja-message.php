@@ -3,8 +3,7 @@
 /**
  * Japanese language file
  *
- * @package wolf
- * @subpackage translations
+ * @package Translations
  *
  * @author Sunao Hara
  * @version Wolf x.y.z

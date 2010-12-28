@@ -3,8 +3,7 @@
 /**
  * Norwegian language file
  *
- * @package wolf
- * @subpackage translations
+ * @package Translations
  *
  * @author Philip Suffren
  * @version Wolf x.y.z

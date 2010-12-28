@@ -3,8 +3,7 @@
     /**
      * Lithuanian language file
      *
-     * @package wolf
-     * @subpackage translations
+     * @package Translations
      *
      * @author Remigijus Jarmalavicius <remigijus@jarmalavicius.lt>
      * @version Wolf 0.7.0

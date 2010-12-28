@@ -3,8 +3,7 @@
 /**
  * Italian language file
  *
- * @package wolf
- * @subpackage translations
+ * @package Translations
  *
  * @author Beres
  * @version Wolf x.y.z

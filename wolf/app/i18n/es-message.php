@@ -3,8 +3,7 @@
 /**
  * Spanish language file
  *
- * @package wolf
- * @subpackage translations
+ * @package Translations
  *
  * @author gothw
  * @version Wolf x.y.z

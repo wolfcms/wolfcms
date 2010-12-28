@@ -3,8 +3,7 @@
 /**
  * Swedish language file
  *
- * @package wolf
- * @subpackage translations
+ * @package Translations
  *
  * @author Andreas Johansson
  * @version Wolf x.y.z

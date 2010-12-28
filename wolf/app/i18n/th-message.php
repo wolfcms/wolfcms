@@ -3,8 +3,7 @@
     /**
      * Thai language file
      *
-     * @package wolf
-     * @subpackage translations
+     * @package Translations
      *
      * @author Nateetorn Lertkhonsan <nateetorn.l@gmail.com>
      * @link http://www.demoncodez.com

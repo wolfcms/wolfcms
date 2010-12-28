@@ -3,8 +3,7 @@
 /**
  * Hungarian language file
  *
- * @package wolf
- * @subpackage translations
+ * @package Translations
  *
  * @author H.S.Laszlo <http://www.bluedesign.hu>
  * @author Gabor Rezso <http://www.wolfcms.hu>

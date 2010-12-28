@@ -3,8 +3,7 @@
     /**
      * Croatian language file
      *
-     * @package wolf
-     * @subpackage translations
+     * @package Translations
      *
      * @author Dejan Andjelkovic <dejan79@gmail.com>
      * @version Wolf 0.6.0

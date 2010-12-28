@@ -3,8 +3,7 @@
 /**
  * Slovak language file
  *
- * @package wolf
- * @subpackage translations
+ * @package Translations
  *
  * @author Jozef Hergott
  * @version Wolf 0.6.0

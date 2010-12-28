@@ -3,8 +3,7 @@
     /**
      * Albanian language file
      *
-     * @package wolf
-     * @subpackage translations
+     * @package Translations
      *
      * @author Arian Xhezairi <arian@xhezairi.com>
      * @version Wolf x.y.z

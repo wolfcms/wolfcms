@@ -3,8 +3,7 @@
     /**
      * Russian language file
      *
-     * @package wolf
-     * @subpackage translations
+     * @package Translations
      *
      * @author Dmitry Kostromin <kostromind@gmail.com>
      * @author Maslakov Alexander <jmas.ukraine@gmail.com>

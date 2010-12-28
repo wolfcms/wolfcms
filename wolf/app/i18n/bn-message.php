@@ -3,8 +3,7 @@
 /**
  * Bengali language file
  *
- * @package wolf
- * @subpackage translations
+ * @package Translations
  *
  * @author Shuvro Prakash Paul <shuvro.paul@gmail.com>
  * @version Wolf x.y.z

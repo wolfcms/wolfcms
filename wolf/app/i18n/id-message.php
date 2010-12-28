@@ -3,8 +3,7 @@
 /**
  * Indonesian language file
  *
- * @package wolf
- * @subpackage translations
+ * @package Translations
  *
  * @author Rendra Stanfordi <renstanford@gmail.com>
  * @version Wolf 0.9.4

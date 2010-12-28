@@ -3,8 +3,7 @@
 /**
  * Hebrew language file
  *
- * @package wolf
- * @subpackage translations
+ * @package Translations
  *
  * @author Philippe Archambault
  * @version Wolf x.y.z

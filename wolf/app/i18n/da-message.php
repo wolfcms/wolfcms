@@ -3,8 +3,7 @@
 	/**
 	 * Danish language file [DA/dk]
 	 *
-	 * @package wolf
-	 * @subpackage translations
+	 * @package Translations
 	 *
      * @author Kenan Christensen <kenan@devmore.org>
 	 * @version Wolf x.y.z

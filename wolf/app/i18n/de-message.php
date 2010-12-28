@@ -3,8 +3,7 @@
 /**
  * German language file
  *
- * @package wolf
- * @subpackage translations
+ * @package Translations
  *
  * @author unknown
  * @version Wolf x.y.z

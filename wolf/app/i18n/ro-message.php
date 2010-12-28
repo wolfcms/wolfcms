@@ -3,8 +3,7 @@
     /**
      * Romanian language file
      *
-     * @package wolf
-     * @subpackage translations
+     * @package Translations
      *
      * @author Cosmin Huţanu <urecheatu007@gmail.com>
      * @version Wolf 0.6.0

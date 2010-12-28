@@ -3,8 +3,7 @@
 /**
  * Chinese-simple language file
  *
- * @package wolf
- * @subpackage translations
+ * @package Translations
  *
  * @author westup <email@domain.something>
  * @link http://www.lintaorun.com

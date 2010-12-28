@@ -3,8 +3,7 @@
  * Português-brasileiro language file
  * based on translation: Frog CMS v0.9.5 portuguese
  *
- * @package wolf
- * @subpackage translations
+ * @package Translations
  *
  * @author Walker de Alencar <contato@walkeralencar.com>
  * @link   http://www.walkeralencar.com

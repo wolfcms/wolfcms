@@ -3,8 +3,7 @@
     /**
      * Polish language file
      *
-     * @package wolf
-     * @subpackage translations
+     * @package Translations
      *
      * @author Piotr Fuz + Paweł Balicki
      * @version Wolf 0.6.0
