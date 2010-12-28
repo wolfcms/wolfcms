@@ -1,4 +1,25 @@
 <?php
+/*
+ * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
+ *
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
+ */
+
+/**
+ * The Textile plugin provides a Filter that uses the Textile parser.
+ *
+ * @package plugins
+ * @subpackage textile
+ *
+ * @author Dean Allen <dean@textism.com>
+ * @copyright Dean Allen <dean@textism.com>
+ * @author Carlo Zottmann <carlo@g-blog.net>
+ * @author Alex Shiels http://thresholdstate.com/
+ * @copyright 2006 Alex Shiels (additions and fixes)
+ * @license see file.
+ */
 
 /* Security measure */
 if (!defined('IN_CMS')) { exit(); }
