@@ -9,8 +9,7 @@
  */
 
 /**
- * @package wolf
- * @subpackage controllers
+ * @package Controllers
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @copyright Martijn van der Kleijn, 2009-2010
@@ -19,11 +18,6 @@
 
 /**
  * Controls the various actions with regards to the settings screen for Wolf CMS.
- *
- * @package wolf
- * @subpackage controllers
- *
- * @since 0.5.5
  */
 class SettingController extends Controller {
 

@@ -10,8 +10,7 @@
  */
 
 /**
- * @package wolf
- * @subpackage controllers
+ * @package Controllers
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @version 0.1
@@ -21,12 +20,6 @@
 
 /**
  * Class LayoutController
- *
- * @package wolf
- * @subpackage controllers
- *
- * @version 0.1
- * @since 0.1
  */
 class LayoutController extends Controller {
 

@@ -8,25 +8,17 @@
  */
 
 /**
- * @package wolf
- * @subpackage controllers
+ * @package Controllers
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @copyright Martijn van der Kleijn, 2008-2010
  * @license http://www.gnu.org/licenses/gpl.html GPL License
- *
- * @version $Id$
  */
 
 /**
  * Class TranslateController
  *
  * This controller allows users to generate a template for a translation file.
- *
- * @package wolf
- * @subpackage controllers
- *
- * @since 0.9.4
  */
 final class TranslateController extends Controller {
 

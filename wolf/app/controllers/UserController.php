@@ -10,8 +10,7 @@
  */
 
 /**
- * @package wolf
- * @subpackage controllers
+ * @package Controllers
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @author Philippe Archambault <philippe.archambault@gmail.com>
@@ -22,11 +21,6 @@
 
 /**
  * Class UserController
- *
- * @package wolf
- * @subpackage controllers
- *
- * @since 0.1
  */
 class UserController extends Controller {
 

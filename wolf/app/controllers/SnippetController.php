@@ -9,8 +9,7 @@
  */
 
 /**
- * @package wolf
- * @subpackage controllers
+ * @package Controllers
  *
  * @author Martijn van der Kleijn, <martijn.niji@gmail.com>
  * @author Philippe Archambault <philippe.archambault@gmail.com>
@@ -21,11 +20,6 @@
 
 /**
  * Controls adding, editing and deleting of Snippets.
- *
- * @package wolf
- * @subpackage controllers
- *
- * @since 0.5.5
  */
 class SnippetController extends Controller {
 

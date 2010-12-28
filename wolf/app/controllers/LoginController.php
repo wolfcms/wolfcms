@@ -24,15 +24,13 @@
  */
 
 /**
- * @package wolf
- * @subpackage controllers
+ * @package Controllers
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @version 1.0
- * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Martijn van der Kleijn, 2008, 2009, 2010
  * @copyright Philippe Archambault, 2008
+ * @license http://www.gnu.org/licenses/gpl.html GPL License
  */
 
 /**
@@ -40,12 +38,6 @@
  *
  * It also has functionality to email a new password to the user if that user
  * cannot remember his or her password.
- *
- * @package wolf
- * @subpackage controllers
- *
- * @version 0.1
- * @since 0.1
  */
 class LoginController extends Controller {
 /**
