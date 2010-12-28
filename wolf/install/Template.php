@@ -24,8 +24,7 @@
  */
 
 /**
- * @package wolf
- * @subpackage installer
+ * @package Installer
  */
 
 class Template {

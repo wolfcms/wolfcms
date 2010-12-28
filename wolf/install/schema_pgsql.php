@@ -8,8 +8,8 @@
  */
 
 /**
- * @package wolf
- * @subpackage installer
+ * @package Installer
+ * @subpackage Database
  * 
  * @author Age Bosma <agebosma@gmail.com>
  * @since Wolf version 0.6.0

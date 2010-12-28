@@ -9,8 +9,8 @@
  */
 
 /**
- * @package wolf
- * @subpackage installer
+ * @package Installer
+ * @subpackage Database
  */
 
 /* Make sure we've been called using index.php */

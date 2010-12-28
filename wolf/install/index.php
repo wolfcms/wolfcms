@@ -23,8 +23,7 @@
  */
 
 /**
- * @package wolf
- * @subpackage installer
+ * @package Installer
  */
 
 // Make sure we hide ugly errrors

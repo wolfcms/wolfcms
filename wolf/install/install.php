@@ -8,8 +8,7 @@
  */
 
 /**
- * @package wolf
- * @subpackage installer
+ * @package Installer
  */
 
 /* Make sure we've been called using index.php */

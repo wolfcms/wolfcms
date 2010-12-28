@@ -17,8 +17,7 @@
  * @since   0.7.0
  * @author  Martijn van der Kleijn <martijn.niji@gmail.com>
  * 
- * @package wolf
- * @subpackage installer
+ * @package Installer
  */
 
 /* Make sure we've been called using index.php */
