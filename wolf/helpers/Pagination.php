@@ -24,8 +24,7 @@
 /**
  * Simple Pagination helper based on the CodeIgniter pagination helper.
  *
- * @package wolf
- * @subpackage helpers
+ * @package Helpers
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author CodeIgniter helper

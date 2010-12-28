@@ -53,12 +53,13 @@
  * MA  02111-1307  USA
  *
  * @category   Crypt
- * @package    Crypt_Hash
  * @author     Jim Wigginton <terrafrost@php.net>
  * @copyright  MMVII Jim Wigginton
  * @license    http://www.gnu.org/licenses/lgpl.txt
  * @version    $Id: Hash.php,v 1.6 2009/11/23 23:37:07 terrafrost Exp $
  * @link       http://phpseclib.sourceforge.net
+ * 
+ * @package Helpers
  */
 
 /**#@+
@@ -85,7 +86,6 @@ define('CRYPT_HASH_MODE_HASH',     3);
  * @author  Jim Wigginton <terrafrost@php.net>
  * @version 0.1.0
  * @access  public
- * @package Crypt_Hash
  */
 class Crypt_Hash {
     /**

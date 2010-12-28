@@ -11,8 +11,7 @@
 /**
  * This helper is based on the Kohana 2.x valid.php helper but has been expanded.
  *
- * @package wolf
- * @subpackage helpers
+ * @package Helpers
  *
  * @author     Kohana Team
  * @copyright  (c) 2007-2010 Kohana Team

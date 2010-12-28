@@ -24,8 +24,7 @@
 /**
  * Simple upload library
  *
- * @package wolf
- * @subpackage helpers
+ * @package Helpers
  *
  * @author unknown
  * @version 0.1

@@ -25,8 +25,7 @@
 /**
  * HTML/XHTML filter that only allows some elements and attributes.
  *
- * @package wolf
- * @subpackage helpers
+ * @package Helpers
  *
  * @author Ulf Harnhammar <metaur@users.sourceforge.net>
  * @version 0.2.2

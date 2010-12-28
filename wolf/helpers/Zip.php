@@ -26,8 +26,7 @@
 /**
  * Simple Zip library
  *
- * @package wolf
- * @subpackage helpers
+ * @package Helpers
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @version 0.1
