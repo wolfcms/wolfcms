@@ -1,4 +1,23 @@
 <?php
+/*
+ * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
+ *
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
+ */
+
+/**
+ * The Markdown plugin provides a Filter that uses the Markdown parser.
+ *
+ * @package plugins
+ * @subpackage markdown
+ *
+ * @author Michel Fortin
+ * @copyright 2004-2009 Michel Fortin (PHP Markdown & Extra)
+ * @copyright 2004-2006 John Gruber (Original Markdown)
+ * @see http://michelf.com/projects/php-markdown/
+ */
 
 /* Security measure */
 if (!defined('IN_CMS')) { exit(); }
