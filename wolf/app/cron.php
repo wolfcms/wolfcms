@@ -6,8 +6,9 @@
  * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
  * Please see license.txt for the full license text.
  */
+
 /**
- * @package wolf
+ * @package Wolf_CMS
  */
 
 // Start by outputting the image and then severing the browser connection.

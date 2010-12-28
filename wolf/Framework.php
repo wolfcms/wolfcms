@@ -19,15 +19,12 @@
  *
  * LICENSE: see license.txt and exception.txt for the full license texts.
  *
- * @package    wolf
- * @subpackage framework
+ * @package    Framework
  *
  * @author     Philippe Archambault <philippe.archambault@gmail.com>
  * @author     Martijn van der Kleijn <martijn.niji@gmail.com>
  * @copyright  2008-2010 Martijn van der Kleijn, Philippe Archambault
- * @license    GPLv3
- *
- * @version    $Id$
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
 
 define('FRAMEWORK_STARTING_MICROTIME', get_microtime());

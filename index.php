@@ -4,11 +4,12 @@
  * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
  * Please see license.txt for the full license text.
  */
 
 /**
- * @package wolf
+ * @package Wolf_CMS
  */
 
 //  Constants  ---------------------------------------------------------------
