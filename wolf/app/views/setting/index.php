@@ -9,16 +9,13 @@
  */
 
 /**
- * @package wolf
- * @subpackage views
+ * @package Views
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @copyright Martijn van der Kleijn, 2009-2010
  * @copyright Philippe Archambault, 2008
- * @license http://www.gnu.org/licenses/gpl.html GPL License
- *
- * @version $Id$
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 ?>
 

@@ -9,13 +9,11 @@
  */
 
 /**
- * @package wolf
- * @subpackage views
+ * @package Views
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @version 0.1
- * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Philippe Archambault, 2008
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 ?>
 <div id="part-<?php echo $index; ?>-content" class="page">
