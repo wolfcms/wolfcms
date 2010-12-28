@@ -329,15 +329,15 @@ class Email {
     private function _str2array($email) {
         if ( ! is_array($email)) {
 
-            if (ereg(',$', $email)) {
+            if (preg_match('/,$/', $email)) {
                 $email = substr($email, 0, -1);
             }
 
-            if (ereg('^,', $email)) {
+            if (preg_match('/^,/', $email)) {
                 $email = substr($email, 1);
             }
 
-            if (ereg(',', $email)) {
+            if (preg_match('/,/', $email)) {
                 $x = explode(',', $email);
                 $email = array();
 
@@ -597,7 +597,7 @@ class Email {
             return $this->_wordwrap($this->alt_message, '76');
         }
 
-        if (eregi( '\<body(.*)\</body\>', $this->_body, $match)) {
+        if (preg_match( '/\<body(.*)\<\/body\>/i', $this->_body, $match)) {
             $body = $match['1'];
             $body = substr($body, strpos($body, ">") + 1);
         } else {
