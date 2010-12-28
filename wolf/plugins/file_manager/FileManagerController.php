@@ -18,13 +18,12 @@ if (!defined('IN_CMS')) {
  *
  * Note - Mostly rewritten since Wolf CMS 0.6.0
  *
- * @package plugins
+ * @package Plugins
  * @subpackage file_manager
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @since Wolf version 0.5.0
- * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Martijn van der Kleijn, 2008-2010
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  *
  * @todo Starting from PHP 5.3, use FileInfo
  */

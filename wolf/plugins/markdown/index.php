@@ -13,7 +13,7 @@ if (!defined('IN_CMS')) { exit(); }
 /**
  * The Markdown plugin allows users edit pages using the markdown syntax.
  *
- * @package plugins
+ * @package Plugins
  * @subpackage markdown
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>

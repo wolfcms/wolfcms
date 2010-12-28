@@ -24,14 +24,12 @@ if (!defined('IN_CMS')) { exit(); }
  * Note: to use the settings and documentation pages, you will first need to enable
  * the plugin!
  *
- * @package plugins
+ * @package Plugins
  * @subpackage skeleton
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @version 1.0.0
- * @since Wolf version 0.5.5
- * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Martijn van der Kleijn, 2008
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 ?>
 <h1><?php echo __('Settings'); ?></h1>

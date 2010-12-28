@@ -14,15 +14,13 @@ if (!defined('IN_CMS')) { exit(); }
 /**
  * The FileManager allows users to upload and manipulate files.
  *
- * @package plugins
+ * @package Plugins
  * @subpackage file_manager
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @version 1.0.0
- * @since Wolf version 0.5.0
- * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Philippe Archambault & Martijn van der Kleijn, 2008
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 
 /**

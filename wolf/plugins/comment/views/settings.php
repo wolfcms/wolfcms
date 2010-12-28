@@ -14,16 +14,14 @@ if (!defined('IN_CMS')) { exit(); }
 /**
  * The Comment plugin provides an interface to enable adding and moderating page comments.
  *
- * @package plugins
+ * @package Plugins
  * @subpackage comment
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author Bebliuc George <bebliuc.george@gmail.com>
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @version 1.2.0
- * @since Wolf version 0.5.0
- * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Philippe Archambault, Bebliuc George & Martijn van der Kleijn, 2008
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 ?>
 <h1><?php echo __('Comments Plugin'); ?></h1>

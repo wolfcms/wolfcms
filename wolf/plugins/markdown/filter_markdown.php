@@ -10,7 +10,7 @@
 /**
  * The Markdown plugin provides a Filter that uses the Markdown parser.
  *
- * @package plugins
+ * @package Plugins
  * @subpackage markdown
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>

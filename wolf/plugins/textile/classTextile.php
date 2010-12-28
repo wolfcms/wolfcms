@@ -10,7 +10,7 @@
 /**
  * The Textile plugin provides a Filter that uses the Textile parser.
  *
- * @package plugins
+ * @package Plugins
  * @subpackage textile
  *
  * @author Dean Allen <dean@textism.com>

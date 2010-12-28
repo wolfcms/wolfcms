@@ -14,14 +14,12 @@ if (!defined('IN_CMS')) { exit(); }
  * The BackupRestore plugin provides administrators with the option of backing
  * up their pages and settings to an XML file.
  *
- * @package plugins
+ * @package Plugins
  * @subpackage backup_restore
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @version 0.0.1
- * @since Wolf version 0.6.0
- * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  * @copyright Martijn van der Kleijn, 2009
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 ?>
 <h1><?php echo __('Settings'); ?></h1>

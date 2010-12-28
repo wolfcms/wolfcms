@@ -21,14 +21,12 @@ if (!defined('IN_CMS')) { exit(); }
  * - URI based language hint (for example: http://www.example.com/en/page.html
  * - Preferred language setting of logged in users
  *
- * @package plugins
+ * @package Plugins
  * @subpackage multi_lang
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @version 1.0.0
- * @since Wolf version 0.7.0
- * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Martijn van der Kleijn, 2010
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 ?>
 
