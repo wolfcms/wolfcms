@@ -8,13 +8,11 @@
  */
 
 /**
- * @package wolf
- * @subpackage models
+ * @package Models
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @version 0.1
- * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  * @copyright Martijn van der Kleijn, 2010
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 final class SecureToken extends Record {
     const TABLE_NAME = 'secure_token';

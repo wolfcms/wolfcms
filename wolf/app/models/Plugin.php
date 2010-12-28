@@ -9,15 +9,14 @@
  */
 
 /**
- * @package wolf
- * @subpackage models
+ * @package Models
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * 
- * @version 0.5.5
- * @license http://www.gnu.org/licenses/gpl.html GPL License
- * @copyright Philippe Archambault 2008, Martijn van der Kleijn 2008-2010
+ * @copyright Martijn van der Kleijn 2008-2010
+ * @copyright Philippe Archambault 2008
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
 
 /**
@@ -26,7 +25,6 @@
  * Provide a Plugin API to make wolf more flexible
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @since Wolf version 0.9
  */
 class Plugin {
     static $plugins = array();

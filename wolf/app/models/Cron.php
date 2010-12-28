@@ -8,13 +8,11 @@
  */
 
 /**
- * @package wolf
- * @subpackage models
+ * @package Models
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @version 1.0
- * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  * @copyright Martijn van der Kleijn, 2009,2010
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 
 /**

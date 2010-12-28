@@ -9,13 +9,11 @@
  */
 
 /**
- * @package wolf
- * @subpackage models
+ * @package Models
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @version 0.1
- * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Philippe Archambault, 2008
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
 
 /**
@@ -23,7 +21,6 @@
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @since Wolf version 0.1
  */
 class User extends Record {
     const TABLE_NAME = 'user';

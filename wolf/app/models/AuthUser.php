@@ -9,15 +9,13 @@
  */
 
 /**
- * @package wolf
- * @subpackage models
+ * @package Models
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @version 1.0
- * @license http://www.gnu.org/licenses/gpl.html GPL License
  * @copyright Philippe Archambault, 2008
  * @copyright Martijn van der Kleijn, 2008, 2009, 2010
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
 
 /**
@@ -25,7 +23,6 @@
  *
  * Tracks information of the logged in user, has login/logout method and
  * permission related functionality.
- *
  */
 class AuthUser {
     const SESSION_KEY                   = 'wolf_auth_user';
