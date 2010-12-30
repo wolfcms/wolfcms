@@ -6,38 +6,44 @@
  * @package Plugins
  * @subpackage file_manager
  *
- * @author gothw <email@domain.something>
- * @version Wolf 0.9.4
+ * @author andrewmman
+ * @version Wolf 0.7
  */
 
-    return array(
+return array(
+        'A possible hack attempt was detected.' => 'Un posible intento de hack ha sido detectado.',
         'Action' => 'Acción',
-        'Are you sure you wish to delete' => 'Está seguro que desea borrar',
+        'Are you sure you wish to delete?' => '¿Estás seguro que deseas borrar?',
         'Cancel' => 'Cancelar',
         'Change mode' => 'Cambiar permisos',
         'Close' => 'Cerrar',
-//        'Create' => '',
+        'Create' => 'Crear',
         'Create new directory' => 'Crear nueva carpeta',
         'Create new file' => 'Crear nuevo archivo',
-        'Directory :name has not been created!' => 'La carpeta <strong>:name</strong> no ha sido creada!',
-        'Directory is not writable! File has not been saved!' => 'La carpeta no tiene permisos de escritura. El archivo no ha sido guardado',
+        'Delete file' => 'Eliminar archivo',
+        'Directory :name has not been created!' => '¡La carpeta <strong>:name</strong> no ha sido creada!',
+        'Directory is not writable! File has not been saved!' => '¡La carpeta no tiene permisos de escritura! ¡El archivo no se ha guardado!',
         'File' => 'Archivo',
-        'File :name has been created with success!' => 'Archivo <strong>:name</strong> creado correctamente!',
-        'File :name has not been created!' => 'Archivo <strong>:name</strong> no ha sido creado!',
-//        'File has been saved with success!' => '',
-        'File has not been uploaded!' => 'El archivo no ha sido subido!',
-//        'File is not writable! File has not been saved!' => '',
-        'File or directory not found!' => 'Archivo o carpeta no encontrado!',
+        'File :name has been created with success!' => '¡El archivo <strong>:name</strong> se ha creado exitosamente!',
+        'File :name has not been created!' => '¡No se ha podido crear el archivo <strong>:name</strong>!',
+        'File Manager' => 'File Manager',
+        'File has been saved with success!' => 'El archivo se ha subido exitosamente.',
+        'File has not been uploaded!' => '¡El archivo no se ha subido!',
+        'File is not writable! File has not been saved!' => '¡El archivo no tiene permiso de escritura! ¡Archivo no guardado!',
+        'File or directory not found!' => '¡Archivo o carpeta no encontrados!',
+        'Files' => 'Archivos',
         'Modify' => 'Modificar',
-//        'Permission denied!' => '',
+        'Permission denied!' => '¡Permisos denegados!',
         'Permissions' => 'Permisos',
+        'Provides interface to manage files from the administration.' => 'Provee la interfaz para la gestión de archivos desde la administración.',
         'Rename' => 'Renombrar',
         'Save' => 'Guardar',
-        'Save and Continue Editing' => 'Guardar y seguir editando',
-        'Size' => 'Tamaño',
+        'Save and Continue Editing' => 'Guardar y Seguir editando',
+        'Size' => 'Tama&ntilde;o',
         'Upload' => 'Subir',
-        'Upload file' => 'Subir Archivo',
-        'You do not have permission to access the requested page!' => 'Usted no tiene permisos para acceder a la página solicitada!',
+        'Upload file' => 'Subir archivo',
+        'You do not have permission to access the requested page!' => '¡No cuentas con los permisos adecuados para acceder a la página que solicitada!',
+        'delete file icon' => 'ícono eliminar archivo',
         'or' => 'o',
-//        'overwrite it?' => '',
-    );
+        'overwrite it?' => '¿sobreescribirlo?',
+);
