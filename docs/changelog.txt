@@ -7,6 +7,18 @@ Sigla:
 . other development
 ======
 
+
+0.7.3 - released ??
+
+- Fixed faulty redirect to login screen for "login required" pages.
+. Added/updated Spanish translation files
+. Added Dutch translation files
+
+0.7.2 - released 2010-12-27
+
+- Fixed a minor timing issue when en- or disabling plugins on systems with slower responses.
+- Fixed CSRF token validation problem on upgraded systems.
+
 0.7.0 - released 2010-12-25
 
 + Added French translation for backup restore plugin - thanks oweb

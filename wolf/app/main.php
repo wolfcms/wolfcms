@@ -197,7 +197,7 @@ function main() {
             AuthUser::load();
             if (!AuthUser::isLoggedIn()) {
                 Flash::set('redirect', $page->url());
-                redirect(URL_PUBLIC.ADMIN_DIR.(USE_MOD_REWRITE ? '/': '/?/').'login');
+                redirect(URL_PUBLIC.(USE_MOD_REWRITE ? '': '?/').ADMIN_DIR.'/login');
             }
         }
 
