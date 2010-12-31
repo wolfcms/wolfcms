@@ -45,7 +45,7 @@ MySQL      : http://www.mysql.com/
 SQLite     : http://www.sqlite.org/  
 PostgreSQL : http://www.postgresql.org/  
 Apache     : http://www.apache.org/  
-Cherokee   : http://www.cherokee-project.com/
+Cherokee   : http://www.cherokee-project.com/  
 Hiawatha   : http://www.hiawatha-webserver.org/  
 Lighttpd   : http://www.lighttpd.net/  
 Nginx      : http://nginx.org/en/  
