@@ -453,7 +453,7 @@ class Validate {
      * @return  boolean
      */
     public static function alpha_comma($str, $utf8 = FALSE) {
-        return ($utf8 === TRUE) ? (bool) preg_match('/^[-\pL\pN_, ]++$/uD', (string) $str) : (bool) preg_match('/^[-a-z0-9_, ]++$/iD', (string) $str);
+        return ($utf8 === TRUE) ? (bool) preg_match('/^[-\pL\pN_, .]++$/uD', (string) $str) : (bool) preg_match('/^[-a-z0-9_, .]++$/iD', (string) $str);
     }
 
 
