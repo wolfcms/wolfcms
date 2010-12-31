@@ -45,8 +45,9 @@ MySQL      : http://www.mysql.com/
 SQLite     : http://www.sqlite.org/  
 PostgreSQL : http://www.postgresql.org/  
 Apache     : http://www.apache.org/  
-Lighttpd   : http://www.lighttpd.net/  
+Cherokee   : http://www.cherokee-project.com/
 Hiawatha   : http://www.hiawatha-webserver.org/  
+Lighttpd   : http://www.lighttpd.net/  
 Nginx      : http://nginx.org/en/  
 
 If you're running Wolf CMS on a different HTTP server, let us know at http://forum.wolfcms.org/
