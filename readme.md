@@ -35,17 +35,19 @@ IMPORTANT - always check your security by viewing security.php post update!
 
 - The Apache HTTP server is recommended.
 - Wolf CMS is known to run on these HTTP servers as well:
-    - Lighttpd
+    - Cherokee
+	- Lighttpd
+	- Nginx
     - Hiawatha
 
-PHP        : http://www.php.net/
-MySQL      : http://www.mysql.com/
-SQLite     : http://www.sqlite.org/
-PostgreSQL : http://www.postgresql.org/
-Apache     : http://www.apache.org/
-Lighttpd   : http://www.lighttpd.net/
-Hiawatha   : http://www.hiawatha-webserver.org/
-Nginx      : http://nginx.org/en/
+PHP        : http://www.php.net/  
+MySQL      : http://www.mysql.com/  
+SQLite     : http://www.sqlite.org/  
+PostgreSQL : http://www.postgresql.org/  
+Apache     : http://www.apache.org/  
+Lighttpd   : http://www.lighttpd.net/  
+Hiawatha   : http://www.hiawatha-webserver.org/  
+Nginx      : http://nginx.org/en/  
 
 If you're running Wolf CMS on a different HTTP server, let us know at http://forum.wolfcms.org/
 
