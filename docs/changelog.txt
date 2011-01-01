@@ -11,6 +11,7 @@ Sigla:
 0.7.3 - released ??
 
 - Fixed faulty redirect to login screen for "login required" pages.
+- Fixed trim issue in Page's hasContent()
 . Added/updated Spanish translation files
 . Added Dutch translation files
 

@@ -351,11 +351,9 @@ class Page extends Node {
      * @return bool             Returns true if part was found or false if nothing was found
      */
     public function hasContent($part, $inherit=false) { 
-        if(isset($this->part->$part))
-        {
-			$trim = trim($this->part->$part);
-        	if(!empty($trim)) 
-        	{
+        if(isset($this->part->$part)) {
+            $trim = trim($this->part->$part->content_html);
+            if(!empty($trim)) {
             	return true;
             }
             
