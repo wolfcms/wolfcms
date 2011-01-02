@@ -59,7 +59,19 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
 
     <script type="text/javascript" src="<?php echo URI_PUBLIC; ?>wolf/admin/markitup/jquery.markitup.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo URI_PUBLIC; ?>wolf/admin/markitup/skins/simple/style.css" />
-
+    
+<?php foreach(Plugin::$plugins as $plugin_id => $plugin): ?>
+<?php if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $plugin_id . '.js')): ?>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.js"></script>
+<?php endif; ?>
+<?php if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $plugin_id . '.css')): ?>
+    <link href="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.css" media="screen" rel="Stylesheet" type="text/css" />
+<?php endif; ?>
+<?php endforeach; ?>
+<?php foreach(Plugin::$javascripts as $jscript_plugin_id => $javascript): ?>
+    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $javascript; ?>"></script>
+<?php endforeach; ?>
+    
     <script type="text/javascript">
     // <![CDATA[
         $(document).ready(function() {
@@ -75,21 +87,33 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
             })( $(".message:first") );
 
             $("input:visible:enabled:first").focus();
+            
+            // Get the initial values and activate filter
+            $('.filter-selector').each(function() {
+                var $this = $(this);
+                $this.data('oldValue', $this.val());
+
+                if ($this.val() == '') {
+                    return true;
+                }
+                var elemId = $this.attr('id').slice(0, -10);
+                var elem = $('#'+elemId+'_content');
+                $this.trigger('wolfSwitchFilterIn', [$this.val(), elem]);
+            });
+            
+            $('.filter-selector').change(function(){
+                var $this = $(this);
+                var newFilter = $this.val();
+                var oldFilter = $this.data('oldValue');
+                $this.data('oldValue', newFilter);
+                var elemId = $this.attr('id').slice(0, -10);
+                var elem = $('#'+elemId+'_content');
+                $(this).trigger('wolfSwitchFilterOut', [oldFilter, elem]);
+                $(this).trigger('wolfSwitchFilterIn', [newFilter, elem]);
+            });
         });
         // ]]>
         </script>
-    
-<?php foreach(Plugin::$plugins as $plugin_id => $plugin): ?>
-<?php if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $plugin_id . '.js')): ?>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.js"></script>
-<?php endif; ?>
-<?php if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $plugin_id . '.css')): ?>
-    <link href="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.css" media="screen" rel="Stylesheet" type="text/css" />
-<?php endif; ?>
-<?php endforeach; ?>
-<?php foreach(Plugin::$javascripts as $jscript_plugin_id => $javascript): ?>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $javascript; ?>"></script>
-<?php endforeach; ?>
 
 <?php $action = Dispatcher::getAction(); ?>
   </head>

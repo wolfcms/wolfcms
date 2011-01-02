@@ -25,7 +25,7 @@
 	    <?php endif; ?>
 	    <p>
 	      <label for="part_<?php echo ($index-1); ?>_filter_id"><?php echo __('Filter'); ?></label>
-	      <select id="part_<?php echo ($index-1); ?>_filter_id" name="part[<?php echo ($index-1); ?>][filter_id]">
+	      <select id="part_<?php echo ($index-1); ?>_filter_id" class="filter-selector" name="part[<?php echo ($index-1); ?>][filter_id]">
 	        <option value=""<?php if ($page_part->filter_id == '') echo ' selected="selected"'; ?>>&#8212; <?php echo __('none'); ?> &#8212;</option>
 	<?php foreach (Filter::findAll() as $filter): ?> 
 	        <option value="<?php echo $filter; ?>"<?php if ($page_part->filter_id == $filter) echo ' selected="selected"'; ?>><?php echo Inflector::humanize($filter); ?></option>
@@ -38,27 +38,42 @@
 	  </div>
 	</div>
 </div>
-
+<?php /*
 <script type="text/javascript">
-$(document).ready(function() {
-	<?php 
-	if($page_part->filter_id != "")
-	{
-	?>
-	$('#part_<?php echo ($index-1); ?>_content').markItUp(<?php echo $page_part->filter_id; ?>Settings);
-<?php } ?>
-	
-	$('#part_<?php echo ($index-1); ?>_filter_id').change(function() {
-		$('#part_<?php echo ($index-1); ?>_content').markItUpRemove();
-			var newfilter = $(this).val();
-<?php foreach (Filter::findAll() as $filter): ?>	
-			if(newfilter == '<?php echo $filter; ?>')
-			{
-				$('#part_<?php echo ($index-1); ?>_content').markItUp(<?php echo $filter; ?>Settings);
-			}
-<?php endforeach; ?>
-
-		return false;		
-	});
-});
-</script>
+// <![CDATA[
+    $(document).ready(function() {
+ * 
+ * THIS WAS MOVED INTO backend.php
+ * 
+        // Get the initial values and activate filter
+        $('.filter-selector').each(function() {
+            var $this = $(this);
+            $this.data('oldValue', $this.val());
+            
+            if ($this.val() == '') {
+                return true;
+            }
+            alert('ELEMENT IS: '+$this.attr('id'));
+            var elemId = $this.attr('id').slice(0, -10);
+            var elem = $('#'+elemId+'_content');
+            $this.trigger('wolfSwitchFilterIn', [$this.val(), elem]);
+        });
+        
+        $('.filter-selector').each(function(){
+            var $this = $(this);
+            
+            $this.change(function() {
+                var $this = $(this);
+                var newFilter = $this.val();
+                var oldFilter = $this.data('oldValue');
+                $this.data('oldValue', newFilter);
+                
+                var elemId = $this.attr('id').slice(0, -10);
+                var elem = $('#'+elemId+'_content');
+                $('.filter-selector').trigger('wolfSwitchFilterOut', [oldFilter, elem]);
+                $('.filter-selector').trigger('wolfSwitchFilterIn', [newFilter, elem]);
+            });
+        });
+    });
+// ]]>
+</script> */ ?>
