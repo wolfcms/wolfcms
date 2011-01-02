@@ -33,6 +33,6 @@ if (!defined('IN_CMS')) { exit(); }
 </p>
 <p>
 <?php echo __('Version'); ?> - <?php echo BR_VERSION; ?><br />
-<?php echo __('Designed for Wolf version').' '.Plugin::getSetting('wolfversion', 'backup_restore'); ?> and upwards.<br />
+<?php echo __('Designed for Wolf version').' '.Plugin::getSetting('wolfversion', 'backup_restore'); ?> <?php echo __('and upwards.').'<br />'; ?>
 </p>
 </div>

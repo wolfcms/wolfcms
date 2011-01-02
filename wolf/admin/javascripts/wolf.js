@@ -11,7 +11,7 @@
 function toSlug(value) {
     // Test for non western characters
     // Need to do this in a better way
-    var rx=/[a-z]|[A-Z]|[0-9]|[àâôäæßéèêëùûöøåîïñü]/;
+    var rx=/[a-z]|[A-Z]|[0-9]|[áàâôäæßéèêëúùûóöøåíîïñü]/;
 
     if (!rx.test(value)) {
         return value;
@@ -19,8 +19,8 @@ function toSlug(value) {
     else {
         value = $.trim(value);
         value = value.toLowerCase();
-        value = value.replace(/[àâ]/g,"a").replace(/[éèêë]/g,"e").replace(/[îï]/g,"i")
-        .replace(/[ô]/g,"o").replace(/[ùû]/g,"u").replace(/[ñ]/g,"n")
+        value = value.replace(/[áàâ]/g,"a").replace(/[éèêë]/g,"e").replace(/[íîï]/g,"i")
+        .replace(/[óô]/g,"o").replace(/[úùû]/g,"u").replace(/[ñ]/g,"n")
         .replace(/[äæ]/g,"ae").replace(/[öø]/g,"oe").replace(/[ü]/g,"ue")
         .replace(/[ß]/g,"ss").replace(/[å]/g,"aa")
         .replace(/[^-a-z0-9~\s\.:;+=_]/g, '').replace(/[\s\.:;=+]+/g, '-');
