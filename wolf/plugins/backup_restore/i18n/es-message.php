@@ -3,9 +3,8 @@
     /**
      * Spanish file for plugin backup_restore
      *
-     * @package plugins
+     * @package Plugins
      * @subpackage backup_restore
-     * @category translations
      *
      * @author andrewmman
      * @version Wolf 0.7
