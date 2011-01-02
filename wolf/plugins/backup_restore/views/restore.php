@@ -28,12 +28,10 @@ if (!defined('IN_CMS')) { exit(); }
         <fieldset style="padding: 0.5em;">
         <legend style="padding: 0em 0.5em 0em 0.5em; font-weight: bold;"><?php echo __('Warning!'); ?></legend>
         <p>
-            <?php echo __('When restoring a backup, please make sure that the backup file was generated from the same Wolf CMS
-            <em>version</em> as you are restoring it to.'); ?>
+            <?php echo __('When restoring a backup, please make sure that the backup file was generated from the same Wolf CMS <em>version</em> as you are restoring it to.'); ?>
         </p>
         <p>
-            <?php echo __('Please be aware that <strong>all</strong> the database tables will be truncated when
-            performing a restore. Truncating a table means that all records in that table are deleted.'); ?>
+            <?php echo __('Please be aware that <strong>all</strong> the database tables will be truncated when performing a restore. Truncating a table means that all records in that table are deleted.'); ?>
         </p>
         <p>
             <?php echo __('As such, the contents of your backup file will replace the contents of your Wolf CMS database tables.'); ?>

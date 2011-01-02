@@ -50,10 +50,8 @@
         'What style of timestamp should be encorporated into the filename.' => 'El estilo de fecha de registro que ser&aacute; a&ntilde;adido en el nombre del archivo.',
         'Yes' => 'S&iacute;',
         'You do not have permission to access the requested page!' => '&iexcl;No cuentas con el permiso para acceder a la p&aacute;gina que has solicitado!',
-        'When restoring a backup, please make sure that the backup file was generated from the same Wolf CMS
-            <em>version</em> as you are restoring it to.' => 'Al restaurar un respaldo, debes asegurarte de que el respaldo fue generado desde una <em>versi&oacute;n</em> de Wolf CMS <strong>igual</strong> a la que deseas restaurar.',
-        'Please be aware that <strong>all</strong> the database tables will be truncated when
-            performing a restore. Truncating a table means that all records in that table are deleted.' => 'Por favor, ten en cuenta que <strong>todas</strong> las tablas de la base de datos ser&aacute;n truncadas. Truncar una tabla significa que todos los registros de dicha tabla se eliminan.',
+        'When restoring a backup, please make sure that the backup file was generated from the same Wolf CMS <em>version</em> as you are restoring it to.' => 'Al restaurar un respaldo, debes asegurarte de que el respaldo fue generado desde una <em>versi&oacute;n</em> de Wolf CMS <strong>igual</strong> a la que deseas restaurar.',
+        'Please be aware that <strong>all</strong> the database tables will be truncated when performing a restore. Truncating a table means that all records in that table are deleted.' => 'Por favor, ten en cuenta que <strong>todas</strong> las tablas de la base de datos ser&aacute;n truncadas. Truncar una tabla significa que todos los registros de dicha tabla se eliminan.',
         'As such, the contents of your backup file will replace the contents of your Wolf CMS database tables.' => 'Por ende, el contenido de tu archivo de respaldo reemplazar&aacute; el contenido de las tablas de tu base de datos de Wolf CMS.',
         'Do NOT upload a zip file, only upload a plain text XML file!' => '&iexcl;NO subas un archivo zip, solo puedes subir un archivo de texto XML!',
         'Upload plain text XML file' => 'Subir archivo de texto XML',
