@@ -96,22 +96,20 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
                 if ($this.val() == '') {
                     return true;
                 }
-                //alert('ELEMENT IS: '+$this.attr('id'));
                 var elemId = $this.attr('id').slice(0, -10);
                 var elem = $('#'+elemId+'_content');
                 $this.trigger('wolfSwitchFilterIn', [$this.val(), elem]);
-
-                $this.change(function() {
-                    var $this = $(this);
-                    var newFilter = $this.val();
-                    var oldFilter = $this.data('oldValue');
-                    $this.data('oldValue', newFilter);
-
-                    var elemId = $this.attr('id').slice(0, -10);
-                    var elem = $('#'+elemId+'_content');
-                    $('.filter-selector').trigger('wolfSwitchFilterOut', [oldFilter, elem]);
-                    $('.filter-selector').trigger('wolfSwitchFilterIn', [newFilter, elem]);
-                });
+            });
+            
+            $('.filter-selector').change(function(){
+                var $this = $(this);
+                var newFilter = $this.val();
+                var oldFilter = $this.data('oldValue');
+                $this.data('oldValue', newFilter);
+                var elemId = $this.attr('id').slice(0, -10);
+                var elem = $('#'+elemId+'_content');
+                $(this).trigger('wolfSwitchFilterOut', [oldFilter, elem]);
+                $(this).trigger('wolfSwitchFilterIn', [newFilter, elem]);
             });
         });
         // ]]>

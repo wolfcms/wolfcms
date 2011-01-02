@@ -41,7 +41,6 @@ $(document).ready(function() {
     
     $('.filter-selector').bind('wolfSwitchFilterIn', function(event, filtername, elem) {
         if (filtername == 'textile') {
-        alert('test-textile');
             elem.markItUp(eval(textileSettings));
         }
     });
