@@ -10,10 +10,16 @@ Sigla:
 
 0.7.3 - released ??
 
++ Added more error handling to do-upgrade.php
+- Fixing highlighting issue for Pages. - thanks mtylerb/andrewmman
 - Fixed faulty redirect to login screen for "login required" pages.
 - Fixed trim issue in Page's hasContent()
-. Added/updated Spanish translation files
-. Added Dutch translation files
+- Fixed date/time issue upon rebuiling page object in error situations.
+- Changed filter switching system to be more flexible for third party filters.
+. Changed Validate::alpha_comma to return true for dot character
+. Added/updated Spanish translation files - thanks andrewmman
+. Added Dutch translation files - thanks fortron
+. Added German translation files - thanks tobi
 
 0.7.2 - released 2010-12-27
 
