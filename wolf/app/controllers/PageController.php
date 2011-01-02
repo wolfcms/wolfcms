@@ -383,18 +383,22 @@ class PageController extends Controller {
         // Check all date fields for a page
         $fields = array('created_on', 'published_on', 'valid_until');
         foreach ($fields as $field) {
-            $data[$field] = trim($data[$field]);
-            if (!empty($data[$field]) && !(bool) preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/D', (string) $data[$field])) {
-                $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
+            if (isset($data[$field])) {
+                $data[$field] = trim($data[$field]);
+                if (!empty($data[$field]) && !(bool) preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/D', (string) $data[$field])) {
+                    $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
+                }
             }
         }
 
         // Check all time fields for a page
         $fields = array('created_on_time', 'published_on_time', 'valid_until_time');
         foreach ($fields as $field) {
-            $data[$field] = trim($data[$field]);
-            if (!empty($data[$field]) && !(bool) preg_match('/^[0-9]{2}:[0-9]{2}:[0-9]{2}$/D', (string) $data[$field])) {
-                $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
+            if (isset($data[$field])) {
+                $data[$field] = trim($data[$field]);
+                if (!empty($data[$field]) && !(bool) preg_match('/^[0-9]{2}:[0-9]{2}:[0-9]{2}$/D', (string) $data[$field])) {
+                    $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
+                }
             }
         }
 
