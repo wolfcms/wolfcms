@@ -198,7 +198,7 @@ return array(
   'You have to specify a name!' => '¡Debes especificar un nombre!',
   'You have to specify a slug!' => '¡Debes especificar el enlace permanente!',
   'You have to specify a title!' => '¡Debes especificar un título!',
-  'and its underlying pages' => 'y las subpáginas',
+  'and its underlying pages' => 'y sus subpáginas',
   'by' => 'por',
   'delete layout icon' => 'ícono eliminar plantilla',
   'delete snippet icon' => 'ícono eliminar fragmento',
