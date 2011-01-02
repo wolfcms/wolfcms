@@ -20,7 +20,7 @@
         'Creating the backup' => 'Creando el respaldo',
         'Current style' => 'Estilo actual',
         'Designed for Wolf version' => 'Dise&ntilde;ado para la versi&oacute;n de Wolf',
-        //'Designed for Wolf version :v and upwards.' => 'Dise&ntilde;ado para la versi&oacute;n :v de Wolf y superiores.',
+        'and upwards.' => 'y superiores.',
         'Do you want to download the backup as a zip file?' => '&iquest;Quieres descargar el respaldo como un archivo zip?',
         'Do you want to include passwords in the backup file? <br/> If you select no, all passwords will be reset upon restoring the backup.' => '&iquest;Quieres incluir las contrase&ntilde;as en el archivo de respaldo?<br/>En caso negativo, todas las contrase&ntilde;as ser&aacute;n eliminadas cuando restaures el respaldo.',
         'Documentation' => 'Documentaci&oacute;n',
