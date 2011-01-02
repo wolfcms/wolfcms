@@ -30,6 +30,27 @@ else {
 }
 
 ?>
+
+
+// Wolf CMS Filter Switching system
+$(document).ready(function() {
+    $('.filter-selector').bind('wolfSwitchFilterOut', function(event, filtername, elem) {
+        if (filtername == 'markdown') {
+            elem.markItUpRemove();
+        }
+    });
+    
+    $('.filter-selector').bind('wolfSwitchFilterIn', function(event, filtername, elem) {
+        if (filtername == 'markdown') {
+        alert('test');
+            elem.markItUp(markdownSettings);
+            event.stopPropagation();
+        }
+    });
+});
+
+
+
 // -------------------------------------------------------------------
 // markItUp!
 // -------------------------------------------------------------------
