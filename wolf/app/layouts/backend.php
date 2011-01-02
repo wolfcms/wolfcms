@@ -100,10 +100,6 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
                 var elemId = $this.attr('id').slice(0, -10);
                 var elem = $('#'+elemId+'_content');
                 $this.trigger('wolfSwitchFilterIn', [$this.val(), elem]);
-            });
-
-            $('.filter-selector').each(function(){
-                var $this = $(this);
 
                 $this.change(function() {
                     var $this = $(this);
