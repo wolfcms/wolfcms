@@ -25,21 +25,21 @@ if (!defined('IN_CMS')) { exit(); }
 <h1><?php echo __('Restore a backup'); ?></h1>
 
 <form action="<?php echo get_url('plugin/backup_restore/restore'); ?>" method="post" enctype="multipart/form-data">
-    <fieldset style="padding: 0.5em;">
+        <fieldset style="padding: 0.5em;">
         <legend style="padding: 0em 0.5em 0em 0.5em; font-weight: bold;"><?php echo __('Warning!'); ?></legend>
         <p>
-            When restoring a backup, please make sure that the backup file was generated from the same Wolf CMS
-            <em>version</em> as you are restoring it to.
+            <?php echo __('When restoring a backup, please make sure that the backup file was generated from the same Wolf CMS
+            <em>version</em> as you are restoring it to.'); ?>
         </p>
         <p>
-            Please be aware that <strong>all</strong> the database tables will be truncated when
-            performing a restore. Truncating a table means that all records in that table are deleted.
+            <?php echo __('Please be aware that <strong>all</strong> the database tables will be truncated when
+            performing a restore. Truncating a table means that all records in that table are deleted.'); ?>
         </p>
         <p>
-            As such, the contents of your backup file will replace the contents of your Wolf CMS database tables.
+            <?php echo __('As such, the contents of your backup file will replace the contents of your Wolf CMS database tables.'); ?>
         </p>
         <p style="text-align: center;"><strong>
-            Do NOT upload a zip file, only upload a plain text XML file!
+            <?php echo __('Do NOT upload a zip file, only upload a plain text XML file!'); ?>
         </strong></p>
     </fieldset>
     <p style="text-align: center;">
