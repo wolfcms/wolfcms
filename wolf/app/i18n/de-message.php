@@ -3,8 +3,7 @@
 /**
  * German language file
  *
- * @package wolf
- * @subpackage translations
+ * @package Translations
  *
  * @author Tobias Urff <wolfcmsl10n_p@urff.at>
  * @version Wolf 0.7.2
