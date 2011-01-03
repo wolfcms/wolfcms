@@ -728,28 +728,28 @@ table.fieldset .error-with-field small {
   color: red;
 }
 
-#meta-pages td {
+#metainfo-content td {
   background-color: #fff;
   padding: 6px;
 }
-#meta-pages td.label {
+#metainfo-content td.label {
   padding-top: 10px;
   vertical-align: top;
   text-align: right;
   width: 20%;
 }
-#meta-pages td.label .optional {
+#metainfo-content td.label .optional {
   color: #929488;
 }
-#meta-pages #page-title,
-#meta-pages #page-metadata,
-#meta-pages #page-settings {
+#metainfo-content #pagetitle,
+#metainfo-content #metadata,
+#metainfo-content #settings {
   padding: 20px;
   margin-top: .30em;
   margin-bottom: 20px;
 }
 
-#metadata table tr td {
+#metainfo-content table tr td {
     padding: 0.2em 0.5em;
 }
 

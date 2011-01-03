@@ -12,6 +12,7 @@ Sigla:
 
 + Added more error handling to do-upgrade.php
 - Fixing highlighting issue for Pages. - thanks mtylerb/andrewmman
+- Fixed styling issue for Page edit screen. - thanks andrewmman
 - Fixed faulty redirect to login screen for "login required" pages.
 - Fixed trim issue in Page's hasContent()
 - Fixed date/time issue upon rebuiling page object in error situations.
