@@ -71,10 +71,6 @@ table.index td.note { color: silver; }
 #site-map-def div { background-color: #f5f5f5;}
 #site-map { border-color: #ddd; }
 #site-map-root li, #site-map li { border-color: #ddd; }
-/* #site-map-root li:hover, #site-map-root li.hover, #site-map li:hover, #site-map li.hover { background-color: #f5f5f5; } */
-#site-map-root li:hover { background-color: #ffffff; }
-#site-map-root #page-0 .page:hover, #site-map-root li.hover { background-color: #f5f5f5; }
-#site-map li:hover, #site-map li.hover { background-color: #f5f5f5; }
 #site-map ul { background-color: #fff; }
 #site-map .status { color: #9eb3bf; }
 #site-map .status.draft-status { color: #c00; }
