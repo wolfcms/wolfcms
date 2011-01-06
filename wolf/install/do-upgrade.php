@@ -121,11 +121,15 @@ if ($driver == 'mysql') {
                     ADD COLUMN failure_count int(11) default NULL
                    ");
         echo '<li>Added fields to user table...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         $PDO->exec("ALTER TABLE ".TABLE_PREFIX."page
                     ADD COLUMN valid_until datetime default NULL
                    ");
         echo '<li>Added fields to page table...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // CHANGING FIELDS
         $PDO->exec("ALTER TABLE ".TABLE_PREFIX."user
@@ -133,12 +137,16 @@ if ($driver == 'mysql') {
                     MODIFY COLUMN language varchar(5) default NULL
                    ");
         echo '<li>Modified fields for user table...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         $PDO->exec("ALTER TABLE ".TABLE_PREFIX."page
                     MODIFY COLUMN behavior_id varchar(25) NOT NULL default '',
                     MODIFY COLUMN position mediumint(6) unsigned default '0'
                    ");
         echo '<li>Modified fields for page table...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // ADDING TABLES
         $PDO->exec("CREATE TABLE ".TABLE_PREFIX."secure_token (
@@ -151,6 +159,8 @@ if ($driver == 'mysql') {
                 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8
                ");
         echo '<li>Added table: secure_token...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         $PDO->exec("CREATE TABLE ".TABLE_PREFIX."role (
                         id int(11) NOT NULL auto_increment,
@@ -160,11 +170,16 @@ if ($driver == 'mysql') {
                     ) ENGINE=MyISAM  DEFAULT CHARSET=utf8
                    ");
         echo '<li>Added table: role...</li>';
+        ob_flush(); flush();
+        sleep(1);
         
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role (id, name) VALUES (1, 'administrator')");
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role (id, name) VALUES (2, 'developer')");
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role (id, name) VALUES (3, 'editor')");
         echo '<li>Added default roles...</li>';
+        ob_flush(); flush();
+        sleep(1);
+
 
         $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user_role (
                         user_id int(11) NOT NULL,
@@ -173,6 +188,8 @@ if ($driver == 'mysql') {
                     ) ENGINE=MyISAM DEFAULT CHARSET=utf8
                    ");
         echo '<li>Added table: user_role...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // Migrate all administrator role mappings
         $sql = 'SELECT user_id FROM '.TABLE_PREFIX.'user_permission'
@@ -185,6 +202,8 @@ if ($driver == 'mysql') {
             $PDO->exec("INSERT INTO ".TABLE_PREFIX."user_role (user_id, role_id) VALUES (".$map->user_id.", 1)");
         }
         echo '<li>Migrated all administrator role mappings...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // Migrate all developer role mappings
         $sql = 'SELECT user_id FROM '.TABLE_PREFIX.'user_permission'
@@ -192,11 +211,15 @@ if ($driver == 'mysql') {
 
         $stmt = $PDO->prepare($sql);
         $stmt->execute();
+        ob_flush(); flush();
+        sleep(1);
 
         while ($map = $stmt->fetchObject()) {
             $PDO->exec("INSERT INTO ".TABLE_PREFIX."user_role (user_id, role_id) VALUES (".$map->user_id.", 2)");
         }
         echo '<li>Migrated all developer role mappings...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // Migrate all editor role mappings
         $sql = 'SELECT user_id FROM '.TABLE_PREFIX.'user_permission'
@@ -204,11 +227,15 @@ if ($driver == 'mysql') {
 
         $stmt = $PDO->prepare($sql);
         $stmt->execute();
+        ob_flush(); flush();
+        sleep(1);
 
         while ($map = $stmt->fetchObject()) {
             $PDO->exec("INSERT INTO ".TABLE_PREFIX."user_role (user_id, role_id) VALUES (".$map->user_id.", 3)");
         }
         echo '<li>Migrated all editor role mappings...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         $PDO->exec("CREATE TABLE ".TABLE_PREFIX."role_permission (
                         role_id int(11) NOT NULL,
@@ -217,6 +244,8 @@ if ($driver == 'mysql') {
                     ) ENGINE=MyISAM DEFAULT CHARSET=utf8
                    ");
         echo '<li>Added table: role_permission...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // Role 1 = administrator
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 1)");
@@ -244,6 +273,8 @@ if ($driver == 'mysql') {
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 23)");
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 24)");
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 25)");
+        ob_flush(); flush();
+        sleep(1);
 
         // Role 2 = developer
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 1)");
@@ -266,6 +297,8 @@ if ($driver == 'mysql') {
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 23)");
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 24)");
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 25)");
+        ob_flush(); flush();
+        sleep(1);
 
         // Role 2 = editor
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 1)");
@@ -281,6 +314,8 @@ if ($driver == 'mysql') {
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 24)");
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 25)");
         echo '<li>Added default role permission mappings...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // Updating permissions table
         $PDO->exec("TRUNCATE TABLE ".TABLE_PREFIX."permission");
@@ -309,8 +344,9 @@ if ($driver == 'mysql') {
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (23, 'file_manager_rename')");
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (24, 'file_manager_chmod')");
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (25, 'file_manager_delete')");
-
         echo '<li>Emptied permission table and added default permissions...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // DELETING TABLES
         $PDO->exec("DROP TABLE ".TABLE_PREFIX."user_permission");
@@ -335,6 +371,8 @@ if ($driver == 'sqlite') {
 
         $PDO->exec("ALTER TABLE page ADD COLUMN valid_until datetime default NULL");
         echo '<li>Added fields to page table...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // CHANGING FIELDS
         // rename to tmp table
@@ -368,6 +406,8 @@ if ($driver == 'sqlite') {
         // drop tmp table
         $PDO->exec("DROP TABLE user_tmp");
         echo '<li>Modified fields for user table...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // rename to tmp table
         $PDO->exec("ALTER TABLE page RENAME TO page_tmp");
@@ -406,6 +446,8 @@ if ($driver == 'sqlite') {
         // drop tmp table
         $PDO->exec("DROP TABLE page_tmp");
         echo '<li>Modified fields for page table...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // ADDING TABLES
         $PDO->exec("CREATE TABLE secure_token (
@@ -416,6 +458,8 @@ if ($driver == 'sqlite') {
         )");
         $PDO->exec("CREATE UNIQUE INDEX username_url ON secure_token (username,url)");
         echo '<li>Added table: secure_token...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         $PDO->exec("CREATE TABLE role (
             id INTEGER NOT NULL PRIMARY KEY,
@@ -423,11 +467,15 @@ if ($driver == 'sqlite') {
         )");
         $PDO->exec("CREATE UNIQUE INDEX role_name ON role (name)");
         echo '<li>Added table: role...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         $PDO->exec("INSERT INTO role (id, name) VALUES (1, 'administrator')");
         $PDO->exec("INSERT INTO role (id, name) VALUES (2, 'developer')");
         $PDO->exec("INSERT INTO role (id, name) VALUES (3, 'editor')");
         echo '<li>Added default roles...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         $PDO->exec("CREATE TABLE user_role (
             user_id int(11) NOT NULL ,
@@ -435,6 +483,8 @@ if ($driver == 'sqlite') {
         )");
         $PDO->exec("CREATE UNIQUE INDEX user_role_user_id ON user_role (user_id,role_id)");
         echo '<li>Added table: user_role...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // Migrate all administrator role mappings
         $sql = 'SELECT user_id FROM user_permission'
@@ -447,6 +497,8 @@ if ($driver == 'sqlite') {
             $PDO->exec("INSERT INTO user_role (user_id, role_id) VALUES (".$map->user_id.", 1)");
         }
         echo '<li>Migrated all administrator role mappings...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // Migrate all developer role mappings
         $sql = 'SELECT user_id FROM user_permission'
@@ -459,6 +511,8 @@ if ($driver == 'sqlite') {
             $PDO->exec("INSERT INTO user_role (user_id, role_id) VALUES (".$map->user_id.", 2)");
         }
         echo '<li>Migrated all developer role mappings...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // Migrate all editor role mappings
         $sql = 'SELECT user_id FROM user_permission'
@@ -471,6 +525,8 @@ if ($driver == 'sqlite') {
             $PDO->exec("INSERT INTO user_role (user_id, role_id) VALUES (".$map->user_id.", 3)");
         }
         echo '<li>Migrated all editor role mappings...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         $PDO->exec("CREATE TABLE role_permission (
             role_id int(11) NOT NULL ,
@@ -478,6 +534,8 @@ if ($driver == 'sqlite') {
         )");
         $PDO->exec("CREATE UNIQUE INDEX role_permission_role_id ON role_permission (role_id,permission_id)");
         echo '<li>Added table: role_permission...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // Role 1 = administrator
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 1)");
@@ -505,6 +563,7 @@ if ($driver == 'sqlite') {
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 23)");
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 24)");
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 25)");
+        sleep(1);
 
         // Role 2 = developer
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 1)");
@@ -527,6 +586,7 @@ if ($driver == 'sqlite') {
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 23)");
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 24)");
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 25)");
+        sleep(1);
 
         // Role 2 = editor
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (3, 1)");
@@ -542,6 +602,8 @@ if ($driver == 'sqlite') {
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (3, 24)");
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (3, 25)");
         echo '<li>Added default role permission mappings...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // Updating permissions table
         $PDO->exec("DELETE FROM permission");
@@ -572,8 +634,9 @@ if ($driver == 'sqlite') {
         $PDO->exec("INSERT INTO permission (id, name) VALUES (23, 'file_manager_rename')");
         $PDO->exec("INSERT INTO permission (id, name) VALUES (24, 'file_manager_chmod')");
         $PDO->exec("INSERT INTO permission (id, name) VALUES (25, 'file_manager_delete')");
-
         echo '<li>Emptied permission table and added default permissions...</li>';
+        ob_flush(); flush();
+        sleep(1);
 
         // DELETING TABLES
         $PDO->exec("DROP TABLE user_permission");

@@ -8,9 +8,11 @@ Sigla:
 ======
 
 
-0.7.3 - released ??
+0.7.3 - released 2010-01-06
 
 + Added more error handling to do-upgrade.php
+- Changed validation to strip html from keywords and description instead of current validation.
+- Fixed faulty url to admin from security.php
 - Fixing highlighting issue for Pages. - thanks mtylerb/andrewmman
 - Fixed styling issue for Page edit screen. - thanks andrewmman
 - Fixed faulty redirect to login screen for "login required" pages.
