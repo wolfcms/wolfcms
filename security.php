@@ -329,7 +329,7 @@ ol, ul {
         </tbody>
     </table>
     <p>
-        Go to your site's <a href="index.php">front page</a> or the <a href="<?php echo (USE_MOD_REWRITE)?'':'?/'; echo ADMIN_DIR;?>">administrative interface</a>.
+        Go to your site's <a href="index.php">front page</a> or the <a href="<?php echo URL_PUBLIC . ((USE_MOD_REWRITE) ? '' : '?/') . ADMIN_DIR;?>">administrative interface</a>.
     </p>
     <hr/>
     <p><small>DISCLAIMER - neither the Wolf CMS project nor any of its contributors provide any warranty, for details, please see /docs/license.txt in the download package.</small></p>
