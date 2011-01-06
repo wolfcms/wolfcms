@@ -112,10 +112,11 @@ if($comments_count <= $rowspage) { $lastpage = 0; } else { $lastpage = abs($last
             }
             echo $prev;
             for ($i = 0; $i <= $lastpage; $i++) {
+				$j = $i + 1;
                 if ($i == $CurPage)
-                    echo '<span class="current">' . $i . '</span';
+                    echo '<span class="current">' . $j . '</span>';
                 else
-                    echo " <a href=" . get_url('plugin/comment/moderation/') . "$i>$i</a>\n";
+                    echo " <a href=" . get_url('plugin/comment/moderation/') . "$i>$j</a>\n";
             }
             echo $next;
             if ($CurPage != $lastpage) {

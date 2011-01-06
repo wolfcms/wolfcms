@@ -114,10 +114,11 @@ __('Delete'); ?></a> | <?php if ($comment->is_approved): ?>
             }
             echo $prev;
             for ($i = 0; $i <= $lastpage; $i++) {
+				$j = $i + 1;
                 if ($i == $CurPage)
-                    echo '<span class="current">'.$i.'</span';
+                    echo '<span class="current">'.$j.'</span>';
                 else
-                    echo " <a href=" . get_url('plugin/comment/index/') . "$i>$i</a>\n";
+                    echo " <a href=" . get_url('plugin/comment/index/') . "$i>$j</a>\n";
             }
             echo $next;
             if ($CurPage != $lastpage) {
