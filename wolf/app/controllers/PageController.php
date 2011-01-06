@@ -132,7 +132,7 @@ class PageController extends Controller {
         }
 
         // check for protected page and editor user
-        if (!AuthUser::hasPermission('page_edit') && $page->is_protected) {
+        if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $page->is_protected)) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url('page'));
         }

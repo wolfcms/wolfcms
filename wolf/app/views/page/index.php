@@ -29,7 +29,7 @@
     <li id="page-0" class="node level-0">
       <div class="page" style="padding-left: 4px">
         <span class="w1">
-<?php if ($root->is_protected && ! AuthUser::hasPermission('page_edit')): ?>
+<?php if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $root->is_protected)): ?>
           <img align="middle" class="icon" src="<?php echo URI_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span>
 <?php else: ?>
           <a href="<?php echo get_url('page/edit/1'); ?>" title="/"><img align="middle" class="icon" src="<?php echo URI_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span></a>
