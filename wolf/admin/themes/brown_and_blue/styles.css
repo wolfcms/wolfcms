@@ -9,7 +9,3 @@
 .tabs .tab a {
     background-color: #dcdcdc;
 }
-
-#site-map-root li:hover { background-color: #ffffff; }
-#site-map-root #page-0 .page:hover, #site-map-root li.hover { background-color: #f5f5f5; }
-#site-map li:hover, #site-map li.hover { background-color: #f5f5f5; }
