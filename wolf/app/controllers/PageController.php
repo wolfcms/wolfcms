@@ -405,10 +405,14 @@ class PageController extends Controller {
         // Check alphanumerical fields
         $fields = array('keywords', 'description');
         foreach ($fields as $field) {
-            $data[$field] = trim($data[$field]);
+            use_helper('Kses');
+            $data[$field] = kses(trim($data[$field]), array());
+            /*
             if (!empty($data[$field]) && !Validate::alpha_comma($data[$field])) {
                 $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
             }
+             * 
+             */
         }
 
         // Check behaviour_id field
