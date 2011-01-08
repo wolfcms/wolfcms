@@ -7,6 +7,10 @@ Sigla:
 . other development
 ======
 
+0.x.x - released ??
+
+- Fixed index already exists bug on upgrade for SQLite DBs
+- Fixed Email helper to prevent safe mode warning - thanks realslacker
 
 0.7.3 - released 2010-01-06
 

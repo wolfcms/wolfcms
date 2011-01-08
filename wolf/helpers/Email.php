@@ -82,9 +82,7 @@ class Email {
      * The constructor can be passed an array of config values
      */
     public function __construct($config = array()) {
-        if (count($config) > 0) {
-            $this->initialize($config);
-        }
+        $this->initialize($config);
     }
 
     /**
