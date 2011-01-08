@@ -22,8 +22,7 @@
         <title><?php echo __('Forgot password'); ?></title>
         <base href="<?php echo trim(BASE_URL, '?/').'/'; ?>" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <link href="<?php echo URI_PUBLIC; ?>wolf/admin/stylesheets/login.css" rel="Stylesheet" type="text/css" />
-        <link href="<?php echo URI_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
+        <link href="<?php echo URI_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/login.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
         <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/jquery-1.4.2.min.js"></script>
         <script type="text/javascript">
             // <![CDATA[
