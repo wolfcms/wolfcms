@@ -32,7 +32,7 @@ $drivers = PDO::getAvailableDrivers();
     <ul>
         <li>Make sure you have created a BACKUP of your database before proceeding.</li>
         <li>This will only touch the CORE database tables, not third party plugin tables.</li>
-        <li>This is only for upgrades from 0.6.0 to 0.7.0.</li>
+        <li>This is only for upgrades from 0.6.0 to 0.7.x.</li>
         <li>If you have created custom user groups, you will have to <strong>recreate</strong> them after upgrading.
             <ul>
                 <li>A custom user group is any group except: administrator, developer, editor.</li>
@@ -45,7 +45,7 @@ $drivers = PDO::getAvailableDrivers();
     <p>
         Do you wish to upgrade:
         <strong>Wolf CMS 0.6.0</strong>
-        =&gt; <strong>Wolf CMS 0.7.0</strong>?
+        =&gt; <strong>Wolf CMS 0.7.x</strong>?
     </p>
 
     <form action="index.php" method="post">

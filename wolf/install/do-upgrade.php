@@ -394,7 +394,6 @@ if ($driver == 'sqlite') {
             created_by_id int(11) default NULL ,
             updated_by_id int(11) default NULL
         )");
-        $PDO->exec("CREATE UNIQUE INDEX user_username ON user (username)");
         // copy content
         $PDO->exec("INSERT INTO user(id, name, email, username, password, salt,
                                      language, last_login, last_failure, failure_count,
@@ -405,6 +404,7 @@ if ($driver == 'sqlite') {
                     FROM user_tmp");
         // drop tmp table
         $PDO->exec("DROP TABLE user_tmp");
+        $PDO->exec("CREATE UNIQUE INDEX user_username ON user (username)");
         echo '<li>Modified fields for user table...</li>';
         ob_flush(); flush();
         sleep(1);
