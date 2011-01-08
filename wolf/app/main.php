@@ -35,50 +35,19 @@ function explode_uri($uri) {
     return preg_split('/\//', $uri, -1, PREG_SPLIT_NO_EMPTY);
 }
 
-
+/**
+ * This function should no longer be used.
+ * 
+ * @deprecated
+ * @see Page::findBySlug()
+ *
+ * @param string $slug
+ * @param type $parent
+ * @param type $all
+ * @return page_class 
+ */
 function find_page_by_slug($slug, &$parent, $all = false) {
-    global $__CMS_CONN__;
-
-    $page_class = 'Page';
-
-    $parent_id = $parent ? $parent->id: 0;
-
-    if (empty($slug)) {
-        $slug = NULL;
-    }
-
-    $sql = 'SELECT page.*, author.name AS author, updater.name AS updater '
-        . 'FROM '.TABLE_PREFIX.'page AS page '
-        . 'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
-        . 'LEFT JOIN '.TABLE_PREFIX.'user AS updater ON updater.id = page.updated_by_id ';
-
-    if ($all) {
-        $sql .= 'WHERE COALESCE(slug, \'\') = COALESCE(?, \'\') AND parent_id = ? AND (status_id='.Page::STATUS_PREVIEW.' OR status_id='.Page::STATUS_PUBLISHED.' OR status_id='.Page::STATUS_HIDDEN.')';
-    }
-    else {
-        $sql .= 'WHERE COALESCE(slug, \'\') = COALESCE(?, \'\') AND parent_id = ? AND (status_id='.Page::STATUS_PUBLISHED.' OR status_id='.Page::STATUS_HIDDEN.')';
-    }
-
-    $stmt = $__CMS_CONN__->prepare($sql);
-
-    $stmt->execute(array($slug, $parent_id));
-
-    if ($page = $stmt->fetchObject()) {
-    // hook to be able to redefine the page class with behavior
-        if ( ! empty($parent->behavior_id)) {
-        // will return Page by default (if not found!)
-            $page_class = Behavior::loadPageHack($parent->behavior_id);
-        }
-
-        // create the object page
-        $page = new $page_class($page, $parent);
-
-        // assign all is parts
-        $page->part = get_parts($page->id);
-
-        return $page;
-    }
-    else return false;
+    return Page::findBySlug($slug, $parent, $all);
 }
 
 function get_parts($page_id) {

@@ -717,13 +717,27 @@ class Page extends Node {
     }
 
     /**
+     * This function should no longer be used.
+     * 
      * @deprecated
      * @see setTags()
+     *
+     * @param type $tags
+     * @return type 
      */
     public function saveTags($tags) {
         return $this->setTags($tags);
     }
 
+    /**
+     * This function should no longer be used.
+     * 
+     * @deprecated
+     * @see findByUri()
+     *
+     * @param type $uri
+     * @return type 
+     */
     public static function find_page_by_uri($uri) {
         return Page::findByUri($uri);
     }
@@ -765,7 +779,52 @@ class Page extends Node {
         } // foreach
 
         return ( ! $page && $has_behavior) ? $parent: $page;
-    } // find_page_by_slug
+    }
+    
+    public static function findBySlug($slug, &$parent, $all = false) {
+        global $__CMS_CONN__;
+
+        $page_class = 'Page';
+
+        $parent_id = $parent ? $parent->id: 0;
+
+        if (empty($slug)) {
+            $slug = NULL;
+        }
+
+        $sql = 'SELECT page.*, author.name AS author, updater.name AS updater '
+            . 'FROM '.TABLE_PREFIX.'page AS page '
+            . 'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
+            . 'LEFT JOIN '.TABLE_PREFIX.'user AS updater ON updater.id = page.updated_by_id ';
+
+        if ($all) {
+            $sql .= 'WHERE COALESCE(slug, \'\') = COALESCE(?, \'\') AND parent_id = ? AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
+        }
+        else {
+            $sql .= 'WHERE COALESCE(slug, \'\') = COALESCE(?, \'\') AND parent_id = ? AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
+        }
+
+        $stmt = $__CMS_CONN__->prepare($sql);
+
+        $stmt->execute(array($slug, $parent_id));
+
+        if ($page = $stmt->fetchObject()) {
+        // hook to be able to redefine the page class with behavior
+            if ( ! empty($parent->behavior_id)) {
+            // will return Page by default (if not found!)
+                $page_class = Behavior::loadPageHack($parent->behavior_id);
+            }
+
+            // create the object page
+            $page = new $page_class($page, $parent);
+
+            // assign all is parts
+            $page->part = get_parts($page->id);
+
+            return $page;
+        }
+        else return false;
+    }
 
 
     /**
