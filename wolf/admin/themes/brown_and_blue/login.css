@@ -1,0 +1,140 @@
+/*
+ * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
+ *
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 12px verdana, arial, helvetica, sans-serif;
+	background-color: #6AD;
+	color: #FFF;
+  text-align: center;
+  line-height: 150%;
+}
+
+a {
+  color: #147;
+  font-weight: bolder;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  margin: -10px -10px 5px;
+  padding: 10px 10px 5px;
+  color: #fff;
+  font-size: 20px;
+  border-bottom: 3px solid #123;
+	background-color: #988060; 
+	text-shadow: -1px 2px 3px #111;
+}
+
+p {
+  margin: 8px 0;
+}
+
+/* Form ------------------------------------------------------------------- */
+label {
+  margin: 3px 0;
+  font-size: 90%;
+  font-weight: bolder;
+  display: block;
+}
+
+label.checkbox {
+  font-weight: normal;
+  display: inline;
+}
+
+input {
+  border: 1px solid #ccc;
+  padding: 3px;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 11px;
+  background: white;
+  color: black;
+}
+
+input:hover {
+  border: 1px solid #6ad;
+}
+
+input.medium { width: 150px; }
+
+input.checkbox {
+  border: 0;
+  width: auto;
+}
+
+input.submit {
+  margin-top: 10px;
+}
+
+/* Construction ----------------------------------------------------------- */
+#dialog {
+  margin: 100px auto 0 auto;
+  background: #fff;
+  color: #222;
+  border: 3px solid #123;
+  padding: 10px;
+  width: 332px;
+  text-align: left;
+}
+
+/* Login dialog ----------------------------------------------------------- */
+#login-username-div, #login-password-div {
+  padding-top: 1px;
+}
+
+#login-username-div {
+  float: left;
+  width: 170px;
+}
+
+* html #login-username-div {
+  margin-top: 1px;
+}
+
+#login-password-div {
+  margin-left: 170px;
+}
+
+#login-submit span, #forgot-submit span {
+  padding-left: 8px;
+  font-size: 11px;
+}
+
+* html #login-submit span, * html #forgot-submit span {
+  position: relative;
+  top: -4px;
+}
+
+#forgot-email {
+    width: 325px;
+}
+
+/* Messages --------------------------------------------------------------- */
+#error, #success {
+  margin: -5px -10px 0;
+  padding: 10px 20px;
+  text-align: left;
+}
+#error {
+  background: #a22;
+  color: #fff;
+}
+#success {
+  background: #cfc;
+  color: #051;
+}
