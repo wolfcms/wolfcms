@@ -44,6 +44,7 @@ if ($action == 'edit') { ?>
             <li class="tab"><a href="#pagetitle"><?php echo __('Page Title'); ?></a></li>
             <li class="tab"><a href="#metadata"><?php echo __('Metadata'); ?></a></li>
             <li class="tab"><a href="#settings"><?php echo __('Settings'); ?></a></li>
+			<?php Observer::notify('view_page_edit_tab_links', $page); ?>
         </ul>
     </div>
     <div id="metainfo-content" class="pages">
