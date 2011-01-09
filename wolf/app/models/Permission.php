@@ -100,7 +100,7 @@ class Permission extends Record {
      * @param string $name
      * @return mixed A Permission object or false on failure.
      */
-    public static function findByName(string $name) {
+    public static function findByName($name) {
         $where = 'name=?';
         $values = array($name);
 

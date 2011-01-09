@@ -9,6 +9,9 @@ Sigla:
 
 0.x.x - released ??
 
++ Added Polish language files. Thanks tikky.
++ Added Japanese language files. Translations need to be checked by native speaker.
+- Fixed incorrect type hint in Permission::findByName() argument list 
 - Fixed index already exists bug on upgrade for SQLite DBs
 - Fixed Email helper to prevent safe mode warning - thanks realslacker
 
