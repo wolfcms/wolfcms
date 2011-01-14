@@ -118,12 +118,12 @@ if ($action == 'edit') { ?>
                   <td class="field">
                     <input id="page_created_on" maxlength="10" name="page[created_on]" size="10" type="text" value="<?php echo substr($page->created_on, 0, 10); ?>" />
                     <img class="datepicker" onclick="displayDatePicker('page[created_on]');" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
-                    <input id="page_created_on_time" maxlength="5" name="page[created_on_time]" size="5" type="text" value="<?php echo substr($page->created_on, 11); ?>" />
+                    <input id="page_created_on_time" maxlength="8" name="page[created_on_time]" size="8" type="text" value="<?php echo substr($page->created_on, 11); ?>" />
                 <?php if (isset($page->published_on)): ?>
                     &nbsp; <label for="page_published_on"><?php echo __('Published date'); ?></label>
                     <input id="page_published_on" maxlength="10" name="page[published_on]" size="10" type="text" value="<?php echo substr($page->published_on, 0, 10); ?>" />
                     <img onclick="displayDatePicker('page[published_on]');" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
-                    <input id="page_published_on_time" maxlength="5" name="page[published_on_time]" size="5" type="text" value="<?php echo substr($page->published_on, 11); ?>" />
+                    <input id="page_published_on_time" maxlength="8" name="page[published_on_time]" size="8" type="text" value="<?php echo substr($page->published_on, 11); ?>" />
                 <?php endif; ?>
                   </td>
                 </tr>
@@ -135,7 +135,7 @@ if ($action == 'edit') { ?>
                   <td class="field">
                     <input id="page_valid_until" maxlength="10" name="page[valid_until]" size="10" type="text" value="<?php echo substr($page->valid_until, 0, 10); ?>" />
                     <img onclick="displayDatePicker('page[valid_until]');" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
-                    <input id="page_valid_until_time" maxlength="5" name="page[valid_until_time]" size="5" type="text" value="<?php echo substr($page->valid_until, 11); ?>" />
+                    <input id="page_valid_until_time" maxlength="8" name="page[valid_until_time]" size="8" type="text" value="<?php echo substr($page->valid_until, 11); ?>" />
                   </td>
                 </tr>
                 <?php endif; ?>
