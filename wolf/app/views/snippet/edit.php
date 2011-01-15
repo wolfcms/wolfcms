@@ -38,7 +38,7 @@
             <div class="page" style="">
                 <p>
                     <label for="snippet_filter_id"><?php echo __('Filter'); ?></label>
-                    <select id="snippet_filter_id" name="snippet[filter_id]" onchange="setTextAreaToolbar('snippet_content', this[this.selectedIndex].value)">
+                    <select id="snippet_filter_id" class="filter-selector" name="snippet[filter_id]">
                         <option value=""<?php if($snippet->filter_id == '') echo ' selected="selected"'; ?>>&#8212; <?php echo __('none'); ?> &#8212;</option>
                         <?php foreach ($filters as $filter): ?>
                         <option value="<?php echo $filter; ?>"<?php if($snippet->filter_id == $filter) echo ' selected="selected"'; ?>><?php echo Inflector::humanize($filter); ?></option>
@@ -78,7 +78,6 @@
         $('form').submit(function() { setConfirmUnload(false); return true; });
     });
     
-  setTextAreaToolbar('snippet_content', '<?php echo $snippet->filter_id; ?>');
   document.getElementById('snippet_name').focus();
 // ]]>
 </script>
