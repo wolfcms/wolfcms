@@ -50,23 +50,6 @@ function find_page_by_slug($slug, &$parent, $all = false) {
     return Page::findBySlug($slug, $parent, $all);
 }
 
-function get_parts($page_id) {
-    global $__CMS_CONN__;
-
-    $objPart = new stdClass;
-
-    $sql = 'SELECT name, content_html FROM '.TABLE_PREFIX.'page_part WHERE page_id=?';
-
-    if ($stmt = $__CMS_CONN__->prepare($sql)) {
-        $stmt->execute(array($page_id));
-
-        while ($part = $stmt->fetchObject())
-            $objPart->{$part->name} = $part;
-    }
-
-    return $objPart;
-}
-
 function url_match($url) {
     $url = trim($url, '/');
 

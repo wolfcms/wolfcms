@@ -499,7 +499,7 @@ class Page extends Node {
                 $page = new $page_class($object, $this);
 
                 // assignParts
-                $page->part = get_parts($page->id);
+                $page->part = self::get_parts($page->id);
                 $pages[] = $page;
             }
         }
@@ -819,7 +819,7 @@ class Page extends Node {
             $page = new $page_class($page, $parent);
 
             // assign all is parts
-            $page->part = get_parts($page->id);
+            $page->part = self::get_parts($page->id);
 
             return $page;
         }
@@ -884,14 +884,14 @@ class Page extends Node {
         if ($limit == 1) {
             $object = $stmt->fetchObject('Page');
             if ($object !== false) {
-                $object->part = get_parts($object->id);
+                $object->part = self::get_parts($object->id);
             }
             return $object;
         } else {
             $objects = array();
             while ($object = $stmt->fetchObject('Page'))
             {
-            	$object->part = get_parts($object->id);
+            	$object->part = self::get_parts($object->id);
                 $objects[] = $object;
 			}
             return $objects;
@@ -986,6 +986,23 @@ class Page extends Node {
         }
 
         return $new_root_id;
+    }
+    
+    public static function get_parts($page_id) {
+        global $__CMS_CONN__;
+
+        $objPart = new stdClass;
+
+        $sql = 'SELECT name, content_html FROM '.TABLE_PREFIX.'page_part WHERE page_id=?';
+
+        if ($stmt = $__CMS_CONN__->prepare($sql)) {
+            $stmt->execute(array($page_id));
+
+            while ($part = $stmt->fetchObject())
+                $objPart->{$part->name} = $part;
+        }
+
+        return $objPart;
     }
 
 } // end Page class
