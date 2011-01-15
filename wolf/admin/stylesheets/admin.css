@@ -94,6 +94,10 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   border-bottom: 2px solid #ccc;
 
   /* Border-radius not implemented yet */
+  border-radius: 6px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  
   -moz-border-radius: 6px;
   -moz-border-radius-bottomright: 0px;
   -moz-border-radius-bottomleft: 0px;
@@ -233,6 +237,10 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   color: #000;
 
   /* Border-radius not implemented yet */
+  border-radius: 6px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  
   -moz-border-radius: 6px;
   -moz-border-radius-bottomright: 0px;
   -moz-border-radius-bottomleft: 0px;
@@ -254,6 +262,7 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   margin-top: 4px;
 
   /* Border-radius not implemented yet */
+  border-radius: 0 6px 6px 6px;
   -moz-border-radius: 0 6px 6px 6px;
   -webkit-border-radius: 0 6px 6px 6px;
 
@@ -317,6 +326,7 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   border-bottom: 2px solid #58b;
 
   /* Border-radius not implemented yet */
+  border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   box-shadow: 5px 3px 4px #aaa;
@@ -409,8 +419,8 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
   
   /* Border-radius not implemented yet */
   border-radius: 6px;
-  border-radius-topright: 0px;
-  border-radius-topleft: 0px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
   -moz-border-radius: 6px;
   -moz-border-radius-topright: 0px;
   -moz-border-radius-topleft: 0px;
