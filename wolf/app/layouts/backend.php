@@ -89,7 +89,7 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
             $("input:visible:enabled:first").focus();
             
             // Get the initial values and activate filter
-            $('.filter-selector').each(function() {
+            $('.filter-selector').live('change', function() {
                 var $this = $(this);
                 $this.data('oldValue', $this.val());
 
