@@ -89,7 +89,7 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
             $("input:visible:enabled:first").focus();
             
             // Get the initial values and activate filter
-            $('.filter-selector').live('change', function() {
+            $('.filter-selector').each(function() {
                 var $this = $(this);
                 $this.data('oldValue', $this.val());
 
@@ -101,7 +101,7 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
                 $this.trigger('wolfSwitchFilterIn', [$this.val(), elem]);
             });
             
-            $('.filter-selector').change(function(){
+            $('.filter-selector').live('change',function(){
                 var $this = $(this);
                 var newFilter = $this.val();
                 var oldFilter = $this.data('oldValue');
