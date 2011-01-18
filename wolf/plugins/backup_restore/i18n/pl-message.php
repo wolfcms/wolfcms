@@ -11,7 +11,7 @@
      */
 
     return array(
-       'Are you sure you wish to restore?' => 'Jesteś pewien, ze chcesz przywrócić?',
+    'Are you sure you wish to restore?' => 'Jesteś pewien, że chcesz przywrócić?',
     'Backup Restore' => 'Kopia zapasowa',
     'Backup file was not uploaded correctly/completely or is broken.' => 'Plik kopii zapasowej nie został załadowany poprawnie / w całości lub jest uszkodzony.',
     'Backup settings' => 'Ustawienia kopii zapasowej',
@@ -24,11 +24,11 @@
     'Do you want to include passwords in the backup file? <br/> If you select no, all passwords will be reset upon restoring the backup.' => 'Chcesz dołączyć hasło do pliku kopii? <br /> Jeśli zaznaczysz nie, wszystkie hasła zostaną zresetowane po przywróceniu kopii zapasowej.',
     'Documentation' => 'Dokumentacja',
     'Filename timestamp style' => 'Styl nazwy pliku',
-    'If no password is provided in the backup file, reset all password fields to this default.' => 'Jeśli w pliku kopii zapasowej jest brak hasła, pola hasła zostaną zresetowane do domyslnych.',
+    'If no password is provided in the backup file, reset all password fields to this default.' => 'Jeśli w pliku kopii zapasowej jest brak hasła, pola hasła zostaną zresetowane do domyślnych.',
     'Include passwords' => 'Dołącz hasło',
     'No' => 'Nie',
     'Package as zip file' => 'Zapisz do archiwum zip',
-    'Provides administrators with the option of backing up their pages and settings to an XML file.' => 'Zapewnia administratorom tworzenie kopii zapasowej stron i ustawień do pliku XML, z mozliwoscia przywrócenia ich.',
+    'Provides administrators with the option of backing up their pages and settings to an XML file.' => 'Zapewnia administratorom tworzenie kopii zapasowej stron i ustawień do pliku XML, z możliwością przywrócenia ich.',
     'Reset passwords to' => 'Zresetuj hasło do',
     'Restore a backup' => 'Przywróć kopię zapasową',
     'Restore settings' => 'Przywróć ustawienia',

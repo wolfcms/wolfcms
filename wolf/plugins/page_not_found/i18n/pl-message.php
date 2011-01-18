@@ -11,6 +11,6 @@
      */
 
     return array(
-    	'Page not found' => 'Typ strony \'Strona nie zostala odnaleziona\'',
-	'Provides Page not found page types.' => 'Dostarcza typ strony \'Strona nie zostala odnaleziona\'.',
+    	'Page not found' => 'Typ strony \'Strona nie zosta³a odnaleziona\'',
+	'Provides Page not found page types.' => 'Dostarcza typ strony \'Strona nie zosta³a odnaleziona\'.',
     );
