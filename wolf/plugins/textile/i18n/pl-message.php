@@ -11,7 +11,7 @@
      */
 
     return array(
-    	'Allows you to compose page parts or snippets using the Textile text filter.' => 'Pozwala utworzyæ fragment strony lub skrawki u¿ywaj±c filtra Textile',
+    	'Allows you to compose page parts or snippets using the Textile text filter.' => 'Pozwala utworzyÄ‡ fragment strony lub skrawki uÅ¼ywajÄ…c filtra Textile',
 	'Textile filter' => 'Filtr Textile',
     );
 

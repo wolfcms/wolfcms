@@ -11,13 +11,13 @@
      */
 
     return array(
-    	'A sidebar' => '',
-	'Display settings page here!' => '',
-	'Display your documentation here!' => '',
-	'Documentation' => '',
-	'Provides a basic plugin implementation. (try enabling it!)' => '',
-	'Put something here, or leave out the sidebar entirely.' => '',
-	'Settings' => '',
-	'Skeleton' => '',
+    	'A sidebar' => 'Panel boczny',
+	'Display settings page here!' => 'Wyświetl tutaj stronę konfiguracji!',
+	'Display your documentation here!' => 'Wyświetl tutaj stronę dokumentacji!',
+	'Documentation' => 'Dokumentacja',
+	'Provides a basic plugin implementation. (try enabling it!)' => 'Prosty przykład implementacji pluginu',
+	'Put something here, or leave out the sidebar entirely.' => 'Wstaw tutaj coś lub zostaw puste.',
+	'Settings' => 'Konfiguracja',
+	'Skeleton' => 'Szkielet',
     );
 
