@@ -11,6 +11,6 @@
      */
 
     return array(
-    	'Allows you to compose page parts or snippets using the Markdown text filter.' => 'Pozwala utworzyc fragment strony lub skrawki uzywajac filtra Markdown',
+    	'Allows you to compose page parts or snippets using the Markdown text filter.' => 'Pozwala utworzyć fragment strony lub skrawki używając filtra Markdown',
 	'Markdown filter' => 'Filtr Markdown',
     );

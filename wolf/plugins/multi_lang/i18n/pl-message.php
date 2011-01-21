@@ -14,7 +14,7 @@
     	'Do you want to create a translated version of a page as a tab of the same page or as a copy of the page in a language specific subtree? (i.e. Home->nl->About as a Dutch translation of Home->About)' => 'Czy chcesz utworzyć przetłumaczoną wersję strony jako zakładkę tej samej strony czy jako kopię wszystkich stron w wybranej gałęzi języka? (np. Home->pl->About to będzie polskie tłumaczenie strony Home->About)',
 	'Documentation' => 'Dokumentacja',
 	'General' => 'Ogólne',
-	'Get the language preference from the HTTP header (default), the uri (/nl/about.html for the Dutch version of about.html) or from the stored preference of a logged in user.' => 'Wczytaj preferencje z nagłówka HTTP (domyślnie), adres (/pl/about.html dla polskiej wersjio about.html) lub z zapamiętanych ustawień zalogowanego użytkownika.',
+	'Get the language preference from the HTTP header (default), the uri (/nl/about.html for the Dutch version of about.html) or from the stored preference of a logged in user.' => 'Wczytaj preferencje z nagłówka HTTP (domyślnie), adres (/pl/about.html dla polskiej wersji about.html) lub z zapamiętanych ustawień zalogowanego użytkownika.',
 	'HTTP_ACCEPT_LANG header' => 'nagłówek HTTP_ACCEPT_LANG',
 	'Language source' => 'Źródło języka',
 	'Multiple Language Documentation' => 'Wielo-językowa dokumentacja',
