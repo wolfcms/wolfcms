@@ -101,7 +101,7 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
                 $this.trigger('wolfSwitchFilterIn', [$this.val(), elem]);
             });
             
-            $('.filter-selector').change(function(){
+            $('.filter-selector').live('change',function(){
                 var $this = $(this);
                 var newFilter = $this.val();
                 var oldFilter = $this.data('oldValue');
