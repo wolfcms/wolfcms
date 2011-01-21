@@ -14,6 +14,7 @@ Sigla:
 - Fixed incorrect type hint in Permission::findByName() argument list 
 - Fixed index already exists bug on upgrade for SQLite DBs
 - Fixed Email helper to prevent safe mode warning - thanks realslacker
+. Updated Indonesian language file for core - thanks Devi
 
 0.7.3 - released 2010-01-06
 
