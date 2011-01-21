@@ -161,16 +161,16 @@ class LoginController extends Controller {
             $email = new Email();
             $email->from(Setting::get('admin_email'), Setting::get('admin_title'));
             $email->to($user->email);
-            $email->subject('Your new password from '.Setting::get('admin_title'));
-            $email->message('username: '.$user->username."\npassword: ".$new_pass);
+            $email->subject(__('Your new password from ').Setting::get('admin_title'));
+            $email->message(__('Username').': '.$user->username."\n".__('Password').': '.$new_pass);
             $email->send();
 
-            Flash::set('success', 'An email has been sent with your new password!');
+            Flash::set('success', __('An email has been sent with your new password!'));
             redirect(get_url('login'));
         }
         else {
             Flash::set('email', $email);
-            Flash::set('error', 'No user found!');
+            Flash::set('error', __('No user found!'));
             redirect(get_url('login/forgot'));
         }
     }
