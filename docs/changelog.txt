@@ -11,6 +11,7 @@ Sigla:
 
 + Added Polish language files. Thanks tikky.
 + Added Japanese language files. Translations need to be checked by native speaker.
++ Added Indonesian language files for core plugins - thanks Devi
 - Fixed incorrect type hint in Permission::findByName() argument list 
 - Fixed index already exists bug on upgrade for SQLite DBs
 - Fixed Email helper to prevent safe mode warning - thanks realslacker
