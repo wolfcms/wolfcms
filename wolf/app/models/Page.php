@@ -196,7 +196,7 @@ class Page extends Node {
         $where   = isset($args['where']) ? $args['where']: '';
         $order   = isset($args['order']) ? $args['order']: 'position, id';
         $limit   = isset($args['limit']) ? $args['limit']: 0;
-        $offset  = 0;
+        $offset  = isset($args['offset']) ? $args['offset']: 0;
 
         // Prepare query parts
         $where_string = trim($where) == '' ? '' : "AND ".$where;
