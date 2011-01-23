@@ -11,7 +11,7 @@
 function toSlug(value) {
     // Test for non western characters
     // Need to do this in a better way
-    var rx=/[a-z]|[A-Z]|[0-9]|[áàâôäæßéèêëúùûóöøåíîïñü]/;
+    var rx=/[a-z]|[A-Z]|[0-9]|[áàâąбćčцдđďéèêëęěфгѓíîïийкłлмñńňóôóпúùûůřšśťтвýыžżźзäæчöøüшщßåяюж]/;
 
     if (!rx.test(value)) {
         return value;
@@ -19,11 +19,42 @@ function toSlug(value) {
     else {
         value = $.trim(value);
         value = value.toLowerCase();
-        value = value.replace(/[áàâ]/g,"a").replace(/[éèêë]/g,"e").replace(/[íîï]/g,"i")
-        .replace(/[óô]/g,"o").replace(/[úùû]/g,"u").replace(/[ñ]/g,"n")
-        .replace(/[äæ]/g,"ae").replace(/[öø]/g,"oe").replace(/[ü]/g,"ue")
-        .replace(/[ß]/g,"ss").replace(/[å]/g,"aa")
-        .replace(/[^-a-z0-9~\s\.:;+=_]/g, '').replace(/[\s\.:;=+]+/g, '-');
+        value = value
+        .replace(/[áàâą]/g,"a")
+        .replace(/[б]/g,"b")
+        .replace(/[ćčц]/g,"c")
+        .replace(/[дđď]/g,"d")
+        .replace(/[éèêëęě]/g,"e")
+        .replace(/[ф]/g,"f")
+        .replace(/[гѓ]/g,"g")
+        .replace(/[íîïи]/g,"i")
+        .replace(/[й]/g,"j")
+        .replace(/[к]/g,"k")
+        .replace(/[łл]/g,"l")
+        .replace(/[м]/g,"m")
+        .replace(/[ñńň]/g,"n")
+        .replace(/[óôó]/g,"o")
+        .replace(/[п]/g,"p")
+        .replace(/[úùûů]/g,"u")
+        .replace(/[ř]/g,"r")
+        .replace(/[šś]/g,"s")
+        .replace(/[ťт]/g,"t")
+        .replace(/[в]/g,"v")
+        .replace(/[ýы]/g,"y")
+        .replace(/[žżźз]/g,"z")
+        .replace(/[äæ]/g,"ae")
+        .replace(/[ч]/g,"ch")
+        .replace(/[öø]/g,"oe")
+        .replace(/[ü]/g,"ue")
+        .replace(/[ш]/g,"sh")
+        .replace(/[щ]/g,"shh")
+        .replace(/[ß]/g,"ss")
+        .replace(/[å]/g,"aa")
+        .replace(/[я]/g,"ya")
+        .replace(/[ю]/g,"yu")
+        .replace(/[ж]/g,"zh")
+        .replace(/[^-a-z0-9~\s\.:;+=_]/g, '')
+        .replace(/[\s\.:;=+]+/g, '-');
 
         return value.replace(/[-]+/g, '-');
     }
