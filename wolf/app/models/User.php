@@ -61,7 +61,7 @@ class User extends Record {
         return true;
     }
 
-    public function beforeUpdated() {
+    public function beforeUpdate() {
         $this->updated_by_id = AuthUser::getId();
         $this->updated_on = date('Y-m-d H:i:s');
         return true;

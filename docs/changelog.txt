@@ -13,10 +13,12 @@ Sigla:
 + Added Japanese language files. Translations need to be checked by native speaker.
 + Added Indonesian language files for core plugins - thanks Devi
 + Added extra non-ascii characters to toSlug JS function - issue 38
+- Fixing issue with part id not being updated when adding part - issue 317
 - Fixed inconsistency in offset handling inside Page::childrenCount - issue 220
 - Fixed incorrect type hint in Permission::findByName() argument list 
 - Fixed index already exists bug on upgrade for SQLite DBs
 - Fixed Email helper to prevent safe mode warning - thanks realslacker
+- Fixed small typo in User model preventing updated by info being updated
 . Updated Indonesian language file for core - thanks Devi
 
 0.7.3 - released 2010-01-06
