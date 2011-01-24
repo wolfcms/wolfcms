@@ -278,6 +278,7 @@ if ($action == 'edit') { ?>
         if (editAction == 'add') {
             $('#page_title').change(function (){
                 $('#page_slug').val(toSlug(this.value));
+                $('#page_breadcrumb').val(this.value);
             });
         }
 
