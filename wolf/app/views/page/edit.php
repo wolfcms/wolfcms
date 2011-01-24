@@ -345,6 +345,7 @@ if ($action == 'edit') { ?>
                                                              <a href="#part-'+partIndex+'-content">'+$('div#add-part-dialog div.content form input#part-name-field').val()+'</a></li>');
 
                 $('div#part-tabs ul.tabNavigation li#part-'+partIndex+'-tab a').click();
+                $('div#add-part-dialog div.content form input#part-index-field').val(partIndex)
 
                 $('#busy').show();
 
