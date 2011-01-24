@@ -310,6 +310,8 @@ if ($action == 'edit') { ?>
 
             // START show popup
             var id = 'div#boxes div#add-part-dialog';
+            
+            $('div#add-part-dialog div.content form input#part-name-field').val('');
 
             //Get the screen height and width
             var maskHeight = $(document).height();
