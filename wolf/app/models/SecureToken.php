@@ -16,7 +16,7 @@
  */
 final class SecureToken extends Record {
     const TABLE_NAME = 'secure_token';
-    const EXPIRES    = 300; // token expires after 5 min.
+    const EXPIRES    = 900; // token expires after 15 min.
 
     public $id;
     public $username;
