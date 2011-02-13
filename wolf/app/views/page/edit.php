@@ -289,21 +289,82 @@ if ($action == 'edit') { ?>
         $('form#page_edit_form :input').bind('change', function() { setConfirmUnload(true); });
         $('form#page_edit_form').submit(function() { setConfirmUnload(false); return true; });
 
+/*--------------------------------------------------------------------------------------------------------------
+ *                                             - Meta Info -
+ *--------------------------------------------------------------------------------------------------------------*/
         // Do the metainfo tab thing
-        $('div#metainfo-tabs ul.tabNavigation a').live('click', function() {
+        $('div#metainfo-tabs ul.tabNavigation li a').bind('click', function(event){
+            /* id selector from a href*/            
             $('div#metainfo-content > div.page').hide().filter(this.hash).show();
-            $('div#metainfo-tabs ul.tabNavigation a').removeClass('here');
-            $(this).addClass('here');
-            return false;
-        }).filter(':first').click();
+            /* Get index */
+            var i = $(this).parent('li').index();
+            /* Or we could use index based selector which is used for cookie and does the same
+             * $('div#metainfo-content > div.page').hide().eq(i).show();*/
 
-        // Do the parts tab thing
-        $('div#part-tabs ul.tabNavigation a').live('click', function() {
-            $('div#part-content > div.page').hide().filter(this.hash).show();
-            $('div#part-tabs ul.tabNavigation a').removeClass('here');
+            $('div#metainfo-tabs ul.tabNavigation a.here').removeClass('here');
             $(this).addClass('here');
+            var pageID = page_id();
+
+            $(this).trigger('metaInfoTabFocus', [ i, this.hash ]);
+            document.cookie = "meta_tab=" + pageID + ':' + i;
             return false;
-        }).filter(':first').click();
+        });
+        // metainfo focused
+        $('div#metainfo-tabs ul.tabNavigation li a').bind('metaInfoTabFocus', function(event,i,target){
+            /* Maybe we want to do something else like send this values to a plugin */
+            /* console.log('metaInfoTabFocus: '+i+'; target: '+target); */
+        });
+/*--------------------------------------------------------------------------------------------------------------
+ *                                          - Page Parts -
+ *--------------------------------------------------------------------------------------------------------------*/
+        /* Do the parts tab thing */
+        $('div#part-tabs ul.tabNavigation a').live('click', function(event) {
+            /* id selector from a href*/            
+            $('div#part-content > div.page').hide().filter(this.hash).show();
+            /* Get index */
+            var i = $(this).parent('li').index();
+            /* Or we could use index based selector which is used for cookie and does the same
+             * $('div#part-content > div.page').hide().eq(i).show();*/
+
+            $('div#part-tabs ul.tabNavigation a.here').removeClass('here');
+            $(this).addClass('here');
+
+            var pageID = page_id();
+            document.cookie = "page_tab=" + pageID + ':' + i;
+            $(this).trigger('pageTabFocus', [ i , this.hash ] );
+            return false;
+        });
+        // page-part focused
+        $('div#part-tabs ul.tabNavigation li a').live('pageTabFocus', function(event,i,target){
+            /* Maybe we want to do something else like send this values to a plugin */
+            /* console.log('pageTabFocus: '+i+'; target: '+target); */
+        });
+/*--------------------------------------------------------------------------------------------------------------
+ *                          - Show MetaInfo & Page-part from cookie or default -
+ *--------------------------------------------------------------------------------------------------------------*/
+        (function(){
+            /* get focused value from cookie or show the first tabs */
+            var id, metaTab, pageTab,
+                pageId = page_id(),
+                meta = document.cookie.match(/meta_tab=(\d+):(\d+);/),
+                part = document.cookie.match(/page_tab=(\d+):(\d+);/);
+
+            if(meta && pageId == meta[1]) {
+                metaTab = (meta) ? meta[2] : 0 ;
+            } else { metaTab = 0 }
+
+            if(part && pageId == part[1]) {
+                pageTab = (part) ? part[2] : 0 ;
+            } else { pageTab = 0 }
+
+            $('div#metainfo-content > div.page').hide().eq(metaTab).show();
+            $('div#metainfo-tabs ul.tabNavigation li a').eq(metaTab).addClass('here');
+
+            $('div#part-content > div.page').hide().eq(pageTab).show();
+            $('div#part-tabs ul.tabNavigation li a').eq(pageTab).addClass('here');      
+        })();
+
+/*-----------------------------------------Changes end here----------------------------------------------*/
 
         // Do the add part button thing
         $('#add-part').click(function() {
