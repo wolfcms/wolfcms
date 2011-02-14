@@ -237,6 +237,12 @@ $(document).ready(function() {
                     $('#mainTabs ul').eq(0).replaceWith(headTabs);
                     $('div#plugins table.index').eq(0).replaceWith(table);
                     $('div#settings input#csrf_token').eq(0).val(token);
+                    // Show success message
+                    $('#header').after('<div id="success" class="message" style="display: none">Settings updated!</div>');
+                    $('#success').fadeIn('slow')
+                        .animate({opacity: 1.0}, 1500)
+                        .fadeOut('slow');
+                    setTimeout("$('#success').remove()",2800);
                 });
             }
         });

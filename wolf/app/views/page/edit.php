@@ -340,7 +340,7 @@ if ($action == 'edit') { ?>
             /* console.log('pageTabFocus: '+i+'; target: '+target); */
         });
 /*--------------------------------------------------------------------------------------------------------------
- *                          - Show MetaInfo & Page-part from cookie or default -
+ *                          - Get focused MetaInfo & Page-part from cookie -
  *--------------------------------------------------------------------------------------------------------------*/
         (function(){
             /* get focused value from cookie or show the first tabs */
@@ -349,11 +349,11 @@ if ($action == 'edit') { ?>
                 meta = document.cookie.match(/meta_tab=(\d+):(\d+);/),
                 part = document.cookie.match(/page_tab=(\d+):(\d+);/);
 
-            if(meta && pageId == meta[1]) {
+            if(pageId == meta[1]) {
                 metaTab = (meta) ? meta[2] : 0 ;
             } else { metaTab = 0 }
 
-            if(part && pageId == part[1]) {
+            if(pageId == part[1]) {
                 pageTab = (part) ? part[2] : 0 ;
             } else { pageTab = 0 }
 
