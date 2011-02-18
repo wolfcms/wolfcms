@@ -150,6 +150,18 @@
                         $('#page_'+parentId).children('ul').show();
                     }
                 }
+				// update parents with children list expanded
+				(function persistExpanded() {
+					var expanded_rows = [];
+					$('ul#site-map img.expanded').parents('li').not('#page-0').each(function() {
+						expanded_rows.push( $(this).attr('id').split('_')[1] );
+					});
+					var rows = expanded_rows.reverse().toString();
+					if(rows===''){
+						rows += ';expires=Sat, 25 Dec 2010 06:07:00 UTC';
+					}
+					document.cookie = 'expanded_rows=' + rows + ';'
+				})();
             });
         };
         

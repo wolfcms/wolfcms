@@ -349,11 +349,11 @@ if ($action == 'edit') { ?>
                 meta = document.cookie.match(/meta_tab=(\d+):(\d+);/),
                 part = document.cookie.match(/page_tab=(\d+):(\d+);/);
 
-            if(pageId == meta[1]) {
+            if(meta && pageId == meta[1]) {
                 metaTab = (meta) ? meta[2] : 0 ;
             } else { metaTab = 0 }
 
-            if(pageId == part[1]) {
+            if(part && pageId == part[1]) {
                 pageTab = (part) ? part[2] : 0 ;
             } else { pageTab = 0 }
 
