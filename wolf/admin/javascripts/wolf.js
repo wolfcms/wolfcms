@@ -61,7 +61,11 @@ function toSlug(value) {
 }
 
 function page_id() {
-  return /(\d+)/.test(window.location.pathname) ? RegExp.$1 : '';
+    if(/(\d+)/.test(window.location.pathname)){
+        return RegExp.$1;
+    } else if (/(\d+)/.test(window.location.href)) {
+        return RegExp.$1;
+    }
 }
 
 // When object is available, do function fn.
