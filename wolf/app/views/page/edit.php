@@ -294,7 +294,7 @@ if ($action == 'edit') { ?>
             $('div#metainfo-content > div.page').hide().filter(this.hash).show();
             /* Get index */
             var i = $(this).parent('li').index();
-             * $('div#metainfo-content > div.page').hide().eq(i).show();*/
+            /* $('div#metainfo-content > div.page').hide().eq(i).show();*/
 
             $('div#metainfo-tabs ul.tabNavigation a.here').removeClass('here');
             $(this).addClass('here');
