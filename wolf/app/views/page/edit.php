@@ -292,29 +292,28 @@ if ($action == 'edit') { ?>
         // Do the metainfo tab thing
         $('div#metainfo-tabs ul.tabNavigation li a').bind('click', function(event){
             $('div#metainfo-content > div.page').hide().filter(this.hash).show();
-            /* Get index */
+            /* Get index and current page id*/
             var i = $(this).parent('li').index();
-            /* $('div#metainfo-content > div.page').hide().eq(i).show();*/
+            var pageID = page_id();
 
             $('div#metainfo-tabs ul.tabNavigation a.here').removeClass('here');
             $(this).addClass('here');
-            var pageID = page_id();
 
             $(this).trigger('metaInfoTabFocus', [ i, this.hash ]);
             document.cookie = "meta_tab=" + pageID + ':' + i;
             return false;
         });
 
-        /* Do the parts tab thing */
+        // Do the parts tab thing
         $('div#part-tabs ul.tabNavigation a').live('click', function(event) {
             $('div#part-content > div.page').hide().filter(this.hash).show();
-            /* Get index */
+            /* Get index and current page id */
             var i = $(this).parent('li').index();
+            var pageID = page_id();
 
             $('div#part-tabs ul.tabNavigation a.here').removeClass('here');
             $(this).addClass('here');
 
-            var pageID = page_id();
             document.cookie = "page_tab=" + pageID + ':' + i;
             $(this).trigger('pageTabFocus', [ i , this.hash ] );
             return false;

@@ -228,12 +228,12 @@ $(document).ready(function() {
             url: '<?php echo get_url('setting'); ?>'+(this.checked ? '/activate_plugin/':'/deactivate_plugin/')+this.value,
             async: false,
             success: function() {
-                $('#dummy').load('<?php echo get_url('setting'); ?> #mainTabs ul, #plugins table.index, input#csrf_token', function() {
-                    var headTabs = $('div#dummy ul'),
-                           table = $('div#dummy table.index'),
-                           token = $('div#dummy input#csrf_token').val();
+                $('#mask').load('<?php echo get_url('setting'); ?> #mainTabs ul, #plugins table.index, input#csrf_token', function() {
+                    var headTabs = $('div#mask ul'),
+                           table = $('div#mask table.index'),
+                           token = $('div#mask input#csrf_token').val();
 
-                    $('div#dummy input#csrf_token').detach();
+                    $('div#mask input#csrf_token').detach();
                     $('#mainTabs ul').eq(0).replaceWith(headTabs);
                     $('div#plugins table.index').eq(0).replaceWith(table);
                     $('div#settings input#csrf_token').eq(0).val(token);
