@@ -327,11 +327,11 @@ if ($action == 'edit') { ?>
 
             if(meta && pageId == meta[1]) {
                 metaTab = (meta[2]) ? meta[2] : 0 ;
-            } else { metaTab = 0 }
+            } else { metaTab = 0; }
 
             if(part && pageId == part[1]) {
                 pageTab = (part[2]) ? part[2] : 0 ;
-            } else { pageTab = 0 }
+            } else { pageTab = 0; }
             
             $('div#metainfo-content > div.page').hide();
             $('div#metainfo-tabs ul.tabNavigation li a').eq(metaTab).click();
