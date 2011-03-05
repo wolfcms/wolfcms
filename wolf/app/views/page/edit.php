@@ -290,20 +290,55 @@ if ($action == 'edit') { ?>
         $('form#page_edit_form').submit(function() { setConfirmUnload(false); return true; });
 
         // Do the metainfo tab thing
-        $('div#metainfo-tabs ul.tabNavigation a').live('click', function() {
+        $('div#metainfo-tabs ul.tabNavigation li a').bind('click', function(event){
             $('div#metainfo-content > div.page').hide().filter(this.hash).show();
-            $('div#metainfo-tabs ul.tabNavigation a').removeClass('here');
+            /* Get index and current page id*/
+            var i = $(this).parent('li').index();
+            var pageID = page_id();
+
+            $('div#metainfo-tabs ul.tabNavigation a.here').removeClass('here');
             $(this).addClass('here');
+
+            $(this).trigger('metaInfoTabFocus', [ i, this.hash ]);
+            document.cookie = "meta_tab=" + pageID + ':' + i;
             return false;
-        }).filter(':first').click();
+        });
 
         // Do the parts tab thing
-        $('div#part-tabs ul.tabNavigation a').live('click', function() {
+        $('div#part-tabs ul.tabNavigation a').live('click', function(event) {
             $('div#part-content > div.page').hide().filter(this.hash).show();
-            $('div#part-tabs ul.tabNavigation a').removeClass('here');
+            /* Get index and current page id */
+            var i = $(this).parent('li').index();
+            var pageID = page_id();
+
+            $('div#part-tabs ul.tabNavigation a.here').removeClass('here');
             $(this).addClass('here');
+
+            document.cookie = "page_tab=" + pageID + ':' + i;
+            $(this).trigger('pageTabFocus', [ i , this.hash ] );
             return false;
-        }).filter(':first').click();
+        });
+
+        (function(){
+            var id, metaTab, pageTab,
+                pageId = page_id(),
+                meta = document.cookie.match(/meta_tab=(\d+):(\d+);/),
+                part = document.cookie.match(/page_tab=(\d+):(\d+);/);
+
+            if(meta && pageId == meta[1]) {
+                metaTab = (meta[2]) ? meta[2] : 0 ;
+            } else { metaTab = 0; }
+
+            if(part && pageId == part[1]) {
+                pageTab = (part[2]) ? part[2] : 0 ;
+            } else { pageTab = 0; }
+            
+            $('div#metainfo-content > div.page').hide();
+            $('div#metainfo-tabs ul.tabNavigation li a').eq(metaTab).click();
+
+            $('div#part-content > div.page').hide();
+            $('div#part-tabs ul.tabNavigation li a').eq(pageTab).click();     
+        })();
 
         // Do the add part button thing
         $('#add-part').click(function() {
