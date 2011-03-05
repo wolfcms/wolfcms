@@ -326,18 +326,18 @@ if ($action == 'edit') { ?>
                 part = document.cookie.match(/page_tab=(\d+):(\d+);/);
 
             if(meta && pageId == meta[1]) {
-                metaTab = (meta) ? meta[2] : 0 ;
-            } else { metaTab = 0 }
+                metaTab = (meta[2]) ? meta[2] : 0 ;
+            } else { metaTab = 0; }
 
             if(part && pageId == part[1]) {
-                pageTab = (part) ? part[2] : 0 ;
-            } else { pageTab = 0 }
+                pageTab = (part[2]) ? part[2] : 0 ;
+            } else { pageTab = 0; }
+            
+            $('div#metainfo-content > div.page').hide();
+            $('div#metainfo-tabs ul.tabNavigation li a').eq(metaTab).click();
 
-            $('div#metainfo-content > div.page').hide().eq(metaTab).show();
-            $('div#metainfo-tabs ul.tabNavigation li a').eq(metaTab).addClass('here');
-
-            $('div#part-content > div.page').hide().eq(pageTab).show();
-            $('div#part-tabs ul.tabNavigation li a').eq(pageTab).addClass('here');      
+            $('div#part-content > div.page').hide();
+            $('div#part-tabs ul.tabNavigation li a').eq(pageTab).click();     
         })();
 
         // Do the add part button thing

@@ -23,7 +23,7 @@
       <div class="page">
         <span class="w1">
           <?php if ($child->has_children): ?><img align="middle" alt="toggle children" class="expander" src="<?php echo URI_PUBLIC;?>wolf/admin/images/<?php echo $child->is_expanded ? 'collapse': 'expand'; ?>.png" title="" /><?php endif; ?>
-<?php if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $page->is_protected)): ?>
+<?php if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $child->is_protected)): ?>
 <img align="middle" class="icon" src="<?php echo URI_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" /> <span class="title protected"><?php echo $child->title; ?></span> <img class="handle_reorder" src="<?php echo URI_PUBLIC;?>wolf/admin/images/drag_to_sort.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
 <?php else: ?>
 <a class="edit-link" href="<?php echo get_url('page/edit/'.$child->id); ?>" title="<?php echo $child->id.' | '.$child->slug; ?>"><img align="middle" class="icon" src="<?php echo URI_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" /> <span class="title"><?php echo $child->title; ?></span></a> <img class="handle_reorder" src="<?php echo URI_PUBLIC;?>wolf/admin/images/drag_to_sort.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" /> <img class="handle_copy" src="<?php echo URI_PUBLIC;?>wolf/admin/images/drag_to_copy.gif" alt="<?php echo __('Drag to Copy'); ?>" align="middle" />
