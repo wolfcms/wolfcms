@@ -7,7 +7,7 @@
 
 // Database settings:
 <?php if ($db_driver == 'mysql'): ?>
-<?php if (PHP_VERSION >= '5.3.0' && $db_host == 'localhost' && strlen($db_socket) == 0) { ?>
+<?php if (version_compare(PHP_VERSION, '5.3.0', '>=') && version_compare(PHP_VERSION, '5.3.5', '<') && $db_host == 'localhost' && strlen($db_socket) == 0) { ?>
 define('DB_DSN', 'mysql:dbname=<?php echo $db_name; ?>;host=127.0.0.1;port=<?php echo $db_port; ?>');
 <?php } else if (strlen($db_socket) > 0) { ?>
 define('DB_DSN', 'mysql:dbname=<?php echo $db_name; ?>;unix_socket=<?php echo $db_socket; ?>');
@@ -15,7 +15,7 @@ define('DB_DSN', 'mysql:dbname=<?php echo $db_name; ?>;unix_socket=<?php echo $d
 define('DB_DSN', 'mysql:dbname=<?php echo $db_name; ?>;host=<?php echo $db_host; ?>;port=<?php echo $db_port; ?>');
 <?php } ?>
 <?php elseif ($db_driver == 'pgsql'): ?>
-<?php if (PHP_VERSION >= '5.3.0' && $db_host == 'localhost') { ?>
+<?php if (version_compare(PHP_VERSION, '5.3.0', '>=') && version_compare(PHP_VERSION, '5.3.5', '<') && $db_host == 'localhost') { ?>
 define('DB_DSN', 'pgsql:dbname=<?php echo $db_name; ?>;host=127.0.0.1;port=<?php echo $db_port; ?>');
 <?php } else if (PHP_VERSION >= '5.3.0' && strlen($db_socket) > 0) { ?>
 define('DB_DSN', 'pgsql:dbname=<?php echo $db_name; ?>;unix_socket=<?php echo $db_socket; ?>');
