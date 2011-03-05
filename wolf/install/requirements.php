@@ -29,7 +29,7 @@ if (!$check) $errors = true;
 
 // check if the PDO driver we need is installed
 $check = false;
-$check = method_exists('PDO','getAvailableDrivers');
+$check = class_exists('PDO',false);
 $pdo = '<span class="'.(($check) ? 'check' : 'notcheck');
 $pdo .= '">'.(($check) ? 'true' : 'false').'</span>';
 if (!$check) $errors = true;

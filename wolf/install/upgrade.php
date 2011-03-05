@@ -17,6 +17,11 @@ if (!defined('INSTALL_SEQUENCE')) {
     exit();
 }
 
+if (!class_exists('PDO',false)) {
+    echo '<p>Wolf CMS requires PDO support which was not detected. Terminating.</p>';
+    exit();
+}
+
 $drivers = PDO::getAvailableDrivers();
 ?>
 
