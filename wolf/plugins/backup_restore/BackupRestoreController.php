@@ -1,7 +1,7 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009-2011 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
  * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
  * Please see license.txt for the full license text.
@@ -18,7 +18,7 @@ if (!defined('IN_CMS')) { exit(); }
  * @subpackage backup_restore
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @copyright Martijn van der Kleijn, 2009,2010
+ * @copyright Martijn van der Kleijn, 2009-2011
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 
@@ -147,15 +147,15 @@ class BackupRestoreController extends PluginController {
 
         // Create the XML file
         $file = $xmlobj->asXML();
-        $filename = 'wolfcms-backup-'.date($settings['stamp']);
+        $filename = 'wolfcms-backup-'.date($settings['stamp']).'.'.$settings['extension'];
 
         // Offer a plain XML file or a zip file for download
         if ($settings['zip'] == '1') {
             // Create a note file
-            $note = "---[ NOTES for $filename.xml ]---\n\n";
+            $note = "---[ NOTES for $filename ]---\n\n";
             $note .= "This backup was created for a specific Wolf CMS version, please only restore it\n";
             $note .= "on the same version.\n\n";
-            $note .= "When restoring a backup, upload the UNzipped XML file, not this zip file.\n\n";
+            $note .= "When restoring a backup, upload the UNzipped XML backup file, not this zip file.\n\n";
             $note .= 'Created on '.date('Y-m-d').' at '.date('H:i:s').' GTM '.date('O').".\n";
             $note .= 'Created with BackupRestore plugin version '.BR_VERSION."\n";
             $note .= 'Created for Wolf CMS version '.CMS_VERSION."\n\n";
@@ -166,7 +166,7 @@ class BackupRestoreController extends PluginController {
             $zip = new Zip();
             $zip->clear();
             $zip->addFile($note, 'readme.txt');
-            $zip->addFile($file, $filename.'.xml');
+            $zip->addFile($file, $filename);
             $zip->download($filename.'.zip');
         }
         else {
@@ -175,7 +175,7 @@ class BackupRestoreController extends PluginController {
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
             header('Cache-Control: private', false);
             header('Content-Type: text/xml; charset=UTF-8');
-            header('Content-Disposition: attachment; filename='.$filename.'.xml;');
+            header('Content-Disposition: attachment; filename='.$filename.';');
             header('Content-Transfer-Encoding: 8bit');
             header('Content-Length: '.strlen($file));
             echo $file;

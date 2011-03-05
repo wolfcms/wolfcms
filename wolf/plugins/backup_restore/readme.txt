@@ -15,8 +15,11 @@ their pages and settings to an XML file.
 
 * This plugin is only useable by the user with user id '1'.
 
+* Upgrade this plugin by uninstalling it and re-enabling it.
+  You'll have to check your settings afterwards.
+
 == LICENSE ==
 
-Copyright 2009-2010, Martijn van der Kleijn. <martijn.niji@gmail.com>
+Copyright 2009-2011, Martijn van der Kleijn. <martijn.niji@gmail.com>
 This plugin is licensed under the GPLv3 License.
 <http://www.gnu.org/licenses/gpl.html>

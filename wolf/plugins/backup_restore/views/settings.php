@@ -1,7 +1,7 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009-2011 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
  * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
  * Please see license.txt for the full license text.
@@ -18,7 +18,7 @@ if (!defined('IN_CMS')) { exit(); }
  * @subpackage backup_restore
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @copyright Martijn van der Kleijn, 2009
+ * @copyright Martijn van der Kleijn, 2009-2011
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 ?>
@@ -58,6 +58,20 @@ if (!defined('IN_CMS')) { exit(); }
                     </select>
                 </td>
                 <td class="help"><?php echo __('What style of timestamp should be encorporated into the filename.'); ?></td>
+            </tr>
+            <tr>
+                <td class="label"><label for="settings_extension"><?php echo __('Filename extension'); ?>: </label></td>
+                <td class="field">
+                    <select class="select" name="settings[extension]" id="setting_extension">
+                        <option value="xml" <?php if ($settings['extension'] == "xml") echo 'selected ="";' ?>>.xml</option>
+                        <option value="bak" <?php if ($settings['extension'] == "bak") echo 'selected ="";' ?>>.bak</option>
+                        <option value="tmp" <?php if ($settings['extension'] == "tmp") echo 'selected ="";' ?>>.tmp</option>
+                        <option value="ori" <?php if ($settings['extension'] == "ori") echo 'selected ="";' ?>>.ori</option>
+                        <option value="dat" <?php if ($settings['extension'] == "dat") echo 'selected ="";' ?>>.dat</option>
+                        <option value="db" <?php if ($settings['extension'] == "db") echo 'selected ="";' ?>>.db</option>
+                    </select>
+                </td>
+                <td class="help"><?php echo __('What extension should be used for the filename.'); ?></td>
             </tr>
             <tr>
                 <td class="label"><label for="example_filename"><?php echo __('Current style'); ?>: </label></td>
