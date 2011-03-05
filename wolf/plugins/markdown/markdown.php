@@ -62,9 +62,12 @@ $(document).ready(function() {
 // Feel free to add more tags
 // -------------------------------------------------------------------
 markdownSettings = {
-	nameSpace:			'markdown',
+	nameSpace:		'markdown',
 	previewParserPath:	'<?php echo URI_PUBLIC; ?><?php echo (USE_MOD_REWRITE === true) ? '' : '?/'; ?><?php echo ADMIN_DIR; ?>/plugin/markdown/preview', // path to your markdown parser
+        //previewInWindow:        'width=800, height=600, resizable=yes, scrollbars=yes',
+        previewAutoRefresh:     true,
 	onShiftEnter:		{keepDefault:false, openWith:'\n\n'},
+        onTab:                  {keepDefault:false, replaceWith:'    '},
 	markupSet: [
 		{name:'First Level Heading', key:'1', placeHolder:'Your title here...', closeWith:function(markItUp) { return miu.markdownTitle(markItUp, '=') } },
 		{name:'Second Level Heading', key:'2', placeHolder:'Your title here...', closeWith:function(markItUp) { return miu.markdownTitle(markItUp, '-') } },

@@ -59,9 +59,12 @@ $(document).ready(function() {
 // Feel free to add more tags
 // -------------------------------------------------------------------
 textileSettings = {
-	nameSpace:			'textile',
+	nameSpace:		'textile',
 	previewParserPath:	'<?php echo URI_PUBLIC;?><?php echo (USE_MOD_REWRITE === true) ? '' : '?/'; ?><?php echo ADMIN_DIR; ?>/plugin/textile/preview', // path to your Textile parser
-	onShiftEnter:		{keepDefault:false, replaceWith:'\n\n'},
+        //previewInWindow:        'width=800, height=600, resizable=yes, scrollbars=yes',
+        previewAutoRefresh:     true,
+	onShiftEnter:		{keepDefault:false, openWith:'\n\n'},
+        onTab:                  {keepDefault:false, replaceWith:'    '},
 	markupSet: [
 		{name:'Heading 1', key:'1', openWith:'h1(!(([![Class]!]))!). ', placeHolder:'Your title here...' },
 		{name:'Heading 2', key:'2', openWith:'h2(!(([![Class]!]))!). ', placeHolder:'Your title here...' },
