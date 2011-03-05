@@ -1527,6 +1527,7 @@ function get_request_method() {
  * @param string $url
  */
 function redirect($url) {
+    Flash::set('HTTP_REFERER', html_encode($_SERVER['REQUEST_URI']));
     header('Location: '.$url); exit;
 }
 
@@ -1537,7 +1538,7 @@ function redirect($url) {
  * @param <type> $url
  */
 function redirect_to($url) {
-    header('Location: '.$url); exit;
+    redirect($url);
 }
 
 /**
