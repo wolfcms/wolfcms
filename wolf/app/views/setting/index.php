@@ -47,7 +47,7 @@
                             $loaded_plugins = Plugin::$plugins;
                             $loaded_filters = Filter::$filters;
                             foreach(Plugin::findAll() as $plugin):
-                                $disabled = (isset($plugin->require_wolf_version) and $plugin->require_wolf_version > CMS_VERSION);
+                                $disabled = (isset($plugin->require_wolf_version) && version_compare($plugin->require_wolf_version, CMS_VERSION, '>'));
                         ?>
                         <tr<?php if ($disabled) echo ' class="disabled"'; ?>>
                             <td class="plugin">
