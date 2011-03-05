@@ -1,7 +1,7 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2008-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2008-2011 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
  * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
@@ -62,6 +62,25 @@ else if ($driver == 'sqlite') {
     $PDO->exec("CREATE INDEX comment_created_on ON comment (created_on)");
     
     $PDO->exec("ALTER TABLE page ADD comment_status tinyint(1) NOT NULL default '0'");
+}
+else if ($driver == 'pgsql') {
+    $PDO->exec("CREATE TABLE " . TABLE_PREFIX . "comment (
+        id serial,
+        page_id integer NOT NULL DEFAULT 0,
+        body text,
+        author_name character varying(50) DEFAULT NULL,
+        author_email character varying(100) DEFAULT NULL,
+        author_link character varying(100) DEFAULT NULL,
+        ip char(100) NOT NULL default '0',
+        is_approved integer NOT NULL default 1,
+        created_on timestamp DEFAULT NULL,
+        PRIMARY KEY (id)
+    )");
+
+    $PDO->exec("CREATE INDEX comment_page_id ON comment (page_id)");
+    $PDO->exec("CREATE INDEX comment_created_on ON comment (created_on)");
+
+    $PDO->exec("ALTER TABLE ".TABLE_PREFIX."page ADD comment_status integer NOT NULL DEFAULT 0");
 }
 
 

@@ -1,7 +1,7 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2008-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2008-2011 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
  * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
@@ -127,9 +127,9 @@ function comments_count_total()
     $sql = 'SELECT COUNT(*) AS count FROM '.TABLE_PREFIX.'comment';
     $stmt = $__CMS_CONN__->prepare($sql);
     $stmt->execute();
-    $total = $stmt->fetchObject();
+    $total = $stmt->fetchColumn();
 
-    return (int) $total->count;
+    return (int) $total;
 }
 
 /**

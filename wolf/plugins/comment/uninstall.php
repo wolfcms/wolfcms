@@ -1,7 +1,7 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009-2011 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
  * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
  * Please see license.txt for the full license text.
@@ -36,7 +36,7 @@ if ($PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'comment') === false) {
 $driver = strtolower($PDO->getAttribute(Record::ATTR_DRIVER_NAME));
 $ret = true;
 
-if ($driver == 'mysql') {
+if ($driver == 'mysql' || $driver == 'pgsql') {
     $ret = $PDO->exec('ALTER TABLE '.TABLE_PREFIX.'page DROP comment_status');
 }
 else if ($driver == 'sqlite') {

@@ -1,7 +1,7 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2008-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2008-2011 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
  * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
@@ -49,7 +49,7 @@ $start = $CurPage * $rowspage;
 $totalrecords = $comments_count;
 $sql = "SELECT comment.is_approved, comment.id, comment.page_id, comment.author_name, comment.author_email, comment.author_link, comment.body, comment.created_on, page.title FROM " .
     TABLE_PREFIX . "comment AS comment, " . TABLE_PREFIX .
-    "page AS page WHERE comment.is_approved = 1 AND comment.page_id = page.id LIMIT " . $rowspage . " OFFSET " . $start;
+    "page AS page WHERE comment.is_approved = 1 AND comment.page_id = page.id ORDER BY comment.created_on DESC LIMIT " . $rowspage . " OFFSET " . $start;
 
 $stmt = $__CMS_CONN__->prepare($sql);
 $stmt->execute();
