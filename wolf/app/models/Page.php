@@ -105,6 +105,9 @@ class Page extends Node {
     public function keywords() {
         return $this->keywords;
     }
+    public function parentId() {
+    	return $this->parent_id;
+    }    
 
     /**
      * Returns the current page object's url.
@@ -218,6 +221,12 @@ class Page extends Node {
     }
 
     public function parent($level=null) {
+    
+    	// check to see if it's already been retrieved, if not get the parent!
+    	if($this->parent === false) {
+    		$this->parent = self::findById($this->parentId());
+    	}    
+    
         if ($level === null)
             return $this->parent;
 
@@ -543,6 +552,7 @@ class Page extends Node {
 
             // execute the layout code
             eval('?>'.$layout->content);
+        // echo $layout->content;
         }
     }
 
@@ -758,10 +768,10 @@ class Page extends Node {
 
         $parent = false;
 
-        foreach ($urls as $page_slug) {
+        foreach ($urls as $page_slug) {      
             $url = ltrim($url . '/' . $page_slug, '/');
 
-            if ($page = find_page_by_slug($page_slug, $parent, $all)) {
+            if ($page = self::findBySlug($page_slug, $parent, $all)) {
                 // check for behavior
                 if ($page->behavior_id != '') {
                     // add a instance of the behavior with the name of the behavior
@@ -781,49 +791,35 @@ class Page extends Node {
         return ( ! $page && $has_behavior) ? $parent: $page;
     }
     
-    public static function findBySlug($slug, &$parent, $all = false) {
-        global $__CMS_CONN__;
-
-        $page_class = 'Page';
-
+	/**
+	 * find a page by the slug and parent id
+	 *
+	 * @param string $slug		page slug to search for
+	 * @param object $parent 	parent object
+	 * @param bool $all			flag for returning all status types
+	 * @return mixed			page object or false
+	 */
+	public static function findBySlug($slug, &$parent, $all = false) {
         $parent_id = $parent ? $parent->id: 0;
 
         if (empty($slug)) {
             $slug = NULL;
-        }
-
-        $sql = 'SELECT page.*, author.name AS author, updater.name AS updater '
-            . 'FROM '.TABLE_PREFIX.'page AS page '
-            . 'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
-            . 'LEFT JOIN '.TABLE_PREFIX.'user AS updater ON updater.id = page.updated_by_id ';
-
-        if ($all) {
-            $sql .= 'WHERE COALESCE(slug, \'\') = COALESCE(?, \'\') AND parent_id = ? AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
+            $slug_sql = "slug IS NULL";
         }
         else {
-            $sql .= 'WHERE COALESCE(slug, \'\') = COALESCE(?, \'\') AND parent_id = ? AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
+        	$slug_sql = "slug = '".$slug."'";
         }
-
-        $stmt = $__CMS_CONN__->prepare($sql);
-
-        $stmt->execute(array($slug, $parent_id));
-
-        if ($page = $stmt->fetchObject()) {
-        // hook to be able to redefine the page class with behavior
-            if ( ! empty($parent->behavior_id)) {
-            // will return Page by default (if not found!)
-                $page_class = Behavior::loadPageHack($parent->behavior_id);
-            }
-
-            // create the object page
-            $page = new $page_class($page, $parent);
-
-            // assign all is parts
-            $page->part = self::get_parts($page->id);
-
-            return $page;
+       
+        if ($all) {
+            $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
         }
-        else return false;
+        else {
+            $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
+        }        
+        $page = self::find(array('where' => $where,
+        						 'limit' => 1));
+        
+        return $page;
     }
 
 
@@ -851,8 +847,10 @@ class Page extends Node {
     public static function find($args = null) {
         if (!is_array($args)) {
             // Assumes find was called with a uri
-            return Page::find_page_by_uri($args);
+            return Page::findByUri($args);
         }
+
+		$page_class = 'Page';
 
         // Collect attributes...
         $where    = isset($args['where']) ? trim($args['where']) : '';
@@ -873,29 +871,36 @@ class Page extends Node {
         $sql = "SELECT page.*, creator.name AS created_by_name, updater.name AS updated_by_name FROM $tablename AS page".
                 " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id".
                 " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id".
-                " $where_string $order_by_string $limit_string $offset_string";
+                " $where_string $order_by_string $limit_string $offset_string";       
 
         $stmt = self::$__CONN__->prepare($sql);
         if (!$stmt->execute()) {
             return false;
         }
 
-        // Run!
-        if ($limit == 1) {
-            $object = $stmt->fetchObject('Page');
-            if ($object !== false) {
-                $object->part = self::get_parts($object->id);
+		// Run!
+        $objects = array();
+        while ($page = $stmt->fetchObject('Page'))
+        {         	
+        	$parent = $page->parent();
+            if ( ! empty($parent->behavior_id)) {
+            // will return Page by default (if not found!)
+                $page_class = Behavior::loadPageHack($parent->behavior_id);
             }
-            return $object;
-        } else {
-            $objects = array();
-            while ($object = $stmt->fetchObject('Page'))
-            {
-            	$object->part = self::get_parts($object->id);
-                $objects[] = $object;
-			}
-            return $objects;
-        }
+
+            // create the object page
+            $page = new $page_class($page, $parent);
+            $page->part = self::get_parts($page->id);
+            $objects[] = $page;
+		}
+	
+		// if we're loading just one result return it
+		if ($limit == 1 AND isset($objects['0']) AND is_object($objects['0'])) {
+			return $objects['0'];
+		}
+		
+		// or return them all
+        return $objects;   
     }
 
     public static function findAll($args = null) {
