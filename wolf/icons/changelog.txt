@@ -1,0 +1,49 @@
+Wolf CMS Icon Set - Change Log
+
+======
+Sigla:
++ new icon
+- improved icon
+. other development
+======
+
+0.0.8 - released 2011-02-25
+
++ rename
++ rename-disabled
+- upload
+- layout
+. Renamed folder to file-folder
+. Renamed file to file-unknown
+
+0.0.7 - released 2010-12-11
+
+- file-php
+- file-image
+- settings
++ layout
++ snippet
+
+0.0.6 - released 2010-12-02
+
++ file
++ file-php
++ file-image
+
+0.0.5 - released 2010-11-18
+
++ comment-blank
++ folder
++ file-archive
+- Reduced rss saturation
+. Created readme, license, changelog
+
+0.0.4 - released 2010-11-06
+
++ comment
++ rss
+
+0.0.3 - released 2010-10-28
+
++ plugin
++ settings

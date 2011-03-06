@@ -68,6 +68,7 @@ else {
 define('PLUGINS_URI', URI_PUBLIC.'wolf/plugins/');
 if (!defined('THEMES_ROOT')) { define('THEMES_ROOT', CMS_ROOT.DS.'public'.DS.'themes'.DS); }
 if (!defined('THEMES_URI')) { define('THEMES_URI', URI_PUBLIC.'public/themes/'); }
+if (!defined('ICONS_URI')) { define('ICONS_URI', URI_PUBLIC.'wolf/icons/'); }
 
 
 // Security checks -----------------------------------------------------------

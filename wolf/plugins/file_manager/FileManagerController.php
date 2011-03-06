@@ -355,6 +355,9 @@ class FileManagerController extends PluginController {
                 $object->size = convert_size($cur->getSize());
                 $object->mtime = date('D, j M, Y', $cur->getMTime());
                 list($object->perms, $object->chmod) = $this->_getPermissions($cur->getPerms());
+                
+                // Find the file type
+                $object->type = $this->_getFileType($cur);
 
                 // make the link depending on if it's a file or a dir
                 if ($cur->isDir()) {
@@ -371,6 +374,47 @@ class FileManagerController extends PluginController {
         }
 
         return array();
+    }
+    
+    private function _getFileType($file) {
+        $default = 'unknown';
+
+        $types = array(
+            'png'   => 'image',
+            'jpg'   => 'image',
+            'jpeg'  => 'image',
+            'gif'   => 'image',
+            'ico'   => 'image',
+
+            'zip'   => 'archive',
+            'gzip'  => 'archive',
+            'gz'    => 'archive',
+            'tar'   => 'archive',
+            'bz2'   => 'archive',
+
+            'php'   => 'php',
+        );
+
+        if ($file->isDir()) {
+          return 'folder';
+        }
+
+        $filename = $file->getFilename();
+        $pos = strrpos($filename, '.');
+
+        // The file has no extention, so use default
+        if ($pos === false) {
+          return $default;
+        }
+
+        // Check if the file is a known type based on the extention
+        $extn = substr($filename, $pos + 1);
+
+        if (isset($types[$extn])) {
+          return $types[$extn];
+        } else {
+          return $default;
+        }
     }
 
     private function _getPermissions($perms) {

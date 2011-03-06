@@ -114,6 +114,16 @@ $PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('allow_htm
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('plugins', 'a:5:{s:7:\"textile\";i:1;s:8:\"markdown\";i:1;s:7:\"archive\";i:1;s:14:\"page_not_found\";i:1;s:12:\"file_manager\";i:1;}')");
 
 
+//  Dumping data for table: plugin_settings
+// @todo - should probably be replaced in future by something like Plugin::activate('file_manager') post install.
+
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."plugin_settings (plugin_id, name, value) VALUES ('file_manager', 'umask', '0022')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."plugin_settings (plugin_id, name, value) VALUES ('file_manager', 'dirmode', '0755')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."plugin_settings (plugin_id, name, value) VALUES ('file_manager', 'filemode', '0644')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."plugin_settings (plugin_id, name, value) VALUES ('file_manager', 'show_hidden', '0')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."plugin_settings (plugin_id, name, value) VALUES ('file_manager', 'show_backups', '1')");
+
+
 //  Dumping data for table: snippet ------------------------------------------
 
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."snippet (id, name, filter_id, content, content_html, created_on, updated_on, created_by_id, updated_by_id) VALUES (1, 'header', '', '<div id=\"header\">\r\n  <h1><a href=\"<?php echo URL_PUBLIC; ?>\">Wolf</a> <span>content management simplified</span></h1>\r\n  <div id=\"nav\">\r\n    <ul>\r\n      <li><a<?php echo url_match(''/'') ? '' class=\"current\"'': ''''; ?> href=\"<?php echo URL_PUBLIC; ?>\">Home</a></li>\r\n<?php foreach(\$this->find(''/'')->children() as \$menu): ?>\r\n      <li><?php echo \$menu->link(\$menu->title, (in_array(\$menu->slug, explode(''/'', \$this->url)) ? '' class=\"current\"'': null)); ?></li>\r\n<?php endforeach; ?> \r\n    </ul>\r\n  </div> <!-- end #navigation -->\r\n</div> <!-- end #header -->', '<div id=\"header\">\r\n  <h1><a href=\"<?php echo URL_PUBLIC; ?>\">Wolf</a> <span>content management simplified</span></h1>\r\n  <div id=\"nav\">\r\n    <ul>\r\n      <li><a<?php echo url_match(''/'') ? '' class=\"current\"'': ''''; ?> href=\"<?php echo URL_PUBLIC; ?>\">Home</a></li>\r\n<?php foreach(\$this->find(''/'')->children() as \$menu): ?>\r\n      <li><?php echo \$menu->link(\$menu->title, (in_array(\$menu->slug, explode(''/'', \$this->url)) ? '' class=\"current\"'': null)); ?></li>\r\n<?php endforeach; ?> \r\n    </ul>\r\n  </div> <!-- end #navigation -->\r\n</div> <!-- end #header -->', '".wolf_datetime_incrementor()."', '".wolf_datetime_incrementor()."', 1, 1)");

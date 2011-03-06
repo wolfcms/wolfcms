@@ -51,19 +51,15 @@ if (!defined('IN_CMS')) { exit(); }
 <?php foreach ($files as $file): ?>
     <tr class="<?php echo odd_even(); ?>">
       <td>
-        <?php if ($file->is_dir) { ?>
-            <img src="<?php echo FILES_ROOT;?>/images/dir_16.png" align="top" alt="dir icon" />
-        <?php } else { ?>
-            <img src="<?php echo FILES_ROOT;?>/images/page_16.png" align="top" alt="page icon" />
-        <?php } ?>
-        <?php echo $file->link; ?>
+          <img src="<?php echo ICONS_URI;?>file-<?php echo $file->type ?>-16.png" align="top" />
+          <?php echo $file->link; ?>
       </td>
       <td><code><?php echo $file->size; ?></code></td>
       <td><code><?php echo $file->perms; ?> (<a href="#" onclick="toggle_chmod_popup('<?php echo $dir.$file->name; ?>', '<?php echo $file->chmod; ?>'); return false;" title="<?php echo __('Change mode'); ?>"><?php echo $file->chmod; ?></a>)</code></td>
       <td><code><?php echo $file->mtime; ?></code></td>
       <td>
-        <a href="#" onclick="toggle_rename_popup('<?php echo $dir.$file->name; ?>', '<?php echo $file->name; ?>'); return false;" title="<?php echo __('Rename'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-rename.gif" alt="rename icon" /></a>
-        <a href="<?php echo get_url('plugin/file_manager/delete/'.$dir.$file->name); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete?'); ?> <?php echo $file->name; ?>?');"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove.gif" alt="<?php echo __('delete file icon'); ?>" title="<?php echo __('Delete file'); ?>" /></a>
+        <a href="#" onclick="toggle_rename_popup('<?php echo $dir.$file->name; ?>', '<?php echo $file->name; ?>'); return false;" title="<?php echo __('Rename'); ?>"><img src="<?php echo ICONS_URI;?>rename-16.png" alt="rename icon" /></a>
+        <a href="<?php echo get_url('plugin/file_manager/delete/'.$dir.$file->name); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete?'); ?> <?php echo $file->name; ?>?');"><img src="<?php echo ICONS_URI;?>delete-16.png" alt="<?php echo __('delete file icon'); ?>" title="<?php echo __('Delete file'); ?>" /></a>
       </td>
     </tr>
 <?php endforeach; ?>
