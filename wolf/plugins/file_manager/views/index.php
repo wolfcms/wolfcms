@@ -97,7 +97,7 @@ if (!defined('IN_CMS')) { exit(); }
 	<div id="dialog" class="window">
 		<div class="titlebar">
             Demo dialog
-            <a href="#" class="close">[x]</a>
+            <a href="#" class="close"><img src="<?php echo ICONS_URI;?>delete-disabled-16.png"/></a>
         </div>
         <div class="content">
             <p>This is just a demo.</p>
@@ -107,7 +107,7 @@ if (!defined('IN_CMS')) { exit(); }
     <div id="create-file-popup" class="window">
 		<div class="titlebar">
             <?php echo __('Create new file'); ?>
-            <a href="#" class="close">[x]</a>
+            <a href="#" class="close"><img src="<?php echo ICONS_URI;?>delete-disabled-16.png"/></a>
         </div>
         <div class="content">
             <form action="<?php echo get_url('plugin/file_manager/create_file'); ?>" method="post">
@@ -121,7 +121,7 @@ if (!defined('IN_CMS')) { exit(); }
     <div id="create-directory-popup" class="window">
 		<div class="titlebar">
             <?php echo __('Create new directory'); ?>
-            <a href="#" class="close">[x]</a>
+            <a href="#" class="close"><img src="<?php echo ICONS_URI;?>delete-disabled-16.png"/></a>
         </div>
         <div class="content">
             <form action="<?php echo get_url('plugin/file_manager/create_directory'); ?>" method="post">
@@ -135,7 +135,7 @@ if (!defined('IN_CMS')) { exit(); }
     <div id="upload-file-popup" class="window">
 		<div class="titlebar">
             <?php echo __('Upload file'); ?>
-            <a href="#" class="close">[x]</a>
+            <a href="#" class="close"><img src="<?php echo ICONS_URI;?>delete-disabled-16.png"/></a>
         </div>
         <div class="content">
             <form action="<?php echo get_url('plugin/file_manager/upload'); ?>" method="post" enctype="multipart/form-data">
