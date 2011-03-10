@@ -117,6 +117,7 @@ $PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('plugins',
 //  Dumping data for table: plugin_settings
 // @todo - should probably be replaced in future by something like Plugin::activate('file_manager') post install.
 
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."plugin_settings (plugin_id, name, value) VALUES ('archive', 'use_dates', '1')");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."plugin_settings (plugin_id, name, value) VALUES ('file_manager', 'umask', '0022')");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."plugin_settings (plugin_id, name, value) VALUES ('file_manager', 'dirmode', '0755')");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."plugin_settings (plugin_id, name, value) VALUES ('file_manager', 'filemode', '0644')");
