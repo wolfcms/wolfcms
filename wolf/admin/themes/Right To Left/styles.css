@@ -1,0 +1,195 @@
+/*
+ * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
+ * RTL support by Hashem Gamal Ahmed - 2011
+ *
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
+ */
+
+/* General ---------------------------------------------------------------- */
+
+body { background-color: #e5e5e5; color: #000; direction:rtl; }
+
+h3 { }
+a { color: #457; }
+a:hover { }
+h1 { color: #fff; background-color: #988060; text-shadow: -1px 2px 3px #111;}
+h1 a { color: #fff; }
+h2 { }
+
+.warning { color: #D42B27; }
+
+/* Header ----------------------------------------------------------------- */
+#header { color: #fff; background-color: #483E37; border-bottom: 4px solid #76A83A; }
+#header a { color: #fff; }
+
+/* Navigation ------------------------------------------------------------- */
+#mainTabs a:link, #mainTabs a:visited { color: #fff; background-color: #A28C6A; border-color: #A28C6A; }
+#mainTabs a:hover { color: #242424; background-color: #76A83A; border-color: #76A83A; }
+#mainTabs a:link.current, #mainTabs a:visited.current { color: #242424; background-color: #76A83A; border-color: #76A83A; }
+
+/* Content ---------------------------------------------------------------- */
+#content-wrapper { background-color: #fff; border-color: #C7C7C7; }
+
+/* Sidebar ---------------------------------------------------------------- */
+#sidebar h2 { border-color: #D8E0EC; }
+#sidebar .box { background-color: #fff; border-color: #76A83A; }
+#sidebar p.button { background-color: #A28C6A; }
+#sidebar p.button img { background-color: #483E37;}
+#sidebar p.button a { color: #fff; }
+#sidebar p.button a:hover { color: #242424; }
+#sidebar .this { color: #999; }
+#sidebar .optional { color: #666; }
+
+/* Footer ----------------------------------------------------------------- */
+#footer { color: #555; padding: 0px; }
+#footer .stats { color: #777; }
+
+/* Site links ------------------------------------------------------------- */
+#site-links { color: #888; }
+#site-links a, #site-links a:visited { color: #e5e5e5; }
+#site-view-page { color: #fff; }
+
+a#site-view-link {
+  background-color:#A28C6A;
+  padding: 0.2em 0.4em;
+  vertical-align: middle;
+
+  border-radius: 3px;
+  -moz-border-radius: 3px; /* Mozilla Firefox */
+  -webkit-border-radius: 3px; /* All WebKit Browsers, Safari, Chrome */
+}
+
+a#site-view-link:hover {
+    background-color: #76A83A;
+    color: #000;
+}
+
+/* Messages --------------------------------------------------------------- */
+#info, #error, #success {
+    border-top: 3px solid #76a83a;
+}
+
+#info { background: #EDFE86; }
+#error { background: #a22; color: #fff; }
+#error a { color: #fff; font-weight: bold; }
+#success { background: #cfc; color: #051; }
+
+/* Index table ------------------------------------------------------------ */
+table.index { border-color: #ddd; }
+table.index th { background-color: #f5f5f5; }
+table.index td { border-color: #ddd; }
+table.index .node .user small { color: #666; }
+table.index .even:hover, table.index .odd:hover, table.index .even.hover, table.index .odd.hover { background-color: #f5f5f5;}
+table.index .node .snippet a, table.index .node .snippet a:visited, table.index .node .layout a, table.index .node .layout a:visited, table.index .node .user a, table.index .node .user a:visited { color: #000;}
+table.index td.note { color: silver; }
+
+/* Site Map --------------------------------------------------------------- */
+#site-map-root .page a .title, #site-map .page a .title, #site-map .node .page a:visited .title { color: #000; }
+#site-map .node .page .title.protected { color: #9eb3bf; }
+#site-map .node .page .info { color: #9eb3bf; }
+#site-map-def div { background-color: #f5f5f5;}
+#site-map { border-color: #ddd; }
+#site-map-root li, #site-map li { border-color: #ddd; }
+#site-map ul { background-color: #fff; }
+#site-map .status { color: #9eb3bf; }
+#site-map .status.draft-status { color: #c00; }
+#site-map .status.published-status { color: #000; }
+#site-map .status.hidden-stats { color: #0c0; }
+
+/* Form Elements ---------------------------------------------------------- */
+.form-area { background-color: #ddd; }
+.form-area .error-with-field .error { color: #f00; }
+.form-area .pages .title { padding: 10px 0px 19px 0px; }
+table.fieldset td { background-color: white; border-color: #ccc; }
+table.fieldset td.label .optional { color: #929488; }
+table.fieldset td.help { background-color: #eee; }
+table.fieldset .error-with-field small { color: red; }
+form fieldset { margin-top: 1em; }
+
+/* Tabs ------------------------------------------------------------------- */
+#tabs-meta .tab a, #tabs .tab a { background-color: #e5e5e5; color: #000; }
+#tabs-meta .tab a:hover, #tabs .tab a:hover { background-color: #988060; color: #fff; }
+#tabs-meta .tab a.here,
+#tabs .tab a.here { background-color: #fff; color: #000; }
+.tabs .tab a { background-color: #e5e5e5; }
+.tabs .tab a:hover { background-color: #988060; color: #fff; }
+.tabs .tab a.here:hover { background-color: #fff; color: #000; }
+#tab-toolbar img { padding-bottom: 2px; }
+#meta-divs td { background-color: #fff; }
+#meta-divs td.label .optional { color: #929488; }
+#meta-divs, #pages { background-color: white; }
+#content #pages .page {}
+#content textarea { border-color: #ccc; }
+#content #pages label {}
+
+/* Popups ----------------------------------------------------------------- */
+#content .popup { background-color: white; border-color: silver; }
+#content .popup .busy { }
+#content .popup h3 { }
+#content .popup .close-link { color: #999; }
+
+/* Comments --------------------------------------------------------------- */
+#comments-def div { background-color: #f5f5f5; border-color: #ddd; }
+#comments li { border-color: #ddd; }
+#comments li:hover { background-color: #eee; }
+#comments .even {}
+#comments .odd {}
+#comments .infos { color: #666; }
+#comments .approve { color: #7a7; background-color: #dfd; border-color: #9c9; }
+#comments .approve a { color: #696; }
+#comments .approve .infos { color: #8b8; }
+
+/* Calendar (Date picker) ------------------------------------------------- */
+.dpDiv { background-color: #eee; border-color: #ccc; }
+/* the table (within the div) that holds the date picker calendar */
+.dpTable { color: #333; }
+.dpTable td { border-color: #eee; }
+/* a table row that holds date numbers (either blank or 1-31) */
+.dpTR {}
+/* the top table row that holds the month, year, and forward/backward buttons */
+.dpTitleTR { color: #fff; background-color: #e5e5e5; }
+/* the second table row, that holds the names of days of the week (Mo, Tu, We, etc.) */
+.dpDayTR {}
+/* the bottom table row, that has the "This Month" and "Close" buttons */
+.dpTodayButtonTR { background-color: #eee; }
+/* a table cell that holds a date number (1-31) */
+.dpTD { background-color: #fff; }
+.dpTDempty {}
+/* a table cell that holds a highlighted day (usually either today's date or the current date field value) */
+.dpDayHighlightTD {}
+/* the date number table cell that the mouse pointer is currently over (you can use contrasting colors to make it apparent which cell is being hovered over) */
+.dpTDHover { color: #fff; background-color: #e5e5e5; }
+/* the table cell that holds the name of the month and the year */
+.dpTitleTD {}
+/* a table cell that holds one of the forward/backward buttons */
+.dpButtonTD button { color: #fff; background-color: #47a; }
+/* the table cell that holds the "This Month" or "Close" button at the bottom */
+.dpTodayButtonTD { background-color: #ddd; }
+/* a table cell that holds the names of days of the week (Mo, Tu, We, etc.) */
+.dpDayTD { color: #666; background-color: #ddd; border-color: #ccc; }
+/* additional style information for the cell that holds a highlighted day (usually either today's date or the current date field value) */
+.dpDayHighlight { color: #47a; background-color: #fff; }
+/* the forward/backward buttons at the top */
+.dpButton { color: #fff; background-color: #47a; }
+/* the "This Month" and "Close" buttons at the bottom */
+.dpTodayButton { color: #666; }
+
+
+/* Overrides for RTL --------------------------------------------------------------- */
+
+#site-title { margin-right: 20px; }
+#mainTabs { margin: 0 20px 0 17px; }
+#mainTabs li, #content-wrapper, #sidebar-wrapper { float: right; }
+#mainTabs .right, .tab_toolbar , #body_page_edit #content span { float: left !important; }
+#site-map-def .status, #site-map .status, #site-map-root .status { right:auto; left: 175px; }
+#site-map-def .view, #site-map .view-page, #site-map-root .view-page { right:auto; left: 100px; }
+#site-map-def .modify, #site-map .modify, #site-map-root .modify { right:auto; left: 5px; }
+#site-links { right:auto; left: 20px; }
+#installation #content-wrapper, #body_setting_index #content-wrapper, #body_page_index #content-wrapper, #body_page_add #content-wrapper, #body_page_edit #content-wrapper, #body_snippet_add #content-wrapper, #body_snippet_edit #content-wrapper, #body_layout_add #content-wrapper, #body_layout_edit #content-wrapper, #body_user_add #content-wrapper, #body_user_edit #content-wrapper, #body_comment_edit #content-wrapper, #body_plugin_index #content-wrapper { margin: 1%; }
+.index .remove { left: 10px; right: auto;}
+#sidebar p.button img { margin: -10px -20px 0 10px; }
+table.index td, table.index th, #plugins th.plugin, #plugins td.plugin { text-align: right; }
+#dialog form { direction: ltr; }
