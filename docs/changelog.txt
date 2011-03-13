@@ -9,6 +9,7 @@ Sigla:
 
 0.x.x - released ??
 
++ Added Arabic language file for core. - thanks hashemgamal
 + Added RTL version of default look-and-feel - thanks hashemgamal
 + Added Polish language files. Thanks tikky.
 + Added Japanese language files. Translations need to be checked by native speaker.
