@@ -22,7 +22,7 @@ function toSlug(value) {
         value = value
         .replace(/[áàâą]/g,"a")
         .replace(/[б]/g,"b")
-        .replace(/[ćčц]/g,"c")
+        .replace(/[ćčçц]/g,"c")
         .replace(/[дđď]/g,"d")
         .replace(/[éèêëęě]/g,"e")
         .replace(/[ф]/g,"f")
