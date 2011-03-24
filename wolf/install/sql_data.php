@@ -92,6 +92,7 @@ $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (22, 'file_
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (23, 'file_manager_rename')");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (24, 'file_manager_chmod')");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (25, 'file_manager_delete')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (26, 'backup_restore_view')");
 
 
 //  Dumping data for table: role ---------------------------------------
@@ -169,6 +170,7 @@ $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id)
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 23)");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 24)");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 25)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 26)");
 
 // Role 2 = developer
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 1)");
@@ -191,6 +193,7 @@ $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id)
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 23)");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 24)");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 25)");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 26)");
 
 // Role 2 = editor
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (3, 1)");
@@ -215,7 +218,7 @@ if ($dbdriver == 'pgsql') {
     $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."layout_id_seq RESTART WITH 5");
     $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."page_id_seq RESTART WITH 8");
     $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."page_part_id_seq RESTART WITH 11");
-    $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."permission_id_seq RESTART WITH 26");
+    $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."permission_id_seq RESTART WITH 27");
     $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."role_id_seq RESTART WITH 4");
     $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."snippet_id_seq RESTART WITH 3");
     $PDO->exec("ALTER SEQUENCE ".TABLE_PREFIX."user_id_seq RESTART WITH 2");

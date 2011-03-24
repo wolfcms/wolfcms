@@ -42,4 +42,4 @@ Plugin::setInfos(array(
     'require_wolf_version' => '0.6.0'
 ));
 
-Plugin::addController('backup_restore', __('Backup Restore'), 'administrator', true);
+Plugin::addController('backup_restore', __('Backup Restore'), 'backup_restore_view', true);
