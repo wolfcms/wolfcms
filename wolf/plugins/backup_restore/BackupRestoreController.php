@@ -122,7 +122,7 @@ class BackupRestoreController extends PluginController {
 
         // Generate XML file entry for each table
         foreach ($tablenames as $tablename) {
-            $table = Record::query('SELECT * FROM '.TABLE_PREFIX.$tablename);
+            $table = Record::query('SELECT * FROM '.$tablename);
 
             while($entry = $table->fetchObject()) {
                 if ($lasttable !== $tablename) {
@@ -251,35 +251,39 @@ class BackupRestoreController extends PluginController {
 
             if (array_key_exists($container, $xml) && count($xml->$container->$tablename) > 0) {
                 if (strpos(DB_DSN,'sqlite') !== false) {
-                    $sql = 'DELETE FROM '.TABLE_PREFIX.$tablename;
+                    $sql = 'DELETE FROM '.$tablename;
                 }
                 else {
-                    $sql = 'TRUNCATE '.TABLE_PREFIX.$tablename;
+                    $sql = 'TRUNCATE '.$tablename;
                 }
                 if (false === $__CMS_CONN__->exec($sql)) {
-                    Flash::set('error', __('Unable to truncate current table :tablename.', array(':tablename' => TABLE_PREFIX.$tablename)));
+                    Flash::set('error', __('Unable to truncate current table :tablename.', array(':tablename' => $tablename)));
                     redirect(get_url('plugin/backup_restore'));
                 }
 
                 foreach ($xml->$container->$tablename as $element) {
                     $keys = array();
                     $values = array();
+                    $delete_salt = false;
                     foreach ($element as $key => $value) {
+                        if ($delete_salt === true) { continue; }
                         if ($key === 'password' && (!isset($value) || empty($value) || $value === '' || $value === null)) {
+                            $delete_salt = true;
                             if (isset($settings['default_pwd']) && $settings['default_pwd'] !== '') {
                                 $value = sha1($settings['default_pwd']);
                             }
                             else {
                                 $value = sha1('pswpsw123');
                             }
+                            if (isset($keys['salt'])) { unset($keys['salt']); }
                         }
                         $keys[] = $key;
                         $values[] = $__CMS_CONN__->quote($value);
                     }
-                    $sql = 'INSERT INTO '.TABLE_PREFIX.$tablename.' ('.join(', ', $keys).') VALUES ('.join(', ', $values).')'."\r";
+                    $sql = 'INSERT INTO '.$tablename.' ('.join(', ', $keys).') VALUES ('.join(', ', $values).')'."\r";
 
                     if ($__CMS_CONN__->exec($sql) === false) {
-                        Flash::set('error', __('Unable to reconstruct table :tablename.', array(':tablename' => TABLE_PREFIX.$tablename)));
+                        Flash::set('error', __('Unable to reconstruct table :tablename.', array(':tablename' => $tablename)));
                         redirect(get_url('plugin/backup_restore'));
                     }
                 }
