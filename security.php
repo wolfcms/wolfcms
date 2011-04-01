@@ -196,6 +196,21 @@ ol, ul {
     if (isWritable(CFG_FILE)) {
         $advisories['config file, writable'] = 'The configuration file has been found to be writable. We would advise you to remove all write permissions on config.php on production systems. As long as no FATAL level potential security issues were detected with the config.php file, you will still be able to run Wolf CMS.';
     }
+    
+    // Is the 'wolf' directory writable?
+    if (isWritable(CORE_ROOT.DS)) {
+        $advisories['core directory, writable'] = 'The Wolf CMS core directory ("wolf/") and/or files underneath it has been found to be writable. We would advise you to remove all write permissions. <br/>You can do this on unix systems with: <code>chmod -R a-w '.CORE_ROOT.DS.'</code>';
+    }
+    
+    // Is the '.htaccess' file writable?
+    if (isWritable(dirname(__FILE__).DS.'.htaccess')) {
+        $advisories['htaccess file, writable'] = 'The Wolf CMS .htaccess file has been found to be writable. We would advise you to remove all write permissions. <br/>You can do this on unix systems with: <code>chmod a-w '.dirname(__FILE__).DS.'.htaccess'.'</code>';
+    }
+    
+    // Is the 'index.php' file writable?
+    if (isWritable(dirname(__FILE__).DS.'index.php')) {
+        $advisories['index.php file, writable'] = 'The Wolf CMS index.php file has been found to be writable. We would advise you to remove all write permissions. <br/>You can do this on unix systems with: <code>chmod a-w '.dirname(__FILE__).DS.'index.php'.'</code>';
+    }
 
 
     /* RUN CHECKS - WARNINGS */
