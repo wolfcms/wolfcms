@@ -43,8 +43,8 @@ if (!defined('IN_CMS')) { exit(); }
       <th class="files"><?php echo __('File'); ?></th>
       <th class="size"><?php echo __('Size'); ?></th>
       <th class="permissions"><?php echo __('Permissions'); ?></th>
-      <th class="mtime"><?php echo __('Modify'); ?></th>
-      <th class="modify"><?php echo __('Action'); ?></th>
+      <th class="mtime"><?php echo __('Modified'); ?></th>
+      <th class="modify"><?php echo __('Modify'); ?></th>
     </tr>
   </thead>
   <tbody>
