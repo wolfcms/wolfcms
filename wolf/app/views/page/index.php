@@ -131,13 +131,15 @@
                     var parent = $(this).parents("li.node:first")
                     var parentId = parent.attr('id').split('_')[1];
 
-                    $('#page_'+parentId).children('ul').hide();
+                    $('#page_'+parentId).removeClass('children-visible').addClass('children-hidden').children('ul').hide();
                 }
                 else {
                     $(this).addClass("expanded");
                     $(this).attr('src', '<?php echo URI_PUBLIC; ?>wolf/admin/images/collapse.png');
                     var parent = $(this).parents("li.node:first");
                     var parentId = parent.attr('id').split('_')[1];
+                    $('#page_'+parentId).removeClass('children-hidden').addClass('children-visible');
+
                     if ($('#page_'+parentId).children('ul').length == 0) {
                         $('#busy-'+parentId).show();
                         $.get("<?php echo get_url('page/children/'); ?>"+parentId+'/'+'1', function(data) {                        
