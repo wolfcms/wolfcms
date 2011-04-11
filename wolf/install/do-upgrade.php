@@ -273,6 +273,7 @@ if ($driver == 'mysql') {
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 23)");
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 24)");
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 25)");
+        $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (1, 26)");
         ob_flush(); flush();
         sleep(1);
 
@@ -297,6 +298,7 @@ if ($driver == 'mysql') {
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 23)");
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 24)");
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 25)");
+        $PDO->exec("INSERT INTO ".TABLE_PREFIX."role_permission (role_id, permission_id) VALUES (2, 26)");
         ob_flush(); flush();
         sleep(1);
 
@@ -344,6 +346,7 @@ if ($driver == 'mysql') {
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (23, 'file_manager_rename')");
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (24, 'file_manager_chmod')");
         $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (25, 'file_manager_delete')");
+        $PDO->exec("INSERT INTO ".TABLE_PREFIX."permission (id, name) VALUES (26, 'backup_restore_view')");
         echo '<li>Emptied permission table and added default permissions...</li>';
         ob_flush(); flush();
         sleep(1);
@@ -563,6 +566,7 @@ if ($driver == 'sqlite') {
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 23)");
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 24)");
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 25)");
+        $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (1, 26)");
         sleep(1);
 
         // Role 2 = developer
@@ -586,6 +590,7 @@ if ($driver == 'sqlite') {
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 23)");
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 24)");
         $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 25)");
+        $PDO->exec("INSERT INTO role_permission (role_id, permission_id) VALUES (2, 26)");
         sleep(1);
 
         // Role 2 = editor
@@ -634,6 +639,7 @@ if ($driver == 'sqlite') {
         $PDO->exec("INSERT INTO permission (id, name) VALUES (23, 'file_manager_rename')");
         $PDO->exec("INSERT INTO permission (id, name) VALUES (24, 'file_manager_chmod')");
         $PDO->exec("INSERT INTO permission (id, name) VALUES (25, 'file_manager_delete')");
+        $PDO->exec("INSERT INTO permission (id, name) VALUES (26, 'backup_restore_view')");
         echo '<li>Emptied permission table and added default permissions...</li>';
         ob_flush(); flush();
         sleep(1);

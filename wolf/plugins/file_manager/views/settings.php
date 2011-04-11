@@ -1,7 +1,7 @@
 <h1><?php echo __('File Manager Settings');?></h1>
 <form action="<?php echo get_url('plugin/file_manager/settings_save'); ?>" method="post">
     <fieldset style="padding: 0.5em;">
-        <legend style="padding: 0em 0.5em 0em 0.5em; font-weight: bold;"><?php echo __('Backup settings'); ?></legend>
+        <legend style="padding: 0em 0.5em 0em 0.5em; font-weight: bold;"><?php echo __('General settings'); ?></legend>
         <table class="fieldset" cellpadding="0" cellspacing="0" border="0">
             <tr>
                 <td class="label"><label for="setting_show_hidden"><?php echo __('Show hidden files'); ?>: </label></td>

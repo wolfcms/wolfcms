@@ -8,7 +8,43 @@ Please be aware that we only support single version upgrades.
 IMPORTANT - always check your security by viewing security.php post update!
 
 
-### Upgrading from 0.6.0 => 0.7.0 ###
+### Upgrading from 0.7.x => 0.7.5 (ONLY!) ###
+
+IMPORTANT - Make absolutely sure you have 0.7.x before doing this.
+
+1. Create a backup of your files AND database. Save your config.php file!
+
+2. Login to your old installation and disable ALL of your plugins.
+
+3. Delete everything from your old Wolf installation. (Make sure you did step 1!)
+    - You can leave your public directory in place.
+
+4. Extract the 0.7.5 download as if you would install it normally.
+
+5. Make sure to rename the "_.htaccess" file if desired and check its settings against your backup.
+
+6. Copy your OLD config.php into your 0.7.5 installation, overwriting the empty default.
+
+7. Copy back your third party plugins.
+
+8. Execute the following SQL on your database.
+
+INSERT INTO permission (id, name) VALUES (26, 'backup_restore_view')
+INSERT INTO role_permission (role_id, permission_id) VALUES (1, 26)
+INSERT INTO role_permission (role_id, permission_id) VALUES (2, 26)
+
+9. Re-enable and test each plugin one by one.
+   (make sure you at least re-enable the File Manager and Archive plugins to enable their new settings)
+
+10. Test your upgraded installation.
+
+11. Visit http://www.example.com/security.php to view the security advisory.
+
+12. Clean up by removing the wolf/install & docs directories as well as readme.txt and security.php
+
+
+
+### Upgrading from 0.6.0 => 0.7.0 (ONLY!) ###
 
 IMPORTANT - Make absolutely sure you have 0.6.0 before doing this.
 
@@ -43,7 +79,7 @@ IMPORTANT - Make absolutely sure you have 0.6.0 before doing this.
 
 
 
-### Upgrading from 0.5.5 => 0.6.0 ###
+### Upgrading from 0.5.5 => 0.6.0 (ONLY!) ###
 
 These are version specific notes. Please see www.wolfcms.org/wiki/upgrading for
 a more detailed general upgrade scenario. Follow that (or your own) and apply
