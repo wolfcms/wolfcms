@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -49,8 +50,6 @@ class Page extends Node {
     public $behavior_id;
     public $status_id;
     public $comment_status;
-    public $parent = false;
-
     public $created_on;
     public $published_on;
     public $valid_until;
@@ -60,16 +59,15 @@ class Page extends Node {
     public $position;
     public $is_protected;
     public $needs_login;
-    public $url = '';
-    public $level = false;
-    public $tags = false;
     public $author;
     public $author_id;
     public $updater;
     public $updater_id;
-
-
-
+    // non db fields
+    private $parent = false;
+    private $uri = false;
+    private $level = false;
+    private $tags = false;
 
     public function __construct($object=null, $parent=null) {
         if ($parent !== null) {
@@ -81,33 +79,35 @@ class Page extends Node {
                 $this->$key = $value;
             }
         }
-
-        if ($this->parent) {
-            $this->setUrl();
-        }
     }
 
     public function id() {
         return $this->id;
     }
+
     public function author() {
         return $this->author;
     }
+
     public function authorId() {
         return $this->author_id;
     }
+
     public function title() {
         return $this->title;
     }
+
     public function description() {
         return $this->description;
     }
+
     public function keywords() {
         return $this->keywords;
     }
+
     public function parentId() {
-    	return $this->parent_id;
-    }    
+        return $this->parent_id;
+    }
 
     /**
      * Returns the current page object's url.
@@ -117,7 +117,7 @@ class Page extends Node {
      * @return string   The url of the page object.
      */
     public function url() {
-        return BASE_URL . $this->url . ($this->url != '' ? URL_SUFFIX: '');
+        return BASE_URL . $this->uri() . ($this->uri() != '' ? URL_SUFFIX : '');
     }
 
     /**
@@ -139,79 +139,127 @@ class Page extends Node {
 
         $page = self::findById($id);
 
-        if (!$page) return '[urlById: no page with that id]';
+        if (!$page)
+            return '[urlById: no page with that id]';
 
-        $suffix = ($page->getUri() != '') ? URL_SUFFIX : '';
-        $url = BASE_URL.$page->getUri().$suffix;
-
-        return $url;
+        return $page->url();
     }
 
     public function slug() {
         return $this->slug;
     }
+
     public function breadcrumb() {
         return $this->breadcrumb;
     }
+
     public function updater() {
         return $this->updater;
     }
+
     public function updaterId() {
         return $this->updater_id;
     }
 
+    /**
+     * Returns a set of breadcrumbs as html.
+     *
+     * @param   string      $separator  The separator between crumbs. Defaults to &gt;
+     * @return  string      The breadcrumbs as an html snippet.
+     */
     public function breadcrumbs($separator='&gt;') {
         $out = '';
         $url = '';
         $path = '';
-        $paths = explode('/', '/'.$this->slug);
+        $paths = explode('/', '/' . $this->slug);
         $nb_path = count($paths);
 
-        if ($this->parent)
-            $out .= $this->parent->_inversedBreadcrumbs($separator);
+        if ($this->parent() !== false)
+            $out .= $this->parent()->_inversedBreadcrumbs($separator);
 
-        return $out . '<span class="breadcrumb-current">'.$this->breadcrumb().'</span>';
-
+        return $out . '<span class="breadcrumb-current">' . $this->breadcrumb() . '</span>';
     }
 
+    /**
+     * 
+     * @todo Finish _inversedBreadcrumbs PHPDoc
+     *
+     * @param type $separator
+     * @return string 
+     */
+    private function _inversedBreadcrumbs($separator) {
+        $out = '<a href="' . $this->url() . '" title="' . $this->breadcrumb . '">' . $this->breadcrumb . '</a><span class="breadcrumb-separator">' . $separator . '</span>';
+
+        if ($this->parent() !== false)
+            return $this->parent()->_inversedBreadcrumbs($separator) . $out;
+
+        return $out;
+    }
+
+    /**
+     * Returns the subjective "previous" Page.
+     *
+     * @return mixed    Returns either a Page object or false.
+     */
     public function previous() {
-        if ($this->parent)
-            return $this->parent->children(array(
-                    'limit' => 1,
-                    'where' => 'page.position < '. $this->position . ' AND page.id < '. $this->id,
-                    'order' => 'page.position DESC'
+        if ($this->parent() !== false) {
+            return $this->parent()->children(array(
+                'limit' => 1,
+                'where' => 'page.position < ' . $this->position . ' AND page.id < ' . $this->id,
+                'order' => 'page.position DESC'
             ));
+        }
+
+        return false;
     }
 
+    /**
+     * Returns the subjective "next" Page.
+     *
+     * @return mixed    Returns either a Page object or false.
+     */
     public function next() {
-        if ($this->parent)
-            return $this->parent->children(array(
-                    'limit' => 1,
-                    'where' => 'page.position > '. $this->position . ' AND page.id > '. $this->id,
-                    'order' => 'page.position ASC'
+        if ($this->parent() !== false) {
+            return $this->parent()->children(array(
+                'limit' => 1,
+                'where' => 'page.position > ' . $this->position . ' AND page.id > ' . $this->id,
+                'order' => 'page.position ASC'
             ));
+        }
+
+        return false;
     }
 
+    /**
+     * Counts the number of children belonging to a Page.
+     * 
+     * @fixme Remove dependency on CMS_CONN - not good
+     *
+     * @param type  $args
+     * @param type  $value
+     * @param type  $include_hidden
+     * @return int  The number of children counted.
+     */
     public function childrenCount($args=null, $value=array(), $include_hidden=false) {
         global $__CMS_CONN__;
 
         // Collect attributes...
-        $where   = isset($args['where']) ? $args['where']: '';
-        $order   = isset($args['order']) ? $args['order']: 'position, id';
-        $limit   = isset($args['limit']) ? $args['limit']: 0;
-        $offset  = isset($args['offset']) ? $args['offset']: 0;
+        $where = isset($args['where']) ? $args['where'] : '';
+        $order = isset($args['order']) ? $args['order'] : 'position, id';
+        $limit = isset($args['limit']) ? $args['limit'] : 0;
+        $offset = isset($args['offset']) ? $args['offset'] : 0;
 
         // Prepare query parts
-        $where_string = trim($where) == '' ? '' : "AND ".$where;
+        $where_string = trim($where) == '' ? '' : "AND " . $where;
         $limit_string = $limit > 0 ? "LIMIT $limit" : '';
         $offset_string = $offset > 0 ? "OFFSET $offset" : '';
 
         // Prepare SQL
-        $sql = 'SELECT COUNT(*) AS nb_rows FROM '.TABLE_PREFIX.'page '
-                . 'WHERE parent_id = '.$this->id
-                . " AND (valid_until IS NULL OR CAST('".date('Y-m-d H:i:s')."' AS DATETIME) < valid_until)"
-                . ' AND (status_id='.Page::STATUS_PUBLISHED
-                . ($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
+        $sql = 'SELECT COUNT(*) AS nb_rows FROM ' . TABLE_PREFIX . 'page '
+                . 'WHERE parent_id = ' . $this->id
+                . " AND (valid_until IS NULL OR CAST('" . date('Y-m-d H:i:s') . "' AS DATETIME) < valid_until)"
+                . ' AND (status_id=' . Page::STATUS_PUBLISHED
+                . ($include_hidden ? ' OR status_id=' . Page::STATUS_HIDDEN : '') . ') '
                 . "$where_string ORDER BY $order $limit_string $offset_string";
 
         $stmt = $__CMS_CONN__->prepare($sql);
@@ -220,13 +268,22 @@ class Page extends Node {
         return (int) $stmt->fetchColumn();
     }
 
+    /**
+     * Returns the Page object's parent.
+     * 
+     * The option $level parameter allows the user to specify the level on
+     * which the found Page object should be.
+     *
+     * @param   int     $level  Optional level parameter
+     * @return  Page    The object's parent.
+     */
     public function parent($level=null) {
-    
-    	// check to see if it's already been retrieved, if not get the parent!
-    	if($this->parent === false) {
-    		$this->parent = self::findById($this->parentId());
-    	}    
-    
+
+        // check to see if it's already been retrieved, if not get the parent!
+        if ($this->parent === false && $this->parent_id != 0) {
+            $this->parent = self::findById($this->parentId());
+        }
+
         if ($level === null)
             return $this->parent;
 
@@ -242,35 +299,34 @@ class Page extends Node {
         return execution_time();
     }
 
-    private function _inversedBreadcrumbs($separator) {
-        $out = '<a href="'.$this->url().'" title="'.$this->breadcrumb.'">'.$this->breadcrumb.'</a><span class="breadcrumb-separator">'.$separator.'</span>';
-
-        if ($this->parent)
-            return $this->parent->_inversedBreadcrumbs($separator) . $out;
-
-        return $out;
-    }
-
+    /**
+     * Allows people to include the parsed content from a Snippet in a Page.
+     * 
+     * The method returns either true or false depending on whether the snippet
+     * was found or not.
+     *
+     * @param   string  $name   Snippet name.
+     * @return  boolean         Returns either true or false.
+     */
     public function includeSnippet($name) {
         $snippet = Snippet::findByName($name);
 
         if (false !== $snippet) {
-            eval('?>'.$snippet->content_html);
+            eval('?>' . $snippet->content_html);
             return true;
         }
 
         return false;
     }
 
-
     private function _loadTags() {
         global $__CMS_CONN__;
         $this->tags = array();
 
-        $sql = "SELECT tag.id AS id, tag.name AS tag FROM ".TABLE_PREFIX."page_tag AS page_tag, ".TABLE_PREFIX."tag AS tag ".
+        $sql = "SELECT tag.id AS id, tag.name AS tag FROM " . TABLE_PREFIX . "page_tag AS page_tag, " . TABLE_PREFIX . "tag AS tag " .
                 "WHERE page_tag.page_id={$this->id} AND page_tag.tag_id = tag.id";
 
-        if ( ! $stmt = $__CMS_CONN__->prepare($sql))
+        if (!$stmt = $__CMS_CONN__->prepare($sql))
             return;
 
         $stmt->execute();
@@ -280,27 +336,61 @@ class Page extends Node {
             $this->tags[$object->id] = $object->tag;
     }
 
+    /**
+     * Returns the Tags for this Page.
+     *
+     * @return array    An array of Tag objects.
+     */
     public function tags() {
-        if ( ! $this->tags)
+        if ($this->tags === false)
             $this->_loadTags();
 
         return $this->tags;
     }
 
     /**
+     * @fixme Merge getTags() with tags() and _loadTags()
+     * @deprecated
+     * @see Page::tags()
+     *
+     * @return type 
+     */
+    public function getTags() {
+        $tablename_page_tag = self::tableNameFromClassName('PageTag');
+        $tablename_tag = self::tableNameFromClassName('Tag');
+
+        $sql = "SELECT tag.id AS id, tag.name AS tag FROM $tablename_page_tag AS page_tag, $tablename_tag AS tag " .
+                "WHERE page_tag.page_id={$this->id} AND page_tag.tag_id = tag.id";
+
+        if (!$stmt = self::$__CONN__->prepare($sql))
+            return array();
+
+        $stmt->execute();
+
+        // Run!
+        $tags = array();
+        while ($object = $stmt->fetchObject())
+            $tags[$object->id] = $object->tag;
+
+        return $tags;
+    }
+
+    /**
      * Return a numerical representation of this page's place in the page hierarchy.
      *
-     * Note: uses the page url to check level. Might not always be what you'd expect.
+     * This uses the page url as returned by the url() method to check the level.
+     * It might not always be what you'd expect.
      *
      * @return int The page's level.
      */
     public function level() {
-        if ($this->level === false)
-            $this->level = empty($this->url) ? 0 : substr_count($this->url, '/')+1;
+        if ($this->level === false) {
+            $uri = $this->uri();
+            $this->level = empty($uri) ? 0 : substr_count($uri, '/') + 1;
+        }
 
         return $this->level;
     }
-
 
     /**
      * Return formatted date for page. Defaults to 'created on' date.
@@ -328,7 +418,6 @@ class Page extends Node {
             return strftime($format, strtotime($this->created_on));
     }
 
-
     /**
      * Return content of the page or a specific part of the page.
      *
@@ -340,12 +429,12 @@ class Page extends Node {
         // if part exist we generate the content en execute it!
         if (isset($this->part->$part)) {
             ob_start();
-            eval('?>'.$this->part->$part->content_html);
+            eval('?>' . $this->part->$part->content_html);
             $out = ob_get_contents();
             ob_end_clean();
             return $out;
-        } else if ($inherit && $this->parent) {
-            return $this->parent->content($part, true);
+        } else if ($inherit && $this->parent() !== false) {
+            return $this->parent()->content($part, true);
         }
     }
 
@@ -359,21 +448,20 @@ class Page extends Node {
      * @param bool   $inherit   Check parents for part if true.
      * @return bool             Returns true if part was found or false if nothing was found
      */
-    public function hasContent($part, $inherit=false) { 
-        if(isset($this->part->$part)) {
+    public function hasContent($part, $inherit=false) {
+        if (isset($this->part->$part)) {
             $trim = trim($this->part->$part->content_html);
-            if(!empty($trim)) {
-            	return true;
+            if (!empty($trim)) {
+                return true;
             }
-            
+
             return false;
-        }
-        else if ( $inherit && $this->parent ) {
-            return $this->parent->hasContent($part, true);
+        } else if ($inherit && $this->parent() !== false) {
+            return $this->parent()->hasContent($part, true);
         }
         return false;
     }
-    
+
     /**
      * Check if a part exists.
      *
@@ -385,17 +473,12 @@ class Page extends Node {
      * @return bool             Returns true if part was found or false if nothing was found
      */
     public function partExists($part, $inherit=false) {
-        if ( isset($this->part->$part) ) {
+        if (isset($this->part->$part)) {
             return true;
-        }
-        else if ( $inherit && $this->parent ) {
-            return $this->parent->partExists($part, true);
+        } else if ($inherit && $this->parent() !== false) {
+            return $this->parent()->partExists($part, true);
         }
         return false;
-    }    
-
-    protected function setUrl() {
-        $this->url = trim($this->parent->url .'/'. $this->slug, '/');
     }
 
     /**
@@ -409,13 +492,9 @@ class Page extends Node {
         if ($label == null)
             $label = $this->title();
 
-        return sprintf('<a href="%s" %s>%s</a>',
-                $this->url(),
-                $options,
-                $label
+        return sprintf('<a href="%s" %s>%s</a>', $this->url(), $options, $label
         );
     }
-
 
     /**
      * Allow user to link to a page by ID.
@@ -432,24 +511,18 @@ class Page extends Node {
      * @return string XHTML compliant link code or error message.
      */
     public static function linkById($id, $label=null, $options='') {
-        $result = null;
-
         if (!is_numeric($id) || !is_int($id) || $id <= 0) {
             return '[linkById: id NAN or id <= 0]';
         }
 
         $page = self::findById($id);
-        $url = BASE_URL.$page->getUri().URL_SUFFIX;
 
         if ($label == null) {
             $label = $page->title();
         }
 
-        return sprintf('<a href="%s" %s>%s</a>',
-            $url,
-            $options,
-            $label
-            );
+        return sprintf('<a href="%s" %s>%s</a>', $page->url(), $options, $label
+        );
     }
 
     /**
@@ -468,34 +541,34 @@ class Page extends Node {
         $page_class = 'Page';
 
         // Collect attributes...
-        $where   = isset($args['where']) ? $args['where']: '';
-        $order   = isset($args['order']) ? $args['order']: 'page.position, page.id';
-        $offset  = isset($args['offset']) ? $args['offset']: 0;
-        $limit   = isset($args['limit']) ? $args['limit']: 0;
+        $where = isset($args['where']) ? $args['where'] : '';
+        $order = isset($args['order']) ? $args['order'] : 'page.position, page.id';
+        $offset = isset($args['offset']) ? $args['offset'] : 0;
+        $limit = isset($args['limit']) ? $args['limit'] : 0;
 
         // auto offset generated with the page param
         if ($offset == 0 && isset($_GET['page']))
-            $offset = ((int)$_GET['page'] - 1) * $limit;
+            $offset = ((int) $_GET['page'] - 1) * $limit;
 
         // Prepare query parts
-        $where_string = trim($where) == '' ? '' : "AND ".$where;
+        $where_string = trim($where) == '' ? '' : "AND " . $where;
         $limit_string = $limit > 0 ? "LIMIT $limit" : '';
         $offset_string = $offset > 0 ? "OFFSET $offset" : '';
 
 
         // Prepare SQL
         $sql = 'SELECT page.*, author.name AS author, author.id AS author_id, updater.name AS updater, updater.id AS updater_id '
-                . 'FROM '.TABLE_PREFIX.'page AS page '
-                . 'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
-                . 'LEFT JOIN '.TABLE_PREFIX.'user AS updater ON updater.id = page.updated_by_id '
-                . 'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN: '').') '
-                . " AND (valid_until IS NULL OR CAST('".date('Y-m-d H:i:s')."' AS DATETIME) < valid_until)"
+                . 'FROM ' . TABLE_PREFIX . 'page AS page '
+                . 'LEFT JOIN ' . TABLE_PREFIX . 'user AS author ON author.id = page.created_by_id '
+                . 'LEFT JOIN ' . TABLE_PREFIX . 'user AS updater ON updater.id = page.updated_by_id '
+                . 'WHERE parent_id = ' . $this->id . ' AND (status_id=' . Page::STATUS_PUBLISHED . ($include_hidden ? ' OR status_id=' . Page::STATUS_HIDDEN : '') . ') '
+                . " AND (valid_until IS NULL OR CAST('" . date('Y-m-d H:i:s') . "' AS DATETIME) < valid_until)"
                 . "$where_string ORDER BY $order $limit_string $offset_string";
 
         $pages = array();
 
         // hack to be able to redefine the page class with behavior
-        if ( ! empty($this->behavior_id)) {
+        if (!empty($this->behavior_id)) {
             // will return Page by default (if not found!)
             $page_class = Behavior::loadPageHack($this->behavior_id);
         }
@@ -514,11 +587,10 @@ class Page extends Node {
         }
 
         if ($limit == 1)
-            return isset($pages[0]) ? $pages[0]: false;
+            return isset($pages[0]) ? $pages[0] : false;
 
         return $pages;
     }
-
 
     /**
      * Finds the "login needed" status for the page.
@@ -526,8 +598,8 @@ class Page extends Node {
      * @return int Integer corresponding to one of the LOGIN_* constants.
      */
     public function getLoginNeeded() {
-        if ($this->needs_login == Page::LOGIN_INHERIT && $this->parent)
-            return $this->parent->getLoginNeeded();
+        if ($this->needs_login == Page::LOGIN_INHERIT && $this->parent() !== false)
+            return $this->parent()->getLoginNeeded();
         else
             return $this->needs_login;
     }
@@ -535,7 +607,7 @@ class Page extends Node {
     public function _executeLayout() {
         global $__CMS_CONN__;
 
-        $sql = 'SELECT content_type, content FROM '.TABLE_PREFIX.'layout WHERE id = ?';
+        $sql = 'SELECT content_type, content FROM ' . TABLE_PREFIX . 'layout WHERE id = ?';
 
         $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute(array($this->_getLayoutId()));
@@ -546,13 +618,13 @@ class Page extends Node {
                 $layout->content_type = 'text/html';
 
             // set content-type and charset of the page
-            header('Content-Type: '.$layout->content_type.'; charset=UTF-8');
+            header('Content-Type: ' . $layout->content_type . '; charset=UTF-8');
 
             Observer::notify('page_before_execute_layout');
 
             // execute the layout code
-            eval('?>'.$layout->content);
-        // echo $layout->content;
+            eval('?>' . $layout->content);
+            // echo $layout->content;
         }
     }
 
@@ -562,15 +634,11 @@ class Page extends Node {
     private function _getLayoutId() {
         if ($this->layout_id)
             return $this->layout_id;
-        else if ($this->parent)
-            return $this->parent->_getLayoutId();
+        else if ($this->parent() !== false)
+            return $this->parent()->_getLayoutId();
         else
-            exit ('You need to set a layout!');
+            exit('You need to set a layout!');
     }
-
-
-    /* -------- */
-
 
     public function beforeInsert() {
         $this->created_on = date('Y-m-d H:i:s');
@@ -586,8 +654,9 @@ class Page extends Node {
         $this->position = 0;
 
         // Prevent certain stuff from entering the INSERT statement
+        // @todo Replace by more appropriate use of Record::getColumns()
         unset($this->parent);
-        unset($this->url);
+        unset($this->uri);
         unset($this->level);
         unset($this->tags);
 
@@ -598,14 +667,14 @@ class Page extends Node {
         $this->created_on = $this->created_on . ' ' . $this->created_on_time;
         unset($this->created_on_time);
 
-        if ( ! empty($this->published_on)) {
+        if (!empty($this->published_on)) {
             $this->published_on = $this->published_on . ' ' . $this->published_on_time;
             unset($this->published_on_time);
         } else if ($this->status_id == Page::STATUS_PUBLISHED) {
             $this->published_on = date('Y-m-d H:i:s');
         }
 
-        if ( ! empty($this->valid_until)) {
+        if (!empty($this->valid_until)) {
             $this->valid_until = $this->valid_until . ' ' . $this->valid_until_time;
             unset($this->valid_until_time);
             if ($this->valid_until < date('Y-m-d H:i:s')) {
@@ -617,7 +686,7 @@ class Page extends Node {
         $this->updated_by_id = AuthUser::getId();
         $this->updated_on = date('Y-m-d H:i:s');
 
-        unset($this->url);
+        unset($this->uri);
         unset($this->level);
         unset($this->tags);
         unset($this->parent);
@@ -637,41 +706,29 @@ class Page extends Node {
     }
 
     /**
-     * @todo improve
+     * Returns the uri for this node.
+     * 
+     * Note: The uri does not start nor end with a '/'.
      *
-     * @return <type>
+     * @return string   The node's full uri.
      */
-    public function getUri() {
-        $result = null;
-
-        $parent = $this->findById($this->parent_id);
-        if ($parent != null && $parent->slug != '') {
-            $result = $parent->getUri().'/'.$this->slug;
-        } else {
-            $result = $this->slug;
+    public function uri() {
+        if ($this->uri === false) {
+            if ($this->parent() !== false)
+                $this->uri = trim($this->parent()->uri() . '/' . $this->slug, '/');
+            else
+                $this->uri = trim($this->slug, '/');
         }
 
-        return $result;
+        return $this->uri;
     }
 
-    public function getTags() {
-        $tablename_page_tag = self::tableNameFromClassName('PageTag');
-        $tablename_tag = self::tableNameFromClassName('Tag');
-
-        $sql = "SELECT tag.id AS id, tag.name AS tag FROM $tablename_page_tag AS page_tag, $tablename_tag AS tag ".
-                "WHERE page_tag.page_id={$this->id} AND page_tag.tag_id = tag.id";
-
-        if ( ! $stmt = self::$__CONN__->prepare($sql))
-            return array();
-
-        $stmt->execute();
-
-        // Run!
-        $tags = array();
-        while ($object = $stmt->fetchObject())
-            $tags[$object->id] = $object->tag;
-
-        return $tags;
+    /**
+     * @deprecated
+     * @see uri()
+     */
+    public function getUri() {
+        return $this->uri();
     }
 
     public function setTags($tags) {
@@ -701,9 +758,9 @@ class Page extends Node {
 
             // insert all tags in the tag table and then populate the page_tag table
             foreach ($new_tags as $index => $tag_name) {
-                if ( ! empty($tag_name)) {
+                if (!empty($tag_name)) {
                     // try to get it from tag list, if not we add it to the list
-                    if ( ! $tag = Record::findOneFrom('Tag', 'name=?', array($tag_name)))
+                    if (!$tag = Record::findOneFrom('Tag', 'name=?', array($tag_name)))
                         $tag = new Tag(array('name' => trim($tag_name)));
 
                     $tag->count++;
@@ -744,9 +801,6 @@ class Page extends Node {
      * 
      * @deprecated
      * @see findByUri()
-     *
-     * @param type $uri
-     * @return type 
      */
     public static function find_page_by_uri($uri) {
         return Page::findByUri($uri);
@@ -768,7 +822,7 @@ class Page extends Node {
 
         $parent = false;
 
-        foreach ($urls as $page_slug) {      
+        foreach ($urls as $page_slug) {
             $url = ltrim($url . '/' . $page_slug, '/');
 
             if ($page = self::findBySlug($page_slug, $parent, $all)) {
@@ -785,43 +839,39 @@ class Page extends Node {
             }
 
             $parent = $page;
-
         } // foreach
 
-        return ( ! $page && $has_behavior) ? $parent: $page;
+        return (!$page && $has_behavior) ? $parent : $page;
     }
-    
-	/**
-	 * find a page by the slug and parent id
-	 *
-	 * @param string $slug		page slug to search for
-	 * @param object $parent 	parent object
-	 * @param bool $all			flag for returning all status types
-	 * @return mixed			page object or false
-	 */
-	public static function findBySlug($slug, &$parent, $all = false) {
-        $parent_id = $parent ? $parent->id: 0;
+
+    /**
+     * find a page by the slug and parent id
+     *
+     * @param string $slug		page slug to search for
+     * @param object $parent 	parent object
+     * @param bool $all			flag for returning all status types
+     * @return mixed			page object or false
+     */
+    public static function findBySlug($slug, &$parent, $all = false) {
+        $parent_id = $parent ? $parent->id : 0;
 
         if (empty($slug)) {
             $slug = NULL;
             $slug_sql = "slug IS NULL";
+        } else {
+            $slug_sql = "slug = '" . $slug . "'";
         }
-        else {
-        	$slug_sql = "slug = '".$slug."'";
-        }
-       
+
         if ($all) {
-            $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
+            $where = $slug_sql . ' AND parent_id = ' . $parent_id . ' AND (status_id=' . self::STATUS_PREVIEW . ' OR status_id=' . self::STATUS_PUBLISHED . ' OR status_id=' . self::STATUS_HIDDEN . ')';
+        } else {
+            $where = $slug_sql . ' AND parent_id = ' . $parent_id . ' AND (status_id=' . self::STATUS_PUBLISHED . ' OR status_id=' . self::STATUS_HIDDEN . ')';
         }
-        else {
-            $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
-        }        
         $page = self::find(array('where' => $where,
-        						 'limit' => 1));
-        
+                    'limit' => 1));
+
         return $page;
     }
-
 
     /**
      * Finds a Page record based on supplied arguments.
@@ -850,13 +900,13 @@ class Page extends Node {
             return Page::findByUri($args);
         }
 
-		$page_class = 'Page';
+        $page_class = 'Page';
 
         // Collect attributes...
-        $where    = isset($args['where']) ? trim($args['where']) : '';
+        $where = isset($args['where']) ? trim($args['where']) : '';
         $order_by = isset($args['order']) ? trim($args['order']) : '';
-        $offset   = isset($args['offset']) ? (int) $args['offset'] : 0;
-        $limit    = isset($args['limit']) ? (int) $args['limit'] : 0;
+        $offset = isset($args['offset']) ? (int) $args['offset'] : 0;
+        $limit = isset($args['limit']) ? (int) $args['limit'] : 0;
 
         // Prepare query parts
         $where_string = empty($where) ? '' : "WHERE $where";
@@ -868,23 +918,22 @@ class Page extends Node {
         $tablename_user = self::tableNameFromClassName('User');
 
         // Prepare SQL
-        $sql = "SELECT page.*, creator.name AS created_by_name, updater.name AS updated_by_name FROM $tablename AS page".
-                " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id".
-                " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id".
-                " $where_string $order_by_string $limit_string $offset_string";       
+        $sql = "SELECT page.*, creator.name AS created_by_name, updater.name AS updated_by_name FROM $tablename AS page" .
+                " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id" .
+                " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id" .
+                " $where_string $order_by_string $limit_string $offset_string";
 
         $stmt = self::$__CONN__->prepare($sql);
         if (!$stmt->execute()) {
             return false;
         }
 
-		// Run!
+        // Run!
         $objects = array();
-        while ($page = $stmt->fetchObject('Page'))
-        {         	
-        	$parent = $page->parent();
-            if ( ! empty($parent->behavior_id)) {
-            // will return Page by default (if not found!)
+        while ($page = $stmt->fetchObject('Page')) {
+            $parent = $page->parent();
+            if (!empty($parent->behavior_id)) {
+                // will return Page by default (if not found!)
                 $page_class = Behavior::loadPageHack($parent->behavior_id);
             }
 
@@ -892,15 +941,15 @@ class Page extends Node {
             $page = new $page_class($page, $parent);
             $page->part = self::get_parts($page->id);
             $objects[] = $page;
-		}
-	
-		// if we're loading just one result return it
-		if ($limit == 1 AND isset($objects['0']) AND is_object($objects['0'])) {
-			return $objects['0'];
-		}
-		
-		// or return them all
-        return $objects;   
+        }
+
+        // if we're loading just one result return it
+        if ($limit == 1 AND isset($objects['0']) AND is_object($objects['0'])) {
+            return $objects['0'];
+        }
+
+        // or return them all
+        return $objects;
     }
 
     public static function findAll($args = null) {
@@ -909,21 +958,21 @@ class Page extends Node {
 
     public static function findById($id) {
         return self::find(array(
-                'where' => 'page.id='.(int)$id,
-                'limit' => 1
+            'where' => 'page.id=' . (int) $id,
+            'limit' => 1
         ));
     }
 
     public static function childrenOf($id) {
-        return self::find(array('where' => 'parent_id='.$id, 'order' => 'position, page.created_on DESC'));
+        return self::find(array('where' => 'parent_id=' . $id, 'order' => 'position, page.created_on DESC'));
     }
 
     public static function hasChildren($id) {
-        return (boolean) self::countFrom('Page', 'parent_id = '.(int)$id);
+        return (boolean) self::countFrom('Page', 'parent_id = ' . (int) $id);
     }
 
     public static function deleteChildrenOf($id) {
-        $id = (int)$id;
+        $id = (int) $id;
 
         if (self::hasChildren($id)) {
             $children = self::childrenOf($id);
@@ -949,7 +998,7 @@ class Page extends Node {
 
         /* Clone passed in page. */
         $clone = Record::findByIdFrom('Page', $page->id);
-        $clone->parent_id = (int)$parent_id;
+        $clone->parent_id = (int) $parent_id;
         $clone->id = null;
 
         if (!$new_root_id) {
@@ -977,7 +1026,7 @@ class Page extends Node {
                 $tag->save();
             }
         }
-        
+
         /* This gets set only once even when called recursively. */
         if (!$new_root_id) {
             $new_root_id = $clone->id;
@@ -992,13 +1041,13 @@ class Page extends Node {
 
         return $new_root_id;
     }
-    
+
     public static function get_parts($page_id) {
         global $__CMS_CONN__;
 
         $objPart = new stdClass;
 
-        $sql = 'SELECT name, content_html FROM '.TABLE_PREFIX.'page_part WHERE page_id=?';
+        $sql = 'SELECT name, content_html FROM ' . TABLE_PREFIX . 'page_part WHERE page_id=?';
 
         if ($stmt = $__CMS_CONN__->prepare($sql)) {
             $stmt->execute(array($page_id));
@@ -1010,4 +1059,6 @@ class Page extends Node {
         return $objPart;
     }
 
-} // end Page class
+}
+
+// end Page class

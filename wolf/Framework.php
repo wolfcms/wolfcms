@@ -1535,7 +1535,7 @@ function redirect($url) {
  * An alias for redirect()
  *
  * @deprecated
- * @param <type> $url
+ * @see redirect()
  */
 function redirect_to($url) {
     redirect($url);

@@ -40,11 +40,6 @@ function explode_uri($uri) {
  * 
  * @deprecated
  * @see Page::findBySlug()
- *
- * @param string $slug
- * @param type $parent
- * @param type $all
- * @return page_class 
  */
 function find_page_by_slug($slug, &$parent, $all = false) {
     return Page::findBySlug($slug, $parent, $all);

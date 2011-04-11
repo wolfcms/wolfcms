@@ -84,14 +84,14 @@ class Archive {
     }
 
     private function _displayPage($slug) {
-        if (!$this->page = find_page_by_slug($slug, $this->page))
+        if (!$this->page = Page::findBySlug($slug, $this->page))
             page_not_found();
     }
 
     function get() {
         $date = join('-', $this->params);
 
-        $pages = $this->page->parent->children(array(
+        $pages = $this->page->parent()->children(array(
                     'where' => "page.created_on LIKE '{$date}%'",
                     'order' => 'page.created_on DESC'
                 ));
@@ -153,13 +153,20 @@ class Archive {
 
 class PageArchive extends Page {
 
-    protected function setUrl() {
+    /**
+     * Returns the current PageArchive object's url.
+     * 
+     * Note: overrides the Page::url() method.
+     *
+     * @return string   A fully qualified url.
+     */
+    public function url() {
         $use_date = Plugin::getSetting('use_dates', 'archive');
         if ($use_date === '1') {
-            $this->url = trim($this->parent->url . date('/Y/m/d/', strtotime($this->created_on)) . $this->slug, '/');
+            return BASE_URL . trim($this->parent()->uri() . date('/Y/m/d/', strtotime($this->created_on)) . $this->slug, '/') . ($this->uri() != '' ? URL_SUFFIX : '');
         }
         elseif ($use_date === '0') {
-            $this->url = trim($this->parent->url . '/' . $this->slug, '/');
+            return BASE_URL . trim($this->parent()->uri() . '/' . $this->slug, '/') . ($this->uri() != '' ? URL_SUFFIX : '');
         }
     }
 
