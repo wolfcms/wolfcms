@@ -44,4 +44,4 @@ Plugin::setInfos(array(
     'require_wolf_version' => '0.5.5'
 ));
 
-Plugin::addController('skeleton', __('Skeleton'), 'administrator', false);
+Plugin::addController('skeleton', __('Skeleton'), 'admin_view', false);
