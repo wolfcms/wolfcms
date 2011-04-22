@@ -41,6 +41,8 @@
 	'Cancel' => 'Annuleer',
 	'Close' => 'Sluit',
 	'Comments' => 'Opmerkingen',
+	'Copy Page Disabled' => 'Pagina kopiëren uitgeschakeld',
+	'Copy Page' => 'Pagina kopiëren',
 	'Confirm Password' => 'Bevestig Wachtwoord',
 	'Content-Type' => 'Content-Type',
 	'Create Core template' => 'Maak Core template',
@@ -58,6 +60,7 @@
 	'Description' => 'Beschrijving',
 	'Determines whether or not HTML code is allowed in a page\'s title.' => 'Bepaald of HTML code is toegestaan in een pagina z\'n titel.',
 	'Developer' => 'Ontwikkelaar',
+	'Documentation' => 'Documentatie',
 	'Draft' => 'Ontwerp',
 	'Drag and Drop' => 'Slepen en Neerzetten',
 	'Drag to Copy' => 'Slepen om te kopieren',
@@ -81,7 +84,7 @@
 	'Just replace <b>snippet</b> by the snippet name you want to include.' => 'Vervang <b>snippet</b> met de snipper naam die je wilt invoegen.',
 	'Keywords' => 'Sleutelwoorden',
 	'Language' => 'Taal',
-	'Last updated by' => 'Laatst bijwerkt door',
+	'Last updated by' => 'Laatst bijgewerkt door',
 	'Latest' => 'Recenste',
 	'Layout' => 'Layout',
 	'Layout <b>:name</b> has been deleted!' => 'Layout <b>:name</b> is verwijderd!',
@@ -182,6 +185,7 @@
 	'Username' => 'Gebruikersnaam',
 	'Username must contain a minimum of 3 characters!' => 'Gebruikersnaam moet minimaal 3 karakters bevatten!',
 	'Users' => 'Gebruikers',
+	'Valid until date' => 'Vervaldatum',
 	'Version' => 'Versie',
 	'View' => 'Bekijken',
 	'View Page' => 'Pagina bekijken',
@@ -221,8 +225,3 @@
 	'unknown' => 'onbekend',
 	'website:' => 'website',
     );
-
-
-
-
-
