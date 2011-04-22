@@ -162,8 +162,8 @@ if ($action == 'edit') { ?>
 
     <div id="part-tabs" class="content tabs">
         <div id="tab-toolbar" class="tab_toolbar">
-          <a href="#" id="add-part" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" alt="plus icon" /></a>
-          <a href="#" id="delete-part" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/minus.png" alt="minus icon" /></a>
+          <a href="#" id="add-part" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" alt="<?php echo __('Add Tab'); ?> icon" /></a>
+          <a href="#" id="delete-part" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/minus.png" alt="<?php echo __('Remove Tab'); ?> icon" /></a>
         </div>
         <ul class="tabNavigation">
             <?php foreach ($page_parts as $key => $page_part) { ?>
