@@ -9,6 +9,7 @@ Sigla:
 
 0.8.0 - released 2011-??-??
 
+. Refactored Page::find()-like methods and related methods like url() and uri()
 . Updated Czech translation for core - thanks ivy
 
 0.7.5 - released 2011-04-11
@@ -38,7 +39,6 @@ Sigla:
 - Fixed Email helper to prevent safe mode warning - thanks realslacker
 - Fixed small typo in User model preventing updated by info being updated
 - Fixed missing "ç" for toSlug() function in js
-. Refactored Page::find()-like methods and related methods like url() and uri()
 . Modified default slugs to use hyphen on install instead of underscore
 . Plugin's require_wolf_version entry now compared to Wolf's version using PHP's version_compare function - issue 267
 . Changed CSRF token timeout from 5 to 15 minutes
