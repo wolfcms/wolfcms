@@ -116,8 +116,13 @@ class Page extends Node {
      *
      * @return string   The url of the page object.
      */
-    public function url() {
-        return BASE_URL . $this->uri() . ($this->uri() != '' ? URL_SUFFIX : '');
+    public function url($suffix=false) {
+        if ($suffix === false) {
+            return BASE_URL . $this->uri();
+        }
+        else {
+            return BASE_URL . $this->uri() . ($this->uri() != '' ? URL_SUFFIX : '');
+        }
     }
 
     /**
@@ -839,9 +844,10 @@ class Page extends Node {
             }
 
             $parent = $page;
+
         } // foreach
 
-        return (!$page && $has_behavior) ? $parent : $page;
+        return ( ! $page ) ? $parent: $page;
     }
 
     /**
@@ -857,16 +863,19 @@ class Page extends Node {
 
         if (empty($slug)) {
             $slug = NULL;
-            $slug_sql = "slug IS NULL";
+            $slug_sql = "slug = ''";
         } else {
             $slug_sql = "slug = '" . $slug . "'";
         }
 
         if ($all) {
-            $where = $slug_sql . ' AND parent_id = ' . $parent_id . ' AND (status_id=' . self::STATUS_PREVIEW . ' OR status_id=' . self::STATUS_PUBLISHED . ' OR status_id=' . self::STATUS_HIDDEN . ')';
+            //$where = 'COALESCE(slug, \'\') = COALESCE('.$slug.', \'\') AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
+            $where = $slug_sql . ' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
         } else {
-            $where = $slug_sql . ' AND parent_id = ' . $parent_id . ' AND (status_id=' . self::STATUS_PUBLISHED . ' OR status_id=' . self::STATUS_HIDDEN . ')';
+            //$where = 'COALESCE(slug, \'\') = COALESCE('.$slug.', \'\') AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
+            $where = $slug_sql . ' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
         }
+        
         $page = self::find(array('where' => $where,
                     'limit' => 1));
 
