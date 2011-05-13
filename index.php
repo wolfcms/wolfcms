@@ -15,7 +15,7 @@
 //  Constants  ---------------------------------------------------------------
 define('IN_CMS', true);
 
-define('CMS_VERSION', '0.7.5');
+define('CMS_VERSION', '0.8.0-dev');
 define('CMS_ROOT', dirname(__FILE__));
 define('DS', DIRECTORY_SEPARATOR);
 define('CORE_ROOT', CMS_ROOT.DS.'wolf');
