@@ -58,7 +58,7 @@ class Archive {
                 break;
 
             default:
-                page_not_found();
+                pageNotFound();
         }
     }
 
@@ -72,20 +72,20 @@ class Archive {
                     'limit' => 1
                         ), array(), true);
 
-        if ($page) {
+        if ($page instanceof Page) {
             $this->page = $page;
             $month = isset($params[1]) ? (int) $params[1] : 1;
             $day = isset($params[2]) ? (int) $params[2] : 1;
 
             $this->page->time = mktime(0, 0, 0, $month, $day, (int) $params[0]);
         } else {
-            page_not_found();
+            pageNotFound();
         }
     }
 
     private function _displayPage($slug) {
         if (!$this->page = Page::findBySlug($slug, $this->page))
-            page_not_found();
+            pageNotFound($slug);
     }
 
     function get() {
@@ -160,7 +160,7 @@ class PageArchive extends Page {
      *
      * @return string   A fully qualified url.
      */
-    public function url() {
+    public function url($suffix=false) {
         $use_date = Plugin::getSetting('use_dates', 'archive');
         if ($use_date === '1') {
             return BASE_URL . trim($this->parent()->uri() . date('/Y/m/d/', strtotime($this->created_on)) . $this->slug, '/') . ($this->uri() != '' ? URL_SUFFIX : '');

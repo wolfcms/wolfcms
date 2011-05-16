@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -23,23 +24,23 @@ if (!defined('IN_CMS')) {
  * @copyright Philippe Archambault, 2008
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
-
 Plugin::setInfos(array(
-        'id'          => 'page_not_found',
-        'title'       => __('Page not found'),
-        'description' => __('Provides Page not found page types.'),
-        'version'     => '1.0.0',
-        'website'     => 'http://www.wolfcms.org/',
-        'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml'
+    'id' => 'page_not_found',
+    'title' => __('Page not found'),
+    'description' => __('Provides Page not found page types.'),
+    'version' => '1.0.0',
+    'website' => 'http://www.wolfcms.org/',
+    'update_url' => 'http://www.wolfcms.org/plugin-versions.xml'
 ));
 
 Behavior::add('page_not_found', '');
 Observer::observe('page_not_found', 'behavior_page_not_found');
 
+
 /**
  * Presents browser with a custom 404 page.
  */
-function behavior_page_not_found() {
+function behavior_page_not_found($url) {
     $sql = 'SELECT * FROM '.TABLE_PREFIX."page WHERE behavior_id='page_not_found'";
 
     $stmt = Record::getConnection()->prepare($sql);
