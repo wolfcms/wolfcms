@@ -1695,13 +1695,22 @@ function cleanXSS() {
 /**
  * Displays a "404 - page not found" message and exits.
  */
-function page_not_found() {
-    Observer::notify('page_not_found');
+function pageNotFound($url=null) {
+    Observer::notify('page_not_found', $url);
 
     header("HTTP/1.0 404 Not Found");
     echo new View('404');
     exit;
 }
+
+/**
+ * @deprecated
+ * @see pageNotFound()
+ */
+function page_not_found($url=null) {
+    pageNotFound($url);
+}
+
 
 /**
  * Converts a disk- or filesize number into a human readable format.
@@ -1810,7 +1819,7 @@ function getContentFromUrl($url, $flags=0, $context=false) {
  * @param Exception $e Exception object.
  */
 function framework_exception_handler($e) {
-    if (!DEBUG) page_not_found();
+    if (!DEBUG) pageNotFound();
 
     echo '<style>h1,h2,h3,p,td {font-family:Verdana; font-weight:lighter;}</style>';
     echo '<h1>Wolf CMS - Uncaught '.get_class($e).'</h1>';
