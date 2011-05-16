@@ -81,33 +81,41 @@ class Page extends Node {
         }
     }
 
+
     public function id() {
         return $this->id;
     }
+
 
     public function author() {
         return $this->author;
     }
 
+
     public function authorId() {
         return $this->author_id;
     }
+
 
     public function title() {
         return $this->title;
     }
 
+
     public function description() {
         return $this->description;
     }
+
 
     public function keywords() {
         return $this->keywords;
     }
 
+
     public function parentId() {
         return $this->parent_id;
     }
+
 
     /**
      * Returns the current page object's url.
@@ -118,12 +126,13 @@ class Page extends Node {
      */
     public function url($suffix=false) {
         if ($suffix === false) {
-            return BASE_URL . $this->uri();
+            return BASE_URL.$this->uri();
         }
         else {
-            return BASE_URL . $this->uri() . ($this->uri() != '' ? URL_SUFFIX : '');
+            return BASE_URL.$this->uri().($this->uri() != '' ? URL_SUFFIX : '');
         }
     }
+
 
     /**
      * Allows user to get the url of a page by page ID.
@@ -150,21 +159,26 @@ class Page extends Node {
         return $page->url();
     }
 
+
     public function slug() {
         return $this->slug;
     }
+
 
     public function breadcrumb() {
         return $this->breadcrumb;
     }
 
+
     public function updater() {
         return $this->updater;
     }
 
+
     public function updaterId() {
         return $this->updater_id;
     }
+
 
     /**
      * Returns a set of breadcrumbs as html.
@@ -176,14 +190,15 @@ class Page extends Node {
         $out = '';
         $url = '';
         $path = '';
-        $paths = explode('/', '/' . $this->slug);
+        $paths = explode('/', '/'.$this->slug);
         $nb_path = count($paths);
 
         if ($this->parent() !== false)
             $out .= $this->parent()->_inversedBreadcrumbs($separator);
 
-        return $out . '<span class="breadcrumb-current">' . $this->breadcrumb() . '</span>';
+        return $out.'<span class="breadcrumb-current">'.$this->breadcrumb().'</span>';
     }
+
 
     /**
      * 
@@ -193,13 +208,14 @@ class Page extends Node {
      * @return string 
      */
     private function _inversedBreadcrumbs($separator) {
-        $out = '<a href="' . $this->url() . '" title="' . $this->breadcrumb . '">' . $this->breadcrumb . '</a><span class="breadcrumb-separator">' . $separator . '</span>';
+        $out = '<a href="'.$this->url().'" title="'.$this->breadcrumb.'">'.$this->breadcrumb.'</a><span class="breadcrumb-separator">'.$separator.'</span>';
 
         if ($this->parent() !== false)
-            return $this->parent()->_inversedBreadcrumbs($separator) . $out;
+            return $this->parent()->_inversedBreadcrumbs($separator).$out;
 
         return $out;
     }
+
 
     /**
      * Returns the subjective "previous" Page.
@@ -210,13 +226,14 @@ class Page extends Node {
         if ($this->parent() !== false) {
             return $this->parent()->children(array(
                 'limit' => 1,
-                'where' => 'page.position < ' . $this->position . ' AND page.id < ' . $this->id,
+                'where' => 'page.position < '.$this->position.' AND page.id < '.$this->id,
                 'order' => 'page.position DESC'
             ));
         }
 
         return false;
     }
+
 
     /**
      * Returns the subjective "next" Page.
@@ -227,13 +244,14 @@ class Page extends Node {
         if ($this->parent() !== false) {
             return $this->parent()->children(array(
                 'limit' => 1,
-                'where' => 'page.position > ' . $this->position . ' AND page.id > ' . $this->id,
+                'where' => 'page.position > '.$this->position.' AND page.id > '.$this->id,
                 'order' => 'page.position ASC'
             ));
         }
 
         return false;
     }
+
 
     /**
      * Counts the number of children belonging to a Page.
@@ -255,23 +273,24 @@ class Page extends Node {
         $offset = isset($args['offset']) ? $args['offset'] : 0;
 
         // Prepare query parts
-        $where_string = trim($where) == '' ? '' : "AND " . $where;
+        $where_string = trim($where) == '' ? '' : "AND ".$where;
         $limit_string = $limit > 0 ? "LIMIT $limit" : '';
         $offset_string = $offset > 0 ? "OFFSET $offset" : '';
 
         // Prepare SQL
-        $sql = 'SELECT COUNT(*) AS nb_rows FROM ' . TABLE_PREFIX . 'page '
-                . 'WHERE parent_id = ' . $this->id
-                . " AND (valid_until IS NULL OR CAST('" . date('Y-m-d H:i:s') . "' AS DATETIME) < valid_until)"
-                . ' AND (status_id=' . Page::STATUS_PUBLISHED
-                . ($include_hidden ? ' OR status_id=' . Page::STATUS_HIDDEN : '') . ') '
-                . "$where_string ORDER BY $order $limit_string $offset_string";
+        $sql = 'SELECT COUNT(*) AS nb_rows FROM '.TABLE_PREFIX.'page '
+                .'WHERE parent_id = '.$this->id
+                ." AND (valid_until IS NULL OR CAST('".date('Y-m-d H:i:s')."' AS DATETIME) < valid_until)"
+                .' AND (status_id='.Page::STATUS_PUBLISHED
+                .($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN : '').') '
+                ."$where_string ORDER BY $order $limit_string $offset_string";
 
         $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute($value);
 
         return (int) $stmt->fetchColumn();
     }
+
 
     /**
      * Returns the Page object's parent.
@@ -300,9 +319,11 @@ class Page extends Node {
             return $this->parent($level);
     }
 
+
     public function executionTime() {
         return execution_time();
     }
+
 
     /**
      * Allows people to include the parsed content from a Snippet in a Page.
@@ -317,18 +338,19 @@ class Page extends Node {
         $snippet = Snippet::findByName($name);
 
         if (false !== $snippet) {
-            eval('?>' . $snippet->content_html);
+            eval('?>'.$snippet->content_html);
             return true;
         }
 
         return false;
     }
 
+
     private function _loadTags() {
         global $__CMS_CONN__;
         $this->tags = array();
 
-        $sql = "SELECT tag.id AS id, tag.name AS tag FROM " . TABLE_PREFIX . "page_tag AS page_tag, " . TABLE_PREFIX . "tag AS tag " .
+        $sql = "SELECT tag.id AS id, tag.name AS tag FROM ".TABLE_PREFIX."page_tag AS page_tag, ".TABLE_PREFIX."tag AS tag ".
                 "WHERE page_tag.page_id={$this->id} AND page_tag.tag_id = tag.id";
 
         if (!$stmt = $__CMS_CONN__->prepare($sql))
@@ -340,6 +362,7 @@ class Page extends Node {
         while ($object = $stmt->fetchObject())
             $this->tags[$object->id] = $object->tag;
     }
+
 
     /**
      * Returns the Tags for this Page.
@@ -353,6 +376,7 @@ class Page extends Node {
         return $this->tags;
     }
 
+
     /**
      * @fixme Merge getTags() with tags() and _loadTags()
      * @deprecated
@@ -364,7 +388,7 @@ class Page extends Node {
         $tablename_page_tag = self::tableNameFromClassName('PageTag');
         $tablename_tag = self::tableNameFromClassName('Tag');
 
-        $sql = "SELECT tag.id AS id, tag.name AS tag FROM $tablename_page_tag AS page_tag, $tablename_tag AS tag " .
+        $sql = "SELECT tag.id AS id, tag.name AS tag FROM $tablename_page_tag AS page_tag, $tablename_tag AS tag ".
                 "WHERE page_tag.page_id={$this->id} AND page_tag.tag_id = tag.id";
 
         if (!$stmt = self::$__CONN__->prepare($sql))
@@ -379,6 +403,7 @@ class Page extends Node {
 
         return $tags;
     }
+
 
     /**
      * Return a numerical representation of this page's place in the page hierarchy.
@@ -396,6 +421,7 @@ class Page extends Node {
 
         return $this->level;
     }
+
 
     /**
      * Return formatted date for page. Defaults to 'created on' date.
@@ -423,6 +449,7 @@ class Page extends Node {
             return strftime($format, strtotime($this->created_on));
     }
 
+
     /**
      * Return content of the page or a specific part of the page.
      *
@@ -434,14 +461,16 @@ class Page extends Node {
         // if part exist we generate the content en execute it!
         if (isset($this->part->$part)) {
             ob_start();
-            eval('?>' . $this->part->$part->content_html);
+            eval('?>'.$this->part->$part->content_html);
             $out = ob_get_contents();
             ob_end_clean();
             return $out;
-        } else if ($inherit && $this->parent() !== false) {
+        }
+        else if ($inherit && $this->parent() !== false) {
             return $this->parent()->content($part, true);
         }
     }
+
 
     /**
      * Check if a part exists and it has content
@@ -461,11 +490,13 @@ class Page extends Node {
             }
 
             return false;
-        } else if ($inherit && $this->parent() !== false) {
+        }
+        else if ($inherit && $this->parent() !== false) {
             return $this->parent()->hasContent($part, true);
         }
         return false;
     }
+
 
     /**
      * Check if a part exists.
@@ -480,11 +511,13 @@ class Page extends Node {
     public function partExists($part, $inherit=false) {
         if (isset($this->part->$part)) {
             return true;
-        } else if ($inherit && $this->parent() !== false) {
+        }
+        else if ($inherit && $this->parent() !== false) {
             return $this->parent()->partExists($part, true);
         }
         return false;
     }
+
 
     /**
      * Return an HTML anchor element for this page.
@@ -500,6 +533,7 @@ class Page extends Node {
         return sprintf('<a href="%s" %s>%s</a>', $this->url(), $options, $label
         );
     }
+
 
     /**
      * Allow user to link to a page by ID.
@@ -530,6 +564,7 @@ class Page extends Node {
         );
     }
 
+
     /**
      * Return an array of this page's children.
      * 
@@ -556,19 +591,19 @@ class Page extends Node {
             $offset = ((int) $_GET['page'] - 1) * $limit;
 
         // Prepare query parts
-        $where_string = trim($where) == '' ? '' : "AND " . $where;
+        $where_string = trim($where) == '' ? '' : "AND ".$where;
         $limit_string = $limit > 0 ? "LIMIT $limit" : '';
         $offset_string = $offset > 0 ? "OFFSET $offset" : '';
 
 
         // Prepare SQL
         $sql = 'SELECT page.*, author.name AS author, author.id AS author_id, updater.name AS updater, updater.id AS updater_id '
-                . 'FROM ' . TABLE_PREFIX . 'page AS page '
-                . 'LEFT JOIN ' . TABLE_PREFIX . 'user AS author ON author.id = page.created_by_id '
-                . 'LEFT JOIN ' . TABLE_PREFIX . 'user AS updater ON updater.id = page.updated_by_id '
-                . 'WHERE parent_id = ' . $this->id . ' AND (status_id=' . Page::STATUS_PUBLISHED . ($include_hidden ? ' OR status_id=' . Page::STATUS_HIDDEN : '') . ') '
-                . " AND (valid_until IS NULL OR CAST('" . date('Y-m-d H:i:s') . "' AS DATETIME) < valid_until)"
-                . "$where_string ORDER BY $order $limit_string $offset_string";
+                .'FROM '.TABLE_PREFIX.'page AS page '
+                .'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
+                .'LEFT JOIN '.TABLE_PREFIX.'user AS updater ON updater.id = page.updated_by_id '
+                .'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN : '').') '
+                ." AND (valid_until IS NULL OR CAST('".date('Y-m-d H:i:s')."' AS DATETIME) < valid_until)"
+                ."$where_string ORDER BY $order $limit_string $offset_string";
 
         $pages = array();
 
@@ -597,6 +632,7 @@ class Page extends Node {
         return $pages;
     }
 
+
     /**
      * Finds the "login needed" status for the page.
      *
@@ -609,10 +645,11 @@ class Page extends Node {
             return $this->needs_login;
     }
 
+
     public function _executeLayout() {
         global $__CMS_CONN__;
 
-        $sql = 'SELECT content_type, content FROM ' . TABLE_PREFIX . 'layout WHERE id = ?';
+        $sql = 'SELECT content_type, content FROM '.TABLE_PREFIX.'layout WHERE id = ?';
 
         $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute(array($this->_getLayoutId()));
@@ -623,15 +660,16 @@ class Page extends Node {
                 $layout->content_type = 'text/html';
 
             // set content-type and charset of the page
-            header('Content-Type: ' . $layout->content_type . '; charset=UTF-8');
+            header('Content-Type: '.$layout->content_type.'; charset=UTF-8');
 
             Observer::notify('page_before_execute_layout');
 
             // execute the layout code
-            eval('?>' . $layout->content);
+            eval('?>'.$layout->content);
             // echo $layout->content;
         }
     }
+
 
     /**
      * find the layoutId of the page where the layout is set
@@ -644,6 +682,7 @@ class Page extends Node {
         else
             exit('You need to set a layout!');
     }
+
 
     public function beforeInsert() {
         $this->created_on = date('Y-m-d H:i:s');
@@ -668,19 +707,21 @@ class Page extends Node {
         return true;
     }
 
+
     public function beforeUpdate() {
-        $this->created_on = $this->created_on . ' ' . $this->created_on_time;
+        $this->created_on = $this->created_on.' '.$this->created_on_time;
         unset($this->created_on_time);
 
         if (!empty($this->published_on)) {
-            $this->published_on = $this->published_on . ' ' . $this->published_on_time;
+            $this->published_on = $this->published_on.' '.$this->published_on_time;
             unset($this->published_on_time);
-        } else if ($this->status_id == Page::STATUS_PUBLISHED) {
+        }
+        else if ($this->status_id == Page::STATUS_PUBLISHED) {
             $this->published_on = date('Y-m-d H:i:s');
         }
 
         if (!empty($this->valid_until)) {
-            $this->valid_until = $this->valid_until . ' ' . $this->valid_until_time;
+            $this->valid_until = $this->valid_until.' '.$this->valid_until_time;
             unset($this->valid_until_time);
             if ($this->valid_until < date('Y-m-d H:i:s')) {
                 $this->status_id = Page::STATUS_ARCHIVED;
@@ -700,6 +741,7 @@ class Page extends Node {
         return true;
     }
 
+
     public function beforeDelete() {
         $ret = false;
 
@@ -709,6 +751,7 @@ class Page extends Node {
 
         return $ret;
     }
+
 
     /**
      * Returns the uri for this node.
@@ -720,13 +763,14 @@ class Page extends Node {
     public function uri() {
         if ($this->uri === false) {
             if ($this->parent() !== false)
-                $this->uri = trim($this->parent()->uri() . '/' . $this->slug, '/');
+                $this->uri = trim($this->parent()->uri().'/'.$this->slug, '/');
             else
                 $this->uri = trim($this->slug, '/');
         }
 
         return $this->uri;
     }
+
 
     /**
      * @deprecated
@@ -735,6 +779,7 @@ class Page extends Node {
     public function getUri() {
         return $this->uri();
     }
+
 
     public function setTags($tags) {
         if (is_string($tags))
@@ -757,7 +802,8 @@ class Page extends Node {
                 self::$__CONN__->exec("UPDATE $tablename SET count = count - 1 WHERE name = '$tag'");
 
             return Record::deleteWhere('PageTag', 'page_id=?', array($this->id));
-        } else {
+        }
+        else {
             $old_tags = array_diff($current_tags, $tags);
             $new_tags = array_diff($tags, $current_tags);
 
@@ -788,6 +834,7 @@ class Page extends Node {
         }
     }
 
+
     /**
      * This function should no longer be used.
      * 
@@ -801,6 +848,7 @@ class Page extends Node {
         return $this->setTags($tags);
     }
 
+
     /**
      * This function should no longer be used.
      * 
@@ -810,6 +858,7 @@ class Page extends Node {
     public static function find_page_by_uri($uri) {
         return Page::findByUri($uri);
     }
+
 
     public static function findByUri($uri, $all = false) {
         global $__CMS_CONN__;
@@ -828,9 +877,10 @@ class Page extends Node {
         $parent = false;
 
         foreach ($urls as $page_slug) {
-            $url = ltrim($url . '/' . $page_slug, '/');
+            $url = ltrim($url.'/'.$page_slug, '/');
 
-            if ($page = self::findBySlug($page_slug, $parent, $all)) {
+            $page = self::findBySlug($page_slug, $parent, $all);
+            if ($page instanceof Page) {
                 // check for behavior
                 if ($page->behavior_id != '') {
                     // add a instance of the behavior with the name of the behavior
@@ -839,16 +889,17 @@ class Page extends Node {
 
                     return $page;
                 }
-            } else {
+            }
+            else {
                 break;
             }
 
             $parent = $page;
-
         } // foreach
-
-        return ( ! $page ) ? $parent: $page;
+        
+        return $page;
     }
+
 
     /**
      * find a page by the slug and parent id
@@ -864,23 +915,26 @@ class Page extends Node {
         if (empty($slug)) {
             $slug = NULL;
             $slug_sql = "slug = ''";
-        } else {
-            $slug_sql = "slug = '" . $slug . "'";
+        }
+        else {
+            $slug_sql = "slug = '".$slug."'";
         }
 
         if ($all) {
             //$where = 'COALESCE(slug, \'\') = COALESCE('.$slug.', \'\') AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
-            $where = $slug_sql . ' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
-        } else {
-            //$where = 'COALESCE(slug, \'\') = COALESCE('.$slug.', \'\') AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
-            $where = $slug_sql . ' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
+            $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
         }
-        
+        else {
+            //$where = 'COALESCE(slug, \'\') = COALESCE('.$slug.', \'\') AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
+            $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
+        }
+
         $page = self::find(array('where' => $where,
                     'limit' => 1));
 
         return $page;
     }
+
 
     /**
      * Finds a Page record based on supplied arguments.
@@ -927,9 +981,9 @@ class Page extends Node {
         $tablename_user = self::tableNameFromClassName('User');
 
         // Prepare SQL
-        $sql = "SELECT page.*, creator.name AS created_by_name, updater.name AS updated_by_name FROM $tablename AS page" .
-                " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id" .
-                " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id" .
+        $sql = "SELECT page.*, creator.name AS created_by_name, updater.name AS updated_by_name FROM $tablename AS page".
+                " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id".
+                " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id".
                 " $where_string $order_by_string $limit_string $offset_string";
 
         $stmt = self::$__CONN__->prepare($sql);
@@ -953,32 +1007,42 @@ class Page extends Node {
         }
 
         // if we're loading just one result return it
-        if ($limit == 1 AND isset($objects['0']) AND is_object($objects['0'])) {
-            return $objects['0'];
+        if ($limit == 1) {
+            if (isset($objects['0']) && is_object($objects['0'])) {
+                return $objects['0'];
+            }
+        }
+        else {
+            // or return them all
+            return $objects;
         }
 
-        // or return them all
-        return $objects;
+        return false;
     }
+
 
     public static function findAll($args = null) {
         return self::find($args);
     }
 
+
     public static function findById($id) {
         return self::find(array(
-            'where' => 'page.id=' . (int) $id,
+            'where' => 'page.id='.(int) $id,
             'limit' => 1
         ));
     }
 
+
     public static function childrenOf($id) {
-        return self::find(array('where' => 'parent_id=' . $id, 'order' => 'position, page.created_on DESC'));
+        return self::find(array('where' => 'parent_id='.$id, 'order' => 'position, page.created_on DESC'));
     }
 
+
     public static function hasChildren($id) {
-        return (boolean) self::countFrom('Page', 'parent_id = ' . (int) $id);
+        return (boolean) self::countFrom('Page', 'parent_id = '.(int) $id);
     }
+
 
     public static function deleteChildrenOf($id) {
         $id = (int) $id;
@@ -991,7 +1055,8 @@ class Page extends Node {
                         return false;
                     }
                 }
-            } elseif ($children instanceof Page) { // because Page::childrenOf return directly an object when there is only 1 child...
+            }
+            elseif ($children instanceof Page) { // because Page::childrenOf return directly an object when there is only 1 child...
                 if (!$children->delete()) {
                     return false;
                 }
@@ -1000,6 +1065,7 @@ class Page extends Node {
 
         return true;
     }
+
 
     public static function cloneTree($page, $parent_id) {
         /* This will hold new id of root of cloned tree. */
@@ -1051,12 +1117,13 @@ class Page extends Node {
         return $new_root_id;
     }
 
+
     public static function get_parts($page_id) {
         global $__CMS_CONN__;
 
         $objPart = new stdClass;
 
-        $sql = 'SELECT name, content_html FROM ' . TABLE_PREFIX . 'page_part WHERE page_id=?';
+        $sql = 'SELECT name, content_html FROM '.TABLE_PREFIX.'page_part WHERE page_id=?';
 
         if ($stmt = $__CMS_CONN__->prepare($sql)) {
             $stmt->execute(array($page_id));
