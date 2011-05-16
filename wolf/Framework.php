@@ -110,7 +110,6 @@ final class Dispatcher {
      */
     public static function addRoute($route, $destination=null) {
         if ($destination != null && !is_array($route)) {
-        //if (!is_array($route)) {
             $route = array($route => $destination);
         }
         self::$routes = array_merge(self::$routes, $route);
@@ -126,6 +125,9 @@ final class Dispatcher {
         if (!self::$routes || count(self::$routes) == 0) {
             return false;
         }
+        
+        // Make sure we strip trailing slashes in the requested url
+        $requested_url = rtrim($requested_url, '/');
 
         foreach (self::$routes as $route => $uri) {
             // Convert wildcards to regex
@@ -190,6 +192,9 @@ final class Dispatcher {
         if (strpos($requested_url, '/') !== 0) {
             $requested_url = '/' . $requested_url;
         }
+        
+        // Make sure we strip trailing slashes in the requested url
+        $requested_url = rtrim($requested_url, '/');
 
         self::$requested_url = $requested_url;
 

@@ -10,6 +10,7 @@ Sigla:
 0.8.0 - released 2011-??-??
 
 - Fixed problem with user name validation. User's name can now contain utf-8 characters. - issue 350
+- Fixed issue 344 - Dispatcher now strips trailing slashes from requested url.
 . Refactored Page::find()-like methods and related methods like url() and uri()
 . Updated Czech translation for core - thanks ivy
 
