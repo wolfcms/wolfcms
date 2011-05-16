@@ -126,11 +126,15 @@ class UserController extends Controller {
         }
 
         // Check alphanumerical fields
-        $fields = array('username', 'name');
+        $fields = array('username');
         foreach ($fields as $field) {
             if (!empty($data[$field]) && !Validate::alphanum_space($data[$field])) {
                 $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
             }
+        }
+        
+        if (!empty($data['name']) && !Validate::alphanum_space($data['name'], true)) {
+            $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'name'));
         }
 
         if (!empty($data['email']) && !Validate::email($data['email'])) {
@@ -240,11 +244,15 @@ class UserController extends Controller {
         }
 
         // Check alphanumerical fields
-        $fields = array('username', 'name');
+        $fields = array('username');
         foreach ($fields as $field) {
             if (!empty($data[$field]) && !Validate::alphanum_space($data[$field])) {
                 $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
             }
+        }
+
+        if (!empty($data['name']) && !Validate::alphanum_space($data['name'], true)) {
+            $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'name'));
         }
 
         if (!empty($data['email']) && !Validate::email($data['email'])) {
