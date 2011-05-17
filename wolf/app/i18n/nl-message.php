@@ -132,7 +132,7 @@
 	'Published' => 'Gepubliceerd',
 	'Published date' => 'Publicatie datum',
 	'Reject' => 'Afwijzen',
-	'Remember me for 14 days' => 'Onthoud mij 14 dagen lang',
+	'Remember me for 30 minutes.' => 'Onthoud mij voor 30 minuten',
 	'Remove Tab' => 'Verwijder Tab',
 	'Remove page' => 'Verwijder Pagina',
 	'Remove unavailable' => 'Verwijder niet beschikbaar',
