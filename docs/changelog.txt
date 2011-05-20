@@ -13,6 +13,7 @@ Sigla:
 - Fixed problem with user name validation. User's name can now contain utf-8 characters. - issue 350
 - Fixed issue 344 - Dispatcher now strips trailing slashes from requested url.
 . Refactored Page::find()-like methods and related methods like url() and uri()
+. Updated nestedSortable.js to current version (1.3.4)
 . Updated Czech translation for core - thanks ivy
 
 0.7.5 - released 2011-04-11
