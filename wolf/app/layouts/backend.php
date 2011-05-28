@@ -122,7 +122,7 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
     <div id="mask"></div>
 
     <div id="header">
-      <div id="site-title"><a href="<?php echo URL_PUBLIC; ?>"><?php echo Setting::get('admin_title'); ?></a></div>
+      <div id="site-title"><a href="<?php echo get_url(); ?>"><?php echo Setting::get('admin_title'); ?></a></div>
       <div id="mainTabs">
         <ul>
           <li id="page-plugin" class="plugin"><a href="<?php echo get_url('page'); ?>"<?php if ($ctrl=='page') echo ' class="current"'; ?>><?php echo __('Pages'); ?></a></li>
