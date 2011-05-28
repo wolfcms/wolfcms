@@ -59,7 +59,7 @@ $PDO->exec("CREATE UNIQUE INDEX layout_name ON layout (name)");
 $PDO->exec("CREATE TABLE page ( 
     id INTEGER NOT NULL PRIMARY KEY,
     title varchar(255) default NULL ,
-    slug varchar(100) default NULL , 
+    slug varchar(100) NOT NULL default '' , 
     breadcrumb varchar(160) default NULL ,
     keywords varchar(255) default NULL ,
     description text , 
