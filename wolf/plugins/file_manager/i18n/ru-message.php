@@ -42,9 +42,9 @@
 	'Save and Continue Editing' 					=> 'Сохранить и Продолжить',
 	'Size' 													=> 'Размер',
 	'Upload' 												=> 'Загрузить',
-	'Upload file' 											=> 'Загрузить файл',
+	'Upload files' 											=> 'Загрузить файл',
 	'You do not have permission to access the requested page!' 	=> 'Вы не имеете прав доступа к запрашиваемой странице!',
 	'or' 														=> 'или',
-	'overwrite it?' 											=> 'заменить?',
+	'Overwrite if a file with the same name already exists?' 											=> 'заменить?',
 
     );

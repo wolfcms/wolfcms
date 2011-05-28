@@ -124,6 +124,7 @@ $PDO->exec("INSERT INTO ".TABLE_PREFIX."plugin_settings (plugin_id, name, value)
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."plugin_settings (plugin_id, name, value) VALUES ('file_manager', 'filemode', '0644')");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."plugin_settings (plugin_id, name, value) VALUES ('file_manager', 'show_hidden', '0')");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."plugin_settings (plugin_id, name, value) VALUES ('file_manager', 'show_backups', '1')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."plugin_settings (plugin_id, name, value) VALUES ('file_manager', 'upload_fields', '3')");
 
 
 //  Dumping data for table: snippet ------------------------------------------

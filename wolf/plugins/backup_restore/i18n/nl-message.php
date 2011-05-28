@@ -43,7 +43,7 @@
         'Unable to reconstruct table :tablename.' => 'Niet in staat om tabel :tablename te recontrueren.',
         'Unable to remove plugin settings.' => 'Niet in staat om plugin instellingen te verwijderen.',
         'Unable to truncate current table :tablename.' => 'Niet in staat om tabel :tablename leeg te gooien.',
-        'Upload file' => 'Upload bestand',
+        'Upload files' => 'Upload bestand',
         'Version' => 'Versie',
         'Warning!' => 'Waarschuwing!',
         'What style of timestamp should be encorporated into the filename.' => 'Welke stijl tijd stempel dient opgenomen te worden in de bestandsnaam.',

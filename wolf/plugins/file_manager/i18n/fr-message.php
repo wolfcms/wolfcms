@@ -36,8 +36,8 @@
         'Save and Continue Editing' => 'Enregistrer et continuer les modifications',
         'Size' => 'Taille',
         'Upload' => 'Importer',
-        'Upload file' => 'Importer un fichier',
+        'Upload files' => 'Importer un fichier',
         'You do not have permission to access the requested page!' => 'Vous n’avez pas les permissions nécessaires pour accéder à la page requise&nbsp;!',
         'or' => 'ou',
-        'overwrite it?' => 'Écraser l’ancienne version&nbsp;?',
+        'Overwrite if a file with the same name already exists?' => 'Écraser l’ancienne version&nbsp;?',
     );

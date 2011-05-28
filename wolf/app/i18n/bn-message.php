@@ -48,7 +48,7 @@ return array(
 'Remove file' => 'ফাইল সরিয়ে ফেল',
 'Create new file' => 'নতুন ফাইল তৈরী কর',
 'Create new directory' => 'নতুন ডিরেক্টরী তৈরী কর',
-'Upload file' => 'ফাইল আপলোড কর',
+'Upload files' => 'ফাইল আপলোড কর',
 'rename' => 'নাম বদলাও',
 
 // layouts

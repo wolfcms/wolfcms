@@ -23,6 +23,13 @@
                 </td>
                 <td class="help"><?php echo __('Do you want to show backup files? If you select no, all files ending with "~" will not be displayed.'); ?></td>
             </tr>
+            <tr>
+                <td class="label"><label for="setting_upload_fields"><?php echo __('Number of upload fields'); ?>: </label></td>
+                <td class="field">
+                    <input type="number" value="<?php echo $settings['upload_fields'] ?>"  class="select" name="settings[upload_fields]" id="setting_upload_fields" />
+                </td>
+                <td class="help"><?php echo __('How many files do you want to upload at once?'); ?></td>
+            </tr>
         </table>
     </fieldset>
     <fieldset style="padding: 0.5em;">

@@ -36,8 +36,8 @@
         'Save and Continue Editing' => 'Speichern und weiterbearbeiten',
         'Size' => 'Grösse',
         'Upload' => 'Hochladen',
-        'Upload file' => 'Datei hochladen',
+        'Upload filess' => 'Datei hochladen',
         'You do not have permission to access the requested page!' => 'Zugriff zur angeforderten Seite verweigert: Sie haben nicht genügend Rechte!',
         'or' => 'oder',
-//        'overwrite it?' => '',
+        'Overwrite if a file with the same name already exists?' => 'Überschreiben, falls bereits eine Datei mit demselben Namen vorhanden ist?',
     );

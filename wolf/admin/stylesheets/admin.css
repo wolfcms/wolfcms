@@ -772,6 +772,19 @@ table.fieldset .error-with-field small {
   border: 1px solid #ccc;
 }
 
+#upload-file-popup fieldset {
+	margin: 20px 0;
+	border: 0;
+}
+
+#upload-file-popup fieldset input {
+	margin-bottom: 5px;
+}
+
+#upload-file-popup fieldset ol {
+	padding-left: 20px;
+}
+
 /* Popups ----------------------------------------------------------------- */
 #content .popup {
   background-color: white;

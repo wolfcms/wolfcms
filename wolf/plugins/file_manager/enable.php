@@ -36,8 +36,9 @@ $settings = array(
 	'umask'		=> isset($settings['umask'])        ? $settings['umask']	: '0022',
 	'dirmode'	=> isset($settings['dirmode'])      ? $settings['dirmode']	: '0755',
 	'filemode'	=> isset($settings['filemode'])     ? $settings['filemode']	: '0644',
-        'show_hidden'   => isset($settings['show_hidden'])  ? $settings['show_hidden']	: '0',
-        'show_backups'  => isset($settings['show_backups']) ? $settings['show_backups']	: '1'
+  'show_hidden'   => isset($settings['show_hidden'])  ? $settings['show_hidden']	: '0',
+  'show_backups'  => isset($settings['show_backups']) ? $settings['show_backups']	: '1'
+  'upload_fields'  => isset($settings['upload_fields']) ? $settings['upload_fields']	: '3'
 );
 
 //	flash message

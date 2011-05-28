@@ -41,11 +41,11 @@
 	'Save and Continue Editing' => 'Bewaar en Blijf Bewerken',
 	'Size' => 'Grootte',
 	'Upload' => 'Upload',
-	'Upload file' => 'Upload bestand',
+	'Upload files' => 'Upload bestand',
 	'You do not have permission to access the requested page!' => 'Je hebt niet de bevoegdheid om deze pagina te bekijken!',
 	'delete file icon' => 'Verwijder bestand icon',
 	'or' => 'of',
-	'overwrite it?' => 'overschrijven?',
+	'Overwrite if a file with the same name already exists?' => 'overschrijven?',
     );
 	
 	
