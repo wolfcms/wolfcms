@@ -112,6 +112,7 @@ $PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('default_s
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('default_filter_id', '')");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('default_tab', '')");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('allow_html_title', 'off')");
+$PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('part_presets', 'body=Main content for your page,sidebar=Column on the right side')");
 $PDO->exec("INSERT INTO ".TABLE_PREFIX."setting (name, value) VALUES ('plugins', 'a:5:{s:7:\"textile\";i:1;s:8:\"markdown\";i:1;s:7:\"archive\";i:1;s:14:\"page_not_found\";i:1;s:12:\"file_manager\";i:1;}')");
 
 

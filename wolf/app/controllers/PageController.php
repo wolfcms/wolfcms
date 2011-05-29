@@ -90,8 +90,9 @@ class PageController extends Controller {
             'filters' => Filter::findAll(),
             'behaviors' => Behavior::findAll(),
             'page_parts' => $page_parts,
-            'layouts' => Record::findAllFrom('Layout'))
-        );
+            'layouts' => Record::findAllFrom('Layout'),
+            'presets' => $this->_getPresets()
+        ));
     }
 
 
@@ -163,8 +164,9 @@ class PageController extends Controller {
             'filters' => Filter::findAll(),
             'behaviors' => Behavior::findAll(),
             'page_parts' => $page_parts,
-            'layouts' => Record::findAllFrom('Layout', '1=1 ORDER BY position'))
-        );
+            'layouts' => Record::findAllFrom('Layout', '1=1 ORDER BY position'),
+            'presets' => $this->_getPresets()
+        ));
     }
 
 
@@ -321,6 +323,31 @@ class PageController extends Controller {
             'index' => $index,
             'page_part' => $page_part
         ));
+    }
+    
+    
+    /**
+     * Returns list of presets with help-message from settings
+     * 
+     * @return array
+     */
+    private function _getPresets() {
+        $presets = array();
+        
+        $setting = trim(Setting::get('part_presets'));
+        
+        if (!empty($setting)) {
+          $configs = explode(',', $setting);
+          for ($i = 0; $i < count($configs); $i++) {
+            $current = explode('=', $configs[$i]);
+            if (empty($current)) {
+              continue;
+            }
+            $presets[$current[0]] = ucfirst($current[0]) . ': ' . $current[1];
+          }
+        }
+        
+        return $presets;
     }
 
 

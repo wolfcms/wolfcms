@@ -255,8 +255,13 @@ h3, h4 { margin: .5em 0; font-size: 1.2em; font-weight: bold; }
 .tab_toolbar {
   float: right;
   margin-top: .28em;
+	font-size: 12px;
 }
-.tab_toolbar img { padding-bottom: 2px; }
+.tab_toolbar img {
+	padding-bottom: 2px;
+	vertical-align: middle;
+	margin-left: 5px;
+}
 .pages {
   background-color: #fff;
   margin-top: 4px;
@@ -783,6 +788,15 @@ table.fieldset .error-with-field small {
 
 #upload-file-popup fieldset ol {
 	padding-left: 20px;
+}
+
+#add-part-dialog {
+	width: 500px;
+}
+
+#add-part-dialog ol {
+	padding: 20px 20px 20px 40px;
+	line-height: 1.7;
 }
 
 /* Popups ----------------------------------------------------------------- */
