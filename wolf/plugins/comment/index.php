@@ -76,7 +76,7 @@ function comment_display_moderatable_count(&$plugin_name, &$plugin)
 
         if ($numlabel && $numlabel == '1')
         {
-            $plugin->label = $plugin->label.' <span id="comment-badge">('.comments_count_moderatable().'/'.comments_count_total().')</span>';
+            $plugin->label = __('Comments').' <span id="comment-badge">('.comments_count_moderatable().'/'.comments_count_total().')</span>';
         }
     }
 }
