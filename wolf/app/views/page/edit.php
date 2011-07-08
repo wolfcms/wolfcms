@@ -199,7 +199,7 @@ if ($action == 'edit') { ?>
     </div>
     
     <p><small>
-<?php if (isset($page->updated_on)): ?>
+<?php if (isset($page->updated_on) and isset($page->updated_by_name)): ?>
     <?php echo __('Last updated by'); ?> <?php echo $page->updated_by_name; ?> <?php echo __('on'); ?> <?php echo date('D, j M Y', strtotime($page->updated_on)); ?>
 <?php endif; ?>
     &nbsp;
