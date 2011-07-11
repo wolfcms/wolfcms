@@ -343,9 +343,9 @@ class Page extends Node {
         $page = Page::findByTitle($title);
         
         // Build the page's parts so we can get to them!
-    	if (!isset($page->part)) {
-    		$page->part = self::get_parts($page->id);
-    	}
+        if (!isset($page->part)) {
+            $page->part = self::get_parts($page->id);
+        }
 
         if (false !== $page && $page->hasContent($part)) {
             eval('?>'.$page->content($part));
