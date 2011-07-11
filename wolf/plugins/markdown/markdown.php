@@ -18,6 +18,8 @@
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
 
+header('Content-Type: text/javascript');
+
 include_once("../../../config.php");
 
 $changedurl = str_replace('//','|',URL_PUBLIC);

@@ -65,7 +65,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."layout (
 $PDO->exec("CREATE TABLE ".TABLE_PREFIX."page (
   id serial,
   title character varying(255) DEFAULT NULL,
-  slug character varying(100) DEFAULT NULL,
+  slug character varying(100) NOT NULL DEFAULT '',
   breadcrumb character varying(160) DEFAULT NULL,
   keywords character varying(255) DEFAULT NULL,
   description text,
