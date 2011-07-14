@@ -100,7 +100,7 @@ class LoginController extends Controller {
                 $this->_checkVersion();
                 // redirect to defaut controller and action
                 if ($redirect != null && $redirect != 'null')
-                    redirect($data['redirect']);
+                    redirect($redirect);
                 else
                     redirect(get_url());
             }
