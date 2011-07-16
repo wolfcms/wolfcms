@@ -144,7 +144,7 @@
 	'Save and Continue Editing' => 'Bewaar en Blijf Bewerken',
 	'Send password' => 'Verstuur wachtwoord',
 	'Settings' => 'Instellingen',
-	'Settings have been saved!' => 'Instelligen zijn bewaard!',
+	'Settings have been saved!' => 'Instellingen zijn bewaard!',
 	'Show Calendar' => 'Kalender Weergeven',
 	'Site email' => 'Website e-mail',
 	'Slug' => 'Pagina',
