@@ -41,11 +41,11 @@ return array(
 'Save and Continue Editing' => 'Uložiť a pokračovať v úpravách',
 'Size' => 'Veľkosť',
 'Upload' => 'Nahrať',
-'Upload file' => 'Nahrať súbor',
+'Upload files' => 'Nahrať súbor',
 'You do not have permission to access the requested page!' => 'Nemáte práva na prístup k požadovanej stránke!',
 'delete file icon' => 'ikona zmazanie súboru',
 'or' => 'alebo',
-'overwrite it?' => 'prepísať?'
+'Overwrite if a file with the same name already exists?' => 'prepísať?'
 
 );
 ?>

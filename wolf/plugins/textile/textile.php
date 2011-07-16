@@ -17,6 +17,8 @@
  * @copyright Martijn van der Kleijn, 2010
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
+ 
+header('Content-Type: text/javascript');
 
 include_once("../../../config.php");
 

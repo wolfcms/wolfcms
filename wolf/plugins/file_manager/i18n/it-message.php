@@ -36,8 +36,8 @@
         'Save and Continue Editing' => 'Salva e continua ad editare',
 //        'Size' => '',
 //        'Upload' => '',
-//        'Upload file' => '',
+//        'Upload files' => '',
         'You do not have permission to access the requested page!' => 'Permessi insufficenti per accedere alla pagina richiesta',
         'or' => 'o',
-//        'overwrite it?' => '',
+//        'Overwrite if a file with the same name already exists?' => '',
     );

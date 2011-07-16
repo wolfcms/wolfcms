@@ -36,8 +36,8 @@
         'Save and Continue Editing' => 'Arkiver og Forsæt Redigering',
         'Size' => 'Størrelse',
         'Upload' => 'Upload',
-        'Upload file' => 'Upload fil',
+        'Upload files' => 'Upload fil',
         'You do not have permission to access the requested page!' => 'Du har ikke rettigheder til adgang af den ønskede side!',
         'or' => 'eller',
-//        'overwrite it?' => '',
+//        'Overwrite if a file with the same name already exists?' => '',
     );

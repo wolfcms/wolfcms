@@ -43,7 +43,7 @@
     'Unable to reconstruct table :tablename.' => 'Tidak dapat merekonstruksi tabel :tablename.',
     'Unable to remove plugin settings.' => 'Tidak dapat menghapus pengaturan plugin.',
     'Unable to truncate current table :tablename.' => 'Tidak dapat mengosongkan tabel :tablename.',
-    'Upload plain text XML file' => 'Upload file XML ',
+    'Upload plain text XML file' => 'Upload files XML ',
     'Version' => 'Versi',
     'Warning!' => 'Perhatian!',
     'What style of timestamp should be encorporated into the filename.' => 'Format waktu seperti apa yang harus dimasukan ke nama file.',

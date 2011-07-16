@@ -36,8 +36,8 @@
         'Save and Continue Editing' => '保存后继续编辑',
         'Size' => '大小',
         'Upload' => '上传',
-        'Upload file' => '上传文件',
+        'Upload files' => '上传文件',
         'You do not have permission to access the requested page!' => '你没有权限读取此页!',
         'or' => '或者',
-        'overwrite it?' => '覆盖?',
+        'Overwrite if a file with the same name already exists?' => '覆盖?',
     );

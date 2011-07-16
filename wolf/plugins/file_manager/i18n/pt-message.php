@@ -42,9 +42,9 @@ return array(
         'Save and Continue Editing' => 'Salvar e continuar editando',
         'Size' => 'Tamanho',
         'Upload' => 'Enviar',
-        'Upload file' => 'Enviar arquivo',
+        'Upload files' => 'Enviar arquivo',
         'You do not have permission to access the requested page!' => 'Voce nao tem permissao para acessar a pagina solicitada',
         'delete file icon' => 'icone de excluir arquivo',
         'or' => 'ou',
-        'overwrite it?' => 'salvar sobre arquivo existente?',
+        'Overwrite if a file with the same name already exists?' => 'salvar sobre arquivo existente?',
 );

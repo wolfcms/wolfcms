@@ -145,6 +145,11 @@
                             <td colspan="3"><h3><?php echo __('Page options'); ?></h3></td>
                         </tr>
                         <tr>
+                            <td class="label"><label for="setting_part_presets"><?php echo __('Part presets'); ?></label></td>
+                            <td class="field"><input class="textbox" id="setting_part_presets" maxlength="255" name="setting[part_presets]" size="255" type="text" value="<?php echo Setting::get('part_presets'); ?>" /></td>
+                            <td class="help"><?php echo __('You can supply presets of parts used by your application to help the user creating pages. Format your setting like <pre>sidebar=You can enter content which will be displayed on the right-hand side,gallery=Enter a folder from which a gallery will be created</pre>, where the string before "=" is the name of the part and the text afterwards a description.'); ?></td>
+                        </tr>
+                        <tr>
                             <td class="label"><label for="setting_allow_html_title"><?php echo __('Allow HTML in Title'); ?></label></td>
                             <td class="field">
                                 <input type="checkbox" id="setting_allow_html_title" name="setting[allow_html_title]" <?php if (Setting::get('allow_html_title') == 'on') echo ' checked="checked"'; ?> />

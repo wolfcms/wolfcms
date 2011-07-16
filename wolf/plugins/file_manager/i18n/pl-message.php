@@ -42,7 +42,7 @@
     'Save and Continue Editing' => 'Zapisz i Kontynuuj edycje',
     'Size' => 'Rozmiar',
     'Upload' => 'Wgraj',
-    'Upload file' => 'Wgraj plik z dysku',
+    'Upload files' => 'Wgraj plik z dysku',
     'You do not have permission to access the requested page!' => 'Nie masz uprawnień do tej strony!',
     'You do not have sufficient permissions to change the permissions on a file or directory.' => 'Nie masz uprawnień aby zmieniać uprawnienia plików i katalogów.',
     'You do not have sufficient permissions to create a directory.' => 'Nie masz uprawnień aby tworzyć katalogi.',
@@ -52,5 +52,5 @@
     'You do not have sufficient permissions to upload a file.' => 'Nie masz uprawnień do ładowania plików.',
     'delete file icon' => 'skasuj ikonę pliku',
     'or' => 'lub',
-    'overwrite it?' => 'zastąpić?',
+    'Overwrite if a file with the same name already exists?' => 'zastąpić?',
     );

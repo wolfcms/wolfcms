@@ -41,9 +41,9 @@
       'Save and Continue Editing' => 'Uložit a pokračovat v úpravách',
       'Size' => 'Velikost',
       'Upload' => 'Nahrát',
-      'Upload file' => 'Nahrát soubor',
+      'Upload files' => 'Nahrát soubor',
       'You do not have permission to access the requested page!' => 'Nemáte oprávnění k přístupu na tuto stránku!',
       'delete file icon' => 'ikonka ke smazání souboru',
       'or' => 'nebo',
-      'overwrite it?' => 'přepsat původní?',
+      'Overwrite if a file with the same name already exists?' => 'přepsat původní?',
     );

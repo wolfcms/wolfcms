@@ -36,8 +36,8 @@
         'Save and Continue Editing' => 'Ment és tovább szerkeszt',
         'Size' => 'Méret',
         'Upload' => 'Feltölt',
-        'Upload file' => 'Fájl feltöltése',
+        'Upload files' => 'Fájl feltöltése',
         'You do not have permission to access the requested page!' => 'Nincs jogod az oldalra belépni!',
         'or' => 'vagy',
-        'overwrite it?' => 'felülírod?',
+        'Overwrite if a file with the same name already exists?' => 'felülírod?',
     );

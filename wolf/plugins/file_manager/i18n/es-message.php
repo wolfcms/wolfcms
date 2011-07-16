@@ -41,9 +41,9 @@ return array(
         'Save and Continue Editing' => 'Guardar y Seguir editando',
         'Size' => 'Tama&ntilde;o',
         'Upload' => 'Subir',
-        'Upload file' => 'Subir archivo',
+        'Upload files' => 'Subir archivo',
         'You do not have permission to access the requested page!' => '¡No cuentas con los permisos adecuados para acceder a la página que solicitada!',
         'delete file icon' => 'ícono eliminar archivo',
         'or' => 'o',
-        'overwrite it?' => '¿sobreescribirlo?',
+        'Overwrite if a file with the same name already exists?' => '¿sobreescribirlo?',
 );

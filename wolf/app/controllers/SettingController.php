@@ -115,7 +115,9 @@ class SettingController extends Controller {
             'strong' => array()
         );
         $data['admin_title'] = kses(trim($data['admin_title']), $allowed);
-
+        
+        $data['part_presets'] = trim($data['part_presets']);
+        
         Setting::saveFromData($data);
         Flash::set('success', __('Settings have been saved!'));
         redirect(get_url('setting'));

@@ -41,9 +41,9 @@
 	'Save and Continue Editing' => 'Salvează şi Continuă Editarea',
 	'Size' => 'Dimensiune',
 	'Upload' => 'Upload',
-	'Upload file' => 'Upload fişier',
+	'Upload files' => 'Upload fişier',
 	'You do not have permission to access the requested page!' => 'Nu ai permisiuni suficiente pentru a accesa pagina cerută!',
 	'delete file icon' => 'miniatură ştergere fişier',
 	'or' => 'sau',
-	'overwrite it?' => 'suprascrie?',
+	'Overwrite if a file with the same name already exists?' => 'suprascrie?',
     );

@@ -162,7 +162,7 @@ if ($action == 'edit') { ?>
 
     <div id="part-tabs" class="content tabs">
         <div id="tab-toolbar" class="tab_toolbar">
-          <a href="#" id="add-part" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" alt="<?php echo __('Add Tab'); ?> icon" /></a>
+          <a href="#" id="add-part" title="<?php echo __('Add Tab'); ?>"><?php echo __('Add Tab'); ?><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" alt="<?php echo __('Add Tab'); ?> icon" /></a>
           <a href="#" id="delete-part" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/minus.png" alt="<?php echo __('Remove Tab'); ?> icon" /></a>
         </div>
         <ul class="tabNavigation">
@@ -236,8 +236,19 @@ if ($action == 'edit') { ?>
         <div class="content">
             <form action="<?php //echo get_url('page/addPart'); ?>" method="post">
             <div>
+                <p><?php echo __('Please enter a name for this part.'); ?>
+<?php if (!empty($presets)): ?>
+                <?php echo __('You can also choose from one of the following templates: ') ?></p>
+                <ol>
+<?php foreach($presets as $part => $help): ?>
+                  <li><a href="#" rel="<?php echo trim($part); ?>"><?php echo trim($help); ?></a></li>
+<?php endforeach; ?>
+                </ol>
+<?php else: ?>
+                </p>
+<?php endif; ?>
                 <input id="part-index-field" name="part[index]" type="hidden" value="<?php echo $index; ?>" />
-                <input id="part-name-field" maxlength="100" name="part[name]" type="text" value="" />
+                <label for="part-name-field">Name</label><input id="part-name-field" maxlength="100" name="part[name]" type="text" value="" style="margin: 0 10px" />
                 <input id="add-part-button" name="commit" type="submit" value="<?php echo __('Add'); ?>" />
             </div>
             </form>
@@ -369,6 +380,12 @@ if ($action == 'edit') { ?>
 
             //transition effect
             $(id).fadeIn("fast"); //2000
+            
+            // write preset to input-field on click-event
+            $(id).find('ol a').click(function(event) {
+              event.preventDefault();
+              $('#part-name-field').val($(this).attr('rel'));
+            });
 
             $(id+" :input:visible:enabled:first").focus();
             // END show popup

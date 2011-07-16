@@ -44,7 +44,7 @@
         'Unable to reconstruct table :tablename.' => 'No se ha podido reconstruir la tabla :tablename.',
         'Unable to remove plugin settings.' => 'No se ha podido eliminar los ajustes del plugin.',
         'Unable to truncate current table :tablename.' => 'No se ha podido truncar la tabla :tablename actual.',
-        'Upload file' => 'Subir archivo',
+        'Upload files' => 'Subir archivo',
         'Version' => 'Versi&oacute;n',
         'Warning!' => '&iexcl;Advertencia!',
         'What style of timestamp should be encorporated into the filename.' => 'El estilo de fecha de registro que ser&aacute; a&ntilde;adido en el nombre del archivo.',

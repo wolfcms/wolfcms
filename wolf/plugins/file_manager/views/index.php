@@ -134,14 +134,20 @@ if (!defined('IN_CMS')) { exit(); }
 
     <div id="upload-file-popup" class="window">
 		<div class="titlebar">
-            <?php echo __('Upload file'); ?>
+            <?php echo __('Upload files'); ?>
             <a href="#" class="close"><img src="<?php echo ICONS_URI;?>delete-disabled-16.png"/></a>
         </div>
         <div class="content">
             <form action="<?php echo get_url('plugin/file_manager/upload'); ?>" method="post" enctype="multipart/form-data">
-                <input id="upload_overwrite" name="upload[overwrite]" type="checkbox" value="1" /> <label for="upload_overwrite"><small><?php echo __('overwrite it?'); ?></small></label><br />
+                <input id="upload_overwrite" name="upload[overwrite]" type="checkbox" value="1" /> <label for="upload_overwrite"><small><?php echo __('Overwrite if a file with the same name already exists?'); ?></small></label><br />
                 <input id="upload_path" name="upload[path]" type="hidden" value="<?php echo ($dir == '') ? '/': $dir; ?>" />
-                <input id="upload_file" name="upload_file" type="file" />
+                <fieldset>
+                  <ol>
+<?php for ($i = 0; $i < $upload_fields; $i++): ?>
+                    <li><input id="upload_file_<?php echo $i ?>" name="upload_file[]" type="file" /></li>
+<?php endfor; ?>
+                  </ol>
+                </fieldset>
                 <input id="upload_file_button" name="commit" type="submit" value="<?php echo __('Upload'); ?>" />
             </form>
         </div>

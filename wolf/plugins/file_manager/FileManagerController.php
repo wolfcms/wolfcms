@@ -96,7 +96,8 @@ class FileManagerController extends PluginController {
         $this->display('file_manager/views/index', array(
             'dir' => $this->path,
             //'files' => $this->_getListFiles()
-            'files' => $this->_listFiles()
+            'files' => $this->_listFiles(),
+            'upload_fields' => Plugin::getSetting('upload_fields', 'file_manager')
         ));
     }
 
@@ -252,17 +253,27 @@ class FileManagerController extends PluginController {
         $data = $_POST['upload'];
         $path = str_replace('..', '', $data['path']);
         $overwrite = isset($data['overwrite']) ? true : false;
+        
+        
+        $upload_fields = Plugin::getSetting('upload_fields', 'file_manager');
+        for ($i = 0; $i < $upload_fields; $i++) {
+          $error = false;
+          if ($_FILES['upload_file']['error'][$i] == UPLOAD_ERR_OK) {
+            // Clean filenames
+            $filename = preg_replace('/ /', '_', $_FILES['upload_file']['name'][$i]);
+            $filename = preg_replace('/[^a-z0-9_\-\.]/i', '', $filename);
+            
+            $file = $this->_upload_file($filename, FILES_DIR . '/' . $path . '/', $_FILES['upload_file']['tmp_name'][$i], $overwrite);
+          } else if ($_FILES['upload_file']['error'][$i] == UPLOAD_ERR_NO_FILE) {
+            // we are fine
+          } else {
+            $error = true;
+          }
 
-        // Clean filenames
-        $filename = preg_replace('/ /', '_', $_FILES['upload_file']['name']);
-        $filename = preg_replace('/[^a-z0-9_\-\.]/i', '', $filename);
-
-        if (isset($_FILES)) {
-            $file = $this->_upload_file($filename, FILES_DIR . '/' . $path . '/', $_FILES['upload_file']['tmp_name'], $overwrite);
-
-            if ($file === false)
-                Flash::set('error', __('File has not been uploaded!'));
+          if ($error === true)
+            Flash::set('error', __('File :name has not been uploaded!', array(':name' => $_FILES['upload_file']['name'][$i])));
         }
+        
         redirect(get_url('plugin/file_manager/browse/' . $path));
     }
 
@@ -595,6 +606,11 @@ class FileManagerController extends PluginController {
                 $settings['filemode'] = '0755';
             if (strlen($settings['filemode']) === 3)
                 $settings['filemode'] = '0' . $settings['filemode'];
+            
+            $settings['upload_fields'] = (int) $settings['upload_fields'];
+            if (empty($settings['upload_fields']) || $settings['upload_fields'] > ini_get('max_file_uploads')) {
+                $settings['upload_fields'] = 3;
+            }
         }
 
         if (Plugin::setAllSettings($settings, 'file_manager'))

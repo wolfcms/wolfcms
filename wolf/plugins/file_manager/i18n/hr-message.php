@@ -40,8 +40,8 @@
 	'Save and Continue Editing' => 'Spremi i Nastavi Uređivati',
 	'Size' => 'Veličina',
 	'Upload' => 'Učitaj',
-	'Upload file' => 'Učitaj datoteku',
+	'Upload files' => 'Učitaj datoteku',
 	'You do not have permission to access the requested page!' => 'Nemate dozvolu za pristup traženoj stranici!',
 	'or' => 'ili',
-	'overwrite it?' => 'prepisati?',
+	'Overwrite if a file with the same name already exists?' => 'prepisati?',
     );
