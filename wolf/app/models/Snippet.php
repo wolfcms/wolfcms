@@ -107,7 +107,7 @@ class Snippet extends Record {
         'where' => self::tableNameFromClassName('Snippet').'.id='.(int)$id,
         'limit' => 1
         ));
-    }http://www.warnborough.ac.uk/?about-us/college-policies/quality-policy.html
+    }
 
     public static function findByName($name) {
         $snippet = self::findOneFrom('Snippet', "name LIKE '$name'");
