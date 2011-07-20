@@ -27,7 +27,7 @@ class UserRole extends Record {
     public $user_id = false;
     public $role_id = false;
 
-    public static function setPermissionsFor($user_id, $roles) {
+    public static function setRolesFor($user_id, $roles) {
         $tablename = self::tableNameFromClassName('UserRole');
 
         $sql = 'DELETE FROM '.$tablename.' WHERE user_id='.(int)$user_id;

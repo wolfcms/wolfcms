@@ -77,7 +77,7 @@ class UserController extends Controller {
             'action' => 'add',
             'csrf_token' => SecureToken::generateToken(BASE_URL.'user/add'),
             'user' => $user,
-            'permissions' => Record::findAllFrom('Role')
+            'roles' => Record::findAllFrom('Role')
         ));
     }
 
@@ -158,9 +158,9 @@ class UserController extends Controller {
         $user->password = AuthUser::generateHashedPassword($user->password, $user->salt);
 
         if ($user->save()) {
-            // now we need to add permissions if needed
+            // now we need to add roles if needed
             if (!empty($_POST['user_permission']))
-                UserRole::setPermissionsFor($user->id, $_POST['user_permission']);
+                UserRole::setRolesFor($user->id, $_POST['user_role']);
 
             Flash::set('success', __('User has been added!'));
             Observer::notify('user_after_add', $user->name);
@@ -189,7 +189,7 @@ class UserController extends Controller {
                 'action' => 'edit',
                 'csrf_token' => SecureToken::generateToken(BASE_URL.'user/edit'),
                 'user' => $user,
-                'permissions' => Record::findAllFrom('Role')
+                'roles' => Record::findAllFrom('Role')
             ));
         }
         else {
@@ -281,9 +281,9 @@ class UserController extends Controller {
 
         if ($user->save()) {
             if (AuthUser::hasPermission('user_edit')) {
-                // now we need to add permissions
-                $data = isset($_POST['user_permission']) ? $_POST['user_permission'] : array();
-                UserRole::setPermissionsFor($user->id, $data);
+                // now we need to add roles
+                $data = isset($_POST['user_role']) ? $_POST['user_role'] : array();
+                UserRole::setRolesFor($user->id, $data);
             }
 
             Flash::set('success', __('User has been saved!'));
@@ -313,6 +313,8 @@ class UserController extends Controller {
             // find the user to delete
             if ($user = Record::findByIdFrom('User', $id)) {
                 if ($user->delete()) {
+                    // delete user-roles relationship
+                    UserRole::setRolesFor($user->id, array());
                     Flash::set('success', __('User <strong>:name</strong> has been deleted!', array(':name' => $user->name)));
                     Observer::notify('user_after_delete', $user->name);
                 }
