@@ -6,6 +6,7 @@
  * @package Translations
  *
  * @author Tobias Urff <wolfcmsl10n_p@urff.at>
+ * @author Patrick Scheips <patrick.scheips@simple-dev.org>, simple-dev.org
  * @version Wolf 0.7.2
  */
 
@@ -87,8 +88,8 @@ return array(
 	'Help us <a href=":url">translate Wolf</a>!' => 'Helfen Sie uns bei der Übersetzung des <a href=":url">Wolf CMS</a>!',
 	'Hidden' => 'Versteckt',
 	'Archived' => 'Archiviert',
-	'inherit' => 'vererbt',
-	'&#8212; inherit &#8212;' => '&#8212; vererbt &#8212;',
+	'inherit' => 'Auswahl geerbt',
+	'&#8212; inherit &#8212;' => '&#8212; Auswahl geerbt &#8212;',
 	'Just replace <b>snippet</b> by the snippet name you want to include.' => 'Ersetzen Sie <b>snippet</b> durch den Namen des Inhaltsbausteins, den Sie einfügen wollen.',
 	'Keywords' => 'Schlüsselwörter',
 	'Language' => 'Sprache',
@@ -119,7 +120,7 @@ return array(
 	'New Snippet' => 'Neuer Inhaltsbaustein',
 	'New User' => 'Neuer Nutzer',
 	'No comments found.' => 'Kein Kommentar gefunden',
-	'none' => 'keine',
+	'none' => 'keine Auswahl',
 	'not required' => 'Nicht erforderlich',
 	'on' => 'am',
 	'Only for filter in pages, NOT in snippets' => 'Einstellung findet nur bei Seiten Verwendung, nicht bei Inhaltsbausteinen.',
