@@ -23,13 +23,14 @@
  * @license    http://www.wolfcms.org/about/wolf-cms-licensing.html
  */
 
+define('EMAIL_FORMAT', '/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix');
+
 /**
  * Permits email to be sent using Mail, Sendmail, or SMTP.
  *
  * Note: some values are hardcoded at the moment.
  */
-class Email {
-
+class Email {  
     public $useragent      = "Wolf framework";
     public $mailpath       = "/usr/sbin/sendmail"; // Sendmail path
     public $protocol       = "mail";   // mail/sendmail/smtp
