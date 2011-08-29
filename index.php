@@ -179,7 +179,8 @@ Flash::init();
 $admin_routes = array (
     '/'.ADMIN_DIR          => Setting::get('default_tab'),
     '/'.ADMIN_DIR.'/'      => Setting::get('default_tab'),
-    '/'.ADMIN_DIR.'/:any'  => '$1'
+    '/'.ADMIN_DIR.'/:any'  => '$1',
+    '/'.ADMIN_DIR.'/:any/:all'  => '$1'
 );
 
 Dispatcher::addRoute($admin_routes);
