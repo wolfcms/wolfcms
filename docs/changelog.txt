@@ -8,7 +8,7 @@ Sigla:
 ======
 
 0.8.0 - released 2011-??-??
-
+. Updated MarkItUp! to current version (1.1.12)
 + Added German i18n file for comments plugin - thanks tkeil69575 
 + Added Portugese language file for file manager - thanks daniel.affonso
 - Fixed problem with user name validation. User's name can now contain utf-8 characters. - issue 350
