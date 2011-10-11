@@ -312,9 +312,9 @@ class Plugin {
         $tablename = TABLE_PREFIX.'plugin_settings';
         $plugin_id = $__CMS_CONN__->quote($plugin_id);
 
-        $sql = "DELETE FROM $tablename WHERE plugin_id=$plugin_id";
+        $sql = 'DELETE FROM :tablename WHERE plugin_id=:pluginid';
         $stmt = $__CMS_CONN__->prepare($sql);
-        return $stmt->execute();
+        return $stmt->execute(array(':tablename' => $tablename, ':pluginid' => $plugin_id));
     }
 
 
@@ -337,9 +337,9 @@ class Plugin {
 
         $existingSettings = array();
 
-        $sql = "SELECT name FROM $tablename WHERE plugin_id=$plugin_id";
+        $sql = 'SELECT name FROM :tablename WHERE plugin_id=:pluginid';
         $stmt = $__CMS_CONN__->prepare($sql);
-        $stmt->execute();
+        $stmt->execute(array(':tablename' => $tablename, ':pluginid' => $plugin_id));
 
         while ($settingname = $stmt->fetchColumn())
             $existingSettings[$settingname] = $settingname;
@@ -350,16 +350,16 @@ class Plugin {
             if (array_key_exists($name, $existingSettings)) {
                 $name = $__CMS_CONN__->quote($name);
                 $value = $__CMS_CONN__->quote($value);
-                $sql = "UPDATE $tablename SET value=$value WHERE name=$name AND plugin_id=$plugin_id";
+                $sql = 'UPDATE :tablename SET value=:value WHERE name=:name AND plugin_id=:pluginid';
             }
             else {
                 $name = $__CMS_CONN__->quote($name);
                 $value = $__CMS_CONN__->quote($value);
-                $sql = "INSERT INTO $tablename (value, name, plugin_id) VALUES ($value, $name, $plugin_id)";
+                $sql = 'INSERT INTO :tablename (value, name, plugin_id) VALUES (:value, :name, :pluginid)';
             }
 
             $stmt = $__CMS_CONN__->prepare($sql);
-            $ret = $stmt->execute();
+            $ret = $stmt->execute(array(':tablename' => $tablename, ':pluginid' => $plugin_id, ':name' => $name, ':value' => $value));
         }
 
         return $ret;
@@ -385,9 +385,9 @@ class Plugin {
 
         $existingSettings = array();
 
-        $sql = "SELECT name FROM $tablename WHERE plugin_id=$plugin_id";
+        $sql = 'SELECT name FROM :tablename WHERE plugin_id=:pluginid';
         $stmt = $__CMS_CONN__->prepare($sql);
-        $stmt->execute(array($plugin_id));
+        $stmt->execute(array(':tablename' => $tablename, ':pluginid' => $plugin_id));
 
         while ($settingname = $stmt->fetchColumn())
             $existingSettings[$settingname] = $settingname;
@@ -395,16 +395,16 @@ class Plugin {
         if (in_array($name, $existingSettings)) {
             $name = $__CMS_CONN__->quote($name);
             $value = $__CMS_CONN__->quote($value);
-            $sql = "UPDATE $tablename SET value=$value WHERE name=$name AND plugin_id=$plugin_id";
+            $sql = 'UPDATE :tablename SET value=:value WHERE name=:name AND plugin_id=:pluginid';
         }
         else {
             $name = $__CMS_CONN__->quote($name);
             $value = $__CMS_CONN__->quote($value);
-            $sql = "INSERT INTO $tablename (value, name, plugin_id) VALUES ($value, $name, $plugin_id)";
+            $sql = 'INSERT INTO :tablename (value, name, plugin_id) VALUES (:value, :name, :pluginid)';
         }
 
         $stmt = $__CMS_CONN__->prepare($sql);
-        return $stmt->execute();
+        return $stmt->execute(array(':tablename' => $tablename, ':pluginid' => $plugin_id, ':name' => $name, ':value' => $value));
     }
 
     /**
@@ -422,9 +422,9 @@ class Plugin {
 
         $settings = array();
 
-        $sql = "SELECT name,value FROM $tablename WHERE plugin_id=$plugin_id";
+        $sql = 'SELECT name,value FROM :tablename WHERE plugin_id=:pluginid';
         $stmt = $__CMS_CONN__->prepare($sql);
-        $stmt->execute();
+        $stmt->execute(array(':tablename' => $tablename, ':pluginid' => $plugin_id));
 
         while ($obj = $stmt->fetchObject()) {
             $settings[$obj->name] = $obj->value;
@@ -450,9 +450,9 @@ class Plugin {
 
         $existingSettings = array();
 
-        $sql = "SELECT value FROM $tablename WHERE plugin_id=$plugin_id AND name=$name LIMIT 1";
+        $sql = 'SELECT value FROM :tablename WHERE plugin_id=:pluginid AND name=:name LIMIT 1';
         $stmt = $__CMS_CONN__->prepare($sql);
-        $stmt->execute();
+        $stmt->execute(array(':tablename' => $tablename, ':pluginid' => $plugin_id, ':name' => $name));
 
         return $stmt->fetchColumn();
     }
