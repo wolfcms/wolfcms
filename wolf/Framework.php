@@ -219,7 +219,7 @@ final class Dispatcher {
         foreach (self::$routes as $route => $uri) {
         // Convert wildcards to regex
             if (strpos($route, ':') !== false) {
-                $route = str_replace(':any', '(.+)', str_replace(':num', '([0-9]+)', $route));
+                $route = str_replace(':any', '([^/]+)', str_replace(':num', '([0-9]+)', str_replace(':all', '(.+)', $route)));
             }
             // Does the regex match?
             if (preg_match('#^'.$route.'$#', $requested_url)) {
