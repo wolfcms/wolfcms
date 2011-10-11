@@ -29,6 +29,7 @@
 	'Administrator' => 'Beheerder',
 	'Allow HTML in Title' => 'Sta HTML toe in Titel',
 	'Approve' => 'Toestaan',
+	'Archived' => 'Gearchiveerd',
 	'Are you sure you wish to delete' => 'Weet je zeker dat je wilt verwijderen?',
 	'Are you sure you wish to delete it?' => 'Weet je zeker dat je het wilt verwijderen?',
 	'Are you sure you wish to delete?' => 'Weet je zeker dat je wilt verwijderen?',
