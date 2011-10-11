@@ -50,7 +50,7 @@ class ArchiveController extends PluginController {
         if (isset($_POST['settings'])) {
             $settings = $_POST['settings'];
             foreach ($settings as $key => $value) {
-                $settings[$key] = mysql_escape_string($value);
+                $settings[$key] = Record::escape($value);
             }
             
             $ret = Plugin::setAllSettings($settings, 'archive');
