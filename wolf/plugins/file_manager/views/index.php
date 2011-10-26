@@ -36,10 +36,23 @@ if (!defined('IN_CMS')) { exit(); }
     }
   }
 ?>
+<style>
+  .fileManagerThumb {
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+  }
+    .fileManagerThumb img {
+      width: auto;
+      height: 64px;
+      text-align: center;
+    }
+</style>
 <h1><a href="<?php echo get_url('plugin/file_manager'); ?>">public</a>/<?php echo $out; ?></h1>
 <table id="files-list" class="index" cellpadding="0" cellspacing="0" border="0">
   <thead>
     <tr>
+      <th class="files">&nbsp;</th>
       <th class="files"><?php echo __('File'); ?></th>
       <th class="size"><?php echo __('Size'); ?></th>
       <th class="permissions"><?php echo __('Permissions'); ?></th>
@@ -50,6 +63,11 @@ if (!defined('IN_CMS')) { exit(); }
   <tbody>
 <?php foreach ($files as $file): ?>
     <tr class="<?php echo odd_even(); ?>">
+      <td>
+          <?php if (preg_match('/\.(jpg|jpeg|pjpeg|png|gif)$/i', $file->name)) { ?>
+          <div class="fileManagerThumb"><img src="/public/<?php echo $dir.$file->name; ?>"></div>
+          <?php } ?>
+      </td>
       <td>
           <img src="<?php echo ICONS_URI;?>file-<?php echo $file->type ?>-16.png" align="top" />
           <?php echo $file->link; ?>
