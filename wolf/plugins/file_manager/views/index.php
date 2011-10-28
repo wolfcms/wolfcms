@@ -66,6 +66,8 @@ if (!defined('IN_CMS')) { exit(); }
       <td>
           <?php if (preg_match('/\.(jpg|jpeg|pjpeg|png|gif)$/i', $file->name)) { ?>
           <div class="fileManagerThumb"><img src="/public/<?php echo $dir.$file->name; ?>"></div>
+          <?php } else { ?>
+          &nbsp;
           <?php } ?>
       </td>
       <td>
