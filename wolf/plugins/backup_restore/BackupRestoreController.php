@@ -107,7 +107,7 @@ class BackupRestoreController extends PluginController {
         }
 
         // All fields that should be wrapped as CDATA
-        $cdata_fields = array('content', 'content_html');
+        $cdata_fields = array('title', 'content', 'content_html');
 
         // Setup XML for backup
         $xmltext = '<?xml version="1.0" encoding="UTF-8"?><wolfcms></wolfcms>';
@@ -229,7 +229,7 @@ class BackupRestoreController extends PluginController {
         }
 
         // All fields that should be wrapped as CDATA
-        $cdata_fields = array('content', 'content_html');
+        $cdata_fields = array('title', 'content', 'content_html');
 
         $xml = simplexml_load_string($fileData);
 
