@@ -338,7 +338,7 @@ class Page extends Node {
         $snippet = Snippet::findByName($name);
 
         if (false !== $snippet) {
-            eval('?>'.$snippet->content_html);
+            eval('?'.'>'.$snippet->content_html);
             return true;
         }
 
@@ -461,7 +461,7 @@ class Page extends Node {
         // if part exist we generate the content en execute it!
         if (isset($this->part->$part)) {
             ob_start();
-            eval('?>'.$this->part->$part->content_html);
+            eval('?'.'>'.$this->part->$part->content_html);
             $out = ob_get_contents();
             ob_end_clean();
             return $out;
@@ -665,7 +665,7 @@ class Page extends Node {
             Observer::notify('page_before_execute_layout');
 
             // execute the layout code
-            eval('?>'.$layout->content);
+            eval('?'.'>'.$layout->content);
             // echo $layout->content;
         }
     }
