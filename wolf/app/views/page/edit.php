@@ -200,7 +200,7 @@ if ($action == 'edit') { ?>
     
     <p><small>
 <?php if (isset($page->updated_on)): ?>
-    <?php echo __('Last updated by'); ?> <?php echo $page->updated_by_name; ?> <?php echo __('on'); ?> <?php echo date('D, j M Y', strtotime($page->updated_on)); ?>
+    <?php echo __('Last updated by :username on :date', array( ':username' => $page->updated_by_name, ':date' => date('D, j M Y', strtotime($page->updated_on)) )); ?>
 <?php endif; ?>
     &nbsp;
     </small></p>
