@@ -13,7 +13,7 @@
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @author Philippe Archambault <philippe.archambault@gmail.com>
- * 
+ *
  * @copyright Martijn van der Kleijn 2008-2010
  * @copyright Philippe Archambault 2008
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
@@ -310,11 +310,10 @@ class Plugin {
 
         global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
-        $plugin_id = $__CMS_CONN__->quote($plugin_id);
 
-        $sql = 'DELETE FROM :tablename WHERE plugin_id=:pluginid';
+        $sql = "DELETE FROM $tablename WHERE plugin_id=:pluginid";
         $stmt = $__CMS_CONN__->prepare($sql);
-        return $stmt->execute(array(':tablename' => $tablename, ':pluginid' => $plugin_id));
+        return $stmt->execute(array(':pluginid' => $plugin_id));
     }
 
 
@@ -333,13 +332,12 @@ class Plugin {
 
         global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
-        $plugin_id = $__CMS_CONN__->quote($plugin_id);
 
         $existingSettings = array();
 
-        $sql = 'SELECT name FROM :tablename WHERE plugin_id=:pluginid';
+        $sql = "SELECT name FROM $tablename WHERE plugin_id=:pluginid";
         $stmt = $__CMS_CONN__->prepare($sql);
-        $stmt->execute(array(':tablename' => $tablename, ':pluginid' => $plugin_id));
+        $stmt->execute(array(':pluginid' => $plugin_id));
 
         while ($settingname = $stmt->fetchColumn())
             $existingSettings[$settingname] = $settingname;
@@ -348,18 +346,14 @@ class Plugin {
 
         foreach ($array as $name => $value) {
             if (array_key_exists($name, $existingSettings)) {
-                $name = $__CMS_CONN__->quote($name);
-                $value = $__CMS_CONN__->quote($value);
-                $sql = 'UPDATE :tablename SET value=:value WHERE name=:name AND plugin_id=:pluginid';
+                $sql = "UPDATE $tablename SET value=:value WHERE name=:name AND plugin_id=:pluginid";
             }
             else {
-                $name = $__CMS_CONN__->quote($name);
-                $value = $__CMS_CONN__->quote($value);
-                $sql = 'INSERT INTO :tablename (value, name, plugin_id) VALUES (:value, :name, :pluginid)';
+                $sql = "INSERT INTO $tablename (value, name, plugin_id) VALUES (:value, :name, :pluginid)";
             }
 
             $stmt = $__CMS_CONN__->prepare($sql);
-            $ret = $stmt->execute(array(':tablename' => $tablename, ':pluginid' => $plugin_id, ':name' => $name, ':value' => $value));
+            $ret = $stmt->execute(array(':pluginid' => $plugin_id, ':name' => $name, ':value' => $value));
         }
 
         return $ret;
@@ -381,30 +375,25 @@ class Plugin {
 
         global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
-        $plugin_id = $__CMS_CONN__->quote($plugin_id);
 
         $existingSettings = array();
 
-        $sql = 'SELECT name FROM :tablename WHERE plugin_id=:pluginid';
+        $sql = "SELECT name FROM $tablename WHERE plugin_id=:pluginid";
         $stmt = $__CMS_CONN__->prepare($sql);
-        $stmt->execute(array(':tablename' => $tablename, ':pluginid' => $plugin_id));
+        $stmt->execute(array(':pluginid' => $plugin_id));
 
         while ($settingname = $stmt->fetchColumn())
             $existingSettings[$settingname] = $settingname;
 
         if (in_array($name, $existingSettings)) {
-            $name = $__CMS_CONN__->quote($name);
-            $value = $__CMS_CONN__->quote($value);
-            $sql = 'UPDATE :tablename SET value=:value WHERE name=:name AND plugin_id=:pluginid';
+            $sql = "UPDATE $tablename SET value=:value WHERE name=:name AND plugin_id=:pluginid";
         }
         else {
-            $name = $__CMS_CONN__->quote($name);
-            $value = $__CMS_CONN__->quote($value);
-            $sql = 'INSERT INTO :tablename (value, name, plugin_id) VALUES (:value, :name, :pluginid)';
+            $sql = "INSERT INTO $tablename (value, name, plugin_id) VALUES (:value, :name, :pluginid)";
         }
 
         $stmt = $__CMS_CONN__->prepare($sql);
-        return $stmt->execute(array(':tablename' => $tablename, ':pluginid' => $plugin_id, ':name' => $name, ':value' => $value));
+        return $stmt->execute(array(':pluginid' => $plugin_id, ':name' => $name, ':value' => $value));
     }
 
     /**
@@ -418,13 +407,12 @@ class Plugin {
 
         global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
-        $plugin_id = $__CMS_CONN__->quote($plugin_id);
 
         $settings = array();
 
-        $sql = 'SELECT name,value FROM :tablename WHERE plugin_id=:pluginid';
+        $sql = "SELECT name,value FROM $tablename WHERE plugin_id=:pluginid";
         $stmt = $__CMS_CONN__->prepare($sql);
-        $stmt->execute(array(':tablename' => $tablename, ':pluginid' => $plugin_id));
+        $stmt->execute(array(':pluginid' => $plugin_id));
 
         while ($obj = $stmt->fetchObject()) {
             $settings[$obj->name] = $obj->value;
@@ -445,14 +433,12 @@ class Plugin {
 
         global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
-        $plugin_id = $__CMS_CONN__->quote($plugin_id);
-        $name = $__CMS_CONN__->quote($name);
 
         $existingSettings = array();
 
-        $sql = 'SELECT value FROM :tablename WHERE plugin_id=:pluginid AND name=:name LIMIT 1';
+        $sql = "SELECT value FROM $tablename WHERE plugin_id=:pluginid AND name=:name LIMIT 1";
         $stmt = $__CMS_CONN__->prepare($sql);
-        $stmt->execute(array(':tablename' => $tablename, ':pluginid' => $plugin_id, ':name' => $name));
+        $stmt->execute(array(':pluginid' => $plugin_id, ':name' => $name));
 
         return $stmt->fetchColumn();
     }
