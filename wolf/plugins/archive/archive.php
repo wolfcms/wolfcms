@@ -99,14 +99,14 @@ class Archive {
     }
 
     function archivesByYear() {
-        global $__CMS_CONN__;
-
+        $tablename = TABLE_PREFIX.'page';
+        $pdo = Record::getConnection();
         $out = array();
 
-        $sql = "SELECT DISTINCT(DATE_FORMAT(created_on, '%Y')) FROM " . TABLE_PREFIX . "page WHERE parent_id=? AND status_id != " . Page::STATUS_HIDDEN . " ORDER BY created_on DESC";
+        $sql = "SELECT DISTINCT(DATE_FORMAT(created_on, '%Y')) FROM $tablename WHERE parent_id = :parent_id AND status_id != :status ORDER BY created_on DESC";
 
-        $stmt = $__CMS_CONN__->prepare($sql);
-        $stmt->execute(array($this->page->id));
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array(':parent_id' => $this->page->id, ':status' => Page::STATUS_HIDDEN ));
 
         while ($date = $stmt->fetchColumn())
             $out[] = $date;
@@ -115,14 +115,14 @@ class Archive {
     }
 
     function archivesByMonth($year='all') {
-        global $__CMS_CONN__;
-
+        $tablename = TABLE_PREFIX.'page';
+        $pdo = Record::getConnection();
         $out = array();
 
-        $sql = "SELECT DISTINCT(DATE_FORMAT(created_on, '%Y/%m')) FROM " . TABLE_PREFIX . "page WHERE parent_id=? AND status_id != " . Page::STATUS_HIDDEN . " ORDER BY created_on DESC";
+        $sql = "SELECT DISTINCT(DATE_FORMAT(created_on, '%Y/%m')) FROM $tablename WHERE parent_id = :parent_id AND status_id != :status ORDER BY created_on DESC";
 
-        $stmt = $__CMS_CONN__->prepare($sql);
-        $stmt->execute(array($this->page->id));
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array(':parent_id' => $this->page->id, ':status' => Page::STATUS_HIDDEN ));
 
         while ($date = $stmt->fetchColumn())
             $out[] = $date;
@@ -131,17 +131,17 @@ class Archive {
     }
 
     function archivesByDay($year='all') {
-        global $__CMS_CONN__;
-
+        $tablename = TABLE_PREFIX.'page';
+        $pdo = Record::getConnection();
         $out = array();
 
         if ($year == 'all')
             $year = '';
 
-        $sql = "SELECT DISTINCT(DATE_FORMAT(created_on, '%Y/%m/%d')) FROM " . TABLE_PREFIX . "page WHERE parent_id=? AND status_id != " . Page::STATUS_HIDDEN . " ORDER BY created_on DESC";
+        $sql = "SELECT DISTINCT(DATE_FORMAT(created_on, '%Y/%m/%d')) FROM $tablename WHERE parent_id = :parent_id AND status_id != :status ORDER BY created_on DESC";
 
-        $stmt = $__CMS_CONN__->prepare($sql);
-        $stmt->execute(array($this->page->id));
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array(':parent_id' => $this->page->id, ':status' => Page::STATUS_HIDDEN ));
 
         while ($date = $stmt->fetchColumn())
             $out[] = $date;

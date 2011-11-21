@@ -121,11 +121,12 @@ function comments_count_moderatable()
  *
  * @return int Number of comments.
  */
-function comments_count_total()
-{
-    global $__CMS_CONN__;
-    $sql = 'SELECT COUNT(*) AS count FROM '.TABLE_PREFIX.'comment';
-    $stmt = $__CMS_CONN__->prepare($sql);
+function comments_count_total() {
+    $tablename = TABLE_PREFIX.'comment';
+    $pdo = Record::getConnection();
+    
+    $sql = "SELECT COUNT(*) AS count FROM $tablename";
+    $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $total = $stmt->fetchColumn();
 
