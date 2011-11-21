@@ -48,22 +48,15 @@ class ArchiveController extends PluginController {
     
     function save() {
         if (isset($_POST['settings'])) {
-            $settings = $_POST['settings'];
-            foreach ($settings as $key => $value) {
-                $settings[$key] = Record::escape($value);
-            }
-            
-            $ret = Plugin::setAllSettings($settings, 'archive');
-
-            if ($ret) {
+            if (Plugin::setAllSettings($_POST['settings'], 'archive')) {
                 Flash::set('success', __('The settings have been saved.'));
             }
             else {
-                Flash::set('error', 'An error occured trying to save the settings.');
+                Flash::set('error', __('An error occured trying to save the settings.'));
             }
         }
         else {
-            Flash::set('error', 'Could not save settings, no settings found.');
+            Flash::set('error', __('Could not save settings, no settings found.'));
         }
 
         redirect(get_url('plugin/archive/settings'));
