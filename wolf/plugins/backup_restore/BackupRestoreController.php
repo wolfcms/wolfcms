@@ -61,10 +61,7 @@ class BackupRestoreController extends PluginController {
     function save() {
         if (isset($_POST['settings'])) {
             $settings = $_POST['settings'];
-            foreach ($settings as $key => $value) {
-                $settings[$key] = Record::escape($value);
-            }
-            
+
             $ret = Plugin::setAllSettings($settings, 'backup_restore');
 
             if ($ret) {
@@ -98,7 +95,7 @@ class BackupRestoreController extends PluginController {
         if (strpos(DB_DSN,'pgsql') !== false) {
             $sql = "select tablename from pg_tables where schemaname='public'";
         }
-        
+
         $pdo = Record::getConnection();
         $result = $pdo->query($sql);
 
