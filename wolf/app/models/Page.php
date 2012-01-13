@@ -324,6 +324,37 @@ class Page extends Node {
         return execution_time();
     }
 
+    public static function findByTitle($title) {
+        $page = self::findOneFrom('Page', "title LIKE '$title'");
+        return $page;
+    }
+    
+    /**
+     * Allows people to include the parsed content from another Page in a Page.
+     * 
+     * The method returns either true or false depending on whether the page
+     * was found or not.
+     *
+     * @param   string  $title  Page title.
+     * @param   string  $part   Page part to print. Defaults to 'body'.
+     * @return  boolean         Returns either true or false.
+     */
+    public function includePage($title, $part='body') {
+        $page = Page::findByTitle($title);
+        
+        // Build the page's parts so we can get to them!
+        if (!isset($page->part)) {
+            $page->part = self::get_parts($page->id);
+        }
+
+        if (false !== $page && $page->hasContent($part)) {
+            eval('?>'.$page->content($part));
+            return true;
+        }
+
+        return false;
+    }
+
 
     /**
      * Allows people to include the parsed content from a Snippet in a Page.

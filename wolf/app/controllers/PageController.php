@@ -84,7 +84,7 @@ class PageController extends Controller {
         $this->setLayout('backend');
         $this->display('page/edit', array(
             'action' => 'add',
-            'csrf_token' => SecureToken::generateToken(BASE_URL.'page/add'),
+            'csrf_token' => SecureToken::generateToken(BASE_URL.'page/'.$page->id.'/add'),
             'page' => $page,
             'tags' => array(),
             'filters' => Filter::findAll(),
@@ -157,7 +157,7 @@ class PageController extends Controller {
         $this->setLayout('backend');
         $this->display('page/edit', array(
             'action' => 'edit',
-            'csrf_token' => SecureToken::generateToken(BASE_URL.'page/edit'),
+            'csrf_token' => SecureToken::generateToken(BASE_URL.'page/'.$page->id.'/edit'),
             'page' => $page,
             'tags' => $page->getTags(),
             'filters' => Filter::findAll(),
@@ -346,7 +346,7 @@ class PageController extends Controller {
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
             $csrf_token = $_POST['csrf_token'];
-            if (!SecureToken::validateToken($csrf_token, BASE_URL.'page/'.$action)) {
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'page/'.$id.'/'.$action)) {
                 $errors[] = __('Invalid CSRF token found!');
             }
         }
@@ -359,7 +359,7 @@ class PageController extends Controller {
             $errors[] = __('You have to specify a title!');
         }
 
-        $data['slug'] = trim($data['slug']);
+        $data['slug'] = isset($data['slug']) ? trim($data['slug']) : '';
         if (empty($data['slug']) && $id != '1') {
             $errors[] = __('You have to specify a slug!');
         }
@@ -469,7 +469,7 @@ class PageController extends Controller {
             $this->setLayout('backend');
             $this->display('page/edit', array(
                 'action' => $action,
-                'csrf_token' => SecureToken::generateToken(BASE_URL.'page/'.$action),
+                'csrf_token' => SecureToken::generateToken(BASE_URL.'page/'.$page->id.'/'.$action),
                 'page' => (object) $page,
                 'tags' => $tags,
                 'filters' => Filter::findAll(),

@@ -99,8 +99,8 @@ class LoginController extends Controller {
 
                 $this->_checkVersion();
                 // redirect to defaut controller and action
-                if ($data['redirect'] != null && $data['redirect'] != 'null')
-                    redirect($data['redirect']);
+                if ($redirect != null && $redirect != 'null')
+                    redirect($redirect);
                 else
                     redirect(get_url());
             }
@@ -111,8 +111,8 @@ class LoginController extends Controller {
         }
 
         // not find or password is wrong
-        if ($data['redirect'] != null && $data['redirect'] != 'null')
-            redirect($data['redirect']);
+        if ($redirect != null && $redirect != 'null')
+            redirect($redirect);
         else
             redirect(get_url('login'));
 

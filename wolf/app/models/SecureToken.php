@@ -54,25 +54,22 @@ final class SecureToken extends Record {
             $pwd = substr(bin2hex($hash->hash($user->password)), 5, 20);
 
             $oldtoken = SecureToken::getToken($user->username, $target_url);
-
             if (false === $oldtoken) {
                 $oldtoken = new SecureToken();
-                
-                $oldtoken->username = $user->username;
-                $oldtoken->url = bin2hex($hash->hash($target_url));
-                $oldtoken->time = $time;
+            }
+            
+            $oldtoken->username = $user->username;
+            $oldtoken->url = bin2hex($hash->hash($target_url));
+            $oldtoken->time = $time;
 
-                $oldtoken->save();
+            $oldtoken->save();
+
+            if (!isset($user->salt)) {
+                return bin2hex($hash->hash($user->username.$time.$target_url.$pwd));
             }
             else {
-                $oldtoken->username = $user->username;
-                $oldtoken->url = bin2hex($hash->hash($target_url));
-                $oldtoken->time = $time;
-
-                $oldtoken->save();
+                return bin2hex($hash->hash($user->username.$time.$target_url.$pwd.$user->salt));
             }
-
-            return bin2hex($hash->hash($user->username.$time.$target_url.$pwd.$user->salt));
         }
         
         return false;
@@ -112,7 +109,6 @@ final class SecureToken extends Record {
             if ((microtime(true) - $time) > self::EXPIRES) {
                 return false;
             }
-
             if (!isset($user->salt)) {
                 return (bin2hex($hash->hash($user->username.$time.$target_url.$pwd)) === $token);
             }
@@ -131,7 +127,7 @@ final class SecureToken extends Record {
         $token = false;
         $token = Record::findOneFrom('SecureToken',"username = ? AND url = ?", array($username, bin2hex($hash->hash($url))));
 
-        if ($token !== null && $token !== false && $token instanceof SecureToken) {
+        if (isset($token) && $token instanceof SecureToken) {
             return $token;
         }
 
