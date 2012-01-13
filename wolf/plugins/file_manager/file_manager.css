@@ -1,0 +1,6 @@
+#files-list .thumb {
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    text-align: center;
+}
