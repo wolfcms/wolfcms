@@ -40,12 +40,10 @@ class Page extends Node {
 
     public $id;
     public $title = '';
-    public $slug = '';
     public $breadcrumb;
     public $keywords = '';
     public $description = '';
     public $content;
-    public $parent_id;
     public $layout_id;
     public $behavior_id;
     public $status_id;
@@ -64,22 +62,7 @@ class Page extends Node {
     public $updater;
     public $updater_id;
     // non db fields
-    private $parent = false;
-    private $uri = false;
-    private $level = false;
-    private $tags = false;
-
-    public function __construct($object=null, $parent=null) {
-        if ($parent !== null) {
-            $this->parent = $parent;
-        }
-
-        if ($object !== null) {
-            foreach ($object as $key => $value) {
-                $this->$key = $value;
-            }
-        }
-    }
+    protected $tags = false;
 
 
     public function id() {
@@ -112,64 +95,6 @@ class Page extends Node {
     }
 
 
-    public function parentId() {
-        return $this->parent_id;
-    }
-
-
-    /**
-     * Returns the current page object's url.
-     *
-     * Usage: <?php echo $this->url(); ?> or <?php echo $page->url(); ?>
-     *
-     * @return string   The url of the page object.
-     */
-    public function url($suffix=false) {
-        if ($suffix === false) {
-            return BASE_URL.$this->uri();
-        }
-        else {
-            return BASE_URL.$this->uri().($this->uri() != '' ? URL_SUFFIX : '');
-        }
-    }
-
-
-    /**
-     * Allows user to get the url of a page by page ID.
-     *
-     * This function will always produce a correct and current url to the page
-     * despite it possibly having moved from its original position in the page
-     * hierarchy.
-     *
-     * Usage: <?php echo Page::urlById(3); ?>
-     *
-     * @param   int     $id The id of the page to link to.
-     * @return  mixed       Full url of page or error message.
-     */
-    public static function urlById($id) {
-        if (!is_numeric($id) || !is_int($id) || $id <= 0) {
-            return '[urlById: id NAN or id <= 0]';
-        }
-
-        $page = self::findById($id);
-
-        if (!$page)
-            return '[urlById: no page with that id]';
-
-        return $page->url();
-    }
-
-
-    public function slug() {
-        return $this->slug;
-    }
-
-
-    public function breadcrumb() {
-        return $this->breadcrumb;
-    }
-
-
     public function updater() {
         return $this->updater;
     }
@@ -181,43 +106,6 @@ class Page extends Node {
 
 
     /**
-     * Returns a set of breadcrumbs as html.
-     *
-     * @param   string      $separator  The separator between crumbs. Defaults to &gt;
-     * @return  string      The breadcrumbs as an html snippet.
-     */
-    public function breadcrumbs($separator='&gt;') {
-        $out = '';
-        $url = '';
-        $path = '';
-        $paths = explode('/', '/'.$this->slug);
-        $nb_path = count($paths);
-
-        if ($this->parent() !== false)
-            $out .= $this->parent()->_inversedBreadcrumbs($separator);
-
-        return $out.'<span class="breadcrumb-current">'.$this->breadcrumb().'</span>';
-    }
-
-
-    /**
-     * 
-     * @todo Finish _inversedBreadcrumbs PHPDoc
-     *
-     * @param type $separator
-     * @return string 
-     */
-    private function _inversedBreadcrumbs($separator) {
-        $out = '<a href="'.$this->url().'" title="'.$this->breadcrumb.'">'.$this->breadcrumb.'</a><span class="breadcrumb-separator">'.$separator.'</span>';
-
-        if ($this->parent() !== false)
-            return $this->parent()->_inversedBreadcrumbs($separator).$out;
-
-        return $out;
-    }
-
-
-    /**
      * Returns the subjective "previous" Page.
      *
      * @return mixed    Returns either a Page object or false.
@@ -225,10 +113,10 @@ class Page extends Node {
     public function previous() {
         if ($this->parent() !== false) {
             return $this->parent()->children(array(
-                'limit' => 1,
-                'where' => 'page.position < '.$this->position.' AND page.id < '.$this->id,
-                'order' => 'page.position DESC'
-            ));
+                        'limit' => 1,
+                        'where' => 'page.position < '.$this->position.' AND page.id < '.$this->id,
+                        'order' => 'page.position DESC'
+                    ));
         }
 
         return false;
@@ -243,86 +131,16 @@ class Page extends Node {
     public function next() {
         if ($this->parent() !== false) {
             return $this->parent()->children(array(
-                'limit' => 1,
-                'where' => 'page.position > '.$this->position.' AND page.id > '.$this->id,
-                'order' => 'page.position ASC'
-            ));
+                        'limit' => 1,
+                        'where' => 'page.position > '.$this->position.' AND page.id > '.$this->id,
+                        'order' => 'page.position ASC'
+                    ));
         }
 
         return false;
     }
 
 
-    /**
-     * Counts the number of children belonging to a Page.
-     * 
-     * @fixme Remove dependency on CMS_CONN - not good
-     *
-     * @param type  $args
-     * @param type  $value
-     * @param type  $include_hidden
-     * @return int  The number of children counted.
-     */
-    public function childrenCount($args=null, $value=array(), $include_hidden=false) {
-        global $__CMS_CONN__;
-
-        // Collect attributes...
-        $where = isset($args['where']) ? $args['where'] : '';
-        $order = isset($args['order']) ? $args['order'] : 'position, id';
-        $limit = isset($args['limit']) ? $args['limit'] : 0;
-        $offset = isset($args['offset']) ? $args['offset'] : 0;
-
-        // Prepare query parts
-        $where_string = trim($where) == '' ? '' : "AND ".$where;
-        $limit_string = $limit > 0 ? "LIMIT $limit" : '';
-        $offset_string = $offset > 0 ? "OFFSET $offset" : '';
-
-        // Prepare SQL
-        $sql = 'SELECT COUNT(*) AS nb_rows FROM '.TABLE_PREFIX.'page '
-                .'WHERE parent_id = '.$this->id
-                ." AND (valid_until IS NULL OR CAST('".date('Y-m-d H:i:s')."' AS DATETIME) < valid_until)"
-                .' AND (status_id='.Page::STATUS_PUBLISHED
-                .($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN : '').') '
-                ."$where_string ORDER BY $order $limit_string $offset_string";
-
-        $stmt = $__CMS_CONN__->prepare($sql);
-        $stmt->execute($value);
-
-        return (int) $stmt->fetchColumn();
-    }
-
-
-    /**
-     * Returns the Page object's parent.
-     * 
-     * The option $level parameter allows the user to specify the level on
-     * which the found Page object should be.
-     *
-     * @param   int     $level  Optional level parameter
-     * @return  Page    The object's parent.
-     */
-    public function parent($level=null) {
-
-        // check to see if it's already been retrieved, if not get the parent!
-        if ($this->parent === false && $this->parent_id != 0) {
-            $this->parent = self::findById($this->parentId());
-        }
-
-        if ($level === null)
-            return $this->parent;
-
-        if ($level > $this->level)
-            return false;
-        else if ($this->level == $level)
-            return $this;
-        else
-            return $this->parent($level);
-    }
-
-
-    public function executionTime() {
-        return execution_time();
-    }
 
 
     /**
@@ -518,53 +336,6 @@ class Page extends Node {
         return false;
     }
 
-
-    /**
-     * Return an HTML anchor element for this page.
-     *
-     * @param string $label     A custom label. Defaults to page title.
-     * @param array $options    Array containing attributes to add.
-     * @return string           The actual anchor element.
-     */
-    public function link($label=null, $options='') {
-        if ($label == null)
-            $label = $this->title();
-
-        return sprintf('<a href="%s" %s>%s</a>', $this->url(), $options, $label
-        );
-    }
-
-
-    /**
-     * Allow user to link to a page by ID.
-     *
-     * This function will always produce a correct and current link to the page
-     * despite it possibly having moved from its original position in the page
-     * hierarchy.
-     *
-     * Usage: <?php echo Page::linkById(3); ?>
-     *
-     * @param int $id The id of the page to link to.
-     * @param string $label The label or title of the link.
-     * @param string $options Any other HTML options you want to use.
-     * @return string XHTML compliant link code or error message.
-     */
-    public static function linkById($id, $label=null, $options='') {
-        if (!is_numeric($id) || !is_int($id) || $id <= 0) {
-            return '[linkById: id NAN or id <= 0]';
-        }
-
-        $page = self::findById($id);
-
-        if ($label == null) {
-            $label = $page->title();
-        }
-
-        return sprintf('<a href="%s" %s>%s</a>', $page->url(), $options, $label
-        );
-    }
-
-
     /**
      * Return an array of this page's children.
      * 
@@ -753,33 +524,6 @@ class Page extends Node {
     }
 
 
-    /**
-     * Returns the uri for this node.
-     * 
-     * Note: The uri does not start nor end with a '/'.
-     *
-     * @return string   The node's full uri.
-     */
-    public function uri() {
-        if ($this->uri === false) {
-            if ($this->parent() !== false)
-                $this->uri = trim($this->parent()->uri().'/'.$this->slug, '/');
-            else
-                $this->uri = trim($this->slug, '/');
-        }
-
-        return $this->uri;
-    }
-
-
-    /**
-     * @deprecated
-     * @see uri()
-     */
-    public function getUri() {
-        return $this->uri();
-    }
-
 
     public function setTags($tags) {
         if (is_string($tags))
@@ -896,7 +640,7 @@ class Page extends Node {
 
             $parent = $page;
         } // foreach
-        
+
         return $page;
     }
 
@@ -1028,9 +772,9 @@ class Page extends Node {
 
     public static function findById($id) {
         return self::find(array(
-            'where' => 'page.id='.(int) $id,
-            'limit' => 1
-        ));
+                    'where' => 'page.id='.(int) $id,
+                    'limit' => 1
+                ));
     }
 
 
