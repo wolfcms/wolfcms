@@ -33,7 +33,7 @@
 	'Are you sure you wish to delete' => 'Weet je zeker dat je wilt verwijderen?',
 	'Are you sure you wish to delete it?' => 'Weet je zeker dat je het wilt verwijderen?',
 	'Are you sure you wish to delete?' => 'Weet je zeker dat je wilt verwijderen?',
-	'Are you sure you wish to uninstall this plugin?' => 'Weet je zeker dat je deze plugin wilt deinstalleren?',
+	'Are you sure you wish to uninstall this plugin?' => 'Weet je zeker dat je deze plugin wilt de&iuml;nstalleren?',
 	'At least 3 characters. Must be unique.' => 'Minimaal 3 tekens. Naam moet uniek zijn.',
 	'At least 5 characters.' => 'Minimaal 5 tekens',
 	'Body' => 'Body',
@@ -64,7 +64,7 @@
 	'Documentation' => 'Documentatie',
 	'Draft' => 'Ontwerp',
 	'Drag and Drop' => 'Slepen en Neerzetten',
-	'Drag to Copy' => 'Slepen om te kopieren',
+	'Drag to Copy' => 'Slepen om te kopi&euml;ren',
 	'E-mail' => 'E-mail',
 	'Edit Page' => 'Bewerk Pagina',
 	'Edit comment' => 'Bewerk Commentaar',
@@ -169,7 +169,7 @@
 	'This will change your Administration theme.' => 'Dit wijzigt uw Administratie thema.',
 	'This will set your language for the backend.' => 'Dit stelt de standaard taal van de Administratie in.',
 	'This will set your preferred language for the backend.' => 'Dit stelt uw voorkeurstaal van de Administratie in.',
-	'Uninstall' => 'Deinstalleren',
+	'Uninstall' => 'De&iuml;nstalleren',
 	'Upload' => 'Upload',
 	'Use layouts to apply a visual look to a Web page. Layouts can contain special tags to include
   page content and other elements such as the header or footer. Click on a layout name below to
@@ -226,8 +226,9 @@
 	'unknown' => 'onbekend',
 	'website:' => 'website',
     );
-
-
-
-
-
+    
+    
+    
+    
+    
+    
