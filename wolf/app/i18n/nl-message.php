@@ -33,7 +33,7 @@
 	'Are you sure you wish to delete' => 'Weet je zeker dat je wilt verwijderen?',
 	'Are you sure you wish to delete it?' => 'Weet je zeker dat je het wilt verwijderen?',
 	'Are you sure you wish to delete?' => 'Weet je zeker dat je wilt verwijderen?',
-	'Are you sure you wish to uninstall this plugin?' => 'Weet je zeker dat je deze plugin wilt de&iuml;nstalleren?',
+	'Are you sure you wish to uninstall this plugin?' => 'Weet je zeker dat je deze plugin wilt deinstalleren?',
 	'At least 3 characters. Must be unique.' => 'Minimaal 3 tekens. Naam moet uniek zijn.',
 	'At least 5 characters.' => 'Minimaal 5 tekens',
 	'Body' => 'Body',
