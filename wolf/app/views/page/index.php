@@ -27,30 +27,42 @@
 
 <ul id="site-map-root">
     <li id="page-0" class="node level-0">
-      <div class="page" style="padding-left: 4px">
-        <span class="w1">
-<?php if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $root->is_protected)): ?>
-          <img align="middle" class="icon" src="<?php echo URI_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span>
-<?php else: ?>
-          <a href="<?php echo get_url('page/edit/1'); ?>" title="/"><img align="middle" class="icon" src="<?php echo URI_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span></a>
-<?php endif; ?>
-        </span>
-      </div>
-      <div class="status published-status"><?php echo __('Published'); ?></div>
-      <div class="view-page"><a href="<?php echo URL_PUBLIC; ?>" target="_blank"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/magnify.png" align="middle" alt="<?php echo __('View Page'); ?>" title="<?php echo __('View Page'); ?>" /></a></div>
-      <div class="modify">
-          <?php if (AuthUser::hasPermission('page_add') || (AuthUser::hasPermission('admin_edit') && $root->is_protected)): ?>
-          <a href="<?php echo get_url('page/add/1'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" align="middle" title="<?php echo __('Add child'); ?>" alt="<?php echo __('Add child'); ?>" /></a>&nbsp;
-          <?php endif; ?>
-          <img class="remove" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove-disabled.gif" align="middle" alt="<?php echo __('remove icon disabled'); ?>" title="<?php echo __('Remove unavailable'); ?>"/>&nbsp;
-      	  <img src="<?php echo URI_PUBLIC;?>wolf/admin/images/copy-disabled.png" align="middle" title="<?php echo __('Copy Page Disabled'); ?>" alt="<?php echo __('Copy Page Disabled'); ?>" />
-      </div>
 
-<?php echo $content_children; ?>
+        <div class="page" style="padding-left: 4px">
+            <span class="w1">
+                <?php if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $root->is_protected)): ?>
+                <img align="middle" class="icon" src="<?php echo URI_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span>
+                <?php else: ?>
+                <a href="<?php echo get_url('page/edit/1'); ?>" title="/">
+                    <img align="middle" class="icon" src="<?php echo URI_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" />
+                    <span class="title"><?php echo $root->title; ?></span>
+                </a>
+                <?php endif; ?>
+            </span>
+        </div>
+
+        <div class="status published-status"><?php echo __('Published'); ?></div>
+
+        <div class="view-page">
+            <a href="<?php echo URL_PUBLIC; ?>" target="_blank">
+                <img src="<?php echo URI_PUBLIC;?>wolf/admin/images/magnify.png" align="middle" alt="<?php echo __('View Page'); ?>" title="<?php echo __('View Page'); ?>" />
+            </a>
+        </div>
+
+        <div class="modify">
+            <?php if (AuthUser::hasPermission('page_add') || (AuthUser::hasPermission('admin_edit') && $root->is_protected)): ?>
+            <a href="<?php echo get_url('page/add/1'); ?>">
+                <img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" align="middle" title="<?php echo __('Add child'); ?>" alt="<?php echo __('Add child'); ?>" />
+            </a>
+            <?php endif; ?>
+            <img class="remove" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove-disabled.gif" align="middle" alt="<?php echo __('remove icon disabled'); ?>" title="<?php echo __('Remove unavailable'); ?>"/>
+      	    <img src="<?php echo URI_PUBLIC;?>wolf/admin/images/copy-disabled.png" align="middle" title="<?php echo __('Copy Page Disabled'); ?>" alt="<?php echo __('Copy Page Disabled'); ?>" />
+        </div>
+
+        <?php echo $content_children; ?>
 
     </li>
 </ul>
-
 
 <style type="text/css">
 
