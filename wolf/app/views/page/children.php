@@ -41,11 +41,19 @@
 } ?>
       <div class="view-page"><a class="view-link" href="<?php echo URL_PUBLIC; echo (USE_MOD_REWRITE == false) ? '?' : ''; echo $child->getUri(); echo ($child->getUri() != '') ? URL_SUFFIX : ''; ?>" target="_blank"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/magnify.png" align="middle" alt="<?php echo __('View Page'); ?>" title="<?php echo __('View Page'); ?>" /></a></div>
       <div class="modify">
+      <?php if (AuthUser::hasPermission('page_add') || (AuthUser::hasPermission('admin_edit') && $child->is_protected)): ?>
         <a class="add-child-link" href="<?php echo get_url('page/add', $child->id); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" align="middle" title="<?php echo __('Add child'); ?>" alt="<?php echo __('Add child'); ?>" /></a>&nbsp;
-<?php if ( ! $child->is_protected || AuthUser::hasPermission('page_delete') ): ?>
+      <?php endif; ?>
+      <?php if ( ! $child->is_protected || AuthUser::hasPermission('page_delete') ): ?>
         <a class="remove" href="<?php echo get_url('page/delete/'.$child->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $child->title; ?> <?php echo __('and its underlying pages'); ?>?');"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove.gif" align="middle" alt="<?php echo __('Remove page'); ?>" title="<?php echo __('Remove page'); ?>" /></a>&nbsp;
-<?php endif; ?>
+      <?php else: ?>
+        <img class="remove" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove-disabled.gif" align="middle" alt="<?php echo __('remove icon disabled'); ?>" title="<?php echo __('Remove unavailable'); ?>"/>
+      <?php endif; ?>
+      <?php if (AuthUser::hasPermission('page_add') || (AuthUser::hasPermission('admin_edit') && $child->is_protected)): ?>
 		<a href="#" id="copy-<?php echo $child->id; ?>" class="copy-page"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/copy.png" align="middle" title="<?php echo __('Copy Page'); ?>" alt="<?php echo __('Copy Page'); ?>" /></a>
+	  <?php else: ?>
+	    <img src="<?php echo URI_PUBLIC;?>wolf/admin/images/copy-disabled.png" align="middle" title="<?php echo __('Copy Page Disabled'); ?>" alt="<?php echo __('Copy Page Disabled'); ?>" />
+	  <?php endif; ?>
       </div>
       </span>
 <?php if ($child->is_expanded) echo $child->children_rows; ?>
