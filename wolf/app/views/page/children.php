@@ -59,13 +59,11 @@
             <div class="modify">
             <?php if (AuthUser::hasPermission('page_add') || (AuthUser::hasPermission('admin_edit') && $child->is_protected)): ?>
                 <a class="add-child-link" href="<?php echo get_url('page/add', $child->id); ?>">
-                    <img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" align="middle" title="<?php echo __('Add child'); ?>" alt="<?php echo __('Add child'); ?>" />
-                </a>&nbsp;
+                    <img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" align="middle" title="<?php echo __('Add child'); ?>" alt="<?php echo __('Add child'); ?>" /></a>
             <?php endif; ?>
             <?php if ( ! $child->is_protected || AuthUser::hasPermission('page_delete') ): ?>
                 <a class="remove" href="<?php echo get_url('page/delete/'.$child->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $child->title; ?> <?php echo __('and its underlying pages'); ?>?');">
-                    <img src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove.gif" align="middle" alt="<?php echo __('Remove page'); ?>" title="<?php echo __('Remove page'); ?>" />
-                </a>&nbsp;
+                    <img src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove.gif" align="middle" alt="<?php echo __('Remove page'); ?>" title="<?php echo __('Remove page'); ?>" /></a>
             <?php else: ?>
                 <img class="remove" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove-disabled.gif" align="middle" alt="<?php echo __('remove icon disabled'); ?>" title="<?php echo __('Remove unavailable'); ?>"/>
             <?php endif; ?>

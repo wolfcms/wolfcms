@@ -31,7 +31,8 @@
         <div class="page" style="padding-left: 4px">
             <span class="w1">
                 <?php if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $root->is_protected)): ?>
-                <img align="middle" class="icon" src="<?php echo URI_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span>
+                <img align="middle" class="icon" src="<?php echo URI_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" />
+                <span class="title"><?php echo $root->title; ?></span>
                 <?php else: ?>
                 <a href="<?php echo get_url('page/edit/1'); ?>" title="/">
                     <img align="middle" class="icon" src="<?php echo URI_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" />
@@ -52,8 +53,7 @@
         <div class="modify">
             <?php if (AuthUser::hasPermission('page_add') || (AuthUser::hasPermission('admin_edit') && $root->is_protected)): ?>
             <a href="<?php echo get_url('page/add/1'); ?>">
-                <img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" align="middle" title="<?php echo __('Add child'); ?>" alt="<?php echo __('Add child'); ?>" />
-            </a>
+                <img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" align="middle" title="<?php echo __('Add child'); ?>" alt="<?php echo __('Add child'); ?>" /></a>
             <?php endif; ?>
             <img class="remove" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove-disabled.gif" align="middle" alt="<?php echo __('remove icon disabled'); ?>" title="<?php echo __('Remove unavailable'); ?>"/>
       	    <img src="<?php echo URI_PUBLIC;?>wolf/admin/images/copy-disabled.png" align="middle" title="<?php echo __('Copy Page Disabled'); ?>" alt="<?php echo __('Copy Page Disabled'); ?>" />
