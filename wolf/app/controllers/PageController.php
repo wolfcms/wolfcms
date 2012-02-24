@@ -52,6 +52,12 @@ class PageController extends Controller {
         if (get_request_method() == 'POST')
             return $this->_store('add');
 
+        // check for protected page and permissions
+        if (!AuthUser::hasPermission('page_add')) {
+            Flash::set('error', __('You do not have permission to access the requested page!'));
+            redirect(get_url('page'));
+        }
+
         // If not trying to save, display "Add page" view.
         $data = Flash::get('post_data');
         $page = new Page($data);
@@ -273,6 +279,12 @@ class PageController extends Controller {
      *
      */
     function copy() {
+        // check for protected page and permissions
+        if (!AuthUser::hasPermission('page_add')) {
+            Flash::set('error', __('You do not have permission to access the requested page!'));
+            redirect(get_url('page'));
+        }
+
         $original_id = $_POST['originalid'];
 
         $page = Record::findByIdFrom('Page', $original_id);
