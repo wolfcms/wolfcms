@@ -53,7 +53,7 @@ class PageController extends Controller {
             return $this->_store('add');
 
         // check for protected page and permissions
-        if (!AuthUser::hasPermission('page_add') || ($page->is_protected && !AuthUser::hasPermission('admin_edit'))) {
+        if (!AuthUser::hasPermission('page_add')) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url('page'));
         }
@@ -123,12 +123,6 @@ class PageController extends Controller {
      */
     public function edit($id) {
         if (!is_numeric($id)) {
-            redirect(get_url('page'));
-        }
-
-        // check for protected page and permissions
-        if (!AuthUser::hasPermission('page_edit') || ($page->is_protected && !AuthUser::hasPermission('admin_edit'))) {
-            Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url('page'));
         }
 
@@ -286,7 +280,7 @@ class PageController extends Controller {
      */
     function copy() {
         // check for protected page and permissions
-        if (!AuthUser::hasPermission('page_add') || ($page->is_protected && !AuthUser::hasPermission('admin_edit'))) {
+        if (!AuthUser::hasPermission('page_add')) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url('page'));
         }
