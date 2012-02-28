@@ -280,7 +280,7 @@ class Page extends Node {
         // Prepare SQL
         $sql = 'SELECT COUNT(*) AS nb_rows FROM '.TABLE_PREFIX.'page '
                 .'WHERE parent_id = '.$this->id
-                ." AND (valid_until IS NULL OR CAST('".date('Y-m-d H:i:s')."' AS DATETIME) < valid_until)"
+                ." AND (valid_until IS NULL OR '".date('Y-m-d H:i:s')."' < valid_until)"
                 .' AND (status_id='.Page::STATUS_PUBLISHED
                 .($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN : '').') '
                 ."$where_string ORDER BY $order $limit_string $offset_string";
@@ -602,7 +602,7 @@ class Page extends Node {
                 .'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
                 .'LEFT JOIN '.TABLE_PREFIX.'user AS updater ON updater.id = page.updated_by_id '
                 .'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN : '').') '
-                ." AND (valid_until IS NULL OR CAST('".date('Y-m-d H:i:s')."' AS DATETIME) < valid_until)"
+                ." AND (valid_until IS NULL OR '".date('Y-m-d H:i:s')."' < valid_until)"
                 ."$where_string ORDER BY $order $limit_string $offset_string";
 
         $pages = array();
