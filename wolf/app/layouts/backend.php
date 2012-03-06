@@ -26,14 +26,16 @@ $ctrl = Dispatcher::getController(Setting::get('default_tab'));
 
 // Allow for nice title.
 // @todo improve/clean this up.
-$title = ($ctrl == 'plugin') ? Plugin::$controllers[Dispatcher::getAction()]->label : ucfirst($ctrl).'s';
-if (isset($this->vars['content_for_layout']->vars['action'])) {
-    $tmp = $this->vars['content_for_layout']->vars['action'];
-    $title .= ' - '.ucfirst($tmp);
+if (!isset($title) || trim($title) == '') {
+    $title = ($ctrl == 'plugin') ? Plugin::$controllers[Dispatcher::getAction()]->label : ucfirst($ctrl).'s';
+    if (isset($this->vars['content_for_layout']->vars['action'])) {
+        $tmp = $this->vars['content_for_layout']->vars['action'];
+        $title .= ' - '.ucfirst($tmp);
 
-    if ($tmp == 'edit' && isset($this->vars['content_for_layout']->vars['page'])) {
-        $tmp = $this->vars['content_for_layout']->vars['page'];
-        $title .= ' - '.$tmp->title;
+        if ($tmp == 'edit' && isset($this->vars['content_for_layout']->vars['page'])) {
+            $tmp = $this->vars['content_for_layout']->vars['page'];
+            $title .= ' - '.$tmp->title;
+        }
     }
 }
 ?>
