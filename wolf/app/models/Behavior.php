@@ -60,14 +60,15 @@ class Behavior {
     public static function load($behavior_id, &$page, $params) {
         if ( ! empty(self::$behaviors[$behavior_id])) {
             $file = CORE_ROOT.'/plugins/'.self::$behaviors[$behavior_id];
+            $behavior_class = Inflector::camelize($behavior_id);
 
             if (isset(self::$loaded_files[$file]))
-                return new $behavior_id($page, $params);
+                return new $behavior_class($page, $params);
 
             if (file_exists($file)) {
                 include $file;
                 self::$loaded_files[$file] = true;
-                return new $behavior_id($page, $params);
+                return new $behavior_class($page, $params);
             }
             else {
                 exit ("Behavior $behavior_id not found!");
@@ -83,7 +84,7 @@ class Behavior {
      * @return string   class name of the page
      */
     public static function loadPageHack($behavior_id) {
-        $behavior_page_class = 'Page'.str_replace(' ','',ucwords(str_replace('_',' ', $behavior_id)));
+        $behavior_page_class = Inflector::camelize('page_'.$behavior_id);
 
         if (class_exists($behavior_page_class, false))
             return $behavior_page_class;
