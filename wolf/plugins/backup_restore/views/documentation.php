@@ -12,7 +12,7 @@ if (!defined('IN_CMS')) { exit(); }
 
 /**
  * The BackupRestore plugin provides administrators with the option of backing
- * up their pages and settings to an XML file.
+ * up their pages, settings and uploaded files to an XML file.
  *
  * @package Plugins
  * @subpackage backup_restore
@@ -24,7 +24,7 @@ if (!defined('IN_CMS')) { exit(); }
 ?>
 <h1><?php echo __('Documentation'); ?></h1>
 <p>
-    <?php echo __('The Backup/Restore plugin allows you to create complete backups of the Wolf CMS database. It generates an XML file that contains all records for each of the Wolf CMS database tables.'); ?>
+    <?php echo __('The Backup/Restore plugin allows you to create complete backups of the Wolf CMS database. It generates an XML file that contains all records for each of the Wolf CMS database tables, and optionally all uploaded files.'); ?>
 </p>
 <h2><?php echo __('Creating the backup'); ?></h2>
 <p>

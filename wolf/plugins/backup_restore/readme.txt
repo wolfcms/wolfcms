@@ -1,7 +1,7 @@
 == WHAT IT IS ==
 
 The BackupRestore plugin provides administrators with the option of backing up
-their pages and settings to an XML file.
+their pages, settings and uploaded files to an XML file.
 
 == HOW TO USE IT ==
 
