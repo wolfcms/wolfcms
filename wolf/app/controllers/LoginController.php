@@ -122,6 +122,19 @@ class LoginController extends Controller {
      * Allows a user to logout.
      */
     function logout() {
+        // CSRF checks
+        if (isset($_GET['csrf_token'])) {
+            $csrf_token = $_GET['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'login/logout')) {
+                Flash::set('error', __('Invalid CSRF token found!'));
+                redirect(get_url());
+            }
+        }
+        else {
+            Flash::set('error', __('No CSRF token found!'));
+            redirect(get_url());
+        }
+        
         // Allow plugins to handle logout events
         Observer::notify('logout_requested');
 

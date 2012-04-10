@@ -191,7 +191,7 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
       <p id="site-links">
         <?php echo __('You are currently logged in as'); ?> <a href="<?php echo get_url('user/edit/'.AuthUser::getId()); ?>"><?php echo AuthUser::getRecord()->name; ?></a>
         <span class="separator"> | </span>
-        <a href="<?php echo get_url('login/logout'); ?>"><?php echo __('Log Out'); ?></a>
+        <a href="<?php echo get_url('login/logout'.'?csrf_token='.SecureToken::generateToken(BASE_URL.'login/logout')); ?>"><?php echo __('Log Out'); ?></a>
         <span class="separator"> | </span>
         <a id="site-view-link" href="<?php echo URL_PUBLIC; ?>" target="_blank"><?php echo __('View Site'); ?></a>
       </p>
