@@ -12,12 +12,13 @@ if (!defined('IN_CMS')) { exit(); }
 
 /**
  * The BackupRestore plugin provides administrators with the option of backing
- * up their pages and settings to an XML file.
+ * up their pages, settings and uploaded files to an XML file.
  *
  * @package Plugins
  * @subpackage backup_restore
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
+ * @author Frank Edelhaeuser <mrpace2@gmail.com>
  * @copyright Martijn van der Kleijn, 2009-2011
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
@@ -25,6 +26,7 @@ if (!defined('IN_CMS')) { exit(); }
 /**
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
+ * @author Frank Edelhaeuser <mrpace2@gmail.com>
  * @copyright Martijn van der Kleijn, 2009,2010
  */
 class BackupRestoreController extends PluginController {
@@ -140,6 +142,12 @@ class BackupRestoreController extends PluginController {
                     }
                 }
             }
+        }
+
+        // Add XML files entries for all files in upload directory
+        if ($settings['backupfiles'] == '1') {
+            $dir = realpath(FILES_DIR);
+            $this->_backup_directory($xmlobj->addChild('files'), $dir, $dir);
         }
 
         // Create the XML file
@@ -287,9 +295,104 @@ class BackupRestoreController extends PluginController {
             }
         }
 
+        // Erase all uploaded files?
+        if ($settings['erasefiles'] == '1') {
+            $this->_cleanup_directory(realpath(FILES_DIR));
+        }
+
+        // Restore directories and files from XML
+        if (($settings['restorefiles'] == '1') && array_key_exists('files', $xml)) {
+            // First directories
+            foreach ($xml->files->directory as $obj) {
+                $name = realpath(FILES_DIR).'/'.$obj->name;
+                if (!file_exists($name)) {
+                    if (mkdir($name, 0777, true) === false) {
+                        Flash::set('error', __('Unable to create directory :name.', array(':name' => dirname($obj->name))));
+                        redirect(get_url('plugin/backup_restore'));
+                    }
+                }
+                $this->_restore_attributes($name, $obj);
+            }
+
+            // Then files
+            foreach ($xml->files->file as $obj) {
+                $name = realpath(FILES_DIR).'/'.$obj->name;
+                if (file_put_contents($name, base64_decode($obj->content)) === false) {
+                    Flash::set('error', __('Unable to restore file :name.', array(':name' => $obj->name)));
+                    redirect(get_url('plugin/backup_restore'));
+                }
+                $this->_restore_attributes($name, $obj);
+            }
+        }
+
         Flash::set('success', __('Succesfully restored backup.'));
 
         redirect(get_url('plugin/backup_restore'));
+    }
+
+    function _backup_directory($parent, $dir, $basedir) {
+        foreach (new DirectoryIterator($dir) as $obj) {
+            if ($obj->isDot() || $obj->isLink()) {
+            }
+            else if ($obj->isDir()) {
+                $child = $parent->addChild('directory');
+                $child->addChild('name', substr($obj->getPathname(), strlen($basedir.'/')));
+                $child->addChild('mode', substr(sprintf('%o', $obj->getPerms()), -4));
+                $child->addChild('mtime', date(DATE_RFC822, $obj->getMTime()));
+
+                $this->_backup_directory($parent, $obj->getPathname(), $basedir);
+            }
+            else if ($obj->isFile()) {
+                $child = $parent->addChild('file');
+                $child->addChild('name', substr($obj->getPathname(), strlen($basedir.'/')));
+                $child->addChild('mode', substr(sprintf('%o', $obj->getPerms()), -4));
+                $child->addChild('mtime', date(DATE_RFC822, $obj->getMTime()));
+                $child->addChild('content', base64_encode(file_get_contents($obj->getPathname())));
+            }
+        }
+    }
+
+    function _cleanup_directory($dir, $basedir) {
+        if (is_dir($dir)) {
+            foreach (new DirectoryIterator($dir) as $obj) {
+                if (!$obj->isDot()) {
+                    if ($obj->isDir()) {
+                        $this->_cleanup_directory($obj->getPathname(), $basedir);
+                        if (rmdir($obj->getPathname()) === false) {
+                            Flash::set('error', __('Unable to delete directory :name.', array(':name' => substr($obj->getPathname(), strlen($basedir.'/')))));
+                            redirect(get_url('plugin/backup_restore'));
+                        }
+                    }
+                    else {
+                        if (unlink($obj->getPathname()) === false) {
+                            Flash::set('error', __('Unable to delete file :name.', array(':name' => substr($obj->getPathname(), strlen($basedir.'/')))));
+                            redirect(get_url('plugin/backup_restore'));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    function _restore_attributes($name, $obj) {
+
+        // Set file attributes
+        if (array_key_exists('mode', $obj)) {
+            if (chmod($name, $obj->mode) === false) {
+                Flash::set('error', __('Unable to restore attributes for :name.', array(':name' => $obj->name)));
+                redirect(get_url('plugin/backup_restore'));
+            }
+        }
+
+        // Set modification time
+        if (array_key_exists('mtime', $obj)) {
+            $dt = date_parse($obj->mtime);
+            $mtime = mktime($dt['hour'], $dt['minute'], $dt['second'], $dt['month'], $dt['day'], $dt['year']); 
+            if (touch($name, $mtime) === false) {
+                Flash::set('error', __('Unable to restore modification date for :name.', array(':name' => $obj->name)));
+                redirect(get_url('plugin/backup_restore'));
+            }
+        }
     }
 }
 
