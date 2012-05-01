@@ -12,12 +12,13 @@ if (!defined('IN_CMS')) { exit(); }
 
 /**
  * The BackupRestore plugin provides administrators with the option of backing
- * up their pages and settings to an XML file.
+ * up their pages, settings and uploaded files to an XML file.
  *
  * @package Plugins
  * @subpackage backup_restore
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
+ * @author Frank Edelhaeuser <mrpace2@gmail.com>
  * @copyright Martijn van der Kleijn, 2009-2011
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
@@ -37,6 +38,16 @@ if (!defined('IN_CMS')) { exit(); }
                     </select>
                 </td>
                 <td class="help"><?php echo __('Do you want to include passwords in the backup file? <br/> If you select no, all passwords will be reset upon restoring the backup.'); ?></td>
+            </tr>
+            <tr>
+                <td class="label"><label for="setting_backupfiles"><?php echo __('Include files'); ?>: </label></td>
+                <td class="field">
+                    <select class="select" name="settings[backupfiles]" id="setting_backupfiles">
+                        <option value="1" <?php if ($settings['backupfiles'] == "1") echo 'selected ="";' ?>><?php echo __('Yes'); ?></option>
+                        <option value="0" <?php if ($settings['backupfiles'] == "0") echo 'selected ="";' ?>><?php echo __('No'); ?></option>
+                    </select>
+                </td>
+                <td class="help"><?php echo __('Do you want to include uploaded files in the backup file?'); ?></td>
             </tr>
             <tr>
                 <td class="label"><label for="setting_zip"><?php echo __('Package as zip file'); ?>: </label></td>
@@ -87,6 +98,26 @@ if (!defined('IN_CMS')) { exit(); }
                 <td class="label"><label for="setting_default_pwd"><?php echo __('Reset passwords to'); ?>: </label></td>
                 <td class="field"><input class="textbox" id="setting_default_pwd" maxlength="255" name="settings[default_pwd]" size="255" type="text" value="<?php echo $settings['default_pwd']; ?>" /></td>
                 <td class="help"><?php echo __('If no password is provided in the backup file, reset all password fields to this default.'); ?></td>
+            </tr>
+            <tr>
+                <td class="label"><label for="setting_erasefiles"><?php echo __('Erase files'); ?>: </label></td>
+                <td class="field">
+                    <select class="select" name="settings[erasefiles]" id="setting_erasefiles">
+                        <option value="1" <?php if ($settings['erasefiles'] == "1") echo 'selected ="";' ?>><?php echo __('Yes'); ?></option>
+                        <option value="0" <?php if ($settings['erasefiles'] == "0") echo 'selected ="";' ?>><?php echo __('No'); ?></option>
+                    </select>
+                </td>
+                <td class="help"><?php echo __('Erase uploaded files before restoring backup?'); ?></td>
+            </tr>
+            <tr>
+                <td class="label"><label for="setting_restorefiles"><?php echo __('Restore files'); ?>: </label></td>
+                <td class="field">
+                    <select class="select" name="settings[restorefiles]" id="setting_restorefiles">
+                        <option value="1" <?php if ($settings['restorefiles'] == "1") echo 'selected ="";' ?>><?php echo __('Yes'); ?></option>
+                        <option value="0" <?php if ($settings['restorefiles'] == "0") echo 'selected ="";' ?>><?php echo __('No'); ?></option>
+                    </select>
+                </td>
+                <td class="help"><?php echo __('Restore uploaded files from backup?'); ?></td>
             </tr>
         </table>
     </fieldset>
