@@ -31,6 +31,7 @@ class AuthUser {
     const ALLOW_LOGIN_WITH_EMAIL        = false;
     const DELAY_ON_INVALID_LOGIN        = true;
     const DELAY_ONCE_EVERY              = 30; // 30 seconds
+    const DELAY_FIRST_AFTER             = 3; // First delay starts after Nth failed login attempt
 
     static protected $is_logged_in  = false;
     static protected $user_id       = false;
@@ -195,7 +196,7 @@ class AuthUser {
 
         $user = User::findBy('username', $username);
 
-        if (self::DELAY_ON_INVALID_LOGIN && $user->failure_count > 0) {
+        if (self::DELAY_ON_INVALID_LOGIN && $user->failure_count > self::DELAY_FIRST_AFTER) {
             $last = explode(' ', $user->last_failure);
             $date = explode('-', $last[0]);
             $hours = explode(':', $last[1]);
