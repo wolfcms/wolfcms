@@ -105,7 +105,7 @@ class LoginController extends Controller {
                     redirect(get_url());
             }
             else {
-                Flash::set('error', __('Login failed. Please check your login data and try again.'));
+                Flash::set('error', __('Login failed. Check your username and password.<br/>If you tried to login more than :attempts times, you will have to wait at least :delay seconds before trying again.', array(':attempts' => AuthUser::DELAY_FIRST_AFTER, ':delay' => AuthUser::DELAY_ONCE_EVERY)));
                 Observer::notify('admin_login_failed', $data['username']);
             }
         }
