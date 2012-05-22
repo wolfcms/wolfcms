@@ -41,22 +41,14 @@ Observer::observe('page_not_found', 'behavior_page_not_found');
  * Presents browser with a custom 404 page.
  */
 function behavior_page_not_found($url) {
-    $sql = 'SELECT * FROM '.TABLE_PREFIX."page WHERE behavior_id='page_not_found'";
+    $where = "behavior_id='page_not_found'";
+    $page = Record::findOneFrom('Page', $where);
 
-    $stmt = Record::getConnection()->prepare($sql);
-    $stmt->execute();
+    if ($page && is_object($page)) {
+        header("HTTP/1.0 404 Not Found");
+        header("Status: 404 Not Found");
 
-    $page = $stmt->fetchObject();
-
-    if ($page) {
-        $page = Page::find_page_by_uri($page->slug);
-
-        if (is_object($page)) {
-            header("HTTP/1.0 404 Not Found");
-            header("Status: 404 Not Found");
-
-            $page->_executeLayout();
-            exit(); // need to exit otherwise true error page will be sent
-        }
+        $page->_executeLayout();
+        exit(); // need to exit otherwise true error page will be sent
     }
 }
