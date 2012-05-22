@@ -66,6 +66,7 @@ class Plugin {
      * - license,
      * - update_url,
      * - require_wolf_version,
+     * - require_php_extensions,
      * - website
      *
      * @param infos array Assoc array with plugin informations
@@ -180,7 +181,7 @@ class Plugin {
      * Possible checks:
      *
      * - require_wolf_version (a valid Wolf CMS version number)
-     * - require_php_extension (comma seperated list of required extensions)
+     * - require_php_extensions (comma seperated list of required extensions)
      */
     public static function hasPrerequisites($plugin, &$errors=array()) {
         // Check require_wolf_version
