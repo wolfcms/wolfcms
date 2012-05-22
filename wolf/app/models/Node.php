@@ -25,6 +25,63 @@
  */
 class Node extends Record {
 
+    // Static variables used to store dynamic methods
+    protected static $_methods = array();
+    protected static $_static_methods = array();
+
+    /**
+     * Allows someone to use a dynamic method that was registered with registerMethod().
+     *
+     * This is for instance specific methods, for class level methods, __callStatic is used.
+     *
+     * @see Node::registerMethod()
+     */
+    public function __call($method, $arguments) {
+        if(isset(self::$_methods[$method]))
+            call_user_func(self::$_methods[$method], array_unshift($arguments, $this));
+        else
+            throw new Exception('Unknown dynamic method: '.$method);
+    }
+    
+    /**
+     * Allows someone to use a dynamic method that was registered with registerMethod().
+     *
+     * PHP 5.3+ only.
+     * This is for class level methods, for instance level methods, __call is used.
+     *
+     * @see Node::registerMethod()
+     */
+    public static function __callStatic($method, $arguments) {
+        if(isset(self::$_static_methods[$method]))
+            call_user_func(self::$_static_methods[$method], array_unshift($arguments, $this));
+        else
+            throw new Exception('Unknown dynamic method: '.$method);
+    }
+
+    /**
+     * Registers a new dynamic method.
+     *
+     * Dynamic methods allow plugins or other components to define a new method at run
+     * time for the Node class as well as derivitives thereof. These methods can then be
+     * called similar to normal methods.
+     *
+     * @todo Add code sample to phpdoc
+     *
+     * NOTE: Class level (static) methods can only be used starting PHP 5.3.
+     */
+    public static function registerMethod($method, $function, $static = false) {
+        if ($static === true) {
+            self::$_static_methods[$method] = $function;
+            return true;
+        }
+        else {
+            self::$_methods[$method] = $function;
+            return true;
+        }
+        
+        return false;
+    }
+
 
     /**
      * Intended to eventually replace like-wise names JS function from wolf.js
