@@ -40,7 +40,8 @@ Plugin::setInfos(array(
     'author'      => 'Martijn van der Kleijn',
     'website'     => 'http://www.wolfcms.org/',
     'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml',
-    'require_wolf_version' => '0.6.0'
+    'require_wolf_version' => '0.6.0',
+    'require_php_extensions' => 'dom,SimpleXML'
 ));
 
 Plugin::addController('backup_restore', __('Backup Restore'), 'backup_restore_view', true);
