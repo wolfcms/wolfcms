@@ -173,6 +173,34 @@ class Plugin {
         ksort(self::$plugins_infos);
         return self::$plugins_infos;
     }
+    
+    /**
+     * Given a plugin, checks a number of prerequisites as specified in plugin's setInfos().
+     *
+     * Possible checks:
+     *
+     * - require_wolf_version (a valid Wolf CMS version number)
+     * - require_php_extension (comma seperated list of required extensions)
+     */
+    public static function hasPrerequisites($plugin, &$errors=array()) {
+        // Check require_wolf_version
+        if (isset($plugin->require_wolf_version) && version_compare($plugin->require_wolf_version, CMS_VERSION, '>')) {
+            $errors[] = __('The plugin requires a minimum of Wolf CMS version :v.', array(':v' => $plugin->require_wolf_version));
+        }
+        
+        // Check require_php_extension
+        if (isset($plugin->require_php_extensions))
+        $exts = explode(',', $plugin->require_php_extensions);
+        foreach ($exts as $ext) {
+            if (trim($ext) !== '' && !extension_loaded($ext)) {
+                $errors[] = __('One or more required PHP extension is missing: :exts', array(':exts', $plugin->require_php_extentions));
+            }
+        }
+        
+        if (count($errors) > 0)
+            return false;
+        else return true;
+    }
 
     /**
      * Check the file mentioned as update_url for the latest plugin version available.
