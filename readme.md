@@ -16,29 +16,33 @@ more information and resources.
 ## Installation & Documentation
 
 You can find all documentation including installation and upgrade instructions
-in the docs/ subdirectory.
+in the docs/ subdirectory. Please read the documentation before asking for help.
 
-IMPORTANT - always check your security by viewing security.php post update!
+IMPORTANT - always check if there is any security advise by viewing security.php
+            after installing or updating Wolf CMS!
 
 ## Required
 
 - An HTTP server
-- PHP 5
+- PHP 5.1+
     - PHP: magic_quotes_gpc should be turned OFF.
     - PHP: Wolf CMS does *not* run on PHP 4.
 - PDO support.
-- MySQL 4.1.x or above with InnoDB support. -OR-
-- SQLite 3 -OR-
-- PostgreSQL (tested against 8.4.5)
+- A database supported by PDO.
+    - MySQL 4.1+ with InnoDB support.
+    - SQLite 3
+    - PostgreSQL (tested against 8.4.5)
 
 ## Recommended
 
-- The Apache HTTP server is recommended.
+- The system is testd on Apache HTTP server.
 - Wolf CMS is known to run on these HTTP servers as well:
     - Cherokee
-	- Lighttpd
-	- Nginx
+    - Lighttpd
+    - Nginx
     - Hiawatha
+
+## More information
 
 PHP        : http://www.php.net/  
 MySQL      : http://www.mysql.com/  
@@ -50,7 +54,8 @@ Hiawatha   : http://www.hiawatha-webserver.org/
 Lighttpd   : http://www.lighttpd.net/  
 Nginx      : http://nginx.org/en/  
 
-If you're running Wolf CMS on a different HTTP server, let us know at http://forum.wolfcms.org/
+If you're running Wolf CMS on a different HTTP server successfully,
+please let us know at http://forum.wolfcms.org/
 
 ## Notes
 
