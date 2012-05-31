@@ -35,7 +35,7 @@ IMPORTANT - always check if there is any security advise by viewing security.php
 
 ## Recommended
 
-- The system is testd on Apache HTTP server.
+- The system is tested on Apache HTTP server.
 - Wolf CMS is known to run on these HTTP servers as well:
     - Cherokee
     - Lighttpd
