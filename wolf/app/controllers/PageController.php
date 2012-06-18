@@ -280,8 +280,6 @@ class PageController extends Controller {
 
         $page = Record::findByIdFrom('Page', $new_root_id);
         $page->position += 1;
-        $page->created_on_time = time();
-        $page->published_on_time = $page->created_on_time;
         $page->save();
 
         $newUrl = URL_PUBLIC;
