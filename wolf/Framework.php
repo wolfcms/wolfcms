@@ -590,6 +590,10 @@ class Record {
                     if (self::$__CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) != 'sqlite') {
                         $value_of[$column] = $column.'=DEFAULT';
                     }
+					else{
+						//Since DEFAULT values don't work in SQLite empty strings should be passed explicitly
+						$value_of[$column] = $column."=''";
+					}
                 }
             }
 
