@@ -71,7 +71,9 @@ class Layout extends Record {
                 LEFT JOIN $tablename_user AS creator ON $tablename.created_by_id =creator.id
                 LEFT JOIN $tablename_user AS updator ON $tablename.updated_by_id =updator.id
                 $where_string $order_by_string $limit_string $offset_string";
-
+	
+	self::logQuery($sql);
+	
         $stmt = self::$__CONN__->prepare($sql);
         $stmt->execute();
 

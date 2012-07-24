@@ -59,6 +59,9 @@ class Setting extends Record {
         foreach ($data as $name => $value) {
             $sql = 'UPDATE '.$tablename.' SET value='.self::$__CONN__->quote($value)
                 . ' WHERE name='.self::$__CONN__->quote($name);
+	    
+	    self::logQuery($sql);
+
             self::$__CONN__->exec($sql);
         }
     }

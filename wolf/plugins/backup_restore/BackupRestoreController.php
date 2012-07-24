@@ -97,8 +97,10 @@ class BackupRestoreController extends PluginController {
         if (strpos(DB_DSN,'pgsql') !== false) {
             $sql = "select tablename from pg_tables where schemaname='public'";
         }
-
-        $pdo = Record::getConnection();
+	
+	Record::logQuery($sql);
+        
+	$pdo = Record::getConnection();
         $result = $pdo->query($sql);
 
         while ($col = $result->fetchColumn()) {
@@ -225,8 +227,10 @@ class BackupRestoreController extends PluginController {
         if (strpos(DB_DSN,'pgsql') !== false) {
             $sql = "select tablename from pg_tables where schemaname='public'";
         }
-
-        $pdo = Record::getConnection();
+	
+	Record::logQuery($sql);
+        
+	$pdo = Record::getConnection();
         $result = $pdo->query($sql);
 
         while ($col = $result->fetchColumn()) {
@@ -261,6 +265,9 @@ class BackupRestoreController extends PluginController {
                 else {
                     $sql = 'TRUNCATE '.$tablename;
                 }
+			
+		Record::logQuery($sql);
+        
                 if (false === $__CMS_CONN__->exec($sql)) {
                     Flash::set('error', __('Unable to truncate current table :tablename.', array(':tablename' => $tablename)));
                     redirect(get_url('plugin/backup_restore'));

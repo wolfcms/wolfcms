@@ -31,11 +31,17 @@ class UserRole extends Record {
         $tablename = self::tableNameFromClassName('UserRole');
 
         $sql = 'DELETE FROM '.$tablename.' WHERE user_id='.(int)$user_id;
+
+	self::logQuery($sql);
+
         self::$__CONN__->exec($sql);
 
         foreach ($roles as $role => $role_id) {
             $sql = 'INSERT INTO '.$tablename.' (user_id, role_id) VALUES ('.(int)$user_id.','.(int)$role_id.')';
-            self::$__CONN__->exec($sql);
+
+	    self::logQuery($sql);
+            
+	    self::$__CONN__->exec($sql);
         }
     }
 
