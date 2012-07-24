@@ -88,8 +88,8 @@ class Form {
             $lbl = '<label for="'.$id.'">'.$label.'</label>';
         }
 
-        foreach ($options as $name => $value) {
-            $opt = $opt.' '.$name.'="'.$value.'"';
+        foreach ($options as $oname => $ovalue) {
+            $opt = $opt.' '.$oname.'="'.$ovalue.'"';
         }
 
         return $lbl.'<input id="'.$id.'" name="'.$name.'" type="'.$type.'"'.$ph.$opt.$required.$focus.$complete.' />';
@@ -141,8 +141,8 @@ class Form {
             $lbl = '<label for="'.$id.'">'.$label.'</label>';
         }
 
-        foreach ($options as $name => $value) {
-            $opt = $opt.' '.$name.'="'.$value.'"';
+        foreach ($options as $oname => $ovalue) {
+            $opt = $opt.' '.$oname.'="'.$ovalue.'"';
         }
 
         return $lbl.'<textarea id="'.$id.'" name="'.$name.'" rows="'.$rows.'"'.$ph.$opt.$required.$focus.'>'.$value.'</textarea>';
@@ -170,8 +170,8 @@ class Form {
         $ret = '';
         $opt = '';
 
-        foreach ($options as $name => $value) {
-            $opt = $opt.' '.$name.'="'.$value.'"';
+        foreach ($options as $oname => $ovalue) {
+            $opt = $opt.' '.$oname.'="'.$ovalue.'"';
         }
 
         foreach ($values as $label => $value) {
@@ -204,8 +204,8 @@ class Form {
         $ret = '';
         $opt = '';
 
-        foreach ($options as $name => $value) {
-            $opt = $opt.' '.$name.'="'.$value.'"';
+        foreach ($options as $oname => $ovalue) {
+            $opt = $opt.' '.$oname.'="'.$ovalue.'"';
         }
 
         foreach ($values as $label => $value) {
@@ -241,8 +241,8 @@ class Form {
         $multiple = ($multiple !== false) ? ' multiple="multiple"' : '';
         $size = ' size="'.$size.'"';
         $opt = '';
-        foreach ($options as $name => $value) {
-            $opt = $opt.' '.$name.'="'.$value.'"';
+        foreach ($options as $oname => $ovalue) {
+            $opt = $opt.' '.$oname.'="'.$ovalue.'"';
         }
 
         $ret = '<select name="'.$name.'"'.$multiple.$size.$opt.$required.$focus.'>';
@@ -267,8 +267,8 @@ class Form {
     public static function button($name="Submit", $type='submit', $options=array()) {
         $opt = '';
 
-        foreach ($options as $name => $value) {
-            $opt = $opt.' '.$name.'="'.$value.'"';
+        foreach ($options as $oname => $ovalue) {
+            $opt = $opt.' '.$oname.'="'.$ovalue.'"';
         }
 
         return '<button type="'.$type.'"'.$opt.'>'.$name.'</button>';
