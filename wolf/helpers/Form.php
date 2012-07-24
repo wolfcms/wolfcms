@@ -88,8 +88,8 @@ class Form {
             $lbl = '<label for="'.$id.'">'.$label.'</label>';
         }
 
-        foreach ($options as $name => $value) {
-            $opt = $opt.' '.$name.'="'.$value.'"';
+        foreach ($options as $oname => $value) {
+            $opt = $opt.' '.$oname.'="'.$value.'"';
         }
 
         return $lbl.'<input id="'.$id.'" name="'.$name.'" type="'.$type.'"'.$ph.$opt.$required.$focus.$complete.' />';
