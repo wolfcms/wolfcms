@@ -457,7 +457,7 @@ class Plugin {
 
         Record::logQuery($sql);
 
-	$stmt = $__CMS_CONN__->prepare($sql);
+        $stmt = $__CMS_CONN__->prepare($sql);
 
         $stmt->execute(array(':pluginid' => $plugin_id));
 
