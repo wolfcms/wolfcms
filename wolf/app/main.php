@@ -160,25 +160,4 @@ function main() {
 // ok come on! let's go! (movie: Hacker's)
 ob_start();
 main();
-// ************** CUT HERE **************
-    $result = Record::getConnection()->query('SHOW PROFILES;');
-echo '<span style="font-size: 10px">';
-echo '<table style="width: 48%; display: inline-block; vertical-align:top;" border="1" >';
-    
-    foreach ($result as $row) {
-	echo '<tr style="height: 100px"><td style="width: 20px">';
-        echo $row[0] . ' </td><td style="width: 80px"> '.$row[1].'</td><td>'.$row[2]. ' </td><td></tr>';
-    }
-echo '</table>';
-echo '<table style="width: 48%; display: inline-block; vertical-align:top;" border="1" >';
-echo '<tr style="height: 100px"><td style="width: 20px"><td></td><td></td></tr>';
-$num = 2;
-foreach (Record::getQueryLog() as $logEntry) {
-	echo '<tr style="height: 100px"><td style="width: 20px">';
-        echo $num . ' </td><td>' . $logEntry . ' </td><td></tr>';
-	$num++;
-}
-echo '</table>';
-echo '</span>';
-// ************** CUT HERE **************
 ob_end_flush();

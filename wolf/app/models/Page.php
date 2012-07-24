@@ -285,8 +285,6 @@ class Page extends Node {
                 .($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN : '').') '
                 ."$where_string ORDER BY $order $limit_string $offset_string";
 
-        self::logQuery($sql);
-
         $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute($value);
 
@@ -355,8 +353,6 @@ class Page extends Node {
         $sql = "SELECT tag.id AS id, tag.name AS tag FROM ".TABLE_PREFIX."page_tag AS page_tag, ".TABLE_PREFIX."tag AS tag ".
                 "WHERE page_tag.page_id={$this->id} AND page_tag.tag_id = tag.id";
 
-        self::logQuery($sql);
-
         if (!$stmt = $__CMS_CONN__->prepare($sql))
             return;
 
@@ -394,8 +390,6 @@ class Page extends Node {
 
         $sql = "SELECT tag.id AS id, tag.name AS tag FROM $tablename_page_tag AS page_tag, $tablename_tag AS tag ".
                 "WHERE page_tag.page_id={$this->id} AND page_tag.tag_id = tag.id";
-
-        self::logQuery($sql);
 
         if (!$stmt = self::$__CONN__->prepare($sql))
             return array();
@@ -610,10 +604,8 @@ class Page extends Node {
                 .'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN : '').') '
                 ." AND (valid_until IS NULL OR '".date('Y-m-d H:i:s')."' < valid_until)"
                 ."$where_string ORDER BY $order $limit_string $offset_string";
-	
-	self::logQuery($sql);
-        
-	$pages = array();
+
+        $pages = array();
 
         // hack to be able to redefine the page class with behavior
         if (!empty($this->behavior_id)) {
@@ -658,8 +650,6 @@ class Page extends Node {
         global $__CMS_CONN__;
 
         $sql = 'SELECT content_type, content FROM '.TABLE_PREFIX.'layout WHERE id = ?';
-
-        self::logQuery($sql);
 
         $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute(array($this->_getLayoutId()));
@@ -996,8 +986,6 @@ class Page extends Node {
                 " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id".
                 " $where_string $order_by_string $limit_string $offset_string";
 
-        self::logQuery($sql);
-
         $stmt = self::$__CONN__->prepare($sql);
         if (!$stmt->execute()) {
             return false;
@@ -1136,8 +1124,6 @@ class Page extends Node {
         $objPart = new stdClass;
 
         $sql = 'SELECT name, content_html FROM '.TABLE_PREFIX.'page_part WHERE page_id=?';
-
-        self::logQuery($sql);
 
         if ($stmt = $__CMS_CONN__->prepare($sql)) {
             $stmt->execute(array($page_id));

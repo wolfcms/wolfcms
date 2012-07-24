@@ -104,9 +104,7 @@ class Archive {
         $out = array();
 
         $sql = "SELECT DISTINCT(DATE_FORMAT(created_on, '%Y')) FROM $tablename WHERE parent_id = :parent_id AND status_id != :status ORDER BY created_on DESC";
-	
-	Record::logQuery($sql);
-	
+
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(':parent_id' => $this->page->id, ':status' => Page::STATUS_HIDDEN ));
 
@@ -123,8 +121,6 @@ class Archive {
 
         $sql = "SELECT DISTINCT(DATE_FORMAT(created_on, '%Y/%m')) FROM $tablename WHERE parent_id = :parent_id AND status_id != :status ORDER BY created_on DESC";
 
-	Record::logQuery($sql);
-	
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(':parent_id' => $this->page->id, ':status' => Page::STATUS_HIDDEN ));
 
@@ -144,8 +140,6 @@ class Archive {
 
         $sql = "SELECT DISTINCT(DATE_FORMAT(created_on, '%Y/%m/%d')) FROM $tablename WHERE parent_id = :parent_id AND status_id != :status ORDER BY created_on DESC";
 
-	Record::logQuery($sql);
-	
         $stmt = $pdo->prepare($sql);
         $stmt->execute(array(':parent_id' => $this->page->id, ':status' => Page::STATUS_HIDDEN ));
 

@@ -115,10 +115,8 @@ class PluginController extends Controller {
 
     private function executeFrontendLayout() {
         $sql = 'SELECT content_type, content FROM '.TABLE_PREFIX.'layout WHERE name = '."'$this->frontend_layout'";
-	
-	Record::logQuery($sql);
-        
-	$stmt = Record::getConnection()->prepare($sql);
+
+        $stmt = Record::getConnection()->prepare($sql);
         $stmt->execute();
 
         $layout = $stmt->fetchObject();
