@@ -277,6 +277,8 @@
 						newobj.find('.view-link').attr('href', data[4]); // set the view page link
 						newobj.find('.add-child-link').attr('href', data[5]); // set the add child link
 						newobj.find('.remove').attr('href', data[6]); // set the delete link
+						newobj.find('.remove').attr('onclick', '').unbind('click'); //remove old confirm dialog for delete link (needs both for IE/FF/Chrome)
+						newobj.find('.remove').click(function(){return confirm('Are you sure you want to delete '+data[2]+' and its underlying pages?');}); //set the onclick dialog box for delete link
 						newobj.find('.copy-page').attr('id', 'copy-'+newid); // set the copy id						
 						
 						$("#page_"+id[1]).after(newobj); // add row to dom and slide down

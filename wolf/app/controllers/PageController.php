@@ -295,7 +295,7 @@ class PageController extends Controller {
             $page->slug(),
             $newUrl,
             get_url('page/add', $new_root_id),
-            get_url('page/delete/'.$new_root_id));
+            get_url('page/delete/'.$new_root_id.'?csrf_token='.SecureToken::generateToken(BASE_URL.'page/delete/'.$new_root_id)));
         echo implode('||', $newData);
     }
 
