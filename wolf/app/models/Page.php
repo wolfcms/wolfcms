@@ -605,6 +605,8 @@ class Page extends Node {
                 ." AND (valid_until IS NULL OR '".date('Y-m-d H:i:s')."' < valid_until)"
                 ."$where_string ORDER BY $order $limit_string $offset_string";
 
+        self::logQuery($sql);
+
         $pages = array();
 
         // hack to be able to redefine the page class with behavior

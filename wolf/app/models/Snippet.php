@@ -81,6 +81,8 @@ class Snippet extends Record {
             " LEFT JOIN $tablename_user AS updater ON $tablename.updated_by_id = updater.id".
             " $where_string $order_by_string $limit_string $offset_string";
 
+        Record::logQuery($sql);
+
         $stmt = self::$__CONN__->prepare($sql);
         $stmt->execute();
 
