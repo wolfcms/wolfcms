@@ -33,7 +33,7 @@ class UserPermission extends Record {
         // remove all perms of this user
         $sql = 'DELETE FROM '.$tablename.' WHERE user_id='.(int)$user_id;
 
-	self::logQuery($sql);
+        self::logQuery($sql);
 
         self::$__CONN__->exec($sql);
 
@@ -41,7 +41,7 @@ class UserPermission extends Record {
         foreach ($perms as $perm_name => $perm_id) {
             $sql = 'INSERT INTO '.$tablename.' (user_id, permission_id) VALUES ('.(int)$user_id.','.(int)$perm_id.')';
 
-	    self::logQuery($sql);
+            self::logQuery($sql);
 
             self::$__CONN__->exec($sql);
         }
