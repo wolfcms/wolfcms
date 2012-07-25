@@ -341,6 +341,9 @@ class Plugin {
         $tablename = TABLE_PREFIX.'plugin_settings';
 
         $sql = "DELETE FROM $tablename WHERE plugin_id=:pluginid";
+
+        Record::logQuery($sql);
+
         $stmt = $__CMS_CONN__->prepare($sql);
         return $stmt->execute(array(':pluginid' => $plugin_id));
     }
@@ -365,6 +368,9 @@ class Plugin {
         $existingSettings = array();
 
         $sql = "SELECT name FROM $tablename WHERE plugin_id=:pluginid";
+
+        Record::logQuery($sql);
+
         $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute(array(':pluginid' => $plugin_id));
 
@@ -380,6 +386,8 @@ class Plugin {
             else {
                 $sql = "INSERT INTO $tablename (value, name, plugin_id) VALUES (:value, :name, :pluginid)";
             }
+
+            Record::logQuery($sql);
 
             $stmt = $__CMS_CONN__->prepare($sql);
             $ret = $stmt->execute(array(':pluginid' => $plugin_id, ':name' => $name, ':value' => $value));
@@ -408,6 +416,9 @@ class Plugin {
         $existingSettings = array();
 
         $sql = "SELECT name FROM $tablename WHERE plugin_id=:pluginid";
+
+        Record::logQuery($sql);
+
         $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute(array(':pluginid' => $plugin_id));
 
@@ -420,6 +431,9 @@ class Plugin {
         else {
             $sql = "INSERT INTO $tablename (value, name, plugin_id) VALUES (:value, :name, :pluginid)";
         }
+
+
+        Record::logQuery($sql);
 
         $stmt = $__CMS_CONN__->prepare($sql);
         return $stmt->execute(array(':pluginid' => $plugin_id, ':name' => $name, ':value' => $value));
@@ -440,7 +454,11 @@ class Plugin {
         $settings = array();
 
         $sql = "SELECT name,value FROM $tablename WHERE plugin_id=:pluginid";
+
+        Record::logQuery($sql);
+
         $stmt = $__CMS_CONN__->prepare($sql);
+
         $stmt->execute(array(':pluginid' => $plugin_id));
 
         while ($obj = $stmt->fetchObject()) {
@@ -466,6 +484,9 @@ class Plugin {
         $existingSettings = array();
 
         $sql = "SELECT value FROM $tablename WHERE plugin_id=:pluginid AND name=:name LIMIT 1";
+
+        Record::logQuery($sql);
+
         $stmt = $__CMS_CONN__->prepare($sql);
         $stmt->execute(array(':pluginid' => $plugin_id, ':name' => $name));
 
