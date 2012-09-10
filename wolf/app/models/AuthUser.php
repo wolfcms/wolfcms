@@ -32,7 +32,6 @@ class AuthUser {
     const DELAY_ON_INVALID_LOGIN        = true;
     const DELAY_ONCE_EVERY              = 30; // 30 seconds
     const DELAY_FIRST_AFTER             = 3; // First delay starts after Nth failed login attempt
-    if (!defined('COOKIE_HTTP_ONLY')) define('COOKIE_HTTP_ONLY', false);
 
     static protected $is_logged_in  = false;
     static protected $user_id       = false;
@@ -221,7 +220,8 @@ class AuthUser {
 
             if ($set_cookie) {
                 $time = $_SERVER['REQUEST_TIME'] + self::COOKIE_LIFE;
-                setcookie(self::COOKIE_KEY, self::bakeUserCookie($time, $user), $time, '/', null, (isset($_ENV['SERVER_PROTOCOL']) && ((strpos($_ENV['SERVER_PROTOCOL'],'https') || strpos($_ENV['SERVER_PROTOCOL'],'HTTPS')))), COOKIE_HTTP_ONLY);
+                $cookie_only = defined( COOKIE_HTTP_ONLY) ? COOKIE_HTTP_ONLY : false;
+                setcookie(self::COOKIE_KEY, self::bakeUserCookie($time, $user), $time, '/', null, (isset($_ENV['SERVER_PROTOCOL']) && ((strpos($_ENV['SERVER_PROTOCOL'],'https') || strpos($_ENV['SERVER_PROTOCOL'],'HTTPS')))), $cookie_only);
             }
 
             // Regenerate Session ID upon login
