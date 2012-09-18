@@ -29,7 +29,7 @@ class Markdown {
 
     function apply($text) {
         require_once('classMarkdown.php');
-        $markdown = new Markdown_Parser();
+        $markdown = new MarkdownExtra_Parser();
         return $markdown->transform($text);
     }
 }
