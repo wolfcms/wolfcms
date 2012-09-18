@@ -8,7 +8,6 @@ Sigla:
 ======
 
 0.8.0 - released 2011-??-??
-. Updated MarkItUp! to current version (1.1.12)
 + Added German i18n file for comments plugin - thanks tkeil69575 
 + Added Portugese language file for file manager - thanks daniel.affonso
 - Fixed problem with user name validation. User's name can now contain utf-8 characters. - issue 350
@@ -16,7 +15,9 @@ Sigla:
 - Fixed issue 376 - Email helper validation failed due to missing EMAIL_FORMAT constant.
 . Refactored Page::find()-like methods and related methods like url() and uri()
 . Updated jQuery core library to current version (1.6.2)
-. Updated nestedSortable.js to current version (1.3.4)
+. Updated Markdown (1.0.1o) and MarkdownExtra (1.2.5) to current versions
+. Updated MarkItUp! to current version (1.1.12)
+. Updated nestedSortable.js to current version (1.3.5)
 . Updated Czech translation for core - thanks ivy
 
 0.7.5 - released 2011-04-11
