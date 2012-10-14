@@ -20,4 +20,4 @@ before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database wolfcms_tests;'; fi"
   - git clone --depth=100 --quiet git://github.com/wolfcms/wolfcms-phpunit.git test
 
-script: phpunit test
+script: phpunit --bootstrap test/bootstrap.php --configuration test/phpunit.xml test
