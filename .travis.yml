@@ -26,4 +26,7 @@ script: phpunit --configuration phpunit.travisci.xml
 notifications:
   irc: "irc.spotchat.org#wolfcms"
   email:
-    - wolfcms-dev@googlegroups.com
+    recipients:
+      - wolfcms-dev@googlegroups.com
+    on_success: change
+    on_failure: change
