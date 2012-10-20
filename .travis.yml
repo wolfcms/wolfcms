@@ -22,10 +22,3 @@ before_script:
   - cd test
 
 script: phpunit --configuration phpunit.travisci.xml
-
-notifications:
-  email:
-    recipients:
-      - wolfcms-dev@googlegroups.com
-    on_success: change
-    on_failure: change
