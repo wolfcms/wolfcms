@@ -22,3 +22,8 @@ before_script:
   - cd test
 
 script: phpunit --configuration phpunit.travisci.xml
+
+notifications:
+  irc: "irc.spotchat.org#wolfcms"
+  email:
+    - wolfcms-dev@googlegroups.com
