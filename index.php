@@ -48,7 +48,7 @@ if (USE_MOD_REWRITE && isset($_GET['WOLFPAGE'])) {
     $admin_check = $_GET['WOLFPAGE'];
 }
 else {
-    $admin_check = urldecode($_SERVER['QUERY_STRING']);
+    $admin_check = !empty($_SERVER['QUERY_STRING']) ? urldecode($_SERVER['QUERY_STRING']) : '';
 }
 
 // Are we in frontend or backend?
