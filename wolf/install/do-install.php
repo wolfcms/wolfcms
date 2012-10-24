@@ -102,6 +102,36 @@ if (false === $error) {
             file_put_contents(CFG_FILE, '');
         }
     }
+    
+    // Validate DB host
+    $db_host = trim($_POST['config']['db_host']);
+    if (empty($db_host)) {
+        $error = 'Database host is missing.';
+        file_put_contents(CFG_FILE, '');
+    }
+
+    // Validate DB user
+    $db_user = trim($_POST['config']['db_user']);
+    if (empty($db_user)) {
+        $error = 'Database user is missing.';
+        file_put_contents(CFG_FILE, '');
+    }
+
+    // Validate DB name
+    $db_name = trim($_POST['config']['db_name']);
+    if (empty($db_name)) {
+        $error = 'Database name is missing.';
+        file_put_contents(CFG_FILE, '');
+    }
+
+    // Validate DB table prefix
+    $table_prefix = trim($_POST['config']['table_prefix']);
+    if (!empty($table_prefix)) {
+        if (!preg_match('/^[a-zA-Z0-9_]+$/', $table_prefix)) {
+            $error = 'Database prefix is not valid. Acceptable database prefix characters are: a-z, 0-9 and _.';
+            file_put_contents(CFG_FILE, '');
+        }
+    }
 
     // Try creating a new PDO object to connect to DB
     if (false === $error) {
