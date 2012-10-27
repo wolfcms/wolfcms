@@ -17,6 +17,9 @@
  * @copyright Martijn van der Kleijn, 2008, 2009, 2010
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
+ 
+ // Making sure COOKIE_HTTP_ONLY is defined.
+if (!defined('COOKIE_HTTP_ONLY')) define('COOKIE_HTTP_ONLY', false);
 
 /**
  * Used to keep track of login status.
@@ -32,7 +35,6 @@ class AuthUser {
     const DELAY_ON_INVALID_LOGIN        = true;
     const DELAY_ONCE_EVERY              = 30; // 30 seconds
     const DELAY_FIRST_AFTER             = 3; // First delay starts after Nth failed login attempt
-    if (!defined('COOKIE_HTTP_ONLY')) define('COOKIE_HTTP_ONLY', false);
 
     static protected $is_logged_in  = false;
     static protected $user_id       = false;
