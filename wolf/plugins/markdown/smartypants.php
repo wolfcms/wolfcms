@@ -14,7 +14,7 @@
 #
 
 /**
- * The Smartypant is a typographic extension for the Markdown parser.
+ * Smartypants is a typographic extension for the Markdown parser.
  *
  * @package Plugins
  * @subpackage markdown
