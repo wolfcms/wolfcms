@@ -1,6 +1,6 @@
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009-2012 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
  * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
@@ -13,111 +13,138 @@
 }
 
 body {
-  font: 12px verdana, arial, helvetica, sans-serif;
-	background-color: #E5E5E5;
-	color: #FFF;
-  text-align: center;
-  line-height: 150%;
+    font-family: "Lucida Grande", "Bitstream Vera Sans", Helvetica, Verdana, Arial, sans-serif;
+    font-size: 12px;
+    background-color: #fff;
+    background-color: #e5e5e5\9;
+    color: #2e2924;
+    text-align: center;
+    line-height: 150%;
 }
 
 a {
-  color: #147;
-  font-weight: bolder;
-  text-decoration: none;
+    color: #2e2924;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 a:hover {
-  text-decoration: underline;
+    text-decoration: none;
 }
 
 h1 {
-  margin: -10px -10px 5px;
-  padding: 10px 10px 5px;
-  color: #fff;
-  font-size: 20px;
-  border-bottom: 3px solid #123;
-	background-color: #988060; 
-	text-shadow: -1px 2px 3px #111;
+    margin: -10px -10px 5px;
+    padding: 20px 10px;
+    color: #fff;
+    font-size: 20px;
+    border-bottom: 4px solid #76a83a;
+    background-color: #2e2924;
+    border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
 }
 
 p {
-  margin: 8px 0;
+    margin: 8px 0;
 }
 
 /* Form ------------------------------------------------------------------- */
 label {
-  margin: 3px 0;
-  font-size: 90%;
-  font-weight: bolder;
-  display: block;
+    margin: 3px 0;
+    font-size: 90%;
+    font-weight: 400;
+    display: block;
 }
 
 label.checkbox {
-  font-weight: normal;
-  display: inline;
+    font-weight: normal;
+    display: inline;
 }
 
 input {
-  border: 1px solid #ccc;
-  padding: 3px;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 11px;
-  background: white;
-  color: black;
+    border: 1px solid #e5e5e5;
+    padding: 3px;
+    font-family: "Lucida Grande", "Bitstream Vera Sans", Helvetica, Verdana, Arial, sans-serif;
+    font-size: 11px;
+    background-color: #fff;
+    color: #2e2924;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
 }
 
-input:hover {
-  border: 1px solid #6ad;
+input:hover, input:focus {
+    border: 1px solid #76a83a;
 }
+
 
 input.medium { width: 150px; }
 
 input.checkbox {
-  border: 0;
-  width: auto;
+    border: 0;
+    width: auto;
 }
 
 input.submit {
-  margin-top: 10px;
+    margin-top: 10px;
+    padding: 3px 7px;
+    cursor: pointer;
+    background-color: #76a83a;
+    font-weight: bold;
+    color: #e5e5e5;
+    border: none;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+input.submit:hover {
+    text-decoration: underline;
 }
 
 /* Construction ----------------------------------------------------------- */
 #dialog {
-  margin: 100px auto 0 auto;
-  background: #fff;
-  color: #222;
-  border: 3px solid #123;
-  padding: 10px;
-  width: 332px;
-  text-align: left;
+    margin: 100px auto 0 auto;
+    background: #fff;
+    color: #2e2924;
+    padding: 10px;
+    width: 332px;
+    display: block;
+    text-align: left;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    box-shadow: 3px 3px 5px 2px #888;
+    -webkit-box-shadow: 3px 3px 5px 2px #888;
+    -moz-box-shadow: 3px 3px 5px 2px #888;
 }
 
 /* Login dialog ----------------------------------------------------------- */
 #login-username-div, #login-password-div {
-  padding-top: 1px;
+    padding-top: 1px;
 }
 
 #login-username-div {
-  float: left;
-  width: 170px;
+    float: left;
+    width: 170px;
 }
 
 * html #login-username-div {
-  margin-top: 1px;
+    margin-top: 1px;
 }
 
 #login-password-div {
-  margin-left: 170px;
+    margin-left: 170px;
 }
 
 #login-submit span, #forgot-submit span {
-  padding-left: 8px;
-  font-size: 11px;
+    padding-left: 8px;
+    font-size: 11px;
 }
 
 * html #login-submit span, * html #forgot-submit span {
-  position: relative;
-  top: -4px;
+    position: relative;
+    top: -4px;
 }
 
 #forgot-email {
@@ -126,15 +153,15 @@ input.submit {
 
 /* Messages --------------------------------------------------------------- */
 #error, #success {
-  margin: -5px -10px 0;
-  padding: 10px 20px;
-  text-align: left;
+    margin: -5px -10px 0;
+    padding: 10px 20px;
+    text-align: left;
 }
 #error {
-  background: #a22;
-  color: #fff;
+    background: #a22;
+    color: #fff;
 }
 #success {
-  background: #cfc;
-  color: #051;
+    background: #cfc;
+    color: #051;
 }
