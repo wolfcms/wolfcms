@@ -19,15 +19,19 @@
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!doctype html>
+<html lang="en">
     <head>
+        <meta charset="utf-8" />
         <title><?php echo __('Login').' - '.Setting::get('admin_title'); ?></title>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <link href="<?php echo URI_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/login.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
-        <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/jquery-1.6.2.min.js"></script>
-        <script type="text/javascript">
+        
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        
+        <link href="<?php echo URI_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/login.css" media="screen" rel="stylesheet" type="text/css" />
+        <script src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/jquery-1.6.2.min.js"></script>
+        <script>
             // <![CDATA[
             $(document).ready(function() {
                 (function showMessages(e) {
@@ -47,40 +51,40 @@
         </script>
     </head>
     <body>
-        <div id="dialog">
+        <section id="dialog">
             <h1><?php echo __('Login').' - '.Setting::get('admin_title'); ?></h1>
             <?php if (Flash::get('error') !== null): ?>
                 <div id="error" class="message" style="display: none;"><?php echo Flash::get('error'); ?></div>
             <?php endif; ?>
             <?php if (Flash::get('success') !== null): ?>
-                    <div id="success" class="message" style="display: none"><?php echo Flash::get('success'); ?></div>
+                <div id="success" class="message" style="display: none"><?php echo Flash::get('success'); ?></div>
             <?php endif; ?>
             <?php if (Flash::get('info') !== null): ?>
-                        <div id="info" class="message" style="display: none"><?php echo Flash::get('info'); ?></div>
+                <div id="info" class="message" style="display: none"><?php echo Flash::get('info'); ?></div>
             <?php endif; ?>
-                        <form action="<?php echo get_url('login/login'); ?>" method="post">
-                            <div id="login-username-div">
-                                <label for="login-username"><?php echo __('Username'); ?>:</label>
-                                <input id="login-username" class="medium" type="text" name="login[username]" value="" />
-                            </div>
-                            <div id="login-password-div">
-                                <label for="login-password"><?php echo __('Password'); ?>:</label>
-                                <input id="login-password" class="medium" type="password" name="login[password]" value="" />
-                            </div>
-                            <div class="clean"></div>
-                            <div style="margin-top: 6px">
-                                <input id="login-remember-me" type="checkbox" class="checkbox" name="login[remember]" value="checked" />
-                                <input id="login-redirect" type="hidden" name="login[redirect]" value="<?php echo $redirect; ?>" />
-                                <label class="checkbox" for="login-remember-me"><?php echo __('Remember me for 30 minutes.'); ?></label>
-                            </div>
-                            <div id="login_submit">
-                                <input class="submit" type="submit" accesskey="s" value="<?php echo __('Login'); ?>" />
-                                <span>(<a href="<?php echo get_url('login/forgot'); ?>"><?php echo __('Forgot password?'); ?></a>)</span>
-                            </div>
-                        </form>
-                    </div>
+                    <form action="<?php echo get_url('login/login'); ?>" method="post">
+                        <div id="login-username-div">
+                            <label for="login-username"><?php echo __('Username'); ?>:</label>
+                            <input id="login-username" class="medium" type="text" name="login[username]" value="" />
+                        </div>
+                        <div id="login-password-div">
+                            <label for="login-password"><?php echo __('Password'); ?>:</label>
+                            <input id="login-password" class="medium" type="password" name="login[password]" value="" />
+                        </div>
+                        <div class="clean"></div>
+                        <div style="margin-top: 6px">
+                            <input id="login-remember-me" type="checkbox" class="checkbox" name="login[remember]" value="checked" />
+                            <input id="login-redirect" type="hidden" name="login[redirect]" value="<?php echo $redirect; ?>" />
+                            <label class="checkbox" for="login-remember-me"><?php echo __('Remember me for 30 minutes.'); ?></label>
+                        </div>
+                        <div id="login-submit">
+                            <input class="submit" type="submit" accesskey="s" value="<?php echo __('Login'); ?>" />
+                            <span>(<a href="<?php echo get_url('login/forgot'); ?>"><?php echo __('Forgot password?'); ?></a>)</span>
+                        </div>
+                    </form>
+        </section>
                     <p><?php echo __('website:').' <a href="'.URL_PUBLIC.'">'.Setting::get('admin_title').'</a>'; ?></p>
-        <script type="text/javascript" charset="utf-8">
+        <script>
             // <![CDATA[
             var loginUsername = document.getElementById('login-username');
             if (loginUsername.value == '') {
