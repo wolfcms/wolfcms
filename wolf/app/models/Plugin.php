@@ -190,11 +190,14 @@ class Plugin {
         }
         
         // Check require_php_extension
-        if (isset($plugin->require_php_extensions))
-        $exts = explode(',', $plugin->require_php_extensions);
-        foreach ($exts as $ext) {
-            if (trim($ext) !== '' && !extension_loaded($ext)) {
-                $errors[] = __('One or more required PHP extension is missing: :exts', array(':exts', $plugin->require_php_extentions));
+        if (isset($plugin->require_php_extensions)) {
+            $exts = explode(',', $plugin->require_php_extensions);
+            if(!empty($exts)) {
+                foreach ($exts as $ext) {
+                    if (trim($ext) !== '' && !extension_loaded($ext)) {
+                        $errors[] = __('One or more required PHP extension is missing: :exts', array(':exts', $plugin->require_php_extentions));
+                    }
+                }
             }
         }
         
