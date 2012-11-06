@@ -65,9 +65,8 @@ define('DEFAULT_LOCALE', 'en');
  * </code>
  */
 function __($string, $args=null) {
-    if (I18n::getLocale() != DEFAULT_LOCALE)
-        $string = I18n::getText($string);
-
+    
+    $string = I18n::getText($string);
     if ($args === null) return $string;
 
     return strtr($string, $args);
@@ -83,8 +82,7 @@ class I18n {
 
     public static function setLocale($locale) {
         self::$locale = $locale;
-        if ($locale != DEFAULT_LOCALE)
-            self::loadArray();
+        self::loadArray();
     }
 
     public static function getLocale() {
@@ -116,7 +114,7 @@ class I18n {
      *
      * Returns empty array when unable to determine language preferences.
      *
-     * @return array Array of iso 639-1 language codes.
+     * @return array Array of ietf language-region codes.
      */
     public static function getPreferredLanguages() {
         $languages = array();

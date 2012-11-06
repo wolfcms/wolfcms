@@ -136,7 +136,7 @@ function replaceUri($uri) {
     global $urilang;
     $tmp = explode('/', $uri, 2);
 
-    if (array_key_exists($tmp[0], SettingController::$iso_639_1)) {
+    if (array_key_exists($tmp[0], SettingController::$ietf)) {
         $urilang = $tmp[0];
         $uri = substr($uri, 2);
     }
