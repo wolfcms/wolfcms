@@ -71,6 +71,9 @@ if (!isset($title) || trim($title) == '') {
     <link href="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.css" media="screen" rel="Stylesheet" type="text/css" />
 <?php endif; ?>
 <?php endforeach; ?>
+<?php foreach(Plugin::$stylesheets as $plugin_id => $stylesheet): ?>
+    <link type="text/css" href="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $stylesheet; ?>" media="screen" rel="Stylesheet" />
+<?php endforeach; ?>
 <?php foreach(Plugin::$javascripts as $jscript_plugin_id => $javascript): ?>
     <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $javascript; ?>"></script>
 <?php endforeach; ?>
