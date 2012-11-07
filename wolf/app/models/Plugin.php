@@ -33,6 +33,7 @@ class Plugin {
 
     static $controllers = array();
     static $javascripts = array();
+    static $stylesheets = array();
 
     /**
      * Initialize all activated plugin by including is index.php file
@@ -301,6 +302,19 @@ class Plugin {
     static function addJavascript($plugin_id, $file) {
         if (file_exists(PLUGINS_ROOT.'/' . $plugin_id . '/' . $file)) {
             self::$javascripts[] = $plugin_id.'/'.$file;
+        }
+    }
+    
+    /**
+     * Add a stylesheet file to be added to the html page for a plugin.
+     * Backend only right now.
+     *
+     * @param $plugin_id    string  The folder name of the plugin
+     * @param $file         string  The path to the stylesheet file relative to plugin root
+     */
+    static function addStylesheet($plugin_id, $file) {
+        if (file_exists(PLUGINS_ROOT.'/' . $plugin_id . '/' . $file)) {
+            self::$stylesheets[] = $plugin_id.'/'.$file;
         }
     }
 
