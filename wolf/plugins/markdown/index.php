@@ -32,5 +32,5 @@ Plugin::setInfos(array(
 ));
 
 Filter::add('markdown', 'markdown/filter_markdown.php');
-Plugin::addController('markdown', __('Markdown'), 'administrator', false);
+Plugin::addController('markdown', null, 'admin_view', false);
 Plugin::addJavascript('markdown', 'markdown.php');

@@ -1,8 +1,8 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
- * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
+ * Copyright (C) 2009-2012 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2007-2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
  * This file is part of Wolf CMS.
  *
@@ -28,18 +28,20 @@
  *
  * @package Helpers
  *
+ * @author Martijn van der Kleijn <martijn.niji@gmail.com>
+ * @copyright Martijn van der Kleijn, 2009-2012
+ * 
  * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @version 0.1
- * @since Wolf version beta 1
+ * @copyright Philippe Archambault, 2007-2008
+ * 
  * @license http://www.gnu.org/licenses/gpl.html GPL License
- * @copyright Philippe Archambault, 2007
  */
 
 /**
  *
  */
 defined('I18N_PATH') or define('I18N_PATH', APP_PATH.DIRECTORY_SEPARATOR.'i18n');
-define('DEFAULT_LOCALE', 'en');
+defined('DEFAULT_LOCALE') or define('DEFAULT_LOCALE', 'en');
 
 /**
  * This function is as flexible as possible, you can choose your own pattern for variables in
@@ -79,6 +81,7 @@ function __($string, $args=null) {
 class I18n {
     private static $locale = DEFAULT_LOCALE;
     private static $array = array();
+    private static $default = array();
 
     public static function setLocale($locale) {
         self::$locale = $locale;
@@ -90,23 +93,48 @@ class I18n {
     }
 
     public static function getText($string) {
-        return isset(self::$array[$string]) ? self::$array[$string] : $string;
+        if (isset(self::$array[$string])) {
+            return self::$array[$string];
+        }
+        else {
+            if (isset(self::$default[$string])) {
+                return self::$default[$string];
+            }
+            else {
+                return 'MISSING_DEFAULT_STRING';
+            }
+        }
     }
 
     public static function loadArray() {
         $catalog_file = I18N_PATH.DIRECTORY_SEPARATOR.self::$locale.'-message.php';
+        $default_catalog_file = I18N_PATH.DIRECTORY_SEPARATOR.DEFAULT_LOCALE.'-message.php';
 
-        // assign returned value of catalog file
-        // file return a array (source => traduction)
+        // Add the preferred locale as main messages file.
         if (file_exists($catalog_file)) {
             $array = include $catalog_file;
             self::add($array);
+        }
+        
+        // Add the default locale as a fall-back for missing translations.
+        // Throw Exception if the default language file wasn't found.
+        if (file_exists($default_catalog_file)) {
+            $default = include $default_catalog_file;
+            self::addDefault($default);
+        }
+        else {
+            throw new Exception('Unable to find default language ('.DEFAULT_LOCALE.'-message.php) file for core system.');
         }
     }
 
     public static function add($array) {
         if (!empty($array))
             self::$array = array_merge(self::$array, $array);
+    }
+    
+    public static function addDefault($default) {
+        if (!empty($default))
+            self::$default = array_merge(self::$default, $default);
     }
 
     /**

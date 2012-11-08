@@ -250,7 +250,6 @@ class PageController extends Controller {
      *
      */
     function reorder() {
-        //throw new Exception('TEST-'.print_r($_POST['data'], true));
         $pages = $_POST['page'];
 
         $i = 1;

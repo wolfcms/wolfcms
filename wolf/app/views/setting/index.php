@@ -57,11 +57,11 @@
                                     if (isset($loaded_plugins[$plugin->id]) && Plugin::hasDocumentationPage($plugin->id) )
                                         echo '<a href="'.get_url('plugin/'.$plugin->id.'/documentation').'">'.$plugin->title.'</a>';
                                     else
-                                        echo __($plugin->title);
+                                        echo $plugin->title;
                                 ?>
                                     <span class="from"><?php if (isset($plugin->author)) echo ' '.__('by').' '.$plugin->author; ?></span>
                                 </h4>
-                                <p><?php echo __($plugin->description); ?> <?php if ($disabled === true) echo '<span class="notes">'.__('This plugin CANNOT be enabled!<br/>').implode('<br/>', $errors).'</span>'; ?></p>
+                                <p><?php echo $plugin->description; ?> <?php if ($disabled === true) echo '<span class="notes">'.__('This plugin CANNOT be enabled!<br/>').implode('<br/>', $errors).'</span>'; ?></p>
                             </td>
                             <td class="pluginSettings">
                                 <?php
@@ -103,7 +103,7 @@
                                     <?php
                                         $current_language = Setting::get('language');
                                         foreach (Setting::getLanguages() as $code => $label): ?>
-                                    <option value="<?php echo $code; ?>"<?php if ($code == $current_language) echo ' selected="selected"'; ?>><?php echo __($label); ?></option>
+                                    <option value="<?php echo $code; ?>"<?php if ($code == $current_language) echo ' selected="selected"'; ?>><?php echo $label; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </td>
@@ -116,7 +116,7 @@
                                     <?php
                                         $current_theme = Setting::get('theme');
                                         foreach (Setting::getThemes() as $code => $label): ?>
-                                    <option value="<?php echo $code; ?>"<?php if ($code == $current_theme) echo ' selected="selected"'; ?>><?php echo __($label); ?></option>
+                                    <option value="<?php echo $code; ?>"<?php if ($code == $current_theme) echo ' selected="selected"'; ?>><?php echo $label; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </td>
