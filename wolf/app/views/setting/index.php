@@ -128,7 +128,7 @@
                                 <select class="select" id="setting_default_tab" name="setting[default_tab]">
                                     <?php $current_default_tab = Setting::get('default_tab');?>
                                     <option value="page"<?php if ($current_default_tab == 'page') echo ' selected="selected"'; ?>><?php echo __('Pages'); ?></option>
-                                    <option value="snippet"<?php if ($current_default_tab == 'snippet') echo ' selected="selected"'; ?>><?php echo __('Snippets'); ?></option>
+                                    <option value="snippet"<?php if ($current_default_tab == 'snippet') echo ' selected="selected"'; ?>><?php echo __('MSG_SNIPPETS'); ?></option>
                                     <option value="layout"<?php if ($current_default_tab == 'layout') echo ' selected="selected"'; ?>><?php echo __('Layouts'); ?></option>
                                     <option value="user"<?php if ($current_default_tab == 'user') echo ' selected="selected"'; ?>><?php echo __('Users'); ?></option>
                                     <option value="setting"<?php if ($current_default_tab == 'setting') echo ' selected="selected"'; ?>><?php echo __('Administration'); ?></option>

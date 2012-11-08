@@ -16,7 +16,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 ?>
-<h1><?php echo __('Snippets'); ?></h1>
+<h1><?php echo __('MSG_SNIPPETS'); ?></h1>
 
 <div id="site-map-def" class="index-def">
     <div class="snippet">

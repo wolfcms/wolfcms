@@ -133,7 +133,7 @@ if (!isset($title) || trim($title) == '') {
         <ul>
           <li id="page-plugin" class="plugin"><a href="<?php echo get_url('page'); ?>"<?php if ($ctrl=='page') echo ' class="current"'; ?>><?php echo __('Pages'); ?></a></li>
 <?php if (AuthUser::hasPermission('snippet_view')): ?>
-          <li id="snippet-plugin" class="plugin"><a href="<?php echo get_url('snippet'); ?>"<?php if ($ctrl=='snippet') echo ' class="current"'; ?>><?php echo __('Snippets'); ?></a></li>
+          <li id="snippet-plugin" class="plugin"><a href="<?php echo get_url('snippet'); ?>"<?php if ($ctrl=='snippet') echo ' class="current"'; ?>><?php echo __('MSG_SNIPPETS'); ?></a></li>
 <?php endif; ?>
 <?php if (AuthUser::hasPermission('layout_view')): ?>
           <li id="layout-plugin" class="plugin"><a href="<?php echo get_url('layout'); ?>"<?php if ($ctrl=='layout') echo ' class="current"'; ?>><?php echo __('Layouts'); ?></a></li>

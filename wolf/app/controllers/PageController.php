@@ -191,7 +191,7 @@ class PageController extends Controller {
 
                 if ($page->delete()) {
                     Observer::notify('page_delete', $page);
-                    Flash::set('success', __('Page :title has been deleted!', array(':title' => $page->title)));
+                    Flash::set('success', __('MSG_PAGE_DELETED_SUCCESS', array(':title' => $page->title)));
                 }
                 else
                     Flash::set('error', __('Page :title has not been deleted!', array(':title' => $page->title)));
