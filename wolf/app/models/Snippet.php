@@ -48,7 +48,12 @@ class Snippet extends Record {
     }
 
     public function beforeSave() {
-    // apply filter to save is generated result in the database
+        // snippet name should not be empty
+        if (empty($this->name)) {
+            return false;
+        }
+        
+        // apply filter to save is generated result in the database
         if ( ! empty($this->filter_id)) {
             $this->content_html = Filter::get($this->filter_id)->apply($this->content);
         }
