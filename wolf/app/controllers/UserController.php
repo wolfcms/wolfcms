@@ -85,7 +85,6 @@ class UserController extends Controller {
     private function _add() {
         use_helper('Validate');
         $data = $_POST['user'];
-        Flash::set('post_data', (object) $data);
 
         // Add pre-save checks here
         $errors = false;
@@ -130,6 +129,8 @@ class UserController extends Controller {
         foreach ($fields as $field) {
             if (!empty($data[$field]) && !Validate::alphanum_space($data[$field])) {
                 $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
+                // Reset to prevent XSS
+                $data[$field] = '';
             }
         }
         
@@ -139,11 +140,18 @@ class UserController extends Controller {
 
         if (!empty($data['email']) && !Validate::email($data['email'])) {
             $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'email'));
+            // Reset to prevent XSS
+            $data['email'] = '';
         }
 
         if (!empty($data['language']) && !Validate::alpha_dash($data['language'])) {
             $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'language'));
+            // Reset to prevent XSS
+            // @todo Remove hardcoded reset to 'en' language
+            $data['language'] = 'en';
         }
+
+        Flash::set('post_data', (object) $data);
 
         if ($errors !== false) {
             // Set the errors to be displayed.
@@ -187,7 +195,7 @@ class UserController extends Controller {
         if ($user = User::findById($id)) {
             $this->display('user/edit', array(
                 'action' => 'edit',
-                'csrf_token' => SecureToken::generateToken(BASE_URL.'user/edit'),
+                'csrf_token' => SecureToken::generateToken(BASE_URL.'user/edit/'.$id),
                 'user' => $user,
                 'roles' => Record::findAllFrom('Role')
             ));
@@ -218,7 +226,7 @@ class UserController extends Controller {
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
             $csrf_token = $_POST['csrf_token'];
-            if (!SecureToken::validateToken($csrf_token, BASE_URL.'user/edit')) {
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'user/edit/'.$id)) {
                 Flash::set('error', __('Invalid CSRF token found!'));
                 redirect(get_url('user/edit/'.$id));
             }
@@ -306,6 +314,26 @@ class UserController extends Controller {
         if (!AuthUser::hasPermission('user_delete')) {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url());
+        }
+        
+        // Sanity checks
+        use_helper('Validate');
+        if (!Validate::numeric($id)) {
+            Flash::set('error', __('Invalid input found!'));
+            redirect(get_url());
+        }
+        
+        // CSRF checks
+        if (isset($_GET['csrf_token'])) {
+            $csrf_token = $_GET['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'user/delete/'.$id)) {
+                Flash::set('error', __('Invalid CSRF token found!'));
+                redirect(get_url('user'));
+            }
+        }
+        else {
+            Flash::set('error', __('No CSRF token found!'));
+            redirect(get_url('user'));
         }
 
         // security (dont delete the first admin)

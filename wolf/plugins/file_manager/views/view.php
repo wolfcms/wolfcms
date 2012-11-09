@@ -44,6 +44,7 @@ if (!defined('IN_CMS')) { exit(); }
     <div class="form-area">
         <p class="content">
             <input type="hidden" name="file[name]" value="<?php echo $filename; ?>" />
+            <input id="csrf_token" name="csrf_token" type="hidden" value="<?php echo $csrf_token; ?>" />
             <textarea class="textarea" id="file_content" name="file[content]" style="width: 100%; height: 400px;" rows="20" cols="40"><?php echo htmlentities($content, ENT_COMPAT, 'UTF-8'); ?></textarea><br />
         </p>
     </div>
