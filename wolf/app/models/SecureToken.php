@@ -8,6 +8,8 @@
  */
 
 /**
+ * @todo Add configurable expiration time.
+ * 
  * @package Models
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>

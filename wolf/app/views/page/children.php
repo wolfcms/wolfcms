@@ -43,7 +43,7 @@
       <div class="modify">
         <a class="add-child-link" href="<?php echo get_url('page/add', $child->id); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" align="middle" title="<?php echo __('Add child'); ?>" alt="<?php echo __('Add child'); ?>" /></a>&nbsp;
 <?php if ( ! $child->is_protected || AuthUser::hasPermission('page_delete') ): ?>
-        <a class="remove" href="<?php echo get_url('page/delete/'.$child->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $child->title; ?> <?php echo __('and its underlying pages'); ?>?');"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove.gif" align="middle" alt="<?php echo __('Remove page'); ?>" title="<?php echo __('Remove page'); ?>" /></a>&nbsp;
+        <a class="remove" href="<?php echo get_url('page/delete/'.$child->id.'?csrf_token='.SecureToken::generateToken(BASE_URL.'page/delete/'.$child->id)); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $child->title; ?> <?php echo __('and its underlying pages'); ?>?');"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove.gif" align="middle" alt="<?php echo __('Remove page'); ?>" title="<?php echo __('Remove page'); ?>" /></a>&nbsp;
 <?php endif; ?>
 		<a href="#" id="copy-<?php echo $child->id; ?>" class="copy-page"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/copy.png" align="middle" title="<?php echo __('Copy Page'); ?>" alt="<?php echo __('Copy Page'); ?>" /></a>
       </div>
