@@ -378,7 +378,14 @@ class PageController extends Controller {
             $errors[] = __('You have to specify a title!');
         }
 
-        $data['slug'] = trim($data['slug']);
+        // Make sure we have a slug
+        if (isset($data['slug'])) {
+            $data['slug'] = trim($data['slug']);
+        }
+        else {
+            $data['slug'] = '';
+        }
+        
         if (empty($data['slug']) && $id != '1') {
             $errors[] = __('You have to specify a slug!');
         }
