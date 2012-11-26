@@ -354,14 +354,14 @@ class Plugin {
     static function deleteAllSettings($plugin_id) {
         if ($plugin_id === null || $plugin_id === '') return false;
 
-        global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
 
         $sql = "DELETE FROM $tablename WHERE plugin_id=:pluginid";
 
         Record::logQuery($sql);
 
-        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
+
         return $stmt->execute(array(':pluginid' => $plugin_id));
     }
 
@@ -379,7 +379,6 @@ class Plugin {
         if (!is_array($array) || !is_string($plugin_id)) return false;
         if (empty($array) || empty($plugin_id)) return false;
 
-        global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
 
         $existingSettings = array();
@@ -388,7 +387,8 @@ class Plugin {
 
         Record::logQuery($sql);
 
-        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
+
         $stmt->execute(array(':pluginid' => $plugin_id));
 
         while ($settingname = $stmt->fetchColumn())
@@ -406,7 +406,8 @@ class Plugin {
 
             Record::logQuery($sql);
 
-            $stmt = $__CMS_CONN__->prepare($sql);
+            $stmt = Record::getConnection()->prepare($sql);
+
             $ret = $stmt->execute(array(':pluginid' => $plugin_id, ':name' => $name, ':value' => $value));
         }
 
@@ -427,7 +428,6 @@ class Plugin {
         if (!is_string($name) || !is_string($value) || !is_string($plugin_id)) return false;
         if (empty($name) || empty($value) || empty($plugin_id)) return false;
 
-        global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
 
         $existingSettings = array();
@@ -436,7 +436,8 @@ class Plugin {
 
         Record::logQuery($sql);
 
-        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
+
         $stmt->execute(array(':pluginid' => $plugin_id));
 
         while ($settingname = $stmt->fetchColumn())
@@ -452,7 +453,8 @@ class Plugin {
 
         Record::logQuery($sql);
 
-        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
+
         return $stmt->execute(array(':pluginid' => $plugin_id, ':name' => $name, ':value' => $value));
     }
 
@@ -465,7 +467,6 @@ class Plugin {
     static function getAllSettings($plugin_id=null) {
         if ($plugin_id == null) return false;
 
-        global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
 
         $settings = array();
@@ -474,7 +475,7 @@ class Plugin {
 
         Record::logQuery($sql);
 
-        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
 
         $stmt->execute(array(':pluginid' => $plugin_id));
 
@@ -495,7 +496,6 @@ class Plugin {
     static function getSetting($name=null, $plugin_id=null) {
         if ($name == null || $plugin_id == null) return false;
 
-        global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
 
         $existingSettings = array();
@@ -504,7 +504,8 @@ class Plugin {
 
         Record::logQuery($sql);
 
-        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
+
         $stmt->execute(array(':pluginid' => $plugin_id, ':name' => $name));
 
         return $stmt->fetchColumn();

@@ -41,11 +41,11 @@ class PagePart extends Record {
     }
 
     public static function findByPageId($id) {
-        return self::findAllFrom('PagePart', 'page_id='.(int)$id.' ORDER BY id');
+        return self::findAllFrom('PagePart', 'page_id = :page_id ORDER BY id', array(':page_id' => (int) $id));
     }
 
     public static function deleteByPageId($id) {
-        return self::$__CONN__->exec('DELETE FROM '.self::tableNameFromClassName('PagePart').' WHERE page_id='.(int)$id) === false ? false: true;
+        return self::deleteWhere('PagePart', 'page_id = :page_id', array(':page_id' => (int) $id)) === false ? false : true;
     }
 
 } // end PagePart class
