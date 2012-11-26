@@ -57,11 +57,11 @@
                                     if (isset($loaded_plugins[$plugin->id]) && Plugin::hasDocumentationPage($plugin->id) )
                                         echo '<a href="'.get_url('plugin/'.$plugin->id.'/documentation').'">'.$plugin->title.'</a>';
                                     else
-                                        echo __($plugin->title);
+                                        echo $plugin->title;
                                 ?>
                                     <span class="from"><?php if (isset($plugin->author)) echo ' '.__('by').' '.$plugin->author; ?></span>
                                 </h4>
-                                <p><?php echo __($plugin->description); ?> <?php if ($disabled === true) echo '<span class="notes">'.__('This plugin CANNOT be enabled!<br/>').implode('<br/>', $errors).'</span>'; ?></p>
+                                <p><?php echo $plugin->description; ?> <?php if ($disabled === true) echo '<span class="notes">'.__('This plugin CANNOT be enabled!<br/>').implode('<br/>', $errors).'</span>'; ?></p>
                             </td>
                             <td class="pluginSettings">
                                 <?php
@@ -103,7 +103,7 @@
                                     <?php
                                         $current_language = Setting::get('language');
                                         foreach (Setting::getLanguages() as $code => $label): ?>
-                                    <option value="<?php echo $code; ?>"<?php if ($code == $current_language) echo ' selected="selected"'; ?>><?php echo __($label); ?></option>
+                                    <option value="<?php echo $code; ?>"<?php if ($code == $current_language) echo ' selected="selected"'; ?>><?php echo $label; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </td>
@@ -116,7 +116,7 @@
                                     <?php
                                         $current_theme = Setting::get('theme');
                                         foreach (Setting::getThemes() as $code => $label): ?>
-                                    <option value="<?php echo $code; ?>"<?php if ($code == $current_theme) echo ' selected="selected"'; ?>><?php echo __($label); ?></option>
+                                    <option value="<?php echo $code; ?>"<?php if ($code == $current_theme) echo ' selected="selected"'; ?>><?php echo $label; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </td>
@@ -128,13 +128,13 @@
                                 <select class="select" id="setting_default_tab" name="setting[default_tab]">
                                     <?php $current_default_tab = Setting::get('default_tab');?>
                                     <option value="page"<?php if ($current_default_tab == 'page') echo ' selected="selected"'; ?>><?php echo __('Pages'); ?></option>
-                                    <option value="snippet"<?php if ($current_default_tab == 'snippet') echo ' selected="selected"'; ?>><?php echo __('Snippets'); ?></option>
+                                    <option value="snippet"<?php if ($current_default_tab == 'snippet') echo ' selected="selected"'; ?>><?php echo __('MSG_SNIPPETS'); ?></option>
                                     <option value="layout"<?php if ($current_default_tab == 'layout') echo ' selected="selected"'; ?>><?php echo __('Layouts'); ?></option>
                                     <option value="user"<?php if ($current_default_tab == 'user') echo ' selected="selected"'; ?>><?php echo __('Users'); ?></option>
                                     <option value="setting"<?php if ($current_default_tab == 'setting') echo ' selected="selected"'; ?>><?php echo __('Administration'); ?></option>
                                     <?php
                                         foreach(Plugin::$controllers as $key=>$controller):
-                                            if ($controller->show_tab === true) { ?>
+                                            if (Plugin::isEnabled($key) && $controller->show_tab === true) { ?>
                                     <option value="plugin/<?php echo $key; ?>"<?php if ('plugin/'.$key == $current_default_tab) echo ' selected="selected"'; ?>><?php echo $controller->label; ?></option>
                                     <?php   }
                                         endforeach; ?>

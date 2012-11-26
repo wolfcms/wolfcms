@@ -101,9 +101,6 @@ class Permission extends Record {
      * @return mixed A Permission object or false on failure.
      */
     public static function findByName($name) {
-        $where = 'name=?';
-        $values = array($name);
-
-        return self::findOneFrom('Permission', $where, $values);
+        return self::findOneFrom('Permission', 'name = :name', array(':name' => $name));
     }
 }

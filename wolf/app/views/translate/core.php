@@ -48,10 +48,10 @@ function writeTemplate($strings) {
     sort($strings);
 
     foreach ($strings as $string) {
-        echo "\t'".$string."' => '',\n";
+        echo "    '".$string."' => '".$string."',\n";
     }    
 
-    echo "    );\n\n\n\n\n\n";
+    echo "    );";
 }
 
 /**

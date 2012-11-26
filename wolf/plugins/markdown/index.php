@@ -25,12 +25,12 @@ if (!defined('IN_CMS')) { exit(); }
 Plugin::setInfos(array(
     'id'          => 'markdown',
     'title'       => __('Markdown filter'),
-    'description' => __('Allows you to use the Markdown text filter.'),
-    'version'     => '2.0.1',
+    'description' => __('Allows you to use the Markdown text filter (with MarkdownExtra and Smartypants).'),
+    'version'     => '2.0.2',
     'website'     => 'http://www.wolfcms.org/',
     'update_url'  => 'http://www.wolfcms.org/plugin-versions.xml'
 ));
 
 Filter::add('markdown', 'markdown/filter_markdown.php');
-Plugin::addController('markdown', __('Markdown'), 'administrator', false);
+Plugin::addController('markdown', null, 'admin_view', false);
 Plugin::addJavascript('markdown', 'markdown.php');

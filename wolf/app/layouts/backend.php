@@ -59,6 +59,9 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
         <script src="<?php echo BASE_URI; ?>wolfbase.js"></script>
         <script src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/wolf.js"></script>
 
+    <script type="text/javascript" src="<?php echo URI_PUBLIC; ?>wolf/admin/markitup/jquery.markitup.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo URI_PUBLIC; ?>wolf/admin/markitup/skins/simple/style.css" />
+    
 <?php foreach(Plugin::$plugins as $plugin_id => $plugin): ?>
 <?php if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $plugin_id . '.js')): ?>
 <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.js"></script>
@@ -70,6 +73,22 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
 <?php foreach(Plugin::$javascripts as $jscript_plugin_id => $javascript): ?>
 <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $javascript; ?>"></script>
 <?php endforeach; ?>
+    
+    <script type="text/javascript">
+    // <![CDATA[
+        $(document).ready(function() {
+            (function showMessages(e) {
+                e.fadeIn('slow')
+                 .animate({opacity: 1.0}, 1500)
+                 .fadeOut('slow', function() {
+                    if ($(this).next().attr('class') == 'message') {
+                        showMessages($(this).next());
+                    }
+                    $(this).remove();
+                 })
+            })( $(".message:first") );
+      // ]]>
+</script>
 
     </head>
     <body>

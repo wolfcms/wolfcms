@@ -157,7 +157,7 @@ class PageController extends Controller {
         $this->setLayout('backend');
         $this->display('page/edit', array(
             'action' => 'edit',
-            'csrf_token' => SecureToken::generateToken(BASE_URL.'page/edit'),
+            'csrf_token' => SecureToken::generateToken(BASE_URL.'page/edit/'.$page->id),
             'page' => $page,
             'tags' => $page->getTags(),
             'filters' => Filter::findAll(),
@@ -176,6 +176,26 @@ class PageController extends Controller {
      * @param int $id Id of page to delete
      */
     public function delete($id) {
+        // Sanity checks
+        use_helper('Validate');
+        if (!Validate::numeric($id)) {
+            Flash::set('error', __('Invalid input found!'));
+            redirect(get_url());
+        }
+        
+        // CSRF checks
+        if (isset($_GET['csrf_token'])) {
+            $csrf_token = $_GET['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'page/delete/'.$id)) {
+                Flash::set('error', __('Invalid CSRF token found!'));
+                redirect(get_url('page'));
+            }
+        }
+        else {
+            Flash::set('error', __('No CSRF token found!'));
+            redirect(get_url('page'));
+        }
+        
         // security (dont delete the root page)
         if ($id > 1) {
             // find the page to delete
@@ -191,7 +211,7 @@ class PageController extends Controller {
 
                 if ($page->delete()) {
                     Observer::notify('page_delete', $page);
-                    Flash::set('success', __('Page :title has been deleted!', array(':title' => $page->title)));
+                    Flash::set('success', __('MSG_PAGE_DELETED_SUCCESS', array(':title' => $page->title)));
                 }
                 else
                     Flash::set('error', __('Page :title has not been deleted!', array(':title' => $page->title)));
@@ -250,7 +270,6 @@ class PageController extends Controller {
      *
      */
     function reorder() {
-        //throw new Exception('TEST-'.print_r($_POST['data'], true));
         $pages = $_POST['page'];
 
         $i = 1;
@@ -344,7 +363,9 @@ class PageController extends Controller {
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
             $csrf_token = $_POST['csrf_token'];
-            if (!SecureToken::validateToken($csrf_token, BASE_URL.'page/'.$action)) {
+            $csrf_id = '';
+            if ($action === 'edit') { $csrf_id = '/'.$id; }
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'page/'.$action.$csrf_id)) {
                 $errors[] = __('Invalid CSRF token found!');
             }
         }
@@ -357,7 +378,14 @@ class PageController extends Controller {
             $errors[] = __('You have to specify a title!');
         }
 
-        $data['slug'] = trim($data['slug']);
+        // Make sure we have a slug
+        if (isset($data['slug'])) {
+            $data['slug'] = trim($data['slug']);
+        }
+        else {
+            $data['slug'] = '';
+        }
+        
         if (empty($data['slug']) && $id != '1') {
             $errors[] = __('You have to specify a slug!');
         }

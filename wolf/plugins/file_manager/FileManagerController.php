@@ -68,6 +68,7 @@ class FileManagerController extends PluginController {
         //security
         // we dont allow back link
         if (strpos($this->path, '..') !== false) {
+            /*
             if (Plugin::isEnabled('statistics_api')) {
                 $user = null;
                 if (AuthUser::isLoggedIn())
@@ -79,6 +80,7 @@ class FileManagerController extends PluginController {
                     'username' => $user);
                 Observer::notify('stats_file_manager_hack_attempt', $event);
             }
+             */
         }
         $this->path = str_replace('..', '', $this->path);
 
@@ -112,6 +114,7 @@ class FileManagerController extends PluginController {
         // Sanitize filename for securtiy
         // We don't allow backlinks
         if (strpos($filename, '..') !== false) {
+            /*
             if (Plugin::isEnabled('statistics_api')) {
                 $user = null;
                 if (AuthUser::isLoggedIn())
@@ -123,6 +126,7 @@ class FileManagerController extends PluginController {
                     'username' => $user);
                 Observer::notify('stats_file_manager_hack_attempt', $event);
             }
+             */
         }
         $filename = str_replace('..', '', $filename);
 
@@ -138,6 +142,7 @@ class FileManagerController extends PluginController {
         }
 
         $this->display('file_manager/views/view', array(
+            'csrf_token' => SecureToken::generateToken(BASE_URL.'plugin/file_manager/save/'.$filename),
             'is_image' => $this->_isImage($file),
             'filename' => $filename,
             'content' => $content
@@ -150,8 +155,22 @@ class FileManagerController extends PluginController {
         // security (remove all ..)
         $data['name'] = str_replace('..', '', $data['name']);
         $file = FILES_DIR . DS . $data['name'];
+        
+        // CSRF checks
+        if (isset($_POST['csrf_token'])) {
+            $csrf_token = $_POST['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'plugin/file_manager/save/'.$data['name'])) {
+                Flash::set('error', __('Invalid CSRF token found!'));
+                redirect(get_url('plugin/file_manager/view/'.$data['name']));
+            }
+        }
+        else {
+            Flash::set('error', __('No CSRF token found!'));
+            redirect(get_url('plugin/file_manager/view/'.$data['name']));
+        }
+        
         if (file_exists($file)) {
-            if (file_put_contents($file, $data['content'])) {
+            if (file_put_contents($file, $data['content']) !== false) {
                 Flash::set('success', __('File has been saved with success!'));
             } else {
                 Flash::set('error', __('File is not writable! File has not been saved!'));
@@ -177,6 +196,19 @@ class FileManagerController extends PluginController {
             Flash::set('error', __('You do not have sufficient permissions to create a file.'));
             redirect(get_url('plugin/file_manager/browse/'));
         }
+        
+        // CSRF checks
+        if (isset($_POST['csrf_token'])) {
+            $csrf_token = $_POST['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'plugin/file_manager/create_file')) {
+                Flash::set('error', __('Invalid CSRF token found!'));
+                redirect(get_url('plugin/file_manager/browse/'));
+            }
+        }
+        else {
+            Flash::set('error', __('No CSRF token found!'));
+            redirect(get_url('plugin/file_manager/browse/'));
+        }
 
         $data = $_POST['file'];
 
@@ -196,6 +228,19 @@ class FileManagerController extends PluginController {
     public function create_directory() {
         if (!AuthUser::hasPermission('file_manager_mkdir')) {
             Flash::set('error', __('You do not have sufficient permissions to create a directory.'));
+            redirect(get_url('plugin/file_manager/browse/'));
+        }
+        
+        // CSRF checks
+        if (isset($_POST['csrf_token'])) {
+            $csrf_token = $_POST['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'plugin/file_manager/create_directory')) {
+                Flash::set('error', __('Invalid CSRF token found!'));
+                redirect(get_url('plugin/file_manager/browse/'));
+            }
+        }
+        else {
+            Flash::set('error', __('No CSRF token found!'));
             redirect(get_url('plugin/file_manager/browse/'));
         }
 
@@ -223,6 +268,19 @@ class FileManagerController extends PluginController {
         $paths = func_get_args();
 
         $file = urldecode(join('/', $paths));
+        
+        // CSRF checks
+        if (isset($_GET['csrf_token'])) {
+            $csrf_token = $_GET['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'plugin/file_manager/delete/'.$file)) {
+                Flash::set('error', __('Invalid CSRF token found!'));
+                redirect(get_url('plugin/file_manager/browse/'));
+            }
+        }
+        else {
+            Flash::set('error', __('No CSRF token found!'));
+            redirect(get_url('plugin/file_manager/browse/'));
+        }
 
         $file = FILES_DIR . '/' . str_replace('..', '', $file);
         $filename = array_pop($paths);
@@ -243,6 +301,19 @@ class FileManagerController extends PluginController {
     public function upload() {
         if (!AuthUser::hasPermission('file_manager_upload')) {
             Flash::set('error', __('You do not have sufficient permissions to upload a file.'));
+            redirect(get_url('plugin/file_manager/browse/'));
+        }
+        
+        // CSRF checks
+        if (isset($_POST['csrf_token'])) {
+            $csrf_token = $_POST['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'plugin/file_manager/upload')) {
+                Flash::set('error', __('Invalid CSRF token found!'));
+                redirect(get_url('plugin/file_manager/browse/'));
+            }
+        }
+        else {
+            Flash::set('error', __('No CSRF token found!'));
             redirect(get_url('plugin/file_manager/browse/'));
         }
         
@@ -272,6 +343,19 @@ class FileManagerController extends PluginController {
             redirect(get_url('plugin/file_manager/browse/'));
         }
 
+        // CSRF checks
+        if (isset($_POST['csrf_token'])) {
+            $csrf_token = $_POST['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'plugin/file_manager/chmod')) {
+                Flash::set('error', __('Invalid CSRF token found!'));
+                redirect(get_url('plugin/file_manager/browse/'));
+            }
+        }
+        else {
+            Flash::set('error', __('No CSRF token found!'));
+            redirect(get_url('plugin/file_manager/browse/'));
+        }
+        
         $data = $_POST['file'];
         $data['name'] = str_replace('..', '', $data['name']);
         $file = FILES_DIR . '/' . $data['name'];
@@ -291,6 +375,19 @@ class FileManagerController extends PluginController {
     public function rename() {
         if (!AuthUser::hasPermission('file_manager_rename')) {
             Flash::set('error', __('You do not have sufficient permissions to rename this file or directory.'));
+            redirect(get_url('plugin/file_manager/browse/'));
+        }
+        
+        // CSRF checks
+        if (isset($_POST['csrf_token'])) {
+            $csrf_token = $_POST['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'plugin/file_manager/rename')) {
+                Flash::set('error', __('Invalid CSRF token found!'));
+                redirect(get_url('plugin/file_manager/browse/'));
+            }
+        }
+        else {
+            Flash::set('error', __('No CSRF token found!'));
             redirect(get_url('plugin/file_manager/browse/'));
         }
 

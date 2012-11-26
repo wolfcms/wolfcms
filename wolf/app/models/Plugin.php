@@ -33,22 +33,37 @@ class Plugin {
 
     static $controllers = array();
     static $javascripts = array();
+    static $stylesheets = array();
 
     /**
-     * Initialize all activated plugin by including is index.php file
+     * Initialize all activated plugin by including is index.php file.
+     * Also load all language files for plugins available in plugins directory.
      */
     static function init() {
+        $dir = PLUGINS_ROOT.DS;
+
+        if ($handle = opendir($dir)) {
+            while (false !== ($plugin_id = readdir($handle))) {
+                $file = $dir.$plugin_id.DS.'i18n'.DS.I18n::getLocale().'-message.php';
+                $default_file = PLUGINS_ROOT.DS.$plugin_id.DS.'i18n'.DS.DEFAULT_LOCALE.'-message.php';
+                
+                if (file_exists($file)) {
+                    $array = include $file;
+                    I18n::add($array);
+                }
+
+                if (file_exists($default_file)) {
+                    $array = include $default_file;
+                    I18n::addDefault($array);
+                }
+            }
+        }
+        
         self::$plugins = unserialize(Setting::get('plugins'));
         foreach (self::$plugins as $plugin_id => $tmp) {
             $file = PLUGINS_ROOT.DS.$plugin_id.DS.'index.php';
             if (file_exists($file))
                 include $file;
-
-            $file = PLUGINS_ROOT.DS.$plugin_id.DS.'i18n'.DS.I18n::getLocale().'-message.php';
-            if (file_exists($file)) {
-                $array = include $file;
-                I18n::add($array);
-            }
         }
     }
 
@@ -190,11 +205,14 @@ class Plugin {
         }
         
         // Check require_php_extension
-        if (isset($plugin->require_php_extensions))
-        $exts = explode(',', $plugin->require_php_extensions);
-        foreach ($exts as $ext) {
-            if (trim($ext) !== '' && !extension_loaded($ext)) {
-                $errors[] = __('One or more required PHP extension is missing: :exts', array(':exts', $plugin->require_php_extentions));
+        if (isset($plugin->require_php_extensions)) {
+            $exts = explode(',', $plugin->require_php_extensions);
+            if(!empty($exts)) {
+                foreach ($exts as $ext) {
+                    if (trim($ext) !== '' && !extension_loaded($ext)) {
+                        $errors[] = __('One or more required PHP extension is missing: :exts', array(':exts', $plugin->require_php_extentions));
+                    }
+                }
             }
         }
         
@@ -300,6 +318,19 @@ class Plugin {
             self::$javascripts[] = $plugin_id.'/'.$file;
         }
     }
+    
+    /**
+     * Add a stylesheet file to be added to the html page for a plugin.
+     * Backend only right now.
+     *
+     * @param $plugin_id    string  The folder name of the plugin
+     * @param $file         string  The path to the stylesheet file relative to plugin root
+     */
+    static function addStylesheet($plugin_id, $file) {
+        if (file_exists(PLUGINS_ROOT.'/' . $plugin_id . '/' . $file)) {
+            self::$stylesheets[] = $plugin_id.'/'.$file;
+        }
+    }
 
 
     static function hasSettingsPage($plugin_id) {
@@ -337,14 +368,14 @@ class Plugin {
     static function deleteAllSettings($plugin_id) {
         if ($plugin_id === null || $plugin_id === '') return false;
 
-        global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
 
         $sql = "DELETE FROM $tablename WHERE plugin_id=:pluginid";
 
         Record::logQuery($sql);
 
-        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
+
         return $stmt->execute(array(':pluginid' => $plugin_id));
     }
 
@@ -362,7 +393,6 @@ class Plugin {
         if (!is_array($array) || !is_string($plugin_id)) return false;
         if (empty($array) || empty($plugin_id)) return false;
 
-        global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
 
         $existingSettings = array();
@@ -371,7 +401,8 @@ class Plugin {
 
         Record::logQuery($sql);
 
-        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
+
         $stmt->execute(array(':pluginid' => $plugin_id));
 
         while ($settingname = $stmt->fetchColumn())
@@ -389,7 +420,8 @@ class Plugin {
 
             Record::logQuery($sql);
 
-            $stmt = $__CMS_CONN__->prepare($sql);
+            $stmt = Record::getConnection()->prepare($sql);
+
             $ret = $stmt->execute(array(':pluginid' => $plugin_id, ':name' => $name, ':value' => $value));
         }
 
@@ -410,7 +442,6 @@ class Plugin {
         if (!is_string($name) || !is_string($value) || !is_string($plugin_id)) return false;
         if (empty($name) || empty($value) || empty($plugin_id)) return false;
 
-        global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
 
         $existingSettings = array();
@@ -419,7 +450,8 @@ class Plugin {
 
         Record::logQuery($sql);
 
-        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
+
         $stmt->execute(array(':pluginid' => $plugin_id));
 
         while ($settingname = $stmt->fetchColumn())
@@ -435,7 +467,8 @@ class Plugin {
 
         Record::logQuery($sql);
 
-        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
+
         return $stmt->execute(array(':pluginid' => $plugin_id, ':name' => $name, ':value' => $value));
     }
 
@@ -448,7 +481,6 @@ class Plugin {
     static function getAllSettings($plugin_id=null) {
         if ($plugin_id == null) return false;
 
-        global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
 
         $settings = array();
@@ -457,7 +489,7 @@ class Plugin {
 
         Record::logQuery($sql);
 
-        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
 
         $stmt->execute(array(':pluginid' => $plugin_id));
 
@@ -478,7 +510,6 @@ class Plugin {
     static function getSetting($name=null, $plugin_id=null) {
         if ($name == null || $plugin_id == null) return false;
 
-        global $__CMS_CONN__;
         $tablename = TABLE_PREFIX.'plugin_settings';
 
         $existingSettings = array();
@@ -487,7 +518,8 @@ class Plugin {
 
         Record::logQuery($sql);
 
-        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
+
         $stmt->execute(array(':pluginid' => $plugin_id, ':name' => $name));
 
         return $stmt->fetchColumn();

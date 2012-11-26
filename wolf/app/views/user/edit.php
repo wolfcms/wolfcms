@@ -68,7 +68,7 @@
         <td class="field">
           <select class="select" id="user_language" name="user[language]">
 <?php foreach (Setting::getLanguages() as $code => $label): ?>
-            <option value="<?php echo $code; ?>"<?php if ($code == $user->language) echo ' selected="selected"'; ?>><?php echo __($label); ?></option>
+            <option value="<?php echo $code; ?>"<?php if ($code == $user->language) echo ' selected="selected"'; ?>><?php echo $label; ?></option>
 <?php endforeach; ?>
           </select>
         </td>

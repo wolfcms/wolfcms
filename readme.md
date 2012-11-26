@@ -24,7 +24,7 @@ IMPORTANT - always check if there is any security advise by viewing security.php
 ## Required
 
 - An HTTP server
-- PHP 5.1+
+- PHP 5.2+
     - PHP: magic_quotes_gpc should be turned OFF.
     - PHP: Wolf CMS does *not* run on PHP 4.
 - PDO support.

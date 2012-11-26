@@ -10,10 +10,11 @@ Sigla:
 0.8.0 - released 2011-??-??
 + Added German i18n file for comments plugin - thanks tkeil69575 
 + Added Portugese language file for file manager - thanks daniel.affonso
-+ Activated MarkdownExtra for Markdown text filter
++ Activated MarkdownExtra for Markdown text filter with Smartypants typography extension
 - Fixed problem with user name validation. User's name can now contain utf-8 characters. - issue 350
 - Fixed issue 344 - Dispatcher now strips trailing slashes from requested url.
 - Fixed issue 376 - Email helper validation failed due to missing EMAIL_FORMAT constant.
+- Fixed issue 442 - add back (refreshed) favicon.ico to root
 . Refactored Page::find()-like methods and related methods like url() and uri()
 . Updated jQuery core library to current version (1.6.2)
 . Updated Markdown (1.0.1o) and MarkdownExtra (1.2.5) to current versions

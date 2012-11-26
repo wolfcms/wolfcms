@@ -7,6 +7,8 @@
  * Please see license.txt for the full license text.
  */
 
+require_once('smartypants.php');
+
 /**
  * The Markdown plugin provides a Filter that uses the Markdown parser.
  *
@@ -30,6 +32,7 @@ class Markdown {
     function apply($text) {
         require_once('classMarkdown.php');
         $markdown = new MarkdownExtra_Parser();
-        return $markdown->transform($text);
+        $text = $markdown->transform($text);
+        return SmartyPants($text);
     }
 }

@@ -155,9 +155,20 @@ class SettingController extends Controller {
     }
 
     /**
-     * @var array All ISO 639-1 language codes.
+     * The $ietf array is an array that contains entries describing languages
+     * useable by Wolf CMS based on rfc4646, specifically the following
+     * combinations are acceptable:
+     * 
+     * Language (en)
+     * Language-Region (en-UK)
+     * 
+     * Important note - This list is currently incomplete. Add as needed.
+     * 
+     * For more information, see:
+     *     http://www.ietf.org/rfc/rfc4646.txt
+     *     http://www.iana.org/assignments/language-subtag-registry
      */
-    public static $iso_639_1 = array(
+    public static $ietf = array(
         'aa' => 'Afar',
         'ab' => 'Abkhazian',
         'ae' => 'Avestan',
@@ -166,6 +177,22 @@ class SettingController extends Controller {
         'am' => 'Amharic',
         'an' => 'Aragonese',
         'ar' => 'Arabic',
+        'ar-DZ' => 'Arabic/Algeria',
+        'ar-BH' => 'Arabic/Bahrain',
+        'ar-EG' => 'Arabic/Egypt',
+        'ar-IQ' => 'Arabic/Iraq',
+        'ar-JO' => 'Arabic/Jordan',
+        'ar-KW' => 'Arabic/Kuwait',
+        'ar-LB' => 'Arabic/Lebanon',
+        'ar-LI' => 'Arabic/Libya',
+        'ar-MA' => 'Arabic/Marocco',
+        'ar-OM' => 'Arabic/Oman',
+        'ar-QA' => 'Arabic/Qatar',
+        'ar-SA' => 'Arabic/Saudi Arabia',
+        'ar-SY' => 'Arabic/Syria',
+        'ar-TN' => 'Arabic/Tunesia',
+        'ar-AE' => 'Arabic/UAE',
+        'ar-YE' => 'Arabic/Yemen',
         'as' => 'Assamese',
         'av' => 'Avaric',
         'ay' => 'Aymara',
@@ -191,11 +218,28 @@ class SettingController extends Controller {
         'cy' => 'Welsh',
         'da' => 'Danish',
         'de' => 'German',
+        'de-AT' => 'German/Austria',
+        'de-DE' => 'German/Germany',
+        'de-LI' => 'German/Liechtenstein',
+        'de-LU' => 'German/Luxembourg',
+        'de-CH' => 'German/Switzerland',
         'dv' => 'Dhivehi',
         'dz' => 'Dzongkha',
         'ee' => 'Ewe',
         'el' => 'Greek',
         'en' => 'English',
+        'en-AU' => 'English/Australia',
+        'en-BZ' => 'English/Belize',
+        'en-CA' => 'English/Canada',
+        'en-IE' => 'English/Ireland',
+        'en-JM' => 'English/Jamaica',
+        'en-NZ' => 'English/New Zealand',
+        'en-PH' => 'English/Philippines',
+        'en-ZA' => 'English/South Africa',
+        'en-TT' => 'English/Trinidad and Tobago',
+        'en-UK' => 'English/United Kingdom',
+        'en-US' => 'English/United States',
+        'en-ZW' => 'English/Zimbabwe',
         'eo' => 'Esperanto',
         'es' => 'Spanish',
         'et' => 'Estonian',
@@ -206,9 +250,15 @@ class SettingController extends Controller {
         'fj' => 'Fijian',
         'fo' => 'Faroese',
         'fr' => 'French',
+        'fr-BE' => 'French/Belgium',
+        'fr-CA' => 'French/Canada',
+        'fr-FR' => 'French/France',
+        'fr-LU' => 'French/Luxembourg',
+        'fr-MC' => 'French/Monaco',
+        'fr-CH' => 'French/Switzerland',
         'fy' => 'Western Frisian',
         'ga' => 'Irish',
-        'gd' => 'Gaelic',
+        'gd' => 'Scottish Gaelic',
         'gl' => 'Galician',
         'gn' => 'Guarani',
         'gu' => 'Gujarati',
@@ -227,10 +277,11 @@ class SettingController extends Controller {
         'ie' => 'Interlingue',
         'ig' => 'Igbo',
         'ii' => 'Sichuan Yi',
-        'ik' => 'Inupiak',
+        'ik' => 'Inupiaq',
         'io' => 'Ido',
         'is' => 'Icelandic',
         'it' => 'Italian',
+        'it-CH' => 'Italian/Switzerland',
         'iu' => 'Inuktitut',
         'ja' => 'Japanese',
         'jv' => 'Javanese',
@@ -243,6 +294,8 @@ class SettingController extends Controller {
         'km' => 'Cambodian',
         'kn' => 'Kannada',
         'ko' => 'Korean',
+        'ko-KP' => 'Korean/North Korea',
+        'ko-KR' => 'Korean/South Korea',
         'kr' => 'Kanuri',
         'ks' => 'Kashmiri',
         'ku' => 'Kurdish',
@@ -275,6 +328,7 @@ class SettingController extends Controller {
         'ne' => 'Nepali',
         'ng' => 'Ndonga',
         'nl' => 'Dutch',
+        'nl-BE' => 'Dutch/Belgium',
         'nn' => 'Norwegian Nynorsk',
         'no' => 'Norwegian',
         'nr' => 'South Ndebele',
@@ -290,6 +344,7 @@ class SettingController extends Controller {
         'pl' => 'Polish',
         'ps' => 'Pushto',
         'pt' => 'Portuguese',
+        'pt-BR' => 'Portuguese/Brazil',
         'qu' => 'Quechua',
         'rm' => 'Romansh',
         'rn' => 'Rundi',
@@ -343,6 +398,10 @@ class SettingController extends Controller {
         'yo' => 'Yoruba',
         'za' => 'Zhuang',
         'zh' => 'Chinese',
+        'zh-CN' => 'Chinese/China',
+        'zh-HK' => 'Chinese/Hong Kong',
+        'zh-SG' => 'Chinese/Singapore',
+        'zh-TW' => 'Chinese/Taiwan',
         'zu' => 'Zulu');
 
 }
