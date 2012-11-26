@@ -110,7 +110,7 @@ if (isset($this->vars['content_for_layout']->vars['action'])) {
                 </li>
                 <?php if (AuthUser::hasPermission('snippet_view')): ?>
                 <li<?php if ($ctrl == 'snippet') echo ' class="current"'; ?>>
-                    <a href="<?php echo get_url('snippet'); ?>"><?php echo __('Snippets'); ?> <span class="counter"><?php //echo Record::countFrom('Snippet') ?></span></a>
+                    <a href="<?php echo get_url('snippet'); ?>"><?php echo __('MSG_SNIPPETS'); ?> <span class="counter"><?php //echo Record::countFrom('Snippet') ?></span></a>
                 </li>
                 <?php endif; ?>
                 <?php if (AuthUser::hasPermission('layout_view')): ?>

@@ -89,7 +89,7 @@ return array(
     'Layout not found!' => 'Layout not found!',
     'Layouts' => 'Layouts',
     'Leave password blank for it to remain unchanged.' => 'Leave password blank for it to remain unchanged.',
-    'Log Out' => 'Log Out',
+    'Logout' => 'Logout',
     'Login' => 'Login',
     'Login failed. Check your username and password.<br/>If you tried to login more than :attempts times, you will have to wait at least :delay seconds before trying again.' => 'Login failed. Check your username and password.<br/>If you tried to login more than :attempts times, you will have to wait at least :delay seconds before trying again.',
     'Login:' => 'Login:',
