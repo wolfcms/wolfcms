@@ -28,21 +28,13 @@ class UserRole extends Record {
     public $role_id = false;
 
     public static function setRolesFor($user_id, $roles) {
-        $tablename = self::tableNameFromClassName('UserRole');
 
-        $sql = 'DELETE FROM '.$tablename.' WHERE user_id='.(int)$user_id;
-
-        self::logQuery($sql);
-
-        self::$__CONN__->exec($sql);
+        Record::deleteWhere('UserRole', 'user_id = :user_id', array(':user_id' => (int) $user_id));
 
         foreach ($roles as $role => $role_id) {
-            $sql = 'INSERT INTO '.$tablename.' (user_id, role_id) VALUES ('.(int)$user_id.','.(int)$role_id.')';
-
-            self::logQuery($sql);
-
-            self::$__CONN__->exec($sql);
+            Record::insert('UserRole', array('user_id' => (int) $user_id, 'role_id' => (int) $role_id));
         }
+
     }
 
 }

@@ -54,16 +54,11 @@ class Setting extends Record {
     }
 
     public static function saveFromData($data) {
-        $tablename = self::tableNameFromClassName('Setting');
 
         foreach ($data as $name => $value) {
-            $sql = 'UPDATE '.$tablename.' SET value='.self::$__CONN__->quote($value)
-                . ' WHERE name='.self::$__CONN__->quote($name);
-
-            self::logQuery($sql);
-
-            self::$__CONN__->exec($sql);
+            Record::update('Setting', array('value' => $value), 'name = :name', array(':name' => $name));
         }
+
     }
 
     public static function getLanguages() {

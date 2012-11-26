@@ -264,7 +264,6 @@ class Page extends Node {
      * @return int  The number of children counted.
      */
     public function childrenCount($args=null, $value=array(), $include_hidden=false) {
-        global $__CMS_CONN__;
 
         // Collect attributes...
         $where = isset($args['where']) ? $args['where'] : '';
@@ -285,7 +284,8 @@ class Page extends Node {
                 .($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN : '').') '
                 ."$where_string ORDER BY $order $limit_string $offset_string";
 
-        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
+
         $stmt->execute($value);
 
         return (int) $stmt->fetchColumn();
@@ -347,13 +347,13 @@ class Page extends Node {
 
 
     private function _loadTags() {
-        global $__CMS_CONN__;
+
         $this->tags = array();
 
         $sql = "SELECT tag.id AS id, tag.name AS tag FROM ".TABLE_PREFIX."page_tag AS page_tag, ".TABLE_PREFIX."tag AS tag ".
                 "WHERE page_tag.page_id={$this->id} AND page_tag.tag_id = tag.id";
 
-        if (!$stmt = $__CMS_CONN__->prepare($sql))
+        if (!$stmt = Record::getConnection()->prepare($sql))
             return;
 
         $stmt->execute();
@@ -391,7 +391,7 @@ class Page extends Node {
         $sql = "SELECT tag.id AS id, tag.name AS tag FROM $tablename_page_tag AS page_tag, $tablename_tag AS tag ".
                 "WHERE page_tag.page_id={$this->id} AND page_tag.tag_id = tag.id";
 
-        if (!$stmt = self::$__CONN__->prepare($sql))
+        if (!$stmt = Record::getConnection()->prepare($sql))
             return array();
 
         $stmt->execute();
@@ -576,7 +576,6 @@ class Page extends Node {
      * @return mixed                    False, array of Page objects or single Page object.
      */
     public function children($args=null, $value=array(), $include_hidden=false) {
-        global $__CMS_CONN__;
 
         $page_class = 'Page';
 
@@ -616,7 +615,7 @@ class Page extends Node {
         }
 
         // Run!
-        if ($stmt = $__CMS_CONN__->prepare($sql)) {
+        if ($stmt = Record::getConnection()->prepare($sql)) {
             $stmt->execute($value);
 
             while ($object = $stmt->fetchObject()) {
@@ -649,11 +648,11 @@ class Page extends Node {
 
 
     public function _executeLayout() {
-        global $__CMS_CONN__;
 
         $sql = 'SELECT content_type, content FROM '.TABLE_PREFIX.'layout WHERE id = ?';
 
-        $stmt = $__CMS_CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
+
         $stmt->execute(array($this->_getLayoutId()));
 
         if ($layout = $stmt->fetchObject()) {
@@ -739,7 +738,6 @@ class Page extends Node {
         unset($this->tags);
         unset($this->parent);
 
-
         return true;
     }
 
@@ -801,7 +799,7 @@ class Page extends Node {
 
             // update count (-1) of those tags
             foreach ($current_tags as $tag)
-                self::$__CONN__->exec("UPDATE $tablename SET count = count - 1 WHERE name = '$tag'");
+                Record::getConnection()->exec("UPDATE $tablename SET count = count - 1 WHERE name = '$tag'");
 
             return Record::deleteWhere('PageTag', 'page_id=?', array($this->id));
         }
@@ -863,7 +861,6 @@ class Page extends Node {
 
 
     public static function findByUri($uri, $all = false) {
-        global $__CMS_CONN__;
 
         $uri = trim($uri, '/');
 
@@ -988,7 +985,8 @@ class Page extends Node {
                 " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id".
                 " $where_string $order_by_string $limit_string $offset_string";
 
-        $stmt = self::$__CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
+
         if (!$stmt->execute()) {
             return false;
         }
@@ -1121,13 +1119,12 @@ class Page extends Node {
 
 
     public static function get_parts($page_id) {
-        global $__CMS_CONN__;
 
         $objPart = new stdClass;
 
         $sql = 'SELECT name, content_html FROM '.TABLE_PREFIX.'page_part WHERE page_id=?';
 
-        if ($stmt = $__CMS_CONN__->prepare($sql)) {
+        if ($stmt = Record::getConnection()->prepare($sql)) {
             $stmt->execute(array($page_id));
 
             while ($part = $stmt->fetchObject())
