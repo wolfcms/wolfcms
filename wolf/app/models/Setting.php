@@ -62,18 +62,13 @@ class Setting extends Record {
     }
 
     public static function getLanguages() {
-    //global $iso_639_1;
-
-    //if (empty($iso_639_1)) $iso_639_1 = SettingController::$iso_639_1;
-        $iso_639_1 = SettingController::$iso_639_1;
-
-        $languages = array('en' => 'English');
+        $ietf = SettingController::$ietf;
 
         if ($handle = opendir(APP_PATH.'/i18n')) {
             while (false !== ($file = readdir($handle))) {
                 if (strpos($file, '.') !== 0) {
-                    $code = substr($file, 0, 2);
-                    $languages[$code] = isset($iso_639_1[$code]) ? $iso_639_1[$code]: __('unknown');
+                    $code = substr($file, 0, strpos($file, '-message.php'));
+                    $languages[$code] = isset($ietf[$code]) ? $ietf[$code]: __('unknown');
                 }
             }
             closedir($handle);

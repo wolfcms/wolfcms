@@ -36,20 +36,34 @@ class Plugin {
     static $stylesheets = array();
 
     /**
-     * Initialize all activated plugin by including is index.php file
+     * Initialize all activated plugin by including is index.php file.
+     * Also load all language files for plugins available in plugins directory.
      */
     static function init() {
+        $dir = PLUGINS_ROOT.DS;
+
+        if ($handle = opendir($dir)) {
+            while (false !== ($plugin_id = readdir($handle))) {
+                $file = $dir.$plugin_id.DS.'i18n'.DS.I18n::getLocale().'-message.php';
+                $default_file = PLUGINS_ROOT.DS.$plugin_id.DS.'i18n'.DS.DEFAULT_LOCALE.'-message.php';
+                
+                if (file_exists($file)) {
+                    $array = include $file;
+                    I18n::add($array);
+                }
+
+                if (file_exists($default_file)) {
+                    $array = include $default_file;
+                    I18n::addDefault($array);
+                }
+            }
+        }
+        
         self::$plugins = unserialize(Setting::get('plugins'));
         foreach (self::$plugins as $plugin_id => $tmp) {
             $file = PLUGINS_ROOT.DS.$plugin_id.DS.'index.php';
             if (file_exists($file))
                 include $file;
-
-            $file = PLUGINS_ROOT.DS.$plugin_id.DS.'i18n'.DS.I18n::getLocale().'-message.php';
-            if (file_exists($file)) {
-                $array = include $file;
-                I18n::add($array);
-            }
         }
     }
 
