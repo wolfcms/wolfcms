@@ -144,7 +144,7 @@ class UserController extends Controller {
             $data['email'] = '';
         }
 
-        if (!empty($data['language']) && !Validate::alpha($data['language'])) {
+        if (!empty($data['language']) && !Validate::alpha_dash($data['language'])) {
             $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'language'));
             // Reset to prevent XSS
             // @todo Remove hardcoded reset to 'en' language
@@ -267,7 +267,7 @@ class UserController extends Controller {
             $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'email'));
         }
 
-        if (!empty($data['language']) && !Validate::alpha($data['language'])) {
+        if (!empty($data['language']) && !Validate::alpha_dash($data['language'])) {
             $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'language'));
         }
 

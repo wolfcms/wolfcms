@@ -31,5 +31,5 @@ Plugin::setInfos(array(
 ));
 
 Filter::add('textile', 'textile/filter_textile.php');
-Plugin::addController('textile', __('Textile'), 'administrator', false);
+Plugin::addController('textile', null, 'admin_view', false);
 Plugin::addJavascript('textile', 'textile.php');

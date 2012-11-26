@@ -133,7 +133,7 @@ if (!isset($title) || trim($title) == '') {
         <ul>
           <li id="page-plugin" class="plugin"><a href="<?php echo get_url('page'); ?>"<?php if ($ctrl=='page') echo ' class="current"'; ?>><?php echo __('Pages'); ?></a></li>
 <?php if (AuthUser::hasPermission('snippet_view')): ?>
-          <li id="snippet-plugin" class="plugin"><a href="<?php echo get_url('snippet'); ?>"<?php if ($ctrl=='snippet') echo ' class="current"'; ?>><?php echo __('Snippets'); ?></a></li>
+          <li id="snippet-plugin" class="plugin"><a href="<?php echo get_url('snippet'); ?>"<?php if ($ctrl=='snippet') echo ' class="current"'; ?>><?php echo __('MSG_SNIPPETS'); ?></a></li>
 <?php endif; ?>
 <?php if (AuthUser::hasPermission('layout_view')): ?>
           <li id="layout-plugin" class="plugin"><a href="<?php echo get_url('layout'); ?>"<?php if ($ctrl=='layout') echo ' class="current"'; ?>><?php echo __('Layouts'); ?></a></li>
@@ -142,7 +142,7 @@ if (!isset($title) || trim($title) == '') {
 <?php foreach (Plugin::$controllers as $plugin_name => $plugin): ?>
 <?php if ($plugin->show_tab && (AuthUser::hasPermission($plugin->permissions))): ?>
           <?php Observer::notify('view_backend_list_plugin', $plugin_name, $plugin); ?>
-          <li id="<?php echo $plugin_name;?>-plugin" class="plugin"><a href="<?php echo get_url('plugin/'.$plugin_name); ?>"<?php if ($ctrl=='plugin' && $action==$plugin_name) echo ' class="current"'; ?>><?php echo __($plugin->label); ?></a></li>
+          <li id="<?php echo $plugin_name;?>-plugin" class="plugin"><a href="<?php echo get_url('plugin/'.$plugin_name); ?>"<?php if ($ctrl=='plugin' && $action==$plugin_name) echo ' class="current"'; ?>><?php echo $plugin->label; ?></a></li>
     <?php endif; ?>
 <?php endforeach; ?>
 
