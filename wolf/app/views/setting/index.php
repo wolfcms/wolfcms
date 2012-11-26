@@ -134,7 +134,7 @@
                                     <option value="setting"<?php if ($current_default_tab == 'setting') echo ' selected="selected"'; ?>><?php echo __('Administration'); ?></option>
                                     <?php
                                         foreach(Plugin::$controllers as $key=>$controller):
-                                            if ($controller->show_tab === true) { ?>
+                                            if (Plugin::isEnabled($key) && $controller->show_tab === true) { ?>
                                     <option value="plugin/<?php echo $key; ?>"<?php if ('plugin/'.$key == $current_default_tab) echo ' selected="selected"'; ?>><?php echo $controller->label; ?></option>
                                     <?php   }
                                         endforeach; ?>
