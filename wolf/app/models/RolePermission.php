@@ -30,10 +30,10 @@ class RolePermission extends Record {
     public $permission_id = false;
 
     public static function savePermissionsFor($role_id, $permissions) {
-        if (!Record::existsIn('Role', 'id=?', array($role_id)))
+        if (!Record::existsIn('Role', 'id = :role_id', array(':role_id' => $role_id)))
             return false;
 
-        if (!self::deleteWhere('RolePermission', 'role_id=?', array((int) $role_id)))
+        if (!self::deleteWhere('RolePermission', 'role_id = :role_id', array(':role_id' => (int) $role_id)))
             return false;
 
         foreach ($permissions as $perm) {
@@ -46,7 +46,7 @@ class RolePermission extends Record {
     }
 
     public static function findPermissionsFor($role_id) {
-        $roleperms = self::findAllFrom('RolePermission', 'role_id='.(int)$role_id);
+        $roleperms = self::findAllFrom('RolePermission', 'role_id = :role_id', array(':role_id' => (int) $role_id));
 
         $perms = array();
 

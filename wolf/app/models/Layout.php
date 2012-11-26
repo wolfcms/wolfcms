@@ -44,7 +44,7 @@ class Layout extends Record {
     }
 
     public static function find($args = null) {
-    // Collect attributes...
+        // Collect attributes...
         $where    = isset($args['where']) ? trim($args['where']) : '';
         $order_by = isset($args['order']) ? trim($args['order']) : '';
         $offset   = isset($args['offset']) ? (int) $args['offset'] : 0;
@@ -74,7 +74,8 @@ class Layout extends Record {
 
         self::logQuery($sql);
 
-        $stmt = self::$__CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
+
         $stmt->execute();
 
         // Run!
@@ -97,13 +98,13 @@ class Layout extends Record {
 
     public static function findById($id) {
         return self::find(array(
-        'where' => self::tableNameFromClassName('Layout').'.id='.(int)$id,
-        'limit' => 1
+            'where' => self::tableNameFromClassName('Layout').'.id='.(int)$id,
+            'limit' => 1
         ));
     }
 
     public function isUsed() {
-        return Record::countFrom('Page', 'layout_id=?', array($this->id));
+        return Record::countFrom('Page', 'layout_id = :layout_id', array(':layout_id' => $this->id));
     }
 
 } // end Layout class
