@@ -104,7 +104,7 @@ class Layout extends Record {
     }
 
     public function isUsed() {
-        return Record::countFrom('Page', 'layout_id=?', array($this->id));
+        return Record::countFrom('Page', 'layout_id = :layout_id', array(':layout_id' => $this->id));
     }
 
 } // end Layout class

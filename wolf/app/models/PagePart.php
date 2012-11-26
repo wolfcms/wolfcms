@@ -41,7 +41,7 @@ class PagePart extends Record {
     }
 
     public static function findByPageId($id) {
-        return self::findAllFrom('PagePart', 'page_id='.(int)$id.' ORDER BY id');
+        return self::findAllFrom('PagePart', 'page_id = :page_id ORDER BY id', array(':page_id' => (int) $id));
     }
 
     public static function deleteByPageId($id) {

@@ -649,11 +649,11 @@ class Page extends Node {
 
     public function _executeLayout() {
 
-        $sql = 'SELECT content_type, content FROM '.TABLE_PREFIX.'layout WHERE id = ?';
+        $sql = 'SELECT content_type, content FROM '.TABLE_PREFIX.'layout WHERE id = :layout_id';
 
         $stmt = Record::getConnection()->prepare($sql);
 
-        $stmt->execute(array($this->_getLayoutId()));
+        $stmt->execute(array(':layout_id' => $this->_getLayoutId()));
 
         if ($layout = $stmt->fetchObject()) {
             // if content-type not set, we set html as default
@@ -799,9 +799,9 @@ class Page extends Node {
 
             // update count (-1) of those tags
             foreach ($current_tags as $tag)
-                Record::getConnection()->exec("UPDATE $tablename SET count = count - 1 WHERE name = '$tag'");
+                Record::update('Tag', array('count' => 'count - 1'), 'name = :tag_name', array(':tag_name' => $tag));
 
-            return Record::deleteWhere('PageTag', 'page_id=?', array($this->id));
+            return Record::deleteWhere('PageTag', 'page_id = :page_id', array(':page_id' => $this->id));
         }
         else {
             $old_tags = array_diff($current_tags, $tags);
@@ -811,7 +811,7 @@ class Page extends Node {
             foreach ($new_tags as $index => $tag_name) {
                 if (!empty($tag_name)) {
                     // try to get it from tag list, if not we add it to the list
-                    if (!$tag = Record::findOneFrom('Tag', 'name=?', array($tag_name)))
+                    if (!$tag = Record::findOneFrom('Tag', 'name = :tag_name', array(':tag_name' => $tag_name)))
                         $tag = new Tag(array('name' => trim($tag_name)));
 
                     $tag->count++;
@@ -826,8 +826,9 @@ class Page extends Node {
             // remove all old tag
             foreach ($old_tags as $index => $tag_name) {
                 // get the id of the tag
-                $tag = Record::findOneFrom('Tag', 'name=?', array($tag_name));
-                Record::deleteWhere('PageTag', 'page_id=? AND tag_id=?', array($this->id, $tag->id));
+                $tag = Record::findOneFrom('Tag', 'name = :tag_name', array(':tag_name' => $tag_name));
+                // delete the pivot record
+                Record::deleteWhere('PageTag', 'page_id = :page_id AND tag_id = :tag_id', array(':page_id' => $this->id, ':tag_id' => $tag->id));
                 $tag->count--;
                 $tag->save();
             }
@@ -903,10 +904,10 @@ class Page extends Node {
     /**
      * find a page by the slug and parent id
      *
-     * @param string $slug		page slug to search for
-     * @param object $parent 	parent object
-     * @param bool $all			flag for returning all status types
-     * @return mixed			page object or false
+     * @param string $slug      page slug to search for
+     * @param object $parent    parent object
+     * @param bool $all         flag for returning all status types
+     * @return mixed            page object or false
      */
     public static function findBySlug($slug, &$parent, $all = false) {
         $parent_id = $parent ? $parent->id : 0;
@@ -928,8 +929,10 @@ class Page extends Node {
             $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
         }
 
-        $page = self::find(array('where' => $where,
-                    'limit' => 1));
+        $page = self::find(array(
+            'where' => $where,
+            'limit' => 1
+        ));
 
         return $page;
     }
@@ -1040,7 +1043,7 @@ class Page extends Node {
 
 
     public static function hasChildren($id) {
-        return (boolean) self::countFrom('Page', 'parent_id = '.(int) $id);
+        return (boolean) self::countFrom('Page', 'parent_id = :parent_id', array(':parent_id' => (int) $id));
     }
 
 
@@ -1122,10 +1125,10 @@ class Page extends Node {
 
         $objPart = new stdClass;
 
-        $sql = 'SELECT name, content_html FROM '.TABLE_PREFIX.'page_part WHERE page_id=?';
+        $sql = 'SELECT name, content_html FROM '.TABLE_PREFIX.'page_part WHERE page_id = :page_id';
 
         if ($stmt = Record::getConnection()->prepare($sql)) {
-            $stmt->execute(array($page_id));
+            $stmt->execute(array(':page_id' => $page_id));
 
             while ($part = $stmt->fetchObject())
                 $objPart->{$part->name} = $part;
