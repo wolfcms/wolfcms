@@ -83,7 +83,7 @@ if (!isset($title) || trim($title) == '') {
         $(document).ready(function() {
             (function showMessages(e) {
                 e.fadeIn('slow')
-                 .animate({opacity: 1.0}, 1500)
+                 .animate({opacity: 1.0}, Math.min(5000, parseInt(e.text().length * 50)))
                  .fadeOut('slow', function() {
                     if ($(this).next().attr('class') == 'message') {
                         showMessages($(this).next());
