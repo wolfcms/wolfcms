@@ -823,6 +823,8 @@ class Record {
      * 
      * None of the above are required for the method to work.
      * 
+     * Note: because of the use of get_called_class(), this method requires PHP 5.3.0 or higher.
+     * 
      * @param array $args   Array of arguments
      * @return mixed        Object (when limit == 1), array of objects or false (on failure).
      */
