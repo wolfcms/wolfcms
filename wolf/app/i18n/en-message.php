@@ -117,6 +117,7 @@ return array(
     'Page not found!' => 'Page not found!',
     'Page options' => 'Page options',
     'Page rendered in' => 'Page rendered in',
+    'Page with slug <b>:slug</b> already exists!' => 'Page with slug <b>:slug</b> already exists!',    
     'Pages' => 'Pages',
     'Password' => 'Password',
     'Password and Confirm are not the same or too small!' => 'Password and Confirm are not the same or too small!',
