@@ -796,6 +796,101 @@ class Record {
 	}
 
 
+    /**
+     * Returns a single Record class instance or an array of Record instances.
+     * 
+     * Usage:
+     * $object = Class::find(array(
+     *     'select'     => 'column1, column2',
+     *     'from'       => 'table_name',
+     *     'joins'      => 'INNER JOIN table_name2 ON table_name2.column = table_name.id',
+     *     'group_by'   => 'column2',
+     *     'having'     => 'column2 = value',
+     *     'order_by'   => 'column3 ASC',
+     *     'limit'      => 10,
+     *     'offset'     => 20
+     * ));
+     * 
+     * Argument array can contain:
+     *  - select        The select statement (leave out 'SELECT ')
+     *  - from          The table name (leave out to automatically use the default table name of that Class)
+     *  - joins         A complete join statement. Multiple joins are allowed
+     *  - group_by      The group by statement (leave out 'GROUP BY ')
+     *  - having        The having statement (leave out 'HAVING ')
+     *  - order by      The order by statement (leave out 'ORDER BY ')
+     *  - limit         The limit (integer)
+     *  - offset        The offset (integer)
+     * 
+     * None of the above are required for the method to work.
+     * 
+     * @param array $args   Array of arguments
+     * @return mixed        Object (when limit == 1), array of objects or false (on failure).
+     */
+    public static function find($args = null) {
+        $class_name = get_called_class();
+        $table_name = self::tableNameFromClassName($class_name);
+        
+        $select   = isset($args['select']) ? trim($args['select']) : '';
+        $from     = isset($args['from']) ? trim($args['from']) : '';
+        $joins    = isset($args['joins']) ? trim($args['joins']) : '';
+        $group_by = isset($args['group']) ? trim($args['group']) : '';
+        $having   = isset($args['having']) ? trim($args['having']) : '';
+        $order_by = isset($args['order']) ? trim($args['order']) : '';
+        $limit    = isset($args['limit']) ? (int) $args['limit'] : 0;
+        $offset   = isset($args['offset']) ? (int) $args['offset'] : 0;
+        
+        $params = array();
+        
+        if (isset($args['where'])) {
+            if (is_string($args['where'])) {
+                $where = trim($args['where']);
+                
+            }
+            elseif (is_array($args['where'])) {
+                $where = trim(array_shift($args['where']));
+                $params = $args['where'];
+            }
+        }
+        
+        // Prepare query parts
+        $select_string      = empty($select) ? 'SELECT *' : "SELECT $select";
+        $from_string        = empty($from) ? "FROM `$table_name`" : "FROM $from";
+        $joins_string       = empty($joins) ? '' : $joins;
+        $where_string       = empty($where) ? '' : "WHERE $where";
+        $group_by_string    = empty($group_by) ? '' : "GROUP BY $group_by";
+        $having_string      = empty($having) ? '' : "HAVING $having";
+        $order_by_string    = empty($order_by) ? '' : "ORDER BY $order_by";
+        $limit_string       = $limit > 0 ? "LIMIT $limit" : '';
+        $offset_string      = $offset > 0 ? "OFFSET $offset" : '';
+        
+        $sql = "$select_string $from_string $joins_string $where_string $group_by_string $having_string $order_by_string $limit_string $offset_string";
+        
+        Record::logQuery($sql);
+        
+        $stmt = self::$__CONN__->prepare($sql);
+        if (!$stmt->execute($params)) {
+            return false;
+        }
+        
+        // Run!
+        if ($limit == 1) {
+            if ($object = $stmt->fetchObject($class_name)) {
+                return $object;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            $objects = array();
+            while ($object = $stmt->fetchObject($class_name)) {
+                $objects[] = $object;
+            }
+            
+            return $objects;
+        }
+    }
+        
     //
     // Note: lazy finder or getter method. Pratical when you need something really
     //       simple no join or anything will only generate simple select * from table ...
