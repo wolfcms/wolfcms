@@ -890,6 +890,22 @@ class Record {
             return $objects;
         }
     }
+    
+    /**
+     * Returns a record based on it's id.
+     * 
+     * Default method so that you don't have to create one for every model you write.
+     * Can of course be overwritten by a custom findById() method (for instance when you want to include another model)
+     * 
+     * @param int $id       Object's id
+     * @return              Single object
+     */
+    public static function findById($id) {
+        return self::find(array(
+            'where' => array('id = ?', $id),
+            'limit' => 1
+        ));
+    }
         
     //
     // Note: lazy finder or getter method. Pratical when you need something really
