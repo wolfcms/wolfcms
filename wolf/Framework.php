@@ -804,6 +804,7 @@ class Record {
      *     'select'     => 'column1, column2',
      *     'from'       => 'table_name',
      *     'joins'      => 'INNER JOIN table_name2 ON table_name2.column = table_name.id',
+     *     'where'      => array('id = ? and slug = ?', $id, $slug),
      *     'group_by'   => 'column2',
      *     'having'     => 'column2 = value',
      *     'order_by'   => 'column3 ASC',
@@ -815,6 +816,7 @@ class Record {
      *  - select        The select statement (leave out 'SELECT ')
      *  - from          The table name (leave out to automatically use the default table name of that Class)
      *  - joins         A complete join statement. Multiple joins are allowed
+     *  - where         A string (for a simple where statement) or an array (if you want to use prepared statements)
      *  - group_by      The group by statement (leave out 'GROUP BY ')
      *  - having        The having statement (leave out 'HAVING ')
      *  - order by      The order by statement (leave out 'ORDER BY ')
