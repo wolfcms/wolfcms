@@ -56,7 +56,7 @@ class Permission extends Record {
      */
     public static function getPermissions() {
         if (!self::$permissions) {
-            $perms = self::findAllFrom('Permission');
+            $perms = self::find();
 
             foreach ($perms as $perm) {
                 self::$permissions[$perm->id()] = $perm;
@@ -101,6 +101,9 @@ class Permission extends Record {
      * @return mixed A Permission object or false on failure.
      */
     public static function findByName($name) {
-        return self::findOneFrom('Permission', 'name = :name', array(':name' => $name));
+        return self::find(array(
+            'where' => array('name = ?', $name),
+            'limit' => 1
+        ));
     }
 }

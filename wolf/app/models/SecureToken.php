@@ -131,12 +131,14 @@ final class SecureToken extends Record {
         $hash = new Crypt_Hash('sha256');
 
         $token = false;
-        $token = Record::findOneFrom('SecureToken', 'username = :username AND url = :url',
-            array(
+        $token = self::find(array(
+            'where' => array(
+                'username = :username AND url = :url',
                 ':username' => $username,
-                ':url'      => bin2hex($hash->hash($url))
-            )
-        );
+                ':url' => bin2hex($hash->hash($url))
+            ),
+            'limit' => 1
+        ));
 
         if ($token !== null && $token !== false && $token instanceof SecureToken) {
             return $token;
@@ -150,12 +152,14 @@ final class SecureToken extends Record {
         $hash = new Crypt_Hash('sha256');
         $time = 0;
 
-        $token = Record::findOneFrom('SecureToken', 'username = :username AND url = :url',
-            array(
+        $token = self::find(array(
+            'where' => array(
+                'username = :username AND url = :url',
                 ':username' => $username,
-                ':url'      => bin2hex($hash->hash($url))
-            )
-        );
+                ':url' => bin2hex($hash->hash($url))
+            ),
+            'limit' => 1
+        ));
 
         if ($token) {
             $time = $token->time;

@@ -23,4 +23,10 @@
  */
 class Tag extends Record {
     const TABLE_NAME = 'tag';
+    
+    public static function findByName($name) {
+        return self::find(array(
+            'where' => array('name = ?', $name)
+        ));
+    }
 }

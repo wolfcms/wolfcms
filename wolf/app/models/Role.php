@@ -76,28 +76,23 @@ class Role extends Record {
     }
 
     /**
-     * Find a Role by id
-     *
-     * @param int $id
-     * @return mixed A Role or false on failure.
-     */
-    public static function findById($id) {
-        return self::findByIdFrom('Role', $id);
-    }
-
-    /**
      * Find a Role by its name.
      *
      * @param string $name
      * @return mixed A Role or false on failure.
      */
     public static function findByName($name) {
-        return self::findOneFrom('Role', 'name = :name', array(':name' => $name));
+        return self::find(array(
+            'where' => array('name = ?', $name),
+            'limit' => 1
+        ));
     }
 
     public static function findByUserId($id) {
 
-        $userroles = UserRole::findAllFrom('UserRole', 'user_id = :user_id', array(':user_id' => (int) $id));
+        $userroles = UserRole::find(array(
+            'where' => array('user_id = ?', (int) $id)
+        ));
 
         if (count($userroles) <= 0)
             return false;
