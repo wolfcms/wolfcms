@@ -5,7 +5,7 @@
 # the three lines below due to server limitations.
 #
 
-php_flag magic_quotes_gpc off
+#php_flag magic_quotes_gpc off ## Removed in php5.4
 AddDefaultCharset UTF-8
 Options -Indexes +FollowSymLinks
 
