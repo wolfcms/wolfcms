@@ -396,7 +396,7 @@ class PageController extends Controller {
             if (!Validate::slug($data['slug']) && (!empty($data['slug']) && $id == '1')) {
                 $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'slug'));
             }
-            if (Record::existsIn('Page','parent_id = :parent_id AND slug = :slug',array(':parent_id' => $data['parent_id'], ':slug' => $data['slug']))) {
+            if (Record::existsIn('Page','parent_id = :parent_id AND slug = :slug AND id <> :id',array(':parent_id' => $data['parent_id'], ':slug' => $data['slug'], ':id' => $id))) {
                 $errors[] = __('Page with slug <b>:slug</b> already exists!', array(':slug' => $data['slug']));
             }            
         }
