@@ -20,6 +20,8 @@
 
 include_once("../../../config.php");
 
+header('Content-Type: text/javascript; charset=UTF-8');
+
 $changedurl = str_replace('//','|',URL_PUBLIC);
 $lastslash = strpos($changedurl, '/');
 if (false === $lastslash) {
@@ -38,7 +40,7 @@ $(document).ready(function() {
             elem.markItUpRemove();
         }
     });
-    
+
     $('.filter-selector').live('wolfSwitchFilterIn', function(event, filtername, elem) {
         if (filtername == 'textile') {
             elem.markItUp(eval(textileSettings));

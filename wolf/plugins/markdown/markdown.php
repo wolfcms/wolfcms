@@ -20,6 +20,8 @@
 
 include_once("../../../config.php");
 
+header('Content-Type: text/javascript; charset=UTF-8');
+
 $changedurl = str_replace('//','|',URL_PUBLIC);
 $lastslash = strpos($changedurl, '/');
 if (false === $lastslash) {
@@ -39,7 +41,7 @@ $(document).ready(function() {
             elem.markItUpRemove();
         }
     });
-    
+
     $('.filter-selector').live('wolfSwitchFilterIn', function(event, filtername, elem) {
         if (filtername == 'markdown') {
             elem.markItUp(markdownSettings);
@@ -75,7 +77,7 @@ markdownSettings = {
 		{name:'Heading 4', key:'4', openWith:'#### ', placeHolder:'Your title here...' },
 		{name:'Heading 5', key:'5', openWith:'##### ', placeHolder:'Your title here...' },
 		{name:'Heading 6', key:'6', openWith:'###### ', placeHolder:'Your title here...' },
-		{separator:'---------------' },		
+		{separator:'---------------' },
 		{name:'Bold', key:'B', openWith:'**', closeWith:'**'},
 		{name:'Italic', key:'I', openWith:'_', closeWith:'_'},
 		{separator:'---------------' },
@@ -86,7 +88,7 @@ markdownSettings = {
 		{separator:'---------------' },
 		{name:'Picture', key:'P', replaceWith:'![[![Alternative text]!]]([![Url:!:http://]!] "[![Title]!]")'},
 		{name:'Link', key:'L', openWith:'[', closeWith:']([![Url:!:http://]!] "[![Title]!]")', placeHolder:'Your text to link here...' },
-		{separator:'---------------'},	
+		{separator:'---------------'},
 		{name:'Quotes', openWith:'> '},
 		{name:'Code Block / Code', openWith:'(!(\t|!|`)!)', closeWith:'(!(`)!)'},
 		{separator:'---------------'},
