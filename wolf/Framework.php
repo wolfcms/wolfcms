@@ -827,35 +827,35 @@ class Record {
      * 
      * Note: because of the use of get_called_class(), this method requires PHP 5.3.0 or higher.
      * 
-     * @param array $args   Array of arguments
-     * @return mixed        Object (when limit == 1), array of objects or false (on failure).
+     * @param array $options    Options array containing parameters for the query
+     * @return mixed            Object (when limit == 1), array of objects or false (on failure).
      */
-    public static function find($args = null) {
+    public static function find($options = null) {
         $class_name = get_called_class();
         $table_name = self::tableNameFromClassName($class_name);
         
-        $single = (isset($args['limit']) && $args['limit'] == 1) ? true : false;
+        $single = (isset($options['limit']) && $options['limit'] == 1) ? true : false;
         
         // Collect attributes
-        $select   = isset($args['select']) ? trim($args['select']) : '';
-        $from     = isset($args['from']) ? trim($args['from']) : '';
-        $joins    = isset($args['joins']) ? trim($args['joins']) : '';
-        $group_by = isset($args['group']) ? trim($args['group']) : '';
-        $having   = isset($args['having']) ? trim($args['having']) : '';
-        $order_by = isset($args['order']) ? trim($args['order']) : '';
-        $limit    = isset($args['limit']) ? (int) $args['limit'] : 0;
-        $offset   = isset($args['offset']) ? (int) $args['offset'] : 0;
+        $select   = isset($options['select']) ? trim($options['select']) : '';
+        $from     = isset($options['from']) ? trim($options['from']) : '';
+        $joins    = isset($options['joins']) ? trim($options['joins']) : '';
+        $group_by = isset($options['group']) ? trim($options['group']) : '';
+        $having   = isset($options['having']) ? trim($options['having']) : '';
+        $order_by = isset($options['order']) ? trim($options['order']) : '';
+        $limit    = isset($options['limit']) ? (int) $options['limit'] : 0;
+        $offset   = isset($options['offset']) ? (int) $options['offset'] : 0;
         
-        $params = array();
+        $values = array();
         
         // 'where' can be a string (for a simple where statement) or an array (if you want to use prepared statements)
-        if (isset($args['where'])) {
-            if (is_string($args['where'])) {
-                $where = trim($args['where']);
+        if (isset($options['where'])) {
+            if (is_string($options['where'])) {
+                $where = trim($options['where']);
             }
-            elseif (is_array($args['where'])) {
-                $where = trim(array_shift($args['where']));
-                $params = $args['where'];
+            elseif (is_array($options['where'])) {
+                $where = trim(array_shift($options['where']));
+                $values = $options['where'];
             }
         }
         
@@ -873,7 +873,7 @@ class Record {
         // Compose the query
         $sql = "$select_string $from_string $joins_string $where_string $group_by_string $having_string $order_by_string $limit_string $offset_string";
         
-        $objects = self::findBySql($sql, $params);
+        $objects = self::findBySql($sql, $values);
         
         return ($single) ? (!empty($objects) ? $objects[0] : false) : $objects;
     }
