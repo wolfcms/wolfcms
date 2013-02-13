@@ -834,6 +834,7 @@ class Record {
         $class_name = get_called_class();
         $table_name = self::tableNameFromClassName($class_name);
         
+        // Collect attributes
         $select   = isset($args['select']) ? trim($args['select']) : '';
         $from     = isset($args['from']) ? trim($args['from']) : '';
         $joins    = isset($args['joins']) ? trim($args['joins']) : '';
@@ -845,10 +846,10 @@ class Record {
         
         $params = array();
         
+        // 'where' can be a string (for a simple where statement) or an array (if you want to use prepared statements)
         if (isset($args['where'])) {
             if (is_string($args['where'])) {
                 $where = trim($args['where']);
-                
             }
             elseif (is_array($args['where'])) {
                 $where = trim(array_shift($args['where']));
@@ -867,16 +868,18 @@ class Record {
         $limit_string       = $limit > 0 ? "LIMIT $limit" : '';
         $offset_string      = $offset > 0 ? "OFFSET $offset" : '';
         
+        // Compose the query
         $sql = "$select_string $from_string $joins_string $where_string $group_by_string $having_string $order_by_string $limit_string $offset_string";
         
         Record::logQuery($sql);
         
+        // Prepare and execute
         $stmt = self::$__CONN__->prepare($sql);
         if (!$stmt->execute($params)) {
             return false;
         }
         
-        // Run!
+        // Fetch and return objects
         if ($limit == 1) {
             if ($object = $stmt->fetchObject($class_name)) {
                 return $object;
