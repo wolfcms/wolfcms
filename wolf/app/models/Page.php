@@ -311,12 +311,12 @@ class Page extends Node {
         if ($level === null)
             return $this->parent;
 
-        if ($level > $this->level)
+        if ($level > $this->level())
             return false;
-        else if ($this->level == $level)
+        else if ($this->level() == $level)
             return $this;
         else
-            return $this->parent($level);
+            return $this->parent->parent($level);
     }
 
 
