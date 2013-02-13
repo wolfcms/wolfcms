@@ -201,11 +201,11 @@ class Page extends Node {
 
 
     /**
-     * 
+     *
      * @todo Finish _inversedBreadcrumbs PHPDoc
      *
      * @param type $separator
-     * @return string 
+     * @return string
      */
     private function _inversedBreadcrumbs($separator) {
         $out = '<a href="'.$this->url().'" title="'.$this->breadcrumb.'">'.$this->breadcrumb.'</a><span class="breadcrumb-separator">'.$separator.'</span>';
@@ -255,7 +255,7 @@ class Page extends Node {
 
     /**
      * Counts the number of children belonging to a Page.
-     * 
+     *
      * @fixme Remove dependency on CMS_CONN - not good
      *
      * @param type  $args
@@ -294,7 +294,7 @@ class Page extends Node {
 
     /**
      * Returns the Page object's parent.
-     * 
+     *
      * The option $level parameter allows the user to specify the level on
      * which the found Page object should be.
      *
@@ -327,7 +327,7 @@ class Page extends Node {
 
     /**
      * Allows people to include the parsed content from a Snippet in a Page.
-     * 
+     *
      * The method returns either true or false depending on whether the snippet
      * was found or not.
      *
@@ -382,7 +382,7 @@ class Page extends Node {
      * @deprecated
      * @see Page::tags()
      *
-     * @return type 
+     * @return type
      */
     public function getTags() {
         $tablename_page_tag = self::tableNameFromClassName('PageTag');
@@ -567,7 +567,7 @@ class Page extends Node {
 
     /**
      * Return an array of this page's children.
-     * 
+     *
      * Note: returns a single Page object if only one child exists.
      *
      * @param array $args               Array of key=>value pairs.
@@ -663,7 +663,7 @@ class Page extends Node {
             // set content-type and charset of the page
             header('Content-Type: '.$layout->content_type.'; charset=UTF-8');
 
-            Observer::notify('page_before_execute_layout');
+            Observer::notify('page_before_execute_layout', $layout);
 
             // execute the layout code
             eval('?'.'>'.$layout->content);
@@ -755,7 +755,7 @@ class Page extends Node {
 
     /**
      * Returns the uri for this node.
-     * 
+     *
      * Note: The uri does not start nor end with a '/'.
      *
      * @return string   The node's full uri.
@@ -838,12 +838,12 @@ class Page extends Node {
 
     /**
      * This function should no longer be used.
-     * 
+     *
      * @deprecated
      * @see setTags()
      *
      * @param type $tags
-     * @return type 
+     * @return type
      */
     public function saveTags($tags) {
         return $this->setTags($tags);
@@ -852,7 +852,7 @@ class Page extends Node {
 
     /**
      * This function should no longer be used.
-     * 
+     *
      * @deprecated
      * @see findByUri()
      */
@@ -896,7 +896,7 @@ class Page extends Node {
 
             $parent = $page;
         } // foreach
-        
+
         return $page;
     }
 
@@ -940,17 +940,17 @@ class Page extends Node {
 
     /**
      * Finds a Page record based on supplied arguments.
-     * 
+     *
      * Usage:
      *      $page = Page::find('/the/uri/to/your/page');
      *      $page = Page::find(array('where' => 'created_by_id=12'));
-     * 
+     *
      * Argument array can contain:
      *      - where
      *      - order
      *      - offset
      *      - limit
-     * 
+     *
      * Return values can be:
      *      - A single Page object
      *      - An array of Page objects which can be empty
