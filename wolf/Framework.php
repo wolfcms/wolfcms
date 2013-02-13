@@ -834,6 +834,8 @@ class Record {
         $class_name = get_called_class();
         $table_name = self::tableNameFromClassName($class_name);
         
+        $single = (isset($args['limit']) && $args['limit'] == 1) ? true : false;
+        
         // Collect attributes
         $select   = isset($args['select']) ? trim($args['select']) : '';
         $from     = isset($args['from']) ? trim($args['from']) : '';
@@ -871,31 +873,28 @@ class Record {
         // Compose the query
         $sql = "$select_string $from_string $joins_string $where_string $group_by_string $having_string $order_by_string $limit_string $offset_string";
         
+        $objects = self::findBySql($sql, $params);
+        
+        return ($single) ? (!empty($objects) ? $objects[0] : false) : $objects;
+    }
+    
+    public static function findBySql($sql, $values = null) {
+        $class_name = get_called_class();
+        
         Record::logQuery($sql);
         
         // Prepare and execute
         $stmt = self::$__CONN__->prepare($sql);
-        if (!$stmt->execute($params)) {
+        if (!$stmt->execute($values)) {
             return false;
         }
         
-        // Fetch and return objects
-        if ($limit == 1) {
-            if ($object = $stmt->fetchObject($class_name)) {
-                return $object;
-            }
-            else {
-                return false;
-            }
+        $objects = array();
+        while ($object = $stmt->fetchObject($class_name)) {
+            $objects[] = $object;
         }
-        else {
-            $objects = array();
-            while ($object = $stmt->fetchObject($class_name)) {
-                $objects[] = $object;
-            }
-            
-            return $objects;
-        }
+        
+        return $objects;
     }
     
     /**
