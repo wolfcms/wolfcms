@@ -485,7 +485,7 @@ class PageController extends Controller {
             }
 
             // setting "updated_by_name" for View if it's not already set from $_POST
-            if (isset($page->updated_by_name)) {
+            if (!isset($page->updated_by_name)) {
                 $page->updated_by_name = '';
             }
             
@@ -524,9 +524,6 @@ class PageController extends Controller {
             Observer::notify('page_edit_before_save', $page);
         }
 
-        // Unset non-DB fields to avoid save() errors
-        if (isset($page->updated_by_name)) unset($page->updated_by_name);
-            
         // Time to actually save the page
         // @todo rebuild this so parts are already set before save?
         // @todo determine lazy init impact

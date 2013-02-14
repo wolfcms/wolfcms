@@ -700,6 +700,9 @@ class Page extends Node {
 
         // Prevent certain stuff from entering the INSERT statement
         // @todo Replace by more appropriate use of Record::getColumns()
+        
+        if (isset($this->updated_by_name)) unset($this->updated_by_name);
+        
         unset($this->parent);
         unset($this->uri);
         unset($this->level);
@@ -729,9 +732,12 @@ class Page extends Node {
             }
         }
         unset($this->valid_until_time);
-
+        
         $this->updated_by_id = AuthUser::getId();
         $this->updated_on = date('Y-m-d H:i:s');
+
+        
+        if (isset($this->updated_by_name)) unset($this->updated_by_name);
 
         unset($this->uri);
         unset($this->level);
