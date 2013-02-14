@@ -246,6 +246,9 @@ class PageController extends Controller {
             $childrens[$index]->has_children = Page::hasChildren($child->id);
             $childrens[$index]->is_expanded = in_array($child->id, $expanded_rows);
 
+            // prevent displaying empty '<ul></ul>' for non existing expanded rows
+            if (($childrens[$index]->has_children===false) && ($childrens[$index]->is_expanded)) $childrens[$index]->is_expanded=false;
+
             if ($childrens[$index]->is_expanded)
                 $childrens[$index]->children_rows = $this->children($child->id, $level + 1, true);
         }
