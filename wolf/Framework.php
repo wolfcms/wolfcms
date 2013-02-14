@@ -830,7 +830,9 @@ class Record {
      * @param array $options    Options array containing parameters for the query
      * @return mixed            Object (when limit == 1), array of objects or false (on failure).
      */
-    public static function find($options = null) {
+    public static function find($options = array()) {
+        $options = (is_null($options)) ? array() : $options;
+        
         $class_name = get_called_class();
         $table_name = self::tableNameFromClassName($class_name);
         
