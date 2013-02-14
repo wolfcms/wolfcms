@@ -498,7 +498,7 @@ class PageController extends Controller {
             $this->setLayout('backend');
             $this->display('page/edit', array(
                 'action' => $action,
-                'csrf_token' => SecureToken::generateToken(BASE_URL.'page/'.$action),
+                'csrf_token' => SecureToken::generateToken(BASE_URL.'page/'.$action.$csrf_id),
                 'page' => (object) $page,
                 'tags' => $tags,
                 'filters' => Filter::findAll(),
