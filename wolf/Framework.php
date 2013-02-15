@@ -863,7 +863,7 @@ class Record {
         
         // Prepare query parts
         $select_string      = empty($select) ? 'SELECT *' : "SELECT $select";
-        $from_string        = empty($from) ? "FROM `$table_name`" : "FROM $from";
+        $from_string        = empty($from) ? "FROM $table_name" : "FROM $from";
         $joins_string       = empty($joins) ? '' : $joins;
         $where_string       = empty($where) ? '' : "WHERE $where";
         $group_by_string    = empty($group_by) ? '' : "GROUP BY $group_by";
