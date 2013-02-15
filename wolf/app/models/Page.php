@@ -37,14 +37,13 @@ class Page extends Node {
     const LOGIN_NOT_REQUIRED = 0;
     const LOGIN_REQUIRED = 1;
     const LOGIN_INHERIT = 2;
-
+    
     public $id;
     public $title = '';
     public $slug = '';
     public $breadcrumb;
     public $keywords = '';
     public $description = '';
-    public $content;
     public $parent_id;
     public $layout_id;
     public $behavior_id;
@@ -59,16 +58,36 @@ class Page extends Node {
     public $position;
     public $is_protected;
     public $needs_login;
+    
+    // non db fields
+    public $content;
     public $author;
     public $author_id;
     public $updater;
     public $updater_id;
-    // non db fields
     private $parent = false;
     private $uri = false;
     private $level = false;
     private $tags = false;
 
+    private static $non_db_columns = array(
+                'non_db_columns', //self-exclude
+                
+                'author',
+                'author_id',
+                'created_on_time',
+                'content',
+                'level',
+                'parent',
+                'published_on_time',
+                'tags',
+                'updated_by_name',
+                'updater',
+                'updater_id',
+                'uri',
+                'valid_until_time',
+    );
+    
     public function __construct($object=null, $parent=null) {
         if ($parent !== null) {
             $this->parent = $parent;
@@ -178,8 +197,18 @@ class Page extends Node {
     public function updaterId() {
         return $this->updater_id;
     }
-
-
+    
+    /**
+     * Returns Array of Page Model DB Columns
+     * 
+     * @return  Array       Database Columns of Page model
+     */
+    public function getColumns() {
+        $ob_columns = array_keys(get_object_vars($this));
+        $db_columns = array_diff($ob_columns, self::$non_db_columns);
+        return $db_columns;
+    }
+    
     /**
      * Returns a set of breadcrumbs as html.
      *
@@ -698,45 +727,29 @@ class Page extends Node {
         // Make sure we get a default position of 0;
         $this->position = 0;
 
-        // Prevent certain stuff from entering the INSERT statement
-        // @todo Replace by more appropriate use of Record::getColumns()
-        unset($this->parent);
-        unset($this->uri);
-        unset($this->level);
-        unset($this->tags);
-
         return true;
     }
 
 
     public function beforeUpdate() {
         $this->created_on = $this->created_on.' '.$this->created_on_time;
-        unset($this->created_on_time);
 
-        if (!empty($this->published_on)) {
+        if (!empty($this->published_on)) 
             $this->published_on = $this->published_on.' '.$this->published_on_time;
-            unset($this->published_on_time);
-        }
-        else if ($this->status_id == Page::STATUS_PUBLISHED) {
+
+        else if ($this->status_id == Page::STATUS_PUBLISHED) 
             $this->published_on = date('Y-m-d H:i:s');
-        }
 
         if (!empty($this->valid_until)) {
             $this->valid_until = $this->valid_until.' '.$this->valid_until_time;
-            unset($this->valid_until_time);
+
             if ($this->valid_until < date('Y-m-d H:i:s')) {
                 $this->status_id = Page::STATUS_ARCHIVED;
             }
         }
-        unset($this->valid_until_time);
-
+        
         $this->updated_by_id = AuthUser::getId();
         $this->updated_on = date('Y-m-d H:i:s');
-
-        unset($this->uri);
-        unset($this->level);
-        unset($this->tags);
-        unset($this->parent);
 
         return true;
     }

@@ -1,0 +1,32 @@
+#
+# Setting Wolf CMS requirements
+#
+# On some server configurations you may need to comment out one or more of
+# the three lines below due to server limitations.
+#
+
+#php_flag magic_quotes_gpc off ## Removed in php5.4
+AddDefaultCharset UTF-8
+Options -Indexes +FollowSymLinks
+
+#
+# Setting rewrite rules
+#
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Set next line to your Wolf CMS root - if not in subdir, then just /
+  RewriteBase /wolfcms/
+
+  # Rules to allow install sequence to test for mod_rewrite support
+  RewriteRule ^wolf/install/index.html$ wolf/install/index.php?rewrite=1 [L,QSA]
+  RewriteRule ^wolf/install/index.php$ wolf/install/index.php?rewrite=1 [L,QSA]
+  RewriteRule ^wolf/install/$ wolf/install/index.php?rewrite=1 [L,QSA]
+  
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  # Main URL rewriting.
+  RewriteRule ^(.*)$ index.php?WOLFPAGE=$1 [L,QSA]
+
+</IfModule>

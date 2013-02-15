@@ -38,6 +38,9 @@ if ($action == 'edit') { ?>
 
   <input id="page_parent_id" name="page[parent_id]" type="hidden" value="<?php echo $page->parent_id; ?>" />
   <input id="csrf_token" name="csrf_token" type="hidden" value="<?php echo $csrf_token; ?>" />
+<?php if (isset($page->updated_on)): ?>
+  <input id="page_updated_by_name" name="page[updated_by_name]" type="hidden" value="<?php echo $page->updated_by_name; ?>" />
+<?php endif; ?>  
   <div class="form-area">
     <div id="metainfo-tabs" class="content tabs">
         <ul class="tabNavigation">
