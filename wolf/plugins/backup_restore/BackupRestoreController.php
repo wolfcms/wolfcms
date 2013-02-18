@@ -119,29 +119,26 @@ class BackupRestoreController extends PluginController {
         global $__CMS_CONN__;
         Record::connection($__CMS_CONN__);
 
-        $lasttable = '';
-
         // Generate XML file entry for each table
         foreach ($tablenames as $tablename) {
             $table = Record::query('SELECT * FROM '.$tablename);
 
-            while($entry = $table->fetchObject()) {
-                if ($lasttable !== $tablename) {
-                    $lasttable = $tablename;
-                    $child = $xmlobj->addChild($tablename.'s');
-                }
+            $child = $xmlobj->addChild($tablename.'s');
+            while ($entry = $table->fetch(PDO::FETCH_ASSOC)) {
                 $subchild = $child->addChild($tablename);
-                while (list($key, $value) = each($entry)) {
-                    if ($key === 'password' && $settings['pwd'] === '0') {
+                foreach ($entry as $key => $value) {
+                    if ($key == 'password' && $settings['pwd'] === '0') {
                         $value = '';
                     }
 
                     if (in_array($key, $cdata_fields, true)) {
-                        $subchild->addCData($key,$value);
+                        $valueChild = $subchild->addCData($key,$value);
                     }
                     else {
-                        $subchild->addChild($key,$value);
+                        $valueChild = $subchild->addChild($key,str_replace('&', '&amp;', $value));
                     }
+                    if ($value === null)
+                        $valueChild->addAttribute('null', true);
                 }
             }
         }
@@ -278,8 +275,8 @@ class BackupRestoreController extends PluginController {
                     $values = array();
                     $delete_salt = false;
                     foreach ($element as $key => $value) {
-                        if ($delete_salt === true) { continue; }
-                        if ($key === 'password' && (!isset($value) || empty($value) || $value === '' || $value === null)) {
+                        $keys[] = $key;
+                        if ($key === 'password' && empty($value)) {
                             $delete_salt = true;
                             if (isset($settings['default_pwd']) && $settings['default_pwd'] !== '') {
                                 $value = sha1($settings['default_pwd']);
@@ -287,13 +284,18 @@ class BackupRestoreController extends PluginController {
                             else {
                                 $value = sha1('pswpsw123');
                             }
-                            if (isset($keys['salt'])) { unset($keys['salt']); }
+                            $values[] = $__CMS_CONN__->quote($value); 
+                        } else {
+                            $attributes = (array)$value->attributes();
+                            $values[] = (isset($attributes['@attributes']) and $attributes['@attributes']['null']) ?
+                                   'NULL' :
+                                   $__CMS_CONN__->quote($value);
                         }
-                        $keys[] = $key;
-                        $values[] = $__CMS_CONN__->quote($value);
+                    }
+                    if ($delete_salt and isset($keys['salt'])) {
+                        unset($keys['salt']);
                     }
                     $sql = 'INSERT INTO '.$tablename.' ('.join(', ', $keys).') VALUES ('.join(', ', $values).')'."\r";
-
                     if ($__CMS_CONN__->exec($sql) === false) {
                         Flash::set('error', __('Unable to reconstruct table :tablename.', array(':tablename' => $tablename)));
                         redirect(get_url('plugin/backup_restore'));
@@ -405,10 +407,10 @@ class BackupRestoreController extends PluginController {
 
 class SimpleXMLExtended extends SimpleXMLElement {
     public function addCData($nodename,$cdata_text) {
-        $node = $this->addChild($nodename); //Added a nodename to create inside the function
-        $node = dom_import_simplexml($node);
+        $sxe = $this->addChild($nodename); //Added a nodename to create inside the function
+        $node = dom_import_simplexml($sxe);
         $no = $node->ownerDocument;
         $node->appendChild($no->createCDATASection($cdata_text));
+        return $sxe;
     }
 }
-
