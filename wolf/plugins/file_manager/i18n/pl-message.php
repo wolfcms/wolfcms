@@ -1,19 +1,14 @@
 <?php
 
-    /**
-     * Polish file for plugin file_manager
-     *
-     * @package Plugins
-     * @subpackage file_manager
-     *
-     * @author Piotr Fuz <piotr.fuz@gmail.com> and Pawel Balicki <kilab1@o2.pl>
-     * @version Wolf 0.7.3
-     */
+/**
+ * Wolf CMS file_manager plugin language file
+ *
+ * @package Translations
+ */
 
-    return array(
+return array(
     'A file or directory with that name already exists!' => 'Plik lub katalog z tą nazwą już istnieje!',
     'A possible hack attempt was detected.' => 'Wykryta została prawdopodobna próba włamania.',
-    'Action' => 'Akcja',
     'Are you sure you wish to delete?' => 'Czy na pewno chcesz usunąć?',
     'Cancel' => 'Anuluj',
     'Change mode' => 'Zmień tryb',
@@ -21,28 +16,44 @@
     'Create' => 'Stwórz',
     'Create new directory' => 'Utwórz nowy folder',
     'Create new file' => 'Utwórz nowy plik',
+    'Default PHP directory creation mode; see <a href="http://php.net/manual/en/function.chmod.php">chmod()</a>' => 'Default PHP directory creation mode; see <a href="http://php.net/manual/en/function.chmod.php">chmod()</a>',
+    'Default PHP file creation mode; see <a href="http://php.net/manual/en/function.chmod.php">chmod()</a>' => 'Default PHP file creation mode; see <a href="http://php.net/manual/en/function.chmod.php">chmod()</a>',
+    'Default PHP umask; see <a href="http://php.net/manual/en/function.umask.php">umask()</a>' => 'Default PHP umask; see <a href="http://php.net/manual/en/function.umask.php">umask()</a>',
     'Delete file' => 'Usuń plik',
     'Directory :name has not been created!' => 'Folder <strong>:name</strong> nie został utworzony!',
+    'Directory Creation Mode:' => 'Directory Creation Mode:',
     'Directory is not writable! File has not been saved!' => 'Brak uprawnień do zapisu. Folder nie został utworzony!',
+    'Do you want to display hidden files on unix systems? <br/> If you select no, all files starting with "." will not be displayed.' => 'Do you want to display hidden files on unix systems? <br/> If you select no, all files starting with "." will not be displayed.',
+    'Do you want to show backup files? If you select no, all files ending with "~" will not be displayed.' => 'Do you want to show backup files? If you select no, all files ending with "~" will not be displayed.',
     'File' => 'Plik',
     'File :name has been created with success!' => 'Plik<strong>:name</strong> został utworzony!',
     'File :name has not been created!' => 'Plik<strong>:name</strong> nie został utworzony!',
+    'File Creation Defaults' => 'File Creation Defaults',
+    'File Creation Mode:' => 'File Creation Mode:',
     'File Manager' => 'Menedżer plików',
+    'File Manager Settings' => 'File Manager Settings',
     'File has been saved with success!' => 'Plik<strong>:name</strong> został zapisany!',
     'File has not been uploaded!' => 'Nie wgrano żadnego pliku!',
     'File is not writable! File has not been saved!' => 'Brak uprawnień do zapisu! Plik nie został zapisany!',
     'File or directory not found!' => 'Plik lub folder nie istnieje!',
     'Files' => 'Pliki',
+    'General settings' => 'General settings',
+    'Modified' => 'Modified',
     'Modify' => 'Zmień',
+    'No' => 'No',
     'Permission denied!' => 'Brak uprawnień!',
     'Permissions' => 'Uprawnienia',
     'Provides interface to manage files from the administration.' => 'Umożliwia zarządzanie plikami w panelu administratora.',
     'Rename' => 'Zmiana nazwy',
     'Save' => 'Zapisz',
     'Save and Continue Editing' => 'Zapisz i Kontynuuj edycje',
+    'Show backup files' => 'Show backup files',
+    'Show hidden files' => 'Show hidden files',
     'Size' => 'Rozmiar',
+    'Umask:' => 'Umask:',
     'Upload' => 'Wgraj',
     'Upload file' => 'Wgraj plik z dysku',
+    'Yes' => 'Yes',
     'You do not have permission to access the requested page!' => 'Nie masz uprawnień do tej strony!',
     'You do not have sufficient permissions to change the permissions on a file or directory.' => 'Nie masz uprawnień aby zmieniać uprawnienia plików i katalogów.',
     'You do not have sufficient permissions to create a directory.' => 'Nie masz uprawnień aby tworzyć katalogi.',
@@ -51,6 +62,14 @@
     'You do not have sufficient permissions to rename this file or directory.' => 'Nie masz uprawnień do zmiany nazwa plików i katalogów.',
     'You do not have sufficient permissions to upload a file.' => 'Nie masz uprawnień do ładowania plików.',
     'delete file icon' => 'skasuj ikonę pliku',
+    'form was not posted.' => 'form was not posted.',
     'or' => 'lub',
     'overwrite it?' => 'zastąpić?',
-    );
+    'plugin settings initialized.' => 'plugin settings initialized.',
+    'plugin settings not saved!' => 'plugin settings not saved!',
+    'plugin settings saved.' => 'plugin settings saved.',
+    'unable to remove stored settings!' => 'unable to remove stored settings!',
+    'unable to retrieve plugin settings.' => 'unable to retrieve plugin settings.',
+    'unable to store plugin settings!' => 'unable to store plugin settings!',
+    'uninstalled.' => 'uninstalled.'
+);

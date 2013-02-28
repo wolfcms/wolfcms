@@ -1,19 +1,15 @@
 <?php
 
-    /**
-     * Lithuanian file for plugin file_manager
-     *
-     * @package Plugins
-     * @subpackage file_manager
-     *
-     * @author Remigijus Jarmalavičius <remigijus@jarmalavicius.lt>
-     * @version Wolf 0.8.0
-     */
+/**
+ * Wolf CMS file_manager plugin language file
+ *
+ * @package Translations
+ */
 
-    return array(
-        'A file or directory with that name already exists!' => 'Failas ar katalogas su tokiu vardu jau egzistuoja!',
+return array(
+    'A file or directory with that name already exists!' => 'Failas ar katalogas su tokiu vardu jau egzistuoja!',
     'A possible hack attempt was detected.' => 'Galima ataka ufiksuota.',
-    'Are you sure you wish to delete?' => '',
+    'Are you sure you wish to delete?' => 'Are you sure you wish to delete?',
     'Cancel' => 'Atšaukti',
     'Change mode' => 'Pakeisti būseną',
     'Close' => 'Uždaryti',
@@ -75,5 +71,5 @@
     'unable to remove stored settings!' => 'negalima pašalinti įskiepio nustatymų!',
     'unable to retrieve plugin settings.' => 'negalima nuskaityti įskiepio nustatymų.',
     'unable to store plugin settings!' => 'negalima išsaugoti įskiepio nustatymų!',
-    'uninstalled.' => 'išdiegta',
-    );
+    'uninstalled.' => 'išdiegta'
+);

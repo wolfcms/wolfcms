@@ -1,16 +1,13 @@
 <?php
 
 /**
- * German translation for plugin markdown
+ * Wolf CMS markdown plugin language file
  *
- * @package Plugins
- * @subpackage markdown
- *
- * @author Patrick Scheips <patrick.scheips@simple-dev.org>, simple-dev.org
- * @version Wolf 0.6.0
+ * @package Translations
  */
 
 return array(
-	'Allows you to use the Markdown text filter.' => 'Ermöglicht die verwendung des Markdown-Textfilters.',
-	'Markdown filter' => 'Markdown-Filter',
+    'Allows you to use the Markdown text filter (with MarkdownExtra and Smartypants).' => 'Ermöglicht es Ihnen den Mardown-Textfilter zu verwenden. (inklusive MarkdownExtra und Smartypants)',
+    'Markdown filter' => 'Markdown-Filter',
+    'Markdown' => 'Markdown'
 );

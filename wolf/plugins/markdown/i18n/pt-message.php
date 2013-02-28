@@ -1,18 +1,13 @@
 <?php
 
-    /**
-     * Português-brasileiro file for plugin markdown
-     *
-     * @package Plugins
-     * @subpackage markdown
-     *
-     * @author Téo Marcus <teo@teomarcus.com>
-     * @link http://www.teomarcus.com
-     * @version Wolf 0.7.5
-     */
+/**
+ * Wolf CMS markdown plugin language file
+ *
+ * @package Translations
+ */
 
-    return array(
-    'Allows you to use the Markdown text filter.' => 'Permite a voc&ecirc; usar o filtro de texto Markdown.',
-	'Markdown' => 'Markdown',
-	'Markdown filter' => 'Filtro Markdown',
-    );
+return array(
+    'Allows you to use the Markdown text filter (with MarkdownExtra and Smartypants).' => 'Allows you to use the Markdown text filter (with MarkdownExtra and Smartypants).',
+    'Markdown filter' => 'Filtro Markdown',
+    'Markdown' => 'Markdown'
+);

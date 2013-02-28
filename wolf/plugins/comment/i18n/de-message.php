@@ -1,15 +1,9 @@
 <?php
 
 /**
- * German language file for comment plugin
+ * Wolf CMS comment plugin language file
  *
- * @package Plugins
- * @subpackage comment
- *
- * @author Tina Keil <seven@geovoyagers.de>
- * @author Kai Middleton <kai@middleton.de>
- * @author Patrick Scheips <patrick.scheips@simple-dev.org>, simple-dev.org
- * @version Wolf 0.6.0
+ * @package Translations
  */
 
 return array(
@@ -37,7 +31,7 @@ return array(
     'Delete' => 'Löschen',
     'Documentation' => 'Dokumentation',
     'Edit' => 'Bearbeiten',
-    'Edit comment' => 'Kommentar bearbeiten',
+    'Edit comment by' => 'Kommentar bearbeiten, von',
     'Enhance comments tab' => 'Erweiterter Kommantar-Tab',
     'Incorrect result value. Please try again:' => 'Falsches Ergebnis. Bitte erneut versuchen:',
     'Moderation' => 'Moderation',
@@ -62,8 +56,9 @@ return array(
     'Unable to drop table :tablename' => 'Tabelle konnte nicht löschen :tablename',
     'Use captcha' => 'Captcha verwenden',
     'Yes' => 'Ja',
+    'You have modified this page.  If you navigate away from this page without first saving your data, the changes will be lost.' => 'Sie haben diese Seite bearbeitet.  Wenn Sie sich zu einer anderen Seite wechseln ohne vorher zu speichern, gehen Ihre Änderungen verloren.',
     'about' => 'über',
     'comment not found!' => 'Kommentar wurde nicht gefunden!',
     'none' => 'keine Auswahl',
-    'or' => 'oder',
+    'or' => 'oder'
 );

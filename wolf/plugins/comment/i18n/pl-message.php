@@ -1,16 +1,12 @@
 <?php
 
-    /**
-     * Polish file for plugin comment
-     *
-     * @package wolf
-     * @subpackage comment
-     *
-     * @author Piotr Fuz <piotr.fuz@gmail.com> and Pawel Balicki <kilab1@o2.pl>
-     * @version Wolf 0.7.3
-     */
+/**
+ * Wolf CMS comment plugin language file
+ *
+ * @package Translations
+ */
 
-    return array(
+return array(
     'A comment was added.' => 'Komentarz dodany',
     'Approve' => 'Akceptuj',
     'Are you sure you wish to delete it?' => 'Czy na pewno chcesz to usunąć?',
@@ -64,5 +60,5 @@
     'about' => 'o',
     'comment not found!' => 'komentarz nie znaleziony',
     'none' => 'żaden',
-    'or' => 'lub',
-    );
+    'or' => 'lub'
+);
