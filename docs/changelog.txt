@@ -10,6 +10,7 @@ Sigla:
 0.8.0 - released 2011-??-??
 + Added German i18n file for comments plugin - thanks tkeil69575 
 + Added Portugese language file for file manager - thanks daniel.affonso
++ Added Finnish language files for core and most core plugins - thanks kuopassa
 + Activated MarkdownExtra for Markdown text filter with Smartypants typography extension
 - Fixed problem with user name validation. User's name can now contain utf-8 characters. - issue 350
 - Fixed issue 344 - Dispatcher now strips trailing slashes from requested url.
