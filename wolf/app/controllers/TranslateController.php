@@ -160,7 +160,7 @@ final class TranslateController extends Controller {
                 if (strcmp($file, '.')==0 || strcmp($file, '..')==0) {
                     continue;
                 }
-                $filepath = $start_dir . '/' . $file;
+                $filepath = $start_dir . DS . $file;
                 if ($plugins) {
                     if ( is_dir($filepath) && !strpos($filepath, 'i18n') ) {
                         $files = array_merge($files, $this->listdir($filepath, $plugins));

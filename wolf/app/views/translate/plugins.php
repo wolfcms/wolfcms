@@ -26,8 +26,8 @@ $pluginname = null;
 
 // Do actual work
 foreach ($files as $file => $strings) {
-    $file = substr($file, strpos($file, '/plugins/') + 9);
-    $file = substr($file, 0, strpos($file, '/'));
+    $file = substr($file, strpos($file, DS.'plugins'.DS) + 9);
+    $file = substr($file, 0, strpos($file, DS));
 
     if ($current == null) {
         $current = $file;
