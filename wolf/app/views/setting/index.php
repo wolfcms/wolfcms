@@ -107,7 +107,7 @@
                                     <?php endforeach; ?>
                                 </select>
                             </td>
-                            <td class="help"><?php echo __('This will set your language for the backend.'); ?><br /><?php echo __('Help us <a href=":url">translate Wolf</a>!', array(':url' => get_url('translate'))); ?></td>
+                            <td class="help"><?php echo __('This will set your language for the backend.'); ?><br /><?php echo __('Help us <a href=":url">translate Wolf</a>!', array(':url' => 'http://www.wolfcms.org/wiki/translator_notes')); ?></td>
                         </tr>
                         <tr>
                             <td class="label"><label for="setting_theme"><?php echo __('Administration Theme'); ?></label></td>
