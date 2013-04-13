@@ -327,6 +327,7 @@ class SettingController extends Controller {
         'ms' => 'Malay',
         'mt' => 'Maltese',
         'my' => 'Burmese',
+        'my_MM' => 'Burmese/Myanmar',
         'na' => 'Nauru',
         'nb' => 'Norwegian Bokmal',
         'nd' => 'North Ndebele',
