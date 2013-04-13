@@ -84,7 +84,7 @@ class Archive {
     }
 
     private function _displayPage($slug) {
-        if (!$this->page = Page::findBySlug($slug, $this->page))
+        if (!$this->page = Page::findBySlug($slug, $this->page, true))
             pageNotFound($slug);
     }
 
