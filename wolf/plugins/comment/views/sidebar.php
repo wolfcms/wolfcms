@@ -24,7 +24,7 @@ if (!defined('IN_CMS')) { exit(); }
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 ?>
-<p class="button"><a href="<?php echo get_url('plugin/comment/'); ?>"><img src="<?php echo COMMENT_ROOT;?>/images/comment.png" align="middle" alt="page icon" /> <?php echo __('Comments'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/comment/moderation/'); ?>"><img src="<?php echo COMMENT_ROOT;?>/images/moderation.png" align="middle" alt="page icon" /> <?php echo __('Moderation'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/comment/settings'); ?>"><img src="<?php echo COMMENT_ROOT;?>/images/settings.png" align="middle" alt="page icon" /> <?php echo __('Settings'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/comment/documentation/'); ?>"><img src="<?php echo COMMENT_ROOT;?>/images/documentation.png" align="middle" alt="page icon" /> <?php echo __('Documentation'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/comment/'); ?>"><img src="<?php echo ICONS_URI;?>comment-32-ns.png" align="middle" alt="page icon" /> <?php echo __('Comments'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/comment/moderation/'); ?>"><img src="<?php echo ICONS_URI;?>action-approve-32-ns.png" align="middle" alt="page icon" /> <?php echo __('Moderation'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/comment/settings'); ?>"><img src="<?php echo ICONS_URI;?>settings-32-ns.png" align="middle" alt="page icon" /> <?php echo __('Settings'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/comment/documentation/'); ?>"><img src="<?php echo ICONS_URI;?>documentation-32-ns.png" align="middle" alt="page icon" /> <?php echo __('Documentation'); ?></a></p>

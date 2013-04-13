@@ -29,5 +29,5 @@ if (!defined('IN_CMS')) { exit(); }
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 ?>
-<p class="button"><a href="<?php echo get_url('plugin/multi_lang/settings'); ?>"><img src="<?php echo PLUGINS_URI;?>/multi_lang/images/settings.png" align="middle" alt="settings icon" /> <?php echo __('Settings'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/multi_lang/documentation/'); ?>"><img src="<?php echo PLUGINS_URI;?>/multi_lang/images/documentation.png" align="middle" alt="documentation icon" /> <?php echo __('Documentation'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/multi_lang/settings'); ?>"><img src="<?php echo ICONS_URI;?>settings-32-ns.png" align="middle" alt="settings icon" /> <?php echo __('Settings'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/multi_lang/documentation/'); ?>"><img src="<?php echo ICONS_URI;?>documentation-32-ns.png" align="middle" alt="documentation icon" /> <?php echo __('Documentation'); ?></a></p>
