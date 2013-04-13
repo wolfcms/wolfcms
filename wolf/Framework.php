@@ -21,9 +21,10 @@
  *
  * @package    Framework
  *
- * @author     Philippe Archambault <philippe.archambault@gmail.com>
  * @author     Martijn van der Kleijn <martijn.niji@gmail.com>
- * @copyright  2008-2010 Martijn van der Kleijn, Philippe Archambault
+ * @author     Philippe Archambault <philippe.archambault@gmail.com>
+ * @copyright  2009-2013 Martijn van der Kleijn
+ * @copyright  2008 Philippe Archambault
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
 
@@ -1109,6 +1110,7 @@ class Controller {
  * The Observer class allows for a simple but powerful event system.
  * 
  * Example of watching/handling an event:
+ * <code>
  *      // Connecting your event hangling function to an event.
  *      Observer::observe('page_edit_after_save', 'my_simple_observer');
  * 
@@ -1117,10 +1119,13 @@ class Controller {
  *          // do what you want to do
  *          var_dump($page);
  *      }
+ * </code>
  * 
  * Example of generating an event:
  * 
+ * <code>
  *      Observer::notify('my_plugin_event', $somevar);
+ * </code>
  * 
  */
 final class Observer {
