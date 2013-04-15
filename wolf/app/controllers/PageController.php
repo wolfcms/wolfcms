@@ -393,7 +393,8 @@ class PageController extends Controller {
             if ($data['slug'] == ADMIN_DIR) {
                 $errors[] = __('You cannot have a slug named :slug!', array(':slug' => ADMIN_DIR));
             }
-            if ( (!Validate::slug($data['slug']) && ($id != '1') ) || (!empty($data['slug']) && ($id == '1')) ) {
+            // Make sure home's slug is passed ok, but other slugs are validated properly
+            if (($id != '1' && (!Validate::slug($data['slug']) || empty($data['slug']))) || ($id == '1' && !empty($data['slug']))) {
                 $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'slug'));
             }
             if (Record::existsIn('Page','parent_id = :parent_id AND slug = :slug AND id <> :id',array(':parent_id' => $data['parent_id'], ':slug' => $data['slug'], ':id' => $id))) {
