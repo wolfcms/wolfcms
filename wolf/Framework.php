@@ -928,7 +928,7 @@ class Record {
      * @return Record               A record instance or false on failure.
      */
     public static function findByIdFrom($class_name, $id) {
-        return self::findOneFrom($class_name, 'id=?', array($id));
+        return $class_name::findById($id);
     }
 
     /**
