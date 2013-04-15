@@ -910,22 +910,21 @@ class Page extends Node {
      * @return mixed            page object or false
      */
     public static function findBySlug($slug, &$parent, $all = false) {
-        $parent_id = $parent ? $parent->id : 0;
 
         if (empty($slug)) {
-            $slug = NULL;
-            $slug_sql = "slug = ''";
-        }
-        else {
-            $slug_sql = "slug = '".$slug."'";
+            return self::find(array(
+                'where' => 'parent_id=0',
+                'limit' => 1
+                  ));
         }
 
+        $parent_id = $parent ? $parent->id : 0;
+        $slug_sql = "slug = '".$slug."'";
+
         if ($all) {
-            //$where = 'COALESCE(slug, \'\') = COALESCE('.$slug.', \'\') AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
             $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
         }
         else {
-            //$where = 'COALESCE(slug, \'\') = COALESCE('.$slug.', \'\') AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
             $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
         }
 
