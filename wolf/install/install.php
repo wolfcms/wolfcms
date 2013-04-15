@@ -25,9 +25,9 @@ $drivers = PDO::getAvailableDrivers();
     // <![CDATA[
         $(document).ready(function() {
             $('#config_db_driver').change(function() {
-                
+
                 if (this.value == 'sqlite') {
-                    $('#config_db_name').val('<?php echo realpath(dirname(__FILE__).'/../../../').'/db/wolf.sq3' ?>');
+                    $('#config_db_name').val('<?php echo str_replace('\\','/',realpath(dirname(__FILE__).'/../../../')).'/db/wolf.sq3' ?>');
                     $('#help-db-name').html('Required. Enter the <strong>absolute</strong> path to the database file.<br/>You are <strong>strongly</strong> advised to keep the Wolf CMS SQLite database outside of the webserver root.');
                     $('#help-db-prefix').html('Optional. Usefull to prevent conflicts if you have, or plan to have, multiple Wolf installations with a single database.');
                     $('#row-table-prefix label').addClass('optional');
@@ -63,7 +63,7 @@ $drivers = PDO::getAvailableDrivers();
 
             $('#config_db_driver').trigger('change');
         });
-        
+
     // ]]>
     </script>
 
@@ -82,7 +82,7 @@ $drivers = PDO::getAvailableDrivers();
             <tr>
                 <td class="label"><label for="config_db_driver">Database driver</label></td>
                 <td class="field">
-                    <select id="config_db_driver" name="config[db_driver]" onchange="db_driver_change(this[this.selectedIndex].value);">
+                    <select id="config_db_driver" name="config[db_driver]">
                         <?php /*if (isset($_POST['dbtype']) && !empty($_POST['dbtype']) && $_POST['dbtype'] == 'sqlite') {
                             echo '<option value="sqlite">SQLite 3</option>';
                         }
