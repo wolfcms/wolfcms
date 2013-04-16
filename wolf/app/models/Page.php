@@ -530,7 +530,7 @@ class Page extends Node {
         if ($label == null)
             $label = $this->title();
 
-        return sprintf('<a href="%s" %s>%s</a>', $this->url(), $options, $label
+        return sprintf('<a href="%s" %s>%s</a>', $this->url(true), $options, $label
         );
     }
 
