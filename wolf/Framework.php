@@ -519,7 +519,12 @@ class Record {
         if (self::$__CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) === 'pgsql') {
             $sql = 'SELECT lastval();';
             
-            return self::$__CONN__->query($sql)->fetchColumn();
+            if ($result = self::$__CONN__->query($sql)) {
+                return $result->fetchColumn();
+            }
+            else {
+                return 0;
+            }
         }
         
         return self::$__CONN__->lastInsertId();
