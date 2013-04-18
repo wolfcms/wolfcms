@@ -124,7 +124,7 @@ class Page extends Node {
      *
      * @return string   The url of the page object.
      */
-    public function url($suffix=false) {
+    public function url($suffix=true) {
         if ($suffix === false) {
             return BASE_URL.$this->uri();
         }
@@ -530,7 +530,7 @@ class Page extends Node {
         if ($label == null)
             $label = $this->title();
 
-        return sprintf('<a href="%s" %s>%s</a>', $this->url(), $options, $label
+        return sprintf('<a href="%s" %s>%s</a>', $this->url(true), $options, $label
         );
     }
 

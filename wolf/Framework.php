@@ -515,6 +515,18 @@ class Record {
      * @return string A key.
      */
     final public static function lastInsertId() {
+        // PostgreSQL does not support lastInsertId retrieval without knowing the sequence name
+        if (self::$__CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) === 'pgsql') {
+            $sql = 'SELECT lastval();';
+            
+            if ($result = self::$__CONN__->query($sql)) {
+                return $result->fetchColumn();
+            }
+            else {
+                return 0;
+            }
+        }
+        
         return self::$__CONN__->lastInsertId();
     }
 

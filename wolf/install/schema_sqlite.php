@@ -180,7 +180,8 @@ $PDO->exec("CREATE TABLE user (
     created_on datetime default NULL ,
     updated_on datetime default NULL ,
     created_by_id int(11) default NULL ,
-    updated_by_id int(11) default NULL
+    updated_by_id int(11) default NULL,
+    CONSTRAINT uc_email UNIQUE (email)
 )");
 $PDO->exec("CREATE UNIQUE INDEX user_username ON user (username)");
 
