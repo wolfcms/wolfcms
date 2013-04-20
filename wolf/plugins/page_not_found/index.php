@@ -9,21 +9,22 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) {
-    exit();
-}
-
 /**
  * Provides Page not found page types.
  *
  * @package Plugins
- * @subpackage page_not_found
+ * @subpackage page-not-found
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @copyright Philippe Archambault, 2008
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
+
+/* Security measure */
+if (!defined('IN_CMS')) {
+    exit();
+}
+
 Plugin::setInfos(array(
     'id' => 'page_not_found',
     'title' => __('Page not found'),

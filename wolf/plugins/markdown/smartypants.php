@@ -24,7 +24,6 @@
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
 
-
 /* Security measure */
 if (!defined('IN_CMS')) { exit(); }
 

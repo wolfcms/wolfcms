@@ -7,20 +7,20 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) { exit(); }
-
 /**
  * The BackupRestore plugin provides administrators with the option of backing
  * up their pages and settings to an XML file.
  *
  * @package Plugins
- * @subpackage backup_restore
+ * @subpackage backup-restore
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @copyright Martijn van der Kleijn, 2009
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
+
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
 
 if (Plugin::deleteAllSettings('backup_restore') === false) {
     Flash::set('error', __('Unable to remove plugin settings.'));

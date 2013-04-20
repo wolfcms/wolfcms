@@ -7,9 +7,6 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) { exit(); }
-
 /**
  * The Markdown plugin allows users edit pages using the markdown syntax.
  *
@@ -22,6 +19,10 @@ if (!defined('IN_CMS')) { exit(); }
  * @copyright Philippe Archambault, 2008
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
+
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
+
 Plugin::setInfos(array(
     'id'          => 'markdown',
     'title'       => __('Markdown filter'),

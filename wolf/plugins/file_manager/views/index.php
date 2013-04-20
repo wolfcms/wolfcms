@@ -8,20 +8,20 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) { exit(); }
-
 /**
  * The FileManager allows users to upload and manipulate files.
  *
  * @package Plugins
- * @subpackage file_manager
+ * @subpackage file-manager
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @copyright Philippe Archambault & Martijn van der Kleijn, 2008
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
+
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
 
   $out = '';
   $progres_path = '';

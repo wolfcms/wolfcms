@@ -8,18 +8,13 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) {
-    exit();
-}
-
 /**
  * The FileManager allows users to upload and manipulate files.
  *
  * Note - Mostly rewritten since Wolf CMS 0.6.0
  *
  * @package Plugins
- * @subpackage file_manager
+ * @subpackage file-manager
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @copyright Martijn van der Kleijn, 2008-2010
@@ -27,6 +22,9 @@ if (!defined('IN_CMS')) {
  *
  * @todo Starting from PHP 5.3, use FileInfo
  */
+
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
 
 //	check for settings
 $settings = Plugin::getAllSettings('file_manager');

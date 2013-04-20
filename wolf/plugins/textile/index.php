@@ -7,9 +7,6 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) { exit(); }
-
 /**
  * The Textile plugin provides a Filter that uses the Textile parser.
  *
@@ -20,6 +17,9 @@ if (!defined('IN_CMS')) { exit(); }
  * @copyright Martijn van der Kleijn, 2010
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
+
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
 
 Plugin::setInfos(array(
     'id'          => 'textile',
