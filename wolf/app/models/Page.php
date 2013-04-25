@@ -982,7 +982,8 @@ class Page extends Node {
         $tablename_user = self::tableNameFromClassName('User');
 
         // Prepare SQL
-        $sql = "SELECT page.*, creator.name AS created_by_name, updater.name AS updated_by_name FROM $tablename AS page".
+        // @todo Remove all "author" mentions and function and replace by more appropriate "creator" name.
+        $sql = "SELECT page.*, creator.name AS author, creator.id AS author_id, updater.name AS updater, updater.id AS updater_id, creator.name AS created_by_name, updater.name AS updated_by_name FROM $tablename AS page".
                 " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id".
                 " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id".
                 " $where_string $order_by_string $limit_string $offset_string";
