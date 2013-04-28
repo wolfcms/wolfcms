@@ -231,7 +231,7 @@ $(document).ready(function() {
 
     // Dynamically uninstall
     $('.uninstall a').click(function(e) {
-        if (confirm('<?php echo __('Are you sure you wish to uninstall this plugin?'); ?>')) {
+        if (confirm('<?php echo jsEscape(__('Are you sure you wish to uninstall this plugin?')); ?>')) {
             var pluginId = this.name.replace('uninstall_', '');
             $.get('<?php echo get_url('setting/uninstall_plugin/'); ?>'+pluginId, function() {
                 location.reload(true);
