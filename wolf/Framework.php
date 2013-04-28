@@ -1737,6 +1737,29 @@ function cleanXSS() {
     return;
 }
 
+
+/**
+ * Escapes special characters in Javascript strings.
+ *
+ * @param $value string The unescaped string.
+ * @return string
+ */
+function jsEscape($value) {
+    return strtr((string) $value, array(
+        "'"     => '\\\'',
+        '"'     => '\"',
+        '\\'    => '\\\\',
+        "\n"    => '\n',
+        "\r"    => '\r',
+        "\t"    => '\t',
+        chr(12) => '\f',
+        chr(11) => '\v',
+        chr(8)  => '\b',
+        '</'    => '\u003c\u002F',
+    ));
+}
+
+
 /**
  * Displays a "404 - page not found" message and exits.
  */
