@@ -22,6 +22,25 @@ if (!defined('INSTALL_SEQUENCE')) {
 }
 
 
+// Make sure we clean out any previous installs. We're supposed to be doing a
+// clean install after all.
+$PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'secure_token');
+$PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'cron');
+$PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'layout');
+$PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'page');
+$PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'page_part');
+$PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'snippet');
+$PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'page_tag');
+$PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'role');
+$PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'permission');
+$PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'setting');
+$PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'plugin_settings');
+$PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'tag');
+$PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'user');
+$PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'user_role');
+$PDO->exec('DROP TABLE IF EXISTS '.TABLE_PREFIX.'role_permission');
+// @todo check if sequences need to be reset
+
 // Table structure for table: secure_token -----------------------------------
 
 $PDO->exec("CREATE TABLE ".TABLE_PREFIX."secure_token (
