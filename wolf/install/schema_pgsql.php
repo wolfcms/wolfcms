@@ -49,7 +49,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."secure_token (
   url character varying(255) DEFAULT NULL,
   time character varying(100) DEFAULT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT username_url UNIQUE (username, url)
+  CONSTRAINT uniqueUsernameUrl UNIQUE (username, url)
 )");
 
 
@@ -75,7 +75,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."layout (
   updated_by_id integer DEFAULT NULL,
   position integer DEFAULT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT layoutname UNIQUE (name)
+  CONSTRAINT uniqueLayoutName UNIQUE (name)
 )");
 
 
@@ -123,7 +123,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."page_part (
 $PDO->exec("CREATE TABLE ".TABLE_PREFIX."page_tag (
   page_id integer NOT NULL,
   tag_id integer NOT NULL,
-  CONSTRAINT page_id UNIQUE (page_id, tag_id)
+  CONSTRAINT uniquePageIdTagId UNIQUE (page_id, tag_id)
 )");
 
 
@@ -133,7 +133,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."permission (
   id serial,
   name character varying(25) NOT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT permissionname UNIQUE (name)
+  CONSTRAINT uniquePermissionName UNIQUE (name)
 )");
 
 
@@ -143,7 +143,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."role (
   id serial,
   name character varying(25) NOT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT rolename UNIQUE (name)
+  CONSTRAINT uniqueRoleName UNIQUE (name)
 )");
 
 
@@ -152,7 +152,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."role (
 $PDO->exec("CREATE TABLE ".TABLE_PREFIX."setting (
   name character varying(40) NOT NULL,
   value text NOT NULL,
-  CONSTRAINT id UNIQUE (name)
+  CONSTRAINT uniqueSettingName UNIQUE (name)
 )");
 
 
@@ -162,7 +162,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."plugin_settings (
   plugin_id character varying(40) NOT NULL,
   name character varying(40) NOT NULL,
   value character varying(255) NOT NULL,
-  CONSTRAINT plugin_setting_id UNIQUE (plugin_id, name)
+  CONSTRAINT uniquePluginIdSettingName UNIQUE (plugin_id, name)
 )");
 
 
@@ -180,7 +180,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."snippet (
   updated_by_id integer DEFAULT NULL,
   position integer DEFAULT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT snippetname UNIQUE (name)
+  CONSTRAINT uniqueSnippetName UNIQUE (name)
 )");
 
 
@@ -191,7 +191,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."tag (
   name character varying(40) NOT NULL,
   count integer NOT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT tagname UNIQUE (name)
+  CONSTRAINT uniqueTagName UNIQUE (name)
 )");
 
 
@@ -213,8 +213,8 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user (
   created_by_id integer DEFAULT NULL,
   updated_by_id integer DEFAULT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT username UNIQUE (username),
-  CONSTRAINT uc_email UNIQUE (email)
+  CONSTRAINT uniqueUsername UNIQUE (username),
+  CONSTRAINT uniqueUserEmail UNIQUE (email)
 )");
 
 
@@ -223,7 +223,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user (
 $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user_role (
   user_id integer NOT NULL,
   role_id integer NOT NULL,
-  CONSTRAINT user_id UNIQUE (user_id, role_id)
+  CONSTRAINT uniqueUserIdRoleId UNIQUE (user_id, role_id)
 )");
 
 
@@ -232,7 +232,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user_role (
 $PDO->exec("CREATE TABLE ".TABLE_PREFIX."role_permission (
   role_id integer NOT NULL,
   permission_id integer NOT NULL,
-  CONSTRAINT role_id UNIQUE (role_id, permission_id)
+  CONSTRAINT uniqueRoleIdPermissionId UNIQUE (role_id, permission_id)
 )");
 
 

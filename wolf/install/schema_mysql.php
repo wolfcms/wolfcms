@@ -45,7 +45,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."secure_token (
   url varchar(255) default NULL,
   time varchar(100) default NULL,
   PRIMARY KEY  (id),
-  UNIQUE KEY username_url (username,url)
+  UNIQUE KEY uniqueUsernameUrl (username,url)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8");
 
 
@@ -71,7 +71,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."layout (
   updated_by_id int(11) default NULL,
   position mediumint(6) unsigned default NULL,
   PRIMARY KEY  (id),
-  UNIQUE KEY name (name)
+  UNIQUE KEY uniqueLayoutName (name)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8");
 
 
@@ -119,7 +119,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."page_part (
 $PDO->exec("CREATE TABLE ".TABLE_PREFIX."page_tag (
   page_id int(11) unsigned NOT NULL,
   tag_id int(11) unsigned NOT NULL,
-  UNIQUE KEY page_id (page_id,tag_id)
+  UNIQUE KEY uniquePageIdTagId (page_id,tag_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8");
 
 
@@ -129,7 +129,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."permission (
   id int(11) NOT NULL auto_increment,
   name varchar(25) NOT NULL,
   PRIMARY KEY  (id),
-  UNIQUE KEY name (name)
+  UNIQUE KEY uniquePermissionName (name)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8");
 
 
@@ -139,7 +139,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."role (
   id int(11) NOT NULL auto_increment,
   name varchar(25) NOT NULL,
   PRIMARY KEY  (id),
-  UNIQUE KEY name (name)
+  UNIQUE KEY uniqueRoleName (name)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8");
 
 
@@ -148,7 +148,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."role (
 $PDO->exec("CREATE TABLE ".TABLE_PREFIX."setting (
   name varchar(40) NOT NULL,
   value text NOT NULL,
-  UNIQUE KEY id (name)
+  UNIQUE KEY uniqueSettingName (name)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8");
 
 
@@ -158,7 +158,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."plugin_settings (
   plugin_id varchar(40) NOT NULL,
   name varchar(40) NOT NULL,
   value varchar(255) NOT NULL,
-  UNIQUE KEY plugin_setting_id (plugin_id,name)
+  UNIQUE KEY uniquePluginIdSettingName (plugin_id,name)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8");
 
 
@@ -176,7 +176,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."snippet (
   updated_by_id int(11) default NULL,
   position mediumint(6) unsigned default NULL,
   PRIMARY KEY  (id),
-  UNIQUE KEY name (name)
+  UNIQUE KEY uniqueSnippetName (name)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8");
 
 
@@ -187,7 +187,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."tag (
   name varchar(40) NOT NULL,
   count int(11) unsigned NOT NULL,
   PRIMARY KEY  (id),
-  UNIQUE KEY name (name)
+  UNIQUE KEY uniqueTagName (name)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8");
 
 
@@ -209,8 +209,8 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user (
   created_by_id int(11) default NULL,
   updated_by_id int(11) default NULL,
   PRIMARY KEY  (id),
-  UNIQUE KEY username (username),
-  CONSTRAINT uc_email UNIQUE (emai)
+  UNIQUE KEY uniqueUsername (username),
+  CONSTRAINT uniqueUserEmail UNIQUE (emai)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8");
 
 
@@ -219,7 +219,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user (
 $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user_role (
   user_id int(11) NOT NULL,
   role_id int(11) NOT NULL,
-  UNIQUE KEY user_id (user_id,role_id)
+  UNIQUE KEY uniqueUserIdRoleId (user_id,role_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8");
 
 
@@ -228,5 +228,5 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user_role (
 $PDO->exec("CREATE TABLE ".TABLE_PREFIX."role_permission (
   role_id int(11) NOT NULL,
   permission_id int(11) NOT NULL,
-  UNIQUE KEY user_id (role_id,permission_id)
+  UNIQUE KEY uniqueRoleIdPermissionId (role_id,permission_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8");

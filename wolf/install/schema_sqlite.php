@@ -46,7 +46,7 @@ $PDO->exec("CREATE TABLE secure_token (
     url varchar(255) default NULL ,
     time varchar(100) default NULL
 )");
-$PDO->exec("CREATE UNIQUE INDEX username_url ON secure_token (username,url)");
+$PDO->exec("CREATE UNIQUE INDEX uniqueUsernameUrl ON secure_token (username,url)");
 
 
 // Table structure for table: cron -----------------------------------------
@@ -70,7 +70,7 @@ $PDO->exec("CREATE TABLE layout (
     updated_by_id int(11) default NULL,
     position mediumint(6) default NULL
 )");
-$PDO->exec("CREATE UNIQUE INDEX layout_name ON layout (name)");
+$PDO->exec("CREATE UNIQUE INDEX uniqueLayoutName ON layout (name)");
 
 
 // Table structure for table: page -------------------------------------------
@@ -116,7 +116,7 @@ $PDO->exec("CREATE TABLE page_tag (
     page_id int(11) NOT NULL , 
     tag_id int(11) NOT NULL
 )");
-$PDO->exec("CREATE UNIQUE INDEX page_tag_page_id ON page_tag (page_id,tag_id)");
+$PDO->exec("CREATE UNIQUE INDEX uniquePageIdTagId ON page_tag (page_id,tag_id)");
 
 
 // Table structure for table: permission -------------------------------------
@@ -125,7 +125,7 @@ $PDO->exec("CREATE TABLE permission (
     id INTEGER NOT NULL PRIMARY KEY, 
     name varchar(25) NOT NULL 
 )");
-$PDO->exec("CREATE UNIQUE INDEX permission_name ON permission (name)");
+$PDO->exec("CREATE UNIQUE INDEX uniquePermissionName ON permission (name)");
 
 
 // Table structure for table: role -------------------------------------
@@ -134,7 +134,7 @@ $PDO->exec("CREATE TABLE role (
     id INTEGER NOT NULL PRIMARY KEY,
     name varchar(25) NOT NULL
 )");
-$PDO->exec("CREATE UNIQUE INDEX role_name ON role (name)");
+$PDO->exec("CREATE UNIQUE INDEX uniqueRoleName ON role (name)");
 
 
 // Table structure for table: setting ----------------------------------------
@@ -143,7 +143,7 @@ $PDO->exec("CREATE TABLE setting (
     name varchar(40) NOT NULL ,
     value text NOT NULL
 )");
-$PDO->exec("CREATE UNIQUE INDEX setting_id ON setting (name)");
+$PDO->exec("CREATE UNIQUE INDEX uniqueSettingName ON setting (name)");
 
 
 // Table structure for table: plugin_settings ----------------------------------------
@@ -153,7 +153,7 @@ $PDO->exec("CREATE TABLE plugin_settings (
     name varchar(40) NOT NULL ,
     value varchar(255) NOT NULL
 )");
-$PDO->exec("CREATE UNIQUE INDEX plugin_setting_id ON plugin_settings (plugin_id,name)");
+$PDO->exec("CREATE UNIQUE INDEX uniquePluginIdSettingName ON plugin_settings (plugin_id,name)");
 
 
 // Table structure for table: snippet ----------------------------------------
@@ -170,7 +170,7 @@ $PDO->exec("CREATE TABLE snippet (
     updated_by_id int(11) default NULL,
     position mediumint(6) default NULL
 )");
-$PDO->exec("CREATE UNIQUE INDEX snippet_name ON snippet (name)");
+$PDO->exec("CREATE UNIQUE INDEX uniqueSnippetName ON snippet (name)");
 
 
 // Table structure for table: tag --------------------------------------------
@@ -180,7 +180,7 @@ $PDO->exec("CREATE TABLE tag (
     name varchar(40) NOT NULL ,
     count int(11) NOT NULL
 )");
-$PDO->exec("CREATE UNIQUE INDEX tag_name ON tag (name)");
+$PDO->exec("CREATE UNIQUE INDEX uniqueTagName ON tag (name)");
 
 
 // Table structure for table: user -------------------------------------------
@@ -200,9 +200,9 @@ $PDO->exec("CREATE TABLE user (
     updated_on datetime default NULL ,
     created_by_id int(11) default NULL ,
     updated_by_id int(11) default NULL,
-    CONSTRAINT uc_email UNIQUE (email)
+    CONSTRAINT uniqueUserEmail UNIQUE (email)
 )");
-$PDO->exec("CREATE UNIQUE INDEX user_username ON user (username)");
+$PDO->exec("CREATE UNIQUE INDEX uniqueUsername ON user (username)");
 
 
 // Table structure for table: user_role --------------------------------
@@ -211,7 +211,7 @@ $PDO->exec("CREATE TABLE user_role (
     user_id int(11) NOT NULL ,
     role_id int(11) NOT NULL
 )");
-$PDO->exec("CREATE UNIQUE INDEX user_role_user_id ON user_role (user_id,role_id)");
+$PDO->exec("CREATE UNIQUE INDEX uniqueUserIdRoleId ON user_role (user_id,role_id)");
 
 
 // Table structure for table: role_permission --------------------------------
@@ -220,4 +220,4 @@ $PDO->exec("CREATE TABLE role_permission (
     role_id int(11) NOT NULL ,
     permission_id int(11) NOT NULL
 )");
-$PDO->exec("CREATE UNIQUE INDEX role_permission_role_id ON role_permission (role_id,permission_id)");
+$PDO->exec("CREATE UNIQUE INDEX uniqueRoleIdPermissionId ON role_permission (role_id,permission_id)");
