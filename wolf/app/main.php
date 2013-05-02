@@ -65,6 +65,47 @@ function url_start_with($url) {
     return false;
 }
 
+/**
+ * Helper function that allows you to display a Node object that you provided.
+ * 
+ * Please note: if you wish to use it for a plugin, use the wrapper function.
+ * 
+ * <code>
+ * Plugin::display($node);
+ * </code>
+ * 
+ * @see Plugin::display()
+ * @param Node $node
+ * @return boolean
+ * @throws Exception
+ */
+function displayNode(Node $node) {
+    if (is_object($node)) {
+        // If the Node is in preview status, only display to logged in users
+        if (Page::STATUS_PREVIEW == $node->status_id) {
+            AuthUser::load();
+            if (!AuthUser::isLoggedIn() || !AuthUser::hasPermission('page_view'))
+                pageNotFound(); // @todo replace this with proper error page
+        }
+
+        // If Node needs login, fire login required event
+        if ($node->getLoginNeeded() == Page::LOGIN_REQUIRED) {
+            AuthUser::load();
+            if (!AuthUser::isLoggedIn()) {
+                Observer::notify('login_required');
+                AuthUser::load();
+                if (!AuthUser::isLoggedIn()) {
+                    throw new Exception('User still not logged in after login_required event fired.');
+                }
+            }
+        }
+
+        Observer::notify('node_found', $node);
+        $node->_executeLayout();
+    }
+
+    return false;
+}
 
 function main() {
     // get the uri string from the query
@@ -130,6 +171,7 @@ function main() {
     // this is where 80% of the things is done
     $page = Page::findByUri($uri, true);
 
+    // @todo Replace this entire section by the display() function.
     // if we found it, display it!
     if (is_object($page)) {
         // If a page is in preview status, only display to logged in users
