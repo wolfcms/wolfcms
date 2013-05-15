@@ -1035,6 +1035,30 @@ class Page extends Node {
             'limit' => 1
         ));
     }
+    
+    
+    /**
+     * Returns the first Page object with a certain behaviour.
+     * 
+     * The optional parameter $parentId can be given to narrow the search if it
+     * is known.
+     * 
+     * @param type $name
+     * @param type $parentId
+     * @return type
+     */
+    public static function findByBehaviour($name, $parentId=false) {
+        $where = "behavior_id='".$name."'";
+        
+        if ($parentId !== false && is_int($parentId)) {
+            $where = $where." AND parent_id=$parentId";
+        }
+        
+        return self::find(array(
+            'where' => $where,
+            'limit' => 1
+        ));
+    }
 
 
     public static function childrenOf($id) {

@@ -42,10 +42,9 @@ Observer::observe('page_not_found', 'behavior_page_not_found');
  * Presents browser with a custom 404 page.
  */
 function behavior_page_not_found($url) {
-    $where = "behavior_id='page_not_found'";
-    $page = Record::findOneFrom('Page', $where);
+    $page = Page::findByBehaviour('page_not_found');
 
-    if ($page && is_object($page)) {
+    if (is_a($page, 'Page')) {
         header("HTTP/1.0 404 Not Found");
         header("Status: 404 Not Found");
 
