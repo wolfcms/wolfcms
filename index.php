@@ -1,8 +1,7 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
- * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
+ * Copyright (C) 2013 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
  * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
  * Please see license.txt for the full license text.
@@ -12,11 +11,11 @@
  * @package Wolf_CMS
  */
 
-//  Constants  ---------------------------------------------------------------
+// Initialize the system.
 define('IN_CMS', true);
-
 define('CMS_ROOT', dirname(__FILE__));
-require_once CMS_ROOT . DIRECTORY_SEPARATOR . 'init.php';
+define('CORE_ROOT', CMS_ROOT . DIRECTORY_SEPARATOR . 'wolf');
+require_once CORE_ROOT . DIRECTORY_SEPARATOR . 'init.php';
 
-// run everything!
+// Run the system.
 require APP_PATH.DS.'main.php';
