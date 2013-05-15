@@ -256,8 +256,6 @@ class Page extends Node {
     /**
      * Counts the number of children belonging to a Page.
      *
-     * @fixme Remove dependency on CMS_CONN - not good
-     *
      * @param type  $args
      * @param type  $value
      * @param type  $include_hidden
