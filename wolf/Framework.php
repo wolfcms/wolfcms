@@ -944,7 +944,7 @@ class Record {
      */
     public static function findOneFrom($class_name, $where, $values=array()) {
         return $class_name::find(array(
-            'where' => array_merge($where, $values),
+            'where' => array_merge(array($where), $values),
             'limit' => 1
         ));
     }
@@ -963,7 +963,7 @@ class Record {
     public static function findAllFrom($class_name, $where=false, $values=array()) {
         if ($where) {
             return $class_name::find(array(
-                'where' => array_merge($where, $values)
+                'where' => array_merge(array($where), $values)
             ));
         } else {
             return $class_name::find();
