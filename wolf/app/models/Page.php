@@ -404,6 +404,16 @@ class Page extends Node {
         return $tags;
     }
 
+    public function getColumns() {
+        return array(
+            'id', 'title', 'slug', 'breadcrumb', 'keywords', 'description',
+            'parent_id', 'layout_id', 'behavoir_id', 'status_id',
+            'created_on', 'published_on', 'valid_until', 'updated_on',
+            'created_by_id', 'updated_by_id', 'position', 'is_protected',
+            'needs_login'
+        );
+    }
+
 
     /**
      * Return a numerical representation of this page's place in the page hierarchy.

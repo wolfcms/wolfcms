@@ -66,6 +66,13 @@ class Layout extends Record {
         ));
     }
 
+    public function getColumns() {
+        return array(
+            'id', 'name', 'content_type', 'content', 'created_on',
+            'updated_on', 'created_by_id', 'updated_by_id', 'position'
+        );
+    }
+
     public function isUsed() {
         return Record::countFrom('Page', 'layout_id = :layout_id', array(':layout_id' => $this->id));
     }

@@ -58,6 +58,14 @@ class User extends Record {
         ));
     }
 
+    public function getColumns() {
+        return array(
+            'id', 'name', 'email', 'username', 'password', 'salt',
+            'language', 'last_login', 'last_failure', 'failure_count',
+            'created_on', 'updated_on', 'created_by_id', 'updated_by_id'
+        );
+    }
+
     public function beforeInsert() {
         $this->created_by_id = AuthUser::getId();
         $this->created_on = date('Y-m-d H:i:s');

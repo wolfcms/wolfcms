@@ -87,5 +87,13 @@ class Snippet extends Record {
         ));
     }
 
+    public function getColumns() {
+        return array(
+            'id', 'name', 'filter_id', 'content', 'content_html',
+            'created_on', 'updated_on', 'created_by_id', 'updated_by_id',
+            'position'
+        );
+    }
+
 } // end Snippet class
 
