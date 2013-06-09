@@ -886,7 +886,7 @@ class Record {
         Record::logQuery($sql);
         
         // Prepare and execute
-        $stmt = self::$__CONN__->prepare($sql);
+        $stmt = Record::getConnection()->prepare($sql);
         if (!$stmt->execute($values)) {
             return false;
         }
