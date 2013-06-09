@@ -811,7 +811,7 @@ class Page extends Node {
             foreach ($new_tags as $index => $tag_name) {
                 if (!empty($tag_name)) {
                     // try to get it from tag list, if not we add it to the list
-                    if (!$tag = Record::findOneFrom('Tag', 'name = :tag_name', array(':tag_name' => $tag_name)))
+                    if (!$tag = Tag::findByName($tag_name))
                         $tag = new Tag(array('name' => trim($tag_name)));
 
                     $tag->count++;
@@ -826,7 +826,7 @@ class Page extends Node {
             // remove all old tag
             foreach ($old_tags as $index => $tag_name) {
                 // get the id of the tag
-                $tag = Record::findOneFrom('Tag', 'name = :tag_name', array(':tag_name' => $tag_name));
+                $tag = Tag::findByName($tag_name);
                 // delete the pivot record
                 Record::deleteWhere('PageTag', 'page_id = :page_id AND tag_id = :tag_id', array(':page_id' => $this->id, ':tag_id' => $tag->id));
                 $tag->count--;
@@ -1075,7 +1075,7 @@ class Page extends Node {
         static $new_root_id = false;
 
         /* Clone passed in page. */
-        $clone = Record::findByIdFrom('Page', $page->id);
+        $clone = Page::findById($page->id);
         $clone->parent_id = (int) $parent_id;
         $clone->id = null;
 
