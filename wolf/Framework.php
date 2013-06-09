@@ -943,14 +943,10 @@ class Record {
      * @return Record               A record instance or false on failure.
      */
     public static function findOneFrom($class_name, $where, $values=array()) {
-        $sql = 'SELECT * FROM '.self::tableNameFromClassName($class_name).' WHERE '.$where;
-
-        $stmt = self::$__CONN__->prepare($sql);
-        $stmt->execute($values);
-
-        self::logQuery($sql);
-
-        return $stmt->fetchObject($class_name);
+        return $class_name::find(array(
+            'where' => array_merge($where, $values),
+            'limit' => 1
+        ));
     }
 
     /**
@@ -965,18 +961,13 @@ class Record {
      * @return array                An array of Records instances.
      */
     public static function findAllFrom($class_name, $where=false, $values=array()) {
-        $sql = 'SELECT * FROM '.self::tableNameFromClassName($class_name).($where ? ' WHERE '.$where:'');
-
-        $stmt = self::$__CONN__->prepare($sql);
-        $stmt->execute($values);
-
-        self::logQuery($sql);
-
-        $objects = array();
-        while ($object = $stmt->fetchObject($class_name))
-            $objects[] = $object;
-
-        return $objects;
+        if ($where) {
+            return $class_name::find(array(
+                'where' => array_merge($where, $values)
+            ));
+        } else {
+            return $class_name::find();
+        }
     }
 
     /**
