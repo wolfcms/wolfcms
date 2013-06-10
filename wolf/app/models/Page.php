@@ -1010,6 +1010,7 @@ class Page extends Node {
         $joins .= " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id";
         
         // Prepare query parts
+        // @todo Remove all "author" mentions and function and replace by more appropriate "creator" name.
         $select_string      = empty($select) ? 'SELECT page.*, creator.name AS author, creator.id AS author_id, updater.name AS updater, updater.id AS updater_id, creator.name AS created_by_name, updater.name AS updated_by_name' : "SELECT $select";
         $from_string        = empty($from) ? "FROM $table_name AS page" : "FROM $from";
         $joins_string       = empty($joins) ? '' : $joins;
