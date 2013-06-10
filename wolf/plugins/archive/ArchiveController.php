@@ -7,9 +7,6 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) { exit(); }
-
 /**
  * The Archive plugin provides an Archive pagetype behaving similar to a blog or news archive.
  *
@@ -20,6 +17,9 @@ if (!defined('IN_CMS')) { exit(); }
  * @copyright Martijn van der Kleijn, 2011
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
+
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
 
 /**
  * 

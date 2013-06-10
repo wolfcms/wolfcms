@@ -1,6 +1,8 @@
-# WOLF CMS - INFORMATION
+# WOLF CMS
 
 ## About Wolf CMS
+
+[![Build Status](https://secure.travis-ci.org/wolfcms/wolfcms.png)](http://travis-ci.org/wolfcms/wolfcms)
 
 Wolf CMS simplifies content management by offering an elegant user interface,
 flexible templating per page, simple user management and permissions, as well

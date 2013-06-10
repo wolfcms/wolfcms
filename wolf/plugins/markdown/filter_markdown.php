@@ -7,8 +7,6 @@
  * Please see license.txt for the full license text.
  */
 
-require_once('smartypants.php');
-
 /**
  * The Markdown plugin provides a Filter that uses the Markdown parser.
  *
@@ -20,9 +18,10 @@ require_once('smartypants.php');
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
 
-
 /* Security measure */
 if (!defined('IN_CMS')) { exit(); }
+
+require_once('smartypants.php');
 
 /**
  * A Wolf CMS specific wrapper around the original parser.

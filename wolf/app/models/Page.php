@@ -124,7 +124,7 @@ class Page extends Node {
      *
      * @return string   The url of the page object.
      */
-    public function url($suffix=false) {
+    public function url($suffix=true) {
         if ($suffix === false) {
             return BASE_URL.$this->uri();
         }
@@ -201,11 +201,11 @@ class Page extends Node {
 
 
     /**
-     * 
+     *
      * @todo Finish _inversedBreadcrumbs PHPDoc
      *
      * @param type $separator
-     * @return string 
+     * @return string
      */
     private function _inversedBreadcrumbs($separator) {
         $out = '<a href="'.$this->url().'" title="'.$this->breadcrumb.'">'.$this->breadcrumb.'</a><span class="breadcrumb-separator">'.$separator.'</span>';
@@ -255,7 +255,7 @@ class Page extends Node {
 
     /**
      * Counts the number of children belonging to a Page.
-     * 
+     *
      * @fixme Remove dependency on CMS_CONN - not good
      *
      * @param type  $args
@@ -279,7 +279,7 @@ class Page extends Node {
         // Prepare SQL
         $sql = 'SELECT COUNT(*) AS nb_rows FROM '.TABLE_PREFIX.'page '
                 .'WHERE parent_id = '.$this->id
-                ." AND (valid_until IS NULL OR '".date('Y-m-d H:i:s')."' < valid_until)"
+                ." AND (COALESCE(valid_until, '') = '' OR '".date('Y-m-d H:i:s')."' < valid_until)"
                 .' AND (status_id='.Page::STATUS_PUBLISHED
                 .($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN : '').') '
                 ."$where_string ORDER BY $order $limit_string $offset_string";
@@ -294,7 +294,7 @@ class Page extends Node {
 
     /**
      * Returns the Page object's parent.
-     * 
+     *
      * The option $level parameter allows the user to specify the level on
      * which the found Page object should be.
      *
@@ -311,12 +311,12 @@ class Page extends Node {
         if ($level === null)
             return $this->parent;
 
-        if ($level > $this->level)
+        if ($level > $this->level())
             return false;
-        else if ($this->level == $level)
+        else if ($this->level() == $level)
             return $this;
         else
-            return $this->parent($level);
+            return $this->parent->parent($level);
     }
 
 
@@ -327,7 +327,7 @@ class Page extends Node {
 
     /**
      * Allows people to include the parsed content from a Snippet in a Page.
-     * 
+     *
      * The method returns either true or false depending on whether the snippet
      * was found or not.
      *
@@ -382,7 +382,7 @@ class Page extends Node {
      * @deprecated
      * @see Page::tags()
      *
-     * @return type 
+     * @return type
      */
     public function getTags() {
         $tablename_page_tag = self::tableNameFromClassName('PageTag');
@@ -540,7 +540,7 @@ class Page extends Node {
         if ($label == null)
             $label = $this->title();
 
-        return sprintf('<a href="%s" %s>%s</a>', $this->url(), $options, $label
+        return sprintf('<a href="%s" %s>%s</a>', $this->url(true), $options, $label
         );
     }
 
@@ -577,7 +577,7 @@ class Page extends Node {
 
     /**
      * Return an array of this page's children.
-     * 
+     *
      * Note: returns a single Page object if only one child exists.
      *
      * @param array $args               Array of key=>value pairs.
@@ -611,7 +611,7 @@ class Page extends Node {
                 .'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
                 .'LEFT JOIN '.TABLE_PREFIX.'user AS updater ON updater.id = page.updated_by_id '
                 .'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN : '').') '
-                ." AND (valid_until IS NULL OR '".date('Y-m-d H:i:s')."' < valid_until)"
+                ." AND (COALESCE(valid_until, '') = '' OR '".date('Y-m-d H:i:s')."' < valid_until)"
                 ."$where_string ORDER BY $order $limit_string $offset_string";
 
         self::logQuery($sql);
@@ -673,7 +673,7 @@ class Page extends Node {
             // set content-type and charset of the page
             header('Content-Type: '.$layout->content_type.'; charset=UTF-8');
 
-            Observer::notify('page_before_execute_layout');
+            Observer::notify('page_before_execute_layout', $layout);
 
             // execute the layout code
             eval('?'.'>'.$layout->content);
@@ -765,7 +765,7 @@ class Page extends Node {
 
     /**
      * Returns the uri for this node.
-     * 
+     *
      * Note: The uri does not start nor end with a '/'.
      *
      * @return string   The node's full uri.
@@ -848,12 +848,12 @@ class Page extends Node {
 
     /**
      * This function should no longer be used.
-     * 
+     *
      * @deprecated
      * @see setTags()
      *
      * @param type $tags
-     * @return type 
+     * @return type
      */
     public function saveTags($tags) {
         return $this->setTags($tags);
@@ -862,7 +862,7 @@ class Page extends Node {
 
     /**
      * This function should no longer be used.
-     * 
+     *
      * @deprecated
      * @see findByUri()
      */
@@ -906,7 +906,7 @@ class Page extends Node {
 
             $parent = $page;
         } // foreach
-        
+
         return $page;
     }
 
@@ -920,22 +920,21 @@ class Page extends Node {
      * @return mixed            page object or false
      */
     public static function findBySlug($slug, &$parent, $all = false) {
-        $parent_id = $parent ? $parent->id : 0;
 
         if (empty($slug)) {
-            $slug = NULL;
-            $slug_sql = "slug = ''";
-        }
-        else {
-            $slug_sql = "slug = '".$slug."'";
+            return self::find(array(
+                'where' => 'parent_id=0',
+                'limit' => 1
+                  ));
         }
 
+        $parent_id = $parent ? $parent->id : 0;
+        $slug_sql = "slug = '".$slug."'";
+
         if ($all) {
-            //$where = 'COALESCE(slug, \'\') = COALESCE('.$slug.', \'\') AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
             $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
         }
         else {
-            //$where = 'COALESCE(slug, \'\') = COALESCE('.$slug.', \'\') AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
             $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
         }
 
@@ -950,17 +949,17 @@ class Page extends Node {
 
     /**
      * Finds a Page record based on supplied arguments.
-     * 
+     *
      * Usage:
      *      $page = Page::find('/the/uri/to/your/page');
      *      $page = Page::find(array('where' => 'created_by_id=12'));
-     * 
+     *
      * Argument array can contain:
      *      - where
      *      - order
      *      - offset
      *      - limit
-     * 
+     *
      * Return values can be:
      *      - A single Page object
      *      - An array of Page objects which can be empty
@@ -1011,7 +1010,7 @@ class Page extends Node {
         $joins .= " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id";
         
         // Prepare query parts
-        $select_string      = empty($select) ? 'SELECT page.*, creator.name AS created_by_name, updater.name AS updated_by_name' : "SELECT $select";
+        $select_string      = empty($select) ? 'SELECT page.*, creator.name AS author, creator.id AS author_id, updater.name AS updater, updater.id AS updater_id, creator.name AS created_by_name, updater.name AS updated_by_name' : "SELECT $select";
         $from_string        = empty($from) ? "FROM $table_name AS page" : "FROM $from";
         $joins_string       = empty($joins) ? '' : $joins;
         $where_string       = empty($where) ? '' : "WHERE $where";
@@ -1067,6 +1066,30 @@ class Page extends Node {
     public static function findById($id) {
         return self::find(array(
             'where' => 'page.id='.(int) $id,
+            'limit' => 1
+        ));
+    }
+    
+    
+    /**
+     * Returns the first Page object with a certain behaviour.
+     * 
+     * The optional parameter $parentId can be given to narrow the search if it
+     * is known.
+     * 
+     * @param type $name
+     * @param type $parentId
+     * @return type
+     */
+    public static function findByBehaviour($name, $parentId=false) {
+        $where = "behavior_id='".$name."'";
+        
+        if ($parentId !== false && is_int($parentId)) {
+            $where = $where." AND parent_id=$parentId";
+        }
+        
+        return self::find(array(
+            'where' => $where,
             'limit' => 1
         ));
     }

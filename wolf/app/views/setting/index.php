@@ -107,7 +107,7 @@
                                     <?php endforeach; ?>
                                 </select>
                             </td>
-                            <td class="help"><?php echo __('This will set your language for the backend.'); ?><br /><?php echo __('Help us <a href=":url">translate Wolf</a>!', array(':url' => get_url('translate'))); ?></td>
+                            <td class="help"><?php echo __('This will set your language for the backend.'); ?><br /><?php echo __('Help us <a href=":url">translate Wolf</a>!', array(':url' => 'http://www.wolfcms.org/wiki/translator_notes')); ?></td>
                         </tr>
                         <tr>
                             <td class="label"><label for="setting_theme"><?php echo __('Administration Theme'); ?></label></td>
@@ -231,7 +231,7 @@ $(document).ready(function() {
 
     // Dynamically uninstall
     $('.uninstall a').click(function(e) {
-        if (confirm('<?php echo __('Are you sure you wish to uninstall this plugin?'); ?>')) {
+        if (confirm('<?php echo jsEscape(__('Are you sure you wish to uninstall this plugin?')); ?>')) {
             var pluginId = this.name.replace('uninstall_', '');
             $.get('<?php echo get_url('setting/uninstall_plugin/'); ?>'+pluginId, function() {
                 location.reload(true);

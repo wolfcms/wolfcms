@@ -8,20 +8,20 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) { exit(); }
-
 /**
  * The FileManager allows users to upload and manipulate files.
  *
  * @package Plugins
- * @subpackage file_manager
+ * @subpackage file-manager
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @copyright Philippe Archambault & Martijn van der Kleijn, 2008
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
+
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
 
   $out = '';
   $progres_path = '';
@@ -62,8 +62,8 @@ if (!defined('IN_CMS')) { exit(); }
       <td><code><?php echo $file->perms; ?> (<a href="#" onclick="toggle_chmod_popup('<?php echo $dir.$file->name; ?>', '<?php echo $file->chmod; ?>'); return false;" title="<?php echo __('Change mode'); ?>"><?php echo $file->chmod; ?></a>)</code></td>
       <td><code><?php echo $file->mtime; ?></code></td>
       <td>
-        <a href="#" onclick="toggle_rename_popup('<?php echo $dir.$file->name; ?>', '<?php echo $file->name; ?>'); return false;" title="<?php echo __('Rename'); ?>"><img src="<?php echo ICONS_URI;?>rename-16.png" alt="rename icon" /></a>
-        <a href="<?php echo get_url('plugin/file_manager/delete/'.$dir.$file->name.'?csrf_token='.SecureToken::generateToken(BASE_URL.'plugin/file_manager/delete/'.$dir.$file->name)); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete?'); ?> <?php echo $file->name; ?>?');"><img src="<?php echo ICONS_URI;?>delete-16.png" alt="<?php echo __('delete file icon'); ?>" title="<?php echo __('Delete file'); ?>" /></a>
+        <a href="#" onclick="toggle_rename_popup('<?php echo $dir.$file->name; ?>', '<?php echo $file->name; ?>'); return false;" title="<?php echo __('Rename'); ?>"><img src="<?php echo ICONS_URI;?>action-rename-16.png" alt="rename icon" /></a>
+        <a href="<?php echo get_url('plugin/file_manager/delete/'.$dir.$file->name.'?csrf_token='.SecureToken::generateToken(BASE_URL.'plugin/file_manager/delete/'.$dir.$file->name)); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete?'); ?> <?php echo $file->name; ?>?');"><img src="<?php echo ICONS_URI;?>action-delete-16.png" alt="<?php echo __('delete file icon'); ?>" title="<?php echo __('Delete file'); ?>" /></a>
       </td>
     </tr>
 <?php endforeach; ?>
@@ -103,7 +103,7 @@ if (!defined('IN_CMS')) { exit(); }
 	<div id="dialog" class="window">
 		<div class="titlebar">
             Demo dialog
-            <a href="#" class="close"><img src="<?php echo ICONS_URI;?>delete-disabled-16.png"/></a>
+            <a href="#" class="close"><img src="<?php echo ICONS_URI;?>action-delete-disabled-16.png"/></a>
         </div>
         <div class="content">
             <p>This is just a demo.</p>
@@ -113,7 +113,7 @@ if (!defined('IN_CMS')) { exit(); }
     <div id="create-file-popup" class="window">
 		<div class="titlebar">
             <?php echo __('Create new file'); ?>
-            <a href="#" class="close"><img src="<?php echo ICONS_URI;?>delete-disabled-16.png"/></a>
+            <a href="#" class="close"><img src="<?php echo ICONS_URI;?>action-delete-disabled-16.png"/></a>
         </div>
         <div class="content">
             <form action="<?php echo get_url('plugin/file_manager/create_file'); ?>" method="post">
@@ -128,7 +128,7 @@ if (!defined('IN_CMS')) { exit(); }
     <div id="create-directory-popup" class="window">
 		<div class="titlebar">
             <?php echo __('Create new directory'); ?>
-            <a href="#" class="close"><img src="<?php echo ICONS_URI;?>delete-disabled-16.png"/></a>
+            <a href="#" class="close"><img src="<?php echo ICONS_URI;?>action-delete-disabled-16.png"/></a>
         </div>
         <div class="content">
             <form action="<?php echo get_url('plugin/file_manager/create_directory'); ?>" method="post">
@@ -143,7 +143,7 @@ if (!defined('IN_CMS')) { exit(); }
     <div id="upload-file-popup" class="window">
 		<div class="titlebar">
             <?php echo __('Upload file'); ?>
-            <a href="#" class="close"><img src="<?php echo ICONS_URI;?>delete-disabled-16.png"/></a>
+            <a href="#" class="close"><img src="<?php echo ICONS_URI;?>action-delete-disabled-16.png"/></a>
         </div>
         <div class="content">
             <form action="<?php echo get_url('plugin/file_manager/upload'); ?>" method="post" enctype="multipart/form-data">

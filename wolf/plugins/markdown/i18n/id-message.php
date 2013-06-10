@@ -1,16 +1,13 @@
 <?php
 
-    /**
-     * Indonesian file for plugin markdown
-     *
-     * @package Plugins
-     * @subpackage markdown
-     *
-     * @author Devi Mandiri <devi.mandiri@gmail.com>
-     * @version Wolf 0.7.x
-     */
+/**
+ * Wolf CMS markdown plugin language file
+ *
+ * @package Translations
+ */
 
-    return array(
-    	'Allows you to compose page parts or snippets using the Markdown text filter.' => 'Memungkinkan Anda untuk menulis halaman atau snippet menggunakan Markdown teks filter',
-		'Markdown filter' => 'Markdown filter',
-    );
+return array(
+    'Allows you to use the Markdown text filter (with MarkdownExtra and Smartypants).' => 'Allows you to use the Markdown text filter (with MarkdownExtra and Smartypants).',
+    'Markdown filter' => 'Markdown filter',
+    'Markdown' => 'Markdown'
+);

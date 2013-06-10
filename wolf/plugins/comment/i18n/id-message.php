@@ -1,16 +1,12 @@
 <?php
 
-    /**
-     * Indonesian file for plugin comment
-     *
-     * @package wolf
-     * @subpackage comment
-     *
-     * @author Devi Mandiri <devi.mandiri@gmail.com>
-     * @version Wolf 0.7.x
-     */
+/**
+ * Wolf CMS comment plugin language file
+ *
+ * @package Translations
+ */
 
-    return array(
+return array(
     'A comment was added.' => 'Komentar sudah ditambahkan.',
     'Approve' => 'Setujui',
     'Are you sure you wish to delete it?' => 'Anda yakin untuk menghapusnya?',
@@ -64,5 +60,5 @@
     'about' => 'tentang',
     'comment not found!' => 'komentar tidak ditemukan',
     'none' => 'tidak ada',
-    'or' => 'atau',
-    );
+    'or' => 'atau'
+);

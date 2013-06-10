@@ -8,9 +8,6 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) { exit(); }
-
 /**
  * The Comment plugin provides an interface to enable adding and moderating page comments.
  *
@@ -23,6 +20,9 @@ if (!defined('IN_CMS')) { exit(); }
  * @copyright Philippe Archambault, Bebliuc George & Martijn van der Kleijn, 2008
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
+
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
 
 /**
  * The Comment class represents a comment on a page.

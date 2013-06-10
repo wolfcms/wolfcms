@@ -21,9 +21,10 @@
  *
  * @package    Framework
  *
- * @author     Philippe Archambault <philippe.archambault@gmail.com>
  * @author     Martijn van der Kleijn <martijn.niji@gmail.com>
- * @copyright  2008-2010 Martijn van der Kleijn, Philippe Archambault
+ * @author     Philippe Archambault <philippe.archambault@gmail.com>
+ * @copyright  2009-2013 Martijn van der Kleijn
+ * @copyright  2008 Philippe Archambault
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
 
@@ -514,6 +515,18 @@ class Record {
      * @return string A key.
      */
     final public static function lastInsertId() {
+        // PostgreSQL does not support lastInsertId retrieval without knowing the sequence name
+        if (self::$__CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) === 'pgsql') {
+            $sql = 'SELECT lastval();';
+            
+            if ($result = self::$__CONN__->query($sql)) {
+                return $result->fetchColumn();
+            }
+            else {
+                return 0;
+            }
+        }
+        
         return self::$__CONN__->lastInsertId();
     }
 
@@ -1006,14 +1019,17 @@ class Record {
  * magic method.
  *
  * Usage example:
- *
+ * 
+ * <code>
  * echo new View('my_template',array(
  *               'title' => 'My Title',
  *               'body' => 'My body content'
  *              ));
- *
+ * </code>
+ * 
  * Template file example (in this case my_template.php):
- *
+ * 
+ * <code>
  * <html>
  * <head>
  *   <title><?php echo $title;?></title>
@@ -1023,10 +1039,12 @@ class Record {
  *   <p><?php echo $body;?></p>
  * </body>
  * </html>
- *
+ * </code>
  * You can also use Helpers in the template by loading them as follows:
- *
+ * 
+ * <code>
  * use_helper('HelperName', 'OtherHelperName');
+ * </code>
  */
 class View {
     private $file;           // String of template file
@@ -1219,6 +1237,7 @@ class Controller {
  * The Observer class allows for a simple but powerful event system.
  * 
  * Example of watching/handling an event:
+ * <code>
  *      // Connecting your event hangling function to an event.
  *      Observer::observe('page_edit_after_save', 'my_simple_observer');
  * 
@@ -1227,10 +1246,13 @@ class Controller {
  *          // do what you want to do
  *          var_dump($page);
  *      }
+ * </code>
  * 
  * Example of generating an event:
  * 
+ * <code>
  *      Observer::notify('my_plugin_event', $somevar);
+ * </code>
  * 
  */
 final class Observer {
@@ -1327,8 +1349,10 @@ class AutoLoader {
      * Adds a (set of) file(s) for autoloading.
      *
      * Examples:
+     * <code>
      *      AutoLoader::addFile('Blog','/path/to/Blog.php');
      *      AutoLoader::addFile(array('Blog'=>'/path/to/Blog.php','Post'=>'/path/to/Post.php'));
+     * </code>
      *
      * @param mixed $class_name Classname or array of classname/path pairs.
      * @param mixed $file       Full path to the file that contains $class_name.
@@ -1345,8 +1369,10 @@ class AutoLoader {
      * Adds an entire folder or set of folders for autoloading.
      *
      * Examples:
+     * <code>
      *      AutoLoader::addFolder('/path/to/classes/');
      *      AutoLoader::addFolder(array('/path/to/classes/','/more/here/'));
+     * </code>
      *
      * @param mixed $folder Full path to a folder or array of paths.
      */
@@ -1408,9 +1434,11 @@ if ( ! function_exists('__autoload')) {
  * redirect).
  *
  * Example usage:
+ * <code>
  *      Flash::set('errors', 'Blog not found!');
  *      Flash::set('success', 'Blog has been saved with success!');
  *      Flash::get('success');
+ * </code>
  *
  * The Flash service as a concept is taken from Rails.
  */
@@ -1493,7 +1521,9 @@ final class Flash {
  * use camelcase syntax ("CamelCase").
  *
  * Example usage:
+ * <code>
  *      echo Inflector::humanize($string);
+ * </code>
  */
 final class Inflector {
 
@@ -1544,8 +1574,10 @@ final class Inflector {
  * Loads all functions from a speficied helper file.
  *
  * Example:
+ * <code>
  *      use_helper('Cookie');
  *      use_helper('Number', 'Javascript', 'Cookie', ...);
+ * </code>
  *
  * @param  string One or more helpers in CamelCase format.
  */
@@ -1575,8 +1607,10 @@ function use_helper() {
  *       for speed improvements.
  *
  * Example:
+ * <code>
  *      use_model('Blog');
  *      use_model('Post', 'Category', 'Tag', ...);
+ * </code>
  *
  * @param  string One or more Models in CamelCase format.
  */
@@ -1609,8 +1643,10 @@ function use_model() {
  * considered to be an anchor.
  *
  * Example:
+ * <code>
  *      get_url('controller/action/param1/param2');
  *      get_url('controller', 'action', 'param1', 'param2');
+ * </code>
  *
  * @param string    controller, action, param and/or #anchor
  * @return string   A generated URL
@@ -1810,6 +1846,29 @@ function cleanXSS() {
     unset($in);
     return;
 }
+
+
+/**
+ * Escapes special characters in Javascript strings.
+ *
+ * @param $value string The unescaped string.
+ * @return string
+ */
+function jsEscape($value) {
+    return strtr((string) $value, array(
+        "'"     => '\\\'',
+        '"'     => '\"',
+        '\\'    => '\\\\',
+        "\n"    => '\n',
+        "\r"    => '\r',
+        "\t"    => '\t',
+        chr(12) => '\f',
+        chr(11) => '\v',
+        chr(8)  => '\b',
+        '</'    => '\u003c\u002F',
+    ));
+}
+
 
 /**
  * Displays a "404 - page not found" message and exits.

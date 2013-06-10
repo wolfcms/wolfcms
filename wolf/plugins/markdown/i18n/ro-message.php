@@ -1,16 +1,13 @@
 <?php
 
-    /**
-     * Romanian file for plugin markdown
-     *
-     * @package Plugins
-     * @subpackage markdown
-     *
-     * @author Cosmin Huţanu <urecheatu007@gmail.com>
-     * @version Wolf 0.6.0
-     */
+/**
+ * Wolf CMS markdown plugin language file
+ *
+ * @package Translations
+ */
 
-    return array(
-    'Allows you to compose page parts or snippets using the Markdown text filter.' => 'Permite compunerea de fragmente sau părţi de pagină folosind filtrul de text Markdown.',
-	'Markdown filter' => 'Filtru Markdown',
-    );
+return array(
+    'Allows you to use the Markdown text filter (with MarkdownExtra and Smartypants).' => 'Allows you to use the Markdown text filter (with MarkdownExtra and Smartypants).',
+    'Markdown filter' => 'Filtru Markdown',
+    'Markdown' => 'Markdown'
+);

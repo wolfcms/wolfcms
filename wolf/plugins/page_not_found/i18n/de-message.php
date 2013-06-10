@@ -1,16 +1,12 @@
 <?php
 
 /**
- * German file for plugin page_not_found
+ * Wolf CMS page_not_found plugin language file
  *
- * @package Plugins
- * @subpackage page_not_found
- *
- * @author Patrick Scheips <patrick.scheips@simple-dev.org>, simple-dev.org
- * @version Wolf 0.7
+ * @package Translations
  */
 
 return array(
-	'Page not found' => 'Seite nicht gefunden',
-	'Provides Page not found page types.' => 'Stellt die Seitenart "Seite nicht gefunden" zur Verfügung.',
+    'Page not found' => 'Seite nicht gefunden',
+    'Provides Page not found page types.' => 'Stellt die "Seite nicht gefunden" seitentypen zur verfügung.'
 );

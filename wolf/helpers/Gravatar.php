@@ -32,6 +32,7 @@
  *                 of a person which does not vary by email hash.
  */
 class Gravatar {
+
     // Defaults
     private static $baseurl = 'http://www.gravatar.com/';
     private static $basesurl = 'https://secure.gravatar.com/';
@@ -40,7 +41,6 @@ class Gravatar {
     private static $rating = 'g';
     private static $default = 'mm';
     private static $format = 'json';
-    
 
     /**
      * Generates a full HTML 5 compliant img tag to a Gravatar image.
@@ -53,20 +53,24 @@ class Gravatar {
      * @param type $secure
      * @return string
      */
-    public static function img($email, $attr = array(), $size=false, $default=false, $rating=false, $secure=false) {
+    public static function img($email, $attr = array(), $size = false, $default = false, $rating = false, $secure = false) {
         $opt = array();
-        if ($size !== false) $opt['size'] = $size;
-        if ($default !== false) $opt['default'] = $default;
-        if ($rating !== false) $opt['rating'] = $rating;
-        if ($secure !== false) $opt['secure'] = $secure;
-        
+        if ($size !== false)
+            $opt['size'] = $size;
+        if ($default !== false)
+            $opt['default'] = $default;
+        if ($rating !== false)
+            $opt['rating'] = $rating;
+        if ($secure !== false)
+            $opt['secure'] = $secure;
+
         $url = self::url($email, 'image', $opt);
-        
+
         $img = '<img src="' . $url . '"';
-        foreach($attr as $key => $val)
+        foreach ($attr as $key => $val)
             $img .= ' ' . $key . '="' . $val . '"';
         $img .= ' />';
-        
+
         return $img;
     }
 
@@ -80,14 +84,16 @@ class Gravatar {
      * @param type $callback
      * @return type
      */
-    public static function profile($email, $format=false, $callback=false) {
+    public static function profile($email, $format = false, $callback = false) {
         $opt = array();
-        if ($format !== false) $opt['format'] = $format;
-        if ($callback !== false) $opt['callback'] = $callback;
-        
+        if ($format !== false)
+            $opt['format'] = $format;
+        if ($callback !== false)
+            $opt['callback'] = $callback;
+
         return self::url($email, 'profile', $opt);
     }
-    
+
     /**
      * Generates a Gravatar.com suited hash.
      * 
@@ -97,7 +103,7 @@ class Gravatar {
     public static function hash($email) {
         return md5(strtolower(trim($email)));
     }
-    
+
     /**
      * Generates a URL to a Gravatar avatar or profile data.
      * 
@@ -106,19 +112,18 @@ class Gravatar {
      * @param type $opt
      * @return null
      */
-    public static function url($email, $type='image', $opt=array()) {
+    public static function url($email, $type = 'image', $opt = array()) {
         $id = self::hash($email);
-        
+
         if ($type === 'image') {
             if (empty($opt)) {
                 $size = self::$size;
                 $default = self::$default;
                 $rating = self::$rating;
-                $secure=false;
-            }
-            else if (is_array($opt)) {
+                $secure = false;
+            } else if (is_array($opt)) {
                 if (isset($opt['default'])) {
-                    $default = urlencode ($default);
+                    $default = urlencode($default);
                 }
                 if (isset($opt['size'])) {
                     $size = $opt['size'];
@@ -126,41 +131,41 @@ class Gravatar {
                 if (isset($opt['rating'])) {
                     $rating = $opt['rating'];
                 }
-                if (isset($opt['secure']) && $opt['secure'] === true) {
-                    $url = self::$basesurl;
-                }
-                else {
-                    $url = self::$baseurl;
+                if (isset($opt['secure'])) {
+                    $secure = $opt['secure'];
                 }
             }
-        
-            return $url.self::$avatar.$id.'.jpg?s='.$size.'&d='.$default.'&r='.$rating;
+
+            if ($secure === true) {
+                $url = self::$basesurl;
+            } else {
+                $url = self::$baseurl;
+            }
+
+            return $url . self::$avatar . $id . '.jpg?s=' . $size . '&d=' . $default . '&r=' . $rating;
         }
-        
+
         if ($type === 'profile') {
             if (empty($opt)) {
                 $format = self::$format;
                 $callback = '';
-            }
-            else if (is_array($opt)) {
+            } else if (is_array($opt)) {
                 if (isset($opt['format'])) {
                     $format = $opt['format'];
-                }
-                else {
+                } else {
                     $format = self::$format;
                 }
                 if (isset($opt['callback'])) {
-                    $callback = '?callback='.$callback;
-                }
-                else {
+                    $callback = '?callback=' . $callback;
+                } else {
                     $callback = '';
                 }
             }
-            
-            return $url.$id.'.'.$format.$callback;
+
+            return $url . $id . '.' . $format . $callback;
         }
-        
+
         return NULL;
     }
-    
+
 }

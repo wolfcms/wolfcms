@@ -7,9 +7,6 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) { exit(); }
-
 /**
  * The multi lang plugin redirects users to a page with content in their language.
  *
@@ -22,12 +19,15 @@ if (!defined('IN_CMS')) { exit(); }
  * - Preferred language setting of logged in users
  *
  * @package Plugins
- * @subpackage multi_lang
+ * @subpackage multi-lang
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @copyright Martijn van der Kleijn, 2010
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
+
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
 ?>
-<p class="button"><a href="<?php echo get_url('plugin/multi_lang/settings'); ?>"><img src="<?php echo PLUGINS_URI;?>/multi_lang/images/settings.png" align="middle" alt="settings icon" /> <?php echo __('Settings'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/multi_lang/documentation/'); ?>"><img src="<?php echo PLUGINS_URI;?>/multi_lang/images/documentation.png" align="middle" alt="documentation icon" /> <?php echo __('Documentation'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/multi_lang/settings'); ?>"><img src="<?php echo ICONS_URI;?>settings-32-ns.png" align="middle" alt="settings icon" /> <?php echo __('Settings'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/multi_lang/documentation/'); ?>"><img src="<?php echo ICONS_URI;?>documentation-32-ns.png" align="middle" alt="documentation icon" /> <?php echo __('Documentation'); ?></a></p>

@@ -348,7 +348,7 @@ class Upload {
      * @return  void
      */
     function setMaxFilesize($n) {
-        $this->max_size = ( ! eregi("^[[:digit:]]+$", $n)) ? 0 : $n;
+        $this->max_size = ( ! preg_match('#^\d+$#i', $n)) ? 0 : (int) $n;
     }
 
     // --------------------------------------------------------------------
@@ -361,7 +361,7 @@ class Upload {
      * @return  void
      */
     function setMaxWidth($n) {
-        $this->max_width = ( ! eregi("^[[:digit:]]+$", $n)) ? 0 : $n;
+        $this->max_width = ( ! preg_match('#^\d+$#i', $n)) ? 0 : (int) $n;
     }
 
     // --------------------------------------------------------------------
@@ -374,7 +374,7 @@ class Upload {
      * @return  void
      */
     function setMaxHeight($n) {
-        $this->max_height = ( ! eregi("^[[:digit:]]+$", $n)) ? 0 : $n;
+        $this->max_height = ( ! preg_match('#^\d+$#i', $n)) ? 0 : (int) $n;
     }
 
     // --------------------------------------------------------------------

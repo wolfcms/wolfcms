@@ -1,17 +1,13 @@
 <?php
 
-    /**
-     * Japanese file for plugin markdown
-     *
-     * @package Plugins
-     * @subpackage markdown
-     *
-     * @author Your Name <email@domain.something>
-     * @version Wolf 0.7.3
-     */
+/**
+ * Wolf CMS markdown plugin language file
+ *
+ * @package Translations
+ */
 
-    return array(
-    	'Allows you to use the Markdown text filter.' => 'あなたはMarkdownのテキストフィルタを使用することができます。',
-	'Markdown' => 'Markdown',
-	'Markdown filter' => 'Markdownのフィルタ',
-    );
+return array(
+    'Allows you to use the Markdown text filter (with MarkdownExtra and Smartypants).' => 'Allows you to use the Markdown text filter (with MarkdownExtra and Smartypants).',
+    'Markdown filter' => 'Markdownのフィルタ',
+    'Markdown' => 'Markdown'
+);
