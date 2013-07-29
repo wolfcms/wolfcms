@@ -7,7 +7,7 @@
  */
 
 return array(
-    'An error occured trying to save the settings.' => 'Vyskytla se chyba při ukládání nastavení.',
+    'An error occurred trying to save the settings.' => 'Vyskytla se chyba při ukládání nastavení.',
     'Archive' => 'Archiv',
     'Could not save settings, no settings found.' => 'Není možné uložit nastavení, žádné nastavení nebylo nalezeno.',
     'Do you want to generate dates for the URLs?' => 'Chcete generovat data pro adresy URL?',
