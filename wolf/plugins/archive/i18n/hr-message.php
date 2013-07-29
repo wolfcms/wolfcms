@@ -7,7 +7,7 @@
  */
 
 return array(
-    'An error occured trying to save the settings.' => 'Došlo je do pogreške prilikom spremanja postavki.',
+    'An error occurred trying to save the settings.' => 'Došlo je do pogreške prilikom spremanja postavki.',
     'Archive' => 'Arhiva',
     'Could not save settings, no settings found.' => 'Ne mogu spremiti postavke, nema pronađenih postavke.',
     'Do you want to generate dates for the URLs?' => 'Želite li generirati datume za URL-ove?',
