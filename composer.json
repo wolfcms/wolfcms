@@ -1,0 +1,6 @@
+// composer.json file to support of coveralls.io usage
+{
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master"
+    }
+}
