@@ -14,9 +14,8 @@ matrix:
     - php: 5.5
 
 before_script:
-  - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install --dev --no-interaction
-  - php composer.phar update satooshi/php-coveralls --dev
+  - composer install --dev --no-interaction
+  - composer update satooshi/php-coveralls --dev
   # Setup for Selenium tests
   #- export DISPLAY=:99
   #- export WEB_FIXTURES_HOST=http://localhost
@@ -66,4 +65,4 @@ script:
   - phpunit -c phpunit.travisci.xml
   
 after_script:
-  - php vendor/bin/coveralls -v
+  - coveralls -v
