@@ -7,7 +7,7 @@
  */
 
 return array(
-    'An error occured trying to save the settings.' => 'Ein Fehler ist aufgetreten während versucht wurde die Einstellungen zu speichern.',
+    'An error occurred trying to save the settings.' => 'Ein Fehler ist aufgetreten während versucht wurde die Einstellungen zu speichern.',
     'Archive' => 'Archiv',
     'Could not save settings, no settings found.' => 'Einstellungen konnten nicht gespeichert werden, Einstellungen nicht gefunden.',
     'Do you want to generate dates for the URLs?' => 'Möchten Sie Daten für die URLs generieren?',
