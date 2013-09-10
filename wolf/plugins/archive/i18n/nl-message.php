@@ -7,7 +7,7 @@
  */
 
 return array(
-    'An error occured trying to save the settings.' => 'Er trad een fout op tijdens het bewaren van de instellingen.',
+    'An error occurred trying to save the settings.' => 'Er trad een fout op tijdens het bewaren van de instellingen.',
     'Archive' => 'Archief',
     'Could not save settings, no settings found.' => 'Kon de instellingen niet bewaren, geen instellingen gevonden.',
     'Do you want to generate dates for the URLs?' => 'Wilt u data genereren voor de URLs?',
