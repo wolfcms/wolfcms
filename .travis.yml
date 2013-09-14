@@ -58,14 +58,13 @@ before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'DROP DATABASE IF EXISTS wolfcms_test;'; fi"
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database wolfcms_test;'; fi"
   - git clone --depth=100 --quiet git://github.com/wolfcms/wolfcms-phpunit.git test
-  - cd test
 
 script:
-  - mkdir -p ../build/logs
-  - phpunit --coverage-clover ../build/logs/clover.xml -c phpunit.travisci.xml
+  - mkdir -p build/logs
+  - phpunit --coverage-clover build/logs/clover.xml -c test/phpunit.travisci.xml
   
 after_script:
-  - php ../vendor/bin/coveralls -v
+  - php vendor/bin/coveralls -v
  
 notifications:
   irc:
