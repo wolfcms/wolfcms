@@ -66,3 +66,10 @@ script:
   
 after_script:
   - coveralls -v
+
+notifications:
+  irc:
+    channels:
+      - "chat.freenode.net#wolfcms"
+    on_success: change
+    on_failure: change
