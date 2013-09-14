@@ -65,11 +65,11 @@ script:
   - phpunit --coverage-clover ../build/logs/clover.xml -c phpunit.travisci.xml
   
 after_script:
-  - php vendor/bin/coveralls -v
+  - php ../vendor/bin/coveralls -v
  
 notifications:
   irc:
     channels:
       - "chat.freenode.net#wolfcms"
     on_success: change
-    on_failure: change
+    on_failure: always
