@@ -60,11 +60,13 @@ before_script:
   - git clone --depth=100 --quiet git://github.com/wolfcms/wolfcms-phpunit.git test
 
 script:
+  - cd test
   - mkdir -p build/logs
-  - phpunit --coverage-clover build/logs/clover.xml -c test/phpunit.travisci.xml
+  - phpunit -c phpunit.travisci.xml
   
 after_script:
-  - php vendor/bin/coveralls -v
+  - cd ..
+  - php vendor/bin/coveralls --config test/.coveralls.yml -v
  
 notifications:
   irc:
