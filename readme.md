@@ -3,6 +3,7 @@
 ## About Wolf CMS
 
 [![Build Status](https://secure.travis-ci.org/wolfcms/wolfcms.png)](http://travis-ci.org/wolfcms/wolfcms)
+[![Coverage Status](https://coveralls.io/repos/wolfcms/wolfcms/badge.png?branch=master)](https://coveralls.io/r/wolfcms/wolfcms?branch=master)
 
 Wolf CMS simplifies content management by offering an elegant user interface,
 flexible templating per page, simple user management and permissions, as well
