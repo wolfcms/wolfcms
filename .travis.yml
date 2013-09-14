@@ -14,8 +14,8 @@ matrix:
     - php: 5.5
 
 before_script:
-  - composer install --dev --no-interaction
-  - composer update satooshi/php-coveralls --dev
+  - wget http://getcomposer.org/composer.phar
+  - php composer.phar install --dev --no-interaction
   # Setup for Selenium tests
   #- export DISPLAY=:99
   #- export WEB_FIXTURES_HOST=http://localhost
@@ -61,12 +61,12 @@ before_script:
   - cd test
 
 script:
-  - mkdir -p build/logs
-  - phpunit -c phpunit.travisci.xml
+  - mkdir -p ../build/logs
+  - phpunit --coverage-clover ../build/logs/clover.xml -c phpunit.travisci.xml
   
 after_script:
-  - coveralls -v
-
+  - php vendor/bin/coveralls -v
+ 
 notifications:
   irc:
     channels:
