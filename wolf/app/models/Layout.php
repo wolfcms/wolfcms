@@ -61,7 +61,7 @@ class Layout extends Record {
                         creator.name AS created_by_name, updator.name AS updated_by_name",
             'joins' => "LEFT JOIN $tablename_user AS creator ON $tablename.created_by_id =creator.id
                         LEFT JOIN $tablename_user AS updator ON $tablename.updated_by_id =updator.id",
-            'where' => array($tablename . '.id = ?', $id)
+            'where' => array($tablename . '.id = :id', ':id' => (int) $id)
         ));
     }
 

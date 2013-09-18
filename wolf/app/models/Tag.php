@@ -26,7 +26,7 @@ class Tag extends Record {
     
     public static function findByName($name) {
         return self::find(array(
-            'where' => array('name = ?', $name)
+            'where' => array('name = :name', ':name' => $name)
         ));
     }
 }

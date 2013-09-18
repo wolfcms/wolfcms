@@ -42,7 +42,7 @@ class PagePart extends Record {
 
     public static function findByPageId($id) {
         return self::find(array(
-            'where' => array('page_id = ?', $id),
+            'where' => array('page_id = :page_id', ':page_id' => (int) $id),
             'order' => 'id'
         ));
     }

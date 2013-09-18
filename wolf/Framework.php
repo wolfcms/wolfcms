@@ -925,7 +925,7 @@ class Record {
      */
     public static function findById($id) {
         return self::findOne(array(
-            'where' => array('id = ?', $id)
+            'where' => array('id = :id', ':id' => (int) $id)
         ));
     }
         

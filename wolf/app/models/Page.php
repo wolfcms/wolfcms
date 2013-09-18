@@ -931,17 +931,28 @@ class Page extends Node {
         $slug_sql = "slug = '".$slug."'";
 
         if ($all) {
-            $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
+            return self::findOne(array(
+                'where' => array(
+                    'slug = :slug AND parent_id = :parent_id AND (status_id = :status_preview OR status_id = :status_published OR status_id = :status_hidden',
+                    ':slug' => $slug,
+                    ':parent_id' => (int) $parent_id,
+                    ':status_preview' => self::STATUS_PREVIEW,
+                    ':status_published' => self::STATUS_PUBLISHED,
+                    ':status_hidden' => self::STATUS_HIDDEN
+                )
+            ));
         }
         else {
-            $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
+            return self::findOne(array(
+                'where' => array(
+                    'slug = :slug AND parent_id = :parent_id AND (status_id = :status_published OR status_id = :status_hidden',
+                    ':slug' => $slug,
+                    ':parent_id' => (int) $parent_id,
+                    ':status_published' => self::STATUS_PUBLISHED,
+                    ':status_hidden' => self::STATUS_HIDDEN
+                )
+            ));
         }
-
-        $page = self::findOne(array(
-            'where' => $where
-        ));
-
-        return $page;
     }
 
 
@@ -1064,7 +1075,7 @@ class Page extends Node {
 
     public static function findById($id) {
         return self::findOne(array(
-            'where' => 'page.id='.(int) $id
+            'where' => array('page.id = :id', ':id' => (int) $id)
         ));
     }
     
@@ -1079,21 +1090,24 @@ class Page extends Node {
      * @param type $parentId
      * @return type
      */
-    public static function findByBehaviour($name, $parentId=false) {
-        $where = "behavior_id='".$name."'";
-        
-        if ($parentId !== false && is_int($parentId)) {
-            $where = $where." AND parent_id=$parentId";
+    public static function findByBehaviour($name, $parent_id=false) {
+        if ($parent_id !== false && is_int($parent_id)) {
+            return self::findOne(array(
+                'where' => array('behavior_id = :behavior_id AND parent_id = :parent_id', ':behavior_id' => $name, ':parent_id' => (int) $parent_id)
+            ));
+        } else {
+            return self::findOne(array(
+                'where' => array('behavior_id = :behavior_id', ':behavior_id' => $name)
+            ));
         }
-        
-        return self::findOne(array(
-            'where' => $where
-        ));
     }
 
 
     public static function childrenOf($id) {
-        return self::find(array('where' => 'parent_id='.$id, 'order' => 'position, page.created_on DESC'));
+        return self::find(array(
+            'where' => array('parent_id = :parent_id', ':parent_id' => (int) $id),
+            'order' => 'position, page.created_on DESC'
+        ));
     }
 
 

@@ -102,7 +102,7 @@ class Permission extends Record {
      */
     public static function findByName($name) {
         return self::findOne(array(
-            'where' => array('name = ?', $name)
+            'where' => array('name = :name', ':name' => $name)
         ));
     }
 }

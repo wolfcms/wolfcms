@@ -47,7 +47,7 @@ class RolePermission extends Record {
 
     public static function findPermissionsFor($role_id) {
         $roleperms = self::find(array(
-            'where' => array('role_id = ?', (int) $role_id)
+            'where' => array('role_id = :role_id', ':role_id' => (int) $role_id)
         ));
 
         $perms = array();

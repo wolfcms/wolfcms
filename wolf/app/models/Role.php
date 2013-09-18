@@ -83,14 +83,14 @@ class Role extends Record {
      */
     public static function findByName($name) {
         return self::findOne(array(
-            'where' => array('name = ?', $name)
+            'where' => array('name = :name', ':name' => $name)
         ));
     }
 
     public static function findByUserId($id) {
 
         $userroles = UserRole::find(array(
-            'where' => array('user_id = ?', (int) $id)
+            'where' => array('user_id = :user_id', ':user_id' => (int) $id)
         ));
 
         if (count($userroles) <= 0)
