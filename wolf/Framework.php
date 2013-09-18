@@ -813,6 +813,7 @@ class Record {
      * Returns a single Record class instance or an array of Record instances.
      * 
      * Usage:
+     * <code>
      * $object = Class::find(array(
      *     'select'     => 'column1, column2',
      *     'from'       => 'table_name',
@@ -824,6 +825,7 @@ class Record {
      *     'limit'      => 10,
      *     'offset'     => 20
      * ));
+     * </code>
      * 
      * Argument array can contain:
      *  - select        The select statement (leave out 'SELECT ')
