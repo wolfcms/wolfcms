@@ -913,29 +913,25 @@ class Page extends Node {
 
         if (empty($slug)) {
             return self::find(array(
-                'where' => 'parent_id=0',
-                'limit' => 1
-                  ));
+                'where' => 'parent_id = 0', 'limit' => 1
+            ));
         }
 
-        $parent_id = $parent ? $parent->id : 0;
-        $slug_sql = "slug = '".$slug."'";
+        $status = ($all === false)
+            ? array(self::STATUS_PUBLISHED, self::STATUS_HIDDEN)
+            : array(self::STATUS_PUBLISHED, self::STATUS_HIDDEN, self::STATUS_PREVIEW);
 
-        if ($all) {
-            $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
-        }
-        else {
-            $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
-        }
+        $where = sprintf(
+            "slug = '%s' AND parent_id = %d AND (status_id IN (%s))",
+            $slug,
+            $parent ? $parent->id : 0,
+            implode(',', $status)
+        );
 
-        $page = self::find(array(
-            'where' => $where,
-            'limit' => 1
+        return self::find(array(
+            'where' => $where, 'limit' => 1
         ));
-
-        return $page;
     }
-
 
     /**
      * Finds a Page record based on supplied arguments.
