@@ -928,7 +928,6 @@ class Page extends Node {
         }
 
         $parent_id = $parent ? $parent->id : 0;
-        $slug_sql = "slug = '".$slug."'";
 
         if ($all) {
             return self::findOne(array(
