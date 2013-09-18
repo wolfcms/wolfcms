@@ -43,64 +43,34 @@ class Layout extends Record {
         return true;
     }
 
-    public static function find($args = null) {
-        // Collect attributes...
-        $where    = isset($args['where']) ? trim($args['where']) : '';
-        $order_by = isset($args['order']) ? trim($args['order']) : '';
-        $offset   = isset($args['offset']) ? (int) $args['offset'] : 0;
-        $limit    = isset($args['limit']) ? (int) $args['limit'] : 0;
-
-        // Prepare query parts
-        $where_string = empty($where) ? '' : "WHERE $where";
-        $order_by_string = empty($order_by) ? '' : "ORDER BY $order_by";
-        $limit_string = $limit > 0 ? "LIMIT $limit" : '';
-        $offset_string = $offset > 0 ? "OFFSET $offset" : '';
-
-        $tablename = self::tableNameFromClassName('Layout');
-        $tablename_user = self::tableNameFromClassName('User');
-
-        // Prepare SQL
-        $sql = "SELECT $tablename.id as id,
-                       $tablename.name as name,
-                       $tablename.content_type as content_type,
-                       $tablename.content as content,
-                       $tablename.created_on as created_on,
-                       $tablename.updated_on as updated_on,
-                       creator.name AS created_by_name, updator.name AS updated_by_name
-                FROM $tablename
-                LEFT JOIN $tablename_user AS creator ON $tablename.created_by_id =creator.id
-                LEFT JOIN $tablename_user AS updator ON $tablename.updated_by_id =updator.id
-                $where_string $order_by_string $limit_string $offset_string";
-
-        self::logQuery($sql);
-
-        $stmt = Record::getConnection()->prepare($sql);
-
-        $stmt->execute();
-
-        // Run!
-        if ($limit == 1) {
-            return $stmt->fetchObject('Layout');
-        }
-        else {
-            $objects = array();
-            while ($object = $stmt->fetchObject('Layout'))
-                $objects[] = $object;
-
-            return $objects;
-        }
-
-    }
-
     public static function findAll($args = null) {
         return self::find($args);
     }
 
     public static function findById($id) {
+        $tablename = self::tableNameFromClassName('Layout');
+        $tablename_user = self::tableNameFromClassName('User');
+        
         return self::find(array(
-            'where' => self::tableNameFromClassName('Layout').'.id='.(int)$id,
+            'select' => "$tablename.id as id,
+                        $tablename.name as name,
+                        $tablename.content_type as content_type,
+                        $tablename.content as content,
+                        $tablename.created_on as created_on,
+                        $tablename.updated_on as updated_on,
+                        creator.name AS created_by_name, updator.name AS updated_by_name",
+            'joins' => "LEFT JOIN $tablename_user AS creator ON $tablename.created_by_id =creator.id
+                        LEFT JOIN $tablename_user AS updator ON $tablename.updated_by_id =updator.id",
+            'where' => array($tablename . '.id = ?', $id),
             'limit' => 1
         ));
+    }
+
+    public function getColumns() {
+        return array(
+            'id', 'name', 'content_type', 'content', 'created_on',
+            'updated_on', 'created_by_id', 'updated_by_id', 'position'
+        );
     }
 
     public function isUsed() {

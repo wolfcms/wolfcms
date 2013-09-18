@@ -35,7 +35,7 @@ class Setting extends Record {
 
     public static function init() {
         if (! self::$is_loaded) {
-            $settings = Record::findAllFrom('Setting');
+            $settings = self::find();
             foreach($settings as $setting)
                 self::$settings[$setting->name] = $setting->value;
 

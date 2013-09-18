@@ -34,70 +34,16 @@ class Comment extends Record
     const OPEN = 1;
     const CLOSED = 2;
 
-    public static function find($args = null)
-    {
-        // Collect attributes...
-        $where = isset($args['where']) ? trim($args['where']) : '';
-        $order_by = isset($args['order']) ? trim($args['order']) :
-            'is_approved, comment.created_on DESC';
-        $offset = isset($args['offset']) ? (int)$args['offset'] : 0;
-        $limit = isset($args['limit']) ? (int)$args['limit'] : 0;
-
-        // Prepare query parts
-        $order_by_string = empty($order_by) ? '' : "ORDER BY $order_by";
-        $limit_string = $limit > 0 ? "LIMIT $limit" : '';
-        $offset_string = $offset > 0 ? "OFFSET $offset" : '';
-
-        $tablename = self::tableNameFromClassName('Comment');
-
-        // Prepare SQL
-        // @todo FIXME - do this in a better way (sqlite doesn't like empty WHEREs)
-        if ($where != '')
-        {
-            $sql = "SELECT * FROM $tablename AS comment " .
-                "WHERE $where $order_by_string $limit_string $offset_string";
-        }
-        else
-        {
-            $sql = "SELECT * FROM $tablename AS comment " .
-                "$order_by_string $limit_string $offset_string";
-        }
-
-        $stmt = self::$__CONN__->prepare($sql);
-        $stmt->execute();
-
-        // Run!
-        if ($limit == 1) {
-            return $stmt->fetchObject('Comment');
-        } else {
-            $objects = array();
-            while ($object = $stmt->fetchObject('Comment'))
-                $objects[] = $object;
-
-            return $objects;
-        }
-    }
-
     /**
      * Find Comments limited to 10.
      * 
      * @param mixed $args Unused.
      * @return Array An array of Comment objects.
      */
-    public static function findAll($args = null)
-    {
-    	return self::find(array('limit' => 10));
-    }
-
-    /**
-     * Find a specific comment by its id.
-     * 
-     * @param int $id The comment's id.
-     * @return Comment A Comment object.
-     */
-    public static function findById($id)
-    {
-        return self::find(array('where' => 'comment.id=' . (int)$id, 'limit' => 1));
+    public static function findAll($args = null) {
+        return self::find(array(
+            'limit' => 10
+        ));
     }
 
     /**
@@ -105,9 +51,10 @@ class Comment extends Record
      *
      * @return Array An array of Comment objects.
      */
-    public static function findApproved()
-    {
-        return self::find(array('where' => 'is_approved=1'));
+    public static function findApproved() {
+        return self::find(array(
+            'where' => 'is_approved = 1'
+        ));
     }
 
     /**
@@ -116,9 +63,10 @@ class Comment extends Record
      * @param int $id Page id.
      * @return Array An array of Comment objects.
      */
-    public static function findApprovedByPageId($id)
-    {
-        return self::find(array('where' => 'is_approved=1 AND page_id=' . (int)$id));
+    public static function findApprovedByPageId($id) {
+        return self::find(array(
+            'where' => array('is_approved = 1 AND page_id = ?', (int) $id)
+        ));
     }
 
 
