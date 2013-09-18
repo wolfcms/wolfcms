@@ -924,9 +924,8 @@ class Record {
      * @return              Single object
      */
     public static function findById($id) {
-        return self::find(array(
-            'where' => array('id = ?', $id),
-            'limit' => 1
+        return self::findOne(array(
+            'where' => array('id = ?', $id)
         ));
     }
         
@@ -947,6 +946,17 @@ class Record {
     }
 
     /**
+     * Returns a single object, retrieved from the database.
+     * 
+     * @param array $options        Options array containing parameters for the query
+     * @return                      Single object
+     */
+    public static function findOne($options = array()) {
+        $options['limit'] = 1;
+        return self::find($options);
+    }
+
+    /**
      * Returns a single Record class instance.
      *
      * The instance is retrieved from the database based on a specified field's
@@ -958,9 +968,8 @@ class Record {
      * @return Record               A record instance or false on failure.
      */
     public static function findOneFrom($class_name, $where, $values=array()) {
-        return $class_name::find(array(
-            'where' => array_merge(array($where), $values),
-            'limit' => 1
+        return $class_name::findOne(array(
+            'where' => array_merge(array($where), $values)
         ));
     }
 

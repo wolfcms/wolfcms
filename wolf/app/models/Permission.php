@@ -101,9 +101,8 @@ class Permission extends Record {
      * @return mixed A Permission object or false on failure.
      */
     public static function findByName($name) {
-        return self::find(array(
-            'where' => array('name = ?', $name),
-            'limit' => 1
+        return self::findOne(array(
+            'where' => array('name = ?', $name)
         ));
     }
 }

@@ -51,7 +51,7 @@ class Layout extends Record {
         $tablename = self::tableNameFromClassName('Layout');
         $tablename_user = self::tableNameFromClassName('User');
         
-        return self::find(array(
+        return self::findOne(array(
             'select' => "$tablename.id as id,
                         $tablename.name as name,
                         $tablename.content_type as content_type,
@@ -61,8 +61,7 @@ class Layout extends Record {
                         creator.name AS created_by_name, updator.name AS updated_by_name",
             'joins' => "LEFT JOIN $tablename_user AS creator ON $tablename.created_by_id =creator.id
                         LEFT JOIN $tablename_user AS updator ON $tablename.updated_by_id =updator.id",
-            'where' => array($tablename . '.id = ?', $id),
-            'limit' => 1
+            'where' => array($tablename . '.id = ?', $id)
         ));
     }
 

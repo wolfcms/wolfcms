@@ -82,9 +82,8 @@ class Role extends Record {
      * @return mixed A Role or false on failure.
      */
     public static function findByName($name) {
-        return self::find(array(
-            'where' => array('name = ?', $name),
-            'limit' => 1
+        return self::findOne(array(
+            'where' => array('name = ?', $name)
         ));
     }
 

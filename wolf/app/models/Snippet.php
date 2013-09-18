@@ -71,19 +71,17 @@ class Snippet extends Record {
         $tablename = self::tableNameFromClassName('Snippet');
         $tablename_user = self::tableNameFromClassName('User');
         
-        return self::find(array(
+        return self::findOne(array(
             'select' => "$tablename.*, creator.name AS created_by_name, updater.name AS updated_by_name",
             'joins' => "LEFT JOIN $tablename_user AS creator ON $tablename.created_by_id = creator.id ".
                        "LEFT JOIN $tablename_user AS updater ON $tablename.updated_by_id = updater.id",
-            'where' => array($tablename . '.id = ?', (int) $id),
-            'limit' => 1
+            'where' => array($tablename . '.id = ?', (int) $id)
         ));
     }
 
     public static function findByName($name) {
-        return self::find(array(
-            'where' => array('name LIKE ?', $name),
-            'limit' => 1
+        return self::findOne(array(
+            'where' => array('name LIKE ?', $name)
         ));
     }
 

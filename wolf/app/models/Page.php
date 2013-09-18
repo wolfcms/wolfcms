@@ -922,10 +922,9 @@ class Page extends Node {
     public static function findBySlug($slug, &$parent, $all = false) {
 
         if (empty($slug)) {
-            return self::find(array(
-                'where' => 'parent_id=0',
-                'limit' => 1
-                  ));
+            return self::findOne(array(
+                'where' => 'parent_id=0'
+            ));
         }
 
         $parent_id = $parent ? $parent->id : 0;
@@ -938,9 +937,8 @@ class Page extends Node {
             $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
         }
 
-        $page = self::find(array(
-            'where' => $where,
-            'limit' => 1
+        $page = self::findOne(array(
+            'where' => $where
         ));
 
         return $page;
@@ -1065,9 +1063,8 @@ class Page extends Node {
 
 
     public static function findById($id) {
-        return self::find(array(
-            'where' => 'page.id='.(int) $id,
-            'limit' => 1
+        return self::findOne(array(
+            'where' => 'page.id='.(int) $id
         ));
     }
     
@@ -1089,9 +1086,8 @@ class Page extends Node {
             $where = $where." AND parent_id=$parentId";
         }
         
-        return self::find(array(
-            'where' => $where,
-            'limit' => 1
+        return self::findOne(array(
+            'where' => $where
         ));
     }
 
