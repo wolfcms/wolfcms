@@ -1027,7 +1027,7 @@ class Page extends Node {
         return ($single) ? (!empty($objects) ? $objects[0] : false) : $objects;
     }
 
-    public static function findBySql($sql, $values = null) {
+    private static function findBySql($sql, $values = null) {
         $class_name = get_called_class();
         
         Record::logQuery($sql);
