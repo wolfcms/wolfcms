@@ -1287,7 +1287,7 @@ class AutoLoader {
         } else {
             foreach (self::$folders as $folder) {
                 $folder = rtrim($folder, DIRECTORY_SEPARATOR);
-                $file = $folder.DIRECTORY_SEPARATOR.$class_name.'.php';
+                $file = $folder.DIRECTORY_SEPARATOR.str_replace('\\', DIRECTORY_SEPARATOR, $class_name).'.php';
                 if (file_exists($file)) {
                     require $file;
                     return;
