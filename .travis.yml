@@ -72,5 +72,5 @@ notifications:
   irc:
     channels:
       - "chat.freenode.net#wolfcms"
-    on_success: change
+    on_success: always
     on_failure: always
