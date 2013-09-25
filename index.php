@@ -74,11 +74,12 @@ define('BASE_URI', BASE_PATH);
 define('PLUGINS_PATH', PATH_PUBLIC.'wolf/plugins/');
 if (!defined('THEMES_ROOT')) { define('THEMES_ROOT', CMS_ROOT.DS.'public'.DS.'themes'.DS); }
 if (!defined('THEMES_PATH')) { define('THEMES_PATH', PATH_PUBLIC.'public/themes/'); }
-if (!defined('ICONS_URI')) { define('ICONS_URI', PATH_PUBLIC.'wolf/icons/'); }
+if (!defined('ICONS_PATH')) { define('ICONS_PATH', PATH_PUBLIC.'wolf/icons/'); }
 
 // Aliases for backward compatibility, these constants should no longer be used.
 define('THEMES_URI', THEMES_PATH);
 define('PLUGINS_URI', PLUGINS_PATH);
+define('ICONS_URI', ICONS_PATH);
 
 // Security checks -----------------------------------------------------------
 if (DEBUG == false && isWritable($config_file)) {
