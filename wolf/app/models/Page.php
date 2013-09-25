@@ -897,7 +897,7 @@ class Page extends Node {
         $has_behavior = false;
 
         // adding the home root
-        $slugs = array_merge(array(''), explode_uri($path));
+        $slugs = array_merge(array(''), explode_path($path));
         $url = '';
 
         $page = new stdClass;
@@ -913,7 +913,7 @@ class Page extends Node {
                 // check for behavior
                 if ($page->behavior_id != '') {
                     // add an instance of the behavior with the name of the behavior
-                    $params = explode_uri(substr($path, strlen($url)));
+                    $params = explode_path(substr($path, strlen($url)));
                     $page->{$page->behavior_id} = Behavior::load($page->behavior_id, $page, $params);
 
                     return $page;

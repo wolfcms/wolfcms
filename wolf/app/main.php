@@ -25,10 +25,24 @@ else
 
 
 /**
- * Explode an URI and make a array of params
+ * Turns a path into an array of slugs
+ * 
+ * @param  string $path     A path (for instance path/to/page)
+ * @return array            Array of slugs
+ */
+function explode_path($path) {
+    return preg_split('/\//', $path, -1, PREG_SPLIT_NO_EMPTY);
+}
+
+
+/**
+ * Alias for explode_path, this function should no longer be used.
+ * 
+ * @deprecated
+ * @see  explode_path()
  */
 function explode_uri($uri) {
-    return preg_split('/\//', $uri, -1, PREG_SPLIT_NO_EMPTY);
+    return explode_path($uri);
 }
 
 
