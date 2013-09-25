@@ -303,8 +303,8 @@ class PageController extends Controller {
 
         $newUrl = URL_PUBLIC;
         $newUrl .= ( USE_MOD_REWRITE == false) ? '?' : '';
-        $newUrl .= $page->getUri();
-        $newUrl .= ( $page->getUri() != '') ? URL_SUFFIX : '';
+        $newUrl .= $page->path();
+        $newUrl .= ( $page->path() != '') ? URL_SUFFIX : '';
 
         $newData = array($new_root_id,
             get_url('page/edit/'.$new_root_id),

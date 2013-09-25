@@ -128,7 +128,7 @@ function main() {
     }
 
     // this is where 80% of the things is done
-    $page = Page::findByUri($uri, true);
+    $page = Page::findByPath($uri, true);
 
     // if we found it, display it!
     if (is_object($page)) {

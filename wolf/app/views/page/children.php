@@ -39,7 +39,7 @@
       case Page::STATUS_HIDDEN: echo '<div class="status hidden-status">'.__('Hidden').'</div>'; break;
       case Page::STATUS_ARCHIVED: echo '<div class="status archived-status">'.__('Archived').'</div>'; break;
 } ?>
-      <div class="view-page"><a class="view-link" href="<?php echo URL_PUBLIC; echo (USE_MOD_REWRITE == false) ? '?' : ''; echo $child->getUri(); echo ($child->getUri() != '') ? URL_SUFFIX : ''; ?>" target="_blank"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/magnify.png" align="middle" alt="<?php echo __('View Page'); ?>" title="<?php echo __('View Page'); ?>" /></a></div>
+      <div class="view-page"><a class="view-link" href="<?php echo URL_PUBLIC; echo (USE_MOD_REWRITE == false) ? '?' : ''; echo $child->path(); echo ($child->path() != '') ? URL_SUFFIX : ''; ?>" target="_blank"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/magnify.png" align="middle" alt="<?php echo __('View Page'); ?>" title="<?php echo __('View Page'); ?>" /></a></div>
       <div class="modify">
         <a class="add-child-link" href="<?php echo get_url('page/add', $child->id); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" align="middle" title="<?php echo __('Add child'); ?>" alt="<?php echo __('Add child'); ?>" /></a>&nbsp;
 <?php if ( ! $child->is_protected || AuthUser::hasPermission('page_delete') ): ?>

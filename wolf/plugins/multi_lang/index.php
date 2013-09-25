@@ -106,7 +106,7 @@ function replaceContent($page) {
             if ( Setting::get('language') == $lang) { break; }
 
             $uri = $lang.'/'.CURRENT_URI;
-            $page = Page::findByUri($uri);
+            $page = Page::findByPath($uri);
 
             if ( false !== $page ) {
                 redirect(BASE_URL.$uri);
@@ -119,7 +119,7 @@ function replaceContent($page) {
             $lang = AuthUser::getRecord()->language;
 
             $uri = $lang.'/'.CURRENT_URI;
-            $page = Page::findByUri($uri);
+            $page = Page::findByPath($uri);
 
             if ( false !== $page ) {
                 redirect(BASE_URL.$uri);

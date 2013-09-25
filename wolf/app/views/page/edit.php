@@ -29,7 +29,7 @@ if ($pagetmp != null && !empty($pagetmp) && $parttmp != null && !empty($parttmp)
 }
 
 if ($action == 'edit') { ?>
-    <span style="float: right;"><a id="site-view-page" onclick="target='_blank'" onkeypress="target='_blank'" href="<?php echo URL_PUBLIC; echo (USE_MOD_REWRITE == false) ? '?' : ''; echo $page->getUri(); echo ($page->getUri() != '') ? URL_SUFFIX : ''; ?>"><?php echo __('View this page'); ?></a></span>
+    <span style="float: right;"><a id="site-view-page" onclick="target='_blank'" onkeypress="target='_blank'" href="<?php echo URL_PUBLIC; echo (USE_MOD_REWRITE == false) ? '?' : ''; echo $page->path(); echo ($page->path() != '') ? URL_SUFFIX : ''; ?>"><?php echo __('View this page'); ?></a></span>
 <?php } ?>
 
 <h1><?php echo __(ucfirst($action).' Page'); ?></h1>
