@@ -37,11 +37,14 @@ $url = URL_PUBLIC;
 $changedurl = str_replace('//','|',URL_PUBLIC);
 $lastslash = strpos($changedurl, '/');
 if (false === $lastslash) {
-    define('URI_PUBLIC', '/');
+    define('PATH_PUBLIC', '/');
 }
 else {
-    define('URI_PUBLIC', substr($changedurl, $lastslash));
+    define('PATH_PUBLIC', substr($changedurl, $lastslash));
 }
+
+// Alias for backward compatibility, this constant should no longer be used.
+define('URI_PUBLIC', PATH_PUBLIC);
 
 // Determine URI for backend check
 if (USE_MOD_REWRITE && isset($_GET['WOLFPAGE'])) {
@@ -58,20 +61,20 @@ if (startsWith($admin_check, ADMIN_DIR) || startsWith($admin_check, '/'.ADMIN_DI
         $url = str_replace('http://', 'https://', $url);
     }
     define('BASE_URL', $url . (endsWith($url, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?/') . ADMIN_DIR . (endsWith(ADMIN_DIR, '/') ? '': '/'));
-    define('BASE_PATH', URI_PUBLIC . (endsWith($url, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?/') . ADMIN_DIR . (endsWith(ADMIN_DIR, '/') ? '': '/'));
+    define('BASE_PATH', PATH_PUBLIC . (endsWith($url, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?/') . ADMIN_DIR . (endsWith(ADMIN_DIR, '/') ? '': '/'));
 }
 else {
     define('BASE_URL', URL_PUBLIC . (endsWith(URL_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
-    define('BASE_PATH', URI_PUBLIC . (endsWith(URI_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
+    define('BASE_PATH', PATH_PUBLIC . (endsWith(PATH_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
 }
 
 // Alias for backward compatibility, this constant should no longer be used.
 define('BASE_URI', BASE_PATH);
 
-define('PLUGINS_URI', URI_PUBLIC.'wolf/plugins/');
+define('PLUGINS_URI', PATH_PUBLIC.'wolf/plugins/');
 if (!defined('THEMES_ROOT')) { define('THEMES_ROOT', CMS_ROOT.DS.'public'.DS.'themes'.DS); }
-if (!defined('THEMES_URI')) { define('THEMES_URI', URI_PUBLIC.'public/themes/'); }
-if (!defined('ICONS_URI')) { define('ICONS_URI', URI_PUBLIC.'wolf/icons/'); }
+if (!defined('THEMES_URI')) { define('THEMES_URI', PATH_PUBLIC.'public/themes/'); }
+if (!defined('ICONS_URI')) { define('ICONS_URI', PATH_PUBLIC.'wolf/icons/'); }
 
 
 // Security checks -----------------------------------------------------------

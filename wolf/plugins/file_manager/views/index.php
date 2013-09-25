@@ -52,7 +52,7 @@ if (!defined('IN_CMS')) { exit(); }
     <tr class="<?php echo odd_even(); ?>">
       <td>
           <?php if (preg_match('/\.(jpg|jpeg|pjpeg|png|gif|ico)$/i', $file->name)) { ?>
-          <img class="thumb" src="<?php echo URI_PUBLIC;?>public/<?php echo $dir.$file->name; ?>" align="middle" />
+          <img class="thumb" src="<?php echo PATH_PUBLIC;?>public/<?php echo $dir.$file->name; ?>" align="middle" />
           <?php } else { ?>
           <img src="<?php echo ICONS_URI;?>file-<?php echo $file->type ?>-16.png" align="top" />
           <?php } ?>

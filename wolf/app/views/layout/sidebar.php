@@ -18,7 +18,7 @@
 ?>
 <?php if (Dispatcher::getAction() == 'index'): ?>
 
-<p class="button"><a href="<?php echo get_url('layout/add'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/layout.png" align="middle" alt="layout icon" /> <?php echo __('New Layout'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('layout/add'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/layout.png" align="middle" alt="layout icon" /> <?php echo __('New Layout'); ?></a></p>
 
 <div class="box">
 <h2><?php echo __('What is a Layout?'); ?></h2>
