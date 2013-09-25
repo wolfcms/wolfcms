@@ -78,7 +78,7 @@ else
  *
  * For example:
  *
- * A route string can be a literal uri such as '/pages/about' or can contain
+ * A route string can be a literal path such as '/pages/about' or can contain
  * wildcards (:any or :num) and/or regex like '/blog/:num' or '/page/:any'.
  *
  * <code>
@@ -107,7 +107,7 @@ final class Dispatcher {
      * Adds a route.
      *
      * @param string $route         A route string.
-     * @param string $destination   URI that the request should be sent to.
+     * @param string $destination   Path that the request should be sent to.
      */
     public static function addRoute($route, $destination=null) {
         if ($destination != null && !is_array($route)) {
@@ -117,10 +117,10 @@ final class Dispatcher {
     }
 
     /**
-     * Checks if a route exists for a specified URI.
+     * Checks if a route exists for a specified path.
      *
-     * @param string $requested_url
-     * @return boolean Returns true when a route was found, otherwise false.
+     * @param string $path      A path (for instance path/to/page)
+     * @return boolean          Returns true when a route was found, otherwise false.
      */
     public static function hasRoute($requested_url) {
         if (!self::$routes || count(self::$routes) == 0) {
@@ -130,7 +130,7 @@ final class Dispatcher {
         // Make sure we strip trailing slashes in the requested url
         $requested_url = rtrim($requested_url, '/');
 
-        foreach (self::$routes as $route => $uri) {
+        foreach (self::$routes as $route => $action) {
             // Convert wildcards to regex
             if (strpos($route, ':') !== false) {
                 $route = str_replace(':any', '([^/]+)', str_replace(':num', '([0-9]+)', str_replace(':all', '(.+)', $route)));
@@ -139,10 +139,10 @@ final class Dispatcher {
             // Does the regex match?
             if (preg_match('#^'.$route.'$#', $requested_url)) {
                 // Do we have a back-reference?
-                if (strpos($uri, '$') !== false && strpos($route, '(') !== false) {
-                    $uri = preg_replace('#^'.$route.'$#', $uri, $requested_url);
+                if (strpos($action, '$') !== false && strpos($route, '(') !== false) {
+                    $action = preg_replace('#^'.$route.'$#', $action, $requested_url);
                 }
-                self::$params = self::splitUrl($uri);
+                self::$params = self::splitUrl($action);
                 // We found it, so we can break the loop now!
                 return true;
             }
@@ -217,7 +217,7 @@ final class Dispatcher {
         }
 
         // Loop through the route array looking for wildcards
-        foreach (self::$routes as $route => $uri) {
+        foreach (self::$routes as $route => $action) {
         // Convert wildcards to regex
             if (strpos($route, ':') !== false) {
                 $route = str_replace(':any', '([^/]+)', str_replace(':num', '([0-9]+)', str_replace(':all', '(.+)', $route)));
@@ -225,10 +225,10 @@ final class Dispatcher {
             // Does the regex match?
             if (preg_match('#^'.$route.'$#', $requested_url)) {
             // Do we have a back-reference?
-                if (strpos($uri, '$') !== false && strpos($route, '(') !== false) {
-                    $uri = preg_replace('#^'.$route.'$#', $uri, $requested_url);
+                if (strpos($action, '$') !== false && strpos($route, '(') !== false) {
+                    $action = preg_replace('#^'.$route.'$#', $action, $requested_url);
                 }
-                self::$params = self::splitUrl($uri);
+                self::$params = self::splitUrl($action);
                 // We found it, so we can break the loop now!
                 break;
             }
@@ -1023,7 +1023,7 @@ class View {
  *      - delete something and redirect,
  *      - etc.
  *
- * Using the Dispatcher class you can define what URIs/routes map to which
+ * Using the Dispatcher class you can define what paths/routes map to which
  * Controllers and their methods.
  *
  * Each Controller method should either:
