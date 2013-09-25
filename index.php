@@ -32,7 +32,7 @@ if ( ! defined('DEBUG')) { header('Location: wolf/install/'); exit(); }
 
 $url = URL_PUBLIC;
 
-// Figure out what the public URI is based on URL_PUBLIC.
+// Figure out what the public path is based on URL_PUBLIC.
 // @todo improve
 $changedurl = str_replace('//','|',URL_PUBLIC);
 $lastslash = strpos($changedurl, '/');
@@ -46,7 +46,7 @@ else {
 // Alias for backward compatibility, this constant should no longer be used.
 define('URI_PUBLIC', PATH_PUBLIC);
 
-// Determine URI for backend check
+// Determine path for backend check
 if (USE_MOD_REWRITE && isset($_GET['WOLFPAGE'])) {
     $admin_check = $_GET['WOLFPAGE'];
 }

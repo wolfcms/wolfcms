@@ -82,16 +82,16 @@ function url_start_with($url) {
 
 function main() {
     // get the uri string from the query
-    $uri = $_SERVER['QUERY_STRING'];
+    $path = $_SERVER['QUERY_STRING'];
 
     // Make sure special characters are decoded (support non-western glyphs like japanese)
-    $uri = urldecode($uri);
+    $path = urldecode($path);
 
     // START processing $_GET variables
     // If we're NOT using mod_rewrite, we check for GET variables we need to integrate
-    if (!USE_MOD_REWRITE && strpos($uri, '?') !== false) {
+    if (!USE_MOD_REWRITE && strpos($path, '?') !== false) {
         $_GET = array(); // empty $_GET array since we're going to rebuild it
-        list($uri, $get_var) = explode('?', $uri);
+        list($path, $get_var) = explode('?', $path);
         $exploded_get = explode('&', $get_var);
 
         if (count($exploded_get)) {
@@ -102,50 +102,50 @@ function main() {
         }
     }
     // We're NOT using mod_rewrite, and there's no question mark wich points to GET variables in combination with site root.
-    else if (!USE_MOD_REWRITE && (strpos($uri, '&') !== false || strpos($uri, '=') !== false)) {
-        $uri = '/';
+    else if (!USE_MOD_REWRITE && (strpos($path, '&') !== false || strpos($path, '=') !== false)) {
+        $path = '/';
     }
 
     // If we're using mod_rewrite, we should have a WOLFPAGE entry.
     if (USE_MOD_REWRITE && array_key_exists('WOLFPAGE', $_GET)) {
-        $uri = $_GET['WOLFPAGE'];
+        $path = $_GET['WOLFPAGE'];
         unset($_GET['WOLFPAGE']);
     }
     else if (USE_MOD_REWRITE)   // We're using mod_rewrite but don't have a WOLFPAGE entry, assume site root.
-        $uri = '/';
+        $path = '/';
 
     // Needed to allow for ajax calls to backend
     if (array_key_exists('WOLFAJAX', $_GET)) {
-        $uri = '/'.ADMIN_DIR.$_GET['WOLFAJAX'];
+        $path = '/'.ADMIN_DIR.$_GET['WOLFAJAX'];
         unset($_GET['WOLFAJAX']);
     }
     // END processing $_GET variables
     // remove suffix page if founded
     if (URL_SUFFIX !== '' and URL_SUFFIX !== '/')
-        $uri = preg_replace('#^(.*)('.URL_SUFFIX.')$#i', "$1", $uri);
+        $path = preg_replace('#^(.*)('.URL_SUFFIX.')$#i', "$1", $path);
 
-    define('CURRENT_PATH', trim($uri, '/'));
+    define('CURRENT_PATH', trim($path, '/'));
 
     // Alias for backward compatibility, this constant should no longer be used.
     define('CURRENT_URI', CURRENT_PATH);
 
-    if ($uri != null && $uri[0] != '/')
-        $uri = '/'.$uri;
+    if ($path != null && $path[0] != '/')
+        $path = '/'.$path;
 
     // Check if there's a custom route defined for this URI,
     // otherwise continue and assume page was requested.
-    if (Dispatcher::hasRoute($uri)) {
-        Observer::notify('dispatch_route_found', $uri);
-        Dispatcher::dispatch($uri);
+    if (Dispatcher::hasRoute($path)) {
+        Observer::notify('dispatch_route_found', $path);
+        Dispatcher::dispatch($path);
         exit;
     }
 
     foreach (Observer::getObserverList('page_requested') as $callback) {
-        $uri = call_user_func_array($callback, array(&$uri));
+        $path = call_user_func_array($callback, array(&$path));
     }
 
     // this is where 80% of the things is done
-    $page = Page::findByPath($uri, true);
+    $page = Page::findByPath($path, true);
 
     // if we found it, display it!
     if (is_object($page)) {
@@ -153,7 +153,7 @@ function main() {
         if (Page::STATUS_PREVIEW == $page->status_id) {
             AuthUser::load();
             if (!AuthUser::isLoggedIn() || !AuthUser::hasPermission('page_view'))
-                pageNotFound($uri);
+                pageNotFound($path);
         }
 
         // If page needs login, redirect to login
@@ -169,7 +169,7 @@ function main() {
         $page->_executeLayout();
     }
     else {
-        pageNotFound($uri);
+        pageNotFound($path);
     }
 }
 
