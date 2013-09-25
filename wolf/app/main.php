@@ -60,7 +60,7 @@ function find_page_by_slug($slug, &$parent, $all = false) {
 function url_match($url) {
     $url = trim($url, '/');
 
-    if (CURRENT_URI == $url)
+    if (CURRENT_PATH == $url)
         return true;
 
     return false;
@@ -70,10 +70,10 @@ function url_match($url) {
 function url_start_with($url) {
     $url = trim($url, '/');
 
-    if (CURRENT_URI == $url)
+    if (CURRENT_PATH == $url)
         return true;
 
-    if (strpos(CURRENT_URI, $url) === 0)
+    if (strpos(CURRENT_PATH, $url) === 0)
         return true;
 
     return false;
@@ -124,7 +124,10 @@ function main() {
     if (URL_SUFFIX !== '' and URL_SUFFIX !== '/')
         $uri = preg_replace('#^(.*)('.URL_SUFFIX.')$#i', "$1", $uri);
 
-    define('CURRENT_URI', trim($uri, '/'));
+    define('CURRENT_PATH', trim($uri, '/'));
+
+    // Alias for backward compatibility, this constant should no longer be used.
+    define('CURRENT_URI', CURRENT_PATH);
 
     if ($uri != null && $uri[0] != '/')
         $uri = '/'.$uri;
