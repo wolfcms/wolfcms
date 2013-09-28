@@ -171,10 +171,10 @@ class PageArchive extends Page {
     public function url($suffix=false) {
         $use_date = Plugin::getSetting('use_dates', 'archive');
         if ($use_date === '1') {
-            return BASE_URL . trim($this->parent()->uri() . date('/Y/m/d/', strtotime($this->created_on)) . $this->slug, '/') . ($this->uri() != '' ? URL_SUFFIX : '');
+            return BASE_URL . trim($this->parent()->path() . date('/Y/m/d/', strtotime($this->created_on)) . $this->slug, '/') . ($this->path() != '' ? URL_SUFFIX : '');
         }
         elseif ($use_date === '0') {
-            return BASE_URL . trim($this->parent()->uri() . '/' . $this->slug, '/') . ($this->uri() != '' ? URL_SUFFIX : '');
+            return BASE_URL . trim($this->parent()->path() . '/' . $this->slug, '/') . ($this->path() != '' ? URL_SUFFIX : '');
         }
     }
 
