@@ -407,7 +407,7 @@ class Page extends Node {
     public function getColumns() {
         return array(
             'id', 'title', 'slug', 'breadcrumb', 'keywords', 'description',
-            'parent_id', 'layout_id', 'behavoir_id', 'status_id',
+            'parent_id', 'layout_id', 'behavior_id', 'status_id',
             'created_on', 'published_on', 'valid_until', 'updated_on',
             'created_by_id', 'updated_by_id', 'position', 'is_protected',
             'needs_login'
