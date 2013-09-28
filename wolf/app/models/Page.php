@@ -1102,6 +1102,18 @@ class Page extends Node {
     }
 
 
+    /**
+     * Returns a single Page object, retrieved from the database.
+     * 
+     * @param array $options        Options array containing parameters for the query
+     * @return                      Single Page object
+     */
+    public static function findOne($options = array()) {
+        $options['limit'] = 1;
+        return self::find($options);
+    }
+
+
     public static function childrenOf($id) {
         return self::find(array(
             'where' => array('parent_id = :parent_id', ':parent_id' => (int) $id),
