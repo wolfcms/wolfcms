@@ -932,7 +932,7 @@ class Page extends Node {
         if ($all) {
             return self::findOne(array(
                 'where' => array(
-                    'slug = :slug AND parent_id = :parent_id AND (status_id = :status_preview OR status_id = :status_published OR status_id = :status_hidden',
+                    'slug = :slug AND parent_id = :parent_id AND (status_id = :status_preview OR status_id = :status_published OR status_id = :status_hidden)',
                     ':slug' => $slug,
                     ':parent_id' => (int) $parent_id,
                     ':status_preview' => self::STATUS_PREVIEW,
@@ -944,7 +944,7 @@ class Page extends Node {
         else {
             return self::findOne(array(
                 'where' => array(
-                    'slug = :slug AND parent_id = :parent_id AND (status_id = :status_published OR status_id = :status_hidden',
+                    'slug = :slug AND parent_id = :parent_id AND (status_id = :status_published OR status_id = :status_hidden)',
                     ':slug' => $slug,
                     ':parent_id' => (int) $parent_id,
                     ':status_published' => self::STATUS_PUBLISHED,
