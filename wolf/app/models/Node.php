@@ -39,7 +39,9 @@ class Node extends Record {
      */
     public function __call($method, $arguments) {
         if(isset(self::$_methods[$method])) {
-            array_unshift($arguments, $this);
+            // array_unshift($arguments, $this); 
+            // the above should remain here to have access to calling object in 
+            // callback function
             return call_user_func_array(self::$_methods[$method], $arguments);
         }
         else {
@@ -57,7 +59,9 @@ class Node extends Record {
      */
     public static function __callStatic($method, $arguments) {
         if(isset(self::$_static_methods[$method])) {
-            array_unshift($arguments, $this);
+            // array_unshift($arguments, $this);
+            // the above should remain here to have access to calling class in 
+            // callback function
             return call_user_func_array(self::$_static_methods[$method], $arguments);
         }
         else {
