@@ -37,10 +37,14 @@ class Node extends Record {
      * @see Node::registerMethod()
      */
     public function __call($method, $arguments) {
-        if(isset(self::$_methods[$method]))
-            call_user_func(self::$_methods[$method], array_unshift($arguments, $this));
-        else
+        if(isset(self::$_methods[$method])) {
+            // prepend $this as first argument
+            array_unshift($arguments, $this);     
+            call_user_func_array(self::$_methods[$method], $arguments);
+        }
+        else {
             throw new Exception('Unknown dynamic method: '.$method);
+        }
     }
     
     /**
@@ -52,10 +56,14 @@ class Node extends Record {
      * @see Node::registerMethod()
      */
     public static function __callStatic($method, $arguments) {
-        if(isset(self::$_static_methods[$method]))
-            call_user_func(self::$_static_methods[$method], array_unshift($arguments, $this));
-        else
+        if(isset(self::$_static_methods[$method])) {
+            // prepend $this as first argument
+            array_unshift($arguments, $this);
+            call_user_func_array(self::$_static_methods[$method], $arguments);
+        }
+        else {
             throw new Exception('Unknown dynamic method: '.$method);
+        }
     }
 
     /**
