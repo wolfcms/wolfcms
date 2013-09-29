@@ -32,18 +32,18 @@ class Node extends Record {
     /**
      * Allows someone to use a dynamic method that was registered with registerMethod().
      *
+     * PHP 5.3+ only.
      * This is for instance specific methods, for class level methods, __callStatic is used.
      *
      * @see Node::registerMethod()
      */
     public function __call($method, $arguments) {
         if(isset(self::$_methods[$method])) {
-            // prepend $this as first argument
-            array_unshift($arguments, $this);     
-            call_user_func_array(self::$_methods[$method], $arguments);
+             array_unshift($arguments, $this);     
+             return call_user_func_array(self::$_methods[$method], $arguments);
         }
         else {
-            throw new Exception('Unknown dynamic method: '.$method);
+            throw new BadMethodCallException('Unknown dynamic method: ' . $method);
         }
     }
     
@@ -57,12 +57,11 @@ class Node extends Record {
      */
     public static function __callStatic($method, $arguments) {
         if(isset(self::$_static_methods[$method])) {
-            // prepend $this as first argument
             array_unshift($arguments, $this);
-            call_user_func_array(self::$_static_methods[$method], $arguments);
+            return call_user_func_array(self::$_static_methods[$method], $arguments);
         }
         else {
-            throw new Exception('Unknown dynamic method: '.$method);
+            throw new BadMethodCallException('Unknown dynamic static method: ' . $method);
         }
     }
 
@@ -73,18 +72,40 @@ class Node extends Record {
      * time for the Node class as well as derivitives thereof. These methods can then be
      * called similar to normal methods.
      *
-     * @todo Add code sample to phpdoc
+     * Example:
+     * <code>
+     * Node::registerMethod('myMethod', 'myDynamicMethod');
+     * Node::registerMethod('myStaticMethod', 'MyStaticDynamicMethod', true);
+     * </code>
+     * 
+     * @param string    $method    Name under which method should be known.
+     * @param string    $function  Name of function that implements method.
+     * @param boolean   $static   Whether it concerns a static method.
      *
-     * NOTE: Class level (static) methods can only be used starting PHP 5.3.
+     * @return boolean  TRUE when function was registerd, FALSE if function doesn't
+     *                  exist or failed to register because of duplicate name.
      */
     public static function registerMethod($method, $function, $static = false) {
+        
+        if (!function_exists($function)) {
+            throw new InvalidArgumentException('Dynamic method implementation could not be found for ' . $method);
+        }
+        
         if ($static === true) {
-            self::$_static_methods[$method] = $function;
-            return true;
+            if (!array_key_exists($method, self::$_static_methods)) {
+                self::$_static_methods[$method] = $function;
+                return true;
+            } else {
+                throw new InvalidArgumentException('Dynamic static method is already defined: ' . $method);
+            }
         }
         else {
-            self::$_methods[$method] = $function;
-            return true;
+            if (!array_key_exists($method, self::$_methods)) {
+                self::$_methods[$method] = $function;
+                return true;
+            } else {
+                throw new InvalidArgumentException('Dynamic method is already defined: ' . $method);                
+            }
         }
         
         return false;
