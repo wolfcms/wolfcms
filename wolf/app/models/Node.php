@@ -39,7 +39,7 @@ class Node extends Record {
      */
     public function __call($method, $arguments) {
         if(isset(self::$_methods[$method])) {
-            array_unshift($arguments, $this);     
+            array_unshift($arguments, $this);
             return call_user_func_array(self::$_methods[$method], $arguments);
         }
         else {
