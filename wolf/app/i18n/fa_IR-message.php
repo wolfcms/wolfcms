@@ -127,7 +127,7 @@ return array(
     'Protected' => 'محفوظ',
     'Published' => 'انتشار یافت',
     'Published date' => 'زمان انتشار',
-    'Remember me for :min minutes.' => 'مرا برای :min دقیقه نگه دار',
+    'Remember me for :min minutes.' => 'Remember me for :min minutes.',
     'Remove Tab' => 'Remove Tab',
     'Remove page' => 'حذف صفحه',
     'Remove unavailable' => 'حذف در دسترس نیست',
