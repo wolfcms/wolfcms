@@ -39,8 +39,8 @@ class Node extends Record {
      */
     public function __call($method, $arguments) {
         if(isset(self::$_methods[$method])) {
-            // array_unshift($arguments, $this); 
-            // the above should remain here to have access to calling object in 
+            // provide caller object context as first parameter
+            array_unshift($arguments, $this); 
             // callback function
             return call_user_func_array(self::$_methods[$method], $arguments);
         }
@@ -59,8 +59,8 @@ class Node extends Record {
      */
     public static function __callStatic($method, $arguments) {
         if(isset(self::$_static_methods[$method])) {
-            // array_unshift($arguments, $this);
-            // the above should remain here to have access to calling class in 
+            // provide caller class context as first parameter
+            array_unshift($arguments, self);
             // callback function
             return call_user_func_array(self::$_static_methods[$method], $arguments);
         }
@@ -80,6 +80,15 @@ class Node extends Record {
      * <code>
      * Node::registerMethod('myMethod', 'myDynamicMethod');
      * Node::registerMethod('myStaticMethod', 'MyStaticDynamicMethod', true);
+     * </code>
+     * 
+     * 
+     * Example of callback function:
+     * <code>
+     * function myDynamicMethod($callerObject, $param1, $param2) {
+     *      $callerClass = get_class($callerObject)
+     *      return $callerClass . ', param1=' . $param1 . ', param2=' . $param2;
+     * }
      * </code>
      * 
      * @param string    $method    Name under which method should be known.
