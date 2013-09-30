@@ -126,7 +126,7 @@ return array(
     'Protected' => '保护的',
     'Published' => '已发布',
     'Published date' => '发布日期',
-    'Remember me for 30 minutes.' => '记住我30分钟。',
+    'Remember me for :min minutes.' => '记住我:min分钟。',
     'Remove Tab' => '移除标签',
     'Remove page' => '移除页面',
     'Remove unavailable' => '无法移除',

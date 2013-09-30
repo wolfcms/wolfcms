@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Chráněno',
     'Published' => 'Publikováno',
     'Published date' => 'Publikováno dne',
-    'Remember me for 30 minutes.' => 'Zapamatovat údaje na 30 minut.',
+    'Remember me for :min minutes.' => 'Zapamatovat údaje na :min minut.',
     'Remove Tab' => 'Odstranit záložku',
     'Remove page' => 'Odstranit stránku',
     'Remove unavailable' => 'Odstranění není možné',

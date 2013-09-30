@@ -77,3 +77,30 @@ define('USE_POORMANSCRON', false);
 // Rough interval in seconds at which poormans cron should trigger.
 // No traffic == no poormans cron run.
 define('POORMANSCRON_INTERVAL', 3600);
+
+// How long should the browser remember logged in user?
+// This relates to Login screen "Remember me for xxx time" checkbox at Backend Login screen
+// Default: 1800 (30 minutes)
+define ('COOKIE_LIFE', 1800);  // 30 minutes
+
+// Can registered users login to backend using their email address?
+// Default: false
+define ('ALLOW_LOGIN_WITH_EMAIL', false);
+
+// Should Wolf CMS block login ability on invalid password provided?
+// Default: true
+define ('DELAY_ON_INVALID_LOGIN', true);
+
+// How long should the login blockade last?
+// Default: 30 seconds
+define ('DELAY_ONCE_EVERY', 30); // 30 seconds
+
+// First delay starts after Nth failed login attempt
+// Default: 3
+define ('DELAY_FIRST_AFTER', 3);
+
+// Secure token expiry time (prevents CSRF attacks, etc.)
+// If backend user does nothing for this time (eg. click some link) 
+// his token will expire with appropriate notification
+// Default: 900 (15 minutes)
+define ('SECURE_TOKEN_EXPIRY', 900);  // 15 minutes

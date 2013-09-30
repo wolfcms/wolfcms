@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Diproteksi',
     'Published' => 'Dirilis',
     'Published date' => 'Tanggal rilis',
-    'Remember me for 30 minutes.' => 'Tetap login selama 30 menit.',
+    'Remember me for :min minutes.' => 'Tetap login selama :min menit.',
     'Remove Tab' => 'Hapus tab',
     'Remove page' => 'Hapus halaman',
     'Remove unavailable' => 'Hapus tidak tersedia',
