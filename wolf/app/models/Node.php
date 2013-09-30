@@ -36,10 +36,12 @@ class Node extends Record {
      * This is for instance specific methods, for class level methods, __callStatic is used.
      *
      * @see Node::registerMethod()
+     * 
+     * @throws BadMethodCallException if method wasn't registered earlier
      */
     public function __call($method, $arguments) {
         if(isset(self::$_methods[$method])) {
-            // provide caller object context as first parameter
+            // provide caller object context as first parameter for dynamic methods
             array_unshift($arguments, $this); 
             // callback function
             return call_user_func_array(self::$_methods[$method], $arguments);
@@ -56,16 +58,16 @@ class Node extends Record {
      * This is for class level methods, for instance level methods, __call is used.
      *
      * @see Node::registerMethod()
+     * 
+     * @throws BadMethodCallException if method wasn't registered earlier
      */
     public static function __callStatic($method, $arguments) {
         if(isset(self::$_static_methods[$method])) {
-            // provide caller class context as first parameter
-            array_unshift($arguments, self);
             // callback function
             return call_user_func_array(self::$_static_methods[$method], $arguments);
         }
         else {
-            throw new BadMethodCallException('Unknown dynamic static method: ' . $method);
+            throw new BadMethodCallException('Unknown static dynamic method: ' . $method);
         }
     }
 
@@ -76,32 +78,39 @@ class Node extends Record {
      * time for the Node class as well as derivitives thereof. These methods can then be
      * called similar to normal methods.
      *
-     * Example:
-     * <code>
+     * Example of instance (non-static) method:
+     * 
+     * <pre>
      * Node::registerMethod('myMethod', 'myDynamicMethod');
-     * Node::registerMethod('myStaticMethod', 'MyStaticDynamicMethod', true);
-     * </code>
-     * 
-     * 
-     * Example of callback function:
-     * <code>
+     * // note the first $callerObject callback function parameter
      * function myDynamicMethod($callerObject, $param1, $param2) {
-     *      $callerClass = get_class($callerObject)
-     *      return $callerClass . ', param1=' . $param1 . ', param2=' . $param2;
+     *   $callerClass = get_class($callerObject);
+     *   return $callerClass . ', param1=' . $param1 . ', param2=' . $param2;
      * }
-     * </code>
+     * </pre>
+     * Sample usage in page part: <code>echo $this->myMethod('val1','val2');</code>
      * 
-     * @param string    $method    Name under which method should be known.
-     * @param string    $function  Name of function that implements method.
-     * @param boolean   $static   Whether it concerns a static method.
+     * Example of class (static) method:
+     * <pre>
+     * Node::registerMethod('myStaticMethod', 'myDynamicStaticMethod');
+     * function myDynamicStaticMethod($param1, $param2) {
+     *      return 'param1=' . $param1 . ', param2=' . $param2;
+     * }
+     * </pre>
+     * Sample usage in page part: <code>echo Page::myStaticMethod('val1','val2');</code>
+     * 
+     * @param string    $method     Name under which method should be known.
+     * @param string    $function   Name of function that implements method.
+     * @param boolean   $static     Whether it concerns a static method.
      *
-     * @return boolean  TRUE when function was registerd, FALSE if function doesn't
-     *                  exist or failed to register because of duplicate name.
+     * @return boolean  TRUE        when function was registerd
+     * 
+     * @throws InvalidArgumentException 
      */
     public static function registerMethod($method, $function, $static = false) {
         
         if (!function_exists($function)) {
-            throw new InvalidArgumentException('Dynamic method implementation could not be found for ' . $method);
+            throw new InvalidArgumentException('Dynamic method implementation "'. $function .'" could not be found for "' . $method . '"');
         }
         
         if ($static === true) {
