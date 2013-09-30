@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Aizsargāts',
     'Published' => 'Publicēts',
     'Published date' => 'Publikācijas datums',
-    'Remember me for 30 minutes.' => 'Remember me for 30 minutes.',
+    'Remember me for :min minutes.' => 'Remember me for :min minutes.',
     'Remove Tab' => 'Noņemt Cilni',
     'Remove page' => 'Noņemt lapu',
     'Remove unavailable' => 'Noņemšana nav pieejama',

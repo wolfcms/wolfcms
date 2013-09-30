@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Zaštićeno',
     'Published' => 'Objavljeno',
     'Published date' => 'Datum objave',
-    'Remember me for 30 minutes.' => 'Zapamti me 30 minuta.',
+    'Remember me for :min minutes.' => 'Zapamti me :min minuta.',
     'Remove Tab' => 'Ukloni Karticu',
     'Remove page' => 'Ukloni stranicu',
     'Remove unavailable' => 'Ukloni nedostupne',

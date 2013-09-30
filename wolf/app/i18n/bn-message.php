@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Protected',
     'Published' => 'সার্বজনীন',
     'Published date' => 'Published date',
-    'Remember me for 30 minutes.' => 'Remember me for 30 minutes.',
+    'Remember me for :min minutes.' => 'Remember me for :min minutes.',
     'Remove Tab' => 'ট্যাব সরিয়ে নাও',
     'Remove page' => 'পৃষ্ঠা সরিয়ে নাও',
     'Remove unavailable' => 'Remove unavailable',

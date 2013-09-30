@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Geschützt',
     'Published' => 'Veröffentlicht',
     'Published date' => 'Veröffentlichungsdatum',
-    'Remember me for 30 minutes.' => '30 Minuten lang angemeldet bleiben.',
+    'Remember me for :min minutes.' => ':min Minuten lang angemeldet bleiben.',
     'Remove Tab' => 'Tab entfernen',
     'Remove page' => 'Seite entfernen',
     'Remove unavailable' => 'Entfernen nicht möglich',

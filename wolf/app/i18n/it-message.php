@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Contenuto protetto',
     'Published' => 'Pubblicata',
     'Published date' => 'Data di pubblicazione',
-    'Remember me for 30 minutes.' => 'Ricordami per 30 minuti.',
+    'Remember me for :min minutes.' => 'Ricordami per :min minuti.',
     'Remove Tab' => 'Rimuovi la scheda',
     'Remove page' => 'Elimina pagina',
     'Remove unavailable' => 'Eliminazione non disponibile',

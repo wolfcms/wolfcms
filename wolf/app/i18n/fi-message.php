@@ -131,7 +131,7 @@ return array(
     'Protected' => 'Suojattu',
     'Published' => 'Julkaistu',
     'Published date' => 'Julkaistiin p&auml;iv&auml;m&auml;&auml;r&auml;n&auml;',
-    'Remember me for 30 minutes.' => 'Muista minut 30 minuutin ajan.',
+    'Remember me for :min minutes.' => 'Muista minut :min minuutin ajan.',
     'Remove Tab' => 'Siirr&auml; v&auml;lilehti',
     'Remove page' => 'Siirr&auml; sivu',
     'Remove unavailable' => 'Siirt&auml;minen ei ole mahdollista',

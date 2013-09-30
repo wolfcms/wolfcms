@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Chroniony',
     'Published' => 'Opublikowany',
     'Published date' => 'Data opublikowania',
-    'Remember me for 30 minutes.' => 'Pamiętaj mnie przez 30 minut.',
+    'Remember me for :min minutes.' => 'Pamiętaj mnie przez :min minut.',
     'Remove Tab' => 'Usuń zakładkę',
     'Remove page' => 'Usuń stronę',
     'Remove unavailable' => 'Usuwanie niedostępne',
