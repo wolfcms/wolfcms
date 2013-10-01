@@ -19,7 +19,7 @@
 if (Dispatcher::getAction() == 'index'):
 ?>
 
-<p class="button"><a href="<?php echo get_url('user/add'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/user.png" align="middle" alt="user icon" /> <?php echo __('New User'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('user/add'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/user.png" align="middle" alt="user icon" /> <?php echo __('New User'); ?></a></p>
 
 <div class="box">
     <h2><?php echo __('Where do the avatars come from?'); ?></h2>

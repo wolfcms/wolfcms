@@ -23,10 +23,10 @@
 if (!defined('IN_CMS')) { exit(); }
 
 ?>
-<p class="button"><a href="<?php echo get_url('plugin/backup_restore/documentation'); ?>"><img src="<?php echo ICONS_URI;?>documentation-32-ns.png" align="middle" alt="documentation icon" /> <?php echo __('Documentation'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/backup_restore/backup'); ?>"><img src="<?php echo ICONS_URI;?>action-download-32-ns.png" align="middle" alt="xml icon" /> <?php echo __('Create a backup'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/backup_restore/restore'); ?>"><img src="<?php echo ICONS_URI;?>action-upload-32-ns.png" align="middle" alt="xml icon" /> <?php echo __('Restore a backup'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/backup_restore/settings'); ?>"><img src="<?php echo ICONS_URI;?>settings-32-ns.png" align="middle" alt="settings icon" /> <?php echo __('Settings'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/backup_restore/documentation'); ?>"><img src="<?php echo ICONS_PATH;?>documentation-32-ns.png" align="middle" alt="documentation icon" /> <?php echo __('Documentation'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/backup_restore/backup'); ?>"><img src="<?php echo ICONS_PATH;?>action-download-32-ns.png" align="middle" alt="xml icon" /> <?php echo __('Create a backup'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/backup_restore/restore'); ?>"><img src="<?php echo ICONS_PATH;?>action-upload-32-ns.png" align="middle" alt="xml icon" /> <?php echo __('Restore a backup'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('plugin/backup_restore/settings'); ?>"><img src="<?php echo ICONS_PATH;?>settings-32-ns.png" align="middle" alt="settings icon" /> <?php echo __('Settings'); ?></a></p>
 <div class="box">
 <h2><?php echo __('Backup/Restore plugin');?></h2>
 <p>

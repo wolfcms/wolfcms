@@ -7,7 +7,7 @@
  */
 
 return array(
-    'An error occured trying to save the settings.' => 'È verificato un errore nel tentativo di salvare le impostazioni.',
+    'An error occurred trying to save the settings.' => 'È verificato un errore nel tentativo di salvare le impostazioni.',
     'Archive' => 'Archivio',
     'Could not save settings, no settings found.' => 'Impossibile salvare le impostazioni, le impostazioni non trovato.',
     'Do you want to generate dates for the URLs?' => 'Vuoi generare le date per gil URL?',
