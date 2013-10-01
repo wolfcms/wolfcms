@@ -105,8 +105,8 @@ function replaceContent($page) {
         foreach (I18n::getPreferredLanguages() as $lang) {
             if ( Setting::get('language') == $lang) { break; }
 
-            $uri = $lang.'/'.CURRENT_URI;
-            $page = Page::findByUri($uri);
+            $uri = $lang.'/'.CURRENT_PATH;
+            $page = Page::findByPath($uri);
 
             if ( false !== $page ) {
                 redirect(BASE_URL.$uri);
@@ -118,8 +118,8 @@ function replaceContent($page) {
         if (AuthUser::isLoggedIn()) {
             $lang = AuthUser::getRecord()->language;
 
-            $uri = $lang.'/'.CURRENT_URI;
-            $page = Page::findByUri($uri);
+            $uri = $lang.'/'.CURRENT_PATH;
+            $page = Page::findByPath($uri);
 
             if ( false !== $page ) {
                 redirect(BASE_URL.$uri);

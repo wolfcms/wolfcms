@@ -7,7 +7,7 @@
  */
 
 return array(
-    'An error occured trying to save the settings.' => '发生错误，而试图以保存设置。',
+    'An error occurred trying to save the settings.' => '发生错误，而试图以保存设置。',
     'Archive' => '存档',
     'Could not save settings, no settings found.' => '无法保存设置，因为没有设置。',
     'Do you want to generate dates for the URLs?' => '你要生成的URL的日期吗？',

@@ -7,7 +7,7 @@
  */
 
 return array(
-    'An error occured trying to save the settings.' => 'Ett fel uppstod med att spara inställningarna.',
+    'An error occurred trying to save the settings.' => 'Ett fel uppstod med att spara inställningarna.',
     'Archive' => 'Arkiv',
     'Could not save settings, no settings found.' => 'Kunde ej spara inställningar, inga inställningar hittades.',
     'Do you want to generate dates for the URLs?' => 'Önskar du producera datum för URL-länkarna?',

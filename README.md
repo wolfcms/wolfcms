@@ -3,6 +3,7 @@
 ## About Wolf CMS
 
 [![Build Status](https://secure.travis-ci.org/wolfcms/wolfcms.png)](http://travis-ci.org/wolfcms/wolfcms)
+[![Coverage Status](https://coveralls.io/repos/wolfcms/wolfcms/badge.png?branch=master)](https://coveralls.io/r/wolfcms/wolfcms?branch=master)
 
 Wolf CMS simplifies content management by offering an elegant user interface,
 flexible templating per page, simple user management and permissions, as well
@@ -26,7 +27,7 @@ IMPORTANT - always check if there is any security advise by viewing security.php
 ## Required
 
 - An HTTP server
-- PHP 5.2+
+- PHP 5.3+
     - PHP: magic_quotes_gpc should be turned OFF.
     - PHP: Wolf CMS does *not* run on PHP 4.
 - PDO support.

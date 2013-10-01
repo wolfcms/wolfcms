@@ -29,7 +29,7 @@ if ($pagetmp != null && !empty($pagetmp) && $parttmp != null && !empty($parttmp)
 }
 
 if ($action == 'edit') { ?>
-    <span style="float: right;"><a id="site-view-page" onclick="target='_blank'" onkeypress="target='_blank'" href="<?php echo URL_PUBLIC; echo (USE_MOD_REWRITE == false) ? '?' : ''; echo $page->getUri(); echo ($page->getUri() != '') ? URL_SUFFIX : ''; ?>"><?php echo __('View this page'); ?></a></span>
+    <span style="float: right;"><a id="site-view-page" onclick="target='_blank'" onkeypress="target='_blank'" href="<?php echo URL_PUBLIC; echo (USE_MOD_REWRITE == false) ? '?' : ''; echo $page->path(); echo ($page->path() != '') ? URL_SUFFIX : ''; ?>"><?php echo __('View this page'); ?></a></span>
 <?php } ?>
 
 <h1><?php echo __(ucfirst($action).' Page'); ?></h1>
@@ -117,12 +117,12 @@ if ($action == 'edit') { ?>
                   <td class="label"><label for="page_created_on"><?php echo __('Created date'); ?></label></td>
                   <td class="field">
                     <input id="page_created_on" maxlength="10" name="page[created_on]" size="10" type="text" value="<?php echo substr($page->created_on, 0, 10); ?>" />
-                    <img class="datepicker" onclick="displayDatePicker('page[created_on]');" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
+                    <img class="datepicker" onclick="displayDatePicker('page[created_on]');" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
                     <input id="page_created_on_time" maxlength="8" name="page[created_on_time]" size="8" type="text" value="<?php echo substr($page->created_on, 11); ?>" />
                 <?php if (isset($page->published_on)): ?>
                     &nbsp; <label for="page_published_on"><?php echo __('Published date'); ?></label>
                     <input id="page_published_on" maxlength="10" name="page[published_on]" size="10" type="text" value="<?php echo substr($page->published_on, 0, 10); ?>" />
-                    <img onclick="displayDatePicker('page[published_on]');" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
+                    <img onclick="displayDatePicker('page[published_on]');" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
                     <input id="page_published_on_time" maxlength="8" name="page[published_on_time]" size="8" type="text" value="<?php echo substr($page->published_on, 11); ?>" />
                 <?php endif; ?>
                   </td>
@@ -134,7 +134,7 @@ if ($action == 'edit') { ?>
                   </td>
                   <td class="field">
                     <input id="page_valid_until" maxlength="10" name="page[valid_until]" size="10" type="text" value="<?php echo substr($page->valid_until, 0, 10); ?>" />
-                    <img onclick="displayDatePicker('page[valid_until]');" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
+                    <img onclick="displayDatePicker('page[valid_until]');" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/icon_cal.gif" alt="<?php echo __('Show Calendar'); ?>" />
                     <input id="page_valid_until_time" maxlength="8" name="page[valid_until_time]" size="8" type="text" value="<?php echo substr($page->valid_until, 11); ?>" />
                   </td>
                 </tr>
@@ -162,8 +162,8 @@ if ($action == 'edit') { ?>
 
     <div id="part-tabs" class="content tabs">
         <div id="tab-toolbar" class="tab_toolbar">
-          <a href="#" id="add-part" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" alt="<?php echo __('Add Tab'); ?> icon" /></a>
-          <a href="#" id="delete-part" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/minus.png" alt="<?php echo __('Remove Tab'); ?> icon" /></a>
+          <a href="#" id="add-part" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/plus.png" alt="<?php echo __('Add Tab'); ?> icon" /></a>
+          <a href="#" id="delete-part" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/minus.png" alt="<?php echo __('Remove Tab'); ?> icon" /></a>
         </div>
         <ul class="tabNavigation">
             <?php foreach ($page_parts as $key => $page_part) { ?>
@@ -229,7 +229,7 @@ if ($action == 'edit') { ?>
 	<!-- Add part dialog -->
 	<div id="add-part-dialog" class="window">
 		<div class="titlebar">
-            <div id="busy" class="busy" style="display: none;"><img alt="Spinner" src="<?php echo URI_PUBLIC;?>wolf/admin/images/spinner.gif" /></div>
+            <div id="busy" class="busy" style="display: none;"><img alt="Spinner" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/spinner.gif" /></div>
             <?php echo __('Add Part'); ?>
             <a href="" class="close">[x]</a>
         </div>

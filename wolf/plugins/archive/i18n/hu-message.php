@@ -7,7 +7,7 @@
  */
 
 return array(
-    'An error occured trying to save the settings.' => 'An error occured trying to save the settings.',
+    'An error occurred trying to save the settings.' => 'An error occured trying to save the settings.',
     'Archive' => 'Archíválás',
     'Could not save settings, no settings found.' => 'Could not save settings, no settings found.',
     'Do you want to generate dates for the URLs?' => 'Do you want to generate dates for the URLs?',

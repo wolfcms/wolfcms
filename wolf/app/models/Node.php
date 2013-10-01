@@ -65,11 +65,25 @@ class Node extends Record {
      * time for the Node class as well as derivitives thereof. These methods can then be
      * called similar to normal methods.
      *
-     * @todo Add code sample to phpdoc
+     * Example:
+     * <code>
+     * Node::registerMethod('myMethod', 'myDynamicMethod');
+     * Node::registerMethod('myStaticMethod', 'MyStaticDynamicMethod', true);
+     * </code>
+     * 
+     * @param string    $method    Name under which method should be known.
+     * @param string    $function  Name of function that implements method.
+     * @param boolean   $static   Whether it concerns a static method.
      *
-     * NOTE: Class level (static) methods can only be used starting PHP 5.3.
+     * @return boolean  TRUE when function was registerd, FALSE if it doesn't
+     *                  exist or failed to register.
      */
     public static function registerMethod($method, $function, $static = false) {
+        
+        if (!function_exists($function)) {
+            throw new InvalidArgumentException('Dynamic method implementation could not be found for '.$method);
+        }
+        
         if ($static === true) {
             self::$_static_methods[$method] = $function;
             return true;
