@@ -30,18 +30,18 @@
       <div class="page" style="padding-left: 4px">
         <span class="w1">
 <?php if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $root->is_protected)): ?>
-          <img align="middle" class="icon" src="<?php echo URI_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span>
+          <img align="middle" class="icon" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span>
 <?php else: ?>
-          <a href="<?php echo get_url('page/edit/1'); ?>" title="/"><img align="middle" class="icon" src="<?php echo URI_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span></a>
+          <a href="<?php echo get_url('page/edit/1'); ?>" title="/"><img align="middle" class="icon" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span></a>
 <?php endif; ?>
         </span>
       </div>
       <div class="status published-status"><?php echo __('Published'); ?></div>
-      <div class="view-page"><a href="<?php echo URL_PUBLIC; ?>" target="_blank"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/magnify.png" align="middle" alt="<?php echo __('View Page'); ?>" title="<?php echo __('View Page'); ?>" /></a></div>
+      <div class="view-page"><a href="<?php echo URL_PUBLIC; ?>" target="_blank"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/magnify.png" align="middle" alt="<?php echo __('View Page'); ?>" title="<?php echo __('View Page'); ?>" /></a></div>
       <div class="modify">
-          <a href="<?php echo get_url('page/add/1'); ?>"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/plus.png" align="middle" title="<?php echo __('Add child'); ?>" alt="<?php echo __('Add child'); ?>" /></a>&nbsp;
-          <img class="remove" src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove-disabled.gif" align="middle" alt="<?php echo __('remove icon disabled'); ?>" title="<?php echo __('Remove unavailable'); ?>"/>&nbsp;
-      	  <img src="<?php echo URI_PUBLIC;?>wolf/admin/images/copy-disabled.png" align="middle" title="<?php echo __('Copy Page Disabled'); ?>" alt="<?php echo __('Copy Page Disabled'); ?>" />
+          <a href="<?php echo get_url('page/add/1'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/plus.png" align="middle" title="<?php echo __('Add child'); ?>" alt="<?php echo __('Add child'); ?>" /></a>&nbsp;
+          <img class="remove" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/icon-remove-disabled.gif" align="middle" alt="<?php echo __('remove icon disabled'); ?>" title="<?php echo __('Remove unavailable'); ?>"/>&nbsp;
+      	  <img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/copy-disabled.png" align="middle" title="<?php echo __('Copy Page Disabled'); ?>" alt="<?php echo __('Copy Page Disabled'); ?>" />
       </div>
 
 <?php echo $content_children; ?>
@@ -126,7 +126,7 @@
             $(this).live('click', function() {
                 if ($(this).hasClass("expanded")) {
                     $(this).removeClass("expanded");
-                    $(this).attr('src', '<?php echo URI_PUBLIC; ?>wolf/admin/images/expand.png');
+                    $(this).attr('src', '<?php echo PATH_PUBLIC; ?>wolf/admin/images/expand.png');
 
                     var parent = $(this).parents("li.node:first")
                     var parentId = parent.attr('id').split('_')[1];
@@ -135,7 +135,7 @@
                 }
                 else {
                     $(this).addClass("expanded");
-                    $(this).attr('src', '<?php echo URI_PUBLIC; ?>wolf/admin/images/collapse.png');
+                    $(this).attr('src', '<?php echo PATH_PUBLIC; ?>wolf/admin/images/collapse.png');
                     var parent = $(this).parents("li.node:first");
                     var parentId = parent.attr('id').split('_')[1];
                     $('#page_'+parentId).removeClass('children-hidden').addClass('children-visible');

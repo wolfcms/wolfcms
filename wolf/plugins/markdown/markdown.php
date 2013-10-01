@@ -25,10 +25,10 @@ header('Content-Type: text/javascript; charset=UTF-8');
 $changedurl = str_replace('//','|',URL_PUBLIC);
 $lastslash = strpos($changedurl, '/');
 if (false === $lastslash) {
-    define('URI_PUBLIC', '/');
+    define('PATH_PUBLIC', '/');
 }
 else {
-    define('URI_PUBLIC', substr($changedurl, $lastslash));
+    define('PATH_PUBLIC', substr($changedurl, $lastslash));
 }
 
 ?>
@@ -65,7 +65,7 @@ $(document).ready(function() {
 // -------------------------------------------------------------------
 markdownSettings = {
 	nameSpace:		'markdown',
-	previewParserPath:	'<?php echo URI_PUBLIC; ?><?php echo (USE_MOD_REWRITE === true) ? '' : '?/'; ?><?php echo ADMIN_DIR; ?>/plugin/markdown/preview', // path to your markdown parser
+	previewParserPath:	'<?php echo PATH_PUBLIC; ?><?php echo (USE_MOD_REWRITE === true) ? '' : '?/'; ?><?php echo ADMIN_DIR; ?>/plugin/markdown/preview', // path to your markdown parser
         //previewInWindow:        'width=800, height=600, resizable=yes, scrollbars=yes',
         previewAutoRefresh:     true,
 	onShiftEnter:		{keepDefault:false, openWith:'\n\n'},

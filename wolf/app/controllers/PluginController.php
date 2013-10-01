@@ -134,7 +134,7 @@ class PluginController extends Controller {
 
             // Provides compatibility with the Page class.
             // @todo Find cleaner way of doing multiple inheritance
-            $this->url = CURRENT_URI;
+            $this->url = CURRENT_PATH;
 
             // Execute the layout code.
             eval('?>'.$layout->content);

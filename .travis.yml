@@ -11,9 +11,11 @@ env:
 
 matrix:
   allow_failures:
-    - php: 5.4
+    - php: 5.5
 
 before_script:
+  - wget http://getcomposer.org/composer.phar
+  - php composer.phar install --dev --no-interaction
   # Setup for Selenium tests
   #- export DISPLAY=:99
   #- export WEB_FIXTURES_HOST=http://localhost
@@ -56,6 +58,19 @@ before_script:
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'DROP DATABASE IF EXISTS wolfcms_test;'; fi"
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database wolfcms_test;'; fi"
   - git clone --depth=100 --quiet git://github.com/wolfcms/wolfcms-phpunit.git test
-  - cd test
 
-script: phpunit --configuration phpunit.travisci.xml
+script:
+  - cd test
+  - mkdir -p build/logs
+  - phpunit -c phpunit.travisci.xml
+  
+after_script:
+  - cd ..
+  - php vendor/bin/coveralls --config test/.coveralls.yml -v
+ 
+notifications:
+  irc:
+    channels:
+      - "chat.freenode.net#wolfcms"
+    on_success: always
+    on_failure: always

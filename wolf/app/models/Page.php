@@ -65,7 +65,7 @@ class Page extends Node {
     public $updater_id;
     // non db fields
     private $parent = false;
-    private $uri = false;
+    private $path = false;
     private $level = false;
     private $tags = false;
 
@@ -118,6 +118,47 @@ class Page extends Node {
 
 
     /**
+     * Returns the path for this node.
+     * 
+     * For instance, for a page with the URL http://www.example.com/wolfcms/path/to/page.html,
+     * the path is: path/to/page (without the URL_SUFFIX)
+     *
+     * Note: The path does not start nor end with a '/'.
+     *
+     * @return string   The node's full path.
+     */
+    public function path() {
+        if ($this->path === false) {
+            if ($this->parent() !== false) {
+                $this->path = trim($this->parent()->path().'/'.$this->slug, '/');
+            } else {
+                $this->path = trim($this->slug, '/');
+            }
+        }
+
+        return $this->path;
+    }
+
+
+    /**
+     * @deprecated
+     * @see path()
+     */
+    public function uri() {
+        return $this->path();
+    }
+
+
+    /**
+     * @deprecated
+     * @see path()
+     */
+    public function getUri() {
+        return $this->path();
+    }
+
+
+    /**
      * Returns the current page object's url.
      *
      * Usage: <?php echo $this->url(); ?> or <?php echo $page->url(); ?>
@@ -126,10 +167,10 @@ class Page extends Node {
      */
     public function url($suffix=true) {
         if ($suffix === false) {
-            return BASE_URL.$this->uri();
+            return BASE_URL.$this->path();
         }
         else {
-            return BASE_URL.$this->uri().($this->uri() != '' ? URL_SUFFIX : '');
+            return BASE_URL.$this->path().($this->path() != '' ? URL_SUFFIX : '');
         }
     }
 
@@ -415,8 +456,8 @@ class Page extends Node {
      */
     public function level() {
         if ($this->level === false) {
-            $uri = $this->uri();
-            $this->level = empty($uri) ? 0 : substr_count($uri, '/') + 1;
+            $path = $this->path();
+            $this->level = empty($path) ? 0 : substr_count($path, '/') + 1;
         }
 
         return $this->level;
@@ -701,7 +742,7 @@ class Page extends Node {
         // Prevent certain stuff from entering the INSERT statement
         // @todo Replace by more appropriate use of Record::getColumns()
         unset($this->parent);
-        unset($this->uri);
+        unset($this->path);
         unset($this->level);
         unset($this->tags);
 
@@ -733,7 +774,7 @@ class Page extends Node {
         $this->updated_by_id = AuthUser::getId();
         $this->updated_on = date('Y-m-d H:i:s');
 
-        unset($this->uri);
+        unset($this->path);
         unset($this->level);
         unset($this->tags);
         unset($this->parent);
@@ -750,34 +791,6 @@ class Page extends Node {
         $ret = PageTag::deleteByPageId($this->id);
 
         return $ret;
-    }
-
-
-    /**
-     * Returns the uri for this node.
-     *
-     * Note: The uri does not start nor end with a '/'.
-     *
-     * @return string   The node's full uri.
-     */
-    public function uri() {
-        if ($this->uri === false) {
-            if ($this->parent() !== false)
-                $this->uri = trim($this->parent()->uri().'/'.$this->slug, '/');
-            else
-                $this->uri = trim($this->slug, '/');
-        }
-
-        return $this->uri;
-    }
-
-
-    /**
-     * @deprecated
-     * @see uri()
-     */
-    public function getUri() {
-        return $this->uri();
     }
 
 
@@ -854,21 +867,37 @@ class Page extends Node {
      * This function should no longer be used.
      *
      * @deprecated
-     * @see findByUri()
+     * @see findByPath()
      */
     public static function find_page_by_uri($uri) {
-        return Page::findByUri($uri);
+        return Page::findByPath($uri);
     }
 
 
+    /**
+     * This function should no longer be used.
+     *
+     * @deprecated
+     * @see findByPath()
+     */
     public static function findByUri($uri, $all = false) {
+        return self::findByPath($uri, $all);
+    }
 
-        $uri = trim($uri, '/');
 
+    /**
+     * Finds a Page record based on it's path.
+     * 
+     * @param string $path      path/to/page
+     * @param bool $all         flag for returning all status types
+     * @return mixed            Page object or false
+     */
+    public static function findByPath($path, $all = false) {
+        $path = trim($path, '/');
         $has_behavior = false;
 
         // adding the home root
-        $urls = array_merge(array(''), explode_uri($uri));
+        $slugs = array_merge(array(''), explode_path($path));
         $url = '';
 
         $page = new stdClass;
@@ -876,21 +905,20 @@ class Page extends Node {
 
         $parent = false;
 
-        foreach ($urls as $page_slug) {
-            $url = ltrim($url.'/'.$page_slug, '/');
+        foreach ($slugs as $slug) {
+            $url = ltrim($url . '/' . $slug, '/');
 
-            $page = self::findBySlug($page_slug, $parent, $all);
+            $page = self::findBySlug($slug, $parent, $all);
             if ($page instanceof Page) {
                 // check for behavior
                 if ($page->behavior_id != '') {
-                    // add a instance of the behavior with the name of the behavior
-                    $params = explode_uri(substr($uri, strlen($url)));
+                    // add an instance of the behavior with the name of the behavior
+                    $params = explode_path(substr($path, strlen($url)));
                     $page->{$page->behavior_id} = Behavior::load($page->behavior_id, $page, $params);
 
                     return $page;
                 }
-            }
-            else {
+            } else {
                 break;
             }
 
@@ -913,35 +941,31 @@ class Page extends Node {
 
         if (empty($slug)) {
             return self::find(array(
-                'where' => 'parent_id=0',
-                'limit' => 1
-                  ));
+                'where' => 'parent_id = 0', 'limit' => 1
+            ));
         }
 
-        $parent_id = $parent ? $parent->id : 0;
-        $slug_sql = "slug = '".$slug."'";
+        $status = ($all === false)
+            ? array(self::STATUS_PUBLISHED, self::STATUS_HIDDEN)
+            : array(self::STATUS_PUBLISHED, self::STATUS_HIDDEN, self::STATUS_PREVIEW);
 
-        if ($all) {
-            $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PREVIEW.' OR status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
-        }
-        else {
-            $where = $slug_sql.' AND parent_id = '.$parent_id.' AND (status_id='.self::STATUS_PUBLISHED.' OR status_id='.self::STATUS_HIDDEN.')';
-        }
+        $where = sprintf(
+            "slug = '%s' AND parent_id = %d AND (status_id IN (%s))",
+            $slug,
+            $parent ? $parent->id : 0,
+            implode(',', $status)
+        );
 
-        $page = self::find(array(
-            'where' => $where,
-            'limit' => 1
+        return self::find(array(
+            'where' => $where, 'limit' => 1
         ));
-
-        return $page;
     }
-
 
     /**
      * Finds a Page record based on supplied arguments.
      *
      * Usage:
-     *      $page = Page::find('/the/uri/to/your/page');
+     *      $page = Page::find('/the/path/to/your/page');
      *      $page = Page::find(array('where' => 'created_by_id=12'));
      *
      * Argument array can contain:
@@ -955,13 +979,13 @@ class Page extends Node {
      *      - An array of Page objects which can be empty
      *      - False
      *
-     * @param mixed $args   Uri string or array of arguments.
+     * @param mixed $args   Path string or array of arguments.
      * @return mixed        Page or array of Pages, otherwise false.
      */
     public static function find($args = null) {
         if (!is_array($args)) {
-            // Assumes find was called with a uri
-            return Page::findByUri($args);
+            // Assumes find was called with a path
+            return Page::findByPath($args);
         }
 
         $page_class = 'Page';
@@ -1032,6 +1056,30 @@ class Page extends Node {
     public static function findById($id) {
         return self::find(array(
             'where' => 'page.id='.(int) $id,
+            'limit' => 1
+        ));
+    }
+    
+    
+    /**
+     * Returns the first Page object with a certain behaviour.
+     * 
+     * The optional parameter $parentId can be given to narrow the search if it
+     * is known.
+     * 
+     * @param type $name
+     * @param type $parentId
+     * @return type
+     */
+    public static function findByBehaviour($name, $parentId=false) {
+        $where = "behavior_id='".$name."'";
+        
+        if ($parentId !== false && is_int($parentId)) {
+            $where = $where." AND parent_id=$parentId";
+        }
+        
+        return self::find(array(
+            'where' => $where,
             'limit' => 1
         ));
     }
