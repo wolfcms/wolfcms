@@ -1,17 +1,13 @@
 <?php
 
-    /**
-     * Italian file for plugin markdown
-     *
-     * @package Plugins
-     * @subpackage markdown
-     *
-     * @author Emanuele Alimonda <emanuele@alimonda.com>
-     * @version Wolf x.y.z
-     */
+/**
+ * Wolf CMS markdown plugin language file
+ *
+ * @package Translations
+ */
 
-    return array(
-    	'Allows you to use the Markdown text filter.' => 'Consente l\'uso del filtro del testo Markdown',
-	'Markdown' => 'Markdown',
-	'Markdown filter' => 'Filtro markdown',
-    );
+return array(
+    'Allows you to use the Markdown text filter (with MarkdownExtra and Smartypants).' => 'Consente di utilizzare il filtro testo Markdown (con MarkdownExtra e smartypants).',
+    'Markdown filter' => 'Filtro markdown',
+    'Markdown' => 'Markdown'
+);

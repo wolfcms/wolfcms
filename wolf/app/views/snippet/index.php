@@ -16,7 +16,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 ?>
-<h1><?php echo __('Snippets'); ?></h1>
+<h1><?php echo __('MSG_SNIPPETS'); ?></h1>
 
 <div id="site-map-def" class="index-def">
     <div class="snippet">
@@ -28,10 +28,10 @@
 <ul id="snippets" class="index">
 <?php foreach($snippets as $snippet): ?>
   <li id="snippet_<?php echo $snippet->id; ?>" class="snippet node <?php echo odd_even(); ?>">
-    <img align="middle" alt="snippet-icon" src="<?php echo URI_PUBLIC;?>wolf/admin/images/snippet.png" />
+    <img align="middle" alt="snippet-icon" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/snippet.png" />
     <a href="<?php echo get_url('snippet/edit/'.$snippet->id); ?>"><?php echo $snippet->name; ?></a>
-    <img class="handle" src="<?php echo URI_PUBLIC;?>wolf/admin/images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
-    <div class="remove"><a class="remove" href="<?php echo get_url('snippet/delete/'.$snippet->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete?'); ?> <?php echo $snippet->name; ?>?');"><img src="<?php echo URI_PUBLIC;?>wolf/admin/images/icon-remove.gif" alt="<?php echo __('delete snippet icon'); ?>" title="<?php echo __('Delete snippet'); ?>" /></a></div>
+    <img class="handle" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
+    <div class="remove"><a class="remove" href="<?php echo get_url('snippet/delete/'.$snippet->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete?'); ?> <?php echo $snippet->name; ?>?');"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/icon-remove.gif" alt="<?php echo __('delete snippet icon'); ?>" title="<?php echo __('Delete snippet'); ?>" /></a></div>
   </li>
 <?php endforeach; ?>
 </ul>

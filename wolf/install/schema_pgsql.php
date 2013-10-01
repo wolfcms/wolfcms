@@ -194,7 +194,8 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user (
   created_by_id integer DEFAULT NULL,
   updated_by_id integer DEFAULT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT username UNIQUE (username)
+  CONSTRAINT username UNIQUE (username),
+  CONSTRAINT uc_email UNIQUE (email)
 )");
 
 

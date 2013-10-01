@@ -1,17 +1,13 @@
 <?php
 
-    /**
-     * Polish file for plugin textile
-     *
-     * @package Plugins
-     * @subpackage textile
-     *
-     * @author Piotr Fuz <piotr.fuz@gmail.com> and Pawel Balicki <kilab1@o2.pl>
-     * @version Wolf 0.6.0
-     */
+/**
+ * Wolf CMS textile plugin language file
+ *
+ * @package Translations
+ */
 
-    return array(
-    	'Allows you to compose page parts or snippets using the Textile text filter.' => 'Pozwala utworzyć fragment strony lub skrawki używając filtra Textile',
-	'Textile filter' => 'Filtr Textile',
-    );
-
+return array(
+    'Allows you to use the Textile text filter.' => 'Allows you to use the Textile text filter.',
+    'Textile filter' => 'Filtr Textile',
+    'Textile' => 'Textile'
+);

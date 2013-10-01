@@ -105,7 +105,7 @@ class LoginController extends Controller {
                     redirect(get_url());
             }
             else {
-                Flash::set('error', __('Login failed. Please check your login data and try again.'));
+                Flash::set('error', __('Login failed. Check your username and password.<br/>If you tried to login more than :attempts times, you will have to wait at least :delay seconds before trying again.', array(':attempts' => AuthUser::DELAY_FIRST_AFTER, ':delay' => AuthUser::DELAY_ONCE_EVERY)));
                 Observer::notify('admin_login_failed', $data['username']);
             }
         }
@@ -122,6 +122,19 @@ class LoginController extends Controller {
      * Allows a user to logout.
      */
     function logout() {
+        // CSRF checks
+        if (isset($_GET['csrf_token'])) {
+            $csrf_token = $_GET['csrf_token'];
+            if (!SecureToken::validateToken($csrf_token, BASE_URL.'login/logout')) {
+                Flash::set('error', __('Invalid CSRF token found!'));
+                redirect(get_url());
+            }
+        }
+        else {
+            Flash::set('error', __('No CSRF token found!'));
+            redirect(get_url());
+        }
+        
         // Allow plugins to handle logout events
         Observer::notify('logout_requested');
 

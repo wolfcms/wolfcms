@@ -17,6 +17,9 @@
  * @copyright Martijn van der Kleijn, 2008, 2009, 2010
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
+ 
+ // Making sure COOKIE_HTTP_ONLY is defined.
+if (!defined('COOKIE_HTTP_ONLY')) define('COOKIE_HTTP_ONLY', false);
 
 /**
  * Used to keep track of login status.
@@ -31,6 +34,7 @@ class AuthUser {
     const ALLOW_LOGIN_WITH_EMAIL        = false;
     const DELAY_ON_INVALID_LOGIN        = true;
     const DELAY_ONCE_EVERY              = 30; // 30 seconds
+    const DELAY_FIRST_AFTER             = 3; // First delay starts after Nth failed login attempt
 
     static protected $is_logged_in  = false;
     static protected $user_id       = false;
@@ -195,7 +199,7 @@ class AuthUser {
 
         $user = User::findBy('username', $username);
 
-        if (self::DELAY_ON_INVALID_LOGIN && $user->failure_count > 0) {
+        if (self::DELAY_ON_INVALID_LOGIN && $user->failure_count > self::DELAY_FIRST_AFTER) {
             $last = explode(' ', $user->last_failure);
             $date = explode('-', $last[0]);
             $hours = explode(':', $last[1]);
@@ -219,7 +223,7 @@ class AuthUser {
 
             if ($set_cookie) {
                 $time = $_SERVER['REQUEST_TIME'] + self::COOKIE_LIFE;
-                setcookie(self::COOKIE_KEY, self::bakeUserCookie($time, $user), $time, '/', null, (isset($_ENV['SERVER_PROTOCOL']) && ((strpos($_ENV['SERVER_PROTOCOL'],'https') || strpos($_ENV['SERVER_PROTOCOL'],'HTTPS')))));
+                setcookie(self::COOKIE_KEY, self::bakeUserCookie($time, $user), $time, '/', null, (isset($_ENV['SERVER_PROTOCOL']) && ((strpos($_ENV['SERVER_PROTOCOL'],'https') || strpos($_ENV['SERVER_PROTOCOL'],'HTTPS')))), COOKIE_HTTP_ONLY);
             }
 
             // Regenerate Session ID upon login

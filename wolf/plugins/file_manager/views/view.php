@@ -8,20 +8,20 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) { exit(); }
-
 /**
  * The FileManager allows users to upload and manipulate files.
  *
  * @package Plugins
- * @subpackage file_manager
+ * @subpackage file-manager
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @copyright Philippe Archambault & Martijn van der Kleijn, 2008
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
+
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
 
   $out = '';
   $progres_path = '';
@@ -44,6 +44,7 @@ if (!defined('IN_CMS')) { exit(); }
     <div class="form-area">
         <p class="content">
             <input type="hidden" name="file[name]" value="<?php echo $filename; ?>" />
+            <input id="csrf_token" name="csrf_token" type="hidden" value="<?php echo $csrf_token; ?>" />
             <textarea class="textarea" id="file_content" name="file[content]" style="width: 100%; height: 400px;" rows="20" cols="40"><?php echo htmlentities($content, ENT_COMPAT, 'UTF-8'); ?></textarea><br />
         </p>
     </div>

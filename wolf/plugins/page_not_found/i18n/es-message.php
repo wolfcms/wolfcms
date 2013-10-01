@@ -1,16 +1,12 @@
 <?php
 
-    /**
-     * Spanish file for plugin page_not_found
-     *
-     * @package Plugins
-     * @subpackage page_not_found
-     *
-     * @author andrewmman
-     * @version Wolf 0.7
-     */
+/**
+ * Wolf CMS page_not_found plugin language file
+ *
+ * @package Translations
+ */
 
-    return array(
+return array(
     'Page not found' => 'Página no encontrada',
-	'Provides Page not found page types.' => 'Proporciona tipos de página para "Página no encontrada".',
-    );
+    'Provides Page not found page types.' => 'Proporciona tipos de página para "Página no encontrada".'
+);

@@ -7,9 +7,6 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) { exit(); }
-
 /**
  * The skeleton plugin serves as a basic plugin template.
  *
@@ -31,6 +28,9 @@ if (!defined('IN_CMS')) { exit(); }
  * @copyright Martijn van der Kleijn, 2008,2009
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
+
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
 
 /*
  * Any code below gets executed each time the plugin is enabled.

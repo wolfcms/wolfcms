@@ -48,7 +48,12 @@ class Snippet extends Record {
     }
 
     public function beforeSave() {
-    // apply filter to save is generated result in the database
+        // snippet name should not be empty
+        if (empty($this->name)) {
+            return false;
+        }
+        
+        // apply filter to save is generated result in the database
         if ( ! empty($this->filter_id)) {
             $this->content_html = Filter::get($this->filter_id)->apply($this->content);
         }
@@ -81,7 +86,9 @@ class Snippet extends Record {
             " LEFT JOIN $tablename_user AS updater ON $tablename.updated_by_id = updater.id".
             " $where_string $order_by_string $limit_string $offset_string";
 
-        $stmt = self::$__CONN__->prepare($sql);
+        Record::logQuery($sql);
+
+        $stmt = Record::getConnection()->prepare($sql);
         $stmt->execute();
 
         // Run!
@@ -104,15 +111,13 @@ class Snippet extends Record {
 
     public static function findById($id) {
         return self::find(array(
-        'where' => self::tableNameFromClassName('Snippet').'.id='.(int)$id,
-        'limit' => 1
+            'where' => self::tableNameFromClassName('Snippet').'.id='.(int)$id,
+            'limit' => 1
         ));
     }
 
     public static function findByName($name) {
-        $snippet = self::findOneFrom('Snippet', "name LIKE '$name'");
-
-        return $snippet;
+        return self::findOneFrom('Snippet', "name LIKE :name", array(':name' => $name));
     }
 
 } // end Snippet class

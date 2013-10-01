@@ -1,16 +1,13 @@
 <?php
 
 /**
- * German file for plugin textile
+ * Wolf CMS textile plugin language file
  *
- * @package Plugins
- * @subpackage textile
- *
- * @author Patrick Scheips <patrick.scheips@simple-dev.org>, simple-dev.org
- * @version Wolf 0.7.x
+ * @package Translations
  */
 
 return array(
-	'Allows you to use the Textile text filter.' => 'Ermöglicht die Verwendung des Textile-Textfilters.',
-	'Textile filter' => 'Textile-Filter',
+    'Allows you to use the Textile text filter.' => 'Ermöglicht die Verwendung des Textile-Textfilters.',
+    'Textile filter' => 'Textile-Filter',
+    'Textile' => 'Textile'
 );

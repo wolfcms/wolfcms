@@ -7,9 +7,6 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) { exit(); }
-
 /**
  * The multi lang plugin redirects users to a page with content in their language.
  *
@@ -22,12 +19,15 @@ if (!defined('IN_CMS')) { exit(); }
  * - Preferred language setting of logged in users
  *
  * @package Plugins
- * @subpackage multi_lang
+ * @subpackage multi-lang
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @copyright Martijn van der Kleijn, 2010
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
+
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
 
 /**
  */

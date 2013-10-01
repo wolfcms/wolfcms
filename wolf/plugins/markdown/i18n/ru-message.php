@@ -1,19 +1,13 @@
 <?php
 
-   /**
-     * Russian language file
-     *
-     * @package Plugins
-     * @subpackage markdown
-     *
-     * @author Dmitry Kostromin <kostromind@gmail.com>
-     * @version Wolf 0.6.0
-     * @last modifed from 07 February 2010
-     */
-	 
-	 
-	 
-    return array(
-    	'Allows you to compose page parts or snippets using the Markdown text filter.' => 'Позволяет создавать страницы или фрагменты с использованием текстового фильтра Markdown',
-		'Markdown filter' => 'Фильтр Markdown',
-    );
+/**
+ * Wolf CMS markdown plugin language file
+ *
+ * @package Translations
+ */
+
+return array(
+    'Allows you to use the Markdown text filter (with MarkdownExtra and Smartypants).' => 'Allows you to use the Markdown text filter (with MarkdownExtra and Smartypants).',
+    'Markdown filter' => 'Фильтр Markdown',
+    'Markdown' => 'Markdown'
+);

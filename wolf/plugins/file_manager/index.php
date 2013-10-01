@@ -8,14 +8,11 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) { exit(); }
-
 /**
  * The FileManager allows users to upload and manipulate files.
  *
  * @package Plugins
- * @subpackage file_manager
+ * @subpackage file-manager
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -23,10 +20,13 @@ if (!defined('IN_CMS')) { exit(); }
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
+
 /**
  * Root location where Files plugin lives.
  */
-define('FILES_ROOT', URI_PUBLIC.'wolf/plugins/file_manager');
+define('FILES_ROOT', PATH_PUBLIC.'wolf/plugins/file_manager');
 
 /**
  * Root location where files get uploaded to as an absolute path.

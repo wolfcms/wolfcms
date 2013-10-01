@@ -1,16 +1,12 @@
 <?php
 
-    /**
-     * YourLanguage file for plugin page_not_found
-     *
-     * @package Plugins
-     * @subpackage page_not_found
-     *
-     * @author Your Name <email@domain.something>
-     * @version Wolf x.y.z
-     */
+/**
+ * Wolf CMS page_not_found plugin language file
+ *
+ * @package Translations
+ */
 
-    return array(
-    	'Page not found' => 'ページが見つかりませんでした',
-	//'Provides Page not found page types.' => '',
-    );
+return array(
+    'Page not found' => 'ページが見つかりませんでした',
+    'Provides Page not found page types.' => 'ページは、ページ·タイプを発見していない提供。'
+);

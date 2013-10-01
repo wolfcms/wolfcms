@@ -9,21 +9,22 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) {
-    exit();
-}
-
 /**
  * Provides Page not found page types.
  *
  * @package Plugins
- * @subpackage page_not_found
+ * @subpackage page-not-found
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @copyright Philippe Archambault, 2008
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
+
+/* Security measure */
+if (!defined('IN_CMS')) {
+    exit();
+}
+
 Plugin::setInfos(array(
     'id' => 'page_not_found',
     'title' => __('Page not found'),
@@ -41,22 +42,13 @@ Observer::observe('page_not_found', 'behavior_page_not_found');
  * Presents browser with a custom 404 page.
  */
 function behavior_page_not_found($url) {
-    $sql = 'SELECT * FROM '.TABLE_PREFIX."page WHERE behavior_id='page_not_found'";
+    $page = Page::findByBehaviour('page_not_found');
 
-    $stmt = Record::getConnection()->prepare($sql);
-    $stmt->execute();
+    if (is_a($page, 'Page')) {
+        header("HTTP/1.0 404 Not Found");
+        header("Status: 404 Not Found");
 
-    $page = $stmt->fetchObject();
-
-    if ($page) {
-        $page = Page::find_page_by_uri($page->slug);
-
-        if (is_object($page)) {
-            header("HTTP/1.0 404 Not Found");
-            header("Status: 404 Not Found");
-
-            $page->_executeLayout();
-            exit(); // need to exit otherwise true error page will be sent
-        }
+        $page->_executeLayout();
+        exit(); // need to exit otherwise true error page will be sent
     }
 }

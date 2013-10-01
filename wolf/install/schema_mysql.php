@@ -191,7 +191,8 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."user (
   created_by_id int(11) default NULL,
   updated_by_id int(11) default NULL,
   PRIMARY KEY  (id),
-  UNIQUE KEY username (username)
+  UNIQUE KEY username (username),
+  CONSTRAINT uc_email UNIQUE (email)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8");
 
 

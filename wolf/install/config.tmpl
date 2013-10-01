@@ -48,6 +48,11 @@ define('URL_PUBLIC', 'http://<?php echo substr(dirname($_SERVER['HTTP_HOST'].$_S
 // Before enabling this, please make sure you have a working HTTP+SSL installation.
 define('USE_HTTPS', false);
 
+// Use HTTP ONLY setting for the Wolf CMS authentication cookie?
+// This requests browsers to make the cookie only available through HTTP, so not javascript for example.
+// Defaults to false for backwards compatibility.
+define('COOKIE_HTTP_ONLY', false);
+
 // The virtual directory name for your Wolf CMS administration section.
 define('ADMIN_DIR', 'admin');
 

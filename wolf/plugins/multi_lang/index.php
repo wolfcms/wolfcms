@@ -7,9 +7,6 @@
  * Please see license.txt for the full license text.
  */
 
-/* Security measure */
-if (!defined('IN_CMS')) { exit(); }
-
 /**
  * The multi lang plugin redirects users to a page with content in their language.
  *
@@ -22,12 +19,15 @@ if (!defined('IN_CMS')) { exit(); }
  * - Preferred language setting of logged in users
  *
  * @package Plugins
- * @subpackage multi_lang
+ * @subpackage multi-lang
  *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @copyright Martijn van der Kleijn, 2010
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
+
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
 
 $urilang = false;
 
@@ -105,8 +105,8 @@ function replaceContent($page) {
         foreach (I18n::getPreferredLanguages() as $lang) {
             if ( Setting::get('language') == $lang) { break; }
 
-            $uri = $lang.'/'.CURRENT_URI;
-            $page = Page::findByUri($uri);
+            $uri = $lang.'/'.CURRENT_PATH;
+            $page = Page::findByPath($uri);
 
             if ( false !== $page ) {
                 redirect(BASE_URL.$uri);
@@ -118,8 +118,8 @@ function replaceContent($page) {
         if (AuthUser::isLoggedIn()) {
             $lang = AuthUser::getRecord()->language;
 
-            $uri = $lang.'/'.CURRENT_URI;
-            $page = Page::findByUri($uri);
+            $uri = $lang.'/'.CURRENT_PATH;
+            $page = Page::findByPath($uri);
 
             if ( false !== $page ) {
                 redirect(BASE_URL.$uri);
@@ -136,7 +136,7 @@ function replaceUri($uri) {
     global $urilang;
     $tmp = explode('/', $uri, 2);
 
-    if (array_key_exists($tmp[0], SettingController::$iso_639_1)) {
+    if (array_key_exists($tmp[0], SettingController::$ietf)) {
         $urilang = $tmp[0];
         $uri = substr($uri, 2);
     }

@@ -1,16 +1,13 @@
 <?php
 
-    /**
-     * Dutch translation for plugin markdown
-     *
-     * @package Plugins
-     * @subpackage markdown
-     *
-     * @author Fortron
-     * @version Wolf 0.6.0
-     */
+/**
+ * Wolf CMS markdown plugin language file
+ *
+ * @package Translations
+ */
 
-    return array(
-    'Allows you to compose page parts or snippets using the Markdown text filter.' => 'Biedt de mogelijkheid tot het samenstellen van een pagina of snippers met de Markdown filter',
-	'Markdown filter' => 'Markdown filter',
-    );
+return array(
+    'Allows you to use the Markdown text filter (with MarkdownExtra and Smartypants).' => 'Stelt u in staat om de Markdown tekst filter (met MarkdownExtra en Smartypants) te gebruiken.',
+    'Markdown filter' => 'Markdown filter',
+    'Markdown' => 'Markdown'
+);

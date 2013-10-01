@@ -26,7 +26,7 @@ if (!defined('IN_CMS')) { exit(); }
 # Markdown Extra  -  A text-to-HTML conversion tool for web writers
 #
 # PHP Markdown & Extra
-# Copyright (c) 2004-2009 Michel Fortin  
+# Copyright (c) 2004-2012 Michel Fortin  
 # <http://michelf.com/projects/php-markdown/>
 #
 # Original Markdown
@@ -35,8 +35,8 @@ if (!defined('IN_CMS')) { exit(); }
 #
 
 
-define( 'MARKDOWN_VERSION',  "1.0.1n" ); # Sat 10 Oct 2009
-define( 'MARKDOWNEXTRA_VERSION',  "1.2.4" ); # Sat 10 Oct 2009
+define( 'MARKDOWN_VERSION',  "1.0.1o" ); # Sun 8 Jan 2012
+define( 'MARKDOWNEXTRA_VERSION',  "1.2.5" ); # Sun 8 Jan 2012
 
 
 #
@@ -76,6 +76,7 @@ function Markdown($text) {
 	# Transform text using parser.
 	return $parser->transform($text);
 }
+
 
 #
 # Markdown Parser Class
@@ -819,7 +820,7 @@ class Markdown_Parser {
 
 		# Re-usable patterns to match list item bullets and number markers:
 		$marker_ul_re  = '[*+-]';
-		$marker_ol_re  = '\d+[.]';
+		$marker_ol_re  = '\d+[\.]';
 		$marker_any_re = "(?:$marker_ul_re|$marker_ol_re)";
 
 		$markers_relist = array(
@@ -880,7 +881,7 @@ class Markdown_Parser {
 	function _doLists_callback($matches) {
 		# Re-usable patterns to match list item bullets and number markers:
 		$marker_ul_re  = '[*+-]';
-		$marker_ol_re  = '\d+[.]';
+		$marker_ol_re  = '\d+[\.]';
 		$marker_any_re = "(?:$marker_ul_re|$marker_ol_re)";
 		
 		$list = $matches[1];
@@ -1010,17 +1011,17 @@ class Markdown_Parser {
 
 
 	var $em_relist = array(
-		''  => '(?:(?<!\*)\*(?!\*)|(?<!_)_(?!_))(?=\S|$)(?![.,:;]\s)',
+		''  => '(?:(?<!\*)\*(?!\*)|(?<!_)_(?!_))(?=\S|$)(?![\.,:;]\s)',
 		'*' => '(?<=\S|^)(?<!\*)\*(?!\*)',
 		'_' => '(?<=\S|^)(?<!_)_(?!_)',
 		);
 	var $strong_relist = array(
-		''   => '(?:(?<!\*)\*\*(?!\*)|(?<!_)__(?!_))(?=\S|$)(?![.,:;]\s)',
+		''   => '(?:(?<!\*)\*\*(?!\*)|(?<!_)__(?!_))(?=\S|$)(?![\.,:;]\s)',
 		'**' => '(?<=\S|^)(?<!\*)\*\*(?!\*)',
 		'__' => '(?<=\S|^)(?<!_)__(?!_)',
 		);
 	var $em_strong_relist = array(
-		''    => '(?:(?<!\*)\*\*\*(?!\*)|(?<!_)___(?!_))(?=\S|$)(?![.,:;]\s)',
+		''    => '(?:(?<!\*)\*\*\*(?!\*)|(?<!_)___(?!_))(?=\S|$)(?![\.,:;]\s)',
 		'***' => '(?<=\S|^)(?<!\*)\*\*\*(?!\*)',
 		'___' => '(?<=\S|^)(?<!_)___(?!_)',
 		);
@@ -1754,7 +1755,7 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 				|
 					# Fenced code block marker
 					(?> ^ | \n )
-					[ ]{'.($indent).'}~~~+[ ]*\n
+					[ ]{0,'.($indent).'}~~~+[ ]*\n
 				' : '' ). ' # End (if not is span).
 				)
 			}xs';
@@ -1816,20 +1817,12 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 				}
 			}
 			#
-			# Check for: Indented code block.
-			#
-			else if ($tag{0} == "\n" || $tag{0} == " ") {
-				# Indented code block: pass it unchanged, will be handled 
-				# later.
-				$parsed .= $tag;
-			}
-			#
 			# Check for: Fenced code block marker.
 			#
-			else if ($tag{0} == "~") {
+			else if (preg_match('{^\n?[ ]{0,'.($indent+3).'}~}', $tag)) {
 				# Fenced code block marker: find matching end marker.
 				$tag_re = preg_quote(trim($tag));
-				if (preg_match('{^(?>.*\n)+?'.$tag_re.' *\n}', $text, 
+				if (preg_match('{^(?>.*\n)+?[ ]{0,'.($indent).'}'.$tag_re.'[ ]*\n}', $text, 
 					$matches)) 
 				{
 					# End marker found: pass text unchanged until marker.
@@ -1840,6 +1833,14 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 					# No end marker: just skip it.
 					$parsed .= $tag;
 				}
+			}
+			#
+			# Check for: Indented code block.
+			#
+			else if ($tag{0} == "\n" || $tag{0} == " ") {
+				# Indented code block: pass it unchanged, will be handled 
+				# later.
+				$parsed .= $tag;
 			}
 			#
 			# Check for: Opening Block level tag or
@@ -2457,17 +2458,17 @@ class MarkdownExtra_Parser extends Markdown_Parser {
 	# work in the middle of a word.
 	#
 	var $em_relist = array(
-		''  => '(?:(?<!\*)\*(?!\*)|(?<![a-zA-Z0-9_])_(?!_))(?=\S|$)(?![.,:;]\s)',
+		''  => '(?:(?<!\*)\*(?!\*)|(?<![a-zA-Z0-9_])_(?!_))(?=\S|$)(?![\.,:;]\s)',
 		'*' => '(?<=\S|^)(?<!\*)\*(?!\*)',
 		'_' => '(?<=\S|^)(?<!_)_(?![a-zA-Z0-9_])',
 		);
 	var $strong_relist = array(
-		''   => '(?:(?<!\*)\*\*(?!\*)|(?<![a-zA-Z0-9_])__(?!_))(?=\S|$)(?![.,:;]\s)',
+		''   => '(?:(?<!\*)\*\*(?!\*)|(?<![a-zA-Z0-9_])__(?!_))(?=\S|$)(?![\.,:;]\s)',
 		'**' => '(?<=\S|^)(?<!\*)\*\*(?!\*)',
 		'__' => '(?<=\S|^)(?<!_)__(?![a-zA-Z0-9_])',
 		);
 	var $em_strong_relist = array(
-		''    => '(?:(?<!\*)\*\*\*(?!\*)|(?<![a-zA-Z0-9_])___(?!_))(?=\S|$)(?![.,:;]\s)',
+		''    => '(?:(?<!\*)\*\*\*(?!\*)|(?<![a-zA-Z0-9_])___(?!_))(?=\S|$)(?![\.,:;]\s)',
 		'***' => '(?<=\S|^)(?<!\*)\*\*\*(?!\*)',
 		'___' => '(?<=\S|^)(?<!_)___(?![a-zA-Z0-9_])',
 		);

@@ -1,23 +1,19 @@
 <?php
 
-    /**
-     * Polish file for plugin skeleton
-     *
-     * @package Plugins
-     * @subpackage skeleton
-     *
-     * @author Piotr Fuz <piotr.fuz@gmail.com> and Paweł Balicki <kilab1@o2.pl>
-     * @version Wolf 0.6.0
-     */
+/**
+ * Wolf CMS skeleton plugin language file
+ *
+ * @package Translations
+ */
 
-    return array(
-    	'A sidebar' => 'Panel boczny',
-	'Display settings page here!' => 'Wyświetl tutaj stronę konfiguracji!',
-	'Display your documentation here!' => 'Wyświetl tutaj stronę dokumentacji!',
-	'Documentation' => 'Dokumentacja',
-	'Provides a basic plugin implementation. (try enabling it!)' => 'Prosty przykład implementacji pluginu',
-	'Put something here, or leave out the sidebar entirely.' => 'Wstaw tutaj coś lub zostaw puste.',
-	'Settings' => 'Konfiguracja',
-	'Skeleton' => 'Szkielet',
-    );
-
+return array(
+    'A sidebar' => 'A sidebar',
+    'Display settings page here!' => 'Display settings page here!',
+    'Display your documentation here!' => 'Display your documentation here!',
+    'Documentation' => 'Dokumentacja',
+    'Provides a basic plugin implementation. (try enabling it!)' => 'Provides a basic plugin implementation. (try enabling it!)',
+    'Put something here, or leave out the sidebar entirely.' => 'Put something here, or leave out the sidebar entirely.',
+    'Settings' => 'Ustawienia',
+    'Skeleton' => 'Skeleton',
+    'You have modified this page.  If you navigate away from this page without first saving your data, the changes will be lost.' => 'Zmieniłeś zawartość, jeśli przejdziesz do innej strony bez zapisywania utracisz modyfikacje.'
+);

@@ -116,6 +116,8 @@ class PluginController extends Controller {
     private function executeFrontendLayout() {
         $sql = 'SELECT content_type, content FROM '.TABLE_PREFIX.'layout WHERE name = '."'$this->frontend_layout'";
 
+        Record::logQuery($sql);
+
         $stmt = Record::getConnection()->prepare($sql);
         $stmt->execute();
 
@@ -132,7 +134,7 @@ class PluginController extends Controller {
 
             // Provides compatibility with the Page class.
             // @todo Find cleaner way of doing multiple inheritance
-            $this->url = CURRENT_URI;
+            $this->url = CURRENT_PATH;
 
             // Execute the layout code.
             eval('?>'.$layout->content);

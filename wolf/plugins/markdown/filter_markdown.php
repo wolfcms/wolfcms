@@ -18,9 +18,10 @@
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
 
-
 /* Security measure */
 if (!defined('IN_CMS')) { exit(); }
+
+require_once('smartypants.php');
 
 /**
  * A Wolf CMS specific wrapper around the original parser.
@@ -29,7 +30,8 @@ class Markdown {
 
     function apply($text) {
         require_once('classMarkdown.php');
-        $markdown = new Markdown_Parser();
-        return $markdown->transform($text);
+        $markdown = new MarkdownExtra_Parser();
+        $text = $markdown->transform($text);
+        return SmartyPants($text);
     }
 }

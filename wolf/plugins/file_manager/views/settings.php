@@ -1,3 +1,27 @@
+<?php
+/*
+ * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2010-2013 Martijn van der Kleijn <martijn.niji@gmail.com>
+ *
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
+ */
+
+/**
+ * The FileManager allows users to upload and manipulate files.
+ *
+ * @package Plugins
+ * @subpackage file-manager
+ *
+ * @author Martijn van der Kleijn <martijn.niji@gmail.com>
+ * @copyright Martijn van der Kleijn, 2010-2013
+ * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
+ */
+
+/* Security measure */
+if (!defined('IN_CMS')) { exit(); }
+
+?>
 <h1><?php echo __('File Manager Settings');?></h1>
 <form action="<?php echo get_url('plugin/file_manager/settings_save'); ?>" method="post">
     <fieldset style="padding: 0.5em;">

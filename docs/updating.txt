@@ -8,6 +8,26 @@ Please be aware that we only support single version upgrades.
 IMPORTANT - always check your security by viewing security.php post update!
 
 
+
+### Upgrading from 0.7.5-sp1 => 0.7.6 or 0.7.7 ###
+
+IMPORTANT - Make absolutely sure you have 0.7.5-sp1 before doing this.
+(due to a bug in the 0.7.6 release, it is advised to upgrade to 0.7.7)
+
+You can upgrade from 0.7.5-sp1 by simply replacing the Wolf CMS files. No database changes required.
+Make sure you have a backup of your files though.
+
+Upgrade Notes:
+
+1. If you see "MISSING_DEFAULT_STRING", it means that no "translation" was found for a string in en-message.php
+
+This is most likely caused by either a missing translation string or a missing en-message.php file for a plugin.
+
+2. Without knowing your layouts and snippets, if you have references to "$this->url" in your navigation related code,
+   you should probably change it into "$this->path()". That should fix potential problems with highlighting the active page in your
+   menu for example.
+
+
 ### Upgrading from 0.7.x => 0.7.5 (ONLY!) ###
 
 IMPORTANT - Make absolutely sure you have 0.7.x before doing this.

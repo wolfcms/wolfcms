@@ -15,7 +15,7 @@
 //  Constants  ---------------------------------------------------------------
 define('IN_CMS', true);
 
-define('CMS_VERSION', '0.8.0-dev');
+define('CMS_VERSION', '0.7.7');
 define('CMS_ROOT', dirname(__FILE__));
 define('DS', DIRECTORY_SEPARATOR);
 define('CORE_ROOT', CMS_ROOT.DS.'wolf');
@@ -32,23 +32,26 @@ if ( ! defined('DEBUG')) { header('Location: wolf/install/'); exit(); }
 
 $url = URL_PUBLIC;
 
-// Figure out what the public URI is based on URL_PUBLIC.
+// Figure out what the public path is based on URL_PUBLIC.
 // @todo improve
 $changedurl = str_replace('//','|',URL_PUBLIC);
 $lastslash = strpos($changedurl, '/');
 if (false === $lastslash) {
-    define('URI_PUBLIC', '/');
+    define('PATH_PUBLIC', '/');
 }
 else {
-    define('URI_PUBLIC', substr($changedurl, $lastslash));
+    define('PATH_PUBLIC', substr($changedurl, $lastslash));
 }
 
-// Determine URI for backend check
+// Alias for backward compatibility, this constant should no longer be used.
+define('URI_PUBLIC', PATH_PUBLIC);
+
+// Determine path for backend check
 if (USE_MOD_REWRITE && isset($_GET['WOLFPAGE'])) {
     $admin_check = $_GET['WOLFPAGE'];
 }
 else {
-    $admin_check = urldecode($_SERVER['QUERY_STRING']);
+    $admin_check = !empty($_SERVER['QUERY_STRING']) ? urldecode($_SERVER['QUERY_STRING']) : '';
 }
 
 // Are we in frontend or backend?
@@ -58,18 +61,25 @@ if (startsWith($admin_check, ADMIN_DIR) || startsWith($admin_check, '/'.ADMIN_DI
         $url = str_replace('http://', 'https://', $url);
     }
     define('BASE_URL', $url . (endsWith($url, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?/') . ADMIN_DIR . (endsWith(ADMIN_DIR, '/') ? '': '/'));
-    define('BASE_URI', URI_PUBLIC . (endsWith($url, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?/') . ADMIN_DIR . (endsWith(ADMIN_DIR, '/') ? '': '/'));
+    define('BASE_PATH', PATH_PUBLIC . (endsWith($url, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?/') . ADMIN_DIR . (endsWith(ADMIN_DIR, '/') ? '': '/'));
 }
 else {
     define('BASE_URL', URL_PUBLIC . (endsWith(URL_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
-    define('BASE_URI', URI_PUBLIC . (endsWith(URI_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
+    define('BASE_PATH', PATH_PUBLIC . (endsWith(PATH_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
 }
 
-define('PLUGINS_URI', URI_PUBLIC.'wolf/plugins/');
-if (!defined('THEMES_ROOT')) { define('THEMES_ROOT', CMS_ROOT.DS.'public'.DS.'themes'.DS); }
-if (!defined('THEMES_URI')) { define('THEMES_URI', URI_PUBLIC.'public/themes/'); }
-if (!defined('ICONS_URI')) { define('ICONS_URI', URI_PUBLIC.'wolf/icons/'); }
+// Alias for backward compatibility, this constant should no longer be used.
+define('BASE_URI', BASE_PATH);
 
+define('PLUGINS_PATH', PATH_PUBLIC.'wolf/plugins/');
+if (!defined('THEMES_ROOT')) { define('THEMES_ROOT', CMS_ROOT.DS.'public'.DS.'themes'.DS); }
+if (!defined('THEMES_PATH')) { define('THEMES_PATH', PATH_PUBLIC.'public/themes/'); }
+if (!defined('ICONS_PATH')) { define('ICONS_PATH', PATH_PUBLIC.'wolf/icons/'); }
+
+// Aliases for backward compatibility, these constants should no longer be used.
+define('THEMES_URI', THEMES_PATH);
+define('PLUGINS_URI', PLUGINS_PATH);
+define('ICONS_URI', ICONS_PATH);
 
 // Security checks -----------------------------------------------------------
 if (DEBUG == false && isWritable($config_file)) {
