@@ -464,7 +464,17 @@ class FileManagerController extends PluginController {
                 $files[$object->name] = $object;
             }
 
-            uksort($files, 'strnatcmp');
+            // note - uses anonymous function so PHP 5.3+ required
+            uasort($files, function($a, $b) {
+                if ($a->is_dir && !$b->is_dir) {
+                    return 0;
+                } elseif ($b->is_dir && !$a->is_dir) {
+                    return 1;
+                } else {
+                    return strnatcmp($a->name, $b->name);
+                }
+            });
+            
             return $files;
         }
 

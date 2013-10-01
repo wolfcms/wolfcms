@@ -46,36 +46,38 @@ if (!isset($title) || trim($title) == '') {
     
     <title><?php use_helper('Kses'); echo $title . ' | ' . kses(Setting::get('admin_title'), array()); ?></title>
 
-    <link rel="favourites icon" href="<?php echo URI_PUBLIC; ?>wolf/admin/images/favicon.ico" />
-    <link href="<?php echo URI_PUBLIC; ?>wolf/admin/stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
-    <link href="<?php echo URI_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
+    <link rel="favourites icon" href="<?php echo PATH_PUBLIC; ?>wolf/admin/images/favicon.ico" />
+    <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
+    <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
 
     <!-- IE6 PNG support fix -->
     <!--[if lt IE 7]>
-        <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/unitpngfix.js"></script>
+        <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/unitpngfix.js"></script>
     <![endif]-->
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/cp-datepicker.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/wolf.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/jquery-1.6.2.min.js"></script> 
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/jquery-ui-1.8.5.custom.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/admin/javascripts/jquery.ui.nestedSortable.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/cp-datepicker.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/wolf.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/jquery-1.6.2.min.js"></script> 
+    <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/jquery-ui-1.8.5.custom.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/jquery.ui.nestedSortable.js"></script>
 
-    <script type="text/javascript" src="<?php echo URI_PUBLIC; ?>wolf/admin/markitup/jquery.markitup.js"></script>
-    <link rel="stylesheet" type="text/css" href="<?php echo URI_PUBLIC; ?>wolf/admin/markitup/skins/simple/style.css" />
+    <?php Observer::notify('view_backend_layout_head', CURRENT_PATH); ?>
+        
+    <script type="text/javascript" src="<?php echo PATH_PUBLIC; ?>wolf/admin/markitup/jquery.markitup.js"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo PATH_PUBLIC; ?>wolf/admin/markitup/skins/simple/style.css" />
     
 <?php foreach(Plugin::$plugins as $plugin_id => $plugin): ?>
 <?php if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $plugin_id . '.js')): ?>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.js"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.js"></script>
 <?php endif; ?>
 <?php if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $plugin_id . '.css')): ?>
-    <link href="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.css" media="screen" rel="Stylesheet" type="text/css" />
+    <link href="<?php echo PATH_PUBLIC; ?>wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.css" media="screen" rel="Stylesheet" type="text/css" />
 <?php endif; ?>
 <?php endforeach; ?>
 <?php foreach(Plugin::$stylesheets as $plugin_id => $stylesheet): ?>
-    <link type="text/css" href="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $stylesheet; ?>" media="screen" rel="Stylesheet" />
+    <link type="text/css" href="<?php echo PATH_PUBLIC; ?>wolf/plugins/<?php echo $stylesheet; ?>" media="screen" rel="Stylesheet" />
 <?php endforeach; ?>
 <?php foreach(Plugin::$javascripts as $jscript_plugin_id => $javascript): ?>
-    <script type="text/javascript" charset="utf-8" src="<?php echo URI_PUBLIC; ?>wolf/plugins/<?php echo $javascript; ?>"></script>
+    <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/plugins/<?php echo $javascript; ?>"></script>
 <?php endforeach; ?>
     
     <script type="text/javascript">

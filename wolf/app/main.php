@@ -25,10 +25,24 @@ else
 
 
 /**
- * Explode an URI and make a array of params
+ * Turns a path into an array of slugs
+ * 
+ * @param  string $path     A path (for instance path/to/page)
+ * @return array            Array of slugs
+ */
+function explode_path($path) {
+    return preg_split('/\//', $path, -1, PREG_SPLIT_NO_EMPTY);
+}
+
+
+/**
+ * Alias for explode_path, this function should no longer be used.
+ * 
+ * @deprecated
+ * @see  explode_path()
  */
 function explode_uri($uri) {
-    return preg_split('/\//', $uri, -1, PREG_SPLIT_NO_EMPTY);
+    return explode_path($uri);
 }
 
 
@@ -46,7 +60,7 @@ function find_page_by_slug($slug, &$parent, $all = false) {
 function url_match($url) {
     $url = trim($url, '/');
 
-    if (CURRENT_URI == $url)
+    if (CURRENT_PATH == $url)
         return true;
 
     return false;
@@ -56,10 +70,10 @@ function url_match($url) {
 function url_start_with($url) {
     $url = trim($url, '/');
 
-    if (CURRENT_URI == $url)
+    if (CURRENT_PATH == $url)
         return true;
 
-    if (strpos(CURRENT_URI, $url) === 0)
+    if (strpos(CURRENT_PATH, $url) === 0)
         return true;
 
     return false;
@@ -109,16 +123,16 @@ function displayNode(Node $node) {
 
 function main() {
     // get the uri string from the query
-    $uri = $_SERVER['QUERY_STRING'];
+    $path = $_SERVER['QUERY_STRING'];
 
     // Make sure special characters are decoded (support non-western glyphs like japanese)
-    $uri = urldecode($uri);
+    $path = urldecode($path);
 
     // START processing $_GET variables
     // If we're NOT using mod_rewrite, we check for GET variables we need to integrate
-    if (!USE_MOD_REWRITE && strpos($uri, '?') !== false) {
+    if (!USE_MOD_REWRITE && strpos($path, '?') !== false) {
         $_GET = array(); // empty $_GET array since we're going to rebuild it
-        list($uri, $get_var) = explode('?', $uri);
+        list($path, $get_var) = explode('?', $path);
         $exploded_get = explode('&', $get_var);
 
         if (count($exploded_get)) {
@@ -129,47 +143,50 @@ function main() {
         }
     }
     // We're NOT using mod_rewrite, and there's no question mark wich points to GET variables in combination with site root.
-    else if (!USE_MOD_REWRITE && (strpos($uri, '&') !== false || strpos($uri, '=') !== false)) {
-        $uri = '/';
+    else if (!USE_MOD_REWRITE && (strpos($path, '&') !== false || strpos($path, '=') !== false)) {
+        $path = '/';
     }
 
     // If we're using mod_rewrite, we should have a WOLFPAGE entry.
     if (USE_MOD_REWRITE && array_key_exists('WOLFPAGE', $_GET)) {
-        $uri = $_GET['WOLFPAGE'];
+        $path = $_GET['WOLFPAGE'];
         unset($_GET['WOLFPAGE']);
     }
     else if (USE_MOD_REWRITE)   // We're using mod_rewrite but don't have a WOLFPAGE entry, assume site root.
-        $uri = '/';
+        $path = '/';
 
     // Needed to allow for ajax calls to backend
     if (array_key_exists('WOLFAJAX', $_GET)) {
-        $uri = '/'.ADMIN_DIR.$_GET['WOLFAJAX'];
+        $path = '/'.ADMIN_DIR.$_GET['WOLFAJAX'];
         unset($_GET['WOLFAJAX']);
     }
     // END processing $_GET variables
     // remove suffix page if founded
     if (URL_SUFFIX !== '' and URL_SUFFIX !== '/')
-        $uri = preg_replace('#^(.*)('.URL_SUFFIX.')$#i', "$1", $uri);
+        $path = preg_replace('#^(.*)('.URL_SUFFIX.')$#i', "$1", $path);
 
-    define('CURRENT_URI', trim($uri, '/'));
+    define('CURRENT_PATH', trim($path, '/'));
 
-    if ($uri != null && $uri[0] != '/')
-        $uri = '/'.$uri;
+    // Alias for backward compatibility, this constant should no longer be used.
+    define('CURRENT_URI', CURRENT_PATH);
+
+    if ($path != null && $path[0] != '/')
+        $path = '/'.$path;
 
     // Check if there's a custom route defined for this URI,
     // otherwise continue and assume page was requested.
-    if (Dispatcher::hasRoute($uri)) {
-        Observer::notify('dispatch_route_found', $uri);
-        Dispatcher::dispatch($uri);
+    if (Dispatcher::hasRoute($path)) {
+        Observer::notify('dispatch_route_found', $path);
+        Dispatcher::dispatch($path);
         exit;
     }
 
     foreach (Observer::getObserverList('page_requested') as $callback) {
-        $uri = call_user_func_array($callback, array(&$uri));
+        $path = call_user_func_array($callback, array(&$path));
     }
 
     // this is where 80% of the things is done
-    $page = Page::findByUri($uri, true);
+    $page = Page::findByPath($path, true);
 
     // @todo Replace this entire section by the display() function.
     // if we found it, display it!
@@ -178,7 +195,7 @@ function main() {
         if (Page::STATUS_PREVIEW == $page->status_id) {
             AuthUser::load();
             if (!AuthUser::isLoggedIn() || !AuthUser::hasPermission('page_view'))
-                pageNotFound($uri);
+                pageNotFound($path);
         }
 
         // If page needs login, redirect to login
@@ -194,7 +211,7 @@ function main() {
         $page->_executeLayout();
     }
     else {
-        pageNotFound($uri);
+        pageNotFound($path);
     }
 }
 
