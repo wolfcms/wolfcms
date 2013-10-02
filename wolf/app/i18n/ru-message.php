@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Защищено',
     'Published' => 'Опубликовано',
     'Published date' => 'Дата публикации',
-    'Remember me for 30 minutes.' => 'Remember me for 30 minutes.',
+    'Remember me for :min minutes.' => 'Remember me for :min minutes.',
     'Remove Tab' => 'Удалить Вкладку',
     'Remove page' => 'Удалить Страницу',
     'Remove unavailable' => 'Remove unavailable',

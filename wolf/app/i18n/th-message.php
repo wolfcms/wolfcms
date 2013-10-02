@@ -126,7 +126,7 @@ return array(
     'Protected' => 'ป้องกัน',
     'Published' => 'เผยแพร่',
     'Published date' => 'วันที่เผยแพร่',
-    'Remember me for 30 minutes.' => 'Remember me for 30 minutes.',
+    'Remember me for :min minutes.' => 'Remember me for :min minutes.',
     'Remove Tab' => 'ลบแท็บ',
     'Remove page' => 'ลบหน้าเพจ',
     'Remove unavailable' => 'ลบที่ไม่เปิดใช้',

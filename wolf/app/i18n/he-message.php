@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Protected',
     'Published' => 'פורסם',
     'Published date' => 'Published date',
-    'Remember me for 30 minutes.' => 'Remember me for 30 minutes.',
+    'Remember me for :min minutes.' => 'Remember me for :min minutes.',
     'Remove Tab' => 'הסרת טאב',
     'Remove page' => 'מחק דף',
     'Remove unavailable' => 'Remove unavailable',

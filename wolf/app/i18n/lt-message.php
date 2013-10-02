@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Apsaugotas',
     'Published' => 'Viešas',
     'Published date' => 'Paviešinimo data',
-    'Remember me for 30 minutes.' => 'Prisiminti prisijungimą 30 minučių.',
+    'Remember me for :min minutes.' => 'Prisiminti prisijungimą :min minučių.',
     'Remove Tab' => 'Pašalinti sektuką',
     'Remove page' => 'Pašalinti puslapį',
     'Remove unavailable' => 'Pašalinimas negalimas',

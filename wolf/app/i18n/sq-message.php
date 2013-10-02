@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Mbrojtur',
     'Published' => 'Publikuar',
     'Published date' => 'Data e publikimit',
-    'Remember me for 30 minutes.' => 'Remember me for 30 minutes.',
+    'Remember me for :min minutes.' => 'Remember me for :min minutes.',
     'Remove Tab' => 'Hiq Tab',
     'Remove page' => 'Hiq faqen',
     'Remove unavailable' => 'Hiqi joaktivet',

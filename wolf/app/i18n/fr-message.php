@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Protégé',
     'Published' => 'Publié',
     'Published date' => 'Date de publication',
-    'Remember me for 30 minutes.' => 'Mémoriser ma connexion pendant 30 minutes.',
+    'Remember me for :min minutes.' => 'Mémoriser ma connexion pendant :min minutes.',
     'Remove Tab' => 'Supprimer Onglet',
     'Remove page' => 'Supprimer page',
     'Remove unavailable' => 'Suppression impossible',

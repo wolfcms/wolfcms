@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Védett',
     'Published' => 'Közzétett',
     'Published date' => 'Közzétéve',
-    'Remember me for 30 minutes.' => 'Jegyezz meg 30 percig',
+    'Remember me for :min minutes.' => 'Jegyezz meg :min percig',
     'Remove Tab' => 'Fül eltávolítása',
     'Remove page' => 'Oldal eltávolítása',
     'Remove unavailable' => 'eltávolítása nme engedélyezett',

@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Protejat',
     'Published' => 'Publicat',
     'Published date' => 'Data Publicării',
-    'Remember me for 30 minutes.' => 'Remember me for 30 minutes.',
+    'Remember me for :min minutes.' => 'Remember me for :min minutes.',
     'Remove Tab' => 'Înlăturare Tab',
     'Remove page' => 'Înlăturare Pagina',
     'Remove unavailable' => 'Înlăturare indisponibilă',
