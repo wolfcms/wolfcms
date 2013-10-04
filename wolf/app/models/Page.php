@@ -622,7 +622,7 @@ class Page extends Node {
 
         // Collect attributes...
         $where = isset($args['where']) ? $args['where'] : '';
-        $order = isset($args['order']) ? $args['order'] : 'page.position, page.id';
+        $order = isset($args['order']) ? $args['order'] : 'page.position ASC, page.id DESC';
         $offset = isset($args['offset']) ? $args['offset'] : 0;
         $limit = isset($args['limit']) ? $args['limit'] : 0;
 
@@ -1086,7 +1086,7 @@ class Page extends Node {
 
 
     public static function childrenOf($id) {
-        return self::find(array('where' => 'parent_id='.$id, 'order' => 'position, page.created_on DESC'));
+        return self::findById($id)->children();
     }
 
 
