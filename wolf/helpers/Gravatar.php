@@ -123,7 +123,7 @@ class Gravatar {
                 $secure = false;
             } else if (is_array($opt)) {
                 if (isset($opt['default'])) {
-                    $default = urlencode($default);
+                    $default = urlencode($opt['default']);
                 }
                 if (isset($opt['size'])) {
                     $size = $opt['size'];
@@ -156,7 +156,7 @@ class Gravatar {
                     $format = self::$format;
                 }
                 if (isset($opt['callback'])) {
-                    $callback = '?callback=' . $callback;
+                    $callback = '?callback=' . $opt['callback'];
                 } else {
                     $callback = '';
                 }
