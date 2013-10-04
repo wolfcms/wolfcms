@@ -68,7 +68,7 @@ class Gravatar {
 
         $img = '<img src="' . $url . '"';
         foreach ($attr as $key => $val)
-            $img .= ' ' . $key . '="' . $val . '"';
+            $img .= ' ' . $key . '="' . htmlspecialchars($val) . '"';
         $img .= ' />';
 
         return $img;
@@ -84,14 +84,8 @@ class Gravatar {
      * @param type $callback
      * @return type
      */
-    public static function profile($email, $format = false, $callback = false) {
-        $opt = array();
-        if ($format !== false)
-            $opt['format'] = $format;
-        if ($callback !== false)
-            $opt['callback'] = $callback;
-
-        return self::url($email, 'profile', $opt);
+    public static function profile($email, $format='json') {
+        return self::url($email, 'profile', array('format' => $format));
     }
 
     /**
@@ -107,10 +101,21 @@ class Gravatar {
     /**
      * Generates a URL to a Gravatar avatar or profile data.
      * 
-     * @param type $email
-     * @param type $type
-     * @param type $opt
-     * @return null
+     * Valid options for images:
+     * 
+     * - default; one of: 404, mm, identicon, monsterid, wavatar, retro, blank
+     * - size; 1-2048 (pixels)
+     * - rating; one of: g, pg, r, x
+     * - secure; true or false (whether to use SSL)
+     * 
+     * Valid options for profiles:
+     * 
+     * - format; one of: json, xml, php, vcf, qr
+     * 
+     * @param type $email   Email for Gravatar user.
+     * @param type $type    Can be either 'image' or 'profile'.
+     * @param type $opt     Array of Gravatar image / profile related options.
+     * @return mixed        Returns a valid URL to either Gravatar image or profile, otherwise null.
      */
     public static function url($email, $type = 'image', $opt = array()) {
         $id = self::hash($email);
@@ -121,18 +126,30 @@ class Gravatar {
                 $default = self::$default;
                 $rating = self::$rating;
                 $secure = false;
-            } else if (is_array($opt)) {
+            } else {
                 if (isset($opt['default'])) {
-                    $default = urlencode($default);
+                    $default = urlencode($opt['default']);
+                } else {
+                    $default = self::$default;
                 }
+                
                 if (isset($opt['size'])) {
-                    $size = $opt['size'];
+                    $size = urlencode($opt['size']);
+                } else {
+                    $size = self::$size;
                 }
+                
                 if (isset($opt['rating'])) {
-                    $rating = $opt['rating'];
+                    $rating = urlencode($opt['rating']);
+                } else {
+                    $rating = self::$rating;
                 }
+                
                 if (isset($opt['secure'])) {
                     $secure = $opt['secure'];
+                }
+                else {
+                    $secure = false;
                 }
             }
 
@@ -142,27 +159,24 @@ class Gravatar {
                 $url = self::$baseurl;
             }
 
-            return $url . self::$avatar . $id . '.jpg?s=' . $size . '&d=' . $default . '&r=' . $rating;
+            return $url . htmlspecialchars(self::$avatar . $id . '.jpg?s=')
+                        . htmlspecialchars($size) .'&d='
+                        . htmlspecialchars($default) . '&r='
+                        . htmlspecialchars($rating);
         }
 
         if ($type === 'profile') {
             if (empty($opt)) {
                 $format = self::$format;
-                $callback = '';
-            } else if (is_array($opt)) {
+            } else {
                 if (isset($opt['format'])) {
-                    $format = $opt['format'];
+                    $format = urlencode($opt['format']);
                 } else {
                     $format = self::$format;
                 }
-                if (isset($opt['callback'])) {
-                    $callback = '?callback=' . $callback;
-                } else {
-                    $callback = '';
-                }
             }
 
-            return $url . $id . '.' . $format . $callback;
+            return $url . htmlspecialchars($id . '.' . $format);
         }
 
         return NULL;

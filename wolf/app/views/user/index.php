@@ -15,6 +15,8 @@
  * @copyright Philippe Archambault, 2008
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
+
+use_helper('Gravatar');
 ?>
 <h1><?php echo __('Users'); ?></h1>
 
@@ -31,7 +33,7 @@
 <?php foreach($users as $user): ?> 
     <tr class="node <?php echo odd_even(); ?>">
       <td class="user">
-        <img src="http://www.gravatar.com/avatar.php?gravatar_id=<?php echo md5($user->email); ?>&amp;default=<?php echo URL_PUBLIC; ?>wolf/admin/images/user.png&amp;size=32" align="middle" alt="user icon" />
+        <?php echo Gravatar::img($user->email, array('align' => 'middle', 'alt' => 'user icon'), '32', URL_PUBLIC.'wolf/admin/images/user.png', 'g', USE_HTTPS); ?>
         <a href="<?php echo get_url('user/edit/'.$user->id); ?>"><?php echo $user->name; ?></a>
         <small><?php echo $user->username; ?></small>
       </td>
