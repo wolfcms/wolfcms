@@ -89,7 +89,7 @@ class CommentController extends PluginController {
     }
 
     function _edit($id) {
-        $comment = Record::findByIdFrom('comment', $id);
+        $comment = Comment::findById($id);
         $comment->setFromData($_POST['comment']);
 
         if (!$comment->save()) {
@@ -105,7 +105,7 @@ class CommentController extends PluginController {
 
     function delete($id) {
         // find the user to delete
-        if ($comment = Record::findByIdFrom('Comment', $id)) {
+        if ($comment = Comment::findById($id)) {
             if ($comment->delete()) {
                 Flash::set('success', __('Comment has been deleted!'));
                 Observer::notify('comment_after_delete', $comment);
@@ -121,7 +121,7 @@ class CommentController extends PluginController {
 
     function approve($id) {
         // find the user to approve
-        if ($comment = Record::findByIdFrom('Comment', $id)) {
+        if ($comment = Comment::findById($id)) {
             $comment->is_approved = 1;
             if ($comment->save()) {
                 Flash::set('success', __('Comment has been approved!'));
@@ -136,7 +136,7 @@ class CommentController extends PluginController {
 
     function unapprove($id) {
         // find the user to unapprove
-        if ($comment = Record::findByIdFrom('Comment', $id)) {
+        if ($comment = Comment::findById($id)) {
             $comment->is_approved = 0;
             if ($comment->save()) {
                 Flash::set('success', __('Comment has been unapproved!'));
