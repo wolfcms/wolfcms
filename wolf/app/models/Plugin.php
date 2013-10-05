@@ -361,7 +361,6 @@ class Plugin {
     /**
      * Returns true when all settings for $plugin_id where deleted.
      *
-     * @global constant $__CMS_CONN__
      * @param string    $plugin_id
      * @return boolean  True when successful
      */
