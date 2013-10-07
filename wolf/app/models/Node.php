@@ -138,6 +138,64 @@ abstract class Node extends Record {
 
 
     /**
+     * Returns the node's breadcrumb.
+     *
+     * @abstract
+     * @return  string              The node's breadcrumb
+     */
+    abstract public function breadcrumb();
+
+
+    /**
+     * Returns an array of this node's children.
+     *
+     * @abstract
+     * @return  array               Array of children objects
+     */
+    abstract public function children();
+
+
+    /**
+     * Returns the node's content, or a specific content part.
+     *
+     * @abstract
+     * @param  string   $part       Part to retrieve content for. Defaults to 'body'.
+     * @param  boolean  $inherit    Check parents for part content if true.
+     * @return string               Actual contents of the part.
+     */
+    abstract public function content($part = 'body', $inherit = false);
+
+
+    /**
+     * Returns the node's description.
+     *
+     * @abstract
+     * @return  string              The node's description
+     */
+    abstract public function description();
+
+
+    /**
+     * Checks if a part exists and it has content.
+     *
+     * @abstract
+     * @param  string   $part       Part to retrieve content for.
+     * @param  boolean  $inherit    Check parents for part content if true.
+     * @return boolean              Returns true if part was found or false if nothing was found.
+     */
+    abstract public function hasContent($part, $inherit = false);
+
+
+    /**
+     * Returns the node's keywords.
+     *
+     * @abstract
+     * @return  string              The node's keywords, comma-seperated
+     */
+    abstract public function keywords();
+
+
+    /**
      * Returns a numerical representation of this node's place in the page hierarchy.
      *
      * This uses the node's path as returned by the path() method to check the level.
@@ -153,6 +211,19 @@ abstract class Node extends Record {
 
         return $this->level;
     }
+
+
+    /**
+     * Returns the node's parent.
+     *
+     * The optional $level parameter allows the user to specify the level
+     * of the parent. I.e. $node->parent(0) should return the Home page.
+     *
+     * @abstract
+     * @param  mixed    $level      Optional level parameter, defaults to null
+     * @return Node                 Returns the parent object
+     */
+    abstract public function parent($level = null);
 
 
     /**
@@ -176,6 +247,24 @@ abstract class Node extends Record {
 
         return $this->path;
     }
+
+
+    /**
+     * Returns the node's slug.
+     *
+     * @abstract
+     * @return  string              The node's slug
+     */
+    abstract public function slug();
+
+
+    /**
+     * Returns the node's title.
+     *
+     * @abstract
+     * @return  string              The node's title
+     */
+    abstract public function title();
 
 
     /**
