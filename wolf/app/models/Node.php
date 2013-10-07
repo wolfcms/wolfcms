@@ -165,6 +165,30 @@ abstract class Node extends Record {
 
 
     /**
+     * Returns a trail of breadcrumbs as HTML.
+     * 
+     * @param  string   $seperator  The separator between breadcrumbs. Defaults to &gt;
+     * @return string               The breadcrumbs as an html snippet.
+     */
+    public function breadcrumbs($seperator = '&gt;') {
+        $seperator = '<span class="breadcrumb-seperator">' . $seperator . '</span>';
+        
+        $breadcrumbs = array();
+
+        foreach ($this->ancestors() as $ancestor) {
+            $breadcrumbs[] = '<a href="' . $ancestor->url() . '">' . $ancestor->breadcrumb() . '</a>';
+        }
+
+        // add current node
+        $breadcrumbs[] = '<span class="breadcrumb-current">' . $this->breadcrumb() . '</span>';
+
+        $html = implode($seperator, $breadcrumbs);
+
+        return $html;
+    }
+
+
+    /**
      * Returns an array of this node's children.
      *
      * @abstract
