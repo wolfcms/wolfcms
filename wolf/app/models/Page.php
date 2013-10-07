@@ -456,22 +456,6 @@ class Page extends Node {
 
 
     /**
-     * Return an HTML anchor element for this page.
-     *
-     * @param string $label     A custom label. Defaults to page title.
-     * @param array $options    Array containing attributes to add.
-     * @return string           The actual anchor element.
-     */
-    public function link($label=null, $options='') {
-        if ($label == null)
-            $label = $this->title();
-
-        return sprintf('<a href="%s" %s>%s</a>', $this->url(true), $options, $label
-        );
-    }
-
-
-    /**
      * Allow user to link to a page by ID.
      *
      * This function will always produce a correct and current link to the page

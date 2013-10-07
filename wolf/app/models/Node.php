@@ -248,6 +248,22 @@ abstract class Node extends Record {
 
 
     /**
+     * Returns an HTML anchor element for this node.
+     * 
+     * @param   string  $label      A custom label. Defaults to node's title.
+     * @param   string  $options    Attributes that should be added.
+     * @return  string              The HTML anchor element.
+     */
+    public function link($label = null, $options = '') {
+        if ($label == null) {
+            $label = $this->title();
+        }
+
+        return sprintf('<a href="%s" %s>%s</a>', $this->url(true), $options, $label);
+    }
+
+
+    /**
      * Returns the node's parent.
      *
      * The optional $level parameter allows the user to specify the level
