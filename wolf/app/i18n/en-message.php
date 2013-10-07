@@ -175,6 +175,7 @@ return array(
     'User not found!' => 'User not found!',
     'Username' => 'Username',
     'Username must contain a minimum of 3 characters!' => 'Username must contain a minimum of 3 characters!',
+    'Username <b>:username</b> is already in use, please choose other!' => 'Username <b>:username</b> is already in use, please choose other!',
     'Users' => 'Users',
     'Valid until date' => 'Valid until date',
     'Version' => 'Version',
