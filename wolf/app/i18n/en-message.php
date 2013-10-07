@@ -105,6 +105,7 @@ return array(
     'No CSRF token found!' => 'No CSRF token found!',
     'No user found!' => 'No user found!',
     'One or more required PHP extension is missing: :exts' => 'One or more required PHP extension is missing: :exts',
+    'Only administrators can change <b>protected</b> status of pages!' => 'Only administrators can change <b>protected</b> status of pages!',
     'Only for filter in pages, NOT in snippets' => 'Only for filter in pages, NOT in snippets',
     'Optional. Please use a valid e-mail address.' => 'Optional. Please use a valid e-mail address.',
     'Page' => 'Page',

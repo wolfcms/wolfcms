@@ -450,6 +450,12 @@ class PageController extends Controller {
             $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'behaviour_id'));
         }
 
+        // Check is_protected field
+        if (!empty($data['is_protected']) && !AuthUser::hasPermission('admin_edit')) {
+            $errors[] = __('Only administrators can change <b>protected</b> status of pages!');
+            unset($data['is_protected']);
+        }
+        
         // Make sure the title doesn't contain HTML
         if (Setting::get('allow_html_title') == 'off') {
             use_helper('Kses');
