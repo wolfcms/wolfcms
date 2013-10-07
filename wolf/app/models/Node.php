@@ -240,18 +240,10 @@ abstract class Node extends Record {
     /**
      * Returns a numerical representation of this node's place in the page hierarchy.
      *
-     * This uses the node's path as returned by the path() method to check the level.
-     * It might not always be what you'd expect.
-     *
      * @return  int     The node's level.
      */
     public function level() {
-        if ($this->level === false) {
-            $path = $this->path();
-            $this->level = empty($path) ? 0 : substr_count($path, '/') + 1;
-        }
-
-        return $this->level;
+        return count($this->ancestors());
     }
 
 
