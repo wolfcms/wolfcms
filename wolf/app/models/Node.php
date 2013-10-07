@@ -20,6 +20,7 @@
  *
  * First version for future feature set.
  *
+ * @abstract
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @since Wolf version 0.7.0
  */
