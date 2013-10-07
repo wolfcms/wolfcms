@@ -117,23 +117,6 @@ class Page extends Node {
 
 
     /**
-     * Returns the current page object's url.
-     *
-     * Usage: <?php echo $this->url(); ?> or <?php echo $page->url(); ?>
-     *
-     * @return string   The url of the page object.
-     */
-    public function url($suffix=true) {
-        if ($suffix === false) {
-            return BASE_URL.$this->path();
-        }
-        else {
-            return BASE_URL.$this->path().($this->path() != '' ? URL_SUFFIX : '');
-        }
-    }
-
-
-    /**
      * Allows user to get the url of a page by page ID.
      *
      * This function will always produce a correct and current url to the page

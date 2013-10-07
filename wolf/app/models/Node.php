@@ -160,6 +160,26 @@ abstract class Node extends Record {
 
 
     /**
+     * Returns the current node's URL.
+     *
+     * Usage: <code><?php echo $node->url(); ?></code>
+     * 
+     * In certain contexts, $this can be a Node, so you can use:
+     * <code><?php echo $this->url(); ?></code>
+     * 
+     * @param  boolean  $suffix     URL includes URL_SUFFIX when set to true
+     * @return string               The URL of the Node object
+     */
+    public function url($suffix = true) {
+        if ($suffix === false) {
+            return BASE_URL.$this->path();
+        } else {
+            return BASE_URL.$this->path() . ($this->path() != '' ? URL_SUFFIX : '');
+        }
+    }
+
+
+    /**
      * @deprecated
      * @see path()
      */
