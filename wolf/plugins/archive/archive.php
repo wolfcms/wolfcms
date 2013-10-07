@@ -162,20 +162,28 @@ class Archive {
 class PageArchive extends Page {
 
     /**
-     * Returns the current PageArchive object's url.
-     * 
-     * Note: overrides the Page::url() method.
+     * Overrides the default path() behavior set by Node.
      *
-     * @return string   A fully qualified url.
+     * If the plugin's setting 'use_dates' is set to true (1), the created_on date will be included in the path.
+     * 
+     * @return  string              The node's full path
      */
-    public function url($suffix=false) {
-        $use_date = Plugin::getSetting('use_dates', 'archive');
-        if ($use_date === '1') {
-            return BASE_URL . trim($this->parent()->path() . date('/Y/m/d/', strtotime($this->created_on)) . $this->slug, '/') . ($this->path() != '' ? URL_SUFFIX : '');
+    public function path() {
+        if ($this->behavior_id == 'archive_year_index') {
+            return trim($this->parent()->path() . '/' . date('Y', $this->time));
+        } elseif ($this->behavior_id == 'archive_month_index') {
+            return trim($this->parent()->path() . '/' . date('Y/m', $this->time));
+        } elseif ($this->behavior_id == 'archive_day_index') {
+            return trim($this->parent()->path() . '/' . date('Y/m/d', $this->time));
+        } else {
+            if (Plugin::getSetting('use_dates', 'archive')) {
+                return trim($this->parent()->path() . '/' . date('Y/m/d', strtotime($this->created_on)) . '/' . $this->slug(), '/');
+            } else {
+                return trim($this->parent()->path() . '/' . $this->slug(), '/');
+            }
         }
-        elseif ($use_date === '0') {
-            return BASE_URL . trim($this->parent()->path() . '/' . $this->slug, '/') . ($this->path() != '' ? URL_SUFFIX : '');
-        }
+
+        return $this->path;
     }
 
     public function title() {
