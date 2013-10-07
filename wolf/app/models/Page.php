@@ -162,43 +162,6 @@ class Page extends Node {
 
 
     /**
-     * Returns a set of breadcrumbs as html.
-     *
-     * @param   string      $separator  The separator between crumbs. Defaults to &gt;
-     * @return  string      The breadcrumbs as an html snippet.
-     */
-    public function breadcrumbs($separator='&gt;') {
-        $out = '';
-        $url = '';
-        $path = '';
-        $paths = explode('/', '/'.$this->slug);
-        $nb_path = count($paths);
-
-        if ($this->parent() !== false)
-            $out .= $this->parent()->_inversedBreadcrumbs($separator);
-
-        return $out.'<span class="breadcrumb-current">'.$this->breadcrumb().'</span>';
-    }
-
-
-    /**
-     *
-     * @todo Finish _inversedBreadcrumbs PHPDoc
-     *
-     * @param type $separator
-     * @return string
-     */
-    private function _inversedBreadcrumbs($separator) {
-        $out = '<a href="'.$this->url().'" title="'.$this->breadcrumb.'">'.$this->breadcrumb.'</a><span class="breadcrumb-separator">'.$separator.'</span>';
-
-        if ($this->parent() !== false)
-            return $this->parent()->_inversedBreadcrumbs($separator).$out;
-
-        return $out;
-    }
-
-
-    /**
      * Returns the subjective "previous" Page.
      *
      * @return mixed    Returns either a Page object or false.
