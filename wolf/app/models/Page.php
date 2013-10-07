@@ -65,7 +65,6 @@ class Page extends Node {
     public $updater_id;
     // non db fields
     private $parent = false;
-    private $path = false;
     private $level = false;
     private $tags = false;
 
@@ -114,47 +113,6 @@ class Page extends Node {
 
     public function parentId() {
         return $this->parent_id;
-    }
-
-
-    /**
-     * Returns the path for this node.
-     * 
-     * For instance, for a page with the URL http://www.example.com/wolfcms/path/to/page.html,
-     * the path is: path/to/page (without the URL_SUFFIX)
-     *
-     * Note: The path does not start nor end with a '/'.
-     *
-     * @return string   The node's full path.
-     */
-    public function path() {
-        if ($this->path === false) {
-            if ($this->parent() !== false) {
-                $this->path = trim($this->parent()->path().'/'.$this->slug, '/');
-            } else {
-                $this->path = trim($this->slug, '/');
-            }
-        }
-
-        return $this->path;
-    }
-
-
-    /**
-     * @deprecated
-     * @see path()
-     */
-    public function uri() {
-        return $this->path();
-    }
-
-
-    /**
-     * @deprecated
-     * @see path()
-     */
-    public function getUri() {
-        return $this->path();
     }
 
 

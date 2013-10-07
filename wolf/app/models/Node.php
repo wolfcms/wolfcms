@@ -25,6 +25,8 @@
  */
 abstract class Node extends Record {
 
+    protected $path = false;
+
     // Static variables used to store dynamic methods
     protected static $_methods = array();
     protected static $_static_methods = array();
@@ -131,6 +133,47 @@ abstract class Node extends Record {
         }
         
         return false;
+    }
+
+
+    /**
+     * Returns the path for this node.
+     * 
+     * For instance, for a page with the URL http://www.example.com/wolfcms/path/to/page.html,
+     * the path is: path/to/page (without the URL_SUFFIX)
+     *
+     * Note: The path does not start nor end with a '/'.
+     *
+     * @return string   The node's full path.
+     */
+    public function path() {
+        if ($this->path === false) {
+            if ($this->parent() !== false) {
+                $this->path = trim($this->parent()->path() . '/' . $this->slug(), '/');
+            } else {
+                $this->path = trim($this->slug(), '/');
+            }
+        }
+
+        return $this->path;
+    }
+
+
+    /**
+     * @deprecated
+     * @see path()
+     */
+    public function uri() {
+        return $this->path();
+    }
+
+
+    /**
+     * @deprecated
+     * @see path()
+     */
+    public function getUri() {
+        return $this->path();
     }
 
 
