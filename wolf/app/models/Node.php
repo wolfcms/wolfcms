@@ -23,7 +23,7 @@
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @since Wolf version 0.7.0
  */
-class Node extends Record {
+abstract class Node extends Record {
 
     // Static variables used to store dynamic methods
     protected static $_methods = array();
