@@ -1,0 +1,11 @@
+#
+# Force some behaviours concerning the repository for Wolf CMS.
+#
+
+# Set default behaviour, in case users don't have core.autocrlf set.
+* text
+
+# Denote all files that are truly binary and should not be modified.
+*.png binary
+*.jpg binary
+*.gif binary
