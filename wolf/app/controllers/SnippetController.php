@@ -80,7 +80,12 @@ class SnippetController extends Controller {
      */
     private function _add() {
         $data = $_POST['snippet'];
-
+        
+        if (!AuthUser::hasPermission('snippet_add')) {
+            Flash::set('error', __('You do not have permission to add snippets!'));
+            redirect(get_url('snippet'));
+        }
+        
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
             $csrf_token = $_POST['csrf_token'];
@@ -161,7 +166,12 @@ class SnippetController extends Controller {
     private function _edit($id) {
         $data = $_POST['snippet'];
         $data['id'] = $id;
-
+        
+        if (!AuthUser::hasPermission('snippet_edit')) {
+            Flash::set('error', __('You do not have permission to edit snippets!'));
+            redirect(get_url('snippet/edit/'.$id));
+        }
+        
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
             $csrf_token = $_POST['csrf_token'];
@@ -206,6 +216,12 @@ class SnippetController extends Controller {
      * @param string $id Snippet id
      */
     public function delete($id) {
+        
+        if (!AuthUser::hasPermission('snippet_delete')) {
+            Flash::set('error', __('You do not have permission to delete snippets!'));
+            redirect(get_url('snippet'));
+        }
+        
         // find the user to delete
         if ($snippet = Record::findByIdFrom('Snippet', $id)) {
             if ($snippet->delete()) {
