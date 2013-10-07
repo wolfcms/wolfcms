@@ -1142,7 +1142,10 @@ class Page extends Node {
 
 
     public static function childrenOf($id) {
-        return self::findById($id)->children();
+        return self::find(array(
+            'where' => array('parent_id = :parent_id', ':parent_id' => $id),
+            'order' => 'page.position ASC, page.id DESC'
+        ));
     }
 
 
