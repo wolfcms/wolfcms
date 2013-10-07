@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Beveiligd',
     'Published' => 'Gepubliceerd',
     'Published date' => 'Publicatie datum',
-    'Remember me for 30 minutes.' => 'Onthoud mij voor 30 minuten',
+    'Remember me for :min minutes.' => 'Onthoud mij voor :min minuten',
     'Remove Tab' => 'Verwijder Tab',
     'Remove page' => 'Verwijder Pagina',
     'Remove unavailable' => 'Verwijder niet beschikbaar',

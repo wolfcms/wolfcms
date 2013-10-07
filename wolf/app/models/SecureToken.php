@@ -7,6 +7,9 @@
  * Please see license.txt for the full license text.
  */
 
+// Making sure all constants are defined to their safe defaults
+if (!defined('SECURE_TOKEN_EXPIRY')) define ('SECURE_TOKEN_EXPIRY', 900);  // 15 minutes
+
 /**
  * @todo Add configurable expiration time.
  * 
@@ -18,7 +21,6 @@
  */
 final class SecureToken extends Record {
     const TABLE_NAME = 'secure_token';
-    const EXPIRES    = 900; // token expires after 15 min.
 
     public $id;
     public $username;
@@ -92,7 +94,7 @@ final class SecureToken extends Record {
      * period of the token, the username, user password or the url changed, the
      * token is considered invalid.
      *
-     * The token is also considered invalid if more than SecureToken::EXPIRES seconds
+     * The token is also considered invalid if more than SECURE_TOKEN_EXPIRY seconds
      * have passed.
      *
      * @param string $token The token.
@@ -111,7 +113,7 @@ final class SecureToken extends Record {
 
             $time = SecureToken::getTokenTime($user->username, $target_url);
 
-            if ((microtime(true) - $time) > self::EXPIRES) {
+            if ((microtime(true) - $time) > SECURE_TOKEN_EXPIRY) {
                 return false;
             }
 

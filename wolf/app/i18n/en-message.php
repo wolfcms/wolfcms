@@ -127,7 +127,7 @@ return array(
     'Protected' => 'Protected',
     'Published' => 'Published',
     'Published date' => 'Published date',
-    'Remember me for 30 minutes.' => 'Remember me for 30 minutes.',
+    'Remember me for :min minutes.' => 'Remember me for :min minutes.',
     'Remove Tab' => 'Remove Tab',
     'Remove page' => 'Remove page',
     'Remove unavailable' => 'Remove unavailable',

@@ -18,8 +18,13 @@
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
  
- // Making sure COOKIE_HTTP_ONLY is defined.
+// Making sure all constants are defined to their safe defaults
 if (!defined('COOKIE_HTTP_ONLY')) define('COOKIE_HTTP_ONLY', false);
+if (!defined('COOKIE_LIFE')) define ('COOKIE_LIFE', 1800);  // 30 minutes
+if (!defined('ALLOW_LOGIN_WITH_EMAIL')) define ('ALLOW_LOGIN_WITH_EMAIL', false);
+if (!defined('DELAY_ON_INVALID_LOGIN')) define ('DELAY_ON_INVALID_LOGIN', true);
+if (!defined('DELAY_ONCE_EVERY')) define ('DELAY_ONCE_EVERY', 30); // 30 seconds
+if (!defined('DELAY_FIRST_AFTER')) define ('DELAY_FIRST_AFTER', 3);
 
 /**
  * Used to keep track of login status.
@@ -30,11 +35,6 @@ if (!defined('COOKIE_HTTP_ONLY')) define('COOKIE_HTTP_ONLY', false);
 class AuthUser {
     const SESSION_KEY                   = 'wolf_auth_user';
     const COOKIE_KEY                    = 'wolf_auth_user';
-    const COOKIE_LIFE                   = 1800;  // 30 minutes
-    const ALLOW_LOGIN_WITH_EMAIL        = false;
-    const DELAY_ON_INVALID_LOGIN        = true;
-    const DELAY_ONCE_EVERY              = 30; // 30 seconds
-    const DELAY_FIRST_AFTER             = 3; // First delay starts after Nth failed login attempt
 
     static protected $is_logged_in  = false;
     static protected $user_id       = false;
@@ -199,21 +199,21 @@ class AuthUser {
 
         $user = User::findBy('username', $username);
 
-        if (self::DELAY_ON_INVALID_LOGIN && $user->failure_count > self::DELAY_FIRST_AFTER) {
+        if (DELAY_ON_INVALID_LOGIN && $user->failure_count > DELAY_FIRST_AFTER) {
             $last = explode(' ', $user->last_failure);
             $date = explode('-', $last[0]);
             $hours = explode(':', $last[1]);
 
             $last = mktime($hours[0], $hours[1], $hours[2], $date[1], $date[2], $date[0]);
             // thirty (by default) second delay for every failed attempt
-            $now = time() - (self::DELAY_ONCE_EVERY * $user->failure_count);
+            $now = time() - (DELAY_ONCE_EVERY * $user->failure_count);
 
             if ($last > $now) {
                 return false;
             }
         }
 
-        if ( ! $user instanceof User && self::ALLOW_LOGIN_WITH_EMAIL)
+        if ( ! $user instanceof User && ALLOW_LOGIN_WITH_EMAIL)
             $user = User::findBy('email', $username);
 
         if ($user instanceof User && (false === $validate_password || self::validatePassword($user, $password))) {
@@ -222,7 +222,7 @@ class AuthUser {
             $user->save();
 
             if ($set_cookie) {
-                $time = $_SERVER['REQUEST_TIME'] + self::COOKIE_LIFE;
+                $time = $_SERVER['REQUEST_TIME'] + COOKIE_LIFE;
                 setcookie(self::COOKIE_KEY, self::bakeUserCookie($time, $user), $time, '/', null, (isset($_ENV['SERVER_PROTOCOL']) && ((strpos($_ENV['SERVER_PROTOCOL'],'https') || strpos($_ENV['SERVER_PROTOCOL'],'HTTPS')))), COOKIE_HTTP_ONLY);
             }
 
@@ -298,7 +298,7 @@ class AuthUser {
      * Eats (destroys) a cookie.
      */
     static private final function eatCookie() {
-        setcookie(self::COOKIE_KEY, false, $_SERVER['REQUEST_TIME']-self::COOKIE_LIFE, '/', null, (isset($_ENV['SERVER_PROTOCOL']) && (strpos($_ENV['SERVER_PROTOCOL'],'https') || strpos($_ENV['SERVER_PROTOCOL'],'HTTPS'))));
+        setcookie(self::COOKIE_KEY, false, $_SERVER['REQUEST_TIME']-COOKIE_LIFE, '/', null, (isset($_ENV['SERVER_PROTOCOL']) && (strpos($_ENV['SERVER_PROTOCOL'],'https') || strpos($_ENV['SERVER_PROTOCOL'],'HTTPS'))));
     }
 
     /**

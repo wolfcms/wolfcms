@@ -121,7 +121,7 @@
 	'Published' 									=> 'Публикувана',
 	'Published date' 								=> 'Дата на публикуване',
 	'Reject' 										=> 'Отхвърляне',
-	'Remember me for 14 days' 					=> 'Запомни ме за 14 дни',
+	'Remember me for :min minutes' 					=> 'Запомни ме за :min min',
 	'Remove Layout' 							=> 'Премахване на Шаблон',
 	'Remove Tab' 								=> 'Премахване на Таб',
 	'Remove page' 								=> 'Премахване на Страница',

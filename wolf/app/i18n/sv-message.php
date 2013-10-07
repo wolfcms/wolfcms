@@ -126,7 +126,7 @@ return array(
     'Protected' => 'Skyddad',
     'Published' => 'Utgiven',
     'Published date' => 'Utgiven datum',
-    'Remember me for 30 minutes.' => 'Kom ihåg mig under 30 minuter.',
+    'Remember me for :min minutes.' => 'Kom ihåg mig under :min minuter.',
     'Remove Tab' => 'Radera Flik',
     'Remove page' => 'Radera Sida',
     'Remove unavailable' => 'Radera inte tillgänglig',

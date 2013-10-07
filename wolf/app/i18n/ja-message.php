@@ -126,7 +126,7 @@ return array(
     'Protected' => '保護',
     'Published' => '公開',
     'Published date' => '公開日',
-    'Remember me for 30 minutes.' => '30分のための私を覚えておいてください。',
+    'Remember me for :min minutes.' => ':min分のための私を覚えておいてください。',
     'Remove Tab' => 'タブの削除',
     'Remove page' => 'ページの削除',
     'Remove unavailable' => 'Remove unavailable',
