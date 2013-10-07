@@ -139,6 +139,23 @@ abstract class Node extends Record {
 
 
     /**
+     * Returns an array of ancestors.
+     * 
+     * @return  array               Array of ancestor Nodes
+     */
+    public function ancestors() {
+        $ancestors = array();
+
+        if ($this->parent()) {
+            $ancestors = $this->parent()->ancestors();
+            $ancestors[] = $this->parent();
+        }
+
+        return $ancestors;
+    }
+
+
+    /**
      * Returns the node's breadcrumb.
      *
      * @abstract
