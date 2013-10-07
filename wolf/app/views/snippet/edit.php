@@ -55,9 +55,14 @@
         </div>
     </div>
     <p class="buttons">
-        <input class="button" name="commit" type="submit" accesskey="s" value="<?php echo __('Save'); ?>" />
-        <input class="button" name="continue" type="submit" accesskey="e" value="<?php echo __('Save and Continue Editing'); ?>" />
-        <?php echo __('or'); ?> <a href="<?php echo get_url('snippet'); ?>"><?php echo __('Cancel'); ?></a>
+        <?php if (($action=='edit' && AuthUser::hasPermission('snippet_edit')) || ($action=='add' && AuthUser::hasPermission('snippet_add'))): ?>
+            <input class="button" name="commit" type="submit" accesskey="s" value="<?php echo __('Save'); ?>" />
+            <input class="button" name="continue" type="submit" accesskey="e" value="<?php echo __('Save and Continue Editing'); ?>" />
+            <?php echo __('or'); ?> 
+        <?php else: ?>
+            <?php echo ($action=='add') ? __('You do not have permission to add snippets!') : __('You do not have permission to edit snippets!'); ?> 
+        <?php endif;?>
+        <a href="<?php echo get_url('snippet'); ?>"><?php echo __('Cancel'); ?></a>
     </p>
 </form>
 
