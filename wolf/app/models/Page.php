@@ -1141,9 +1141,15 @@ class Page extends Node {
     }
 
 
-    public static function childrenOf($id) {
+    /**
+     * Returns all children (including those with a status other than published) of a Page.
+     * 
+     * @param   int     $parent_id  ID of the parent Page
+     * @return  array               Array containing Page objects
+     */
+    public static function childrenOf($parent_id) {
         return self::find(array(
-            'where' => array('parent_id = :parent_id', ':parent_id' => $id),
+            'where' => array('parent_id = :parent_id', ':parent_id' => $parent_id),
             'order' => 'page.position ASC, page.id DESC'
         ));
     }
