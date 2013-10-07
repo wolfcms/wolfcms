@@ -169,7 +169,7 @@ class SnippetController extends Controller {
         
         if (!AuthUser::hasPermission('snippet_edit')) {
             Flash::set('error', __('You do not have permission to edit snippets!'));
-            redirect(get_url('snippet/edit/'.$id));
+            redirect(get_url('snippet'));
         }
         
         // CSRF checks
