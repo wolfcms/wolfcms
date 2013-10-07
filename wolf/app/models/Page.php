@@ -65,7 +65,6 @@ class Page extends Node {
     public $updater_id;
     // non db fields
     private $parent = false;
-    private $level = false;
     private $tags = false;
 
     public function __construct($object=null, $parent=null) {
@@ -394,24 +393,6 @@ class Page extends Node {
             'created_by_id', 'updated_by_id', 'position', 'is_protected',
             'needs_login'
         );
-    }
-
-
-    /**
-     * Return a numerical representation of this page's place in the page hierarchy.
-     *
-     * This uses the page url as returned by the url() method to check the level.
-     * It might not always be what you'd expect.
-     *
-     * @return int The page's level.
-     */
-    public function level() {
-        if ($this->level === false) {
-            $path = $this->path();
-            $this->level = empty($path) ? 0 : substr_count($path, '/') + 1;
-        }
-
-        return $this->level;
     }
 
 
