@@ -150,6 +150,11 @@ class UserController extends Controller {
             // @todo Remove hardcoded reset to 'en' language
             $data['language'] = 'en';
         }
+        
+        // Check if user with the same 'username' already exists
+        if ( Record::existsIn('User', 'username=:username', array( ':username' => $data['username'] )) ) {
+            $errors[] = __('Username <b>:username</b> is already in use, please choose other!', array( ':username' => $data['username'] ));
+        }
 
         Flash::set('post_data', (object) $data);
 
@@ -270,7 +275,12 @@ class UserController extends Controller {
         if (!empty($data['language']) && !Validate::alpha_dash($data['language'])) {
             $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'language'));
         }
-
+        
+        // Check if user with the same 'username' already exists
+        if ( Record::existsIn('User', 'username=:username', array( ':username' => $data['username'] )) ) {
+            $errors[] = __('Username <b>:username</b> is already in use, please choose other!', array( ':username' => $data['username'] ));
+        }
+        
         if ($errors !== false) {
             // Set the errors to be displayed.
             Flash::set('error', implode('<br/>', $errors));
