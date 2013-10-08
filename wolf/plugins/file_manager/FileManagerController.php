@@ -134,7 +134,7 @@ class FileManagerController extends PluginController {
         // We don't allow leading slashes
         $filename = preg_replace('/^\//', '', $filename);
         
-        // Check if file had URL_SUFFIX - if so, and append it
+        // Check if file had URL_SUFFIX - if so, append it to filename
         $filename .= ($_GET['has_url_suffix']==='1') ? URL_SUFFIX : '';
         
         $file = FILES_DIR . '/' . $filename;
