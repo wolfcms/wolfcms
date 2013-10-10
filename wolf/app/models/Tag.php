@@ -24,8 +24,16 @@
 class Tag extends Record {
     const TABLE_NAME = 'tag';
     
+    public $id;
+    public $name;
+    public $count;
+    
+    public function getColumns() {
+        return array('id', 'name', 'count');
+    }
+    
     public static function findByName($name) {
-        return self::find(array(
+        return self::findOne(array(
             'where' => array('name = :name', ':name' => $name)
         ));
     }
