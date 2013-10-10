@@ -140,6 +140,12 @@ class LoginController extends Controller {
 
         $username = AuthUser::getUserName();
         AuthUser::logout();
+        
+        // Also eat cookies that were set by JS for backend gui
+        setcookie("expanded_rows", "", time()-3600);
+        setcookie("meta_tab", "", time()-3600);
+        setcookie("page_tab", "", time()-3600);
+        
         Observer::notify('admin_after_logout', $username);
         redirect(get_url());
     }
