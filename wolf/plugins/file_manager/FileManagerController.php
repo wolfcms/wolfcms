@@ -133,12 +133,15 @@ class FileManagerController extends PluginController {
 
         // We don't allow leading slashes
         $filename = preg_replace('/^\//', '', $filename);
-
+        
+        // Check if file had URL_SUFFIX - if so, append it to filename
+        $filename .= ($_GET['has_url_suffix']==='1') ? URL_SUFFIX : '';
+        
         $file = FILES_DIR . '/' . $filename;
         if (!$this->_isImage($file) && file_exists($file)) {
             $content = file_get_contents($file);
         }
-
+        
         $this->display('file_manager/views/view', array(
             'csrf_token' => SecureToken::generateToken(BASE_URL.'plugin/file_manager/save/'.$filename),
             'is_image' => $this->_isImage($file),
@@ -185,7 +188,7 @@ class FileManagerController extends PluginController {
         if (isset($_POST['commit'])) {
             redirect(get_url('plugin/file_manager/browse/' . substr($data['name'], 0, strrpos($data['name'], '/'))));
         } else {
-            redirect(get_url('plugin/file_manager/view/' . $data['name']));
+            redirect(get_url('plugin/file_manager/view/' . $data['name'] . (endsWith($data['name'], URL_SUFFIX) ? '?has_url_suffix=1' : '')));
         }
     }
 
@@ -458,7 +461,7 @@ class FileManagerController extends PluginController {
                 if ($cur->isDir()) {
                     $object->link = '<a href="' . get_url('plugin/file_manager/browse/' . $this->path . $object->name) . '">' . $object->name . '</a>';
                 } else {
-                    $object->link = '<a href="' . get_url('plugin/file_manager/view/' . $this->path . $object->name) . '">' . $object->name . '</a>';
+                    $object->link = '<a href="' . get_url('plugin/file_manager/view/' . $this->path . $object->name . (endsWith($object->name, URL_SUFFIX) ? '?has_url_suffix=1' : '')) . '">' . $object->name . '</a>';
                 }
 
                 $files[$object->name] = $object;
