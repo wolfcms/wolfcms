@@ -574,6 +574,11 @@ class Record {
             // Escape and format for SQL insert query
             // @todo check if we like this new method of escaping and defaulting
             foreach ($columns as $column) {
+                // Make sure we don't try to add "id" field;
+                if ($column === 'id') {
+                    continue;
+                }
+                
                 if (!empty($this->$column) || is_numeric($this->$column)) { // Do include 0 as value
                     $value_of[$column] = self::$__CONN__->quote($this->$column);
                 }
