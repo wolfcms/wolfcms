@@ -36,6 +36,9 @@ class User extends Record {
     public $updated_on;
     public $created_by_id;
     public $updated_by_id;
+    public $last_login;
+    public $last_failure;
+    public $failure_count;
 
 
     public function roles() {
@@ -68,6 +71,9 @@ class User extends Record {
     public function beforeInsert() {
         $this->created_by_id = AuthUser::getId();
         $this->created_on = date('Y-m-d H:i:s');
+        $this->last_login = date('Y-m-d H:i:s', 0);
+        $this->last_failure = date('Y-m-d H:i:s', 0);
+        $this->failure_count = 0;
         return true;
     }
 
