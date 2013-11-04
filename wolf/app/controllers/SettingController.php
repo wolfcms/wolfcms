@@ -250,6 +250,7 @@ class SettingController extends Controller {
         'et' => 'Estonian',
         'eu' => 'Basque',
         'fa' => 'Persian',
+        'fa_IR' => 'Persian/Iran',
         'ff' => 'Fulah',
         'fi' => 'Finnish',
         'fj' => 'Fijian',

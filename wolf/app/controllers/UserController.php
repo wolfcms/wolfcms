@@ -256,6 +256,14 @@ class UserController extends Controller {
             unset($data['password'], $data['confirm']);
         }
 
+        // Check alphanumerical fields
+        $fields = array('username');
+        foreach ($fields as $field) {
+            if (!empty($data[$field]) && !Validate::alphanum_space($data[$field])) {
+                $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
+            }
+        }
+
         if (!empty($data['name']) && !Validate::alphanum_space($data['name'], true)) {
             $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'name'));
         }
@@ -266,6 +274,11 @@ class UserController extends Controller {
 
         if (!empty($data['language']) && !Validate::alpha_dash($data['language'])) {
             $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'language'));
+        }
+        
+        // Check if user with the same 'username' already exists
+        if ( Record::existsIn('User', 'username=:username', array( ':username' => $data['username'] )) ) {
+            $errors[] = __('Username <b>:username</b> is already in use, please choose other!', array( ':username' => $data['username'] ));
         }
         
         if ($errors !== false) {

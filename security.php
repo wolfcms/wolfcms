@@ -187,9 +187,24 @@ ol, ul {
 
     /* RUN CHECKS - ADVISORIES */
 
-    // Does the readme.txt file exist?
-    if (file_exists(CORE_ROOT.DS.'..'.DS.'readme.txt')) {
-        $advisories['readme.txt, file present'] = 'The readme.txt is still present. You may want to remove it for added security.';
+    // Does the README.md file exist?
+    if (file_exists(CORE_ROOT.DS.'..'.DS.'README.md')) {
+        $advisories['README.md, file present'] = 'The README.md is still present. You may want to remove it for added security.';
+    }
+
+    // Does the CONTRIBUTING.md file exist?
+    if (file_exists(CORE_ROOT.DS.'..'.DS.'CONTRIBUTING.md')) {
+        $advisories['CONTRIBUTING.md, file present'] = 'The CONTRIBUTING.md is still present. You may want to remove it for added security.';
+    }
+
+    // Does the composer.json file exist?
+    if (file_exists(CORE_ROOT.DS.'..'.DS.'composer.json')) {
+        $advisories['composer.json, file present'] = 'The composer.json is still present. This file is only needed for Wolf CMS development. You may want to remove it for added security.';
+    }
+
+    // Does the .travis.yml file exist?
+    if (file_exists(CORE_ROOT.DS.'..'.DS.'.travis.yml')) {
+        $advisories['.travis.yml, file present'] = 'The .travis.yml is still present. This file is only needed for Wolf CMS development. You may want to remove it for added security.';
     }
 
     // Is the config file writable?
