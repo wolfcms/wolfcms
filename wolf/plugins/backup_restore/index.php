@@ -24,7 +24,7 @@
 if (!defined('IN_CMS')) { exit(); }
 
 
-if (!defined('BR_VERSION')) { define('BR_VERSION', '0.8'); }
+if (!defined('BR_VERSION')) { define('BR_VERSION', '0.8.0'); }
 /**
  *
  * Root location where Comment plugin lives.
