@@ -1,13 +1,9 @@
 <?php
 
 /**
- * Finnish language file
+ * Wolf CMS core language file
  *
  * @package Translations
- *
- * @author Petri Ikonen <petri.ikonen@kuopassa.com>
- * @version Wolf x.y.z
- * @link http://www.kuopassa.com/
  */
 
 return array(
@@ -109,6 +105,7 @@ return array(
     'No CSRF token found!' => 'CSRF-avainta ei l&ouml;ytynyt!',
     'No user found!' => 'K&auml;ytt&auml;j&auml;&auml; ei l&ouml;ytynyt!',
     'One or more required PHP extension is missing: :exts' => 'Yksi tai useammista tarvittavista PHP-laajennuksista puuttuu: :exts',
+    'Only administrators can change <b>protected</b> status of pages!' => 'Only administrators can change <b>protected</b> status of pages!',
     'Only for filter in pages, NOT in snippets' => 'Vain sivujen suodattamiseen, EI snipettien',
     'Optional. Please use a valid e-mail address.' => 'Vapaaehtoinen. K&auml;yt&auml; kelvollista s&auml;hk&ouml;postiosoitetta.',
     'Page' => 'Sivu',
@@ -121,7 +118,7 @@ return array(
     'Page not found!' => 'Sivua ei l&ouml;ytynyt!',
     'Page options' => 'Sivun asetukset',
     'Page rendered in' => 'Sivu luotiin',
-    'Page with slug <b>:slug</b> already exists!' => 'Sivu, jolla on slug <b>:slug</b>, on jo olemassa!',
+    'Page with slug <b>:slug</b> already exists!' => 'Page with slug <b>:slug</b> already exists!',    
     'Pages' => 'Sivut',
     'Password' => 'Salasana',
     'Password and Confirm are not the same or too small!' => 'Salasana ja salasanan vahvistaminen eiv&auml;t ole samanlaisia, tai ne ovat liian lyhyit&auml;!',
@@ -179,6 +176,7 @@ return array(
     'User not found!' => 'K&auml;ytt&auml;j&auml;&auml; ei l&ouml;ytynyt!',
     'Username' => 'K&auml;ytt&auml;j&auml;tunnus',
     'Username must contain a minimum of 3 characters!' => 'K&auml;ytt&auml;j&auml;nimen tulee olla v&auml;hint&auml;&auml;n 3 merkki&auml; pitk&auml;!',
+    'Username <b>:username</b> is already in use, please choose other!' => 'Username <b>:username</b> is already in use, please choose other!',
     'Users' => 'K&auml;ytt&auml;j&auml;t',
     'Valid until date' => 'Voimassa p&auml;iv&auml;m&auml;&auml;r&auml;&auml;n asti',
     'Version' => 'Versio',
@@ -195,8 +193,11 @@ return array(
     'Where do the avatars come from?' => 'Mist&auml; haluat avatarien tulevan?',
     'You are currently logged in as' => 'Olet kirjautunut sis&auml;&auml;n nimell&auml;',
     'You cannot have a slug named :slug!' => 'Et voi k&auml;ytt&auml;&auml; slugia :slug!',
+    'You do not have permission to add snippets!' => 'You do not have permission to add snippets!',
+    'You do not have permission to delete snippets!' => 'You do not have permission to delete snippets!',
+    'You do not have permission to edit snippets!' => 'You do not have permission to edit snippets!',
     'You do not have permission to access the requested page!' => 'Sinulla ei ole tarvittavia k&auml;ytt&ouml;oikeuksia voidaksesi avata kyseisen sivun!',
-    'You have modified this page. If you navigate away from this page without first saving your data, the changes will be lost.' => 'Muokkasit t&auml;t&auml; sivua. Jos siirryt sivulta pois tallentamatta muutoksia, muutokset katoavat.',
+    'You have modified this page.  If you navigate away from this page without first saving your data, the changes will be lost.' => 'Olet tehnyt muutoksia tälle sivulle. Jos siirryt sivulta pois ennen tallentamista, tekemäsi muutokset katoavat.',
     'You have to specify a content-type!' => 'M&auml;&auml;rittele sis&auml;lt&ouml;tyyppi!',
     'You have to specify a name!' => 'Sinun tulee asettaa nimi!',
     'You have to specify a slug!' => 'Sinun tulee asettaa slug!',
@@ -222,7 +223,7 @@ return array(
     'required' => 'pakollinen',
     'seconds' => 'sekuntia',
     'unknown' => 'tuntematon',
-    'website:' => 'nettisivu:',
+    'website:' => 'nettisivu:',    
     'Administrator' => 'Yll&auml;pit&auml;j&auml;',
     'Editor' => 'Editori',
     'Developer' => 'Kehitt&auml;j&auml;'
