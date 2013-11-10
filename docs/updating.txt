@@ -13,12 +13,12 @@ IMPORTANT - always check your security by viewing security.php post update!
 IMPORTANT - Make absolutely sure you have 0.7.7 before doing this.
 
 Short explanation: you can upgrade from 0.7.7 by simply replacing all the
-                   Wolf CMS files, including of course index.php. Afterwars you
-                   visit install/index.php
+                   Wolf CMS files, including of course index.php. Afterwards you
+                   visit .../wolf/install/ to do the DB upgrade.
 
 Longer explanation:
 
-  1. Create a backup of your files AND database. Save your config.php file!
+  1. Create a backup of your files AND database. Especially save your config.php file!
 
   2. Login to your old installation and disable all of your plugins.
 
@@ -33,14 +33,14 @@ Longer explanation:
   6. Copy your OLD config.php into your new 0.7.8 installation, overwriting the
      empty default.
 
-  7. Visit http://www.example.com/wolf/install/index.php and follow the
+  7. Visit http://www.example.com/wolf/install/ and follow the
      instructions to upgrade your database.
 
   8. Visit http://www.example.com/security.php to view the security advisory.
 
   9. Test your new installation.
 
-  10. Copy back your third party plugins.
+  10. Copy back your third party plugins, if any.
 
   11. Enable and test each third party plugin *one by one*.
 
