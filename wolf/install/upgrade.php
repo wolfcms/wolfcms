@@ -1,7 +1,7 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009-2013 Martijn van der Kleijn <martijn.niji@gmail.com>
  *
  * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
  * Please see license.txt for the full license text.
@@ -37,20 +37,12 @@ $drivers = PDO::getAvailableDrivers();
     <ul>
         <li>Make sure you have created a BACKUP of your database before proceeding.</li>
         <li>This will only touch the CORE database tables, not third party plugin tables.</li>
-        <li>This is only for upgrades from 0.6.0 to 0.7.x.</li>
-        <li>If you have created custom user groups, you will have to <strong>recreate</strong> them after upgrading.
-            <ul>
-                <li>A custom user group is any group except: administrator, developer, editor.</li>
-                <li>The current permission table will be emptied.</li>
-                <li>The current user_permission table will be <strong>deleted</strong>.</li>
-            </ul>
-        </li>
-
+        <li>This is <strong>only</strong> for upgrades from 0.7.7 to 0.7.8.</li>
     </ul>
     <p>
         Do you wish to upgrade:
-        <strong>Wolf CMS 0.6.0</strong>
-        =&gt; <strong>Wolf CMS 0.7.x</strong>?
+        <strong>Wolf CMS 0.7.7</strong>
+        =&gt; <strong>Wolf CMS 0.7.8</strong>?
     </p>
 
     <form action="index.php" method="post">
