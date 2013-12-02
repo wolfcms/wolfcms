@@ -7,7 +7,7 @@
  */
 
 return array(
-    'A comment was added.' => 'Комментарий был добавлен.',
+    'A comment was added.' => 'Комментарий добавлен.',
     'Approve' => 'Одобрить',
     'Are you sure you wish to delete it?' => 'Вы уверены, что хотите удалить?',
     'Auto approve' => 'Разрешать автоматически',
@@ -30,8 +30,8 @@ return array(
     'Comments settings' => 'Настройки комментариев',
     'Delete' => 'Удалить',
     'Documentation' => 'Документация',
-    'Edit' => 'Edit',
-    'Edit comment by' => 'Edit comment by',
+    'Edit' => 'Редактировать',
+    'Edit comment by' => 'Изменить комментарий от',
     'Enhance comments tab' => 'Расширить вкладку с комментариями',
     'Incorrect result value. Please try again:' => 'Некорректное значение. Попробуйте ещё раз:',
     'Moderation' => 'Модерация',
@@ -53,10 +53,10 @@ return array(
     'The settings have been updated.' => 'Настройки были обновлены',
     'Unable to clean up table alterations.' => 'Не удаётся очистить таблицу изменений',
     'Unable to delete plugin settings.' => 'Не удаётся удалить настройки плагина.',
-    'Unable to drop table :tablename' => 'Не удаётся сбросить таблицу :tablename',
-    'Use captcha' => 'Капча',
+    'Unable to drop table :tablename' => 'Не удаётся удалить таблицу :tablename',
+    'Use captcha' => 'Использовать капчу',
     'Yes' => 'Да',
-    'You have modified this page.  If you navigate away from this page without first saving your data, the changes will be lost.' => 'You have modified this page.  If you navigate away from this page without first saving your data, the changes will be lost.',
+    'You have modified this page.  If you navigate away from this page without first saving your data, the changes will be lost.' => 'Вы изменили страницу. если вы уйдете отсюда без сохранения, изменения будут потеряны.',
     'about' => 'о',
     'comment not found!' => 'комментарий не найден',
     'none' => 'нет',
