@@ -65,8 +65,6 @@ class Page extends Node {
     public $updater_id;
     // non db fields
     private $parent = false;
-    private $path = false;
-    private $level = false;
     private $tags = false;
 
     public function __construct($object=null, $parent=null) {
@@ -118,64 +116,6 @@ class Page extends Node {
 
 
     /**
-     * Returns the path for this node.
-     * 
-     * For instance, for a page with the URL http://www.example.com/wolfcms/path/to/page.html,
-     * the path is: path/to/page (without the URL_SUFFIX)
-     *
-     * Note: The path does not start nor end with a '/'.
-     *
-     * @return string   The node's full path.
-     */
-    public function path() {
-        if ($this->path === false) {
-            if ($this->parent() !== false) {
-                $this->path = trim($this->parent()->path().'/'.$this->slug, '/');
-            } else {
-                $this->path = trim($this->slug, '/');
-            }
-        }
-
-        return $this->path;
-    }
-
-
-    /**
-     * @deprecated
-     * @see path()
-     */
-    public function uri() {
-        return $this->path();
-    }
-
-
-    /**
-     * @deprecated
-     * @see path()
-     */
-    public function getUri() {
-        return $this->path();
-    }
-
-
-    /**
-     * Returns the current page object's url.
-     *
-     * Usage: <?php echo $this->url(); ?> or <?php echo $page->url(); ?>
-     *
-     * @return string   The url of the page object.
-     */
-    public function url($suffix=true) {
-        if ($suffix === false) {
-            return BASE_URL.$this->path();
-        }
-        else {
-            return BASE_URL.$this->path().($this->path() != '' ? URL_SUFFIX : '');
-        }
-    }
-
-
-    /**
      * Allows user to get the url of a page by page ID.
      *
      * This function will always produce a correct and current url to the page
@@ -218,43 +158,6 @@ class Page extends Node {
 
     public function updaterId() {
         return $this->updater_id;
-    }
-
-
-    /**
-     * Returns a set of breadcrumbs as html.
-     *
-     * @param   string      $separator  The separator between crumbs. Defaults to &gt;
-     * @return  string      The breadcrumbs as an html snippet.
-     */
-    public function breadcrumbs($separator='&gt;') {
-        $out = '';
-        $url = '';
-        $path = '';
-        $paths = explode('/', '/'.$this->slug);
-        $nb_path = count($paths);
-
-        if ($this->parent() !== false)
-            $out .= $this->parent()->_inversedBreadcrumbs($separator);
-
-        return $out.'<span class="breadcrumb-current">'.$this->breadcrumb().'</span>';
-    }
-
-
-    /**
-     *
-     * @todo Finish _inversedBreadcrumbs PHPDoc
-     *
-     * @param type $separator
-     * @return string
-     */
-    private function _inversedBreadcrumbs($separator) {
-        $out = '<a href="'.$this->url().'" title="'.$this->breadcrumb.'">'.$this->breadcrumb.'</a><span class="breadcrumb-separator">'.$separator.'</span>';
-
-        if ($this->parent() !== false)
-            return $this->parent()->_inversedBreadcrumbs($separator).$out;
-
-        return $out;
     }
 
 
@@ -457,24 +360,6 @@ class Page extends Node {
 
 
     /**
-     * Return a numerical representation of this page's place in the page hierarchy.
-     *
-     * This uses the page url as returned by the url() method to check the level.
-     * It might not always be what you'd expect.
-     *
-     * @return int The page's level.
-     */
-    public function level() {
-        if ($this->level === false) {
-            $path = $this->path();
-            $this->level = empty($path) ? 0 : substr_count($path, '/') + 1;
-        }
-
-        return $this->level;
-    }
-
-
-    /**
      * Return formatted date for page. Defaults to 'created on' date.
      *
      * This function works through PHP's strftime() function. Please see
@@ -567,22 +452,6 @@ class Page extends Node {
             return $this->parent()->partExists($part, true);
         }
         return false;
-    }
-
-
-    /**
-     * Return an HTML anchor element for this page.
-     *
-     * @param string $label     A custom label. Defaults to page title.
-     * @param array $options    Array containing attributes to add.
-     * @return string           The actual anchor element.
-     */
-    public function link($label=null, $options='') {
-        if ($label == null)
-            $label = $this->title();
-
-        return sprintf('<a href="%s" %s>%s</a>', $this->url(true), $options, $label
-        );
     }
 
 

@@ -20,10 +20,14 @@
  *
  * First version for future feature set.
  *
+ * @abstract
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @since Wolf version 0.7.0
  */
-class Node extends Record {
+abstract class Node extends Record {
+
+    protected $path = false;
+    protected $level = false;
 
     // Static variables used to store dynamic methods
     protected static $_methods = array();
@@ -131,6 +135,223 @@ class Node extends Record {
         }
         
         return false;
+    }
+
+
+    /**
+     * Returns an array of ancestors.
+     * 
+     * @return  array               Array of ancestor Nodes
+     */
+    public function ancestors() {
+        $ancestors = array();
+
+        if ($this->parent()) {
+            $ancestors = $this->parent()->ancestors();
+            $ancestors[] = $this->parent();
+        }
+
+        return $ancestors;
+    }
+
+
+    /**
+     * Returns the node's breadcrumb.
+     *
+     * @abstract
+     * @return  string              The node's breadcrumb
+     */
+    abstract public function breadcrumb();
+
+
+    /**
+     * Returns a trail of breadcrumbs as HTML.
+     * 
+     * @param  string   $seperator  The separator between breadcrumbs. Defaults to &gt;
+     * @return string               The breadcrumbs as an html snippet.
+     */
+    public function breadcrumbs($seperator = '&gt;') {
+        $seperator = '<span class="breadcrumb-seperator">' . $seperator . '</span>';
+        
+        $breadcrumbs = array();
+
+        foreach ($this->ancestors() as $ancestor) {
+            $breadcrumbs[] = '<a href="' . $ancestor->url() . '">' . $ancestor->breadcrumb() . '</a>';
+        }
+
+        // add current node
+        $breadcrumbs[] = '<span class="breadcrumb-current">' . $this->breadcrumb() . '</span>';
+
+        $html = implode($seperator, $breadcrumbs);
+
+        return $html;
+    }
+
+
+    /**
+     * Returns an array of this node's children.
+     *
+     * @abstract
+     * @return  array               Array of children objects
+     */
+    abstract public function children();
+
+
+    /**
+     * Returns the node's content, or a specific content part.
+     *
+     * @abstract
+     * @param  string   $part       Part to retrieve content for. Defaults to 'body'.
+     * @param  boolean  $inherit    Check parents for part content if true.
+     * @return string               Actual contents of the part.
+     */
+    abstract public function content($part = 'body', $inherit = false);
+
+
+    /**
+     * Returns the node's description.
+     *
+     * @abstract
+     * @return  string              The node's description
+     */
+    abstract public function description();
+
+
+    /**
+     * Checks if a part exists and it has content.
+     *
+     * @abstract
+     * @param  string   $part       Part to retrieve content for.
+     * @param  boolean  $inherit    Check parents for part content if true.
+     * @return boolean              Returns true if part was found or false if nothing was found.
+     */
+    abstract public function hasContent($part, $inherit = false);
+
+
+    /**
+     * Returns the node's keywords.
+     *
+     * @abstract
+     * @return  string              The node's keywords, comma-seperated
+     */
+    abstract public function keywords();
+
+
+    /**
+     * Returns a numerical representation of this node's place in the page hierarchy.
+     *
+     * @return  int     The node's level.
+     */
+    public function level() {
+        return count($this->ancestors());
+    }
+
+
+    /**
+     * Returns an HTML anchor element for this node.
+     * 
+     * @param   string  $label      A custom label. Defaults to node's title.
+     * @param   string  $options    Attributes that should be added.
+     * @return  string              The HTML anchor element.
+     */
+    public function link($label = null, $options = '') {
+        if ($label == null) {
+            $label = $this->title();
+        }
+
+        return sprintf('<a href="%s" %s>%s</a>', $this->url(true), $options, $label);
+    }
+
+
+    /**
+     * Returns the node's parent.
+     *
+     * The optional $level parameter allows the user to specify the level
+     * of the parent. I.e. $node->parent(0) should return the Home page.
+     *
+     * @abstract
+     * @param  mixed    $level      Optional level parameter, defaults to null
+     * @return Node                 Returns the parent object
+     */
+    abstract public function parent($level = null);
+
+
+    /**
+     * Returns the path for this node.
+     * 
+     * For instance, for a page with the URL http://www.example.com/wolfcms/path/to/page.html,
+     * the path is: path/to/page (without the URL_SUFFIX)
+     *
+     * Note: The path does not start nor end with a '/'.
+     *
+     * @return string   The node's full path.
+     */
+    public function path() {
+        if ($this->path === false) {
+            if ($this->parent() !== false) {
+                $this->path = trim($this->parent()->path() . '/' . $this->slug(), '/');
+            } else {
+                $this->path = trim($this->slug(), '/');
+            }
+        }
+
+        return $this->path;
+    }
+
+
+    /**
+     * Returns the node's slug.
+     *
+     * @abstract
+     * @return  string              The node's slug
+     */
+    abstract public function slug();
+
+
+    /**
+     * Returns the node's title.
+     *
+     * @abstract
+     * @return  string              The node's title
+     */
+    abstract public function title();
+
+
+    /**
+     * Returns the current node's URL.
+     *
+     * Usage: <code><?php echo $node->url(); ?></code>
+     * 
+     * In certain contexts, $this can be a Node, so you can use:
+     * <code><?php echo $this->url(); ?></code>
+     * 
+     * @param  boolean  $suffix     URL includes URL_SUFFIX when set to true
+     * @return string               The URL of the Node object
+     */
+    public function url($suffix = true) {
+        if ($suffix === false) {
+            return BASE_URL.$this->path();
+        } else {
+            return BASE_URL.$this->path() . ($this->path() != '' ? URL_SUFFIX : '');
+        }
+    }
+
+
+    /**
+     * @deprecated
+     * @see path()
+     */
+    public function uri() {
+        return $this->path();
+    }
+
+
+    /**
+     * @deprecated
+     * @see path()
+     */
+    public function getUri() {
+        return $this->path();
     }
 
 
