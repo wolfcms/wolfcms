@@ -500,10 +500,12 @@ function kses_bad_protocol_once($string, $allowed_protocols)
 # handling whitespace and HTML entities.
 ###############################################################################
 {
-    return preg_replace('/^((&[^;]*;|[\sA-Za-z0-9])*)'.
-        '(:|&#58;|&#[Xx]3[Aa];)\s*/e',
-    'kses_bad_protocol_once2("\\1", $allowed_protocols)',
-    $string);
+    $callback = function ($matches) use ($allowed_protocols)
+    {
+        return kses_bad_protocol_once2($matches[1], $allowed_protocols);
+    };
+    return preg_replace_callback('/^((&[^;]*;|[\sA-Za-z0-9])*)'
+        . '(:|&#58;|&#[Xx]3[Aa];)\s*/', $callback, $string);
 } # function kses_bad_protocol_once
 
 
@@ -548,8 +550,8 @@ function kses_normalize_entities($string)
 
     $string = preg_replace('/&amp;([A-Za-z][A-Za-z0-9]{0,19});/',
         '&\\1;', $string);
-    $string = preg_replace('/&amp;#0*([0-9]{1,5});/e',
-        'kses_normalize_entities2("\\1")', $string);
+    $string = preg_replace('/&amp;#0*([0-9]{1,5});/',
+        'kses_normalize_entities2', $string);
     $string = preg_replace('/&amp;#([Xx])0*(([0-9A-Fa-f]{2}){1,2});/',
         '&#\\1\\2;', $string);
 
@@ -574,9 +576,14 @@ function kses_decode_entities($string)
 # URL protocol whitelisting system anyway.
 ###############################################################################
 {
-    $string = preg_replace('/&#([0-9]+);/e', 'chr("\\1")', $string);
-    $string = preg_replace('/&#[Xx]([0-9A-Fa-f]+);/e', 'chr(hexdec("\\1"))',
-        $string);
-
-    return $string;
+    $callback1 = function ($matches)
+    {
+        return chr($matches[1]);
+    };
+    $string = preg_replace_callback('/&#([0-9]+);/', $callback1, $string);
+    $callback2 = function ($matches)
+    {
+        return chr(hexdec($matches[1]));
+    };
+    return preg_replace_callback('/&#[Xx]([0-9A-Fa-f]+);/', $callback2, $string);
 } # function kses_decode_entities
