@@ -550,7 +550,7 @@ function kses_normalize_entities($string)
 
     $string = preg_replace('/&amp;([A-Za-z][A-Za-z0-9]{0,19});/',
         '&\\1;', $string);
-    $string = preg_replace('/&amp;#0*([0-9]{1,5});/',
+    $string = preg_replace_callback('/&amp;#0*([0-9]{1,5});/',
         'kses_normalize_entities2', $string);
     $string = preg_replace('/&amp;#([Xx])0*(([0-9A-Fa-f]{2}){1,2});/',
         '&#\\1\\2;', $string);
@@ -565,6 +565,8 @@ function kses_normalize_entities2($i)
 # and nothing more for &#number; entities.
 ###############################################################################
 {
+    if (is_array($i) && count($i) == 2)
+        $i = $i[1];
     return (($i > 65535) ? "&amp;#$i;" : "&#$i;");
 } # function kses_normalize_entities2
 
