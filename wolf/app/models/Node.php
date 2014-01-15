@@ -16,12 +16,15 @@
  */
 
 /**
- * Generic Node model.
- *
- * First version for future feature set.
+ * An abstract class that is the base class for all models that are part of Wolf's URL structure.
+ * A Node can be an HTML page, but can also be an image or something else.
+ * 
+ * The Node class is abstract, in other words it can not be instantiated. It contains a number of
+ * abstract methods that have to be implemented by it's subclasses.
  *
  * @abstract
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
+ * @author Nic Wortel <nic.wortel@nth-root.nl>
  * @since Wolf version 0.7.0
  */
 abstract class Node extends Record {
