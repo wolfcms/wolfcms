@@ -62,11 +62,7 @@ class Page extends AbstractPage {
 
     protected $creator = null;
     protected $updater = null;
-
-    public $author;
-    public $author_id;
-    public $updater;
-    public $updater_id;
+    
     // non db fields
     private $parent = false;
     private $tags = false;
@@ -546,10 +542,8 @@ class Page extends AbstractPage {
 
 
         // Prepare SQL
-        $sql = 'SELECT page.*, author.name AS author, author.id AS author_id, updater.name AS updater, updater.id AS updater_id '
+        $sql = 'SELECT page.* '
                 .'FROM '.TABLE_PREFIX.'page AS page '
-                .'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
-                .'LEFT JOIN '.TABLE_PREFIX.'user AS updater ON updater.id = page.updated_by_id '
                 .'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN : '').') '
                 ." AND (COALESCE(valid_until, '') = '' OR '".date('Y-m-d H:i:s')."' < valid_until)"
                 ."$where_string ORDER BY $order $limit_string $offset_string";
@@ -945,7 +939,7 @@ class Page extends AbstractPage {
         
         // Prepare query parts
         // @todo Remove all "author" mentions and function and replace by more appropriate "creator" name.
-        $select_string      = empty($select) ? 'SELECT page.*, creator.name AS author, creator.id AS author_id, updater.name AS updater, updater.id AS updater_id, creator.name AS created_by_name, updater.name AS updated_by_name' : "SELECT $select";
+        $select_string      = empty($select) ? 'SELECT page.*' : "SELECT $select";
         $from_string        = empty($from) ? "FROM $table_name AS page" : "FROM $from";
         $joins_string       = empty($joins) ? '' : $joins;
         $where_string       = empty($where) ? '' : "WHERE $where";
