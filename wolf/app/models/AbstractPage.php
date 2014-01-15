@@ -27,4 +27,25 @@
  */
 abstract class AbstractPage extends Node {
 
+    /**
+     * Returns the node's content, or a specific content part.
+     *
+     * @abstract
+     * @param  string   $part       Part to retrieve content for. Defaults to 'body'.
+     * @param  boolean  $inherit    Check parents for part content if true.
+     * @return string               Actual contents of the part.
+     */
+    abstract public function content($part = 'body', $inherit = false);
+
+
+    /**
+     * Checks if a part exists and it has content.
+     *
+     * @abstract
+     * @param  string   $part       Part to retrieve content for.
+     * @param  boolean  $inherit    Check parents for part content if true.
+     * @return boolean              Returns true if part was found or false if nothing was found.
+     */
+    abstract public function hasContent($part, $inherit = false);
+
 }
