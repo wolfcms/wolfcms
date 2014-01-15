@@ -59,6 +59,10 @@ class Page extends AbstractPage {
     public $position;
     public $is_protected;
     public $needs_login;
+
+    protected $creator = null;
+    protected $updater = null;
+
     public $author;
     public $author_id;
     public $updater;
@@ -85,13 +89,49 @@ class Page extends AbstractPage {
     }
 
 
-    public function author() {
-        return $this->author;
+    /**
+     * @deprecated
+     * @see creator()
+     */
+    public function authorId() {
+        return $this->creator()->id;
     }
 
 
-    public function authorId() {
-        return $this->author_id;
+    /**
+     * Returns the User that created this Page.
+     * 
+     * @return  User
+     */
+    public function creator() {
+        if ($this->creator === null) {
+            $this->creator = User::findById($this->created_by_id);
+        }
+
+        return $this->creator;
+    }
+
+
+    /**
+     * Returns the User that updated this Page most recently.
+     * 
+     * @return  User
+     */
+    public function updater() {
+        if ($this->updater === null) {
+            $this->updater = User::findById($this->updated_by_id);
+        }
+
+        return $this->updater;
+    }
+
+
+    /**
+     * @deprecated
+     * @see updater()
+     */
+    public function updaterId() {
+        return $this->updater()->id;
     }
 
 
@@ -148,16 +188,6 @@ class Page extends AbstractPage {
 
     public function breadcrumb() {
         return $this->breadcrumb;
-    }
-
-
-    public function updater() {
-        return $this->updater;
-    }
-
-
-    public function updaterId() {
-        return $this->updater_id;
     }
 
 
