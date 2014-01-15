@@ -159,6 +159,15 @@ abstract class Node extends Record {
 
 
     /**
+     * @deprecated
+     * @see creator()
+     */
+    public function author() {
+        return $this->creator();
+    }
+
+
+    /**
      * Returns the node's breadcrumb.
      *
      * @abstract
@@ -198,6 +207,15 @@ abstract class Node extends Record {
      * @return  array               Array of children objects
      */
     abstract public function children();
+
+
+    /**
+     * Returns the User that created this Node.
+     * 
+     * @abstract
+     * @return  User
+     */
+    abstract public function creator();
 
 
     /**
@@ -296,6 +314,15 @@ abstract class Node extends Record {
      * @return  string              The node's title
      */
     abstract public function title();
+
+
+    /**
+     * Returns the User that updated this Node most recently.
+     * 
+     * @abstract
+     * @return  User
+     */
+    abstract public function updater();
 
 
     /**
