@@ -25,7 +25,7 @@
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  */
-class Page extends Node {
+class Page extends AbstractPage {
     const TABLE_NAME = 'page';
 
     const STATUS_DRAFT = 1;
