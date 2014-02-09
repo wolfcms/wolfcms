@@ -127,6 +127,13 @@ define('DEFAULT_ACTION', 'index');
 
 require CORE_ROOT.DS.'Framework.php';
 
+AutoLoader::register();
+
+AutoLoader::addFolder(array(
+    APP_PATH.DIRECTORY_SEPARATOR.'models',
+    APP_PATH.DIRECTORY_SEPARATOR.'controllers',
+));
+
 try {
     $__CMS_CONN__ = new PDO(DB_DSN, DB_USER, DB_PASS);
 }
