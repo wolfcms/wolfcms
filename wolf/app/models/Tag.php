@@ -23,4 +23,28 @@
  */
 class Tag extends Record {
     const TABLE_NAME = 'tag';
+    
+    public $id;
+    public $name;
+    public $count;
+    
+    public function getColumns() {
+        return array('id', 'name', 'count');
+    }
+    
+    public function afterSave() {
+        parent::afterSave();
+        
+        if ($this->count === 0) {
+            return $this->delete();
+        }
+        
+        return true;
+    }
+    
+    public static function findByName($name) {
+        return self::findOne(array(
+            'where' => array('name = :name', ':name' => $name)
+        ));
+    }
 }

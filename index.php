@@ -15,7 +15,7 @@
 //  Constants  ---------------------------------------------------------------
 define('IN_CMS', true);
 
-define('CMS_VERSION', '0.7.8');
+define('CMS_VERSION', '0.0.0-DEV');
 define('CMS_ROOT', dirname(__FILE__));
 define('DS', DIRECTORY_SEPARATOR);
 define('CORE_ROOT', CMS_ROOT.DS.'wolf');
@@ -126,6 +126,13 @@ define('DEFAULT_CONTROLLER', 'page');
 define('DEFAULT_ACTION', 'index');
 
 require CORE_ROOT.DS.'Framework.php';
+
+AutoLoader::register();
+
+AutoLoader::addFolder(array(
+    APP_PATH.DIRECTORY_SEPARATOR.'models',
+    APP_PATH.DIRECTORY_SEPARATOR.'controllers',
+));
 
 try {
     $__CMS_CONN__ = new PDO(DB_DSN, DB_USER, DB_PASS);

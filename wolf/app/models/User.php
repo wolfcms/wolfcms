@@ -36,6 +36,9 @@ class User extends Record {
     public $updated_on;
     public $created_by_id;
     public $updated_by_id;
+    public $last_login;
+    public $last_failure;
+    public $failure_count;
 
 
     public function roles() {
@@ -52,12 +55,25 @@ class User extends Record {
     }
 
     public static function findBy($column, $value) {
-        return Record::findOneFrom('User', $column.' = ?', array($value));
+        return self::findOne(array(
+            'where' => array($column . ' = :value', ':value' => $value)
+        ));
+    }
+
+    public function getColumns() {
+        return array(
+            'id', 'name', 'email', 'username', 'password', 'salt',
+            'language', 'last_login', 'last_failure', 'failure_count',
+            'created_on', 'updated_on', 'created_by_id', 'updated_by_id'
+        );
     }
 
     public function beforeInsert() {
         $this->created_by_id = AuthUser::getId();
         $this->created_on = date('Y-m-d H:i:s');
+        $this->last_login = date('Y-m-d H:i:s', 0);
+        $this->last_failure = date('Y-m-d H:i:s', 0);
+        $this->failure_count = 0;
         return true;
     }
 
@@ -67,56 +83,18 @@ class User extends Record {
         return true;
     }
 
-    public static function find($args = null) {
-
-        // Collect attributes...
-        $where    = isset($args['where']) ? trim($args['where']) : '';
-        $order_by = isset($args['order']) ? trim($args['order']) : '';
-        $offset   = isset($args['offset']) ? (int) $args['offset'] : 0;
-        $limit    = isset($args['limit']) ? (int) $args['limit'] : 0;
-
-        // Prepare query parts
-        $where_string = empty($where) ? '' : "WHERE $where";
-        $order_by_string = empty($order_by) ? '' : "ORDER BY $order_by";
-        $limit_string = $limit > 0 ? "LIMIT $limit" : '';
-        $offset_string = $offset > 0 ? "OFFSET $offset" : '';
-
-        $tablename = self::tableNameFromClassName('User');
-
-        // Prepare SQL
-        $sql = "SELECT $tablename.*, creator.name AS created_by_name, updater.name AS updated_by_name FROM $tablename".
-            " LEFT JOIN $tablename AS creator ON $tablename.created_by_id = creator.id".
-            " LEFT JOIN $tablename AS updater ON $tablename.updated_by_id = updater.id".
-            " $where_string $order_by_string $limit_string $offset_string";
-
-
-        Record::logQuery($sql);
-
-        $stmt = Record::getConnection()->prepare($sql);
-        $stmt->execute();
-
-        // Run!
-        if ($limit == 1) {
-            return $stmt->fetchObject('User');
-        }
-        else {
-            $objects = array();
-            while ($object = $stmt->fetchObject('User')) {
-                $objects[] = $object;
-            }
-            return $objects;
-        }
-
-    }
-
     public static function findAll($args = null) {
         return self::find($args);
     }
 
     public static function findById($id) {
-        return self::find(array(
-            'where' => self::tableNameFromClassName('User').'.id='.(int)$id,
-            'limit' => 1
+        $tablename = self::tableNameFromClassName('User');
+        
+        return self::findOne(array(
+            'select' => "$tablename.*, creator.name AS created_by_name, updater.name AS updated_by_name",
+            'joins' => "LEFT JOIN $tablename AS creator ON $tablename.created_by_id = creator.id ".
+                       "LEFT JOIN $tablename AS updater ON $tablename.updated_by_id = updater.id",
+            'where' => array($tablename . '.id = :id', ':id' => $id)
         ));
     }
 

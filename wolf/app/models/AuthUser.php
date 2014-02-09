@@ -265,7 +265,7 @@ class AuthUser {
     static private final function challengeCookie($cookie) {
         $params = self::explodeCookie($cookie);
         if (isset($params['exp'], $params['id'], $params['digest'])) {
-            if ( ! $user = Record::findByIdFrom('User', $params['id']))
+            if ( ! $user = User::findById($params['id']))
                 return false;
 
             if (self::bakeUserCookie($params['exp'], $user) == $cookie && $params['exp'] > $_SERVER['REQUEST_TIME'])

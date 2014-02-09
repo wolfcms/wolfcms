@@ -63,61 +63,34 @@ class Snippet extends Record {
         return true;
     }
 
-    public static function find($args = null) {
-
-    // Collect attributes...
-        $where    = isset($args['where']) ? trim($args['where']) : '';
-        $order_by = isset($args['order']) ? trim($args['order']) : '';
-        $offset   = isset($args['offset']) ? (int) $args['offset'] : 0;
-        $limit    = isset($args['limit']) ? (int) $args['limit'] : 0;
-
-        // Prepare query parts
-        $where_string = empty($where) ? '' : "WHERE $where";
-        $order_by_string = empty($order_by) ? '' : "ORDER BY $order_by";
-        $limit_string = $limit > 0 ? "LIMIT $limit" : '';
-        $offset_string = $offset > 0 ? "OFFSET $offset" : '';
-
-        $tablename = self::tableNameFromClassName('Snippet');
-        $tablename_user = self::tableNameFromClassName('User');
-
-        // Prepare SQL
-        $sql = "SELECT $tablename.*, creator.name AS created_by_name, updater.name AS updated_by_name FROM $tablename".
-            " LEFT JOIN $tablename_user AS creator ON $tablename.created_by_id = creator.id".
-            " LEFT JOIN $tablename_user AS updater ON $tablename.updated_by_id = updater.id".
-            " $where_string $order_by_string $limit_string $offset_string";
-
-        Record::logQuery($sql);
-
-        $stmt = Record::getConnection()->prepare($sql);
-        $stmt->execute();
-
-        // Run!
-        if ($limit == 1) {
-            return $stmt->fetchObject('Snippet');
-        }
-        else {
-            $objects = array();
-            while ($object = $stmt->fetchObject('Snippet')) {
-                $objects[] = $object;
-            }
-            return $objects;
-        }
-
-    } // find
-
     public static function findAll($args = null) {
         return self::find($args);
     }
 
     public static function findById($id) {
-        return self::find(array(
-            'where' => self::tableNameFromClassName('Snippet').'.id='.(int)$id,
-            'limit' => 1
+        $tablename = self::tableNameFromClassName('Snippet');
+        $tablename_user = self::tableNameFromClassName('User');
+        
+        return self::findOne(array(
+            'select' => "$tablename.*, creator.name AS created_by_name, updater.name AS updated_by_name",
+            'joins' => "LEFT JOIN $tablename_user AS creator ON $tablename.created_by_id = creator.id ".
+                       "LEFT JOIN $tablename_user AS updater ON $tablename.updated_by_id = updater.id",
+            'where' => array($tablename . '.id = ?', (int) $id)
         ));
     }
 
     public static function findByName($name) {
-        return self::findOneFrom('Snippet', "name LIKE :name", array(':name' => $name));
+        return self::findOne(array(
+            'where' => array('name LIKE ?', $name)
+        ));
+    }
+
+    public function getColumns() {
+        return array(
+            'id', 'name', 'filter_id', 'content', 'content_html',
+            'created_on', 'updated_on', 'created_by_id', 'updated_by_id',
+            'position'
+        );
     }
 
 } // end Snippet class
