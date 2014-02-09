@@ -1236,6 +1236,14 @@ class AutoLoader {
     protected static $folders = array();
 
     /**
+     * Register the AutoLoader on the SPL autoload stack.
+     */
+    public static function register()
+    {
+        spl_autoload_register(array('AutoLoader', 'load'), true, true);
+    }
+
+    /**
      * Adds a (set of) file(s) for autoloading.
      *
      * Examples:
