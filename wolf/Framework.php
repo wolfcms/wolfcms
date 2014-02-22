@@ -1362,6 +1362,14 @@ class AutoLoader {
     protected static $folders = array();
 
     /**
+     * Register the AutoLoader on the SPL autoload stack.
+     */
+    public static function register()
+    {
+        spl_autoload_register(array('AutoLoader', 'load'), true, true);
+    }
+
+    /**
      * Adds a (set of) file(s) for autoloading.
      *
      * Examples:
@@ -1424,19 +1432,6 @@ class AutoLoader {
     }
 
 } // end AutoLoader class
-
-if ( ! function_exists('__autoload')) {
-    AutoLoader::addFolder(array(APP_PATH.DIRECTORY_SEPARATOR.'models',
-        APP_PATH.DIRECTORY_SEPARATOR.'controllers'));
-    function __autoload($class_name) {
-        try {
-            AutoLoader::load($class_name);
-        }
-        catch (Exception $e) {
-            throw $e;
-        }
-    }
-}
 
 /**
  * Flash service.
