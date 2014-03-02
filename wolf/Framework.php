@@ -815,86 +815,72 @@ class Record {
 
 
     /**
-     * Returns a single Record class instance or an array of Record instances.
+     * Returns a single class instance or an array of instances.
      * 
-     * Usage:
+     * This method guarantees sane defaults, making the `options` argument
+     * optional. It is important to note however, that when using prepared
+     * statements with placeholders in for example the `WHERE` clause, the
+     * `values` option is mandatory.
+     * 
+     * Valid options are: 'select', 'where', 'group_by', 'having', 'order_by', 'limit', 'offset', 'values'
+     * 
+     * Example usage:
      * <code>
-     * $object = Class::find(array(
+     * // Note that MyClass extends Record 
+     * $object = MyClass::find(array(
      *     'select'     => 'column1, column2',
-     *     'from'       => 'table_name',
-     *     'joins'      => 'INNER JOIN table_name2 ON table_name2.column = table_name.id',
-     *     'where'      => array('id = ? and slug = ?', $id, $slug),
+     *     'where'      => 'id = ? and slug = ?',
      *     'group_by'   => 'column2',
-     *     'having'     => 'column2 = value',
+     *     'having'     => 'column2 = ?',
      *     'order_by'   => 'column3 ASC',
      *     'limit'      => 10,
-     *     'offset'     => 20
+     *     'offset'     => 20,
+     *     'values'     => array($id, $slug, 'some-value-for-having-clause')
      * ));
      * </code>
      * 
-     * Argument array can contain:
-     *  - select        The select statement (leave out 'SELECT ')
-     *  - from          The table name (leave out to automatically use the default table name of that Class)
-     *  - joins         A complete join statement. Multiple joins are allowed
-     *  - where         A string (for a simple where statement) or an array (if you want to use prepared statements)
-     *  - group_by      The group by statement (leave out 'GROUP BY ')
-     *  - having        The having statement (leave out 'HAVING ')
-     *  - order by      The order by statement (leave out 'ORDER BY ')
-     *  - limit         The limit (integer)
-     *  - offset        The offset (integer)
+     * @param   array   $options    Array of options for the query.
+     * @return  mixed               Single object, array of objects or false on failure.
      * 
-     * None of the above are required for the method to work.
-     * 
-     * Note: because of the use of get_called_class(), this method requires PHP 5.3.0 or higher.
-     * 
-     * @param array $options    Options array containing parameters for the query
-     * @return mixed            Object (when limit == 1), array of objects or false (on failure).
+     * @todo    Decide if we'll keep the from and joins options since they clash heavily with the one Record == one DB tuple idea.
      */
     public static function find($options = array()) {
+        // @todo Replace by InvalidArgumentException if not array based on logger decision.
         $options = (is_null($options)) ? array() : $options;
         
         $class_name = get_called_class();
         $table_name = self::tableNameFromClassName($class_name);
         
-        $single = (isset($options['limit']) && $options['limit'] == 1) ? true : false;
-        
         // Collect attributes
-        $select   = isset($options['select']) ? trim($options['select']) : '';
-        $from     = isset($options['from']) ? trim($options['from']) : '';
-        $joins    = isset($options['joins']) ? trim($options['joins']) : '';
-        $group_by = isset($options['group']) ? trim($options['group']) : '';
-        $having   = isset($options['having']) ? trim($options['having']) : '';
-        $order_by = isset($options['order']) ? trim($options['order']) : '';
-        $limit    = isset($options['limit']) ? (int) $options['limit'] : 0;
-        $offset   = isset($options['offset']) ? (int) $options['offset'] : 0;
-        
-        $values = array();
-        
-        // 'where' can be a string (for a simple where statement) or an array (if you want to use prepared statements)
-        if (isset($options['where'])) {
-            if (is_string($options['where'])) {
-                $where = trim($options['where']);
-            }
-            elseif (is_array($options['where'])) {
-                $where = trim(array_shift($options['where']));
-                $values = $options['where'];
-            }
-        }
+        $ses    = isset($options['select']) ? trim($options['select'])   : '';
+        $frs    = isset($options['from'])   ? trim($options['from'])     : '';
+        $jos    = isset($options['joins'])  ? trim($options['joins'])    : '';
+        $whs    = isset($options['where'])  ? trim($options['where'])    : '';
+        $gbs    = isset($options['group'])  ? trim($options['group'])    : '';
+        $has    = isset($options['having']) ? trim($options['having'])   : '';
+        $obs    = isset($options['order'])  ? trim($options['order'])    : '';
+        $lis    = isset($options['limit'])  ? (int) $options['limit']    : 0;
+        $ofs    = isset($options['offset']) ? (int) $options['offset']   : 0;
+        $values = isset($options['values']) ? (array) $options['values'] : array();
+
+        // Asked for single Record?
+        $single = ($lis === 1) ? true : false;
         
         // Prepare query parts
-        $select_string      = empty($select) ? 'SELECT *' : "SELECT $select";
-        $from_string        = empty($from) ? "FROM $table_name" : "FROM $from";
-        $joins_string       = empty($joins) ? '' : $joins;
-        $where_string       = empty($where) ? '' : "WHERE $where";
-        $group_by_string    = empty($group_by) ? '' : "GROUP BY $group_by";
-        $having_string      = empty($having) ? '' : "HAVING $having";
-        $order_by_string    = empty($order_by) ? '' : "ORDER BY $order_by";
-        $limit_string       = $limit > 0 ? "LIMIT $limit" : '';
-        $offset_string      = $offset > 0 ? "OFFSET $offset" : '';
+        $select      = empty($ses) ? 'SELECT *'         : "SELECT $ses";
+        $from        = empty($frs) ? "FROM $table_name" : "FROM $frs";
+        $joins       = empty($jos) ? ''                 : $jos;
+        $where       = empty($whs) ? ''                 : "WHERE $whs";
+        $group_by    = empty($gbs) ? ''                 : "GROUP BY $gbs";
+        $having      = empty($has) ? ''                 : "HAVING $has";
+        $order_by    = empty($obs) ? ''                 : "ORDER BY $obs";
+        $limit       = $lis > 0    ? "LIMIT $lis"       : '';
+        $offset      = $ofs > 0    ? "OFFSET $ofs"      : '';
         
-        // Compose the query
-        $sql = "$select_string $from_string $joins_string $where_string $group_by_string $having_string $order_by_string $limit_string $offset_string";
+        // Build the query
+        $sql = "$select $from $joins $where $group_by $having $order_by $limit $offset";
         
+        // Run query
         $objects = self::findBySql($sql, $values);
         
         return ($single) ? (!empty($objects) ? $objects[0] : false) : $objects;
@@ -903,10 +889,10 @@ class Record {
     private static function findBySql($sql, $values = null) {
         $class_name = get_called_class();
         
-        Record::logQuery($sql);
+        self::logQuery($sql);
         
         // Prepare and execute
-        $stmt = Record::getConnection()->prepare($sql);
+        $stmt = self::getConnection()->prepare($sql);
         if (!$stmt->execute($values)) {
             return false;
         }
@@ -930,7 +916,8 @@ class Record {
      */
     public static function findById($id) {
         return self::findOne(array(
-            'where' => array('id = :id', ':id' => (int) $id)
+            'where'  => 'id = :id',
+            'values' => array(':id' => (int) $id)
         ));
     }
         
@@ -974,7 +961,8 @@ class Record {
      */
     public static function findOneFrom($class_name, $where, $values=array()) {
         return $class_name::findOne(array(
-            'where' => array_merge(array($where), $values)
+            'where'  => $where,
+            'values' => $values
         ));
     }
 
@@ -992,7 +980,8 @@ class Record {
     public static function findAllFrom($class_name, $where=false, $values=array()) {
         if ($where) {
             return $class_name::find(array(
-                'where' => array_merge(array($where), $values)
+                'where'  => $where,
+                'values' => $values
             ));
         } else {
             return $class_name::find();
