@@ -2,8 +2,10 @@
 
 ## About Wolf CMS
 
-[![Build Status](https://secure.travis-ci.org/wolfcms/wolfcms.png)](http://travis-ci.org/wolfcms/wolfcms)
-[![Coverage Status](https://coveralls.io/repos/wolfcms/wolfcms/badge.png?branch=master)](https://coveralls.io/r/wolfcms/wolfcms?branch=master)
+[![Current Version](http://img.shields.io/badge/wolfcms-v0.7.8-blue.svg)](http://www.wolfcms.org/download.html)
+[![Build Status](http://img.shields.io/travis/wolfcms/wolfcms/develop.svg)](http://travis-ci.org/wolfcms/wolfcms)
+[![Coverage Status](http://img.shields.io/coveralls/wolfcms/wolfcms/master.svg)](https://coveralls.io/r/wolfcms/wolfcms?branch=master)
+[![Gittip Status](http://img.shields.io/gittip/Wolf%20CMS.svg)](https://www.gittip.com/Wolf%20CMS/)
 
 Wolf CMS simplifies content management by offering an elegant user interface,
 flexible templating per page, simple user management and permissions, as well
