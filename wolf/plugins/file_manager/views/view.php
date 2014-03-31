@@ -43,6 +43,13 @@ if (!defined('IN_CMS')) { exit(); }
 <form method="post" action="<?php echo get_url('plugin/file_manager/save'); ?>">
     <div class="form-area">
         <p class="content">
+            <label for="file_filter_id"><?php echo __('Filter'); ?></label>
+            <select id="file_filter_id" class="filter-selector" name="file[filter_id]">
+                <option value="">&#8212; <?php echo __('none'); ?> &#8212;</option>
+                <?php foreach (Filter::findAll() as $filter): ?>
+                    <option value="<?php echo $filter; ?>"><?php echo Inflector::humanize($filter); ?></option>
+                <?php endforeach; ?>
+            </select>
             <input type="hidden" name="file[name]" value="<?php echo $filename; ?>" />
             <input id="csrf_token" name="csrf_token" type="hidden" value="<?php echo $csrf_token; ?>" />
             <textarea class="textarea" id="file_content" name="file[content]" style="width: 100%; height: 400px;" rows="20" cols="40"><?php echo htmlentities($content, ENT_COMPAT, 'UTF-8'); ?></textarea><br />
