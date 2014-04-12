@@ -1,7 +1,7 @@
 <?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
- * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2009-2014 Martijn van der Kleijn <martijn.niji@gmail.com>
  * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
  *
  * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
@@ -19,11 +19,12 @@
  *
  * LICENSE: see license.txt and exception.txt for the full license texts.
  *
- * @package    Framework
+ * @package    org.wolfcms.core
+ * @subpackage framework
  *
  * @author     Martijn van der Kleijn <martijn.niji@gmail.com>
  * @author     Philippe Archambault <philippe.archambault@gmail.com>
- * @copyright  2009-2013 Martijn van der Kleijn
+ * @copyright  2009-2014 Martijn van der Kleijn
  * @copyright  2008 Philippe Archambault
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 License
  */
@@ -1011,7 +1012,7 @@ class Record {
     }
 
 }
-/* end record */
+/* end Record */
 
 
 /**
@@ -1040,6 +1041,9 @@ class Record {
  * // find users with same name
  * $objects = MyModel::findIdNameEmailByNameOrderedByIdAsc('mike');
  * </code>
+ * 
+ * @author Martijn van der Kleijn <martijn.niji@gmail.com>
+ * @copyright (c) 2014, Martijn van der Kleijn.
  */
 abstract class Finder extends Record {
     
@@ -1167,6 +1171,7 @@ abstract class Finder extends Record {
      * 
      * @param string    $name       Name of virtual find.. method.
      * @param array     $arguments  Array of arguments given to virtual find.. method.
+     * @ignore
      */
     public static function __callStatic($name, $arguments) {
         // Options array to later pass on to Record::find()
@@ -1215,6 +1220,7 @@ abstract class Finder extends Record {
         return self::find($options);
     }
 }
+/* end Finder */
 
 /**
  * The View class is used to generate output based on a template.
