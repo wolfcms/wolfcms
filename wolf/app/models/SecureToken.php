@@ -134,10 +134,9 @@ final class SecureToken extends Record {
 
         $token = false;
         $token = self::findOne(array(
-            'where' => array(
-                'username = :username AND url = :url',
-                ':username' => $username,
-                ':url' => bin2hex($hash->hash($url))
+            'where' => 'username = :username AND url = :url',
+            'values' => array(':username' => $username,
+                              ':url' => bin2hex($hash->hash($url))
             )
         ));
 
@@ -154,8 +153,8 @@ final class SecureToken extends Record {
         $time = 0;
 
         $token = self::findOne(array(
-            'where' => array(
-                'username = :username AND url = :url',
+            'where' => 'username = :username AND url = :url',
+            'values' => array(
                 ':username' => $username,
                 ':url' => bin2hex($hash->hash($url))
             )

@@ -44,7 +44,8 @@ class Tag extends Record {
     
     public static function findByName($name) {
         return self::findOne(array(
-            'where' => array('name = :name', ':name' => $name)
+            'where' => 'name = :name',
+            'values' => array(':name' => $name)
         ));
     }
 }

@@ -75,13 +75,15 @@ class Snippet extends Record {
             'select' => "$tablename.*, creator.name AS created_by_name, updater.name AS updated_by_name",
             'joins' => "LEFT JOIN $tablename_user AS creator ON $tablename.created_by_id = creator.id ".
                        "LEFT JOIN $tablename_user AS updater ON $tablename.updated_by_id = updater.id",
-            'where' => array($tablename . '.id = ?', (int) $id)
+            'where' => $tablename . '.id = ?',
+            'values' => array((int) $id)
         ));
     }
 
     public static function findByName($name) {
         return self::findOne(array(
-            'where' => array('name LIKE ?', $name)
+            'where' => 'name LIKE ?',
+            'values' => array($name)
         ));
     }
 

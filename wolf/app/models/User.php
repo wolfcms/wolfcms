@@ -56,7 +56,8 @@ class User extends Record {
 
     public static function findBy($column, $value) {
         return self::findOne(array(
-            'where' => array($column . ' = :value', ':value' => $value)
+            'where' => $column . ' = :value',
+            'values' => array(':value' => $value)
         ));
     }
 
@@ -94,7 +95,8 @@ class User extends Record {
             'select' => "$tablename.*, creator.name AS created_by_name, updater.name AS updated_by_name",
             'joins' => "LEFT JOIN $tablename AS creator ON $tablename.created_by_id = creator.id ".
                        "LEFT JOIN $tablename AS updater ON $tablename.updated_by_id = updater.id",
-            'where' => array($tablename . '.id = :id', ':id' => $id)
+            'where' => $tablename . '.id = :id',
+            'values' => array(':id' => $id)
         ));
     }
 
