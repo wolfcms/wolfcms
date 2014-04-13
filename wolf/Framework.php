@@ -1092,7 +1092,7 @@ class View {
      */
     public function assign($name, $value=null) {
         if (is_array($name)) {
-            array_merge($this->vars, $name);
+            $this->vars = array_merge($this->vars, $name);
         } else {
             $this->vars[$name] = $value;
         }
@@ -1178,9 +1178,9 @@ class Controller {
      * @param mixed $var    An array of key/value pairs or the name of a single variable.
      * @param string $value The value of the single variable.
      */
-    public function assignToLayout($var, $value) {
+    public function assignToLayout($var, $value = null) {
         if (is_array($var)) {
-            array_merge($this->layout_vars, $var);
+            $this->layout_vars = array_merge($this->layout_vars, $var);
         } else {
             $this->layout_vars[$var] = $value;
         }
