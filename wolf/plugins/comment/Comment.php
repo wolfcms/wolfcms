@@ -65,7 +65,8 @@ class Comment extends Record
      */
     public static function findApprovedByPageId($id) {
         return self::find(array(
-            'where' => array('is_approved = 1 AND page_id = ?', (int) $id)
+            'where' => 'is_approved = 1 AND page_id = ?',
+            'values' => array((int) $id)
         ));
     }
 
