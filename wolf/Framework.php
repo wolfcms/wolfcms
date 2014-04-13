@@ -574,6 +574,11 @@ class Record {
             // Escape and format for SQL insert query
             // @todo check if we like this new method of escaping and defaulting
             foreach ($columns as $column) {
+                // Make sure we don't try to add "id" field;
+                if ($column === 'id') {
+                    continue;
+                }
+                
                 if (!empty($this->$column) || is_numeric($this->$column)) { // Do include 0 as value
                     $value_of[$column] = self::$__CONN__->quote($this->$column);
                 }
@@ -809,6 +814,113 @@ class Record {
 	}
 
 
+    /**
+     * Returns a single class instance or an array of instances.
+     * 
+     * This method guarantees sane defaults, making the `options` argument
+     * optional. It is important to note however, that when using prepared
+     * statements with placeholders in for example the `WHERE` clause, the
+     * `values` option is mandatory.
+     * 
+     * Valid options are: 'select', 'where', 'group_by', 'having', 'order_by', 'limit', 'offset', 'values'
+     * 
+     * Example usage:
+     * <code>
+     * // Note that MyClass extends Record 
+     * $object = MyClass::find(array(
+     *     'select'     => 'column1, column2',
+     *     'where'      => 'id = ? and slug = ?',
+     *     'group_by'   => 'column2',
+     *     'having'     => 'column2 = ?',
+     *     'order_by'   => 'column3 ASC',
+     *     'limit'      => 10,
+     *     'offset'     => 20,
+     *     'values'     => array($id, $slug, 'some-value-for-having-clause')
+     * ));
+     * </code>
+     * 
+     * @param   array   $options    Array of options for the query.
+     * @return  mixed               Single object, array of objects or false on failure.
+     * 
+     * @todo    Decide if we'll keep the from and joins options since they clash heavily with the one Record == one DB tuple idea.
+     */
+    public static function find($options = array()) {
+        // @todo Replace by InvalidArgumentException if not array based on logger decision.
+        $options = (is_null($options)) ? array() : $options;
+        
+        $class_name = get_called_class();
+        $table_name = self::tableNameFromClassName($class_name);
+        
+        // Collect attributes
+        $ses    = isset($options['select']) ? trim($options['select'])   : '';
+        $frs    = isset($options['from'])   ? trim($options['from'])     : '';
+        $jos    = isset($options['joins'])  ? trim($options['joins'])    : '';
+        $whs    = isset($options['where'])  ? trim($options['where'])    : '';
+        $gbs    = isset($options['group'])  ? trim($options['group'])    : '';
+        $has    = isset($options['having']) ? trim($options['having'])   : '';
+        $obs    = isset($options['order'])  ? trim($options['order'])    : '';
+        $lis    = isset($options['limit'])  ? (int) $options['limit']    : 0;
+        $ofs    = isset($options['offset']) ? (int) $options['offset']   : 0;
+        $values = isset($options['values']) ? (array) $options['values'] : array();
+
+        // Asked for single Record?
+        $single = ($lis === 1) ? true : false;
+        
+        // Prepare query parts
+        $select      = empty($ses) ? 'SELECT *'         : "SELECT $ses";
+        $from        = empty($frs) ? "FROM $table_name" : "FROM $frs";
+        $joins       = empty($jos) ? ''                 : $jos;
+        $where       = empty($whs) ? ''                 : "WHERE $whs";
+        $group_by    = empty($gbs) ? ''                 : "GROUP BY $gbs";
+        $having      = empty($has) ? ''                 : "HAVING $has";
+        $order_by    = empty($obs) ? ''                 : "ORDER BY $obs";
+        $limit       = $lis > 0    ? "LIMIT $lis"       : '';
+        $offset      = $ofs > 0    ? "OFFSET $ofs"      : '';
+        
+        // Build the query
+        $sql = "$select $from $joins $where $group_by $having $order_by $limit $offset";
+        
+        // Run query
+        $objects = self::findBySql($sql, $values);
+        
+        return ($single) ? (!empty($objects) ? $objects[0] : false) : $objects;
+    }
+    
+    private static function findBySql($sql, $values = null) {
+        $class_name = get_called_class();
+        
+        self::logQuery($sql);
+        
+        // Prepare and execute
+        $stmt = self::getConnection()->prepare($sql);
+        if (!$stmt->execute($values)) {
+            return false;
+        }
+        
+        $objects = array();
+        while ($object = $stmt->fetchObject($class_name)) {
+            $objects[] = $object;
+        }
+        
+        return $objects;
+    }
+    
+    /**
+     * Returns a record based on it's id.
+     * 
+     * Default method so that you don't have to create one for every model you write.
+     * Can of course be overwritten by a custom findById() method (for instance when you want to include another model)
+     * 
+     * @param int $id       Object's id
+     * @return              Single object
+     */
+    public static function findById($id) {
+        return self::findOne(array(
+            'where'  => 'id = :id',
+            'values' => array(':id' => (int) $id)
+        ));
+    }
+        
     //
     // Note: lazy finder or getter method. Pratical when you need something really
     //       simple no join or anything will only generate simple select * from table ...
@@ -822,7 +934,18 @@ class Record {
      * @return Record               A record instance or false on failure.
      */
     public static function findByIdFrom($class_name, $id) {
-        return self::findOneFrom($class_name, 'id=?', array($id));
+        return $class_name::findById($id);
+    }
+
+    /**
+     * Returns a single object, retrieved from the database.
+     * 
+     * @param array $options        Options array containing parameters for the query
+     * @return                      Single object
+     */
+    public static function findOne($options = array()) {
+        $options['limit'] = 1;
+        return self::find($options);
     }
 
     /**
@@ -837,14 +960,10 @@ class Record {
      * @return Record               A record instance or false on failure.
      */
     public static function findOneFrom($class_name, $where, $values=array()) {
-        $sql = 'SELECT * FROM '.self::tableNameFromClassName($class_name).' WHERE '.$where;
-
-        $stmt = self::$__CONN__->prepare($sql);
-        $stmt->execute($values);
-
-        self::logQuery($sql);
-
-        return $stmt->fetchObject($class_name);
+        return $class_name::findOne(array(
+            'where'  => $where,
+            'values' => $values
+        ));
     }
 
     /**
@@ -859,18 +978,14 @@ class Record {
      * @return array                An array of Records instances.
      */
     public static function findAllFrom($class_name, $where=false, $values=array()) {
-        $sql = 'SELECT * FROM '.self::tableNameFromClassName($class_name).($where ? ' WHERE '.$where:'');
-
-        $stmt = self::$__CONN__->prepare($sql);
-        $stmt->execute($values);
-
-        self::logQuery($sql);
-
-        $objects = array();
-        while ($object = $stmt->fetchObject($class_name))
-            $objects[] = $object;
-
-        return $objects;
+        if ($where) {
+            return $class_name::find(array(
+                'where'  => $where,
+                'values' => $values
+            ));
+        } else {
+            return $class_name::find();
+        }
     }
 
     /**

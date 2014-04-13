@@ -135,7 +135,7 @@ class FileManagerController extends PluginController {
         $filename = preg_replace('/^\//', '', $filename);
         
         // Check if file had URL_SUFFIX - if so, append it to filename
-        $filename .= ($_GET['has_url_suffix']==='1') ? URL_SUFFIX : '';
+        $filename .= (isset($_GET['has_url_suffix']) && $_GET['has_url_suffix']==='1') ? URL_SUFFIX : '';
         
         $file = FILES_DIR . '/' . $filename;
         if (!$this->_isImage($file) && file_exists($file)) {

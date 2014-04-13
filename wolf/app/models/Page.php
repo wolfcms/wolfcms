@@ -445,6 +445,16 @@ class Page extends Node {
         return $tags;
     }
 
+    public function getColumns() {
+        return array(
+            'id', 'title', 'slug', 'breadcrumb', 'keywords', 'description',
+            'parent_id', 'layout_id', 'behavior_id', 'status_id',
+            'created_on', 'published_on', 'valid_until', 'updated_on',
+            'created_by_id', 'updated_by_id', 'position', 'is_protected',
+            'needs_login'
+        );
+    }
+
 
     /**
      * Return a numerical representation of this page's place in the page hierarchy.
@@ -622,7 +632,7 @@ class Page extends Node {
 
         // Collect attributes...
         $where = isset($args['where']) ? $args['where'] : '';
-        $order = isset($args['order']) ? $args['order'] : 'page.position, page.id';
+        $order = isset($args['order']) ? $args['order'] : 'page.position ASC, page.id DESC';
         $offset = isset($args['offset']) ? $args['offset'] : 0;
         $limit = isset($args['limit']) ? $args['limit'] : 0;
 
@@ -824,7 +834,7 @@ class Page extends Node {
             foreach ($new_tags as $index => $tag_name) {
                 if (!empty($tag_name)) {
                     // try to get it from tag list, if not we add it to the list
-                    if (!$tag = Record::findOneFrom('Tag', 'name = :tag_name', array(':tag_name' => $tag_name)))
+                    if (!$tag = Tag::findByName($tag_name))
                         $tag = new Tag(array('name' => trim($tag_name)));
 
                     $tag->count++;
@@ -839,7 +849,7 @@ class Page extends Node {
             // remove all old tag
             foreach ($old_tags as $index => $tag_name) {
                 // get the id of the tag
-                $tag = Record::findOneFrom('Tag', 'name = :tag_name', array(':tag_name' => $tag_name));
+                $tag = Tag::findByName($tag_name);
                 // delete the pivot record
                 Record::deleteWhere('PageTag', 'page_id = :page_id AND tag_id = :tag_id', array(':page_id' => $this->id, ':tag_id' => $tag->id));
                 $tag->count--;
@@ -940,25 +950,36 @@ class Page extends Node {
     public static function findBySlug($slug, &$parent, $all = false) {
 
         if (empty($slug)) {
-            return self::find(array(
-                'where' => 'parent_id = 0', 'limit' => 1
+            return self::findOne(array(
+                'where' => 'parent_id=0'
             ));
         }
 
-        $status = ($all === false)
-            ? array(self::STATUS_PUBLISHED, self::STATUS_HIDDEN)
-            : array(self::STATUS_PUBLISHED, self::STATUS_HIDDEN, self::STATUS_PREVIEW);
+        $parent_id = $parent ? $parent->id : 0;
 
-        $where = sprintf(
-            "slug = '%s' AND parent_id = %d AND (status_id IN (%s))",
-            $slug,
-            $parent ? $parent->id : 0,
-            implode(',', $status)
-        );
-
-        return self::find(array(
-            'where' => $where, 'limit' => 1
-        ));
+        if ($all) {
+            return self::findOne(array(
+                'where' => array(
+                    'slug = :slug AND parent_id = :parent_id AND (status_id = :status_preview OR status_id = :status_published OR status_id = :status_hidden)',
+                    ':slug' => $slug,
+                    ':parent_id' => (int) $parent_id,
+                    ':status_preview' => self::STATUS_PREVIEW,
+                    ':status_published' => self::STATUS_PUBLISHED,
+                    ':status_hidden' => self::STATUS_HIDDEN
+                )
+            ));
+        }
+        else {
+            return self::findOne(array(
+                'where' => array(
+                    'slug = :slug AND parent_id = :parent_id AND (status_id = :status_published OR status_id = :status_hidden)',
+                    ':slug' => $slug,
+                    ':parent_id' => (int) $parent_id,
+                    ':status_published' => self::STATUS_PUBLISHED,
+                    ':status_hidden' => self::STATUS_HIDDEN
+                )
+            ));
+        }
     }
 
     /**
@@ -982,43 +1003,80 @@ class Page extends Node {
      * @param mixed $args   Path string or array of arguments.
      * @return mixed        Page or array of Pages, otherwise false.
      */
-    public static function find($args = null) {
-        if (!is_array($args)) {
-            // Assumes find was called with a path
-            return Page::findByPath($args);
+    public static function find($options = null) {
+        if (!is_array($options)) {
+            // Assumes find was called with a uri
+            return Page::findByPath($options);
         }
 
-        $page_class = 'Page';
+        $options = (is_null($options)) ? array() : $options;
+        
+        $class_name = get_called_class();
+        $table_name = self::tableNameFromClassName($class_name);
+        
+        $single = (isset($options['limit']) && $options['limit'] == 1) ? true : false;
 
-        // Collect attributes...
-        $where = isset($args['where']) ? trim($args['where']) : '';
-        $order_by = isset($args['order']) ? trim($args['order']) : '';
-        $offset = isset($args['offset']) ? (int) $args['offset'] : 0;
-        $limit = isset($args['limit']) ? (int) $args['limit'] : 0;
+        // Collect attributes
+        $select   = isset($options['select']) ? trim($options['select']) : '';
+        $from     = isset($options['from']) ? trim($options['from']) : '';
+        $joins    = isset($options['joins']) ? trim($options['joins']) : '';
+        $group_by = isset($options['group']) ? trim($options['group']) : '';
+        $having   = isset($options['having']) ? trim($options['having']) : '';
+        $order_by = isset($options['order']) ? trim($options['order']) : '';
+        $limit    = isset($options['limit']) ? (int) $options['limit'] : 0;
+        $offset   = isset($options['offset']) ? (int) $options['offset'] : 0;
+        
+        $values = array();
+        
+        // 'where' can be a string (for a simple where statement) or an array (if you want to use prepared statements)
+        if (isset($options['where'])) {
+            if (is_string($options['where'])) {
+                $where = trim($options['where']);
+            }
+            elseif (is_array($options['where'])) {
+                $where = trim(array_shift($options['where']));
+                $values = $options['where'];
+            }
+        }
 
-        // Prepare query parts
-        $where_string = empty($where) ? '' : "WHERE $where";
-        $order_by_string = empty($order_by) ? '' : "ORDER BY $order_by";
-        $limit_string = $limit > 0 ? "LIMIT $limit" : '';
-        $offset_string = $offset > 0 ? "OFFSET $offset" : '';
-
-        $tablename = self::tableNameFromClassName('Page');
         $tablename_user = self::tableNameFromClassName('User');
 
-        // Prepare SQL
+        $joins .= " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id";
+        $joins .= " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id";
+        
+        // Prepare query parts
         // @todo Remove all "author" mentions and function and replace by more appropriate "creator" name.
-        $sql = "SELECT page.*, creator.name AS author, creator.id AS author_id, updater.name AS updater, updater.id AS updater_id, creator.name AS created_by_name, updater.name AS updated_by_name FROM $tablename AS page".
-                " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id".
-                " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id".
-                " $where_string $order_by_string $limit_string $offset_string";
+        $select_string      = empty($select) ? 'SELECT page.*, creator.name AS author, creator.id AS author_id, updater.name AS updater, updater.id AS updater_id, creator.name AS created_by_name, updater.name AS updated_by_name' : "SELECT $select";
+        $from_string        = empty($from) ? "FROM $table_name AS page" : "FROM $from";
+        $joins_string       = empty($joins) ? '' : $joins;
+        $where_string       = empty($where) ? '' : "WHERE $where";
+        $group_by_string    = empty($group_by) ? '' : "GROUP BY $group_by";
+        $having_string      = empty($having) ? '' : "HAVING $having";
+        $order_by_string    = empty($order_by) ? '' : "ORDER BY $order_by";
+        $limit_string       = $limit > 0 ? "LIMIT $limit" : '';
+        $offset_string      = $offset > 0 ? "OFFSET $offset" : '';
+        
+        // Compose the query
+        $sql = "$select_string $from_string $joins_string $where_string $group_by_string $having_string $order_by_string $limit_string $offset_string";
+        
+        $objects = self::findBySql($sql, $values);
+        
+        return ($single) ? (!empty($objects) ? $objects[0] : false) : $objects;
+    }
 
+    private static function findBySql($sql, $values = null) {
+        $class_name = get_called_class();
+        
+        Record::logQuery($sql);
+        
+        // Prepare and execute
         $stmt = Record::getConnection()->prepare($sql);
-
-        if (!$stmt->execute()) {
+        if (!$stmt->execute($values)) {
             return false;
         }
 
-        // Run!
+        $page_class = 'Page';
+        
         $objects = array();
         while ($page = $stmt->fetchObject('Page')) {
             $parent = $page->parent();
@@ -1032,21 +1090,9 @@ class Page extends Node {
             $page->part = self::get_parts($page->id);
             $objects[] = $page;
         }
-
-        // if we're loading just one result return it
-        if ($limit == 1) {
-            if (isset($objects['0']) && is_object($objects['0'])) {
-                return $objects['0'];
-            }
-        }
-        else {
-            // or return them all
-            return $objects;
-        }
-
-        return false;
+        
+        return $objects;
     }
-
 
     public static function findAll($args = null) {
         return self::find($args);
@@ -1054,9 +1100,8 @@ class Page extends Node {
 
 
     public static function findById($id) {
-        return self::find(array(
-            'where' => 'page.id='.(int) $id,
-            'limit' => 1
+        return self::findOne(array(
+            'where' => array('page.id = :id', ':id' => (int) $id)
         ));
     }
     
@@ -1071,22 +1116,42 @@ class Page extends Node {
      * @param type $parentId
      * @return type
      */
-    public static function findByBehaviour($name, $parentId=false) {
-        $where = "behavior_id='".$name."'";
-        
-        if ($parentId !== false && is_int($parentId)) {
-            $where = $where." AND parent_id=$parentId";
+    public static function findByBehaviour($name, $parent_id=false) {
+        if ($parent_id !== false && is_int($parent_id)) {
+            return self::findOne(array(
+                'where' => array('behavior_id = :behavior_id AND parent_id = :parent_id', ':behavior_id' => $name, ':parent_id' => (int) $parent_id)
+            ));
+        } else {
+            return self::findOne(array(
+                'where' => array('behavior_id = :behavior_id', ':behavior_id' => $name)
+            ));
         }
-        
-        return self::find(array(
-            'where' => $where,
-            'limit' => 1
-        ));
     }
 
 
-    public static function childrenOf($id) {
-        return self::find(array('where' => 'parent_id='.$id, 'order' => 'position, page.created_on DESC'));
+    /**
+     * Returns a single Page object, retrieved from the database.
+     * 
+     * @param array $options        Options array containing parameters for the query
+     * @return                      Single Page object
+     */
+    public static function findOne($options = array()) {
+        $options['limit'] = 1;
+        return self::find($options);
+    }
+
+
+    /**
+     * Returns all children (including those with a status other than published) of a Page.
+     * 
+     * @param   int     $parent_id  ID of the parent Page
+     * @return  array               Array containing Page objects
+     */
+    public static function childrenOf($parent_id) {
+        return self::find(array(
+            'where' => array('parent_id = :parent_id', ':parent_id' => $parent_id),
+            'order' => 'page.position ASC, page.id DESC'
+        ));
     }
 
 
@@ -1123,7 +1188,7 @@ class Page extends Node {
         static $new_root_id = false;
 
         /* Clone passed in page. */
-        $clone = Record::findByIdFrom('Page', $page->id);
+        $clone = Page::findById($page->id);
         $clone->parent_id = (int) $parent_id;
         $clone->id = null;
 
