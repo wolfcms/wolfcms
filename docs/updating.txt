@@ -8,6 +8,16 @@ Please be aware that we only support single version upgrades.
 IMPORTANT - always check your security by viewing security.php post update!
 
 
+### Upgrading from 0.7.8 => 0.8.0 ###
+
+IMPORTANT - Make absolutely sure you have 0.7.8 before doing this.
+
+There are no database changes in this release, so you can upgrade from 0.7.8 by
+simply replacing all the Wolf CMS files, including of course index.php.
+
+Remember to backup everything! Better safe than sorry!
+
+
 ### Upgrading from 0.7.7 => 0.7.8 ###
 
 IMPORTANT - Make absolutely sure you have 0.7.7 before doing this.
