@@ -1029,15 +1029,7 @@ class Page extends Node {
         
         
         // 'where' can be a string (for a simple where statement) or an array (if you want to use prepared statements)
-        if (isset($options['where'])) {
-            if (is_string($options['where'])) {
-                $where = trim($options['where']);
-            }
-            elseif (is_array($options['where'])) {
-                $where  = trim(array_shift($options['where']));
-                $values = array_merge($values, $options['where']);
-            }
-        }
+        $where   = isset($options['where']) ? trim($options['where']) : '';
 
         $tablename_user = self::tableNameFromClassName('User');
 
