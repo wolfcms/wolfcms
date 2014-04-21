@@ -1014,42 +1014,38 @@ class Page extends Node {
         $class_name = get_called_class();
         $table_name = self::tableNameFromClassName($class_name);
         
-        $single = (isset($options['limit']) && $options['limit'] == 1) ? true : false;
-
         // Collect attributes
-        $select   = isset($options['select']) ? trim($options['select']) : '';
-        $from     = isset($options['from']) ? trim($options['from']) : '';
-        $joins    = isset($options['joins']) ? trim($options['joins']) : '';
-        $group_by = isset($options['group']) ? trim($options['group']) : '';
-        $having   = isset($options['having']) ? trim($options['having']) : '';
-        $order_by = isset($options['order']) ? trim($options['order']) : '';
-        $limit    = isset($options['limit']) ? (int) $options['limit'] : 0;
-        $offset   = isset($options['offset']) ? (int) $options['offset'] : 0;
-        $values   = isset($options['values']) ? $options['values'] : array();
+        $ses    = isset($options['select']) ? trim($options['select'])   : '';
+        $frs    = isset($options['from'])   ? trim($options['from'])     : '';
+        $jos    = isset($options['joins'])  ? trim($options['joins'])    : '';
+        $whs    = isset($options['where'])  ? trim($options['where'])    : '';
+        $gbs    = isset($options['group'])  ? trim($options['group'])    : '';
+        $has    = isset($options['having']) ? trim($options['having'])   : '';
+        $obs    = isset($options['order'])  ? trim($options['order'])    : '';
+        $lis    = isset($options['limit'])  ? (int) $options['limit']    : 0;
+        $ofs    = isset($options['offset']) ? (int) $options['offset']   : 0;
+        $values = isset($options['values']) ? (array) $options['values'] : array();
         
-        
-        // 'where' can be a string (for a simple where statement) or an array (if you want to use prepared statements)
-        $where   = isset($options['where']) ? trim($options['where']) : '';
-
+        $single = ($lis === 1) ? true : false;
         $tablename_user = self::tableNameFromClassName('User');
 
-        $joins .= " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id";
-        $joins .= " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id";
+        $jos .= " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id";
+        $jos .= " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id";
         
         // Prepare query parts
         // @todo Remove all "author" mentions and function and replace by more appropriate "creator" name.
-        $select_string      = empty($select) ? 'SELECT page.*, creator.name AS author, creator.id AS author_id, updater.name AS updater, updater.id AS updater_id, creator.name AS created_by_name, updater.name AS updated_by_name' : "SELECT $select";
-        $from_string        = empty($from) ? "FROM $table_name AS page" : "FROM $from";
-        $joins_string       = empty($joins) ? '' : $joins;
-        $where_string       = empty($where) ? '' : "WHERE $where";
-        $group_by_string    = empty($group_by) ? '' : "GROUP BY $group_by";
-        $having_string      = empty($having) ? '' : "HAVING $having";
-        $order_by_string    = empty($order_by) ? '' : "ORDER BY $order_by";
-        $limit_string       = $limit > 0 ? "LIMIT $limit" : '';
-        $offset_string      = $offset > 0 ? "OFFSET $offset" : '';
+        $select     = empty($ses) ? 'SELECT page.*, creator.name AS author, creator.id AS author_id, updater.name AS updater, updater.id AS updater_id, creator.name AS created_by_name, updater.name AS updated_by_name' : "SELECT $ses";
+        $from       = empty($frs) ? "FROM $table_name AS page" : "FROM $frs";
+        $joins      = empty($jos) ? '' : $jos;
+        $where      = empty($whs) ? '' : "WHERE $whs";
+        $group_by   = empty($gbs) ? '' : "GROUP BY $gbs";
+        $having     = empty($has) ? '' : "HAVING $has";
+        $order_by   = empty($obs) ? '' : "ORDER BY $obs";
+        $limit      = $lis > 0 ? "LIMIT $lis" : '';
+        $offset     = $ofs > 0 ? "OFFSET $ofs" : '';
         
         // Compose the query
-        $sql = "$select_string $from_string $joins_string $where_string $group_by_string $having_string $order_by_string $limit_string $offset_string";
+        $sql = "$select $from $joins $where $group_by $having $order_by $limit $offset";
         
         $objects = self::findBySql($sql, $values);
         
