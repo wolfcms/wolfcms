@@ -1089,7 +1089,8 @@ class Page extends Node {
 
     public static function findById($id) {
         return self::findOne(array(
-            'where' => array('page.id = :id', ':id' => (int) $id)
+            'where' => 'page.id = :id',
+            'values' => array(':id' => (int) $id)
         ));
     }
     
@@ -1137,7 +1138,8 @@ class Page extends Node {
      */
     public static function childrenOf($parent_id) {
         return self::find(array(
-            'where' => array('parent_id = :parent_id', ':parent_id' => $parent_id),
+            'where' => 'parent_id = :parent_id',
+            'values' => array(':parent_id' => $parent_id),
             'order' => 'page.position ASC, page.id DESC'
         ));
     }
