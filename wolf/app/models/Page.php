@@ -959,9 +959,8 @@ class Page extends Node {
 
         if ($all) {
             return self::findOne(array(
-                'where' => array(
-                    'slug = :slug AND parent_id = :parent_id AND (status_id = :status_preview OR status_id = :status_published OR status_id = :status_hidden)',
-                    ':slug' => $slug,
+                'where' => 'slug = :slug AND parent_id = :parent_id AND (status_id = :status_preview OR status_id = :status_published OR status_id = :status_hidden)',
+                'values' => array(':slug' => $slug,
                     ':parent_id' => (int) $parent_id,
                     ':status_preview' => self::STATUS_PREVIEW,
                     ':status_published' => self::STATUS_PUBLISHED,
@@ -971,9 +970,8 @@ class Page extends Node {
         }
         else {
             return self::findOne(array(
-                'where' => array(
-                    'slug = :slug AND parent_id = :parent_id AND (status_id = :status_published OR status_id = :status_hidden)',
-                    ':slug' => $slug,
+                'where' => 'slug = :slug AND parent_id = :parent_id AND (status_id = :status_published OR status_id = :status_hidden)',
+                'values' => array(':slug' => $slug,
                     ':parent_id' => (int) $parent_id,
                     ':status_published' => self::STATUS_PUBLISHED,
                     ':status_hidden' => self::STATUS_HIDDEN
@@ -1108,11 +1106,13 @@ class Page extends Node {
     public static function findByBehaviour($name, $parent_id=false) {
         if ($parent_id !== false && is_int($parent_id)) {
             return self::findOne(array(
-                'where' => array('behavior_id = :behavior_id AND parent_id = :parent_id', ':behavior_id' => $name, ':parent_id' => (int) $parent_id)
+                'where' => 'behavior_id = :behavior_id AND parent_id = :parent_id',
+                'values' => array(':behavior_id' => $name, ':parent_id' => (int) $parent_id)
             ));
         } else {
             return self::findOne(array(
-                'where' => array('behavior_id = :behavior_id', ':behavior_id' => $name)
+                'where' => 'behavior_id = :behavior_id',
+                'values' => array(':behavior_id' => $name)
             ));
         }
     }

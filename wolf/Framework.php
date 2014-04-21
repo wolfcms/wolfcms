@@ -855,7 +855,7 @@ class Record {
         // Collect attributes
         $ses    = isset($options['select']) ? trim($options['select'])   : '';
         $frs    = isset($options['from'])   ? trim($options['from'])     : '';
-        $jos    = isset($options['joins'])  ? trim($options['joins'])    : '';
+        $jos    = isset($options['joins'])  ? trim($options['joins'])    : '';       
         $whs    = isset($options['where'])  ? trim($options['where'])    : '';
         $gbs    = isset($options['group'])  ? trim($options['group'])    : '';
         $has    = isset($options['having']) ? trim($options['having'])   : '';
@@ -880,7 +880,7 @@ class Record {
         
         // Build the query
         $sql = "$select $from $joins $where $group_by $having $order_by $limit $offset";
-        
+
         // Run query
         $objects = self::findBySql($sql, $values);
         
