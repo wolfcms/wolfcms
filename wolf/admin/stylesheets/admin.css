@@ -618,6 +618,7 @@ table.index td.note {
   background-color: #f5f5f5;
 }
 #site-map ul { list-style: none; margin:0; padding:0; background: #fff; }
+#site-map .node > span { display: block; position: relative; }
 #site-map .page, #site-map-root .page {}
 #site-map .status, #site-map-root .status { position: absolute; text-align: center; top: 10px; right: 175px; width: 100px }
 #site-map .view-page, #site-map-root .view-page { position: absolute; text-align: center; top: 10px; right: 100px; width: 75px }
