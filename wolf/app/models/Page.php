@@ -1025,8 +1025,8 @@ class Page extends Node {
         $order_by = isset($options['order']) ? trim($options['order']) : '';
         $limit    = isset($options['limit']) ? (int) $options['limit'] : 0;
         $offset   = isset($options['offset']) ? (int) $options['offset'] : 0;
+        $values   = isset($options['values']) ? $options['values'] : array();
         
-        $values = array();
         
         // 'where' can be a string (for a simple where statement) or an array (if you want to use prepared statements)
         if (isset($options['where'])) {
@@ -1034,8 +1034,8 @@ class Page extends Node {
                 $where = trim($options['where']);
             }
             elseif (is_array($options['where'])) {
-                $where = trim(array_shift($options['where']));
-                $values = $options['where'];
+                $where  = trim(array_shift($options['where']));
+                $values = array_merge($values, $options['where']);
             }
         }
 
