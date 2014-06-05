@@ -26,7 +26,7 @@
         <title><?php echo __('Login').' - '.Setting::get('admin_title'); ?></title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/login.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
-        <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/jquery-1.6.2.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/jquery-1.8.3.min.js"></script>
         <script type="text/javascript">
             // <![CDATA[
             $(document).ready(function() {
