@@ -51,9 +51,23 @@ Plugin::addController('comment', __('Comments'));
 Observer::observe('view_page_edit_plugins', 'comment_display_dropdown');
 Observer::observe('page_found', 'comment_save');
 Observer::observe('view_backend_list_plugin', 'comment_display_moderatable_count');
+Observer::observe('page_add_after_save',  'comment_on_page_saved');
+Observer::observe('page_edit_after_save', 'comment_on_page_saved');
+
 
 if (Plugin::isEnabled('statistics_api'))
     Observer::observe('stats_comment_after_add', 'StatisticsEvent::registerEvent');
+
+
+function comment_on_page_saved($page) {
+    $status = Comment::NONE;
+    $input = $_POST['page'];
+
+    if (isset($input['comment_status']) && is_int((int)$input['comment_status']))
+        $status = $input['comment_status'];
+
+    Record::update('Page', array('comment_status' => $status), 'id = ?', array($page->id));
+}
 
 /**
  * Allows for a dropdown box with comment status on the edit page view in the backend.
