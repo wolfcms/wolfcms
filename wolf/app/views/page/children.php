@@ -32,6 +32,7 @@
           <img align="middle" alt="" class="busy" id="busy-<?php echo $child->id; ?>" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/spinner.gif" title="" />
         </span>
       </div>
+      <div class="page-layout"><?php $layout = Layout::findById($child->layout_id); echo isset($layout->name) ? htmlspecialchars($layout->name) : __('inherit'); ?></div>
 <?php switch ($child->status_id) {
       case Page::STATUS_DRAFT: echo '<div class="status draft-status">'.__('Draft').'</div>'; break;
       case Page::STATUS_PREVIEW: echo '<div class="status preview-status">'.__('Preview').'</div>'; break;
