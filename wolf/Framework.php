@@ -257,7 +257,9 @@ final class Dispatcher {
         // if it's a plugin and not activated, revert to Wolf hardcoded default
         if (isset(self::$params[0]) && self::$params[0] == 'plugin' ) {
             $loaded_plugins = Plugin::$plugins;
-            if (isset(self::$params[1]) && !isset($loaded_plugins[self::$params[1]])) {
+            if (count(self::$params) < 2) {
+                unset(self::$params[0]);
+            } elseif (isset(self::$params[1]) && !isset($loaded_plugins[self::$params[1]])) {
                 unset(self::$params[0]);
                 unset(self::$params[1]);
             }
