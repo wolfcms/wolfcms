@@ -177,7 +177,7 @@
 				placeholder: 'placeholder',
 				tabSize: 25,
 				tolerance: 'pointer',
-				toleranceElement: '> span',
+				toleranceElement: '> div.content-children',
 				listType: 'ul',
 				helper: 'clone',
 				beforeStop: function(event, ui) {

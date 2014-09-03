@@ -19,7 +19,7 @@
 <ul<?php if ($level == 1) echo ' id="site-map" class="sortable tree-root"'; else echo ' class="sortable child"'; ?>>
 <?php foreach($childrens as $child): ?> 
     <li id="page_<?php echo $child->id; ?>" class="node level-<?php echo $level; if ( ! $child->has_children) echo ' no-children'; else if ($child->is_expanded) echo ' children-visible'; else echo ' children-hidden'; ?>">
-      <span>
+      <div class="content-children">
       <div class="page">
         <span class="w1">
           <?php if ($child->has_children): ?><img align="middle" alt="toggle children" class="expander<?php if($child->is_expanded) echo ' expanded'; ?>" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/<?php echo $child->is_expanded ? 'collapse': 'expand'; ?>.png" title="" /><?php endif; ?>
@@ -47,7 +47,7 @@
 <?php endif; ?>
 		<a href="#" id="copy-<?php echo $child->id; ?>" class="copy-page"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/copy.png" align="middle" title="<?php echo __('Copy Page'); ?>" alt="<?php echo __('Copy Page'); ?>" /></a>
       </div>
-      </span>
+      </div><!-- /.content-children -->
 <?php if ($child->is_expanded) echo $child->children_rows; ?>
     </li>
 <?php endforeach; ?>
