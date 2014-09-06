@@ -1081,7 +1081,7 @@ class Email {
 
         $this->_sendData($this->_header_str . $this->_finalbody);
 
-        $this->_send_data('.');
+        $this->_sendData('.');
 
         $reply = $this->_getSmtpData();
 
