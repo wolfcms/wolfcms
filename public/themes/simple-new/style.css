@@ -10,7 +10,6 @@ h1, h2 {
 
 header {
     background: #769D31;
-    border-bottom: solid 8px #483E37;
     color: #fff;
     text-shadow: 0 0 3px #000;
 }
@@ -32,9 +31,8 @@ main {
     background: #fff;
 }
 
-div#content {
+#content {
     margin: 20px;
-    max-width: 600px;
 }
 
 footer {
@@ -51,10 +49,12 @@ footer a {
     color: #79A325;
 }
 
-@media screen and (min-width:480px) {
+@media screen and (min-width:900px) {
     header {
         background: url("images/wolf.jpg");
         padding: 10px 50px;
+        border-bottom: solid 8px #483E37;
+
     }
     
     nav {
@@ -78,34 +78,58 @@ footer a {
     nav a {
         color: #fff;
     }
-
-    aside {
-        width: 200px;
-        float: right;
-        padding: 10px;
-        margin: 20px;
-        border-left: solid 2px #79A325;
-        clear: right;
-    }
-
+    
     main {
         margin: 0 auto;
         max-width: 900px;
         box-shadow: 0 0 5px;
         background: #fff;
     }
+    
+    #content {
+        max-width: 600px;
+        float: left;
+    }
+    
+    aside {
+        width: 200px;
+        float: right;
+        padding: 10px;
+        margin: 19px;
+        border-left: solid 2px #79A325;
+        clear: right;
+    }
 }
 
-@media screen and (max-width:479px) {
-    aside {
-        display: none;
+@media screen and (max-width:899px) {
+    header {
+        padding: 20px;
     }
-
+    
     header h1, header h2 {
         margin: 0;
     }
-
-    header {
-        padding: 20px;
+    
+    nav {
+        background: #483E37;
+        text-align: right;
+    }
+    
+    nav ul {
+        margin: 0;
+    }
+    
+    nav li {
+        display: inline-block;
+        padding: 10px;
+    }
+    
+    nav a {
+        color: #fff;
+    }
+    
+    aside {
+        margin: 20px;
+        border-top: solid 2px #79A325;
     }
 }
