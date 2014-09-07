@@ -28,28 +28,6 @@ header h2 {
     font-style: italic;
 }
 
-nav {
-    float: right;
-    clean: right;
-}
-
-nav ul {
-    margin: 0;
-}
-
-nav li {
-    display: inline-block;
-    background: #769D31;
-    padding: 10px;
-    margin-right: 20px;
-    border-radius: 0 0 10px 10px;
-    box-shadow: 5px 5px 5px #888;
-}
-
-nav a {
-    color: #fff;
-}
-
 main {
     background: #fff;
 }
@@ -77,6 +55,28 @@ footer a {
     header {
         background: url("images/wolf.jpg");
         padding: 10px 50px;
+    }
+    
+    nav {
+        float: right;
+        clean: right;
+    }
+    
+    nav ul {
+        margin: 0;
+    }
+    
+    nav li {
+        display: inline-block;
+        background: #769D31;
+        padding: 10px;
+        margin-right: 20px;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 5px 5px 5px #888;
+    }
+    
+    nav a {
+        color: #fff;
     }
 
     aside {
