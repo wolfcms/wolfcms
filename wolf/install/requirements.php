@@ -22,7 +22,7 @@ if (!defined('INSTALL_SEQUENCE')) {
 $errors = false;
 
 // Check PHP version
-$check = (PHP_VERSION >= '5.1.2');
+$check = (PHP_VERSION >= '5.3.0');
 $php = '<span class="'.($check ? 'check' : 'notcheck');
 $php .= '">PHP '.PHP_VERSION.'</span>';
 if (!$check) $errors = true;
