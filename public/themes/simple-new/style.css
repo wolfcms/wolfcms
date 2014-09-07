@@ -1,6 +1,6 @@
 body {
     background: #888;
-    font: 20px ubuntu, sans-serif;
+    font: 20px Ubuntu, "Trebuchet MS", "Lucida Grande", sans-serif;
     margin: 0;
 }
 
@@ -47,6 +47,14 @@ footer {
 
 footer a {
     color: #79A325;
+}
+
+img, pre {
+    max-width: 100%;
+}
+
+pre {
+    overflow: auto;
 }
 
 @media screen and (min-width:900px) {
