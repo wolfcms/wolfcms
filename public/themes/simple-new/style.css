@@ -119,6 +119,10 @@ pre {
         margin: 0;
     }
     
+    header h1 {
+        text-decoration: underline;
+    }
+    
     nav {
         background: #483E37;
         text-align: right;
