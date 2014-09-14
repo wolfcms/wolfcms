@@ -27,7 +27,7 @@ body {
 }
 
 /* @todo cleanup */
-img { border: 0; max-width: 100% }
+img { border: 0; max-width: 100%; }
 h3 { font-size: 130%; margin: 1.25em 0 .5em; }
 a { color: #147; }
 a:hover { text-decoration: none; }
