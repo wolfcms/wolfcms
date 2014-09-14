@@ -1,0 +1,48 @@
+/* Adapted from: http://line25.com/tutorials/handy-tips-for-creating-a-print-css-stylesheet */
+
+body {
+	font-family: Cambria, Georgia, "Times New Roman", Serif;
+	color: #000;
+	background: #fff;
+}
+a:link, a:visited {
+	color: #000;
+	text-decoration: none;
+	border-bottom-width: 1pt;
+	border-bottom-style: solid;
+}
+
+#nav, #col2, #col3, #footer, #sidebar {
+	display: none;
+}
+
+#header h1 {
+	text-align: center;
+	font-size: 36pt;
+	font-style: italic;
+	margin: 0;
+}
+#header h1 span, #header .tagline {
+	display: block;
+	text-align: center;
+	font-size:12pt;
+	font-weight: normal;
+}
+
+#content h2, #col1 h2 {
+	font-size: 24pt;
+	font-style: italic;
+}
+
+#content h3 #col1 h3 {
+	font-size: 18pt;
+	margin: 0;
+}
+#content p a:after, #col1 p a:after {
+	content: " ("attr(href)") ";
+	font-size: 10pt;
+	color: #666;
+}
+.info {
+	font-size:10pt;
+}
