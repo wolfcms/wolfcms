@@ -959,9 +959,8 @@ class Page extends Node {
 
         if ($all) {
             return self::findOne(array(
-                'where' => array(
-                    'slug = :slug AND parent_id = :parent_id AND (status_id = :status_preview OR status_id = :status_published OR status_id = :status_hidden)',
-                    ':slug' => $slug,
+                'where' => 'slug = :slug AND parent_id = :parent_id AND (status_id = :status_preview OR status_id = :status_published OR status_id = :status_hidden)',
+                'values' => array(':slug' => $slug,
                     ':parent_id' => (int) $parent_id,
                     ':status_preview' => self::STATUS_PREVIEW,
                     ':status_published' => self::STATUS_PUBLISHED,
@@ -971,9 +970,8 @@ class Page extends Node {
         }
         else {
             return self::findOne(array(
-                'where' => array(
-                    'slug = :slug AND parent_id = :parent_id AND (status_id = :status_published OR status_id = :status_hidden)',
-                    ':slug' => $slug,
+                'where' => 'slug = :slug AND parent_id = :parent_id AND (status_id = :status_published OR status_id = :status_hidden)',
+                'values' => array(':slug' => $slug,
                     ':parent_id' => (int) $parent_id,
                     ':status_published' => self::STATUS_PUBLISHED,
                     ':status_hidden' => self::STATUS_HIDDEN
@@ -1014,50 +1012,38 @@ class Page extends Node {
         $class_name = get_called_class();
         $table_name = self::tableNameFromClassName($class_name);
         
-        $single = (isset($options['limit']) && $options['limit'] == 1) ? true : false;
-
         // Collect attributes
-        $select   = isset($options['select']) ? trim($options['select']) : '';
-        $from     = isset($options['from']) ? trim($options['from']) : '';
-        $joins    = isset($options['joins']) ? trim($options['joins']) : '';
-        $group_by = isset($options['group']) ? trim($options['group']) : '';
-        $having   = isset($options['having']) ? trim($options['having']) : '';
-        $order_by = isset($options['order']) ? trim($options['order']) : '';
-        $limit    = isset($options['limit']) ? (int) $options['limit'] : 0;
-        $offset   = isset($options['offset']) ? (int) $options['offset'] : 0;
+        $ses    = isset($options['select']) ? trim($options['select'])   : '';
+        $frs    = isset($options['from'])   ? trim($options['from'])     : '';
+        $jos    = isset($options['joins'])  ? trim($options['joins'])    : '';
+        $whs    = isset($options['where'])  ? trim($options['where'])    : '';
+        $gbs    = isset($options['group'])  ? trim($options['group'])    : '';
+        $has    = isset($options['having']) ? trim($options['having'])   : '';
+        $obs    = isset($options['order'])  ? trim($options['order'])    : '';
+        $lis    = isset($options['limit'])  ? (int) $options['limit']    : 0;
+        $ofs    = isset($options['offset']) ? (int) $options['offset']   : 0;
+        $values = isset($options['values']) ? (array) $options['values'] : array();
         
-        $values = array();
-        
-        // 'where' can be a string (for a simple where statement) or an array (if you want to use prepared statements)
-        if (isset($options['where'])) {
-            if (is_string($options['where'])) {
-                $where = trim($options['where']);
-            }
-            elseif (is_array($options['where'])) {
-                $where = trim(array_shift($options['where']));
-                $values = $options['where'];
-            }
-        }
-
+        $single = ($lis === 1) ? true : false;
         $tablename_user = self::tableNameFromClassName('User');
 
-        $joins .= " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id";
-        $joins .= " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id";
+        $jos .= " LEFT JOIN $tablename_user AS creator ON page.created_by_id = creator.id";
+        $jos .= " LEFT JOIN $tablename_user AS updater ON page.updated_by_id = updater.id";
         
         // Prepare query parts
         // @todo Remove all "author" mentions and function and replace by more appropriate "creator" name.
-        $select_string      = empty($select) ? 'SELECT page.*, creator.name AS author, creator.id AS author_id, updater.name AS updater, updater.id AS updater_id, creator.name AS created_by_name, updater.name AS updated_by_name' : "SELECT $select";
-        $from_string        = empty($from) ? "FROM $table_name AS page" : "FROM $from";
-        $joins_string       = empty($joins) ? '' : $joins;
-        $where_string       = empty($where) ? '' : "WHERE $where";
-        $group_by_string    = empty($group_by) ? '' : "GROUP BY $group_by";
-        $having_string      = empty($having) ? '' : "HAVING $having";
-        $order_by_string    = empty($order_by) ? '' : "ORDER BY $order_by";
-        $limit_string       = $limit > 0 ? "LIMIT $limit" : '';
-        $offset_string      = $offset > 0 ? "OFFSET $offset" : '';
+        $select     = empty($ses) ? 'SELECT page.*, creator.name AS author, creator.id AS author_id, updater.name AS updater, updater.id AS updater_id, creator.name AS created_by_name, updater.name AS updated_by_name' : "SELECT $ses";
+        $from       = empty($frs) ? "FROM $table_name AS page" : "FROM $frs";
+        $joins      = empty($jos) ? '' : $jos;
+        $where      = empty($whs) ? '' : "WHERE $whs";
+        $group_by   = empty($gbs) ? '' : "GROUP BY $gbs";
+        $having     = empty($has) ? '' : "HAVING $has";
+        $order_by   = empty($obs) ? '' : "ORDER BY $obs";
+        $limit      = $lis > 0 ? "LIMIT $lis" : '';
+        $offset     = $ofs > 0 ? "OFFSET $ofs" : '';
         
         // Compose the query
-        $sql = "$select_string $from_string $joins_string $where_string $group_by_string $having_string $order_by_string $limit_string $offset_string";
+        $sql = "$select $from $joins $where $group_by $having $order_by $limit $offset";
         
         $objects = self::findBySql($sql, $values);
         
@@ -1101,7 +1087,8 @@ class Page extends Node {
 
     public static function findById($id) {
         return self::findOne(array(
-            'where' => array('page.id = :id', ':id' => (int) $id)
+            'where' => 'page.id = :id',
+            'values' => array(':id' => (int) $id)
         ));
     }
     
@@ -1119,11 +1106,13 @@ class Page extends Node {
     public static function findByBehaviour($name, $parent_id=false) {
         if ($parent_id !== false && is_int($parent_id)) {
             return self::findOne(array(
-                'where' => array('behavior_id = :behavior_id AND parent_id = :parent_id', ':behavior_id' => $name, ':parent_id' => (int) $parent_id)
+                'where' => 'behavior_id = :behavior_id AND parent_id = :parent_id',
+                'values' => array(':behavior_id' => $name, ':parent_id' => (int) $parent_id)
             ));
         } else {
             return self::findOne(array(
-                'where' => array('behavior_id = :behavior_id', ':behavior_id' => $name)
+                'where' => 'behavior_id = :behavior_id',
+                'values' => array(':behavior_id' => $name)
             ));
         }
     }
@@ -1149,7 +1138,8 @@ class Page extends Node {
      */
     public static function childrenOf($parent_id) {
         return self::find(array(
-            'where' => array('parent_id = :parent_id', ':parent_id' => $parent_id),
+            'where' => 'parent_id = :parent_id',
+            'values' => array(':parent_id' => $parent_id),
             'order' => 'page.position ASC, page.id DESC'
         ));
     }

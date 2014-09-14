@@ -581,7 +581,7 @@ class FileManagerController extends PluginController {
     public function _isImage($file) {
         if (!@is_file($file))
             return false;
-        else if (!preg_match('/^(.*).(jpe?g|gif|png)$/i', $file))
+        else if (!preg_match('/^(.*).(jpe?g|gif|png|ico|svg)$/i', $file))
             return false;
 
         return true;

@@ -27,7 +27,7 @@ body {
 }
 
 /* @todo cleanup */
-img { border: 0; }
+img { border: 0; max-width: 100% }
 h3 { font-size: 130%; margin: 1.25em 0 .5em; }
 a { color: #147; }
 a:hover { text-decoration: none; }
@@ -585,6 +585,7 @@ table.index td.note {
 }
 #site-map-def { margin-top: 20px; position: relative; }
 #site-map-def .page {}
+#site-map-def .page-layout { position: absolute; text-align: center; top: 0; right: 325px; width: 150px }
 #site-map-def .status { position: absolute; text-align: center; top: 0; right: 175px; width: 100px }
 #site-map-def .view { position: absolute; text-align: center; top: 0; right: 100px; width: 75px }
 #site-map-def .modify { position: absolute; text-align: center; top: 0; right: 5px; width: 85px; }
@@ -618,7 +619,9 @@ table.index td.note {
   background-color: #f5f5f5;
 }
 #site-map ul { list-style: none; margin:0; padding:0; background: #fff; }
+#site-map .node > span { display: block; position: relative; }
 #site-map .page, #site-map-root .page {}
+#site-map .page-layout, #site-map-root .page-layout { position: absolute; text-align: center; top: 10px; right: 325px; width: 150px }
 #site-map .status, #site-map-root .status { position: absolute; text-align: center; top: 10px; right: 175px; width: 100px }
 #site-map .view-page, #site-map-root .view-page { position: absolute; text-align: center; top: 10px; right: 100px; width: 75px }
 #site-map .modify, #site-map-root .modify { position: absolute; text-align: center; top: 10px; right: 7px; width: 85px }

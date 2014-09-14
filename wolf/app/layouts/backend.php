@@ -187,7 +187,7 @@ if (!isset($title) || trim($title) == '') {
 
     <div id="footer">
       <p>
-      <?php echo __('Thank you for using'); ?> <a href="http://www.wolfcms.org/" target="_blank">Wolf CMS</a> <?php echo CMS_VERSION; ?> | <a href="http://forum.wolfcms.org/" target="_blank"><?php echo __('Feedback'); ?></a> | <a href="http://wiki.wolfcms.org/" target="_blank"><?php echo __('Documentation'); ?></a>
+      <?php echo __('Thank you for using'); ?> <a href="http://www.wolfcms.org/" target="_blank">Wolf CMS</a> <?php echo CMS_VERSION; ?> | <a href="http://forum.wolfcms.org/" target="_blank"><?php echo __('Feedback'); ?></a> | <a href="http://docs.wolfcms.org/" target="_blank"><?php echo __('Documentation'); ?></a>
       </p>
 <?php if (DEBUG): ?>
         <p class="stats">

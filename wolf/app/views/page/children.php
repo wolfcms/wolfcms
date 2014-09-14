@@ -19,7 +19,7 @@
 <ul<?php if ($level == 1) echo ' id="site-map" class="sortable tree-root"'; else echo ' class="sortable child"'; ?>>
 <?php foreach($childrens as $child): ?> 
     <li id="page_<?php echo $child->id; ?>" class="node level-<?php echo $level; if ( ! $child->has_children) echo ' no-children'; else if ($child->is_expanded) echo ' children-visible'; else echo ' children-hidden'; ?>">
-      <span>
+      <div class="content-children">
       <div class="page">
         <span class="w1">
           <?php if ($child->has_children): ?><img align="middle" alt="toggle children" class="expander<?php if($child->is_expanded) echo ' expanded'; ?>" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/<?php echo $child->is_expanded ? 'collapse': 'expand'; ?>.png" title="" /><?php endif; ?>
@@ -32,6 +32,7 @@
           <img align="middle" alt="" class="busy" id="busy-<?php echo $child->id; ?>" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/spinner.gif" title="" />
         </span>
       </div>
+      <div class="page-layout"><?php $layout = Layout::findById($child->layout_id); echo isset($layout->name) ? htmlspecialchars($layout->name) : __('inherit'); ?></div>
 <?php switch ($child->status_id) {
       case Page::STATUS_DRAFT: echo '<div class="status draft-status">'.__('Draft').'</div>'; break;
       case Page::STATUS_PREVIEW: echo '<div class="status preview-status">'.__('Preview').'</div>'; break;
@@ -47,7 +48,7 @@
 <?php endif; ?>
 		<a href="#" id="copy-<?php echo $child->id; ?>" class="copy-page"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/copy.png" align="middle" title="<?php echo __('Copy Page'); ?>" alt="<?php echo __('Copy Page'); ?>" /></a>
       </div>
-      </span>
+      </div><!-- /.content-children -->
 <?php if ($child->is_expanded) echo $child->children_rows; ?>
     </li>
 <?php endforeach; ?>

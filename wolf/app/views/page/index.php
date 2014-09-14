@@ -20,6 +20,7 @@
 
 <div id="site-map-def">
     <div class="page"><?php echo __('Page'); ?> (<a href="#" id="toggle_reorder"><?php echo __('reorder'); ?></a>)</div>
+    <div class="page-layout"><?php echo __('Layout'); ?></div>
     <div class="status"><?php echo __('Status'); ?></div>
     <div class="view"><?php echo __('View'); ?></div>
     <div class="modify"><?php echo __('Modify'); ?></div>
@@ -36,6 +37,7 @@
 <?php endif; ?>
         </span>
       </div>
+      <div class="page-layout"><?php echo Layout::findById($root->layout_id)->name; ?></div>
       <div class="status published-status"><?php echo __('Published'); ?></div>
       <div class="view-page"><a href="<?php echo URL_PUBLIC; ?>" target="_blank"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/magnify.png" align="middle" alt="<?php echo __('View Page'); ?>" title="<?php echo __('View Page'); ?>" /></a></div>
       <div class="modify">
@@ -177,7 +179,7 @@
 				placeholder: 'placeholder',
 				tabSize: 25,
 				tolerance: 'pointer',
-				toleranceElement: '> span',
+				toleranceElement: '> div.content-children',
 				listType: 'ul',
 				helper: 'clone',
 				beforeStop: function(event, ui) {
