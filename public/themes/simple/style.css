@@ -1,65 +1,67 @@
-body {
-    background: #888;
-    font: 20px Ubuntu, "Trebuchet MS", "Lucida Grande", sans-serif;
-    margin: 0;
-}
+@media screen {
+    body {
+        background: #888;
+        font: 20px Ubuntu, "Trebuchet MS", "Lucida Grande", sans-serif;
+        margin: 0;
+    }
 
-h1, h2 {
-    font-weight: 100;
-}
+    h1, h2 {
+        font-weight: 100;
+    }
 
-header {
-    background: #769D31;
-    color: #fff;
-    text-shadow: 0 0 3px #000;
-}
+    header {
+        background: #769D31;
+        color: #fff;
+        text-shadow: 0 0 3px #000;
+    }
 
-header a {
-    text-decoration: none;
-    color: #fff;
-}
+    header a {
+        text-decoration: none;
+        color: #fff;
+    }
 
-header a:hover {
-    text-decoration: underline;
-}
+    header a:hover {
+        text-decoration: underline;
+    }
 
-header h2 {
-    font-style: italic;
-}
+    header h2 {
+        font-style: italic;
+    }
 
-nav ul {
-    margin: 0;
-    padding: 0;
-}
+    nav ul {
+        margin: 0;
+        padding: 0;
+    }
 
-main {
-    background: #fff;
-}
+    main {
+        background: #fff;
+    }
 
-#content {
-    margin: 20px;
-}
+    #content {
+        margin: 20px;
+    }
 
-footer {
-    text-align: center;
-    background: #483E37;
-    padding: 10px;
-    border-top: 4px solid #79A325;
-    font-size: 16px;
-    color: #fff;
-    clear: both;
-}
+    footer {
+        text-align: center;
+        background: #483E37;
+        padding: 10px;
+        border-top: 4px solid #79A325;
+        font-size: 16px;
+        color: #fff;
+        clear: both;
+    }
 
-footer a {
-    color: #79A325;
-}
+    footer a {
+        color: #79A325;
+    }
 
-img, pre {
-    max-width: 100%;
-}
+    img, pre {
+        max-width: 100%;
+    }
 
-pre {
-    overflow: auto;
+    pre {
+        overflow: auto;
+    }
 }
 
 @media screen and (min-width:900px) {
@@ -140,5 +142,23 @@ pre {
     aside {
         margin: 20px;
         border-top: solid 2px #79A325;
+    }
+}
+
+@media print {
+    body {
+        font-family: "Liberation serif", "Times New Roman", Serif;
+    }
+
+    a:link, a:visited {
+        color: #000;
+    }
+
+    header, nav, footer, aside {
+        display: none;
+    }
+
+    h1, h2, h3 {
+        font-family: ubuntu, sans-serif;
     }
 }
