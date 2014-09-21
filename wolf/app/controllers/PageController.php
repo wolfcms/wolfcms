@@ -405,7 +405,7 @@ class PageController extends Controller {
         // Check all numerical fields for a page
         $fields = array('parent_id', 'layout_id', 'needs_login');
         foreach ($fields as $field) {
-            if (!Validate::digit($data[$field])) {
+            if (!Validate::numeric($data[$field])) {
                 $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => $field));
             }
         }
