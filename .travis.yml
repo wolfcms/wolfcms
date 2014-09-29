@@ -80,6 +80,7 @@ script:
   - phpunit -c phpunit.travisci.xml
   
 after_script:
+  - php ../vendor/bin/test-reporter
   - cd ..
   - php vendor/bin/coveralls --config test/.coveralls.yml -v
  
@@ -89,3 +90,5 @@ notifications:
       - "chat.freenode.net#wolfcms"
     on_success: change
     on_failure: change
+
+secure: "ZCt7szUxQyG4Rpz4pwCZg2GbK/6Y49EhgOWaRXbUoeK+/L2cG/mijtX42DyKLwZXSqExqI5NFigE/ZVWpLNKct/sVn7+sOZM/qgP255DOMrswxVWtHzKF+5fdm1GR9PpJUJNDAHQEfm4O9eO1zJlu4X/KdH/9KEqN95eVfIsxdI="
