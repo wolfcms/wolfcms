@@ -7,7 +7,7 @@
  */
 
 return array(
-    'Allows you to use the Textile text filter.' => 'Mahdollistaa Textile-suotimen käyttämisen.',
+    'Allows you to use the Textile text filter.' => 'Mahdollistaa Textilen käyttämisen.',
     'Textile filter' => 'Textile-suodin',
     'Textile' => 'Textile'
 );

@@ -10,7 +10,7 @@ return array(
     'An error occurred trying to save the settings.' => 'При сохранении настроек возникла ошибка.',
     'Archive' => 'Архив',
     'Could not save settings, no settings found.' => 'Не получилось сохранить настройки, настройки не найдены',
-    'Do you want to generate dates for the URLs?' => 'Вы хотите сгенерировать даты для URL-ов',
+    'Do you want to generate dates for the URLs?' => 'Генерировать даты для URL ?',
     'Generate dates' => 'Сгенерировать даты',
     'No' => 'Нет',
     'Provides an Archive pagetype behaving similar to a blog or news archive.' => 'Обеспечивает новый тип страниц — «Архив», для использования в блоге или архиве новостей.',

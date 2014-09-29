@@ -7,7 +7,7 @@
  */
 
 return array(
-    'Do you want to create a translated version of a page as a tab of the same page or as a copy of the page in a language specific subtree? (i.e. Home->nl->About as a Dutch translation of Home->About)' => 'Как Вы хотите сделать перевод? В виде вкладки страницы или в специальном поддереве (нанример, чтобы "Главная -> de -> о нас" было немецким переводом "Главная -> О нас")',
+    'Do you want to create a translated version of a page as a tab of the same page or as a copy of the page in a language specific subtree? (i.e. Home->nl->About as a Dutch translation of Home->About)' => 'Как Вы хотите сделать перевод? В виде вкладки страницы или в специальном поддереве (например, чтобы "Главная -> de -> о нас" было немецким переводом "Главная -> О нас")',
     'Documentation' => 'Документация',
     'General' => 'Основное',
     'Get the language preference from the HTTP header (default), the uri (/nl/about.html for the Dutch version of about.html) or from the stored preference of a logged in user.' => 'Получать настройки языка из http заголовков (по умолчанию) или из настроек вошедшего в систему пользователя.',
