@@ -80,8 +80,9 @@ script:
   - phpunit -c phpunit.travisci.xml
   
 after_script:
-  - php ../vendor/bin/test-reporter
   - cd ..
+  - ln -s test/build
+  - php vendor/bin/test-reporter
   - php vendor/bin/coveralls --config test/.coveralls.yml -v
  
 notifications:
