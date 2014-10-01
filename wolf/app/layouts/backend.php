@@ -39,10 +39,12 @@ if (!isset($title) || trim($title) == '') {
     }
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!doctype html>
+<html lang="<?php echo AuthUser::getRecord()->language; ?>">
   <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <!--<meta http-equiv="Content-type" content="text/html; charset=utf-8" />-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <title><?php use_helper('Kses'); echo $title . ' | ' . kses(Setting::get('admin_title'), array()); ?></title>
 
@@ -50,15 +52,13 @@ if (!isset($title) || trim($title) == '') {
     <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
     <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
 
-    <!-- IE6 PNG support fix -->
-    <!--[if lt IE 7]>
-        <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/unitpngfix.js"></script>
-    <![endif]-->
     <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/cp-datepicker.js"></script>
     <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/wolf.js"></script>
     <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/jquery-1.8.3.min.js"></script> 
     <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/jquery-ui-1.10.3.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/jquery.ui.nestedSortable.js"></script>
+    <!-- bootstrap -->
+    <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/bootstrap.js"></script>
 
     <?php Observer::notify('view_backend_layout_head', CURRENT_PATH); ?>
         
@@ -129,7 +129,7 @@ if (!isset($title) || trim($title) == '') {
     <!-- Div to allow for modal dialogs -->
     <div id="mask"></div>
 
-    <div id="header">
+    <header id="header">
       <div id="site-title"><a href="<?php echo get_url(); ?>"><?php echo Setting::get('admin_title'); ?></a></div>
       <div id="mainTabs">
         <ul>
@@ -156,7 +156,7 @@ if (!isset($title) || trim($title) == '') {
 <?php endif; ?>
         </ul>
       </div>
-    </div>
+    </header> <!-- #header -->
 <?php if (Flash::get('error') !== null): ?>
                 <div id="error" class="message" style="display: none;"><?php echo Flash::get('error'); ?></div>
 <?php endif; ?>
