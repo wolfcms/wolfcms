@@ -185,17 +185,22 @@ if (!isset($title) || trim($title) == '') {
         <?php } ?>
     </div>
 
-    <div id="footer">
-      <p>
-      <?php echo __('Thank you for using'); ?> <a href="http://www.wolfcms.org/" target="_blank">Wolf CMS</a> <?php echo CMS_VERSION; ?> | <a href="http://forum.wolfcms.org/" target="_blank"><?php echo __('Feedback'); ?></a> | <a href="http://docs.wolfcms.org/" target="_blank"><?php echo __('Documentation'); ?></a>
-      </p>
+    <footer id="footer">
+        <!-- DEBUG info -->
+        <div class="debug">
 <?php if (DEBUG): ?>
         <p class="stats">
             <?php echo __('Page rendered in'); ?> <?php echo execution_time(); ?> <?php echo __('seconds'); ?>
             | <?php echo __('Memory usage:'); ?> <?php echo memory_usage(); ?>
         </p>
 <?php endif; ?>
-
+        </div>
+        <!-- WOLFCMS info -->
+        <div class="version">
+            <p>
+                <?php echo __('Thank you for using'); ?> <a href="http://www.wolfcms.org/" target="_blank">Wolf CMS</a> <?php echo CMS_VERSION; ?> | <a href="http://forum.wolfcms.org/" target="_blank"><?php echo __('Feedback'); ?></a> | <a href="http://docs.wolfcms.org/" target="_blank"><?php echo __('Documentation'); ?></a>
+            </p>
+        </div>
       <p id="site-links">
         <?php echo __('You are currently logged in as'); ?> <a href="<?php echo get_url('user/edit/'.AuthUser::getId()); ?>"><?php echo AuthUser::getRecord()->name; ?></a>
         <span class="separator"> | </span>
@@ -203,6 +208,6 @@ if (!isset($title) || trim($title) == '') {
         <span class="separator"> | </span>
         <a id="site-view-link" href="<?php echo URL_PUBLIC; ?>" target="_blank"><?php echo __('View Site'); ?></a>
       </p>
-    </div>
+    </footer>
   </body>
 </html>
