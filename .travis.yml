@@ -22,9 +22,12 @@ branches:
 
 # Which DBs we want to test
 env:
-  - DB=mysql
-  - DB=postgres
-  - DB=sqlite
+  global:
+    - secure: "ZCt7szUxQyG4Rpz4pwCZg2GbK/6Y49EhgOWaRXbUoeK+/L2cG/mijtX42DyKLwZXSqExqI5NFigE/ZVWpLNKct/sVn7+sOZM/qgP255DOMrswxVWtHzKF+5fdm1GR9PpJUJNDAHQEfm4O9eO1zJlu4X/KdH/9KEqN95eVfIsxdI="
+  matrix:  
+    - DB=mysql
+    - DB=postgres
+    - DB=sqlite
 
 before_script:
   - wget http://getcomposer.org/composer.phar
@@ -91,5 +94,3 @@ notifications:
       - "chat.freenode.net#wolfcms"
     on_success: change
     on_failure: change
-
-secure: "ZCt7szUxQyG4Rpz4pwCZg2GbK/6Y49EhgOWaRXbUoeK+/L2cG/mijtX42DyKLwZXSqExqI5NFigE/ZVWpLNKct/sVn7+sOZM/qgP255DOMrswxVWtHzKF+5fdm1GR9PpJUJNDAHQEfm4O9eO1zJlu4X/KdH/9KEqN95eVfIsxdI="
