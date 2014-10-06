@@ -51,6 +51,8 @@ if (!isset($title) || trim($title) == '') {
     <link rel="favourites icon" href="<?php echo PATH_PUBLIC; ?>wolf/admin/images/favicon.ico" />
     <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
     <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
+    <!-- Font Awesome -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
     <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/cp-datepicker.js"></script>
     <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/wolf.js"></script>
@@ -127,9 +129,10 @@ if (!isset($title) || trim($title) == '') {
   </head>
   <body id="body_<?php echo $ctrl.'_'.Dispatcher::getAction(); ?>">
     <!-- Div to allow for modal dialogs -->
-    <div id="mask"></div>
+    <!-- <div id="mask"></div>  -->
 
-    <header id="header">
+    <header>
+    <!--
       <div id="site-title"><a href="<?php echo get_url(); ?>"><?php echo Setting::get('admin_title'); ?></a></div>
       <div id="mainTabs">
         <ul>
@@ -156,6 +159,119 @@ if (!isset($title) || trim($title) == '') {
 <?php endif; ?>
         </ul>
       </div>
+      -->
+
+
+      <!-- NAVIGATION -->
+      <nav id="navigation" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="<?php echo get_url(); ?>" class="navbar-brand"><?php echo Setting::get('admin_title'); ?></a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <section class="nav navbar-nav">
+                <li id="page-plugin" class="<?php echo ( $ctrl == 'page' ) ? 'plugin active' : 'plugin'; ?>">
+                    <a href="<?php echo get_url('page'); ?>">
+                        <?php echo __('Pages'); ?>
+                    </a>
+                </li>
+                <?php if ( AuthUser::hasPermission('snippet_view') ): ?>
+
+                    <li id="snippet-plugin" class="<?php echo ( $ctrl == 'snippet' ) ? 'plugin active' : 'plugin'; ?>">
+                        <a href="<?php echo get_url('snippet'); ?>">
+                            <?php echo __('MSG_SNIPPETS'); ?>
+                        </a>
+                    </li>
+                <?php endif; ?>
+                <?php if ( AuthUser::hasPermission('layout_view') ): ?>
+
+                    <li id="layout-plugin" class="<?php echo ( $ctrl == 'layout' ) ? 'plugin active' : 'plugin'; ?>">
+                        <a href="<?php echo get_url('layout'); ?>">
+                            <?php echo __('Layouts'); ?>
+                        </a>
+                    </li>
+                <?php endif; ?>
+
+                <?php foreach ( Plugin::$controllers as $plugin_name => $plugin ): ?>
+                    <?php if ( $plugin->show_tab && (AuthUser::hasPermission($plugin->permissions)) ): ?>
+                        <?php Observer::notify('view_backend_list_plugin', $plugin_name, $plugin); ?>
+                        <?php if ( !empty($plugin->label) ): ?>
+
+                            <li id="<?php echo $plugin_name; ?>-plugin" class="<?php echo ( $ctrl == 'plugin' && $action == $plugin_name ) ? 'plugin active' : 'plugin'; ?>">
+                                <a href="<?php echo get_url('plugin/' . $plugin_name); ?>">
+                                    <?php echo $plugin->label; ?>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </section>
+            <section class="nav navbar-nav navbar-right">
+                <li class="dropdown<?php echo ( $ctrl == 'setting' || $ctrl == 'user' ) ? ' active' : ''; ?>">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="navbar-settings">
+                            <?php echo __('Settings'); ?> <b class="caret"></b>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <?php if ( AuthUser::hasPermission('admin_edit') ): ?>
+                            <li class="<?php echo ( $ctrl == 'setting' && $action != 'plugin' ) ? ' active' : ''; ?>">
+                                <a href="<?php echo get_url('setting'); ?>"><i class="fa fa-cog"></i> <?php echo __('Administration'); ?></a>
+                            </li>
+                        <?php endif; ?>
+                        <!-- plugins -->
+                        <?php if ( AuthUser::hasPermission('admin_view') ): ?>
+                            <li class="<?php echo ( $ctrl == 'setting' && $action == 'plugin' ) ? ' active' : ''; ?>">
+                                <a href="<?php echo get_url('setting/plugin'); ?>"><i class="fa fa-plug"></i> <?php echo __('Plugins'); ?></a>
+                            </li>
+                        <?php endif; ?>
+                        <?php if ( AuthUser::hasPermission('user_view') ): ?>
+                            <li class="<?php echo ( $ctrl == 'user' ) ? ' active' : ''; ?>">
+                                <a href="<?php echo get_url('user'); ?>"><i class="fa fa-users"></i> <?php echo __('Users'); ?></a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="navbar-username">
+                            <?php echo AuthUser::getRecord()->name; ?>
+                            <b class="caret"></b>
+                            <?php
+                            use_helper('Gravatar');
+                            echo Gravatar::img(AuthUser::getRecord()->email, array( 'align' => 'middle', 'alt' => 'user icon', 'class' => 'navbar-user-gravatar' ), '32', URL_PUBLIC . 'wolf/admin/images/user.png', 'g', USE_HTTPS);
+                            ?>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="<?php echo get_url('user/edit/' . AuthUser::getId()); ?>">
+                                <i class="fa fa-user"></i>
+                                <?php echo __('Edit user'); ?>
+                            </a>
+                        <li>
+                            <a id="site-view-link" href="<?php echo URL_PUBLIC; ?>" target="_blank">
+                                <i class="fa fa-external-link-square"></i>
+                                <?php echo __('View Site'); ?> 
+                            </a>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="<?php echo get_url('login/logout' . '?csrf_token=' . SecureToken::generateToken(BASE_URL . 'login/logout')); ?>">
+                                <i class="fa fa-power-off"></i>
+                                <?php echo __('Log Out'); ?>
+                            </a>
+                        </li>
+                    </ul>
+                </li>                        
+            </section>
+        </div>
+      </nav>
+      <!-- END NAVIGATION -->
     </header> <!-- #header -->
 <?php if (Flash::get('error') !== null): ?>
                 <div id="error" class="message" style="display: none;"><?php echo Flash::get('error'); ?></div>
