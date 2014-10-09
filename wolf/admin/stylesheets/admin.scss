@@ -1,2 +1,54 @@
 // Import _bootstrap.scss
 @import "bootstrap";
+
+/*
+ *	Wolf default styling
+ */
+
+body {
+	background: $wolf-gray;
+	//background: $gray-light;
+}
+
+header {
+	background: $brand-primary;
+	min-height: 50px;
+	width: 100%;
+
+	.navbar {
+		border: 0px !important;
+		margin-bottom: 0;
+	}
+}
+
+// Main content area with or without sidebar
+
+#main {
+	@extend .container-fluid;
+	background-color: $white;
+}
+
+// Footer content area
+footer {
+	@extend .container-fluid;
+	font-size: 12px;
+
+	.version, #site-links {
+		padding-top: 2em;
+		@extend .col-md-6;
+	}
+
+	.version {
+		
+	}
+
+	#site-links {
+		text-align: right;
+	}
+
+	.debug {
+		font-size: 11px;
+		font-style: italic;
+	}
+
+}
