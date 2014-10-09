@@ -163,7 +163,7 @@ if (!isset($title) || trim($title) == '') {
 
 
       <!-- NAVIGATION -->
-      <nav id="navigation" class="navbar navbar-inverse navbar-fixed-top">
+      <nav id="navigation" class="navbar navbar-inverse">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
@@ -240,12 +240,11 @@ if (!isset($title) || trim($title) == '') {
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="navbar-username">
                             <?php echo AuthUser::getRecord()->name; ?>
-                            <b class="caret"></b>
+                        </span>
                             <?php
                             use_helper('Gravatar');
                             echo Gravatar::img(AuthUser::getRecord()->email, array( 'align' => 'middle', 'alt' => 'user icon', 'class' => 'navbar-user-gravatar' ), '32', URL_PUBLIC . 'wolf/admin/images/user.png', 'g', USE_HTTPS);
                             ?>
-                        </span>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -302,28 +301,28 @@ if (!isset($title) || trim($title) == '') {
     </div>
 
     <footer id="footer">
-        <!-- DEBUG info -->
-        <div class="debug">
-<?php if (DEBUG): ?>
-        <p class="stats">
-            <?php echo __('Page rendered in'); ?> <?php echo execution_time(); ?> <?php echo __('seconds'); ?>
-            | <?php echo __('Memory usage:'); ?> <?php echo memory_usage(); ?>
-        </p>
-<?php endif; ?>
-        </div>
         <!-- WOLFCMS info -->
         <div class="version">
+        <p><?php echo __('Thank you for using'); ?> <a href="http://www.wolfcms.org/" target="_blank">Wolf CMS</a> <?php echo CMS_VERSION; ?> | <a href="http://forum.wolfcms.org/" target="_blank"><?php echo __('Feedback'); ?></a> | <a href="http://docs.wolfcms.org/" target="_blank"><?php echo __('Documentation'); ?></a></p>
+        <?php if (DEBUG): ?>
+            <!-- DEBUG info -->
+            <div class="debug">
+                <p class="stats">
+                    <?php echo __('Page rendered in'); ?> <?php echo execution_time(); ?> <?php echo __('seconds'); ?>
+                    | <?php echo __('Memory usage:'); ?> <?php echo memory_usage(); ?>
+                </p>
+            </div>
+        <?php endif; ?>
+        </div>
+        <div id="site-links">
             <p>
-                <?php echo __('Thank you for using'); ?> <a href="http://www.wolfcms.org/" target="_blank">Wolf CMS</a> <?php echo CMS_VERSION; ?> | <a href="http://forum.wolfcms.org/" target="_blank"><?php echo __('Feedback'); ?></a> | <a href="http://docs.wolfcms.org/" target="_blank"><?php echo __('Documentation'); ?></a>
+                <?php echo __('You are currently logged in as'); ?> <a href="<?php echo get_url('user/edit/'.AuthUser::getId()); ?>"><?php echo AuthUser::getRecord()->name; ?></a>
+                <span class="separator"> | </span>
+                <a href="<?php echo get_url('login/logout'.'?csrf_token='.SecureToken::generateToken(BASE_URL.'login/logout')); ?>"><?php echo __('Log Out'); ?></a>
+                <span class="separator"> | </span>
+                <a id="site-view-link" href="<?php echo URL_PUBLIC; ?>" target="_blank"><?php echo __('View Site'); ?></a>
             </p>
         </div>
-      <p id="site-links">
-        <?php echo __('You are currently logged in as'); ?> <a href="<?php echo get_url('user/edit/'.AuthUser::getId()); ?>"><?php echo AuthUser::getRecord()->name; ?></a>
-        <span class="separator"> | </span>
-        <a href="<?php echo get_url('login/logout'.'?csrf_token='.SecureToken::generateToken(BASE_URL.'login/logout')); ?>"><?php echo __('Log Out'); ?></a>
-        <span class="separator"> | </span>
-        <a id="site-view-link" href="<?php echo URL_PUBLIC; ?>" target="_blank"><?php echo __('View Site'); ?></a>
-      </p>
     </footer>
   </body>
 </html>
