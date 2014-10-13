@@ -18,6 +18,7 @@ $gray:                   lighten(#000, 33.5%) !default; // #555
 $gray-light:             lighten(#000, 46.7%) !default; // #777
 $gray-lighter:           lighten(#000, 93.5%) !default; // #eee
 
+// WOLFCMS MAIN COLORS
 $wolf-brown: #2e2924; // new darker brown
 $wolf-green: #76a83a; // new, darker green
 $wolf-gray: #ecf0f1; // light gray
@@ -31,13 +32,16 @@ $brand-info:            #5bc0de !default;
 $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
 
-/*
+// WOLFCMS INTERNAL VARIABLES
+// how much to indent each level of page tree index
+$pages-nested-list-padding: 40px;
 
-dark brown: #2e2924;
-green: #76a83a;
-light gray: #e5e5e5; or #ecf0f1;
-
-*/
+// page status colors
+$page-status-draft: #c00; 
+$page-status-published: #0a0;
+$page-status-hidden: #aaa;
+$page-status-preview: #080;
+$page-status-archived: #0aa;
 
 
 //== Scaffolding
