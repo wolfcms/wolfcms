@@ -273,16 +273,25 @@ if (!isset($title) || trim($title) == '') {
       <!-- END NAVIGATION -->
     </header> <!-- #header -->
 <?php if (Flash::get('error') !== null): ?>
-                <div id="error" class="message" style="display: none;"><?php echo Flash::get('error'); ?></div>
+        <div id="error" class="alert alert-danger alert-dissmisable flash-message">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <?php echo Flash::get('error'); ?>
+        </div>
 <?php endif; ?>
 <?php if (Flash::get('success') !== null): ?>
-                <div id="success" class="message" style="display: none"><?php echo Flash::get('success'); ?></div>
+        <div id="success" class="alert alert-success alert-dissmisable flash-message">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <?php echo Flash::get('success'); ?>
+        </div>
 <?php endif; ?>
 <?php if (Flash::get('info') !== null): ?>
-                <div id="info" class="message" style="display: none"><?php echo Flash::get('info'); ?></div>
+        <div id="info" class="alert alert-info alert-dissmisable flash-message">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <?php echo Flash::get('info'); ?>
+        </div>
 <?php endif; ?>
     <div id="main">
-        <div id="content-wrapper">
+        <div id="content-wrapper" <?php if (isset($sidebar) && trim($sidebar) != '') { echo ' class="use-sidebar sidebar-at-side2"'; } ?>>
             <div id="content">
         <!-- content -->
         <?php echo $content_for_layout; ?>
