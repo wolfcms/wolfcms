@@ -291,7 +291,7 @@ if (!isset($title) || trim($title) == '') {
         </div>
 <?php endif; ?>
     <div id="main">
-        <div id="content-wrapper" <?php if (isset($sidebar) && trim($sidebar) != '') { echo ' class="use-sidebar sidebar-at-side2"'; } ?>>
+        <div id="content-wrapper" <?php if (isset($sidebar) && trim($sidebar) != '') { echo ' class="use-sidebar"'; } ?>>
             <div id="content">
         <!-- content -->
         <?php echo $content_for_layout; ?>
