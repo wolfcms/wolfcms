@@ -1,10 +1,3 @@
-/*
-
-dark brown: #2e2924;
-green: #76a83a;
-light gray: #e5e5e5; or #ecf0f1;
-
-*/
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -5509,11 +5502,11 @@ button.close {
     bottom: 20px;
   }
 }
-.clearfix:before, .clearfix:after {
+.clearfix:before, #body_page_index ul:before, .clearfix:after, #body_page_index ul:after {
   content: " ";
   display: table;
 }
-.clearfix:after {
+.clearfix:after, #body_page_index ul:after {
   clear: both;
 }
 
@@ -5819,8 +5812,30 @@ header .navbar {
   margin-bottom: 0;
 }
 
-#main {
-  background-color: white;
+#content-wrapper.use-sidebar {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  #content-wrapper.use-sidebar {
+    float: left;
+    width: 75%;
+  }
+}
+
+#sidebar-wrapper {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    float: left;
+    width: 25%;
+  }
 }
 
 footer {
@@ -5835,4 +5850,185 @@ footer #site-links {
 footer .debug {
   font-size: 11px;
   font-style: italic;
+}
+
+/* PAGES LIST "/admin/pages" */
+/* ========================= */
+#body_page_index ul {
+  padding-left: 0;
+  list-style: none;
+}
+#body_page_index ul .edit-link {
+  line-height: 32px;
+}
+#body_page_index ul .edit-link img {
+  vertical-align: middle;
+}
+#body_page_index ul .title {
+  vertical-align: middle;
+  font-weight: bold;
+}
+#body_page_index ul .title.protected {
+  color: #555555;
+  cursor: default;
+}
+#body_page_index ul .behavior-id {
+  color: #777777;
+  font-style: italic;
+  font-size: 12px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+#body_page_index ul a:hover {
+  text-decoration: none;
+}
+#body_page_index ul .page-status-draft {
+  color: #cc0000;
+}
+#body_page_index ul .page-status-published {
+  color: #00aa00;
+}
+#body_page_index ul .page-status-hidden {
+  color: #aaaaaa;
+}
+#body_page_index ul .page-status-preview {
+  color: #008800;
+}
+#body_page_index ul .page-status-archived {
+  color: #00aaaa;
+}
+
+.page-list-item {
+  margin-left: -15px;
+  margin-right: -15px;
+  border-bottom: 1px solid #dddddd;
+}
+.page-list-item:before, .page-list-item:after {
+  content: " ";
+  display: table;
+}
+.page-list-item:after {
+  clear: both;
+}
+.page-list-item:hover {
+  background-color: whitesmoke;
+}
+ul.tree-root > li:last-child > .page-list-item {
+  border: none;
+}
+.panel-heading .page-list-item {
+  border: none;
+}
+@media (min-width: 768px) {
+  .page-list-item {
+    border: none;
+  }
+}
+
+.page-list-name {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  .page-list-name {
+    float: left;
+    width: 66.66667%;
+  }
+}
+
+.page-list-status {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: right;
+}
+@media (min-width: 768px) {
+  .page-list-status {
+    float: left;
+    width: 16.66667%;
+  }
+}
+@media (min-width: 768px) {
+  .page-list-status {
+    text-align: center;
+  }
+}
+ul .page-list-status {
+  line-height: 32px;
+}
+
+.page-list-modify {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: right;
+}
+@media (min-width: 768px) {
+  .page-list-modify {
+    float: left;
+    width: 16.66667%;
+  }
+}
+ul .page-list-modify {
+  line-height: 32px;
+}
+
+.level-0 .indent-wrap {
+  padding-left: 0px;
+}
+
+.level-1 .indent-wrap {
+  padding-left: 0px;
+}
+
+.level-2 .indent-wrap {
+  padding-left: 40px;
+}
+
+.level-3 .indent-wrap {
+  padding-left: 80px;
+}
+
+.level-4 .indent-wrap {
+  padding-left: 120px;
+}
+
+.level-5 .indent-wrap {
+  padding-left: 160px;
+}
+
+.level-6 .indent-wrap {
+  padding-left: 200px;
+}
+
+li.level-0 .nested-list-placeholder {
+  margin-left: 20px;
+}
+
+li.level-1 .nested-list-placeholder {
+  margin-left: 60px;
+}
+
+li.level-2 .nested-list-placeholder {
+  margin-left: 100px;
+}
+
+li.level-3 .nested-list-placeholder {
+  margin-left: 140px;
+}
+
+li.level-4 .nested-list-placeholder {
+  margin-left: 180px;
+}
+
+li.level-5 .nested-list-placeholder {
+  margin-left: 220px;
+}
+
+li.level-6 .nested-list-placeholder {
+  margin-left: 260px;
 }
