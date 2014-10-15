@@ -93,25 +93,26 @@ footer {
                     @media (min-width: $screen-sm) { border: none; }                              
 }
 .page-list-name   { 
-	@include make-sm-column(8); 
+	@include make-sm-column(6); 
 }
-.page-list-status { 
+.page-list-layout, .page-list-status, { 
 	@include make-sm-column(2); 
 	text-align: right; 
 		
-		@media (min-width: $screen-sm) { text-align: center; }
+		//@media (min-width: $screen-sm) { text-align: center; }
 
     ul & {
     	line-height: 32px; 
     }
 }
-.page-list-modify { 
-	@include make-sm-column(2); 
+
+.page-list-view, .page-list-modify {
+	@include make-sm-column(1);
 	text-align: right;
 
-		ul & { 
-			line-height: 32px; 
-		}
+	ul & {
+		line-height: 32px;
+	}
 }
 
 // SITE-MAP ITEM AND PLACEHOLDER INDENTATION

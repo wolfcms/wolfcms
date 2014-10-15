@@ -5934,11 +5934,11 @@ ul.tree-root > li:last-child > .page-list-item {
 @media (min-width: 768px) {
   .page-list-name {
     float: left;
-    width: 66.66667%;
+    width: 50%;
   }
 }
 
-.page-list-status {
+.page-list-layout, .page-list-status {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
@@ -5946,21 +5946,16 @@ ul.tree-root > li:last-child > .page-list-item {
   text-align: right;
 }
 @media (min-width: 768px) {
-  .page-list-status {
+  .page-list-layout, .page-list-status {
     float: left;
     width: 16.66667%;
   }
 }
-@media (min-width: 768px) {
-  .page-list-status {
-    text-align: center;
-  }
-}
-ul .page-list-status {
+ul .page-list-layout, ul .page-list-status {
   line-height: 32px;
 }
 
-.page-list-modify {
+.page-list-view, .page-list-modify {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
@@ -5968,12 +5963,12 @@ ul .page-list-status {
   text-align: right;
 }
 @media (min-width: 768px) {
-  .page-list-modify {
+  .page-list-view, .page-list-modify {
     float: left;
-    width: 16.66667%;
+    width: 8.33333%;
   }
 }
-ul .page-list-modify {
+ul .page-list-view, ul .page-list-modify {
   line-height: 32px;
 }
 
