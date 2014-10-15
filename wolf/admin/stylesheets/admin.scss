@@ -26,11 +26,11 @@ header {
 	@extend .container-fluid;
 }
 
-#content-wrapper.use-sidebar {
+#content.use-sidebar {
 	@include make-sm-column(9);
 }
 
-#sidebar-wrapper {
+#sidebar {
 	@include make-sm-column(3);
 }
 

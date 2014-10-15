@@ -5812,27 +5812,27 @@ header .navbar {
   margin-bottom: 0;
 }
 
-#content-wrapper.use-sidebar {
+#content.use-sidebar {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
 }
 @media (min-width: 768px) {
-  #content-wrapper.use-sidebar {
+  #content.use-sidebar {
     float: left;
     width: 75%;
   }
 }
 
-#sidebar-wrapper {
+#sidebar {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
 }
 @media (min-width: 768px) {
-  #sidebar-wrapper {
+  #sidebar {
     float: left;
     width: 25%;
   }

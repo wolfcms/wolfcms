@@ -291,21 +291,17 @@ if (!isset($title) || trim($title) == '') {
         </div>
 <?php endif; ?>
     <div id="main">
-        <div id="content-wrapper" <?php if (isset($sidebar) && trim($sidebar) != '') { echo ' class="use-sidebar"'; } ?>>
-            <div id="content">
-        <!-- content -->
-        <?php echo $content_for_layout; ?>
-        <!-- end content -->
-            </div>
+        <div id="content" <?php if (isset($sidebar) && trim($sidebar) != '') { echo ' class="use-sidebar"'; } ?>>
+            <!-- content -->
+            <?php echo $content_for_layout; ?>
+            <!-- end content -->
         </div>
         <?php if (isset($sidebar)) { ?>
-        <div id="sidebar-wrapper">
-            <div id="sidebar">
-            <!-- sidebar -->
-            <?php echo $sidebar; ?>
-            <!-- end sidebar -->
-            </div>
-        </div>
+            <aside id="sidebar">
+                <!-- sidebar -->
+                <?php echo $sidebar; ?>
+                <!-- end sidebar -->
+            </aside>
         <?php } ?>
     </div>
 
