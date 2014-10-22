@@ -34,7 +34,15 @@
                 <?php else: ?>
                     <a class="edit-link" href="<?php echo get_url('page/edit/'.$child->id); ?>" title="<?php echo $child->id.' | '.$child->slug; ?>">
                     <i class="fa fa-file-o"></i>
-                    <span class="title"><?php echo $child->title; ?></span></a> 
+                    <span class="title"><?php echo $child->title; ?></span></a>
+
+                    <?php 
+                    //childrenCount
+                    if($child->childrenCount() > 0) {
+                      echo '<span class="badge">'.$child->childrenCount().'</span>';
+                    }
+                    ?>
+
                     <img class="handle_reorder" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/drag_to_sort.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" /> 
                     <img class="handle_copy" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/drag_to_copy.gif" alt="<?php echo __('Drag to Copy'); ?>" align="middle" />
                 <?php endif; ?>

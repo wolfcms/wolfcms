@@ -28,10 +28,18 @@ header {
 
 #content.use-sidebar {
 	@include make-sm-column(9);
+	//padding-left: 0;
 }
 
 #sidebar {
 	@include make-sm-column(3);
+	//padding-right: 0;
+	// add top margin for sidebar panel
+	margin-top: 63px;
+
+	.box {
+		margin-top: 20px;
+	}
 }
 
 // Footer content area
@@ -131,3 +139,51 @@ li.level-3 .nested-list-placeholder { margin-left: floor(3.5 * $pages-nested-lis
 li.level-4 .nested-list-placeholder { margin-left: floor(4.5 * $pages-nested-list-padding); }
 li.level-5 .nested-list-placeholder { margin-left: floor(5.5 * $pages-nested-list-padding); }
 li.level-6 .nested-list-placeholder { margin-left: floor(6.5 * $pages-nested-list-padding); }
+
+
+#body_page_index #content,
+
+#body_snippet_edit #content,
+#body_snippet_add #content,
+
+#body_layout_edit #content,
+#body_page_edit #content,
+#body_page_add #content,
+#body_setting_index #content, 
+#body_setting_plugin #content{
+    @include make-sm-column(12);
+}
+
+
+	// remove top margin when there is no sidebar
+//#body_page_index #content,
+//#body_page_edit #content,
+//#body_page_add #content,
+
+#body_snippet_edit #sidebar,
+#body_snippet_add #sidebar,
+
+#body_layout_edit #sidebar,
+#body_layout_add #sidebar,
+
+#body_setting_index #content, 
+#body_setting_plugin #content{
+	margin-top: 0;
+}
+
+
+// SNIPPETS
+.snippet-list-item   { @include make-row(); line-height: 32px; }
+.snippet-list-name   { @include make-sm-column(10); }
+.snippet-list-modify { @include make-sm-column(2); text-align: right; }
+
+// LAYOUTS
+.layout-list-item   { @include make-row(); line-height: 32px; }
+.layout-list-name   { @include make-sm-column(10); }
+.layout-list-modify { @include make-sm-column(2); text-align: right; }
+
+
+// Misc
+pre {
+	font-size: 11px;
+}
