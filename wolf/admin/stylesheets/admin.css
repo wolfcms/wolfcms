@@ -5830,12 +5830,16 @@ header .navbar {
   min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
+  margin-top: 63px;
 }
 @media (min-width: 768px) {
   #sidebar {
     float: left;
     width: 25%;
   }
+}
+#sidebar .box {
+  margin-top: 20px;
 }
 
 footer {
@@ -6026,4 +6030,124 @@ li.level-5 .nested-list-placeholder {
 
 li.level-6 .nested-list-placeholder {
   margin-left: 260px;
+}
+
+#body_page_index #content,
+#body_snippet_edit #content,
+#body_snippet_add #content,
+#body_layout_edit #content,
+#body_page_edit #content,
+#body_page_add #content,
+#body_setting_index #content,
+#body_setting_plugin #content {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  #body_page_index #content,
+  #body_snippet_edit #content,
+  #body_snippet_add #content,
+  #body_layout_edit #content,
+  #body_page_edit #content,
+  #body_page_add #content,
+  #body_setting_index #content,
+  #body_setting_plugin #content {
+    float: left;
+    width: 100%;
+  }
+}
+
+#body_snippet_edit #sidebar,
+#body_snippet_add #sidebar,
+#body_layout_edit #sidebar,
+#body_layout_add #sidebar,
+#body_setting_index #content,
+#body_setting_plugin #content {
+  margin-top: 0;
+}
+
+.snippet-list-item {
+  margin-left: -15px;
+  margin-right: -15px;
+  line-height: 32px;
+}
+.snippet-list-item:before, .snippet-list-item:after {
+  content: " ";
+  display: table;
+}
+.snippet-list-item:after {
+  clear: both;
+}
+
+.snippet-list-name {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  .snippet-list-name {
+    float: left;
+    width: 83.33333%;
+  }
+}
+
+.snippet-list-modify {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: right;
+}
+@media (min-width: 768px) {
+  .snippet-list-modify {
+    float: left;
+    width: 16.66667%;
+  }
+}
+
+.layout-list-item {
+  margin-left: -15px;
+  margin-right: -15px;
+  line-height: 32px;
+}
+.layout-list-item:before, .layout-list-item:after {
+  content: " ";
+  display: table;
+}
+.layout-list-item:after {
+  clear: both;
+}
+
+.layout-list-name {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  .layout-list-name {
+    float: left;
+    width: 83.33333%;
+  }
+}
+
+.layout-list-modify {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: right;
+}
+@media (min-width: 768px) {
+  .layout-list-modify {
+    float: left;
+    width: 16.66667%;
+  }
+}
+
+pre {
+  font-size: 11px;
 }
