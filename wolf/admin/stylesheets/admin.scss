@@ -1,0 +1,133 @@
+// Import _bootstrap.scss
+@import "bootstrap";
+
+/*
+ *	Wolf default styling
+ */
+
+body {
+	background: $wolf-gray;
+	//background: $gray-light;
+}
+
+header {
+	background: $brand-primary;
+	min-height: 50px;
+	width: 100%;
+
+	.navbar {
+		border: 0px !important;
+		margin-bottom: 0;
+	}
+}
+
+// Main content area
+#main {
+	@extend .container-fluid;
+}
+
+#content.use-sidebar {
+	@include make-sm-column(9);
+}
+
+#sidebar {
+	@include make-sm-column(3);
+}
+
+// Footer content area
+footer {
+	@extend .container-fluid;
+	font-size: 12px;
+
+	.version, #site-links {
+		padding-top: 2em;
+		@extend .col-md-6;
+	}
+
+	.version {
+		
+	}
+
+	#site-links {
+		text-align: right;
+	}
+
+	.debug {
+		font-size: 11px;
+		font-style: italic;
+	}
+
+}
+
+/* PAGES LIST "/admin/pages" */
+/* ========================= */
+
+#body_page_index ul {
+    @extend .clearfix;
+    padding-left: 0; 
+    list-style: none;
+    .edit-link { line-height: 32px; 
+                 img {vertical-align: middle;}        
+    }
+    .title { vertical-align: middle; font-weight: bold;}
+    .title.protected {color: $gray; cursor: default;}
+    .behavior-id { color: $gray-light; font-style: italic; font-size: $font-size-small; font-weight: bold; vertical-align: middle; }
+    a:hover { text-decoration: none; }
+    .page-status-draft     { color: $page-status-draft;    }
+    .page-status-published { color: $page-status-published;}
+    .page-status-hidden    { color: $page-status-hidden;   }
+    .page-status-preview   { color: $page-status-preview;  }
+    .page-status-archived  { color: $page-status-archived; }
+
+}
+
+// item column sizes
+.page-list-item   { 
+	@include make-row; 
+                    border-bottom: 1px solid $panel-default-border;
+
+                    &:hover { background-color: $table-bg-hover; }
+                    ul.tree-root > li:last-child > & {border: none;}
+                    .panel-heading & {border: none}
+
+                    @media (min-width: $screen-sm) { border: none; }                              
+}
+.page-list-name   { 
+	@include make-sm-column(6); 
+}
+.page-list-layout, .page-list-status, { 
+	@include make-sm-column(2); 
+	text-align: right; 
+		
+		//@media (min-width: $screen-sm) { text-align: center; }
+
+    ul & {
+    	line-height: 32px; 
+    }
+}
+
+.page-list-view, .page-list-modify {
+	@include make-sm-column(1);
+	text-align: right;
+
+	ul & {
+		line-height: 32px;
+	}
+}
+
+// SITE-MAP ITEM AND PLACEHOLDER INDENTATION
+.level-0 .indent-wrap {padding-left: 0px;}
+.level-1 .indent-wrap {padding-left: 0*$pages-nested-list-padding;}
+.level-2 .indent-wrap {padding-left: 1*$pages-nested-list-padding;}
+.level-3 .indent-wrap {padding-left: 2*$pages-nested-list-padding;}
+.level-4 .indent-wrap {padding-left: 3*$pages-nested-list-padding;}
+.level-5 .indent-wrap {padding-left: 4*$pages-nested-list-padding;}
+.level-6 .indent-wrap {padding-left: 5*$pages-nested-list-padding;}
+
+li.level-0 .nested-list-placeholder { margin-left: floor(0.5 * $pages-nested-list-padding); }
+li.level-1 .nested-list-placeholder { margin-left: floor(1.5 * $pages-nested-list-padding); }
+li.level-2 .nested-list-placeholder { margin-left: floor(2.5 * $pages-nested-list-padding); }
+li.level-3 .nested-list-placeholder { margin-left: floor(3.5 * $pages-nested-list-padding); }
+li.level-4 .nested-list-placeholder { margin-left: floor(4.5 * $pages-nested-list-padding); }
+li.level-5 .nested-list-placeholder { margin-left: floor(5.5 * $pages-nested-list-padding); }
+li.level-6 .nested-list-placeholder { margin-left: floor(6.5 * $pages-nested-list-padding); }
