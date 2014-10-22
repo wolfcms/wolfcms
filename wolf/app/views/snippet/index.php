@@ -16,29 +16,41 @@
  * @license http://www.gnu.org/licenses/gpl.html GPLv3 license
  */
 ?>
-<h1><?php echo __('MSG_SNIPPETS'); ?></h1>
+<h2><?php echo __('MSG_SNIPPETS'); ?></h2>
 
-<div id="site-map-def" class="index-def">
-    <div class="snippet">
-        <?php echo __('Snippet'); ?> (<a href="#" id="reorder-toggle"><?php echo __('reorder'); ?></a>)
+<div id="site-map-def" class="panel panel-default index-def">
+    
+    <div class="panel-heading">
+        <div id="snippet" class="snippet-list-item">
+            <div class="snippet-list-name">
+                <?php echo __('Snippet'); ?> <span class="btn btn-default btn-xs" id="reorder-toggle"><?php echo __('reorder'); ?></span>
+            </div>
+            <div class="snippet-list-modify">
+                <?php echo __('Modify'); ?>
+            </div>
+        </div>
     </div>
-    <div class="modify"><?php echo __('Modify'); ?></div>
+
+    <div class="panel-body">
+        <ul id="snippets" class="snippet-list list-unstyled">
+        <?php foreach ( $snippets as $snippet ) { ?>
+            <li id="snippet_<?php echo $snippet->id; ?>" class="snippet-list-item node <?php echo odd_even() ?>">
+                <span class="snippet-list-name">
+                    <i class="fa fa-file-o"></i>
+                    <a href="<?php echo get_url('snippet/edit/' . $snippet->id); ?>"><?php echo $snippet->name; ?></a>
+                    <img class="handle" src="<?php echo PATH_PUBLIC; ?>wolf/admin/images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>"/>
+                </span>
+                <span class="snippet-list-modify">
+                    <?php if ( AuthUser::hasPermission('snippet_delete') ): ?>        
+                        <a class="remove" href="<?php echo get_url('snippet/delete/' . $snippet->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete?'); ?> <?php echo $snippet->name; ?>?');" title="<?php echo __('Delete snippet'); ?>"><i class="fa fa-minus-square"></i></a>
+                    <?php endif; ?>
+                </span>
+            </li>
+        <?php } ?>
+        </ul>
+    </div>
+
 </div>
-
-<ul id="snippets" class="index">
-<?php foreach($snippets as $snippet): ?>
-  <li id="snippet_<?php echo $snippet->id; ?>" class="snippet node <?php echo odd_even(); ?>">
-    <img align="middle" alt="snippet-icon" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/snippet.png" />
-    <a href="<?php echo get_url('snippet/edit/'.$snippet->id); ?>"><?php echo $snippet->name; ?></a>
-    <img class="handle" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
-    <div class="remove">
-        <?php if (AuthUser::hasPermission('snippet_delete')): ?>        
-            <a class="remove" href="<?php echo get_url('snippet/delete/'.$snippet->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete?'); ?> <?php echo $snippet->name; ?>?');"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/icon-remove.gif" alt="<?php echo __('delete snippet icon'); ?>" title="<?php echo __('Delete snippet'); ?>" /></a>
-        <?php endif; ?>
-    </div>
-  </li>
-<?php endforeach; ?>
-</ul>
 
 <style type="text/css" >
     .placeholder {
@@ -56,14 +68,14 @@
         this.sortable({
             disabled:true,
             tolerance:'intersect',
-       		containment:'#main',
-       		placeholder:'placeholder',
-       		revert: true,
+            containment:'#main',
+            placeholder:'placeholder',
+            revert: true,
             handle: '.handle',
             cursor:'crosshair',
-       		distance:'15',
+            distance:'15',
             stop: function(event, ui) {
-                var order = $(ui.item.parent()).sortable('serialize', {key: 'snippets[]'});
+                var order = $(ui.item.parent()).sortable('serialize', {key: 'layouts[]'});
                 $.post('<?php echo get_url('snippet/reorder/'); ?>', {data : order});
             }
         })
