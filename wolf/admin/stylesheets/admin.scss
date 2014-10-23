@@ -166,8 +166,8 @@ li.level-6 .nested-list-placeholder { margin-left: floor(6.5 * $pages-nested-lis
 #body_layout_edit #sidebar,
 #body_layout_add #sidebar,
 
-#body_setting_index #content, 
-#body_setting_plugin #content{
+#body_setting_index #sidebar, 
+{
 	margin-top: 0;
 }
 
@@ -181,6 +181,31 @@ li.level-6 .nested-list-placeholder { margin-left: floor(6.5 * $pages-nested-lis
 .layout-list-item   { @include make-row(); line-height: 32px; }
 .layout-list-name   { @include make-sm-column(10); }
 .layout-list-modify { @include make-sm-column(2); text-align: right; }
+
+// PLUGINS
+.plugin-list-name     { 
+	width: 52%;
+
+    .plugin-list-title {}
+    .plugin-list-author {color: $gray-light;}
+    .plugin-list-description {font-style: italic;}
+    .notes { color: $brand-danger; font-size: $font-size-small; }
+}
+.plugin-list-settings { width: 8% }
+.plugin-list-website  { width: 8% }
+.plugin-list-version  { width: 8%; text-align: center; max-width: 10%; }
+.plugin-list-latest   { width: 8%; text-align: center; max-width: 100px; overflow: auto; }
+.plugin-list-enabled  { width: 8%; text-align: center; }
+.plugin-list-uninst   { width: 8%; text-align: center; }
+
+// SETTINGS
+
+
+// USERS
+.user-list-name,
+.user-list-email,
+.user-list-role,
+.user-list-modify {}
 
 
 // Misc

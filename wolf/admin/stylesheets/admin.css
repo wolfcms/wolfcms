@@ -6063,8 +6063,7 @@ li.level-6 .nested-list-placeholder {
 #body_snippet_add #sidebar,
 #body_layout_edit #sidebar,
 #body_layout_add #sidebar,
-#body_setting_index #content,
-#body_setting_plugin #content {
+#body_setting_index #sidebar {
   margin-top: 0;
 }
 
@@ -6146,6 +6145,51 @@ li.level-6 .nested-list-placeholder {
     float: left;
     width: 16.66667%;
   }
+}
+
+.plugin-list-name {
+  width: 52%;
+}
+.plugin-list-name .plugin-list-author {
+  color: #777777;
+}
+.plugin-list-name .plugin-list-description {
+  font-style: italic;
+}
+.plugin-list-name .notes {
+  color: #d9534f;
+  font-size: 12px;
+}
+
+.plugin-list-settings {
+  width: 8%;
+}
+
+.plugin-list-website {
+  width: 8%;
+}
+
+.plugin-list-version {
+  width: 8%;
+  text-align: center;
+  max-width: 10%;
+}
+
+.plugin-list-latest {
+  width: 8%;
+  text-align: center;
+  max-width: 100px;
+  overflow: auto;
+}
+
+.plugin-list-enabled {
+  width: 8%;
+  text-align: center;
+}
+
+.plugin-list-uninst {
+  width: 8%;
+  text-align: center;
 }
 
 pre {
