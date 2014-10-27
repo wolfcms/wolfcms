@@ -211,7 +211,7 @@ if (!isset($title) || trim($title) == '') {
                 <?php endforeach; ?>
             </section>
             <section class="nav navbar-nav navbar-right">
-                <li class="dropdown<?php echo ( $ctrl == 'setting' || $ctrl == 'user' ) ? ' active' : ''; ?>">
+                <li class="dropdown<?php echo ( $ctrl == 'setting' || $ctrl == 'plugin' || $ctrl == 'user' ) ? ' active' : ''; ?>">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="navbar-settings">
                             <?php echo __('Settings'); ?> <b class="caret"></b>
@@ -225,7 +225,7 @@ if (!isset($title) || trim($title) == '') {
                         <?php endif; ?>
                         <!-- plugins -->
                         <?php if ( AuthUser::hasPermission('admin_view') ): ?>
-                            <li class="<?php echo ( $ctrl == 'setting' && $action == 'plugin' ) ? ' active' : ''; ?>">
+                            <li class="<?php echo ( $ctrl != 'setting' && $action == 'plugin' ) ? ' active' : ''; ?>">
                                 <a href="<?php echo get_url('setting/plugin'); ?>"><i class="fa fa-plug"></i> <?php echo __('Plugins'); ?></a>
                             </li>
                         <?php endif; ?>
