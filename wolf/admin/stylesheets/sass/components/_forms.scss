@@ -1,0 +1,93 @@
+/*  Forms
+----------------------------- */
+
+form,
+fieldset {
+    margin-bottom: $spacing;
+}
+
+legend,
+label {
+    display: block;
+    font-weight: normal;
+    padding: 0;
+    margin-bottom: 5px;
+}
+
+input,
+textarea,
+select {
+    display: block;
+    width: 100%;
+    font: inherit;
+    line-height: 1.5;
+    color: tint($black, 18%);
+    //margin-bottom: 20px;
+    padding: 5px;
+    border: 1px solid $grey;
+    border-radius: 1px;
+}
+
+form button,
+form .button {
+    margin-bottom: 20px;
+}
+
+textarea {
+    height: 12em;
+}
+
+input[type="image"],
+input[type="checkbox"],
+input[type="radio"] {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+input:focus,
+textarea:focus {
+    border-color: rgba(82, 168, 236, 0.8);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+    outline: 0;
+    outline: thin dotted \9;
+}
+
+input[type="file"]:focus,
+input[type="checkbox"]:focus,
+select:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+input[type="submit"],
+button {
+    border: none;
+    background-color: $button-color;
+    color: white;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+input[type="submit"]:hover,
+button:hover {
+    background-color: darken($button-color, 10);
+}
+
+.input-inline {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+}
+
+
+/*  Condensed Inputs */
+.input-condensed {
+    padding: 1px 5px;
+    font-size: 15px;
+}

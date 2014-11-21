@@ -1,0 +1,59 @@
+// Grid stuff
+$gutter_width: 40px; // Your gutter width
+$columns: 12; // The amount of columns you want
+$max_width: 1080px; // Set a maximum width of the site
+$site_align: center !default;
+
+// WOLFCMS default colors
+$wolf-brown: #2e2924; // new darker brown
+$wolf-green: #76a83a; // new, darker green
+$wolf-grey: #ecf0f1; // light gray
+
+$sucess: #76a83a; // $wolf-green
+$info: #2980b9; // blue
+$error: #c0392b; // red
+
+// Other colors
+$brown: #2e2924;
+$green: #76a83a;
+$grey: #e5e5e5;
+$black: #333;
+$white: #fff;
+$blue: #2980b9;
+$red: #c0392b;
+$purple: #8e44ad;
+$medium-purple: #9370DB;
+
+// Main site color
+$brand-color: $wolf-brown;
+// Main background color
+$background-color: $white;
+
+// Fonts
+$serif: Georgia, 'Times New Roman', Times, serif;
+$sans-serif: "Lucida Grande", "Bitstream Vera Sans", Helvetica, Verdana, Arial, sans-serif;
+$mono: 'Consolas', 'Lucida Console', 'Courier New', 'Monaco', Courier, monospace;
+
+// Weights
+$light: 300;
+$regular: 400;
+$semi-bold: 600;
+$bold: 700;
+
+// Base font
+$base-font-family: $sans-serif;
+$base-font-color: $black;
+$base-font-size: 16px;
+
+// Headings
+$heading-font-family: $sans-serif;
+$heading-font-color: $black;
+
+// Links
+$link: $purple;
+
+// Forms
+$button-color: $brand-color;
+
+// Spacing, Margin, Padding
+$spacing: 1.5em;

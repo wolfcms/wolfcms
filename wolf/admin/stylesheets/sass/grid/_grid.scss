@@ -1,0 +1,57 @@
+/**
+ * Responsable Grid System (Super tiny huh!?)
+ *
+ * @author Abban Dunne http://abandon.ie
+ * @author James Wilson http://jimmynotjim.com
+ * @version 2.1.0
+ */
+
+//@import "mixins/clearfix.scss";
+
+// Set up some default variables
+//$columns: 12 !default;
+//$gutter_width: 24px !default;
+//$max_width: 1024px !default;
+//$site_align: center !default;
+
+// Utility variable — you should never need to modify this
+$gridsystem_width: $columns * 1px;
+$padding: $gutter_width * 0.5;
+
+// Our row container
+@mixin row($max_width:$max_width, $padding:0)
+{
+    @include clearfix();
+    //@include border-box();
+
+    display:block;
+    max-width: $max_width;
+    padding:0 $padding;
+
+    @if $site_align == left { margin: 0; }
+    @else if $site_align == right { margin: 0 0 0 auto; }
+    @else { margin: 0 auto; }
+}
+
+// Our column container
+@mixin column($x, $padding:$padding, $columns:$columns)
+{
+    //@include border-box();
+
+    display: inline;
+    float: left;
+    width: 100% * ($x / $columns);
+    padding: 0 $padding;
+}
+
+// Push adds left padding
+@mixin push($offset:1, $columns:$columns)
+{
+    margin-left: 100% * ($offset / $columns);
+}
+
+// Pull adds right padding
+@mixin pull($offset:1, $columns:$columns)
+{
+    margin-right: 100% * ($offset / $columns);
+}
