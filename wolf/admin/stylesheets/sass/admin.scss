@@ -21,6 +21,12 @@
 
 @import "components/tables";
 
+// Import header with navigation and gravatar
+@import "components/header";
+
+// Flash messages
+@import "components/flash-message";
+
 /*
     ORIGINAL ADMIN STYLESHEET FILE
 
@@ -34,92 +40,30 @@
 .handle_reorder { display: none; cursor: move; }
 .handle_copy { display: none; cursor: move; }
 
-/* Header ----------------------------------------------------------------- */
-#header {
-  background-color: #483E37;
-  color: #fff;
-  width: 100%;
-  padding-top: 1px;
-}
-#header a {
-  color: #fff;
-  font-weight: bold;
-  text-decoration: none;
-}
-#header a:hover,
-#header a:visited:hover {
-  text-decoration: underline;
-}
-#header #site-title {
-  font-size: 150%;
-  font-weight: bold;
-  margin-top: 19px;
-  margin-left: 20px;
-  padding-bottom: 20px;
-  text-shadow: -1px 2px 3px #111;
-}
 
-/* Navigation ------------------------------------------------------------- */
-#mainTabs {
-  margin: 0 17px 0 20px;
-  height: 28px;
-}
-#mainTabs ul {}
-#mainTabs li {
-  display: inline;
-  list-style: none;
-  border: none;
-}
-#mainTabs a:link,
-#mainTabs a:visited {
-  float: left;
-  margin-right: 3px;
-  padding: 6px 8px 5px;
-  font-size: 14px;
-  line-height: 16px;
-  font-weight: normal;
-  text-decoration: none !important;
-  color: #222;
-  background-color: #eee;
-  border-bottom: 2px solid #ccc;
 
-  /* Border-radius not implemented yet */
-  border-radius: 6px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
-  
-  -moz-border-radius: 6px;
-  -moz-border-radius-bottomright: 0px;
-  -moz-border-radius-bottomleft: 0px;
-  -webkit-border-radius: 6px;
-  -webkit-border-bottom-right-radius: 0px;
-  -webkit-border-bottom-left-radius: 0px;
-}
-#mainTabs a:hover {
-  color: #000;
-  background-color: #999;
-  border-color: #777;
-}
 
-#mainTabs a:link.current,
-#mainTabs a:visited.current {
-  color: #123;
-  background: #6ad;
-  border-color: #6ad;
-  font-weight: bold;
-  text-decoration: none;
-}
-#mainTabs .right {
-  float: right;
-}
-
-/* Main ------------------------------------------------------------------- */
+/* Main ----------------------------------------- */
 #main {
-  width: 100%;
-  overflow:hidden;
+  @include row();
+  //background-color: $grey;
+  //overflow:hidden;
 }
 
-/* Content ---------------------------------------------------------------- */
+/* Content -------------------------------------- */
+#content-wrapper {
+    @include column(9);
+}
+
+#content {
+    padding: 1em;
+
+    h1 {
+        font-size: 100%;
+    }
+}
+
+/*
 #content-wrapper {
   float: left;
   margin: 1%;
@@ -128,7 +72,7 @@
   background-color: #fff;
   border-bottom: 2px solid #76A83A;
 
-  /* Border-radius implemented. */
+   Border-radius implemented. 
   border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -137,19 +81,19 @@
 #content {
   padding: 20px;
 
-  /* Border-radius - implemented. */
+  Border-radius - implemented.
   border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
 
-  /* Box-shadow - implemented. */
+  Box-shadow - implemented. 
   box-shadow: 5px 3px 4px #aaa;
   -moz-box-shadow: 5px 3px 4px #aaa;
   -webkit-box-shadow: 5px 3px 4px #aaa;
 }
 
 #content h1 {
-  /* Border-radius not implemented yet */
+   Border-radius not implemented yet 
   border-radius: 6px 6px 0px 0px;
   -moz-border-radius: 6px 6px 0px 0px;
   -webkit-border-radius: 6px;
@@ -161,17 +105,173 @@
     float: right;
     margin-top: 1em;
 }
+*/
+
+/* Sidebar -------------------------------------- */
+#sidebar-wrapper {
+  @include column(3);
+}
+
+#installation #content-wrapper,
+#body_setting_index #content-wrapper,
+#body_page_index #content-wrapper,
+#body_page_add #content-wrapper,
+#body_page_edit #content-wrapper,
+#body_snippet_add #content-wrapper,
+#body_snippet_edit #content-wrapper,
+#body_layout_add #content-wrapper,
+#body_layout_edit #content-wrapper,
+#body_user_add #content-wrapper,
+#body_user_edit #content-wrapper,
+#body_comment_edit #content-wrapper,
+#body_plugin_index #content-wrapper {
+  @include column(12);
+}
+
+#installation #sidebar-wrapper,
+#body_setting_index #sidebar-wrapper,
+#body_page_index #sidebar-wrapper,
+#body_page_add #sidebar-wrapper,
+#body_page_edit #sidebar-wrapper,
+#body_snippet_add #sidebar-wrapper,
+#body_snippet_edit #sidebar-wrapper,
+#body_layout_add #sidebar-wrapper,
+#body_layout_edit #sidebar-wrapper,
+#body_user_add #sidebar-wrapper,
+#body_user_edit #sidebar-wrapper,
+#body_comment_edit #sidebar-wrapper,
+#body_plugin_index #sidebar-wrapper {
+    display: none;
+}
+
+#sidebar {
+    border: 1px solid $grey;
+    margin: 56px 0 0 0;
+    font-size: .83em;
+
+    .box {
+        
+        padding: 2em 1em;
+    }
+
+}
+/*
+#sidebar h2 {
+  margin: 0;
+  padding: 0 0 5px 0;
+  font-size: 15px;
+  border-bottom: 1px solid #ddd;
+  text-shadow: -1px 2px 2px #ddd;
+}
+#sidebar .box {
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  background: #fff;
+  border-bottom: 2px solid #58b;
+
+   Border-radius not implemented yet
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  box-shadow: 5px 3px 4px #aaa;
+  -moz-box-shadow: 5px 3px 4px #aaa;
+  -webkit-box-shadow: 5px 3px 4px #aaa;
+}
+#sidebar p,
+#sidebar td,
+#sidebar th {
+  font-size: .83em;
+}
+#sidebar p.button {
+  margin: 0 0 10px;
+  padding: 10px 20px 0;
+  background: #59c;
+
+   Border-radius not implemented yet 
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  box-shadow: 5px 3px 4px #aaa;
+  -moz-box-shadow: 5px 3px 4px #aaa;
+  -webkit-box-shadow: 5px 3px 4px #aaa;
+}
+#sidebar p.button:hover {
+  box-shadow: 0px 0px 0px #aaa;
+  -moz-box-shadow: 0px 0px 0px #aaa;
+  -webkit-box-shadow: 0px 0px 0px #aaa;
+}
+
+#sidebar p.button img {
+  margin: -10px 10px 0 -20px;
+  padding: 6px 10px;
+  background: #9ce;
+
+   Border-radius not implemented yet 
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+#sidebar p.button a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+
+   Border-radius not implemented yet 
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+#sidebar p.button a:hover {
+  color: #123;
+}
+#sidebar .this {
+  color: #999;
+}
+#sidebar .optional {
+  color: #666;
+}
+*/
 
 /* Footer ----------------------------------------------------------------- */
 #footer {
-    clear: both;
+    @include row();
     font-size: 80%;
-    margin: 0em 1.5em;
+    margin: 2em 0;
+
+    .info {
+        @include column(6);
+    }
+
+    #site-links {
+        @include column(6);
+        text-align: right;
+    }
 }
+/*
 #footer .stats {
     margin-top: -0.5em;
     font-size: 90%;
 }
+
+#site-links {
+  color: #899;
+  font-size: 90%;
+  margin: 0;
+  
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+#site-links a,
+#site-links a:visited {
+  color: #6ad;
+  text-decoration: none;
+}
+#site-links a:hover,
+#site-links a:visited:hover {
+  text-decoration: underline;
+}
+*/
 
 /* Plugins tables */
 #plugins th, #plugins td {
@@ -262,179 +362,8 @@
   padding:  20px;
 }
 
-/* Sidebar ---------------------------------------------------------------- */
-#sidebar-wrapper {
-  float: left;
-  margin: 1% 0;
-  width: 27%;
-}
-
-#installation #content-wrapper,
-#body_setting_index #content-wrapper,
-#body_page_index #content-wrapper,
-#body_page_add #content-wrapper,
-#body_page_edit #content-wrapper,
-#body_snippet_add #content-wrapper,
-#body_snippet_edit #content-wrapper,
-#body_layout_add #content-wrapper,
-#body_layout_edit #content-wrapper,
-#body_user_add #content-wrapper,
-#body_user_edit #content-wrapper,
-#body_comment_edit #content-wrapper,
-#body_plugin_index #content-wrapper {
-  margin-right: 0;
-  width: 98%;
-}
-
-#installation #sidebar-wrapper,
-#body_setting_index #sidebar-wrapper,
-#body_page_index #sidebar-wrapper,
-#body_page_add #sidebar-wrapper,
-#body_page_edit #sidebar-wrapper,
-#body_snippet_add #sidebar-wrapper,
-#body_snippet_edit #sidebar-wrapper,
-#body_layout_add #sidebar-wrapper,
-#body_layout_edit #sidebar-wrapper,
-#body_user_add #sidebar-wrapper,
-#body_user_edit #sidebar-wrapper,
-#body_comment_edit #sidebar-wrapper,
-#body_plugin_index #sidebar-wrapper {
-    display: none;
-}
-
-#sidebar h2 {
-  margin: 0;
-  padding: 0 0 5px 0;
-  font-size: 15px;
-  border-bottom: 1px solid #ddd;
-  text-shadow: -1px 2px 2px #ddd;
-}
-#sidebar .box {
-  margin-bottom: 10px;
-  padding: 10px 20px;
-  background: #fff;
-  border-bottom: 2px solid #58b;
-
-  /* Border-radius not implemented yet */
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  box-shadow: 5px 3px 4px #aaa;
-  -moz-box-shadow: 5px 3px 4px #aaa;
-  -webkit-box-shadow: 5px 3px 4px #aaa;
-}
-#sidebar p,
-#sidebar td,
-#sidebar th {
-  font-size: .83em;
-}
-#sidebar p.button {
-  margin: 0 0 10px;
-  padding: 10px 20px 0;
-  background: #59c;
-
-  /* Border-radius not implemented yet */
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  box-shadow: 5px 3px 4px #aaa;
-  -moz-box-shadow: 5px 3px 4px #aaa;
-  -webkit-box-shadow: 5px 3px 4px #aaa;
-}
-#sidebar p.button:hover {
-  box-shadow: 0px 0px 0px #aaa;
-  -moz-box-shadow: 0px 0px 0px #aaa;
-  -webkit-box-shadow: 0px 0px 0px #aaa;
-}
-
-#sidebar p.button img {
-  margin: -10px 10px 0 -20px;
-  padding: 6px 10px;
-  background: #9ce;
-
-  /* Border-radius not implemented yet */
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-}
-#sidebar p.button a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-
-  /* Border-radius not implemented yet */
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-}
-#sidebar p.button a:hover {
-  color: #123;
-}
-#sidebar .this {
-  color: #999;
-}
-#sidebar .optional {
-  color: #666;
-}
 
 
-/* Site links top right --------------------------------------------------- */
-#site-links {
-  color: #899;
-  font-size: 90%;
-  margin: 0;
-  position: absolute;
-  right: 20px;
-  top: 20px;
-}
-#site-links a,
-#site-links a:visited {
-  color: #6ad;
-  text-decoration: none;
-}
-#site-links a:hover,
-#site-links a:visited:hover {
-  text-decoration: underline;
-}
-
-/* Messages --------------------------------------------------------------- */
-#info, #error, #success {
-/* css for fade positioning -- start */
-  position: absolute;
-  left: 10%;
-  width: 75%;
-  margin: 0 auto;
-  padding: 1em 1.5em 0.9em 1.5em;
-  text-align: center;
-  
-  /* Border-radius not implemented yet */
-  border-radius: 6px;
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
-  -moz-border-radius: 6px;
-  -moz-border-radius-topright: 0px;
-  -moz-border-radius-topleft: 0px;
-  -webkit-border-radius: 6px;
-  -webkit-border-top-right-radius: 0px;
-  -webkit-border-top-left-radius: 0px;
-
-  box-shadow: 5px 3px 4px #333;
-  -moz-box-shadow: 5px 3px 4px #333;
-  -webkit-box-shadow: 5px 3px 4px #333;
-}
-
-#info {
-  background: #EDFE86;
-  color: #000;
-}
-#error {
-  background: #a22;
-  color: #fff;
-}
-#success {
-  background: #cfc;
-  color: #000;
-}
 
 /* Index table, list ------------------------------------------------------ */
 .index-def {
