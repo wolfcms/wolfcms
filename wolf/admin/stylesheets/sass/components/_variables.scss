@@ -1,7 +1,7 @@
 // Grid stuff
 $gutter_width: 40px; // Your gutter width
 $columns: 12; // The amount of columns you want
-$max_width: 1080px; // Set a maximum width of the site
+$max_width: 100%; // Set a maximum width of the site
 $site_align: center !default;
 
 // WOLFCMS default colors
@@ -50,7 +50,7 @@ $heading-font-family: $sans-serif;
 $heading-font-color: $black;
 
 // Links
-$link: $purple;
+$link: $wolf-green;
 
 // Forms
 $button-color: $brand-color;
