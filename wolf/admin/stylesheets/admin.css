@@ -56,22 +56,22 @@ table {
 body {
   font-family: "Lucida Grande", "Bitstream Vera Sans", Helvetica, Verdana, Arial, sans-serif;
   font-size: 16px;
-  background: white;
-  color: #333333;
+  background: #fff;
+  color: #333;
   line-height: 1.5;
 }
 
 /*  Links
 ----------------------------- */
 a {
-  color: #8e44ad;
+  color: #76a83a;
   text-decoration: none;
   word-wrap: break-word;
   text-decoration: underline;
 }
 
 a:hover {
-  color: #333333;
+  color: #333;
   text-decoration: underline;
 }
 
@@ -126,7 +126,6 @@ p img.right {
 ----------------------------- */
 ul, ol, dl {
   margin-bottom: 1.5em;
-  margin-left: 20px;
 }
 
 ul ul,
@@ -170,7 +169,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   font-family: "Lucida Grande", "Bitstream Vera Sans", Helvetica, Verdana, Arial, sans-serif;
   margin-bottom: 1em;
-  color: #333333;
+  color: #333;
 }
 
 h1,
@@ -206,7 +205,7 @@ hr {
   margin: em(32) auto;
   border: 0;
   border-top: em(1) solid #e5e5e5;
-  border-bottom: 0 solid white;
+  border-bottom: 0 solid #fff;
 }
 
 /*  Bold */
@@ -240,12 +239,12 @@ sub {
 
 /*  Highlighting colors */
 ::selection {
-  color: white;
+  color: #fff;
   background: #2980b9;
 }
 
 ::-moz-selection {
-  color: white;
+  color: #fff;
   background: #2980b9;
 }
 
@@ -310,7 +309,7 @@ select {
   width: 100%;
   font: inherit;
   line-height: 1.5;
-  color: tint(#333333, 18%);
+  color: tint(#333, 18%);
   padding: 5px;
   border: 1px solid #e5e5e5;
   border-radius: 1px;
@@ -442,6 +441,178 @@ table tbody tr td {
   border: none;
 }
 
+/*	HEADER -------------------------------------- */
+#header {
+  background-color: #2e2924;
+  color: #fff;
+  padding-top: 1px;
+  *zoom: 1;
+  display: block;
+  max-width: 100%;
+  padding: 0 0;
+  margin: 0 auto;
+}
+#header:before, #header:after {
+  content: "";
+  display: table;
+}
+#header:after {
+  clear: both;
+}
+
+/*	SITE TITLE ---------------------------------- */
+#site-title {
+  display: inline;
+  float: left;
+  width: 16.66667%;
+  padding: 0 20px;
+  margin: 14px 0 0 0;
+}
+#site-title a {
+  font-size: 120%;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1;
+}
+#site-title a:hover {
+  text-decoration: underline;
+}
+
+/*	NAVIGATION ---------------------------------- */
+#mainTabs {
+  display: inline;
+  float: left;
+  width: 66.66667%;
+  padding: 0 20px;
+}
+#mainTabs ul {
+  margin: 13px 0;
+}
+#mainTabs li {
+  display: inline;
+}
+#mainTabs li a, #mainTabs li a:visited {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  padding-right: 10px;
+}
+#mainTabs .right {
+  float: right;
+}
+
+/*	GRAVATAR ------------------------------------ */
+#gravatar {
+  display: inline;
+  float: left;
+  width: 16.66667%;
+  padding: 0 20px;
+  font-size: 90%;
+}
+#gravatar .gravatar {
+  height: 32px;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+}
+#gravatar .gravatar span {
+  padding: 0 0 0 5px;
+}
+
+/*
+#mainTabs {
+  margin: 0 17px 0 20px;
+  height: 28px;
+}
+#mainTabs ul {}
+#mainTabs li {
+  display: inline;
+  list-style: none;
+  border: none;
+}
+#mainTabs a:link,
+#mainTabs a:visited {
+  float: left;
+  margin-right: 3px;
+  padding: 6px 8px 5px;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: normal;
+  text-decoration: none !important;
+  color: #222;
+  background-color: #eee;
+  border-bottom: 2px solid #ccc;
+
+
+  border-radius: 6px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  
+  -moz-border-radius: 6px;
+  -moz-border-radius-bottomright: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-radius: 6px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+}
+#mainTabs a:hover {
+  color: #000;
+  background-color: #999;
+  border-color: #777;
+}
+
+#mainTabs a:link.current,
+#mainTabs a:visited.current {
+  color: #123;
+  background: #6ad;
+  border-color: #6ad;
+  font-weight: bold;
+  text-decoration: none;
+}
+#mainTabs .right {
+  float: right;
+}
+*/
+/* Messages ------------------------------------- */
+#info, #error, #success {
+  /* css for fade positioning -- start */
+  position: absolute;
+  left: 10%;
+  width: 75%;
+  margin: 0 auto;
+  padding: 1em 1.5em 0.9em 1.5em;
+  text-align: center;
+  /* Border-radius not implemented yet */
+  border-radius: 6px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  -moz-border-radius: 6px;
+  -moz-border-radius-topright: 0px;
+  -moz-border-radius-topleft: 0px;
+  -webkit-border-radius: 6px;
+  -webkit-border-top-right-radius: 0px;
+  -webkit-border-top-left-radius: 0px;
+  box-shadow: 5px 3px 4px #333;
+  -moz-box-shadow: 5px 3px 4px #333;
+  -webkit-box-shadow: 5px 3px 4px #333;
+}
+
+#info {
+  background: #EDFE86;
+  color: #000;
+}
+
+#error {
+  background: #a22;
+  color: #fff;
+}
+
+#success {
+  background: #cfc;
+  color: #000;
+}
+
 /*
     ORIGINAL ADMIN STYLESHEET FILE
 
@@ -474,96 +645,38 @@ table tbody tr td {
   cursor: move;
 }
 
-/* Header ----------------------------------------------------------------- */
-#header {
-  background-color: #483E37;
-  color: #fff;
-  width: 100%;
-  padding-top: 1px;
-}
-
-#header a {
-  color: #fff;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-#header a:hover,
-#header a:visited:hover {
-  text-decoration: underline;
-}
-
-#header #site-title {
-  font-size: 150%;
-  font-weight: bold;
-  margin-top: 19px;
-  margin-left: 20px;
-  padding-bottom: 20px;
-  text-shadow: -1px 2px 3px #111;
-}
-
-/* Navigation ------------------------------------------------------------- */
-#mainTabs {
-  margin: 0 17px 0 20px;
-  height: 28px;
-}
-
-#mainTabs li {
-  display: inline;
-  list-style: none;
-  border: none;
-}
-
-#mainTabs a:link,
-#mainTabs a:visited {
-  float: left;
-  margin-right: 3px;
-  padding: 6px 8px 5px;
-  font-size: 14px;
-  line-height: 16px;
-  font-weight: normal;
-  text-decoration: none !important;
-  color: #222;
-  background-color: #eee;
-  border-bottom: 2px solid #ccc;
-  /* Border-radius not implemented yet */
-  border-radius: 6px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
-  -moz-border-radius: 6px;
-  -moz-border-radius-bottomright: 0px;
-  -moz-border-radius-bottomleft: 0px;
-  -webkit-border-radius: 6px;
-  -webkit-border-bottom-right-radius: 0px;
-  -webkit-border-bottom-left-radius: 0px;
-}
-
-#mainTabs a:hover {
-  color: #000;
-  background-color: #999;
-  border-color: #777;
-}
-
-#mainTabs a:link.current,
-#mainTabs a:visited.current {
-  color: #123;
-  background: #6ad;
-  border-color: #6ad;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-#mainTabs .right {
-  float: right;
-}
-
-/* Main ------------------------------------------------------------------- */
+/* Main ----------------------------------------- */
 #main {
-  width: 100%;
-  overflow: hidden;
+  *zoom: 1;
+  display: block;
+  max-width: 100%;
+  padding: 0 0;
+  margin: 0 auto;
+}
+#main:before, #main:after {
+  content: "";
+  display: table;
+}
+#main:after {
+  clear: both;
 }
 
-/* Content ---------------------------------------------------------------- */
+/* Content -------------------------------------- */
+#content-wrapper {
+  display: inline;
+  float: left;
+  width: 75%;
+  padding: 0 20px;
+}
+
+#content {
+  padding: 1em;
+}
+#content h1 {
+  font-size: 100%;
+}
+
+/*
 #content-wrapper {
   float: left;
   margin: 1%;
@@ -571,7 +684,8 @@ table tbody tr td {
   font-size: 95%;
   background-color: #fff;
   border-bottom: 2px solid #76A83A;
-  /* Border-radius implemented. */
+
+   Border-radius implemented. 
   border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -579,18 +693,20 @@ table tbody tr td {
 
 #content {
   padding: 20px;
-  /* Border-radius - implemented. */
+
+  Border-radius - implemented.
   border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
-  /* Box-shadow - implemented. */
+
+  Box-shadow - implemented. 
   box-shadow: 5px 3px 4px #aaa;
   -moz-box-shadow: 5px 3px 4px #aaa;
   -webkit-box-shadow: 5px 3px 4px #aaa;
 }
 
 #content h1 {
-  /* Border-radius not implemented yet */
+   Border-radius not implemented yet 
   border-radius: 6px 6px 0px 0px;
   -moz-border-radius: 6px 6px 0px 0px;
   -webkit-border-radius: 6px;
@@ -599,22 +715,194 @@ table tbody tr td {
 }
 
 #content .logo {
-  float: right;
-  margin-top: 1em;
+    float: right;
+    margin-top: 1em;
+}
+*/
+/* Sidebar -------------------------------------- */
+#sidebar-wrapper {
+  display: inline;
+  float: left;
+  width: 25%;
+  padding: 0 20px;
 }
 
+#installation #content-wrapper,
+#body_setting_index #content-wrapper,
+#body_page_index #content-wrapper,
+#body_page_add #content-wrapper,
+#body_page_edit #content-wrapper,
+#body_snippet_add #content-wrapper,
+#body_snippet_edit #content-wrapper,
+#body_layout_add #content-wrapper,
+#body_layout_edit #content-wrapper,
+#body_user_add #content-wrapper,
+#body_user_edit #content-wrapper,
+#body_comment_edit #content-wrapper,
+#body_plugin_index #content-wrapper {
+  display: inline;
+  float: left;
+  width: 100%;
+  padding: 0 20px;
+}
+
+#installation #sidebar-wrapper,
+#body_setting_index #sidebar-wrapper,
+#body_page_index #sidebar-wrapper,
+#body_page_add #sidebar-wrapper,
+#body_page_edit #sidebar-wrapper,
+#body_snippet_add #sidebar-wrapper,
+#body_snippet_edit #sidebar-wrapper,
+#body_layout_add #sidebar-wrapper,
+#body_layout_edit #sidebar-wrapper,
+#body_user_add #sidebar-wrapper,
+#body_user_edit #sidebar-wrapper,
+#body_comment_edit #sidebar-wrapper,
+#body_plugin_index #sidebar-wrapper {
+  display: none;
+}
+
+#sidebar {
+  border: 1px solid #e5e5e5;
+  margin: 56px 0 0 0;
+  font-size: .83em;
+}
+#sidebar .box {
+  padding: 2em 1em;
+}
+
+/*
+#sidebar h2 {
+  margin: 0;
+  padding: 0 0 5px 0;
+  font-size: 15px;
+  border-bottom: 1px solid #ddd;
+  text-shadow: -1px 2px 2px #ddd;
+}
+#sidebar .box {
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  background: #fff;
+  border-bottom: 2px solid #58b;
+
+   Border-radius not implemented yet
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  box-shadow: 5px 3px 4px #aaa;
+  -moz-box-shadow: 5px 3px 4px #aaa;
+  -webkit-box-shadow: 5px 3px 4px #aaa;
+}
+#sidebar p,
+#sidebar td,
+#sidebar th {
+  font-size: .83em;
+}
+#sidebar p.button {
+  margin: 0 0 10px;
+  padding: 10px 20px 0;
+  background: #59c;
+
+   Border-radius not implemented yet 
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  box-shadow: 5px 3px 4px #aaa;
+  -moz-box-shadow: 5px 3px 4px #aaa;
+  -webkit-box-shadow: 5px 3px 4px #aaa;
+}
+#sidebar p.button:hover {
+  box-shadow: 0px 0px 0px #aaa;
+  -moz-box-shadow: 0px 0px 0px #aaa;
+  -webkit-box-shadow: 0px 0px 0px #aaa;
+}
+
+#sidebar p.button img {
+  margin: -10px 10px 0 -20px;
+  padding: 6px 10px;
+  background: #9ce;
+
+   Border-radius not implemented yet 
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+#sidebar p.button a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+
+   Border-radius not implemented yet 
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+#sidebar p.button a:hover {
+  color: #123;
+}
+#sidebar .this {
+  color: #999;
+}
+#sidebar .optional {
+  color: #666;
+}
+*/
 /* Footer ----------------------------------------------------------------- */
 #footer {
-  clear: both;
+  *zoom: 1;
+  display: block;
+  max-width: 100%;
+  padding: 0 0;
+  margin: 0 auto;
   font-size: 80%;
-  margin: 0em 1.5em;
+  margin: 2em 0;
+}
+#footer:before, #footer:after {
+  content: "";
+  display: table;
+}
+#footer:after {
+  clear: both;
+}
+#footer .info {
+  display: inline;
+  float: left;
+  width: 50%;
+  padding: 0 20px;
+}
+#footer #site-links {
+  display: inline;
+  float: left;
+  width: 50%;
+  padding: 0 20px;
+  text-align: right;
 }
 
+/*
 #footer .stats {
-  margin-top: -0.5em;
-  font-size: 90%;
+    margin-top: -0.5em;
+    font-size: 90%;
 }
 
+#site-links {
+  color: #899;
+  font-size: 90%;
+  margin: 0;
+  
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+#site-links a,
+#site-links a:visited {
+  color: #6ad;
+  text-decoration: none;
+}
+#site-links a:hover,
+#site-links a:visited:hover {
+  text-decoration: underline;
+}
+*/
 /* Plugins tables */
 #plugins th, #plugins td {
   text-align: center;
@@ -715,185 +1003,6 @@ table tbody tr td {
 
 .pages .page {
   padding: 20px;
-}
-
-/* Sidebar ---------------------------------------------------------------- */
-#sidebar-wrapper {
-  float: left;
-  margin: 1% 0;
-  width: 27%;
-}
-
-#installation #content-wrapper,
-#body_setting_index #content-wrapper,
-#body_page_index #content-wrapper,
-#body_page_add #content-wrapper,
-#body_page_edit #content-wrapper,
-#body_snippet_add #content-wrapper,
-#body_snippet_edit #content-wrapper,
-#body_layout_add #content-wrapper,
-#body_layout_edit #content-wrapper,
-#body_user_add #content-wrapper,
-#body_user_edit #content-wrapper,
-#body_comment_edit #content-wrapper,
-#body_plugin_index #content-wrapper {
-  margin-right: 0;
-  width: 98%;
-}
-
-#installation #sidebar-wrapper,
-#body_setting_index #sidebar-wrapper,
-#body_page_index #sidebar-wrapper,
-#body_page_add #sidebar-wrapper,
-#body_page_edit #sidebar-wrapper,
-#body_snippet_add #sidebar-wrapper,
-#body_snippet_edit #sidebar-wrapper,
-#body_layout_add #sidebar-wrapper,
-#body_layout_edit #sidebar-wrapper,
-#body_user_add #sidebar-wrapper,
-#body_user_edit #sidebar-wrapper,
-#body_comment_edit #sidebar-wrapper,
-#body_plugin_index #sidebar-wrapper {
-  display: none;
-}
-
-#sidebar h2 {
-  margin: 0;
-  padding: 0 0 5px 0;
-  font-size: 15px;
-  border-bottom: 1px solid #ddd;
-  text-shadow: -1px 2px 2px #ddd;
-}
-
-#sidebar .box {
-  margin-bottom: 10px;
-  padding: 10px 20px;
-  background: #fff;
-  border-bottom: 2px solid #58b;
-  /* Border-radius not implemented yet */
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  box-shadow: 5px 3px 4px #aaa;
-  -moz-box-shadow: 5px 3px 4px #aaa;
-  -webkit-box-shadow: 5px 3px 4px #aaa;
-}
-
-#sidebar p,
-#sidebar td,
-#sidebar th {
-  font-size: .83em;
-}
-
-#sidebar p.button {
-  margin: 0 0 10px;
-  padding: 10px 20px 0;
-  background: #59c;
-  /* Border-radius not implemented yet */
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  box-shadow: 5px 3px 4px #aaa;
-  -moz-box-shadow: 5px 3px 4px #aaa;
-  -webkit-box-shadow: 5px 3px 4px #aaa;
-}
-
-#sidebar p.button:hover {
-  box-shadow: 0px 0px 0px #aaa;
-  -moz-box-shadow: 0px 0px 0px #aaa;
-  -webkit-box-shadow: 0px 0px 0px #aaa;
-}
-
-#sidebar p.button img {
-  margin: -10px 10px 0 -20px;
-  padding: 6px 10px;
-  background: #9ce;
-  /* Border-radius not implemented yet */
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-}
-
-#sidebar p.button a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  /* Border-radius not implemented yet */
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-}
-
-#sidebar p.button a:hover {
-  color: #123;
-}
-
-#sidebar .this {
-  color: #999;
-}
-
-#sidebar .optional {
-  color: #666;
-}
-
-/* Site links top right --------------------------------------------------- */
-#site-links {
-  color: #899;
-  font-size: 90%;
-  margin: 0;
-  position: absolute;
-  right: 20px;
-  top: 20px;
-}
-
-#site-links a,
-#site-links a:visited {
-  color: #6ad;
-  text-decoration: none;
-}
-
-#site-links a:hover,
-#site-links a:visited:hover {
-  text-decoration: underline;
-}
-
-/* Messages --------------------------------------------------------------- */
-#info, #error, #success {
-  /* css for fade positioning -- start */
-  position: absolute;
-  left: 10%;
-  width: 75%;
-  margin: 0 auto;
-  padding: 1em 1.5em 0.9em 1.5em;
-  text-align: center;
-  /* Border-radius not implemented yet */
-  border-radius: 6px;
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
-  -moz-border-radius: 6px;
-  -moz-border-radius-topright: 0px;
-  -moz-border-radius-topleft: 0px;
-  -webkit-border-radius: 6px;
-  -webkit-border-top-right-radius: 0px;
-  -webkit-border-top-left-radius: 0px;
-  box-shadow: 5px 3px 4px #333;
-  -moz-box-shadow: 5px 3px 4px #333;
-  -webkit-box-shadow: 5px 3px 4px #333;
-}
-
-#info {
-  background: #EDFE86;
-  color: #000;
-}
-
-#error {
-  background: #a22;
-  color: #fff;
-}
-
-#success {
-  background: #cfc;
-  color: #000;
 }
 
 /* Index table, list ------------------------------------------------------ */
