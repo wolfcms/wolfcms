@@ -7,7 +7,7 @@ body {
     background: $background-color;
     color: $base-font-color;
     //margin: 0;
-    line-height: 1.5;
+    line-height: $base-line-height;
 }
 
 /*  Links
