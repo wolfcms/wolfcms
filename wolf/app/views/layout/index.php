@@ -28,10 +28,15 @@
 <ul id="layouts" class="index">
 <?php foreach($layouts as $layout) { ?>
   <li id="layout_<?php echo $layout->id; ?>" class="layout node <?php echo odd_even(); ?>">
-    <img align="middle" alt="layout-icon" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/layout.png" title="" />
-    <a href="<?php echo get_url('layout/edit/'.$layout->id); ?>"><?php echo $layout->name; ?></a>
-    <img class="handle" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
-    <div class="remove"><a href="<?php echo get_url('layout/delete/'.$layout->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $layout->name; ?>?');"><img alt="<?php echo __('delete layout icon'); ?>" title="<?php echo __('Delete layout'); ?>" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/icon-remove.gif" /></a></div>
+    <div class="title">
+        <i class="fa fa-file-o"></i>
+        <a href="<?php echo get_url('layout/edit/'.$layout->id); ?>"><?php echo $layout->name; ?></a>
+        <img class="handle" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
+    </div>
+    <div class="delete">
+        <a href="<?php echo get_url('layout/delete/'.$layout->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $layout->name; ?>?');" title="<?php echo __('Delete layout'); ?>"><i class="fa fa-minus-square"></i></a>    
+    </div>
+    
   </li>
 <?php } ?>
 </ul>
