@@ -19,7 +19,7 @@
 if (Dispatcher::getAction() == 'index'): ?>
 
 <?php if (AuthUser::hasPermission('snippet_add')): ?>
-<p class="button"><a href="<?php echo get_url('snippet/add'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/snippet.png" align="middle" alt="snippet icon" /> <?php echo __('New Snippet'); ?></a></p>
+<a class="button wide large" href="<?php echo get_url('snippet/add'); ?>"><i class="fa fa-plus"></i> <?php echo __('New Snippet'); ?></a>
 <?php endif; ?>
 
 <div class="box">

@@ -56,8 +56,8 @@
     </div>
     <p class="buttons">
         <?php if (($action=='edit' && AuthUser::hasPermission('snippet_edit')) || ($action=='add' && AuthUser::hasPermission('snippet_add'))): ?>
-            <input class="button" name="commit" type="submit" accesskey="s" value="<?php echo __('Save'); ?>" />
-            <input class="button" name="continue" type="submit" accesskey="e" value="<?php echo __('Save and Continue Editing'); ?>" />
+            <button name="commit" type="submit" accesskey="s" class="button"><?php echo __('Save'); ?></button>
+            <button name="continue" type="submit" accesskey="e" class="button"><?php echo __('Save and Continue Editing'); ?></button>
             <?php echo __('or'); ?> 
         <?php else: ?>
             <?php echo ($action=='add') ? __('You do not have permission to add snippets!') : __('You do not have permission to edit snippets!'); ?> 
