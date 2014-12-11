@@ -1,0 +1,52 @@
+/*	SITEMAP DEF --------------------------------- */
+#site-map-def {
+    font-size: 90%;
+    @include row();
+    border-bottom: 1px solid $grey;
+
+    .page {
+    	@include column(8);
+    }
+    .page-layout {
+    	@include column(1);
+    }
+    .status {
+    	@include column(1);
+    }
+    .view {
+    	@include column(1);
+    }
+    .modify {
+    	@include column(1);
+    }
+
+    // snippet
+    .snippet, .layout {
+    	@include column(11);
+    }
+}
+
+.index {
+	
+
+	li.node {
+		@include row();
+		padding: 5px 0;
+		border-bottom: 1px solid $grey;
+
+		.title {
+			@include column(11);
+		}
+
+		.delete {
+			@include column(1);
+			text-align: center;
+		}
+
+		a {
+			color: $wolf-brown;
+			text-decoration: none;
+		}
+	}
+}
+
