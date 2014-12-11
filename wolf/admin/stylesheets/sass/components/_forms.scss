@@ -67,7 +67,7 @@ select:focus {
 input[type="submit"],
 button {
     border: none;
-    background-color: $button-color;
+    background-color: $brand-color;
     color: white;
     padding: 8px 16px;
     cursor: pointer;
@@ -76,7 +76,7 @@ button {
 
 input[type="submit"]:hover,
 button:hover {
-    background-color: darken($button-color, 10);
+    background-color: darken($brand-color, 10);
 }
 
 .input-inline {
