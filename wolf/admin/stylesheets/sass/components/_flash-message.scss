@@ -1,8 +1,33 @@
 /* Messages ------------------------------------- */
 
+.message {
+  position: absolute;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1em 0;
+}
+
+#info {
+  @extend .message;
+  background: $info;
+}
+
+#success {
+  @extend .message;
+  background: $success;
+}
+
+#error {
+  @extend .message;
+  background: $error;
+  color: $white;
+}
+
+/*
 #info, #error, #success {
 /* css for fade positioning -- start */
-  position: absolute;
+  /*position: absolute;
   left: 10%;
   width: 75%;
   margin: 0 auto;
@@ -10,7 +35,7 @@
   text-align: center;
   
   /* Border-radius not implemented yet */
-  border-radius: 6px;
+  /*border-radius: 6px;
   border-top-right-radius: 0px;
   border-top-left-radius: 0px;
   -moz-border-radius: 6px;
@@ -37,3 +62,5 @@
   background: #cfc;
   color: #000;
 }
+
+*/
