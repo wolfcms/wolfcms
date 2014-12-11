@@ -9,7 +9,7 @@ $wolf-brown: #2e2924; // new darker brown
 $wolf-green: #76a83a; // new, darker green
 $wolf-grey: #ecf0f1; // light gray
 
-$sucess: #76a83a; // $wolf-green
+$success: #76a83a; // $wolf-green
 $info: #2980b9; // blue
 $error: #c0392b; // red
 
@@ -40,10 +40,14 @@ $regular: 400;
 $semi-bold: 600;
 $bold: 700;
 
-// Base font
+// Base font settings
 $base-font-family: $sans-serif;
 $base-font-color: $black;
-$base-font-size: 16px;
+$base-font-size: 14px;
+$base-line-height: 1.4;
+
+$font-size-large: 18px;
+$font-size-small: 12px;
 
 // Headings
 $heading-font-family: $sans-serif;
@@ -52,8 +56,16 @@ $heading-font-color: $black;
 // Links
 $link: $wolf-green;
 
-// Forms
-$button-color: $brand-color;
+
+// Line heights
+$line-height-large: 1.8;
+$line-height-small: 1.2;
+
+// Border radius
+$border-radius: 3px;
+$border-radius-large: 5px;
+$border-radius-small: 2px;
+
 
 // Spacing, Margin, Padding
 $spacing: 1.5em;
