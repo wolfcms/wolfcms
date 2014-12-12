@@ -25,6 +25,8 @@
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Font awesome CDN -->
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
         <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/stylesheets/admin.css" media="screen" rel="stylesheet" type="text/css">
         <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/login.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
@@ -50,28 +52,30 @@
         </script>
     </head>
     <body>
-        <div id="dialog">
-            <h1><?php echo __('Forgot password'); ?></h1>
-            <?php if (Flash::get('error') !== null): ?>
-            <div id="error" class="message" style="display: none;"><?php echo Flash::get('error'); ?></div>
-            <?php endif; ?>
-            <?php if (Flash::get('success') !== null): ?>
-            <div id="success" class="message" style="display: none"><?php echo Flash::get('success'); ?></div>
-            <?php endif; ?>
-            <?php if (Flash::get('info') !== null): ?>
-            <div id="info" class="message" style="display: none"><?php echo Flash::get('info'); ?></div>
-            <?php endif; ?>
-            <form action="<?php echo get_url('login', 'forgot'); ?>" method="post">
-                <div>
-                    <label for="forgot-email"><?php echo __('Email address'); ?>:</label>
-                    <input class="long" id="forgot-email" type="text" name="forgot[email]" value="<?php echo $email; ?>" />
+        <div class="login">
+            <h1 class="admin-title"><?php echo Setting::get('admin_title'); ?></h1>
+                <div id="dialog">
+                    <h2><?php echo __('Forgot password'); ?><span class="login-link"><a href="<?php echo get_url('login'); ?>"><?php echo __('Login'); ?></a></span></h2>
+                    <?php if (Flash::get('error') !== null): ?>
+                        <div id="error" class="message" style="display: none;"><?php echo Flash::get('error'); ?></div>
+                    <?php endif; ?>
+                    <?php if (Flash::get('success') !== null): ?>
+                        <div id="success" class="message" style="display: none"><?php echo Flash::get('success'); ?></div>
+                    <?php endif; ?>
+                    <?php if (Flash::get('info') !== null): ?>
+                        <div id="info" class="message" style="display: none"><?php echo Flash::get('info'); ?></div>
+                    <?php endif; ?>
+                    <form action="<?php echo get_url('login', 'forgot'); ?>" method="post">
+                        <div>
+                            <label for="forgot-email"><?php echo __('Email address'); ?>:</label>
+                            <input class="long" id="forgot-email" type="text" name="forgot[email]" value="<?php echo $email; ?>" />
+                        </div>
+                        <div id="forgot-submit">
+                            <button class="button wide medium" type="submit" accesskey="s"><i class="fa fa-envelope"></i> <?php echo __('Send password'); ?></button>
+                        </div>
+                    </form>
                 </div>
-                <div id="forgot-submit">
-                    <input class="submit" type="submit" accesskey="s" value="<?php echo __('Send password'); ?>" />
-                    <span>(<a href="<?php echo get_url('login'); ?>"><?php echo __('Login'); ?></a>)</span>
-                </div>
-            </form>
+                <p><?php echo __('website:').' <a href="'.URL_PUBLIC.'">'.Setting::get('admin_title').'</a>'; ?></p>
         </div>
-        <p><?php echo __('website:').' <a href="'.URL_PUBLIC.'">'.Setting::get('admin_title').'</a>'; ?></p>
     </body>
 </html>
