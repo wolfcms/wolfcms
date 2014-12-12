@@ -1645,6 +1645,183 @@ table.fieldset .error-with-field small {
   border-radius: 5px;
 }
 
+.medium {
+  padding: .7em 1.4em;
+  font-size: 15px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
 .wide {
   width: 100%;
 }
+
+/*
+ * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
+ * Copyright (C) 2009-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
+ * Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
+ *
+ * This file is part of Wolf CMS. Wolf CMS is licensed under the GNU GPLv3 license.
+ * Please see license.txt for the full license text.
+ */
+/*
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 12px verdana, arial, helvetica, sans-serif;
+  color: #fff;
+  background-color: #6ad;
+  text-align: center;
+  line-height: 150%;
+}
+
+a {
+  color: #147;
+  font-weight: bolder;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  margin: -10px -10px 5px;
+  padding: 10px 10px 5px;
+  background: #123;
+  color: #fff;
+  font-size: 20px;
+  border-bottom: 3px solid #123;
+}
+
+p {
+  margin: 8px 0;
+}
+*/
+/* Form ------------------------------------------------------------------- */
+/*
+label {
+  margin: 3px 0;
+  font-size: 90%;
+  font-weight: bolder;
+  display: block;
+}
+
+label.checkbox {
+  font-weight: normal;
+  display: inline;
+}
+
+input {
+  border: 1px solid #ccc;
+  padding: 3px;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 11px;
+  background: white;
+  color: black;
+}
+
+input:hover {
+  border: 1px solid #6ad;
+}
+
+input.medium { width: 150px; }
+
+input.checkbox {
+  border: 0;
+  width: auto;
+}
+
+input.submit {
+  margin-top: 10px;
+}
+*/
+/* Construction ----------------------------------------------------------- */
+.login {
+  margin: 10% auto;
+  width: 350px;
+  text-align: center;
+}
+
+#dialog {
+  background: #fff;
+  color: #222;
+  border: 1px solid #e5e5e5;
+  text-align: left;
+  border-radius: 3px;
+}
+#dialog h2 {
+  position: relative;
+  margin: 1em 1em 0 1em;
+  margin-bottom: 0;
+}
+#dialog h2 span.forgot-password-link, #dialog h2 span.login-link {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  font-size: 14px;
+}
+#dialog form {
+  padding: 2em;
+}
+#dialog form input {
+  margin-bottom: 1em;
+}
+#dialog form button {
+  margin-bottom: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Login dialog ----------------------------------------------------------- */
+/*
+#login-username-div, #login-password-div {
+  padding-top: 1px;
+}
+
+#login-username-div {
+  float: left;
+  width: 170px;
+}
+
+* html #login-username-div {
+  margin-top: 1px;
+}
+
+#login-password-div {
+  margin-left: 170px;
+}
+
+#login-submit span, #forgot-submit span {
+  padding-left: 8px;
+  font-size: 11px;
+}
+
+* html #login-submit span, * html #forgot-submit span {
+  position: relative;
+  top: -4px;
+}
+
+#forgot-email {
+    width: 325px;
+}
+*/
+/* Messages --------------------------------------------------------------- */
+/*#error, #success {
+  margin: -5px -10px 0;
+  padding: 10px 20px;
+  text-align: left;
+}
+#error {
+  background: #a22;
+  color: #fff;
+}
+#success {
+  background: #cfc;
+  color: #051;
+}*/
