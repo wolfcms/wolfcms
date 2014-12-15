@@ -105,7 +105,16 @@ select {
     padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
     border-radius: 4px;
     box-shadow: none;
-    background: #fff; 
+    background: #fff;
+}
+
+/* Default width on all elements except select (dropdown) */
+input[type="email"],
+input[type="search"],
+input[type="text"],
+input[type="password"],
+textarea {
+    width: 100%;
 }
 
 /* Removes awkard default styles on some inputs */
@@ -119,7 +128,7 @@ textarea {
 }
 
 textarea {
-    min-height: 12em;
+    min-height: 20em;
     padding-top: 6px;
     padding-bottom: 6px; 
 }
