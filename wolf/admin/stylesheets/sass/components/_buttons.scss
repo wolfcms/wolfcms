@@ -16,7 +16,7 @@ input[type="button"] {
     letter-spacing: .1em;
     text-transform: uppercase;
     text-decoration: none;
-    white-space: nowrap;
+    //white-space: nowrap;
 
     transition: background 0.1s ease-in-out;
 	-webkit-transition: background 0.1s ease-in-out;
@@ -58,4 +58,8 @@ input[type="button"] {
 
 .wide {
     	width: 100%;
+}
+
+.buttons {
+	margin-top: 1.5em;
 }
