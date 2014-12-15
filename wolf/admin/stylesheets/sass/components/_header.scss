@@ -1,10 +1,12 @@
 /*	HEADER -------------------------------------- */
-
-#header {
+header {
 	background-color: $wolf-brown;
 	color: $white;
-	padding-top: 1px;
+	//padding-top: 1px;
 	border-bottom: 1px solid $wolf-green;
+}
+
+#header {
 	@include row();
 }
 
