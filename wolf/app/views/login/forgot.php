@@ -71,7 +71,7 @@
                             <input class="long" id="forgot-email" type="text" name="forgot[email]" value="<?php echo $email; ?>" />
                         </div>
                         <div id="forgot-submit">
-                            <button class="button wide medium" type="submit" accesskey="s"><i class="fa fa-envelope"></i> <?php echo __('Send password'); ?></button>
+                            <button type="submit" accesskey="s"><i class="fa fa-envelope"></i> <?php echo __('Send password'); ?></button>
                         </div>
                     </form>
                 </div>

@@ -82,8 +82,8 @@
                                     <?php echo __('Remember me for :min minutes.', array(':min' => round(COOKIE_LIFE/60))); ?>
                                 </label>
                             </div>
-                            <div id="login_submit">
-                                <button class="button wide medium" type="submit" accesskey="s"><i class="fa fa-lock"></i> <?php echo __('Login'); ?></button>
+                            <div id="login-submit">
+                                <button type="submit" accesskey="s"><i class="fa fa-lock"></i> <?php echo __('Login'); ?></button>
                             </div>
                         </form>
                 </div>
