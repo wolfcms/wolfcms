@@ -1,15 +1,20 @@
 /*	BUTTONS ------------------------------------- */
-
-.button {
+.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+	display: inline-block;
 	border: none;
     background-color: $brand-color;
     color: $white;
     padding: .5em 1em;
     cursor: pointer;
     text-align: center;
-    font-weight: $bold;
-    //text-transform: uppercase;
-    display: inline-block;
+    font-size: 13px;
+    //font-weight: $semi-bold;
+    letter-spacing: .1em;
+    text-transform: uppercase;
     text-decoration: none;
     white-space: nowrap;
 
@@ -53,4 +58,4 @@
 
 .wide {
     	width: 100%;
-    }
+}
