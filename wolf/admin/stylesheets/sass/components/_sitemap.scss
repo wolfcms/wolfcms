@@ -1,31 +1,30 @@
 /*	SITEMAP DEF --------------------------------- */
 #site-map-def {
-    font-size: 90%;
     @include row();
+    font-size: 90%;
+    margin-bottom: 5px;
     border-bottom: 1px solid $grey;
 
     .page {
-    	@include column(8);
+    	@include column(8,0);
+        margin-bottom: 10px;
     }
-    .page-layout {
-    	@include column(1);
-    }
-    .status {
-    	@include column(1);
-    }
-    .view {
-    	@include column(1);
-    }
+    .page-layout, 
+    .status,
+    .view,
     .modify {
-    	@include column(1);
+    	@include column(1,0);
+        text-align: center;
     }
 
     // snippet
     .snippet, .layout {
-    	@include column(11);
+    	@include column(11,0);
+        margin-bottom: 10px;
     }
 }
 
+// Snippet and Layout
 .index {
 	
 
@@ -35,11 +34,11 @@
 		border-bottom: 1px solid $grey;
 
 		.title {
-			@include column(11);
+			@include column(11,0);
 		}
 
 		.delete {
-			@include column(1);
+			@include column(1,0);
 			text-align: center;
 		}
 
