@@ -1,6 +1,6 @@
 /*  Forms
 ----------------------------- */
-
+/*
 form,
 fieldset {
     margin-bottom: $spacing;
@@ -85,9 +85,74 @@ button:hover {
     vertical-align: middle;
 }
 
-
+*/
 /*  Condensed Inputs */
-.input-condensed {
+/*.input-condensed {
     padding: 1px 5px;
     font-size: 15px;
+}
+*/
+// TEST 
+
+input[type="email"],
+input[type="search"],
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+    border: 1px solid #D1D1D1;
+    height: 36px;
+    padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
+    border-radius: 4px;
+    box-shadow: none;
+    background: #fff; 
+}
+
+/* Removes awkard default styles on some inputs */
+input[type="email"],
+input[type="search"],
+input[type="text"],
+textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+textarea {
+    min-height: 12em;
+    padding-top: 6px;
+    padding-bottom: 6px; 
+}
+
+input[type="email"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    border: 1px solid #33C3F0;
+    outline: 0; 
+}
+
+label,
+legend {
+    display: block;
+    font-weight: 600;
+    margin-bottom: .5em; 
+}
+
+fieldset {
+    border-width: 0;
+    padding: 0; 
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    display: inline; 
+}
+
+label > .label-body {
+    display: inline-block;
+    font-weight: normal;
+    margin-left: .5em; 
 }
