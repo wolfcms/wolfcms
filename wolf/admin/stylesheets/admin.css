@@ -396,6 +396,15 @@ select {
   background: #fff;
 }
 
+/* Default width on all elements except select (dropdown) */
+input[type="email"],
+input[type="search"],
+input[type="text"],
+input[type="password"],
+textarea {
+  width: 100%;
+}
+
 /* Removes awkard default styles on some inputs */
 input[type="email"],
 input[type="search"],
@@ -407,7 +416,7 @@ textarea {
 }
 
 textarea {
-  min-height: 12em;
+  min-height: 20em;
   padding-top: 6px;
   padding-bottom: 6px;
 }
@@ -509,14 +518,16 @@ table tbody tr td {
 }
 
 /*	HEADER -------------------------------------- */
-#header {
+header {
   background-color: #2e2924;
   color: #fff;
-  padding-top: 1px;
   border-bottom: 1px solid #76a83a;
+}
+
+#header {
   *zoom: 1;
   display: block;
-  max-width: 100%;
+  max-width: 1280px;
   padding: 0 0;
   margin: 0 auto;
 }
@@ -740,7 +751,7 @@ text-align: center;
 #main {
   *zoom: 1;
   display: block;
-  max-width: 100%;
+  max-width: 1280px;
   padding: 0 0;
   margin: 0 auto;
 }
@@ -763,7 +774,7 @@ text-align: center;
 #content {
   padding: 1em;
 }
-#content h1 {
+#content h1, #content h2 {
   font-size: 100%;
 }
 
@@ -941,11 +952,11 @@ text-align: center;
 #footer {
   *zoom: 1;
   display: block;
-  max-width: 100%;
+  max-width: 1280px;
   padding: 0 0;
   margin: 0 auto;
   font-size: 90%;
-  margin: 2em 0;
+  padding-top: 2em;
 }
 #footer:before, #footer:after {
   content: "";
@@ -969,40 +980,38 @@ text-align: center;
 }
 
 /* Plugins tables */
+/*
 #plugins th, #plugins td {
-  text-align: center;
+    text-align: center;
 }
-
 #plugins th.plugin, #plugins td.plugin {
-  text-align: left;
+    text-align: left;
 }
-
 #plugins .disabled td {
-  color: #a22;
+    color: #a22;
 }
-
 #plugins td .notes {
-  padding: 2px 5px;
-  border: 1px solid #ddd;
-  background-color: #eee;
-  font-size: .83em;
-  color: #222;
+    padding: 2px 5px;
+    border: 1px solid #ddd;
+    background-color: #eee;
+    font-size: .83em;
+    color: #222;
 }
-
-#plugins .plugin h4 .from {
-  font-size: .83em;
-  font-weight: normal;
-  color: #999;
+#plugins .plugin h4 .from
+{
+    font-size: .83em;
+    font-weight: normal;
+    color: #999;
 }
-
+*/
 /* Form Elements ---------------------------------------------------------- */
 .form-area {
-  background-color: #9ce;
+  /*
   margin-left: -20px;
   margin-right: -20px;
   padding: 20px;
   padding-top: 15px;
-  padding-bottom: 20px;
+  padding-bottom: 20px;*/
 }
 
 /* Tabs ------------------------------------------------------------------- */
@@ -1056,20 +1065,23 @@ text-align: center;
   padding-bottom: 2px;
 }
 
+/*
 .pages {
   background-color: #fff;
   margin-top: 4px;
-  /* Border-radius not implemented yet */
+
+  /* Border-radius not implemented yet 
   border-radius: 0 6px 6px 6px;
   -moz-border-radius: 0 6px 6px 6px;
   -webkit-border-radius: 0 6px 6px 6px;
+
   text-shadow: black;
 }
-
 .pages .page {
-  padding: 20px;
+  padding:  20px;
 }
 
+*/
 /* Index table, list ------------------------------------------------------ */
 /*
 .index-def {
@@ -1157,12 +1169,13 @@ table.index td.note {
 */
 /*	SITEMAP DEF --------------------------------- */
 #site-map-def {
-  font-size: 90%;
   *zoom: 1;
   display: block;
-  max-width: 100%;
+  max-width: 1280px;
   padding: 0 0;
   margin: 0 auto;
+  font-size: 90%;
+  margin-bottom: 5px;
   border-bottom: 1px solid #e5e5e5;
 }
 #site-map-def:before, #site-map-def:after {
@@ -1176,43 +1189,31 @@ table.index td.note {
   display: inline;
   float: left;
   width: 66.66667%;
-  padding: 0 20px;
+  padding: 0 0;
+  margin-bottom: 10px;
 }
-#site-map-def .page-layout {
-  display: inline;
-  float: left;
-  width: 8.33333%;
-  padding: 0 20px;
-}
-#site-map-def .status {
-  display: inline;
-  float: left;
-  width: 8.33333%;
-  padding: 0 20px;
-}
-#site-map-def .view {
-  display: inline;
-  float: left;
-  width: 8.33333%;
-  padding: 0 20px;
-}
+#site-map-def .page-layout,
+#site-map-def .status,
+#site-map-def .view,
 #site-map-def .modify {
   display: inline;
   float: left;
   width: 8.33333%;
-  padding: 0 20px;
+  padding: 0 0;
+  text-align: center;
 }
 #site-map-def .snippet, #site-map-def .layout {
   display: inline;
   float: left;
   width: 91.66667%;
-  padding: 0 20px;
+  padding: 0 0;
+  margin-bottom: 10px;
 }
 
 .index li.node {
   *zoom: 1;
   display: block;
-  max-width: 100%;
+  max-width: 1280px;
   padding: 0 0;
   margin: 0 auto;
   padding: 5px 0;
@@ -1229,13 +1230,13 @@ table.index td.note {
   display: inline;
   float: left;
   width: 91.66667%;
-  padding: 0 20px;
+  padding: 0 0;
 }
 .index li.node .delete {
   display: inline;
   float: left;
   width: 8.33333%;
-  padding: 0 20px;
+  padding: 0 0;
   text-align: center;
 }
 .index li.node a {
@@ -1689,7 +1690,6 @@ input[type="button"] {
   letter-spacing: .1em;
   text-transform: uppercase;
   text-decoration: none;
-  white-space: nowrap;
   transition: background 0.1s ease-in-out;
   -webkit-transition: background 0.1s ease-in-out;
   -moz-transition: background 0.1s ease-in-out;
@@ -1731,6 +1731,10 @@ input[type="button"]:hover {
 
 .wide {
   width: 100%;
+}
+
+.buttons {
+  margin-top: 1.5em;
 }
 
 /*
