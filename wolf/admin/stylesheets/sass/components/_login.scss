@@ -120,12 +120,18 @@ input.submit {
   form {
     padding: 2em;
 
-    input {
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
       margin-bottom: 1em;
+      width: 100%;
     }
 
     button {
       margin-bottom: 0;
+      width: 100%;
+      //padding: .5em 1em;
+      line-height: 3em;
     }
   }
 }
