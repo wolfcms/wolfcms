@@ -58,7 +58,7 @@
 #content {
     padding: 1em;
 
-    h1 {
+    h1, h2 {
         font-size: 100%;
     }
 }
@@ -236,7 +236,7 @@
 #footer {
     @include row();
     font-size: 90%;
-    margin: 2em 0;
+    padding-top: 2em;
 
     .info {
         @include column(6);
@@ -250,6 +250,7 @@
 
 
 /* Plugins tables */
+/*
 #plugins th, #plugins td {
     text-align: center;
 }
@@ -272,15 +273,16 @@
     font-weight: normal;
     color: #999;
 }
-
+*/
 /* Form Elements ---------------------------------------------------------- */
 .form-area {
-  background-color: #9ce;
+  //background-color: #9ce;
+  /*
   margin-left: -20px;
   margin-right: -20px;
   padding: 20px;
   padding-top: 15px;
-  padding-bottom: 20px;
+  padding-bottom: 20px;*/
 }
 
 
@@ -323,11 +325,12 @@
   margin-top: .28em;
 }
 .tab_toolbar img { padding-bottom: 2px; }
+/*
 .pages {
   background-color: #fff;
   margin-top: 4px;
 
-  /* Border-radius not implemented yet */
+  /* Border-radius not implemented yet 
   border-radius: 0 6px 6px 6px;
   -moz-border-radius: 0 6px 6px 6px;
   -webkit-border-radius: 0 6px 6px 6px;
@@ -338,7 +341,7 @@
   padding:  20px;
 }
 
-
+*/
 
 
 /* Index table, list ------------------------------------------------------ */
