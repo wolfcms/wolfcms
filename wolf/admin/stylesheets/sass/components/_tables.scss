@@ -1,6 +1,6 @@
 /*  Tables
 ----------------------------- */
-
+/*
 table {
     background: #fff;
     -webkit-border-radius: 3px;
@@ -60,4 +60,25 @@ table tbody tr td {
     padding: 9px 10px;
     vertical-align: top;
     border: none;
+}
+*/
+table {
+    width: 100%;
+}
+
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid $grey; 
+}
+
+th:first-child,
+td:first-child {
+    padding-left: 0; 
+}
+
+th:last-child,
+td:last-child {
+    padding-right: 0; 
 }
