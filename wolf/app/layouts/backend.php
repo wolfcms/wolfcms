@@ -152,10 +152,13 @@ if (!isset($title) || trim($title) == '') {
     <?php endforeach; ?>
 
     <?php if (AuthUser::hasPermission('admin_edit')): ?>
-              <li class="right"><a href="<?php echo get_url('setting'); ?>"<?php if ($ctrl=='setting') echo ' class="current"'; ?>><?php echo __('Administration'); ?></a></li>
+            <li class="right"><a href="<?php echo get_url('setting'); ?>"<?php if ($ctrl=='setting') echo ' class="current"'; ?>><?php echo __('Administration'); ?></a></li>
     <?php endif; ?>
     <?php if (AuthUser::hasPermission('user_view')): ?>
-              <li class="right"><a href="<?php echo get_url('user'); ?>"<?php if ($ctrl=='user') echo ' class="current"'; ?>><?php echo __('Users'); ?></a></li>
+            <li class="right"><a href="<?php echo get_url('user'); ?>"<?php if ($ctrl=='user') echo ' class="current"'; ?>><?php echo __('Users'); ?></a></li>
+    <?php endif; ?>
+    <?php if ( AuthUser::hasPermission('admin_view') ): ?>
+            <li class="right"><a href="<?php echo get_url('setting/plugin'); ?>"<?php if($ctrl != 'setting' && $action == 'plugin') echo ' class="current"'; ?>><?php echo __('Plugins'); ?></a></li>
     <?php endif; ?>
             </ul>
           </div>
