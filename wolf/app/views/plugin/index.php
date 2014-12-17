@@ -73,3 +73,25 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    $(document).ready(function () {
+        // Dynamically change enabled state
+        $('.enabled input').change(function() {
+            $.get('<?php echo get_url('setting'); ?>'+(this.checked ? '/activate_plugin/':'/deactivate_plugin/')+this.value, function(){
+                location.reload(true);
+            });
+        });
+
+        // Dynamically uninstall
+        $('.uninstall a').click(function(e) {
+            if (confirm('<?php echo jsEscape(__('Are you sure you wish to uninstall this plugin?')); ?>')) {
+                var pluginId = this.name.replace('uninstall_', '');
+                $.get('<?php echo get_url('setting/uninstall_plugin/'); ?>'+pluginId, function() {
+                    location.reload(true);
+                });
+            }
+            e.preventDefault();
+        });
+    });
+</script>
