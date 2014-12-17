@@ -71,7 +71,7 @@ a {
 }
 
 a:hover {
-  color: #333;
+  color: #2e2924;
   text-decoration: underline;
 }
 
@@ -170,34 +170,29 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Lucida Grande", "Bitstream Vera Sans", Helvetica, Verdana, Arial, sans-serif;
   margin-bottom: 1em;
   color: #333;
-}
-
-h1,
-.h1 {
-  font-size: 24px;
   font-weight: 700;
 }
 
-h2,
-.h2 {
-  font-size: 22px;
+h1, .h1,
+h2, .h2 {
+  font-size: 16px;
 }
 
 h3,
 .h3 {
-  font-size: 18px;
+  font-size: 15px;
 }
 
 h4, h5, h6,
 .h4, .h5, .h6 {
-  font-size: 16px;
+  font-size: 14px;
 }
 
+/*
 h4,
 .h4 {
-  text-transform: uppercase;
-}
-
+    text-transform: uppercase;
+}*/
 /*  Lines, Quotes, Emphasis
 ----------------------------- */
 /*  Lines */
@@ -796,9 +791,6 @@ text-align: center;
 #content {
   padding: 1em;
 }
-#content h1, #content h2 {
-  font-size: 100%;
-}
 
 /*
 #content-wrapper {
@@ -1000,6 +992,25 @@ text-align: center;
   width: 50%;
   padding: 0 20px;
   text-align: right;
+}
+
+/*  Plugins ------------------------------------- */
+#plugins th, #plugins td {
+  text-align: center;
+}
+#plugins .plugin {
+  text-align: left;
+}
+#plugins .plugin p {
+  margin-bottom: 0;
+}
+#plugins .disabled {
+  color: #ecf0f1;
+}
+#plugins .from {
+  font-size: 13px;
+  font-weight: 400;
+  color: #999;
 }
 
 /* Plugins tables */
@@ -1703,6 +1714,7 @@ input[type="submit"],
 input[type="reset"],
 input[type="button"] {
   display: inline-block;
+  margin-bottom: 1em;
   border: none;
   background-color: #2e2924;
   color: #fff;
