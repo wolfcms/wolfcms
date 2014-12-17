@@ -5,6 +5,7 @@ input[type="submit"],
 input[type="reset"],
 input[type="button"] {
 	display: inline-block;
+	margin-bottom: 1em;
 	border: none;
     background-color: $brand-color;
     color: $white;
