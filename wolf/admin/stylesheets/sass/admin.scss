@@ -57,10 +57,6 @@
 
 #content {
     padding: 1em;
-
-    h1, h2 {
-        font-size: 100%;
-    }
 }
 
 /*
@@ -249,7 +245,36 @@
     }
 }
 
+/*  Plugins ------------------------------------- */
+#plugins {
+    // Center all cells
+    th, td {
+        text-align: center;
+    }
+    // Align left only name and description
+    .plugin {
+        text-align: left;
 
+        p {
+            margin-bottom: 0;
+        }
+    }
+
+    .disabled {
+        color: $wolf-grey;
+    }
+
+    .notes {
+
+    }
+
+    .from {
+        font-size: 13px;
+        font-weight: $regular;
+        //color: $grey;
+        color: #999;
+    }
+}
 /* Plugins tables */
 /*
 #plugins th, #plugins td {
