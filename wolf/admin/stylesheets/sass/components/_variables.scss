@@ -25,13 +25,18 @@ $purple: #8e44ad;
 $medium-purple: #9370DB;
 
 // Main site color
-$brand-color: $wolf-brown;
+$brand-color: $wolf-green;
+
 // Main background color
-$background-color: $white;
+$background-color: $grey;
+
+// Links
+$link: $wolf-green;
+$link-hover: darken($wolf-green, 10);
 
 // Fonts
 $serif: Georgia, 'Times New Roman', Times, serif;
-$sans-serif: "Lucida Grande", "Bitstream Vera Sans", Helvetica, Verdana, Arial, sans-serif;
+$sans-serif: "Lucida Grande", Helvetica, Arial, sans-serif;
 $mono: 'Consolas', 'Lucida Console', 'Courier New', 'Monaco', Courier, monospace;
 
 // Weights
@@ -52,9 +57,6 @@ $font-size-small: 12px;
 // Headings
 $heading-font-family: $sans-serif;
 $heading-font-color: $black;
-
-// Links
-$link: $wolf-green;
 
 
 // Line heights
