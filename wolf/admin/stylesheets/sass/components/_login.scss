@@ -89,7 +89,7 @@ input.submit {
 }
 
 #dialog {
-  //margin: 100px auto 0 auto;
+  margin-bottom: 2em;
   //padding: 2em;
   background: #fff;
   color: #222;
@@ -113,7 +113,7 @@ input.submit {
       right: 0;
       bottom: 2px;
 
-      font-size: 14px;
+      font-size: 13px;
     }
   }
 
@@ -132,12 +132,14 @@ input.submit {
       width: 100%;
       //padding: .5em 1em;
       line-height: 3em;
+      font-size: 14px;
     }
   }
 }
 
 a {
   text-decoration: none;
+  font-weight: $regular;
 }
 
 
