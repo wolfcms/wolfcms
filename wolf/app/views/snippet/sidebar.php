@@ -29,7 +29,7 @@ if (Dispatcher::getAction() == 'index'): ?>
 <div class="box">
     <h2><?php echo __('Tag to use this snippet'); ?></h2>
     <p><?php echo __('Just replace <b>snippet</b> by the snippet name you want to include.'); ?></p>
-    <p><code>&lt;?php $this->includeSnippet('snippet'); ?&gt;</code></p>
+    <pre><code>&lt;?php $this->includeSnippet('snippet'); ?&gt;</code></pre>
 </div>
 
 <?php endif; ?>
