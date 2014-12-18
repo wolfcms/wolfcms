@@ -228,7 +228,8 @@ small {
 pre, code, kbd, samp {
     font-family: $mono;
     _font-family: 'Courier New', monospace;
-    font-size: 1em;
+    font-size: 11px;
+    line-height: 1em;
     margin: 1em 0;
 }
 
@@ -236,4 +237,8 @@ pre {
     white-space: pre;
     white-space: pre-wrap;
     word-wrap: break-word;
+
+    padding: 1em 0.5em;
+    background: $grey;
+    display: block;
 }
