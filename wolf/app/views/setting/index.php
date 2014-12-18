@@ -96,8 +96,14 @@
                 <tr>
                     <td class="label"><label for="setting_default_status_id-draft"><?php echo __('Default Status'); ?></label></td>
                     <td class="field">
-                        <input class="radio" id="setting_default_status_id-draft" name="setting[default_status_id]" size="10" type="radio" value="<?php echo Page::STATUS_DRAFT; ?>"<?php if (Setting::get('default_status_id') == Page::STATUS_DRAFT) echo ' checked="checked"'; ?> /><label for="setting_default_status_id-draft"> <?php echo __('Draft'); ?> </label> &nbsp;
-                        <input class="radio" id="setting_default_status_id-published" name="setting[default_status_id]" size="10" type="radio" value="<?php echo Page::STATUS_PUBLISHED; ?>"<?php if (Setting::get('default_status_id') == Page::STATUS_PUBLISHED) echo ' checked="checked"'; ?> /><label for="setting_default_status_id-published"> <?php echo __('Published'); ?> </label>
+                        <label for="setting_default_status_id-draft">
+                            <input class="radio" id="setting_default_status_id-draft" name="setting[default_status_id]" size="10" type="radio" value="<?php echo Page::STATUS_DRAFT; ?>"<?php if (Setting::get('default_status_id') == Page::STATUS_DRAFT) echo ' checked="checked"'; ?> />
+                            <?php echo __('Draft'); ?>
+                        </label>
+                        <label for="setting_default_status_id-published">
+                            <input class="radio" id="setting_default_status_id-published" name="setting[default_status_id]" size="10" type="radio" value="<?php echo Page::STATUS_PUBLISHED; ?>"<?php if (Setting::get('default_status_id') == Page::STATUS_PUBLISHED) echo ' checked="checked"'; ?> />
+                            <?php echo __('Published'); ?>
+                        </label>
                     </td>
                     <td class="help">&nbsp;</td>
                 </tr>
