@@ -44,6 +44,14 @@
 
 
 /* Main ----------------------------------------- */
+.container {
+    width: 100%;
+
+    &[role="main"] {
+        background: $white;
+    }
+}
+
 #main {
   @include row();
   //background-color: $grey;
