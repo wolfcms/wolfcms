@@ -150,16 +150,21 @@ if (!isset($title) || trim($title) == '') {
               <li id="<?php echo $plugin_name;?>-plugin" class="plugin"><a href="<?php echo get_url('plugin/'.$plugin_name); ?>"<?php if ($ctrl=='plugin' && $action==$plugin_name) echo ' class="current"'; ?>><?php echo $plugin->label; ?></a></li>
         <?php endif; ?>
     <?php endforeach; ?>
-
-    <?php if (AuthUser::hasPermission('admin_edit')): ?>
-            <li class="right"><a href="<?php echo get_url('setting'); ?>"<?php if ($ctrl=='setting') echo ' class="current"'; ?>><?php echo __('Administration'); ?></a></li>
-    <?php endif; ?>
-    <?php if (AuthUser::hasPermission('user_view')): ?>
-            <li class="right"><a href="<?php echo get_url('user'); ?>"<?php if ($ctrl=='user') echo ' class="current"'; ?>><?php echo __('Users'); ?></a></li>
-    <?php endif; ?>
-    <?php if ( AuthUser::hasPermission('admin_view') ): ?>
-            <li class="right"><a href="<?php echo get_url('setting/plugin'); ?>"<?php if($ctrl != 'setting' && $action == 'plugin') echo ' class="current"'; ?>><?php echo __('Plugins'); ?></a></li>
-    <?php endif; ?>
+            
+                <li class="dropdown right">
+                    <a href="#"><?php echo __('Settings'); ?></a>
+                    <ul>
+                        <?php if (AuthUser::hasPermission('admin_edit')): ?>
+                            <li><a href="<?php echo get_url('setting'); ?>"<?php if ($ctrl=='setting') echo ' class="current"'; ?>><?php echo __('Administration'); ?></a></li>
+                        <?php endif; ?>
+                        <?php if (AuthUser::hasPermission('user_view')): ?>
+                            <li><a href="<?php echo get_url('user'); ?>"<?php if ($ctrl=='user') echo ' class="current"'; ?>><?php echo __('Users'); ?></a></li>
+                        <?php endif; ?>
+                        <?php if ( AuthUser::hasPermission('admin_view') ): ?>
+                            <li><a href="<?php echo get_url('setting/plugin'); ?>"<?php if($ctrl != 'setting' && $action == 'plugin') echo ' class="current"'; ?>><?php echo __('Plugins'); ?></a></li>
+                        <?php endif; ?>   
+                    </ul>
+                </li>
             </ul>
           </div>
           <div id="gravatar">
@@ -182,23 +187,26 @@ if (!isset($title) || trim($title) == '') {
 <?php if (Flash::get('info') !== null): ?>
                 <div id="info" class="message" style="display: none"><?php echo Flash::get('info'); ?></div>
 <?php endif; ?>
-    <div id="main">
-        <div id="content-wrapper">
-            <div id="content">
-        <!-- content -->
-        <?php echo $content_for_layout; ?>
-        <!-- end content -->
+
+    <div class="container" role="main">
+        <div id="main">
+            <div id="content-wrapper">
+                <div id="content">
+            <!-- content -->
+            <?php echo $content_for_layout; ?>
+            <!-- end content -->
+                </div>
             </div>
-        </div>
-        <?php if (isset($sidebar)) { ?>
-        <div id="sidebar-wrapper">
-            <div id="sidebar">
-            <!-- sidebar -->
-            <?php echo $sidebar; ?>
-            <!-- end sidebar -->
+            <?php if (isset($sidebar)) { ?>
+            <div id="sidebar-wrapper">
+                <div id="sidebar">
+                <!-- sidebar -->
+                <?php echo $sidebar; ?>
+                <!-- end sidebar -->
+                </div>
             </div>
+            <?php } ?>
         </div>
-        <?php } ?>
     </div>
 
     <footer class="footer">
