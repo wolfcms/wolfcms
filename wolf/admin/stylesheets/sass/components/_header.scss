@@ -1,6 +1,6 @@
 /*	HEADER -------------------------------------- */
 header {
-	background-color: $wolf-brown;
+	background-color: $wolf-green;
 	color: $white;
 	//padding-top: 1px;
 	border-bottom: 1px solid $wolf-green;
@@ -35,33 +35,79 @@ header {
 #mainTabs {
 	@include column(8);
 
-	ul {
-		margin: 13px 0;
-	}
-
-	li {
-		display: inline;
-	}
-
-	li a, li a:visited {
+	a {
 		color: $white;
 		font-weight: $bold;
-		text-decoration: none;
-		padding-right: 10px;
 
+		&:hover {
+			text-decoration: none;
+		}
 	}
 
-	li a:hover {
+	ul {
+		text-align: left;
+		display: inline;
+		margin: 0;
+		padding: 15px 4px 17px 0;
 
-	}
+		li {
+			display: inline-block;
+			margin-right: -4px;
+			position: relative;
+			padding: 15px 20px;
+			cursor: pointer;
+			-webkit-transition: all 0.2s;
+			-moz-transition: all 0.2s;
+			-ms-transition: all 0.2s;
+			-o-transition: all 0.2s;
+			transition: all 0.2s;
 
-	li a.current, li a:visited.current {
+			&:hover {
+				background: $link-hover;
+				color: #fff;
+			}
 
+			&:hover ul {
+				display: block;
+				opacity: 1;
+				visibility: visible;
+			}
+
+			ul {
+				padding: 0;
+				position: absolute;
+				top: 48px;
+				left: 0;
+				width: 150px;
+				-webkit-box-shadow: none;
+				-moz-box-shadow: none;
+				box-shadow: none;
+				display: none;
+				opacity: 0;
+				visibility: hidden;
+				-webkit-transiton: opacity 0.2s;
+				-moz-transition: opacity 0.2s;
+				-ms-transition: opacity 0.2s;
+				-o-transition: opacity 0.2s;
+				-transition: opacity 0.2s;
+
+				li {
+					background: $link-hover;
+					display: block;
+					color: #fff;
+
+					&:hover {
+						background: $link;
+					}
+				}
+			}
+		}
 	}
 
 	.right {
 		float: right;
 	}
+	
 }
 
 /*	GRAVATAR ------------------------------------ */
