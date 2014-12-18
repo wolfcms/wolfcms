@@ -54,9 +54,9 @@ table {
 /*  Base 
 ----------------------------- */
 body {
-  font-family: "Lucida Grande", "Bitstream Vera Sans", Helvetica, Verdana, Arial, sans-serif;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 14px;
-  background: #fff;
+  background: #e5e5e5;
   color: #333;
   line-height: 1.4;
 }
@@ -167,7 +167,7 @@ dd {
 -----------------------------*/
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
-  font-family: "Lucida Grande", "Bitstream Vera Sans", Helvetica, Verdana, Arial, sans-serif;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   margin-bottom: 1em;
   color: #333;
   font-weight: 700;
@@ -272,7 +272,8 @@ small {
 pre, code, kbd, samp {
   font-family: "Consolas", "Lucida Console", "Courier New", "Monaco", Courier, monospace;
   _font-family: 'Courier New', monospace;
-  font-size: 1em;
+  font-size: 11px;
+  line-height: 1em;
   margin: 1em 0;
 }
 
@@ -280,6 +281,9 @@ pre {
   white-space: pre;
   white-space: pre-wrap;
   word-wrap: break-word;
+  padding: 1em 0.5em;
+  background: #e5e5e5;
+  display: block;
 }
 
 /*  Forms
@@ -438,8 +442,8 @@ fieldset {
   padding: 0;
 }
 
-input[type="checkbox"],
-input[type="radio"] {
+input[type="checkbox"] > label,
+input[type="radio"] > label {
   display: inline;
 }
 
@@ -521,7 +525,13 @@ th,
 td {
   padding: 12px 15px;
   text-align: left;
+}
+
+tr {
   border-bottom: 1px solid #e5e5e5;
+}
+tr:first-child {
+  border-top: 1px solid #e5e5e5;
 }
 
 th:first-child,
@@ -534,9 +544,21 @@ td:last-child {
   padding-right: 0;
 }
 
+td.label {
+  width: 20%;
+}
+
+td.field {
+  width: 50%;
+}
+
+td.help {
+  width: 30%;
+}
+
 /*	HEADER -------------------------------------- */
 header {
-  background-color: #2e2924;
+  background-color: #76a83a;
   color: #fff;
   border-bottom: 1px solid #76a83a;
 }
@@ -582,17 +604,65 @@ header {
   width: 66.66667%;
   padding: 0 20px;
 }
-#mainTabs ul {
-  margin: 13px 0;
-}
-#mainTabs li {
-  display: inline;
-}
-#mainTabs li a, #mainTabs li a:visited {
+#mainTabs a {
   color: #fff;
   font-weight: 700;
+}
+#mainTabs a:hover {
   text-decoration: none;
-  padding-right: 10px;
+}
+#mainTabs ul {
+  text-align: left;
+  display: inline;
+  margin: 0;
+  padding: 15px 4px 17px 0;
+}
+#mainTabs ul li {
+  display: inline-block;
+  margin-right: -4px;
+  position: relative;
+  padding: 15px 20px;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+#mainTabs ul li:hover {
+  background: #5b822d;
+  color: #fff;
+}
+#mainTabs ul li:hover ul {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+#mainTabs ul li ul {
+  padding: 0;
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 150px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transiton: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  -transition: opacity 0.2s;
+}
+#mainTabs ul li ul li {
+  background: #5b822d;
+  display: block;
+  color: #fff;
+}
+#mainTabs ul li ul li:hover {
+  background: #76a83a;
 }
 #mainTabs .right {
   float: right;
@@ -765,6 +835,13 @@ text-align: center;
 }
 
 /* Main ----------------------------------------- */
+.container {
+  width: 100%;
+}
+.container[role="main"] {
+  background: #fff;
+}
+
 #main {
   *zoom: 1;
   display: block;
@@ -1716,14 +1793,14 @@ input[type="button"] {
   display: inline-block;
   margin-bottom: 1em;
   border: none;
-  background-color: #2e2924;
+  background-color: #76a83a;
   color: #fff;
-  padding: .5em 1em;
+  padding: .7em 1.2em;
   cursor: pointer;
   text-align: center;
   font-size: 13px;
+  font-weight: 600;
   letter-spacing: .1em;
-  text-transform: uppercase;
   text-decoration: none;
   transition: background 0.1s ease-in-out;
   -webkit-transition: background 0.1s ease-in-out;
@@ -1737,7 +1814,7 @@ button:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
 input[type="button"]:hover {
-  background: #11100e;
+  background: #5b822d;
   color: #fff;
   outline: none;
   text-decoration: none;
@@ -1863,6 +1940,7 @@ input.submit {
 }
 
 #dialog {
+  margin-bottom: 2em;
   background: #fff;
   color: #222;
   border: 1px solid #e5e5e5;
@@ -1878,7 +1956,7 @@ input.submit {
   position: absolute;
   right: 0;
   bottom: 2px;
-  font-size: 14px;
+  font-size: 13px;
 }
 #dialog form {
   padding: 2em;
@@ -1893,10 +1971,12 @@ input.submit {
   margin-bottom: 0;
   width: 100%;
   line-height: 3em;
+  font-size: 14px;
 }
 
 a {
   text-decoration: none;
+  font-weight: 400;
 }
 
 /* Login dialog ----------------------------------------------------------- */
