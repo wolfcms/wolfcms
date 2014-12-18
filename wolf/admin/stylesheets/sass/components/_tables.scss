@@ -70,7 +70,15 @@ th,
 td {
     padding: 12px 15px;
     text-align: left;
+    //border-bottom: 1px solid $grey; 
+}
+
+tr {
     border-bottom: 1px solid $grey; 
+
+    &:first-child {
+        border-top: 1px solid $grey; 
+    }
 }
 
 th:first-child,
@@ -82,3 +90,16 @@ th:last-child,
 td:last-child {
     padding-right: 0; 
 }
+
+    td.label {
+        width: 20%;    
+    }
+
+    td.field {
+        width: 50%;
+    }
+
+    td.help {
+        width: 30%;
+    }
+    
