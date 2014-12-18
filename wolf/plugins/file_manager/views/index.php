@@ -159,6 +159,6 @@ if (!defined('IN_CMS')) { exit(); }
 
 
     <!-- Do not remove div#mask, because you'll need it to fill the whole screen -->
- 	<div id="mask"></div>
+ 	<!--<div id="mask"></div>-->
 
 </div>
