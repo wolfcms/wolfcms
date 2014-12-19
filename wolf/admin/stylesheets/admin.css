@@ -606,7 +606,6 @@ header {
 }
 #mainTabs a {
   color: #fff;
-  font-weight: 700;
 }
 #mainTabs a:hover {
   text-decoration: none;
@@ -621,7 +620,7 @@ header {
   display: inline-block;
   margin-right: -4px;
   position: relative;
-  padding: 15px 20px;
+  padding: 15px 10px;
   cursor: pointer;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -1798,9 +1797,8 @@ input[type="button"] {
   padding: .7em 1.2em;
   cursor: pointer;
   text-align: center;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: .1em;
+  font-size: 15px;
+  font-weight: 700;
   text-decoration: none;
   transition: background 0.1s ease-in-out;
   -webkit-transition: background 0.1s ease-in-out;
@@ -1971,7 +1969,6 @@ input.submit {
   margin-bottom: 0;
   width: 100%;
   line-height: 3em;
-  font-size: 14px;
 }
 
 a {
