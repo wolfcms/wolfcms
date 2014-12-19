@@ -37,7 +37,7 @@ header {
 
 	a {
 		color: $white;
-		font-weight: $bold;
+		//font-weight: $bold;
 
 		&:hover {
 			text-decoration: none;
@@ -54,7 +54,8 @@ header {
 			display: inline-block;
 			margin-right: -4px;
 			position: relative;
-			padding: 15px 20px;
+			//padding: 15px 20px;
+			padding: 15px 10px;
 			cursor: pointer;
 			-webkit-transition: all 0.2s;
 			-moz-transition: all 0.2s;
