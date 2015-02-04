@@ -1,4 +1,5 @@
-/*	SITEMAP DEF --------------------------------- */
+/*	PAGE TREE --------------------- */
+/* #site-map-def is first row */
 #site-map-def {
     @include row();
     font-size: 90%;
@@ -24,10 +25,38 @@
     }
 }
 
+//Site map root contains all other rows
+#site-map-root {
+    //@include row();
+    font-size: 90%;
+    
+    li.node {
+        @include row();
+        padding: 5px 0;
+        border-bottom: 1px solid $grey;
+
+        .page {
+            @include column(8,0);
+        }
+
+        .page-layout,
+        .status,
+        .view-page,
+        .modify {
+            @include column(1,0);
+            text-align: center;
+        }
+    }
+}
+
+/* Hide + expander for children pages
+#site-map .page img.expander {
+    display: none;
+}*/
+
 // Snippet and Layout
 .index {
 	
-
 	li.node {
 		@include row();
 		padding: 5px 0;
