@@ -29,5 +29,5 @@
 /* Security measure */
 if (!defined('IN_CMS')) { exit(); }
 ?>
-<p class="button"><a href="<?php echo get_url('plugin/multi_lang/settings'); ?>"><img src="<?php echo ICONS_PATH;?>settings-32-ns.png" align="middle" alt="settings icon" /> <?php echo __('Settings'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/multi_lang/documentation/'); ?>"><img src="<?php echo ICONS_PATH;?>documentation-32-ns.png" align="middle" alt="documentation icon" /> <?php echo __('Documentation'); ?></a></p>
+<a href="<?php echo get_url('plugin/multi_lang/settings'); ?>" class="button wide large"><i class="fa fa-gear"></i> <?php echo __('Settings'); ?></a>
+<a href="<?php echo get_url('plugin/multi_lang/documentation/'); ?>" class="button wide large"><i class="fa fa-file-text-o"></i> <?php echo __('Documentation'); ?></a>
