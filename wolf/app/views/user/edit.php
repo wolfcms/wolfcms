@@ -43,20 +43,23 @@
     <tr>
       <td class="label"><label for="user_password"><?php echo __('Password'); ?></label></td>
       <td class="field"><input class="textbox" id="user_password" maxlength="40" name="user[password]" size="40" type="password" value="" /></td>
-      <td class="help" rowspan="2"><?php echo __('At least 5 characters.'); ?> <?php if($action=='edit') { echo __('Leave password blank for it to remain unchanged.'); } ?></td>
+      <td class="help"><?php echo __('At least 5 characters.'); ?> <?php if($action=='edit') { echo __('Leave password blank for it to remain unchanged.'); } ?></td>
     </tr>
     <tr>
       <td class="label"><label for="user_confirm"><?php echo __('Confirm Password'); ?></label></td>
-
       <td class="field"><input class="textbox" id="user_confirm" maxlength="40" name="user[confirm]" size="40" type="password" value="" /></td>
+      <td class="help"><?php echo __('Confirm Password'); ?></td>
     </tr>
 <?php if (AuthUser::hasPermission('user_edit')): ?>
     <tr>
-      <td class="label"><?php echo __('Roles'); ?></td>
+      <td class="label"><label for="user-role"><?php echo __('Roles'); ?></label></td>
       <td class="field">
 <?php $user_roles = ($user instanceof User) ? $user->roles(): array(); ?>
 <?php foreach ($roles as $role): ?>
-        <span class="checkbox"><input<?php if (in_array($role->name, $user_roles)) echo ' checked="checked"'; ?>  id="user_role-<?php echo $role->name; ?>" name="user_role[<?php echo $role->name; ?>]" type="checkbox" value="<?php echo $role->id; ?>" />&nbsp;<label for="user_role-<?php echo $role->name; ?>"><?php echo __(ucwords($role->name)); ?></label></span>
+        <label for="user_role-<?php echo $role->name; ?>">
+          <input<?php if (in_array($role->name, $user_roles)) echo ' checked="checked"'; ?>  id="user_role-<?php echo $role->name; ?>" name="user_role[<?php echo $role->name; ?>]" type="checkbox" value="<?php echo $role->id; ?>" />
+          <?php echo __(ucwords($role->name)); ?>
+        </label>
 <?php endforeach; ?>
       </td>
       <td class="help"><?php echo __('Roles restrict user privileges and turn parts of the administrative interface on or off.'); ?></td>
