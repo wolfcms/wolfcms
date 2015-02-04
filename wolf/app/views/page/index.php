@@ -28,18 +28,19 @@
 
 <ul id="site-map-root">
     <li id="page-0" class="node level-0">
-      <div class="page" style="padding-left: 4px">
-        <span class="w1">
-<?php if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $root->is_protected)): ?>
-          <i class="fa fa-file-o"></i> <span class="title"><?php echo $root->title; ?></span>
-<?php else: ?>
-          <a href="<?php echo get_url('page/edit/1'); ?>" title="/"><i class="fa fa-file-o"></i> <span class="title"><?php echo $root->title; ?></span></a>
-<?php endif; ?>
-        </span>
+      <!--<div class="page" style="padding-left: 4px">-->
+      <div class="page">
+		<span class="w1">
+			<?php if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $root->is_protected)): ?>
+				<i class="fa fa-file-o"></i> <span class="title"><?php echo $root->title; ?></span>
+			<?php else: ?>
+				<i class="fa fa-file-o"></i> <a href="<?php echo get_url('page/edit/1'); ?>" title="/"><span class="title"><?php echo $root->title; ?></span></a>
+			<?php endif; ?>
+		</span>
       </div>
       <div class="page-layout"><?php echo Layout::findById($root->layout_id)->name; ?></div>
       <div class="status published-status"><?php echo __('Published'); ?></div>
-      <div class="view-page"><a href="<?php echo URL_PUBLIC; ?>" target="_blank"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/magnify.png" align="middle" alt="<?php echo __('View Page'); ?>" title="<?php echo __('View Page'); ?>" /></a></div>
+      <div class="view-page"><a href="<?php echo URL_PUBLIC; ?>" target="_blank" title="<?php echo __('View Page'); ?>"><i class="fa fa-eye"></i></a></div>
       <div class="modify">
           <a href="<?php echo get_url('page/add/1'); ?>" title="<?php echo __('Add child'); ?>"><i class="fa fa-plus-square"></i></a>&nbsp;
           <i class="fa fa-minus-square remove"></i>&nbsp;
