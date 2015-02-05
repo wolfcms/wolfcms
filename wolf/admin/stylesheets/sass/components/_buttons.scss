@@ -12,10 +12,10 @@ input[type="button"] {
     padding: .7em 1.2em;
     cursor: pointer;
     text-align: center;
-    font-size: 15px;
-    font-weight: $bold;
-    //letter-spacing: .1em;
-    //text-transform: uppercase;
+    //font-size: 15px;
+    //font-weight: $bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     text-decoration: none;
     //white-space: nowrap;
 
@@ -33,32 +33,28 @@ input[type="button"] {
 		outline: none;
 		text-decoration: none;
     }
-}
 
-.green {
-	background: $wolf-green;
-
-	&:hover {
-		background: darken($wolf-green, 10);
-	}
+    i {
+    	font-size: 15px;
+    }
 }
 
 .large {
 	padding: 1em 2em;
-	font-size: 16px;
+	//font-size: 16px;
 	line-height: 1.6;
 	border-radius: $border-radius-large;
 }
 
 .medium {
 	padding: .7em 1.4em;
-	font-size: 15px;
+	//font-size: 15px;
 	line-height: 1.5;
 	border-radius: $border-radius;
 }
 
 .wide {
-    	width: 100%;
+	width: 100%;
 }
 
 .buttons {
