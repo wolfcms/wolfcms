@@ -29,23 +29,27 @@
 <ul id="site-map-root">
     <li id="page-0" class="node level-0">
       <!--<div class="page" style="padding-left: 4px">-->
-      <div class="page">
-		<span class="w1">
-			<?php if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $root->is_protected)): ?>
-				<i class="fa fa-file-o"></i> <span class="title"><?php echo $root->title; ?></span>
-			<?php else: ?>
-				<i class="fa fa-file-o"></i> <a href="<?php echo get_url('page/edit/1'); ?>" title="/"><span class="title"><?php echo $root->title; ?></span></a>
-			<?php endif; ?>
-		</span>
-      </div>
-      <div class="page-layout"><?php echo Layout::findById($root->layout_id)->name; ?></div>
-      <div class="status published-status"><?php echo __('Published'); ?></div>
-      <div class="view-page"><a href="<?php echo URL_PUBLIC; ?>" target="_blank" title="<?php echo __('View Page'); ?>"><i class="fa fa-eye"></i></a></div>
-      <div class="modify">
-          <a href="<?php echo get_url('page/add/1'); ?>" title="<?php echo __('Add child'); ?>"><i class="fa fa-plus-square"></i></a>&nbsp;
-          <i class="fa fa-minus-square remove"></i>&nbsp;
-      	  <i class="fa fa-copy"></i>
-      </div>
+      <div class="page-list-item">
+
+		<div class="page">
+			<span class="w1">
+				<?php if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $root->is_protected)): ?>
+					<i class="fa fa-file-o"></i> <span class="title"><?php echo $root->title; ?></span>
+				<?php else: ?>
+					<i class="fa fa-file-o"></i> <a href="<?php echo get_url('page/edit/1'); ?>" title="/"><span class="title"><?php echo $root->title; ?></span></a>
+				<?php endif; ?>
+			</span>
+		</div>
+
+		<div class="page-layout"><?php echo Layout::findById($root->layout_id)->name; ?></div>
+		<div class="status published-status"><?php echo __('Published'); ?></div>
+		<div class="view-page"><a href="<?php echo URL_PUBLIC; ?>" target="_blank" title="<?php echo __('View Page'); ?>"><i class="fa fa-eye"></i></a></div>
+		<div class="modify">
+			<a class="add-child-link" href="<?php echo get_url('page/add/1'); ?>" title="<?php echo __('Add child'); ?>"><i class="fa fa-plus-square"></i></a>&nbsp;
+			<i class="fa fa-minus-square remove"></i>&nbsp;
+			<i class="fa fa-copy"></i>
+		</div>
+	</div><!-- #page-list-item -->
 
 <?php echo $content_children; ?>
 
@@ -69,9 +73,9 @@
     }
 
     .child {
-        min-height: 10px;
+       /* min-height: 10px;
         height: auto !important;
-        height: 30px;
+        height: 30px;*/
     }
 
     .child li {
@@ -81,11 +85,11 @@
 	    margin: 0;
 	    margin-top: 0.5em;
         margin-left: 0.5em;*/
-        padding-left: 0.5em;
-        margin-left: 0.5em;
-	    border-left: 10px solid grey;
+        /*padding-left: 0.5em;*/
+        /*margin-left: 0.5em;*/
+	    /*border-left: 10px solid grey;*/
 	}
-
+/*
 	.i-sortable { display: block; background-color: #EDFE86; }
     .i-sortable li { display: block; background-color: #fff; }
 
@@ -97,7 +101,7 @@
         color: #363636;
         /*height: 5px;
         background: #f00;*/
-    }
+   /* }*/
 
 
 </style>
