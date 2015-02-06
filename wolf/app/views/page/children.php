@@ -20,8 +20,12 @@
 <?php foreach($childrens as $child): ?> 
     <li id="page_<?php echo $child->id; ?>" class="node level-<?php echo $level; if ( ! $child->has_children) echo ' no-children'; else if ($child->is_expanded) echo ' children-visible'; else echo ' children-hidden'; ?>">
       <div class="content-children">
+
+<div class="page-list-item">
+<!--<div class="indent">-->
+
       <div class="page">
-        <span class="w1">
+        <span class="w1 indent">
           <?php if ($child->has_children): ?><img align="middle" alt="toggle children" class="expander<?php if($child->is_expanded) echo ' expanded'; ?>" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/<?php echo $child->is_expanded ? 'collapse': 'expand'; ?>.png" title="" /><?php endif; ?>
 <?php if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $child->is_protected)): ?>
     <i class="fa fa-file-o"></i> <span class="title protected"><?php echo $child->title; ?></span> <img class="handle_reorder" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/drag_to_sort.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
@@ -32,6 +36,9 @@
           <img align="middle" alt="" class="busy" id="busy-<?php echo $child->id; ?>" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/spinner.gif" title="" />
         </span>
       </div>
+
+<!--</div>--><!-- .indent -->
+
       <div class="page-layout"><?php $layout = Layout::findById($child->layout_id); echo isset($layout->name) ? htmlspecialchars($layout->name) : __('inherit'); ?></div>
 <?php switch ($child->status_id) {
       case Page::STATUS_DRAFT: echo '<div class="status draft-status">'.__('Draft').'</div>'; break;
@@ -48,6 +55,8 @@
 <?php endif; ?>
         <a href="#" id="copy-<?php echo $child->id; ?>" class="copy-page" title="<?php echo __('Copy Page'); ?>"><i class="fa fa-copy"></i></a>
       </div>
+
+</div><!-- .page-list-item -->      
       </div><!-- /.content-children -->
 <?php if ($child->is_expanded) echo $child->children_rows; ?>
     </li>
