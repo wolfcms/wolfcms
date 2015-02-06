@@ -3,7 +3,7 @@
 #site-map-def {
     @include row();
     font-size: 90%;
-    margin-bottom: 5px;
+    //margin-bottom: 5px;
     border-bottom: 1px solid $grey;
 
     .page {
@@ -25,19 +25,70 @@
     }
 }
 
-//Site map root contains all other rows
-#site-map-root {
-    //@include row();
-    font-size: 90%;
-    
-    li.node {
-        @include row();
-        padding: 5px 0;
-        border-bottom: 1px solid $grey;
+/*
+#site-map-root ul {
+    //@include clearfix();
+    //padding-left: 0; 
+    //list-style: none;
+    .edit-link { 
+        line-height: 32px; 
+        
+        img { vertical-align: middle; }
+    }
+    .page span.title { vertical-align: middle; font-weight: $bold; }
+    .page span.title.protected {color: $grey; cursor: default;}
+    .behavior-id { color: $grey; font-style: italic; font-size: 12px; font-weight: bold; vertical-align: middle; }
+    a:hover { text-decoration: none; }
+    /*.page-status-draft     { color: @page-status-draft;    }
+    .page-status-published { color: @page-status-published;}
+    .page-status-hidden    { color: @page-status-hidden;   }
+    .page-status-preview   { color: @page-status-preview;  }
+    .page-status-archived  { color: @page-status-archived; }
 
-        .page {
-            @include column(8,0);
-        }
+}*/
+// Make all page titles bold
+#site-map-root .page-list-item .page span.title {
+    font-weight: $bold;
+}
+
+#site-map-root .page a {
+    color: $wolf-brown;
+}
+
+// ICONS
+a { 
+    // Remove icon [-]
+    &.remove { color: $red; }
+    &.remove:hover { color: darken($red,10); }
+    // Add child page icon [+]
+    &.add-child-link { color: $green; }
+    &.add-child-link:hover { color: darken($green,10); }
+    // Copy page [][]
+    &.copy-page { color: $black; }
+    // View page link <o>
+    &.view-link { color: $black; }
+    &.view-link:hover { color: lighten($black,10); }
+}
+
+// Placeholder
+.placeholder {
+    height: 2.4em;
+    line-height: 1.2em;
+    border: 1px solid #fcefa1;
+    background-color: #fbf9ee;
+    color: #363636;
+}
+
+
+
+// TESTING
+#site-map, #site-map-root {
+    .page-list-item {
+        @include row();
+        border-bottom: 1px solid $grey;
+        line-height: 2em;
+
+        .page { @include column(8,0); }
 
         .page-layout,
         .status,
@@ -46,13 +97,42 @@
             @include column(1,0);
             text-align: center;
         }
+
+        .page-layout,
+        .status {
+            font-size: 12px;
+        }
     }
 }
 
-/* Hide + expander for children pages
-#site-map .page img.expander {
-    display: none;
-}*/
+// Indentation
+#site-map {
+    // If there is no child pages, move right to verttically align icons
+    // and avoid [+] expander
+    .no-children .indent { margin-left: 21px; }
+    // indent by levels
+    .level-1 .indent { padding-left: 10px; }
+    .level-2 .indent { padding-left: 40px; }
+    .level-3 .indent { padding-left: 60px; }
+    .level-4 .indent { padding-left: 80px; }
+    .level-5 .indent { padding-left: 100px; }
+    .level-6 .indent { padding-left: 120px; }
+    .level-7 .indent { padding-left: 140px; }
+    .level-8 .indent { padding-left: 160px; }
+
+    // Page statuses
+    .status { 
+        color: $page-status; 
+        
+        &.draft-status { color: $page-status-draft; }
+        &.published-status { color: $page-status-published; }
+        &.hidden-status { color: $page-status-hidden; }
+        &.preview-status { color: $page-status-preview; }
+        &.archived-status { font-style: italic; }
+    }
+}
+
+
 
 // Snippet and Layout
 .index {
@@ -64,16 +144,17 @@
 
 		.title {
 			@include column(11,0);
+            
+            a {
+                font-weight: $bold;
+                color: $wolf-brown;
+            }
+
 		}
 
 		.delete {
 			@include column(1,0);
 			text-align: center;
-		}
-
-		a {
-			color: $wolf-brown;
-			text-decoration: none;
 		}
 	}
 }
