@@ -317,6 +317,7 @@
   padding: 20px;
   padding-top: 15px;
   padding-bottom: 20px;*/
+  //@include clearfix();
 }
 
 
@@ -338,7 +339,7 @@
   text-decoration: none;
   color: #000;
 
-  /* Border-radius not implemented yet */
+  
   border-radius: 6px;
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
@@ -359,23 +360,25 @@
   margin-top: .28em;
 }
 .tab_toolbar img { padding-bottom: 2px; }
-/*
+
+
+
 .pages {
   background-color: #fff;
   margin-top: 4px;
 
-  /* Border-radius not implemented yet 
+  
   border-radius: 0 6px 6px 6px;
   -moz-border-radius: 0 6px 6px 6px;
   -webkit-border-radius: 0 6px 6px 6px;
 
   text-shadow: black;
 }
-.pages .page {
+/*.pages .page {
   padding:  20px;
 }
-
 */
+
 
 
 /* Index table, list ------------------------------------------------------ */
@@ -688,7 +691,29 @@ table.fieldset .checkbox {
 table.fieldset .error-with-field small {
   color: red;
 }
+*/
 
+/*  Edit Page */
+// Page title
+.form-area .title .textbox {
+  //font-family: $serif;
+  font-size: 150%;
+}
+
+.form-area .view-page-edit-plugins {
+  @include row();
+}
+.form-area .view-page-edit-plugins p {
+  float: left;
+  margin-right: 2em;
+  margin-bottom: 1em;
+}
+/*
+.form-area .view-page-edit-plugins:after {
+  @include clearfix();
+}*/
+
+/*
 #metainfo-content td {
   background-color: #fff;
   padding: 6px;
@@ -720,6 +745,7 @@ table.fieldset .error-with-field small {
   border: 1px solid #ccc;
 }
 */
+
 /* Popups ----------------------------------------------------------------- */
 #content .popup {
   background-color: white;
