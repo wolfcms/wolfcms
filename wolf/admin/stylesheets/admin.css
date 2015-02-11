@@ -341,8 +341,8 @@ input[type="password"],
 textarea,
 select {
   border: 1px solid #D1D1D1;
-  height: 36px;
-  padding: 6px 10px;
+  height: 28px;
+  padding: 3px 10px;
   /* The 6px vertically centers text on FF, ignored by Webkit */
   border-radius: 4px;
   box-shadow: none;
@@ -389,6 +389,10 @@ fieldset {
   border-width: 0;
   padding: 0; }
 
+input[type="email"] > label,
+input[type="search"] > label,
+input[type="text"] > label,
+input[type="password"] > label,
 input[type="checkbox"] > label,
 input[type="radio"] > label {
   display: inline; }
@@ -1027,7 +1031,6 @@ text-align: center;
   padding: 0.35em 1em 0.35em 1em;
   text-decoration: none;
   color: #000;
-  /* Border-radius not implemented yet */
   border-radius: 6px;
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
@@ -1049,22 +1052,17 @@ text-align: center;
 .tab_toolbar img {
   padding-bottom: 2px; }
 
-/*
 .pages {
   background-color: #fff;
   margin-top: 4px;
-
-  /* Border-radius not implemented yet 
   border-radius: 0 6px 6px 6px;
   -moz-border-radius: 0 6px 6px 6px;
   -webkit-border-radius: 0 6px 6px 6px;
+  text-shadow: black; }
 
-  text-shadow: black;
-}
-.pages .page {
+/*.pages .page {
   padding:  20px;
 }
-
 */
 /* Index table, list ------------------------------------------------------ */
 /*
@@ -1551,7 +1549,33 @@ table.fieldset .checkbox {
 table.fieldset .error-with-field small {
   color: red;
 }
+*/
+/*  Edit Page */
+.form-area .title .textbox {
+  font-size: 150%; }
 
+.form-area .view-page-edit-plugins {
+  *zoom: 1;
+  display: block;
+  max-width: 1280px;
+  padding: 0 0;
+  margin: 0 auto; }
+  .form-area .view-page-edit-plugins:before, .form-area .view-page-edit-plugins:after {
+    content: "";
+    display: table; }
+  .form-area .view-page-edit-plugins:after {
+    clear: both; }
+
+.form-area .view-page-edit-plugins p {
+  float: left;
+  margin-right: 2em;
+  margin-bottom: 1em; }
+
+/*
+.form-area .view-page-edit-plugins:after {
+  @include clearfix();
+}*/
+/*
 #metainfo-content td {
   background-color: #fff;
   padding: 6px;
