@@ -101,8 +101,8 @@ input[type="password"],
 textarea,
 select {
     border: 1px solid #D1D1D1;
-    height: 36px;
-    padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
+    height: 28px;
+    padding: 3px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
     border-radius: 4px;
     box-shadow: none;
     background: #fff;
@@ -154,7 +154,10 @@ fieldset {
     border-width: 0;
     padding: 0; 
 }
-
+input[type="email"] > label,
+input[type="search"] > label,
+input[type="text"] > label,
+input[type="password"] > label,
 input[type="checkbox"] > label,
 input[type="radio"] > label {
     display: inline; 
@@ -165,3 +168,4 @@ label > .label-body {
     font-weight: normal;
     margin-left: .5em; 
 }
+
