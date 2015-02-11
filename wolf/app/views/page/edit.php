@@ -29,7 +29,7 @@ if ($pagetmp != null && !empty($pagetmp) && $parttmp != null && !empty($parttmp)
 }
 
 if ($action == 'edit') { ?>
-    <span style="float: right;"><a id="site-view-page" onclick="target='_blank'" onkeypress="target='_blank'" href="<?php echo URL_PUBLIC; echo (USE_MOD_REWRITE == false) ? '?' : ''; echo $page->path(); echo ($page->path() != '') ? URL_SUFFIX : ''; ?>"><?php echo __('View this page'); ?></a></span>
+    <span style="float: right;"><a id="site-view-page" onclick="target='_blank'" onkeypress="target='_blank'" href="<?php echo URL_PUBLIC; echo (USE_MOD_REWRITE == false) ? '?' : ''; echo $page->path(); echo ($page->path() != '') ? URL_SUFFIX : ''; ?>"><?php echo __('View this page'); ?></a> <input class="button" name="continue" type="submit" accesskey="e" value="<?php echo __('Save'); ?>" /></span>
 <?php } ?>
 
 <h1><?php echo __(ucfirst($action).' Page'); ?></h1>
@@ -47,19 +47,79 @@ if ($action == 'edit') { ?>
 			<?php Observer::notify('view_page_edit_tab_links', $page); ?>
         </ul>
     </div>
-    <div id="metainfo-content" class="pages">
-        <div id="pagetitle" class="page">
+<div id="metainfo-content">
+    <div id="pagetitle" class="page">
+      <!--<div>-->
+    <!--<div id="metainfo-content" class="pages">-->
+        <!--<div id="pagetitle" class="page">-->
             <div id="div-title" class="title" title="<?php echo __('Page Title'); ?>">
-            <input class="textbox" id="page_title" maxlength="255" name="page[title]" size="255" type="text" value="<?php echo $page->title; ?>" />
+              <input class="textbox" id="page_title" maxlength="255" name="page[title]" type="text" value="<?php echo $page->title; ?>" />
             </div>
+            <!-- test -->
+            <div id="part-tabs" class="content tabs">
+              <div id="tab-toolbar" class="tab_toolbar">
+                <a href="#" id="add-part" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/plus.png" alt="<?php echo __('Add Tab'); ?> icon" /></a>
+                <a href="#" id="delete-part" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/minus.png" alt="<?php echo __('Remove Tab'); ?> icon" /></a>
+              </div>
+              <ul class="tabNavigation">
+                  <?php foreach ($page_parts as $key => $page_part) { ?>
+                  <li id="part-<?php echo $key+1; ?>-tab" class="tab"><a href="#part-<?php echo $key+1; ?>-content"><?php echo $page_part->name; ?></a></li>
+                  <?php } ?>
+              </ul>
+          </div>
+          <div id="part-content" class="pages">
+            <?php
+            $index = 1;
+            foreach ($page_parts as $page_part) {
+                echo new View('page/part_edit', array('index' => $index, 'page_part' => $page_part));
+                $index++;
+            }
+            ?>
+          </div>
+
+          <?php Observer::notify('view_page_after_edit_tabs', $page); ?>
+
+          <div class="updated-by">
+            <p><small>
+        <?php if (isset($page->updated_on)): ?>
+            <?php echo __('Last updated by :username on :date', array( ':username' => $page->updated_by_name, ':date' => date('D, j M Y', strtotime($page->updated_on)) )); ?>
+        <?php endif; ?>
+            &nbsp;
+            </small></p>
+          </div>
+
+          <div class="view-page-edit-plugins">
+      <?php if ( ! isset($page->id) || $page->id != 1): ?>
+            <p><label for="page_status_id"><?php echo __('Status'); ?>
+              <select id="page_status_id" name="page[status_id]">
+                <option value="<?php echo Page::STATUS_DRAFT; ?>"<?php echo $page->status_id == Page::STATUS_DRAFT ? ' selected="selected"': ''; ?>><?php echo __('Draft'); ?></option>
+                <option value="<?php echo Page::STATUS_PREVIEW; ?>"<?php echo $page->status_id == Page::STATUS_PREVIEW ? ' selected="selected"': ''; ?>><?php echo __('Preview'); ?></option>
+                <option value="<?php echo Page::STATUS_PUBLISHED; ?>"<?php echo $page->status_id == Page::STATUS_PUBLISHED ? ' selected="selected"': ''; ?>><?php echo __('Published'); ?></option>
+                <option value="<?php echo Page::STATUS_HIDDEN; ?>"<?php echo $page->status_id == Page::STATUS_HIDDEN ? ' selected="selected"': ''; ?>><?php echo __('Hidden'); ?></option>
+                <option value="<?php echo Page::STATUS_ARCHIVED; ?>"<?php echo $page->status_id == Page::STATUS_ARCHIVED ? ' selected="selected"': ''; ?>><?php echo __('Archived'); ?></option>
+              </select>
+              </label>
+            </p>
+      <?php endif; ?>
+      <?php Observer::notify('view_page_edit_plugins', $page); ?>
+          </div>
+
+        <!--</div>-->
+        <p class="buttons">
+          <input class="button" name="commit" type="submit" accesskey="s" value="<?php echo __('Save and Close'); ?>" />
+          <input class="button" name="continue" type="submit" accesskey="e" value="<?php echo __('Save and Continue Editing'); ?>" />
+          <?php echo __('or'); ?> <a href="<?php echo get_url('page'); ?>"><?php echo __('Cancel'); ?></a>
+        </p>
+            <!-- end test -->
         </div>
+
         <div id="metadata" class="page">
             <div id="div-metadata" title="<?php echo __('Metadata'); ?>">
-              <table cellpadding="0" cellspacing="0" border="0">
+              <table>
                 <?php if ($page->parent_id != 0) : ?>
                 <tr>
                   <td class="label"><label for="page_slug"><?php echo __('Slug'); ?></label></td>
-                  <td class="field"><input class="textbox" id="page_slug" maxlength="100" name="page[slug]" size="100" type="text" value="<?php echo $page->slug; ?>" /></td>
+                  <td class="field"><input id="page_slug" maxlength="100" name="page[slug]" type="text" value="<?php echo $page->slug; ?>" /></td>
                 </tr>
                 <?php endif; ?>
                 <tr>
@@ -83,7 +143,7 @@ if ($action == 'edit') { ?>
         </div>
         <div id="settings" class="page">
             <div id="div-settings" title="<?php echo __('Settings'); ?>">
-              <table cellpadding="0" cellspacing="0" border="0">
+              <table>
                 <?php if ($page->parent_id != 0) : ?>
                 <tr>
                   <td class="label"><label for="page_id"><?php echo __('Page id'); ?></label></td>
@@ -144,12 +204,13 @@ if ($action == 'edit') { ?>
                 <tr>
                   <td class="label"><label for="page_needs_login"><?php echo __('Login:'); ?></label></td>
                   <td class="field">
+                  <label for="page_is_protected" title="<?php echo __('When enabled, only users who are an administrator can edit the page.'); ?>">
                     <select id="page_needs_login" name="page[needs_login]" title="<?php echo __('When enabled, users have to login before they can view the page.'); ?>">
                         <option value="<?php echo Page::LOGIN_INHERIT; ?>"<?php echo $page->needs_login == Page::LOGIN_INHERIT ? ' selected="selected"': ''; ?>><?php echo __('&#8212; inherit &#8212;'); ?></option>
                         <option value="<?php echo Page::LOGIN_NOT_REQUIRED; ?>"<?php echo $page->needs_login == Page::LOGIN_NOT_REQUIRED ? ' selected="selected"': ''; ?>><?php echo __('not required'); ?></option>
                         <option value="<?php echo Page::LOGIN_REQUIRED; ?>"<?php echo $page->needs_login == Page::LOGIN_REQUIRED ? ' selected="selected"': ''; ?>><?php echo __('required'); ?></option>
                     </select>
-                      <input id="page_is_protected" name="page[is_protected]" class="checkbox" type="checkbox" value="1"<?php if ($page->is_protected) echo ' checked="checked"'; ?><?php if (!AuthUser::hasPermission('admin_edit')) echo ' disabled="disabled"'; ?>/><label for="page_is_protected" title="<?php echo __('When enabled, only users who are an administrator can edit the page.'); ?>"> <?php echo __('Protected'); ?> </label>
+                      <input id="page_is_protected" name="page[is_protected]" class="checkbox" type="checkbox" value="1"<?php if ($page->is_protected) echo ' checked="checked"'; ?><?php if (!AuthUser::hasPermission('admin_edit')) echo ' disabled="disabled"'; ?>/> <?php echo __('Protected'); ?> </label>
                   </td>
                 </tr>
               <?php endif; ?>
@@ -159,58 +220,9 @@ if ($action == 'edit') { ?>
         </div>
         <?php Observer::notify('view_page_edit_tabs', $page); ?>
     </div>
-
-    <div id="part-tabs" class="content tabs">
-        <div id="tab-toolbar" class="tab_toolbar">
-          <a href="#" id="add-part" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/plus.png" alt="<?php echo __('Add Tab'); ?> icon" /></a>
-          <a href="#" id="delete-part" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/minus.png" alt="<?php echo __('Remove Tab'); ?> icon" /></a>
-        </div>
-        <ul class="tabNavigation">
-            <?php foreach ($page_parts as $key => $page_part) { ?>
-            <li id="part-<?php echo $key+1; ?>-tab" class="tab"><a href="#part-<?php echo $key+1; ?>-content"><?php echo $page_part->name; ?></a></li>
-            <?php } ?>
-        </ul>
-    </div>
-    <div id="part-content" class="pages">
-      <?php
-      $index = 1;
-      foreach ($page_parts as $page_part) {
-          echo new View('page/part_edit', array('index' => $index, 'page_part' => $page_part));
-          $index++;
-      }
-      ?>
-    </div>
-
-    <?php Observer::notify('view_page_after_edit_tabs', $page); ?>
-
-    <div class="row">
-<?php if ( ! isset($page->id) || $page->id != 1): ?>
-      <p><label for="page_status_id"><?php echo __('Status'); ?></label>
-        <select id="page_status_id" name="page[status_id]">
-          <option value="<?php echo Page::STATUS_DRAFT; ?>"<?php echo $page->status_id == Page::STATUS_DRAFT ? ' selected="selected"': ''; ?>><?php echo __('Draft'); ?></option>
-          <option value="<?php echo Page::STATUS_PREVIEW; ?>"<?php echo $page->status_id == Page::STATUS_PREVIEW ? ' selected="selected"': ''; ?>><?php echo __('Preview'); ?></option>
-          <option value="<?php echo Page::STATUS_PUBLISHED; ?>"<?php echo $page->status_id == Page::STATUS_PUBLISHED ? ' selected="selected"': ''; ?>><?php echo __('Published'); ?></option>
-          <option value="<?php echo Page::STATUS_HIDDEN; ?>"<?php echo $page->status_id == Page::STATUS_HIDDEN ? ' selected="selected"': ''; ?>><?php echo __('Hidden'); ?></option>
-          <option value="<?php echo Page::STATUS_ARCHIVED; ?>"<?php echo $page->status_id == Page::STATUS_ARCHIVED ? ' selected="selected"': ''; ?>><?php echo __('Archived'); ?></option>
-        </select>
-      </p>
-<?php endif; ?>
-<?php Observer::notify('view_page_edit_plugins', $page); ?>
-    </div>
-    
-    <p><small>
-<?php if (isset($page->updated_on)): ?>
-    <?php echo __('Last updated by :username on :date', array( ':username' => $page->updated_by_name, ':date' => date('D, j M Y', strtotime($page->updated_on)) )); ?>
-<?php endif; ?>
-    &nbsp;
-    </small></p>
-
   </div>
-  <p class="buttons">
-    <input class="button" name="commit" type="submit" accesskey="s" value="<?php echo __('Save and Close'); ?>" />
-    <input class="button" name="continue" type="submit" accesskey="e" value="<?php echo __('Save and Continue Editing'); ?>" />
-    <?php echo __('or'); ?> <a href="<?php echo get_url('page'); ?>"><?php echo __('Cancel'); ?></a>
-  </p>
+
+    
 
 </form>
 
@@ -290,10 +302,10 @@ if ($action == 'edit') { ?>
         $('form#page_edit_form').submit(function() { setConfirmUnload(false); return true; });
 
         // Do the metainfo tab thing
-        $('div#metainfo-tabs ul.tabNavigation li a').bind('click', function(event){
+        /*$('div#metainfo-tabs ul.tabNavigation li a').bind('click', function(event){
             $('div#metainfo-content > div.page').hide().filter(this.hash).show();
             /* Get index and current page id*/
-            var i = $(this).parent('li').index();
+            /*var i = $(this).parent('li').index();
             var pageID = page_id();
 
             $('div#metainfo-tabs ul.tabNavigation a.here').removeClass('here');
@@ -302,7 +314,11 @@ if ($action == 'edit') { ?>
             $(this).trigger('metaInfoTabFocus', [ i, this.hash ]);
             document.cookie = "meta_tab=" + pageID + ':' + i;
             return false;
-        });
+        });*/
+// Main Tabs [Page title, Metadata, Settings + view_page_edit_tabs]
+$('.form-area').tabs({
+  active: 1
+});
 
         // Do the parts tab thing
         $('div#part-tabs ul.tabNavigation a').live('click', function(event) {
