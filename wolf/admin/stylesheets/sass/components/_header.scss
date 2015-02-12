@@ -42,6 +42,10 @@ header {
 		&:hover {
 			text-decoration: none;
 		}
+
+		&.current {
+			font-weight: $bold;
+		}
 	}
 
 	ul {
