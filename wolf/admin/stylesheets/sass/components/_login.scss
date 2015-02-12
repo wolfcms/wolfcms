@@ -124,15 +124,17 @@ input.submit {
     input[type="password"],
     input[type="email"] {
       margin-bottom: 1em;
-      width: 100%;
+      //width: 100%;
     }
 
     button {
       margin-bottom: 0;
-      width: 100%;
+      //width: 100%;
       //padding: .5em 1em;
-      line-height: 3em;
+      //line-height: 3em;
+      //border-radius: 2px;
       //font-size: 14px;
+      text-transform: capitalize;
     }
   }
 }
