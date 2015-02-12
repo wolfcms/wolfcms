@@ -133,6 +133,11 @@ textarea {
     padding-bottom: 6px; 
 }
 
+/* Make all dropdowns 150px wide. It's more consistent */
+select {
+    min-width: 150px;
+}
+
 input[type="email"]:focus,
 input[type="search"]:focus,
 input[type="text"]:focus,
@@ -154,13 +159,20 @@ fieldset {
     border-width: 0;
     padding: 0; 
 }
-input[type="email"] > label,
+/*input[type="email"] > label,
 input[type="search"] > label,
 input[type="text"] > label,
-input[type="password"] > label,
-input[type="checkbox"] > label,
+input[type="password"] > label,*/
+/*input[type="checkbox"] > label,
 input[type="radio"] > label {
-    display: inline; 
+    display: inline;
+    vertical-align: middle;
+}*/
+
+label > input[type="checkbox"],
+label > input[type="radio"] {
+    display: inline;
+    vertical-align: top;
 }
 
 label > .label-body {
