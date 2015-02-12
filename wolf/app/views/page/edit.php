@@ -57,14 +57,15 @@ if ($action == 'edit') { ?>
             </div>
             <!-- test -->
             <div id="part-tabs" class="content tabs">
-              <div id="tab-toolbar" class="tab_toolbar">
+              <!--<div id="tab-toolbar" class="tab_toolbar">
                 <a href="#" id="add-part" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/plus.png" alt="<?php echo __('Add Tab'); ?> icon" /></a>
                 <a href="#" id="delete-part" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/minus.png" alt="<?php echo __('Remove Tab'); ?> icon" /></a>
-              </div>
+              </div>-->
               <ul class="tabNavigation">
                   <?php foreach ($page_parts as $key => $page_part) { ?>
-                  <li id="part-<?php echo $key+1; ?>-tab" class="tab"><a href="#part-<?php echo $key+1; ?>-content"><?php echo $page_part->name; ?></a></li>
+                  <li id="part-<?php echo $key+1; ?>-tab" class="tab"><a href="#part-<?php echo $key+1; ?>-content"><?php echo $page_part->name; ?></a><a href="#" id="delete-part" title="<?php echo __('Remove Tab'); ?>"><i class="fa fa-minus-square"></i></a></li>
                   <?php } ?>
+                  <li id="part-new-tab" class="tab"><a href="#add-part-dialog" id="add-part" title="<?php echo __('Add Tab'); ?>"><i class="fa fa-plus-square"></i></a></li>
               </ul>
           </div>
           <div id="part-content" class="pages">
@@ -241,19 +242,19 @@ if ($action == 'edit') { ?>
 	<!-- Add part dialog -->
 	<div id="add-part-dialog" class="window">
 		<div class="titlebar">
-            <div id="busy" class="busy" style="display: none;"><img alt="Spinner" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/spinner.gif" /></div>
-            <?php echo __('Add Part'); ?>
-            <a href="" class="close">[x]</a>
-        </div>
-        <div class="content">
-            <form action="<?php //echo get_url('page/addPart'); ?>" method="post">
-            <div>
-                <input id="part-index-field" name="part[index]" type="hidden" value="<?php echo $index; ?>" />
-                <input id="part-name-field" maxlength="100" name="part[name]" type="text" value="" />
-                <input id="add-part-button" name="commit" type="submit" value="<?php echo __('Add'); ?>" />
-            </div>
-            </form>
-        </div>
+        <div id="busy" class="busy" style="display: none;"><img alt="Spinner" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/spinner.gif" /></div>
+        <?php echo __('Add Part'); ?>
+        <a href="" class="close"><i class="fa fa-times"></i></a>
+    </div>
+    <div class="content">
+        <form action="<?php //echo get_url('page/addPart'); ?>" method="post">
+          <div>
+              <input id="part-index-field" name="part[index]" type="hidden" value="<?php echo $index; ?>" />
+              <input id="part-name-field" maxlength="100" name="part[name]" type="text" value="" />
+              <button id="add-part-button" name="commit" type="submit"><?php echo __('Add'); ?></button>
+          </div>
+        </form>
+    </div>
 	</div>
 <?php Observer::notify('view_page_edit_popup', $page); ?>
 
