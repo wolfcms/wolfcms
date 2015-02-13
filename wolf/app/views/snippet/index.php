@@ -35,7 +35,7 @@
     </div>
     <div class="delete">
         <?php if (AuthUser::hasPermission('snippet_delete')): ?>        
-            <a class="remove" href="<?php echo get_url('snippet/delete/'.$snippet->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete?'); ?> <?php echo $snippet->name; ?>?');" title="<?php echo __('Delete snippet'); ?>" ><i class="fa fa-minus-square"></i></a>
+            <a class="remove" href="<?php echo get_url('snippet/delete/'.$snippet->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $snippet->name; ?>?');" title="<?php echo __('Delete snippet'); ?>" ><i class="fa fa-minus-square"></i></a>
         <?php endif; ?>
     </div>
   </li>
