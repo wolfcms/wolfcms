@@ -1733,7 +1733,7 @@ table.fieldset .error-with-field small {
 }
 */
 /*  Edit Page */
-.form-area .title .textbox {
+.form-area .title input {
   font-size: 150%;
 }
 
@@ -1756,6 +1756,16 @@ table.fieldset .error-with-field small {
   float: left;
   margin-right: 2em;
   margin-bottom: 1em;
+}
+
+/* Layout specific styles */
+#layout .content-type label, #layout .content-type input {
+  display: inline-block;
+  width: auto;
+}
+#layout .content-type label {
+  min-width: 150px;
+  margin-right: 0.5em;
 }
 
 /*
@@ -1845,11 +1855,14 @@ table.fieldset .error-with-field small {
 #boxes .window .titlebar .close {
   float: right;
 }
-#boxes .window .content input {
+#boxes .window input {
   margin-bottom: 1em;
 }
+#boxes .window button {
+  margin-bottom: 0;
+}
 
-/* Small modal window for Files - Change permissions and Rename */
+/* Small modal window for Files manager - Change permissions and Rename */
 #popups .popup {
   background: #fff;
   border: #e5e5e5 solid 1px;
@@ -1863,6 +1876,11 @@ table.fieldset .error-with-field small {
 }
 #popups .popup input {
   margin-bottom: 1em;
+}
+#popups .popup button {
+  font-size: 12px;
+  padding: 0.5em 1em;
+  margin-bottom: 0;
 }
 
 /*
