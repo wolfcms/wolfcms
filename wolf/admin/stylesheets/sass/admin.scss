@@ -696,7 +696,7 @@ table.fieldset .error-with-field small {
 
 /*  Edit Page */
 // Page title
-.form-area .title .textbox {
+.form-area .title input {
   //font-family: $serif;
   font-size: 150%;
 }
@@ -709,6 +709,23 @@ table.fieldset .error-with-field small {
   margin-right: 2em;
   margin-bottom: 1em;
 }
+
+/* Layout specific styles */
+#layout {
+    .content-type {
+        label, input {
+            display: inline-block;
+            width: auto;
+
+        }
+
+        label {
+            min-width: 150px;
+            margin-right: 0.5em;
+        }
+    }
+}
+
 /*
 .form-area .view-page-edit-plugins:after {
   @include clearfix();
@@ -801,13 +818,17 @@ table.fieldset .error-with-field small {
       }
     }
 
-    .content input {
+    input {
       margin-bottom: 1em;
+    }
+
+    button {
+      margin-bottom: 0;
     }
   }
 }
 
-/* Small modal window for Files - Change permissions and Rename */
+/* Small modal window for Files manager - Change permissions and Rename */
 #popups {
   .popup {
     background: $white;
@@ -823,6 +844,12 @@ table.fieldset .error-with-field small {
 
     input {
       margin-bottom: 1em;
+    }
+
+    button {
+      font-size: 12px;
+      padding: 0.5em 1em;
+      margin-bottom: 0;
     }
   }
 }
