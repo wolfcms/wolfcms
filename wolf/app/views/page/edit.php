@@ -47,7 +47,7 @@ if ($action == 'edit') { ?>
 			<?php Observer::notify('view_page_edit_tab_links', $page); ?>
         </ul>
     </div>
-<div id="metainfo-content">
+  <div id="metainfo-content">
     <div id="pagetitle" class="page">
       <!--<div>-->
     <!--<div id="metainfo-content" class="pages">-->
@@ -79,15 +79,13 @@ if ($action == 'edit') { ?>
           </div>
 
           <?php Observer::notify('view_page_after_edit_tabs', $page); ?>
-
-          <div class="updated-by">
-            <p><small>
+        
+        <!-- Updated by -->
         <?php if (isset($page->updated_on)): ?>
-            <?php echo __('Last updated by :username on :date', array( ':username' => $page->updated_by_name, ':date' => date('D, j M Y', strtotime($page->updated_on)) )); ?>
-        <?php endif; ?>
-            &nbsp;
-            </small></p>
+          <div class="updated-by">
+            <small><?php echo __('Last updated by :username on :date', array( ':username' => $page->updated_by_name, ':date' => date('D, j M Y', strtotime($page->updated_on)) )); ?></small>
           </div>
+        <?php endif; ?>
 
           <div class="view-page-edit-plugins">
       <?php if ( ! isset($page->id) || $page->id != 1): ?>
@@ -104,14 +102,6 @@ if ($action == 'edit') { ?>
       <?php endif; ?>
       <?php Observer::notify('view_page_edit_plugins', $page); ?>
           </div>
-
-        <!--</div>-->
-        <p class="buttons">
-          <input class="button" name="commit" type="submit" accesskey="s" value="<?php echo __('Save and Close'); ?>" />
-          <input class="button" name="continue" type="submit" accesskey="e" value="<?php echo __('Save and Continue Editing'); ?>" />
-          <?php echo __('or'); ?> <a href="<?php echo get_url('page'); ?>"><?php echo __('Cancel'); ?></a>
-        </p>
-            <!-- end test -->
         </div>
 
         <div id="metadata" class="page">
@@ -142,6 +132,7 @@ if ($action == 'edit') { ?>
               </table>
             </div>
         </div>
+
         <div id="settings" class="page">
             <div id="div-settings" title="<?php echo __('Settings'); ?>">
               <table>
@@ -221,24 +212,17 @@ if ($action == 'edit') { ?>
         </div>
         <?php Observer::notify('view_page_edit_tabs', $page); ?>
     </div>
-  </div>
+  </div><!-- end .form-area wrap -->
 
-    
+<p class="buttons">
+  <input class="button" name="commit" type="submit" accesskey="s" value="<?php echo __('Save and Close'); ?>" />
+  <input class="button" name="continue" type="submit" accesskey="e" value="<?php echo __('Save and Continue Editing'); ?>" />
+  <?php echo __('or'); ?> <a href="<?php echo get_url('page'); ?>"><?php echo __('Cancel'); ?></a>
+</p>
 
 </form>
 
 <div id="boxes">
-	<!-- #Demo dialog -->
-	<div id="dialog" class="window">
-		<div class="titlebar">
-            Demo dialog
-            <a href="#" class="close">[x]</a>
-        </div>
-        <div class="content">
-            <p>This is just a demo.</p>
-        </div>
-	</div>
-
 	<!-- Add part dialog -->
 	<div id="add-part-dialog" class="window">
 		<div class="titlebar">
@@ -257,7 +241,6 @@ if ($action == 'edit') { ?>
     </div>
 	</div>
 <?php Observer::notify('view_page_edit_popup', $page); ?>
-
 </div>
 
 <script type="text/javascript">
