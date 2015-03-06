@@ -39,6 +39,8 @@ class Archive {
         switch (count($params)) {
             case 0: break;
             case 1:
+                if (!is_numeric($params[0]))
+                    break;
                 if (strlen((int) $params[0]) == 4)
                     $this->_archiveBy('year', $params);
                 else
@@ -46,10 +48,14 @@ class Archive {
                 break;
 
             case 2:
+                if (!is_numeric($params[0]) || !is_numeric($params[1]))
+                    break;
                 $this->_archiveBy('month', $params);
                 break;
 
             case 3:
+                if (!is_numeric($params[0]) || !is_numeric($params[1]) || !is_numeric($params[2]))
+                    break;
                 $this->_archiveBy('day', $params);
                 break;
 
