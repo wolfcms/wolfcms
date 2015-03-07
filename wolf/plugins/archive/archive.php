@@ -39,8 +39,6 @@ class Archive {
         switch (count($params)) {
             case 0: break;
             case 1:
-                if (!is_numeric($params[0]))
-                    break;
                 if (strlen((int) $params[0]) == 4)
                     $this->_archiveBy('year', $params);
                 else
@@ -48,14 +46,10 @@ class Archive {
                 break;
 
             case 2:
-                if (!is_numeric($params[0]) || !is_numeric($params[1]))
-                    break;
                 $this->_archiveBy('month', $params);
                 break;
 
             case 3:
-                if (!is_numeric($params[0]) || !is_numeric($params[1]) || !is_numeric($params[2]))
-                    break;
                 $this->_archiveBy('day', $params);
                 break;
 
@@ -70,8 +64,6 @@ class Archive {
 
     private function _archiveBy($interval, $params) {
         $this->interval = $interval;
-
-        global $__CMS_CONN__;
 
         $page = $this->page->children(array(
                     'where' => "behavior_id = 'archive_{$interval}_index'",
@@ -95,72 +87,82 @@ class Archive {
     }
 
     function get() {
+        // Make sure params are numeric
+        foreach ($this->params as $param) {
+            if (!is_numeric($param)) {
+                // TODO replace by decent error message
+                pageNotFound();
+            }
+        }
+        
         $date = join('-', $this->params);
 
         $pages = $this->page->parent()->children(array(
-                    'where' => "page.created_on LIKE '{$date}%'",
+                    'where' => 'page.created_on LIKE :date',
                     'order' => 'page.created_on DESC'
-                ));
+                ), array(':date' => ''.$date.'%'));
+
         return $pages;
     }
 
     function archivesByYear() {
-        $tablename = TABLE_PREFIX.'page';
-        $pdo = Record::getConnection();
-        $out = array();
+      $tablename = TABLE_PREFIX.'page';
 
-        $sql = "SELECT DISTINCT(DATE_FORMAT(created_on, '%Y')) FROM $tablename WHERE parent_id = :parent_id AND status_id != :status ORDER BY created_on DESC";
+      $out = array();
 
-        Record::logQuery($sql);
+      $res = Record::find(array(
+                  'select' => "DISTINCT(DATE_FORMAT(created_on, '%Y')) AS date",
+                  'from' => $tablename,
+                  'where' => 'parent_id = :parent_id AND status_id != :status',
+                  'order_by' => 'created_on DESC',
+                  'values' => array(':parent_id' => $this->page->id, ':status' => Page::STATUS_HIDDEN )
+                ));
 
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(array(':parent_id' => $this->page->id, ':status' => Page::STATUS_HIDDEN ));
+      foreach($res as $r) {
+        $out[] = $r->date;
+      }
 
-        while ($date = $stmt->fetchColumn())
-            $out[] = $date;
-
-        return $out;
+      return $out;
     }
 
     function archivesByMonth($year='all') {
         $tablename = TABLE_PREFIX.'page';
-        $pdo = Record::getConnection();
+
         $out = array();
 
-        $sql = "SELECT DISTINCT(DATE_FORMAT(created_on, '%Y/%m')) FROM $tablename WHERE parent_id = :parent_id AND status_id != :status ORDER BY created_on DESC";
+        $res = Record::find(array(
+                    'select' => "DISTINCT(DATE_FORMAT(created_on, '%Y/%m')) AS date",
+                    'from' => $tablename,
+                    'where' => 'parent_id = :parent_id AND status_id != :status',
+                    'order_by' => 'created_on DESC',
+                    'values' => array(':parent_id' => $this->page->id, ':status' => Page::STATUS_HIDDEN )
+                  ));
 
-
-        Record::logQuery($sql);
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(array(':parent_id' => $this->page->id, ':status' => Page::STATUS_HIDDEN ));
-
-        while ($date = $stmt->fetchColumn())
-            $out[] = $date;
+        foreach($res as $r) {
+          $out[] = $r->date;
+        }
 
         return $out;
     }
 
     function archivesByDay($year='all') {
-        $tablename = TABLE_PREFIX.'page';
-        $pdo = Record::getConnection();
-        $out = array();
+      $tablename = TABLE_PREFIX.'page';
 
-        if ($year == 'all')
-            $year = '';
+      $out = array();
 
-        $sql = "SELECT DISTINCT(DATE_FORMAT(created_on, '%Y/%m/%d')) FROM $tablename WHERE parent_id = :parent_id AND status_id != :status ORDER BY created_on DESC";
+      $res = Record::find(array(
+                  'select' => "DISTINCT(DATE_FORMAT(created_on, '%Y/%m/%d')) AS date",
+                  'from' => $tablename,
+                  'where' => 'parent_id = :parent_id AND status_id != :status',
+                  'order_by' => 'created_on DESC',
+                  'values' => array(':parent_id' => $this->page->id, ':status' => Page::STATUS_HIDDEN )
+                ));
 
+      foreach($res as $r) {
+        $out[] = $r->date;
+      }
 
-        Record::logQuery($sql);
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(array(':parent_id' => $this->page->id, ':status' => Page::STATUS_HIDDEN ));
-
-        while ($date = $stmt->fetchColumn())
-            $out[] = $date;
-
-        return $out;
+      return $out;
     }
 
 }
@@ -169,7 +171,7 @@ class PageArchive extends Page {
 
     /**
      * Returns the current PageArchive object's url.
-     * 
+     *
      * Note: overrides the Page::url() method.
      *
      * @return string   A fully qualified url.
