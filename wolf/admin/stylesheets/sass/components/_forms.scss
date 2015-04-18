@@ -1,0 +1,185 @@
+/*  Forms
+----------------------------- */
+/*
+form,
+fieldset {
+    margin-bottom: $spacing;
+}
+
+legend,
+label {
+    display: block;
+    font-weight: normal;
+    padding: 0;
+    margin-bottom: 5px;
+}
+
+input,
+textarea,
+select {
+    display: block;
+    width: 100%;
+    font: inherit;
+    line-height: 1.5;
+    color: tint($black, 18%);
+    //margin-bottom: 20px;
+    padding: 5px;
+    border: 1px solid $grey;
+    border-radius: 1px;
+}
+
+form button,
+form .button {
+    margin-bottom: 20px;
+}
+
+textarea {
+    height: 12em;
+}
+
+input[type="image"],
+input[type="checkbox"],
+input[type="radio"] {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+input:focus,
+textarea:focus {
+    border-color: rgba(82, 168, 236, 0.8);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+    outline: 0;
+    outline: thin dotted \9;
+}
+
+input[type="file"]:focus,
+input[type="checkbox"]:focus,
+select:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+input[type="submit"],
+button {
+    border: none;
+    background-color: $brand-color;
+    color: white;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+input[type="submit"]:hover,
+button:hover {
+    background-color: darken($brand-color, 10);
+}
+
+.input-inline {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+}
+
+*/
+/*  Condensed Inputs */
+/*.input-condensed {
+    padding: 1px 5px;
+    font-size: 15px;
+}
+*/
+// TEST 
+
+input[type="email"],
+input[type="search"],
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+    border: 1px solid #D1D1D1;
+    height: 28px;
+    padding: 3px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
+    border-radius: 4px;
+    box-shadow: none;
+    background: #fff;
+}
+
+/* Default width on all elements except select (dropdown) */
+input[type="email"],
+input[type="search"],
+input[type="text"],
+input[type="password"],
+textarea {
+    width: 100%;
+}
+
+/* Removes awkard default styles on some inputs */
+input[type="email"],
+input[type="search"],
+input[type="text"],
+textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+textarea {
+    min-height: 20em;
+    padding-top: 6px;
+    padding-bottom: 6px; 
+}
+
+/* Make all dropdowns 150px wide. It's more consistent */
+select {
+    min-width: 150px;
+}
+
+input[type="email"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    border: 1px solid #33C3F0;
+    outline: 0; 
+}
+
+label,
+legend {
+    display: block;
+    font-weight: 600;
+    margin-bottom: .5em; 
+}
+
+fieldset {
+    border-width: 0;
+    padding: 0; 
+}
+/*input[type="email"] > label,
+input[type="search"] > label,
+input[type="text"] > label,
+input[type="password"] > label,*/
+/*input[type="checkbox"] > label,
+input[type="radio"] > label {
+    display: inline;
+    vertical-align: middle;
+}*/
+
+label > input[type="checkbox"],
+label > input[type="radio"] {
+    display: inline;
+    vertical-align: top;
+}
+
+label > .label-body {
+    display: inline-block;
+    font-weight: normal;
+    margin-left: .5em; 
+}
+
+
+

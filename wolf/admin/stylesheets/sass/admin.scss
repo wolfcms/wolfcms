@@ -1,0 +1,923 @@
+// VARIABLES
+
+@import "components/variables";
+
+// MIXINS
+@import "mixins/mixins";
+// GRID
+@import "grid/grid";
+
+// STYLES
+
+@import "components/reset";
+
+* {
+    @include border-box;
+}
+
+@import "components/base";
+
+@import "components/forms";
+
+@import "components/tables";
+
+// Import header with navigation and gravatar
+@import "components/header";
+
+// Flash messages
+@import "components/flash-message";
+
+/*
+    ORIGINAL ADMIN STYLESHEET FILE
+
+*/
+
+.hidden { display: none; }
+.clear { font-size: 1px; clear: both; }
+.warning { color: #D42B27; }
+
+.handle { display: none; cursor: move; }
+.handle_reorder { display: none; cursor: move; }
+.handle_copy { display: none; cursor: move; }
+
+
+
+
+/* Main ----------------------------------------- */
+.container {
+    width: 100%;
+
+    &[role="main"] {
+        background: $white;
+    }
+}
+
+#main {
+  @include row();
+  //background-color: $grey;
+  //overflow:hidden;
+}
+
+/* Content -------------------------------------- */
+#content-wrapper {
+    @include column(9);
+}
+
+#content {
+    padding: 1em;
+}
+
+/*
+#content-wrapper {
+  float: left;
+  margin: 1%;
+  width: 70%;
+  font-size: 95%;
+  background-color: #fff;
+  border-bottom: 2px solid #76A83A;
+
+   Border-radius implemented. 
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+#content {
+  padding: 20px;
+
+  Border-radius - implemented.
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+
+  Box-shadow - implemented. 
+  box-shadow: 5px 3px 4px #aaa;
+  -moz-box-shadow: 5px 3px 4px #aaa;
+  -webkit-box-shadow: 5px 3px 4px #aaa;
+}
+
+#content h1 {
+   Border-radius not implemented yet 
+  border-radius: 6px 6px 0px 0px;
+  -moz-border-radius: 6px 6px 0px 0px;
+  -webkit-border-radius: 6px;
+  -webkit-border-bottom-left-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+}
+
+#content .logo {
+    float: right;
+    margin-top: 1em;
+}
+*/
+
+/* Sidebar -------------------------------------- */
+#sidebar-wrapper {
+  @include column(3);
+}
+
+#installation #content-wrapper,
+#body_setting_index #content-wrapper,
+#body_setting_plugin #content-wrapper,
+#body_page_index #content-wrapper,
+#body_page_add #content-wrapper,
+#body_page_edit #content-wrapper,
+#body_snippet_add #content-wrapper,
+#body_snippet_edit #content-wrapper,
+#body_layout_add #content-wrapper,
+#body_layout_edit #content-wrapper,
+#body_user_add #content-wrapper,
+#body_user_edit #content-wrapper,
+#body_comment_edit #content-wrapper,
+#body_plugin_index #content-wrapper {
+  @include column(12);
+}
+
+#installation #sidebar-wrapper,
+#body_setting_index #sidebar-wrapper,
+#body_page_index #sidebar-wrapper,
+#body_page_add #sidebar-wrapper,
+#body_page_edit #sidebar-wrapper,
+#body_snippet_add #sidebar-wrapper,
+#body_snippet_edit #sidebar-wrapper,
+#body_layout_add #sidebar-wrapper,
+#body_layout_edit #sidebar-wrapper,
+#body_user_add #sidebar-wrapper,
+#body_user_edit #sidebar-wrapper,
+#body_comment_edit #sidebar-wrapper,
+#body_plugin_index #sidebar-wrapper {
+    display: none;
+}
+
+#sidebar {
+    //border: 1px solid $grey;
+    margin: 56px 0 0 0;
+    font-size: .83em;
+
+    .box {
+        
+        padding: 0 1em 1em;
+    }
+
+}
+/*
+#sidebar h2 {
+  margin: 0;
+  padding: 0 0 5px 0;
+  font-size: 15px;
+  border-bottom: 1px solid #ddd;
+  text-shadow: -1px 2px 2px #ddd;
+}
+#sidebar .box {
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  background: #fff;
+  border-bottom: 2px solid #58b;
+
+   Border-radius not implemented yet
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  box-shadow: 5px 3px 4px #aaa;
+  -moz-box-shadow: 5px 3px 4px #aaa;
+  -webkit-box-shadow: 5px 3px 4px #aaa;
+}
+#sidebar p,
+#sidebar td,
+#sidebar th {
+  font-size: .83em;
+}
+#sidebar p.button {
+  margin: 0 0 10px;
+  padding: 10px 20px 0;
+  background: #59c;
+
+   Border-radius not implemented yet 
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  box-shadow: 5px 3px 4px #aaa;
+  -moz-box-shadow: 5px 3px 4px #aaa;
+  -webkit-box-shadow: 5px 3px 4px #aaa;
+}
+#sidebar p.button:hover {
+  box-shadow: 0px 0px 0px #aaa;
+  -moz-box-shadow: 0px 0px 0px #aaa;
+  -webkit-box-shadow: 0px 0px 0px #aaa;
+}
+
+#sidebar p.button img {
+  margin: -10px 10px 0 -20px;
+  padding: 6px 10px;
+  background: #9ce;
+
+   Border-radius not implemented yet 
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+#sidebar p.button a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+
+   Border-radius not implemented yet 
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+#sidebar p.button a:hover {
+  color: #123;
+}
+#sidebar .this {
+  color: #999;
+}
+#sidebar .optional {
+  color: #666;
+}
+*/
+
+/* Footer ----------------------------------------------------------------- */
+#footer {
+    @include row();
+    font-size: 90%;
+    padding-top: 2em;
+
+    .info {
+        @include column(6);
+    }
+
+    #site-links {
+        @include column(6);
+        text-align: right;
+    }
+}
+
+/*  Plugins ------------------------------------- */
+#plugins {
+    // Center all cells
+    th, td {
+        text-align: center;
+    }
+    // Align left only name and description
+    .plugin {
+        text-align: left;
+
+        p {
+            margin-bottom: 0;
+        }
+    }
+
+    .disabled {
+        color: $wolf-grey;
+    }
+
+    .notes {
+
+    }
+
+    .from {
+        font-size: 13px;
+        font-weight: $regular;
+        //color: $grey;
+        color: #999;
+    }
+}
+/* Plugins tables */
+/*
+#plugins th, #plugins td {
+    text-align: center;
+}
+#plugins th.plugin, #plugins td.plugin {
+    text-align: left;
+}
+#plugins .disabled td {
+    color: #a22;
+}
+#plugins td .notes {
+    padding: 2px 5px;
+    border: 1px solid #ddd;
+    background-color: #eee;
+    font-size: .83em;
+    color: #222;
+}
+#plugins .plugin h4 .from
+{
+    font-size: .83em;
+    font-weight: normal;
+    color: #999;
+}
+*/
+/* Form Elements ---------------------------------------------------------- */
+.form-area {
+  //background-color: #9ce;
+  /*
+  margin-left: -20px;
+  margin-right: -20px;
+  padding: 20px;
+  padding-top: 15px;
+  padding-bottom: 20px;*/
+  //@include clearfix();
+}
+
+
+/* Tabs ------------------------------------------------------------------- */
+#metainfo-tabs { margin: 10px 0 5px 0; }
+#part-tabs { margin: 35px 0 5px 0; }
+.tabs {
+  margin-right: -4px;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 6px;
+}
+.tabs .tab {
+  display: inline;
+   border: $grey solid 1px;
+}
+.tabs .tab a {
+  margin-right: 0.35em;
+  padding: 0.35em 1em 0.35em 1em;
+  text-decoration: none;
+  color: #000;
+
+  
+  border-radius: 6px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  
+  -moz-border-radius: 6px;
+  -moz-border-radius-bottomright: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-radius: 6px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+}
+.tabs .tab a.here {
+  background-color: #fff;
+  font-weight: bold;
+}
+/*.tab_toolbar {
+  float: right;
+  margin-top: .28em;
+}
+.tab_toolbar img { padding-bottom: 2px; }
+*/
+
+
+.pages {
+  background-color: #fff;
+  margin-top: 4px;
+
+  
+  border-radius: 0 6px 6px 6px;
+  -moz-border-radius: 0 6px 6px 6px;
+  -webkit-border-radius: 0 6px 6px 6px;
+
+  text-shadow: black;
+}
+/*.pages .page {
+  padding:  20px;
+}
+*/
+
+
+
+/* Index table, list ------------------------------------------------------ */
+
+/*
+.index-def {
+  background-color: #f5f5f5;
+  font-size: 90%;
+  font-weight: normal;
+  margin-top: 20px;
+  padding: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.index {
+  font-size: 90%;
+  width: 100%;
+  margin-top: 20px;
+  border-bottom: 1px solid #ddd;
+}
+ul.index {
+  margin-top: 0;
+}
+table.index td,
+table.index th {
+  text-align: left;
+}
+table.index th {
+  background-color: #f5f5f5;
+  font-size: 90%;
+  font-weight: normal;
+  padding: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+table.index td, .index li {
+  position: relative;
+  border-top: 1px solid #ddd;
+  padding: 2px 4px;
+  font-weight: normal;
+}
+.index .node {
+  font-size: 115%;
+  font-weight: bold;
+}
+.index .node .user small {
+  position: relative;
+  top: 5px;
+  color: #666;
+  font-size: 90%;
+  font-style: italic;
+  font-weight: normal;
+  margin-left: .5em;
+}
+.index .even:hover,
+.index .odd:hover,
+.index .even.hover,
+.index .odd.hover {
+  background: #f5f5f5;
+}
+.index .node a,
+.index .node a:visited
+.index .node i {
+  position: relative;
+  //top: 5px;
+  color: #000;
+  text-decoration: none;
+}
+.index .node a:hover,
+.index .node a:visited:hover {
+  text-decoration: underline;
+}
+table.index td.note {
+  color: silver;
+  font-size: 85%;
+  font-style: italic;
+  padding: 3em;
+  text-align: center;
+}
+.index p {
+  margin-top: 5px;
+}
+.index .remove {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+}
+*/
+// Import sitemap definitions for pages, snippets and layouts
+@import "components/sitemap";
+/* Site Map --------------------------------------------------------------- */
+/*
+#site-map-root .node.level-0 .page,
+#site-map .node.level-1 .page,
+#site-map .node.level-2 .page {
+  font-size: 120%;
+  font-weight: bold;
+}
+#site-map .node.level-1 .page { margin-left: 10px; }
+#site-map .node.level-2 .page { font-size: 115%; margin-left: 40px; }
+#site-map .node.level-3 .page { font-size: 110%; margin-left: 70px; }
+#site-map .node.level-4 .page { font-size: 105%; margin-left: 100px; }
+#site-map .node.level-5 .page { margin-left: 130px; }
+#site-map .node.level-6 .page { margin-left: 160px; }
+#site-map .node.level-7 .page { margin-left: 190px; }
+#site-map-root .node .page a,
+#site-map .node .page a {
+  text-decoration: none;
+}
+#site-map-root .page a .title,
+#site-map .page a .title,
+#site-map .node .page a:visited .title {
+  color: #000;
+  text-decoration: none;
+}
+#site-map .node .page .title.protected {
+  color: #9eb3bf;
+}
+#site-map-root .node .page a:hover .title,
+#site-map .node .page a:hover .title,
+#site-map .node .page a:visited:hover .title {
+  text-decoration: underline;
+}
+#site-map .node .page .info {
+  color: #9eb3bf;
+  font-style: italic;
+  font-weight: normal;
+}
+#site-map .no-children .w1 { padding-left: 23px; }
+#site-map-root .page .title,
+#site-map .page .title,
+#site-map .page .info {
+  position: relative;
+  top: 5px;
+}
+.site-map-placeholder {
+    height: 30px;
+    background-color: #eee;
+    margin: 0px;
+}
+#site-map .page img.expander {
+  padding: 3px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+#site-map-def { margin-top: 20px; position: relative; }
+#site-map-def .page { }
+#site-map-def .page-layout { position: absolute; text-align: center; top: 0; right: 325px; width: 150px }
+#site-map-def .status { position: absolute; text-align: center; top: 0; right: 175px; width: 100px }
+#site-map-def .view { position: absolute; text-align: center; top: 0; right: 100px; width: 75px }
+#site-map-def .modify { position: absolute; text-align: center; top: 0; right: 5px; width: 85px; }
+#site-map-def .tag { position: absolute; top: 0; right: 375px; width: 150px; }
+#site-map-def div {
+  padding: 2px 0px;
+  font-size: 90%;
+  font-weight: normal;
+  background-color: #f5f5f5;
+}
+#site-map-root {
+  font-size: 90%;
+}
+#site-map {
+  border-bottom: 1px solid #ddd;
+  font-size: 90%;
+}
+#site-map-root li,
+#site-map li {
+  padding: 2px 0;
+  position: relative;
+  border-top: 1px solid #ddd;
+}
+#site-map-root li:hover {
+  background-color: #ffffff;
+}
+#site-map-root #page-0 .page:hover,
+#site-map-root li.hover,
+#site-map li:hover,
+#site-map li.hover {
+  background-color: #f5f5f5;
+}
+#site-map ul { list-style: none; margin:0; padding:0; background: #fff; }
+#site-map .node > span { display: block; position: relative; }
+#site-map .page, #site-map-root .page {}
+#site-map .page-layout, #site-map-root .page-layout { position: absolute; text-align: center; top: 10px; right: 325px; width: 150px }
+#site-map .status, #site-map-root .status { position: absolute; text-align: center; top: 10px; right: 175px; width: 100px }
+#site-map .view-page, #site-map-root .view-page { position: absolute; text-align: center; top: 10px; right: 100px; width: 75px }
+#site-map .modify, #site-map-root .modify { position: absolute; text-align: center; top: 10px; right: 7px; width: 85px }
+#site-map .modify img, #site-map-root .modify img {vertical-align: middle;}
+#site-map .status { color: #9eb3bf; }
+#site-map .status.draft-status { color: #c00; }
+#site-map .status.published-status { color: #000; }
+#site-map .status.hidden-stats { color: #0c0; }
+
+#snippet_1 .tag, #snippets .tag { font-size:10px; position: absolute; top: 10px; right: 237px; width:300px }
+*/
+/* @todo CLEANUP */
+/*
+.form-area h3 {
+  font-size: 100%;
+  margin-bottom: 0;
+}
+.form-area p {
+  margin-top: 0;
+}
+.form-area small {
+  font-size: 75%;
+}
+.form-area label {
+  font-weight: bold;
+}
+.form-area .textbox {
+  font-size: 100%;
+  width: 100%;
+}
+.form-area .title {
+  margin-bottom: 0;
+}
+.form-area .title label {
+  display: block;
+}
+.form-area .title .textbox {
+  font-family: Georgia, Palatino, "Times New Roman", Times, serif;
+  font-size: 170%;
+  width: 100%;
+}
+.form-area .content {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.form-area .row {
+  clear: both;
+  margin-top: 1em;
+}
+.form-area .row p,
+.form-area .row .fieldset {
+  float: left;
+  margin-right: 2em;
+  margin-bottom: 1em;
+}
+.form-area .fieldset {
+  margin-right: .5em;
+}
+.form-area .fieldset td {
+  padding-right: .5em;
+}
+.form-area .error-with-field .error {
+  color: #f00;
+  display: block;
+  padding: 2px;
+  padding-top: 0;
+}
+.textbox {
+  border: 1px solid #ccc;
+}
+#snippet_name {
+    width:96.7%;
+    border: 1px solid #ccc;
+    font-size:200%;
+    margin:10px 10px 0 20px;
+}
+.buttons {
+  font-size: 80%;
+  margin-top: 2.5em;
+}
+.button {
+  font-size: 150%;
+}
+
+
+*/
+
+
+/*
+table.fieldset {
+  margin-top: 20px;
+  width: 100%;
+}
+table.fieldset td {
+  background-color: white;
+  border-top: 1px solid #ccc;
+  padding: 6px;
+}
+table.fieldset td.label {
+  padding-top: 10px;
+  vertical-align: top;
+  text-align: right;
+  width: 20%;
+}
+table.fieldset td.label .optional {
+  color: #929488;
+}
+table.fieldset td.field .textbox {
+  width: 100%;
+}
+table.fieldset td.help {
+  background-color: #eee;
+  font-size: 80%;
+  padding-left: 10px;
+  width: 40%;
+}
+table.fieldset input {
+  font-size: 100%;
+}
+table.fieldset .checkbox {
+  display: block;
+  float: left;
+  padding-top: 4px;
+  width: 10em;
+}
+table.fieldset .error-with-field small {
+  color: red;
+}
+*/
+
+/*  Edit Page */
+// Page title
+.form-area .title input {
+  //font-family: $serif;
+  font-size: 150%;
+}
+
+.form-area .view-page-edit-plugins {
+  @include row();
+}
+.form-area .view-page-edit-plugins p {
+  float: left;
+  margin-right: 2em;
+  margin-bottom: 1em;
+}
+
+/* Layout specific styles */
+#layout {
+    .content-type {
+        label, input {
+            display: inline-block;
+            width: auto;
+
+        }
+
+        label {
+            min-width: 150px;
+            margin-right: 0.5em;
+        }
+    }
+}
+
+/*
+.form-area .view-page-edit-plugins:after {
+  @include clearfix();
+}*/
+
+/*
+#metainfo-content td {
+  background-color: #fff;
+  padding: 6px;
+}
+#metainfo-content td.label {
+  padding-top: 10px;
+  vertical-align: top;
+  text-align: right;
+  width: 20%;
+}
+#metainfo-content td.label .optional {
+  color: #929488;
+}
+#metainfo-content #pagetitle,
+#metainfo-content #metadata,
+#metainfo-content #settings {
+  padding: 20px;
+  margin-top: .30em;
+  margin-bottom: 20px;
+}
+
+#metainfo-content table tr td {
+    padding: 0.2em 0.5em;
+}
+
+#content textarea {
+  padding: 3px 0;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+*/
+
+/* Popups ----------------------------------------------------------------- */
+/*#content .popup {
+  background-color: white;
+  border: 5px solid silver;
+  padding: 2em;
+  padding-top: 1em;
+  padding-bottom: .5em;
+
+  /* Border-radius not implemented yet */
+  /*border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}*/
+/*#content .popup .busy {
+  float: right;
+}
+#content .popup h3 {
+  margin-top: 0;
+}
+#content .popup .close-link {
+  font-size: 85%;
+  color: #999;
+}
+*/
+/* Z-index of #mask must lower than #boxes .window */
+/* #mask is default container for modals */
+#mask {
+  position:absolute;
+  z-index:9000;
+  background-color:#000;
+  display:none;
+}
+
+/* Modal dialog for Page parts, File manager (Create ne file/directory and Upload file) */
+#boxes {
+  .window {
+    position: absolute;
+    display: none;
+    z-index: 9999;
+    background: $white;
+    border-radius: $border-radius;
+    padding: 1em;
+
+    .titlebar {
+      font-size: 120%;
+      font-weight: $bold;
+      padding: 0 0 1em 0;
+      cursor: move;
+
+      .close {
+        float: right;
+      }
+    }
+
+    input {
+      margin-bottom: 1em;
+    }
+
+    button {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/* Small modal window for Files manager - Change permissions and Rename */
+#popups {
+  .popup {
+    background: $white;
+    border: $grey solid 1px;
+    border-radius: $border-radius;
+    padding: 1em;
+
+    h3 span {
+      float: right;
+      font-size: 90%;
+      font-weight: $regular;
+    }
+
+    input {
+      margin-bottom: 1em;
+    }
+
+    button {
+      font-size: 12px;
+      padding: 0.5em 1em;
+      margin-bottom: 0;
+    }
+  }
+}
+
+/*
+#boxes .window {
+  position:absolute;
+  display:none;
+  z-index:9999;
+
+  background-color: white;
+  border: 5px solid silver;*/
+
+  /* Border-radius not implemented yet 
+  //border-radius: 6px;
+  //-moz-border-radius: 6px;
+  //-webkit-border-radius: 6px;
+}*/
+/*
+#boxes .window .titlebar {
+    background-color: #988060;
+    color: #fff;
+    padding: 0.5em;
+    font-size: 130%;
+    text-shadow: -1px 2px 3px #000;
+}
+
+#boxes .window .titlebar .close {
+    color: #fff;
+    text-decoration: none;
+    float: right;
+    font-size: 80%;
+    text-shadow: none;
+    margin-left: 0.5em;
+}
+
+#boxes .window .content {
+    padding: 1em;
+}
+
+#boxes .window .content p {
+    margin: 0em 0.2em 0em 0.2em;
+    padding: 0;
+}
+*/
+/* Customize your modal window here, you can add background image too */
+/*
+#boxes #dialog {
+  background-color: #fff;
+  color: #000;
+}
+*/
+
+/*
+
+    ORIGINAL ADMIN STYLESHEET FILE
+
+*/
+
+// BUTTONS
+@import "components/buttons";
+
+// DATEPICKER for Page Settings
+@import "components/datepicker";
+
+// LOGIN / FORGOT PASSWORD
+@import "components/login";
+
+
+
+

@@ -20,13 +20,13 @@ use_helper('Gravatar');
 ?>
 <h1><?php echo __('Users'); ?></h1>
 
-<table id="users" class="index" cellpadding="0" cellspacing="0" border="0">
+<table id="users" class="index">
   <thead>
     <tr>
-      <th><?php echo __('Name'); ?> / <?php echo __('Username'); ?></th>
-      <th><?php echo __('Email'); ?></th>
-      <th><?php echo __('Roles'); ?></th>
-      <th><?php echo __('Modify'); ?></th>
+      <th class="user-name"><?php echo __('Name'); ?> / <?php echo __('Username'); ?></th>
+      <th class="user-email"><?php echo __('Email'); ?></th>
+      <th class="user-role"><?php echo __('Roles'); ?></th>
+      <th class="user-modify"><?php echo __('Modify'); ?></th>
     </tr>
   </thead>
   <tbody>
@@ -41,9 +41,9 @@ use_helper('Gravatar');
       <td><?php echo implode(', ', $user->roles()); ?></td>
       <td>
 <?php if ($user->id > 1): ?>
-        <a href="<?php echo get_url('user/delete/'.$user->id.'?csrf_token='.SecureToken::generateToken(BASE_URL.'user/delete/'.$user->id)); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete').' '.$user->name.'?'; ?>');"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/icon-remove.gif" alt="<?php echo __('delete user icon'); ?>" title="<?php echo __('Delete user'); ?>" /></a>
+        <a href="<?php echo get_url('user/delete/'.$user->id.'?csrf_token='.SecureToken::generateToken(BASE_URL.'user/delete/'.$user->id)); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete').' '.$user->name.'?'; ?>');" title="<?php echo __('Delete user'); ?>"><i class="fa fa-minus-square"></i></a>
 <?php else: ?>
-        <img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/icon-remove-disabled.gif" alt="<?php echo __('delete user icon disabled'); ?>" title="<?php echo __('Delete user unavailable'); ?>" />
+        <a href="#" class="disabled" title="<?php echo __('Delete user unavailable'); ?>"><i class="fa fa-minus-square"></i></a>
 <?php endif; ?>
       </td>
     </tr>

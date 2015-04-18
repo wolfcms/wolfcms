@@ -39,21 +39,23 @@ if (!isset($title) || trim($title) == '') {
     }
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!doctype html>
+<html lang="en">
   <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title><?php use_helper('Kses'); echo $title . ' | ' . kses(Setting::get('admin_title'), array()); ?></title>
 
-    <link rel="favourites icon" href="<?php echo PATH_PUBLIC; ?>wolf/admin/images/favicon.ico" />
-    <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="<?php echo PATH_PUBLIC; ?>wolf/admin/images/favicon.ico" />
+    <!-- Font awesome CDN -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Main admin stylesheet -->
+    <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/stylesheets/admin.css" media="screen" rel="stylesheet" type="text/css">
+    <!-- Theme stylesheet -->
     <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
 
-    <!-- IE6 PNG support fix -->
-    <!--[if lt IE 7]>
-        <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/unitpngfix.js"></script>
-    <![endif]-->
     <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/cp-datepicker.js"></script>
     <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/wolf.js"></script>
     <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/jquery-1.8.3.min.js"></script> 
@@ -129,34 +131,53 @@ if (!isset($title) || trim($title) == '') {
     <!-- Div to allow for modal dialogs -->
     <div id="mask"></div>
 
-    <div id="header">
-      <div id="site-title"><a href="<?php echo get_url(); ?>"><?php echo Setting::get('admin_title'); ?></a></div>
-      <div id="mainTabs">
-        <ul>
-          <li id="page-plugin" class="plugin"><a href="<?php echo get_url('page'); ?>"<?php if ($ctrl=='page') echo ' class="current"'; ?>><?php echo __('Pages'); ?></a></li>
-<?php if (AuthUser::hasPermission('snippet_view')): ?>
-          <li id="snippet-plugin" class="plugin"><a href="<?php echo get_url('snippet'); ?>"<?php if ($ctrl=='snippet') echo ' class="current"'; ?>><?php echo __('MSG_SNIPPETS'); ?></a></li>
-<?php endif; ?>
-<?php if (AuthUser::hasPermission('layout_view')): ?>
-          <li id="layout-plugin" class="plugin"><a href="<?php echo get_url('layout'); ?>"<?php if ($ctrl=='layout') echo ' class="current"'; ?>><?php echo __('Layouts'); ?></a></li>
-<?php endif; ?>
-
-<?php foreach (Plugin::$controllers as $plugin_name => $plugin): ?>
-<?php if ($plugin->show_tab && (AuthUser::hasPermission($plugin->permissions))): ?>
-          <?php Observer::notify('view_backend_list_plugin', $plugin_name, $plugin); ?>
-          <li id="<?php echo $plugin_name;?>-plugin" class="plugin"><a href="<?php echo get_url('plugin/'.$plugin_name); ?>"<?php if ($ctrl=='plugin' && $action==$plugin_name) echo ' class="current"'; ?>><?php echo $plugin->label; ?></a></li>
+    <header class="header">
+        <div id="header">
+          <div id="site-title"><a href="<?php echo get_url(); ?>"><?php echo Setting::get('admin_title'); ?></a></div>
+          <div id="mainTabs">
+            <ul>
+              <li id="page-plugin" class="plugin"><a href="<?php echo get_url('page'); ?>"<?php if ($ctrl=='page') echo ' class="current"'; ?>><?php echo __('Pages'); ?></a></li>
+    <?php if (AuthUser::hasPermission('snippet_view')): ?>
+              <li id="snippet-plugin" class="plugin"><a href="<?php echo get_url('snippet'); ?>"<?php if ($ctrl=='snippet') echo ' class="current"'; ?>><?php echo __('MSG_SNIPPETS'); ?></a></li>
     <?php endif; ?>
-<?php endforeach; ?>
+    <?php if (AuthUser::hasPermission('layout_view')): ?>
+              <li id="layout-plugin" class="plugin"><a href="<?php echo get_url('layout'); ?>"<?php if ($ctrl=='layout') echo ' class="current"'; ?>><?php echo __('Layouts'); ?></a></li>
+    <?php endif; ?>
 
-<?php if (AuthUser::hasPermission('admin_edit')): ?>
-          <li class="right"><a href="<?php echo get_url('setting'); ?>"<?php if ($ctrl=='setting') echo ' class="current"'; ?>><?php echo __('Administration'); ?></a></li>
-<?php endif; ?>
-<?php if (AuthUser::hasPermission('user_view')): ?>
-          <li class="right"><a href="<?php echo get_url('user'); ?>"<?php if ($ctrl=='user') echo ' class="current"'; ?>><?php echo __('Users'); ?></a></li>
-<?php endif; ?>
-        </ul>
-      </div>
-    </div>
+    <?php foreach (Plugin::$controllers as $plugin_name => $plugin): ?>
+    <?php if ($plugin->show_tab && (AuthUser::hasPermission($plugin->permissions))): ?>
+              <?php Observer::notify('view_backend_list_plugin', $plugin_name, $plugin); ?>
+              <li id="<?php echo $plugin_name;?>-plugin" class="plugin"><a href="<?php echo get_url('plugin/'.$plugin_name); ?>"<?php if ($ctrl=='plugin' && $action==$plugin_name) echo ' class="current"'; ?>><?php echo $plugin->label; ?></a></li>
+        <?php endif; ?>
+    <?php endforeach; ?>
+            
+                <li class="dropdown right">
+                    <a href="#"><?php echo __('Settings'); ?></a>
+                    <ul>
+                        <?php if (AuthUser::hasPermission('admin_edit')): ?>
+                            <li><a href="<?php echo get_url('setting'); ?>"<?php if ($ctrl=='setting') echo ' class="current"'; ?>><?php echo __('Administration'); ?></a></li>
+                        <?php endif; ?>
+                        <?php if (AuthUser::hasPermission('user_view')): ?>
+                            <li><a href="<?php echo get_url('user'); ?>"<?php if ($ctrl=='user') echo ' class="current"'; ?>><?php echo __('Users'); ?></a></li>
+                        <?php endif; ?>
+                        <?php if ( AuthUser::hasPermission('admin_view') ): ?>
+                            <li><a href="<?php echo get_url('setting/plugin'); ?>"<?php if($ctrl != 'setting' && $action == 'plugin') echo ' class="current"'; ?>><?php echo __('Plugins'); ?></a></li>
+                        <?php endif; ?>   
+                    </ul>
+                </li>
+            </ul>
+          </div>
+          <div id="gravatar">
+                <div class="gravatar">
+                    <?php
+                    use_helper('Gravatar');
+                    echo Gravatar::img(AuthUser::getRecord()->email, array( 'align' => 'middle', 'alt' => 'user icon', 'class' => 'navbar-user-gravatar' ), '32', URL_PUBLIC . 'wolf/admin/images/user.png', 'g', USE_HTTPS);
+                    ?>
+                    <span><?php echo AuthUser::getRecord()->name; ?></span>
+                </div>
+          </div>
+        </div>
+    </header>
 <?php if (Flash::get('error') !== null): ?>
                 <div id="error" class="message" style="display: none;"><?php echo Flash::get('error'); ?></div>
 <?php endif; ?>
@@ -166,43 +187,50 @@ if (!isset($title) || trim($title) == '') {
 <?php if (Flash::get('info') !== null): ?>
                 <div id="info" class="message" style="display: none"><?php echo Flash::get('info'); ?></div>
 <?php endif; ?>
-    <div id="main">
-        <div id="content-wrapper">
-            <div id="content">
-        <!-- content -->
-        <?php echo $content_for_layout; ?>
-        <!-- end content -->
+
+    <div class="container" role="main">
+        <div id="main">
+            <div id="content-wrapper">
+                <div id="content">
+            <!-- content -->
+            <?php echo $content_for_layout; ?>
+            <!-- end content -->
+                </div>
             </div>
-        </div>
-        <?php if (isset($sidebar)) { ?>
-        <div id="sidebar-wrapper">
-            <div id="sidebar">
-            <!-- sidebar -->
-            <?php echo $sidebar; ?>
-            <!-- end sidebar -->
+            <?php if (isset($sidebar)) { ?>
+            <div id="sidebar-wrapper">
+                <div id="sidebar">
+                <!-- sidebar -->
+                <?php echo $sidebar; ?>
+                <!-- end sidebar -->
+                </div>
             </div>
+            <?php } ?>
         </div>
-        <?php } ?>
     </div>
 
-    <div id="footer">
-      <p>
-      <?php echo __('Thank you for using'); ?> <a href="http://www.wolfcms.org/" target="_blank">Wolf CMS</a> <?php echo CMS_VERSION; ?> | <a href="http://forum.wolfcms.org/" target="_blank"><?php echo __('Feedback'); ?></a> | <a href="http://docs.wolfcms.org/" target="_blank"><?php echo __('Documentation'); ?></a>
-      </p>
-<?php if (DEBUG): ?>
-        <p class="stats">
-            <?php echo __('Page rendered in'); ?> <?php echo execution_time(); ?> <?php echo __('seconds'); ?>
-            | <?php echo __('Memory usage:'); ?> <?php echo memory_usage(); ?>
-        </p>
-<?php endif; ?>
+    <footer class="footer">
+        <div id="footer">
+            <div class="info">
+              <p>
+                <?php echo __('Thank you for using'); ?> <a href="http://www.wolfcms.org/" target="_blank">Wolf CMS</a> <?php echo CMS_VERSION; ?> | <a href="http://forum.wolfcms.org/" target="_blank"><?php echo __('Feedback'); ?></a> | <a href="http://docs.wolfcms.org/" target="_blank"><?php echo __('Documentation'); ?></a>
+              </p>
+                <?php if (DEBUG): ?>
+                <p class="stats">
+                    <?php echo __('Page rendered in'); ?> <?php echo execution_time(); ?> <?php echo __('seconds'); ?>
+                    | <?php echo __('Memory usage:'); ?> <?php echo memory_usage(); ?>
+                </p>
+                <?php endif; ?>
+            </div>
 
-      <p id="site-links">
-        <?php echo __('You are currently logged in as'); ?> <a href="<?php echo get_url('user/edit/'.AuthUser::getId()); ?>"><?php echo AuthUser::getRecord()->name; ?></a>
-        <span class="separator"> | </span>
-        <a href="<?php echo get_url('login/logout'.'?csrf_token='.SecureToken::generateToken(BASE_URL.'login/logout')); ?>"><?php echo __('Log Out'); ?></a>
-        <span class="separator"> | </span>
-        <a id="site-view-link" href="<?php echo URL_PUBLIC; ?>" target="_blank"><?php echo __('View Site'); ?></a>
-      </p>
-    </div>
+            <p id="site-links">
+            <?php echo __('You are currently logged in as'); ?> <a href="<?php echo get_url('user/edit/'.AuthUser::getId()); ?>"><?php echo AuthUser::getRecord()->name; ?></a>
+            <span class="separator"> | </span>
+            <a href="<?php echo get_url('login/logout'.'?csrf_token='.SecureToken::generateToken(BASE_URL.'login/logout')); ?>"><?php echo __('Log Out'); ?></a>
+            <span class="separator"> | </span>
+            <a id="site-view-link" href="<?php echo URL_PUBLIC; ?>" target="_blank"><?php echo __('View Site'); ?></a>
+            </p>
+        </div>
+    </footer>
   </body>
 </html>

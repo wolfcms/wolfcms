@@ -70,6 +70,6 @@ if (!defined('IN_CMS')) { exit(); }
         </table>
     </fieldset>
     <p class="buttons">
-        <input class="button" name="commit" type="submit" accesskey="s" value="<?php echo __('Save');?>" />
+        <button name="commit" type="submit" accesskey="s"><?php echo __('Save');?></button>
     </p>
 </form>

@@ -1,0 +1,244 @@
+/*  Base 
+----------------------------- */
+
+body {
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+    background: $background-color;
+    color: $base-font-color;
+    //margin: 0;
+    line-height: $base-line-height;
+}
+
+/*  Links
+----------------------------- */
+
+a {
+    color: $link;
+    text-decoration: none;
+    word-wrap: break-word;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: $wolf-brown;
+    text-decoration: underline;
+}
+
+a img {
+    border: none;
+    background: none;
+}
+
+a:hover img {
+    border: none;
+    background: none;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
+/*  Typography
+----------------------------- */
+
+p {
+    margin-bottom: $spacing;
+}
+
+p.lead {
+    font-size: 1.2em;
+}
+
+/*  Images
+----------------------------- */
+
+img {
+    -ms-interpolation-mode: bicubic;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+p img { 
+    margin: 0; 
+}
+
+p img.left { 
+    float: left; 
+    margin: 0 1em 1em 0; 
+    padding: 0; 
+}
+
+p img.right { 
+    float: right; 
+    margin: 0 0 1em 1em; 
+}
+
+/*  Lists
+----------------------------- */
+
+ul, ol, dl {
+    margin-bottom: $spacing;
+}
+
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+    margin-bottom: 0;
+}
+
+ul.disc {
+    list-style: disc;
+    margin-bottom: $spacing;
+    margin-left: 20px;
+}
+
+ol {
+    list-style: decimal;
+}
+
+dl {
+    margin-left: 0;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin-left: 0;
+}
+
+.no-style {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/*  Heading
+-----------------------------*/
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    font-family:$heading-font-family;
+    margin-bottom: 1em;
+    color: $heading-font-color;
+    font-weight: $bold;
+}
+
+h1,.h1,
+h2,.h2 {
+    font-size: 16px;
+}
+
+h3,
+.h3 {
+    font-size: 15px;
+}
+
+h4, h5, h6,
+.h4, .h5, .h6 {
+    font-size: 14px;
+}
+/*
+h4,
+.h4 {
+    text-transform: uppercase;
+}*/
+
+/*  Lines, Quotes, Emphasis
+----------------------------- */
+
+/*  Lines */
+hr {
+    margin: em(32) auto;
+    border: 0;
+    border-top: em(1) solid $grey;
+    border-bottom: 0 solid $white;
+}
+
+/*  Bold */
+strong {
+    font-weight: bold;
+}
+
+/*  Italics */
+em {
+    font-style: italic;
+}
+
+/*  Subscript & Superscript */
+sub,
+sup {
+    position: relative;
+    font-size: 85%;
+    font-weight: bold;
+    line-height: 0;
+    vertical-align: baseline;
+    margin-left: 4px;
+}
+
+sup {
+    top: -8px;
+}
+
+sub {
+    bottom: -4px;
+}
+
+/*  Highlighting colors */
+::selection {
+    color: $white;
+    background: $blue;
+}
+
+::-moz-selection {
+    color: $white;
+    background: $blue;
+}
+
+/*  Blockquotes */
+blockquote {
+    border-left: 4px solid $blue;
+    margin-bottom: $spacing;
+    padding-left: $spacing;
+    padding-right: $spacing;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+small {
+    font-size: 75%;
+}
+
+/*  Pre, Code
+----------------------------- */
+
+pre, code, kbd, samp {
+    font-family: $mono;
+    _font-family: 'Courier New', monospace;
+    font-size: 11px;
+    line-height: 1em;
+    margin: 1em 0;
+}
+
+pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+
+    padding: 1em 0.5em;
+    background: $grey;
+    display: block;
+}

@@ -25,7 +25,7 @@
 if (!defined('IN_CMS')) { exit(); }
 
 ?>
-<p class="button"><a href="<?php echo get_url('plugin/comment/'); ?>"><img src="<?php echo ICONS_PATH;?>comment-32-ns.png" align="middle" alt="page icon" /> <?php echo __('Comments'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/comment/moderation/'); ?>"><img src="<?php echo ICONS_PATH;?>action-approve-32-ns.png" align="middle" alt="page icon" /> <?php echo __('Moderation'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/comment/settings'); ?>"><img src="<?php echo ICONS_PATH;?>settings-32-ns.png" align="middle" alt="page icon" /> <?php echo __('Settings'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/comment/documentation/'); ?>"><img src="<?php echo ICONS_PATH;?>documentation-32-ns.png" align="middle" alt="page icon" /> <?php echo __('Documentation'); ?></a></p>
+<a class="button wide large" href="<?php echo get_url('plugin/comment/'); ?>"><i class="fa fa-comments"></i> <?php echo __('Comments'); ?></a>
+<a class="button wide large" href="<?php echo get_url('plugin/comment/moderation/'); ?>"><i class="fa fa-check-square-o"></i> <?php echo __('Moderation'); ?></a>
+<a class="button wide large" href="<?php echo get_url('plugin/comment/settings'); ?>"><i class="fa fa-gear"></i> <?php echo __('Settings'); ?></a>
+<a class="button wide large" href="<?php echo get_url('plugin/comment/documentation/'); ?>"><i class="fa fa-file-text-o"></i> <?php echo __('Documentation'); ?></a>

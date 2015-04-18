@@ -28,12 +28,14 @@
 <ul id="snippets" class="index">
 <?php foreach($snippets as $snippet): ?>
   <li id="snippet_<?php echo $snippet->id; ?>" class="snippet node <?php echo odd_even(); ?>">
-    <img align="middle" alt="snippet-icon" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/snippet.png" />
-    <a href="<?php echo get_url('snippet/edit/'.$snippet->id); ?>"><?php echo $snippet->name; ?></a>
-    <img class="handle" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
-    <div class="remove">
+    <div class="title">
+        <i class="fa fa-file-o"></i>
+        <a href="<?php echo get_url('snippet/edit/'.$snippet->id); ?>"><?php echo $snippet->name; ?></a>
+        <img class="handle" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
+    </div>
+    <div class="delete">
         <?php if (AuthUser::hasPermission('snippet_delete')): ?>        
-            <a class="remove" href="<?php echo get_url('snippet/delete/'.$snippet->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete?'); ?> <?php echo $snippet->name; ?>?');"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/icon-remove.gif" alt="<?php echo __('delete snippet icon'); ?>" title="<?php echo __('Delete snippet'); ?>" /></a>
+            <a class="remove" href="<?php echo get_url('snippet/delete/'.$snippet->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $snippet->name; ?>?');" title="<?php echo __('Delete snippet'); ?>" ><i class="fa fa-minus-square"></i></a>
         <?php endif; ?>
     </div>
   </li>

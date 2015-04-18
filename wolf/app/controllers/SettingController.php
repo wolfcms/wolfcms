@@ -65,6 +65,20 @@ class SettingController extends Controller {
         );
     }
 
+    /**
+    * Calls save function or displays plugins screen.
+    */
+    public final function plugin() {
+        // check if trying to save
+        if (get_request_method() == 'POST') {
+            $this->_save();
+        }
+
+        $this->display('plugin/index',
+            array('csrf_token' => SecureToken::generateToken(BASE_URL.'setting'))
+        );
+    }
+
 
     /**
      * Saves the settings.

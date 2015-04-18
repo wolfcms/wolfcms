@@ -23,10 +23,11 @@
 if (!defined('IN_CMS')) { exit(); }
 
 ?>
-<p class="button"><a href="<?php echo get_url('plugin/backup_restore/documentation'); ?>"><img src="<?php echo ICONS_PATH;?>documentation-32-ns.png" align="middle" alt="documentation icon" /> <?php echo __('Documentation'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/backup_restore/backup'); ?>"><img src="<?php echo ICONS_PATH;?>action-download-32-ns.png" align="middle" alt="xml icon" /> <?php echo __('Create a backup'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/backup_restore/restore'); ?>"><img src="<?php echo ICONS_PATH;?>action-upload-32-ns.png" align="middle" alt="xml icon" /> <?php echo __('Restore a backup'); ?></a></p>
-<p class="button"><a href="<?php echo get_url('plugin/backup_restore/settings'); ?>"><img src="<?php echo ICONS_PATH;?>settings-32-ns.png" align="middle" alt="settings icon" /> <?php echo __('Settings'); ?></a></p>
+<a href="<?php echo get_url('plugin/backup_restore/documentation'); ?>" class="button wide large"><i class="fa fa-file-text-o"></i> <?php echo __('Documentation'); ?></a>
+<a href="<?php echo get_url('plugin/backup_restore/backup'); ?>" class="button wide large"><i class="fa fa-cloud-download"></i> <?php echo __('Create a backup'); ?></a>
+<a href="<?php echo get_url('plugin/backup_restore/restore'); ?>" class="button wide large"><i class="fa fa-cloud-upload"> </i> <?php echo __('Restore a backup'); ?></a>
+<a href="<?php echo get_url('plugin/backup_restore/settings'); ?>" class="button wide large"><i class="fa fa-gear"></i> <?php echo __('Settings'); ?></a>
+
 <div class="box">
 <h2><?php echo __('Backup/Restore plugin');?></h2>
 <p>

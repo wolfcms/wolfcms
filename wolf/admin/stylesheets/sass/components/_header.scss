@@ -1,0 +1,187 @@
+/*	HEADER -------------------------------------- */
+header {
+	background-color: $wolf-green;
+	color: $white;
+	//padding-top: 1px;
+	border-bottom: 1px solid $wolf-green;
+}
+
+#header {
+	@include row();
+}
+
+/*	SITE TITLE ---------------------------------- */
+
+#site-title {
+	@include column(2);
+	margin: 14px 0 0 0;
+
+	a {
+		font-size: 120%;
+		color: $white;
+		font-weight: $bold;
+		text-decoration: none;
+		line-height: 1;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+
+
+/*	NAVIGATION ---------------------------------- */
+#mainTabs {
+	@include column(8);
+
+	a {
+		color: $white;
+		//font-weight: $bold;
+
+		&:hover {
+			text-decoration: none;
+		}
+
+		&.current {
+			font-weight: $bold;
+		}
+	}
+
+	ul {
+		text-align: left;
+		display: inline;
+		margin: 0;
+		padding: 15px 4px 17px 0;
+
+		li {
+			display: inline-block;
+			margin-right: -4px;
+			position: relative;
+			//padding: 15px 20px;
+			padding: 15px 10px;
+			cursor: pointer;
+			-webkit-transition: all 0.2s;
+			-moz-transition: all 0.2s;
+			-ms-transition: all 0.2s;
+			-o-transition: all 0.2s;
+			transition: all 0.2s;
+
+			&:hover {
+				background: $link-hover;
+				color: #fff;
+			}
+
+			&:hover ul {
+				display: block;
+				opacity: 1;
+				visibility: visible;
+			}
+
+			ul {
+				padding: 0;
+				position: absolute;
+				top: 48px;
+				left: 0;
+				width: 150px;
+				-webkit-box-shadow: none;
+				-moz-box-shadow: none;
+				box-shadow: none;
+				display: none;
+				opacity: 0;
+				visibility: hidden;
+				-webkit-transiton: opacity 0.2s;
+				-moz-transition: opacity 0.2s;
+				-ms-transition: opacity 0.2s;
+				-o-transition: opacity 0.2s;
+				-transition: opacity 0.2s;
+
+				li {
+					background: $link-hover;
+					display: block;
+					color: #fff;
+
+					&:hover {
+						background: $link;
+					}
+				}
+			}
+		}
+	}
+
+	.right {
+		float: right;
+	}
+	
+}
+
+/*	GRAVATAR ------------------------------------ */
+#gravatar {
+	@include column(2);
+	font-size: 90%;
+
+	.gravatar {
+		height: 32px;
+		margin: 8px 0;
+		display: flex;
+		align-items: center;
+
+		span {
+			padding: 0 0 0 5px;
+		}
+	}
+}
+/*
+#mainTabs {
+  margin: 0 17px 0 20px;
+  height: 28px;
+}
+#mainTabs ul {}
+#mainTabs li {
+  display: inline;
+  list-style: none;
+  border: none;
+}
+#mainTabs a:link,
+#mainTabs a:visited {
+  float: left;
+  margin-right: 3px;
+  padding: 6px 8px 5px;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: normal;
+  text-decoration: none !important;
+  color: #222;
+  background-color: #eee;
+  border-bottom: 2px solid #ccc;
+
+
+  border-radius: 6px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  
+  -moz-border-radius: 6px;
+  -moz-border-radius-bottomright: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-radius: 6px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+}
+#mainTabs a:hover {
+  color: #000;
+  background-color: #999;
+  border-color: #777;
+}
+
+#mainTabs a:link.current,
+#mainTabs a:visited.current {
+  color: #123;
+  background: #6ad;
+  border-color: #6ad;
+  font-weight: bold;
+  text-decoration: none;
+}
+#mainTabs .right {
+  float: right;
+}
+*/

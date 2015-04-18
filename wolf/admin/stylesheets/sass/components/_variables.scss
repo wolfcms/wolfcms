@@ -1,0 +1,82 @@
+// Grid stuff
+$gutter_width: 40px; // Your gutter width
+$columns: 12; // The amount of columns you want
+$max_width: 1280px; // Set a maximum width of the site
+$site_align: center !default;
+
+// WOLFCMS default colors
+$wolf-brown: #2e2924; // new darker brown
+$wolf-green: #76a83a; // new, darker green
+$wolf-grey: #ecf0f1; // light gray
+
+$success: #76a83a; // $wolf-green
+$info: #2980b9; // blue
+$error: #c0392b; // red
+
+$page-status: $wolf-brown;
+$page-status-published: #2e2924; // new darker brown
+$page-status-draft: #c0392b; // red
+$page-status-hidden: #9eb3bf; // blueish
+$page-status-preview: #76a83a; // new, darker green
+
+
+
+
+// Other colors
+$brown: #2e2924;
+$green: #76a83a;
+$grey: #e5e5e5;
+$black: #333;
+$white: #fff;
+$blue: #2980b9;
+$red: #c0392b;
+$purple: #8e44ad;
+$medium-purple: #9370DB;
+
+// Main site color
+$brand-color: $wolf-green;
+
+// Main background color
+$background-color: $grey;
+
+// Links
+$link: $wolf-green;
+$link-hover: darken($wolf-green, 10);
+
+// Fonts
+$serif: Georgia, 'Times New Roman', Times, serif;
+$sans-serif: "Lucida Grande", Helvetica, Arial, sans-serif;
+$mono: 'Consolas', 'Lucida Console', 'Courier New', 'Monaco', Courier, monospace;
+
+// Weights
+$light: 300;
+$regular: 400;
+$semi-bold: 600;
+$bold: 700;
+
+// Base font settings
+$base-font-family: $sans-serif;
+$base-font-color: $black;
+$base-font-size: 14px;
+$base-line-height: 1.4;
+
+$font-size-large: 18px;
+$font-size-small: 12px;
+
+// Headings
+$heading-font-family: $sans-serif;
+$heading-font-color: $black;
+
+
+// Line heights
+$line-height-large: 1.8;
+$line-height-small: 1.2;
+
+// Border radius
+$border-radius: 2px;
+$border-radius-large: 4px;
+$border-radius-small: 1px;
+
+
+// Spacing, Margin, Padding
+$spacing: 1.5em;

@@ -23,8 +23,8 @@ if (!defined('IN_CMS')) { exit(); }
 
 if (Dispatcher::getAction() != 'view'): ?>
 
-<p class="button"><a href="#create-file-popup" class="popupLink"><img src="<?php echo ICONS_PATH; ?>action-add-32-ns.png" align="middle" alt="page icon" /> <?php echo __('Create new file'); ?></a></p>
-<p class="button"><a href="#create-directory-popup" class="popupLink"><img src="<?php echo ICONS_PATH; ?>file-folder-32-ns.png" align="middle" alt="dir icon" /> <?php echo __('Create new directory'); ?></a></p>
-<p class="button"><a href="#upload-file-popup" class="popupLink"><img src="<?php echo ICONS_PATH; ?>action-upload-32-ns.png" align="middle" alt="upload icon" /><?php echo __('Upload file'); ?></a></p>
+<a class="button wide large popupLink" href="#create-file-popup"><i class="fa fa-plus"></i> <?php echo __('Create new file'); ?></a>
+<a class="button wide large popupLink" href="#create-directory-popup"><i class="fa fa-folder-o"></i> <?php echo __('Create new directory'); ?></a>
+<a class="button wide large popupLink" href="#upload-file-popup"><i class="fa fa-upload"></i> <?php echo __('Upload file'); ?></a>
 
 <?php endif; ?>
