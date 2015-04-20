@@ -19,7 +19,7 @@
 if (Dispatcher::getAction() == 'index'): ?>
 
 <?php if (AuthUser::hasPermission('snippet_add')): ?>
-<a class="button wide large" href="<?php echo get_url('snippet/add'); ?>"><i class="fa fa-plus"></i> <?php echo __('New Snippet'); ?></a>
+<a class="button" href="<?php echo get_url('snippet/add'); ?>"><i class="fa fa-plus"></i> <?php echo __('New Snippet'); ?></a>
 <?php endif; ?>
 
 <div class="box">

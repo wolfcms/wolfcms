@@ -18,7 +18,7 @@
 ?>
 <?php if (Dispatcher::getAction() == 'index'): ?>
 
-<a class="button large wide" href="<?php echo get_url('layout/add'); ?>"><i class="fa fa-plus"></i> <?php echo __('New Layout'); ?></a>
+<a class="button" href="<?php echo get_url('layout/add'); ?>"><i class="fa fa-plus"></i> <?php echo __('New Layout'); ?></a>
 
 <div class="box">
 	<h2><?php echo __('What is a Layout?'); ?></h2>

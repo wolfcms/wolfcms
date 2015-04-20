@@ -19,7 +19,7 @@
 if (Dispatcher::getAction() == 'index'):
 ?>
 
-<a class="button wide large" href="<?php echo get_url('user/add'); ?>"><i class="fa fa-plus"></i> <?php echo __('New User'); ?></a>
+<a class="button" href="<?php echo get_url('user/add'); ?>"><i class="fa fa-plus"></i> <?php echo __('New User'); ?></a>
 
 <div class="box">
     <h2><?php echo __('Where do the avatars come from?'); ?></h2>
