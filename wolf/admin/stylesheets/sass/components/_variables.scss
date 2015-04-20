@@ -7,7 +7,11 @@ $site_align: center !default;
 // WOLFCMS default colors
 $wolf-brown: #2e2924; // new darker brown
 $wolf-green: #76a83a; // new, darker green
-$wolf-grey: #ecf0f1; // light gray
+//$wolf-grey: #ecf0f1; // light grey
+$wolf-grey: #edede7;
+
+$test-color: #364144;
+
 
 $success: #76a83a; // $wolf-green
 $info: #2980b9; // blue
@@ -34,10 +38,12 @@ $purple: #8e44ad;
 $medium-purple: #9370DB;
 
 // Main site color
-$brand-color: $wolf-green;
+//$brand-color: $wolf-green;
+$brand-color: $test-color;
 
 // Main background color
-$background-color: $grey;
+//$background-color: $grey;
+$background-color: $wolf-grey;
 
 // Links
 $link: $wolf-green;
@@ -45,7 +51,7 @@ $link-hover: darken($wolf-green, 10);
 
 // Fonts
 $serif: Georgia, 'Times New Roman', Times, serif;
-$sans-serif: "Lucida Grande", Helvetica, Arial, sans-serif;
+$sans-serif: Tahoma, "Lucida Sans Unicode", "Lucida Grande", Helvetica, Arial, sans-serif;
 $mono: 'Consolas', 'Lucida Console', 'Courier New', 'Monaco', Courier, monospace;
 
 // Weights
