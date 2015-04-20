@@ -66,7 +66,11 @@ table {
     width: 100%;
 }
 
-th,
+th {
+    padding: 0 15px 12px 15px;
+    text-align: left;
+}
+
 td {
     padding: 12px 15px;
     text-align: left;
@@ -77,7 +81,7 @@ tr {
     border-bottom: 1px solid $grey; 
 
     &:first-child {
-        border-top: 1px solid $grey; 
+        //border-top: 1px solid $grey; 
     }
 }
 
