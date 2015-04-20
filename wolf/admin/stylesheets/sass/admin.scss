@@ -47,9 +47,9 @@
 .container {
     width: 100%;
 
-    &[role="main"] {
+    /*&[role="main"] {
         background: $white;
-    }
+    }*/
 }
 
 #main {
@@ -61,10 +61,18 @@
 /* Content -------------------------------------- */
 #content-wrapper {
     @include column(9);
+    margin-top: 2em;
+
+    background: $white;
+    border: $grey solid 1px;
+    border-radius: $border-radius;
 }
 
 #content {
     padding: 1em;
+    //background: $white;
+    //border: $grey solid 1px;
+    //border-radius: $border-radius;
 }
 
 /*
@@ -114,6 +122,7 @@
 /* Sidebar -------------------------------------- */
 #sidebar-wrapper {
   @include column(3);
+  margin-top: 2em;
 }
 
 #installation #content-wrapper,
@@ -131,6 +140,7 @@
 #body_comment_edit #content-wrapper,
 #body_plugin_index #content-wrapper {
   @include column(12);
+  margin-top: 2em;
 }
 
 #installation #sidebar-wrapper,
@@ -151,12 +161,23 @@
 
 #sidebar {
     //border: 1px solid $grey;
-    margin: 56px 0 0 0;
+    //margin: 56px 0 0 0;
     font-size: .83em;
+
+    background: $white;
+    border: $grey solid 1px;
+    border-radius: $border-radius;
 
     .box {
         
         padding: 0 1em 1em;
+    }
+
+    // TEST
+    .button {
+      width: 90%;
+      margin: 5%;
+      padding: 1em 0;
     }
 
 }
