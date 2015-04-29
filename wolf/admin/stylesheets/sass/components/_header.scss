@@ -99,7 +99,7 @@ header {
 				li {
 					background: $link-hover;
 					display: block;
-					color: #fff;
+					color: $white;
 
 					&:hover {
 						background: $link;
@@ -112,7 +112,7 @@ header {
 	.right {
 		float: right;
 	}
-	
+
 }
 
 /*	GRAVATAR ------------------------------------ */
@@ -159,7 +159,7 @@ header {
   border-radius: 6px;
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
-  
+
   -moz-border-radius: 6px;
   -moz-border-radius-bottomright: 0px;
   -moz-border-radius-bottomleft: 0px;
