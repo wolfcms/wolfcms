@@ -92,7 +92,7 @@ button:hover {
     font-size: 15px;
 }
 */
-// TEST 
+// TEST
 
 input[type="email"],
 input[type="search"],
@@ -100,12 +100,13 @@ input[type="text"],
 input[type="password"],
 textarea,
 select {
-    border: 1px solid #D1D1D1;
+    font-family: $sans-serif;
+    border: 1px solid $border-color;
     height: 28px;
     padding: 3px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
-    border-radius: 4px;
+    border-radius: $border-radius;
     box-shadow: none;
-    background: #fff;
+    background: $white;
 }
 
 /* Default width on all elements except select (dropdown) */
@@ -114,7 +115,7 @@ input[type="search"],
 input[type="text"],
 input[type="password"],
 textarea {
-    width: 100%;
+    width: 100%
 }
 
 /* Removes awkard default styles on some inputs */
@@ -130,7 +131,7 @@ textarea {
 textarea {
     min-height: 20em;
     padding-top: 6px;
-    padding-bottom: 6px; 
+    padding-bottom: 6px;
 }
 
 /* Make all dropdowns 150px wide. It's more consistent */
@@ -144,42 +145,60 @@ input[type="text"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus {
-    border: 1px solid #33C3F0;
-    outline: 0; 
+    //border: 1px solid #33C3F0;
+    border: darken($border-color,10) solid 1px;
+    outline: 0;
 }
 
-label,
-legend {
+label {
     display: block;
     font-weight: 600;
-    margin-bottom: .5em; 
+}
+
+legend {
+    width: 100%;
+    display: block;
+    padding-bottom: 0.5em;
+    color: $red;
+    font-weight: $semi-bold;
+    text-transform: uppercase;
+    border-bottom: $border-color solid 1px;
 }
 
 fieldset {
     border-width: 0;
-    padding: 0; 
+    padding: 0 0 0.5em 0;
 }
 /*input[type="email"] > label,
 input[type="search"] > label,
 input[type="text"] > label,
 input[type="password"] > label,*/
-/*input[type="checkbox"] > label,
+input[type="checkbox"] > label,
 input[type="radio"] > label {
-    display: inline;
-    vertical-align: middle;
-}*/
-
-label > input[type="checkbox"],
-label > input[type="radio"] {
     display: inline;
     vertical-align: top;
 }
-
+/*
+label > input[type="checkbox"],
+label > input[type="radio"] {
+    display: inline-block;
+    color: $red;
+    vertical-align: top;
+    margin-bottom: 0;
+}
+*/
 label > .label-body {
     display: inline-block;
     font-weight: normal;
-    margin-left: .5em; 
+    margin-left: .5em;
 }
+
+.inline {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+}
+
 
 
 
