@@ -4,50 +4,44 @@ $columns: 12; // The amount of columns you want
 $max_width: 1280px; // Set a maximum width of the site
 $site_align: center !default;
 
-// WOLFCMS default colors
-$wolf-brown: #2e2924; // new darker brown
-$wolf-green: #76a83a; // new, darker green
-//$wolf-grey: #ecf0f1; // light grey
-$wolf-grey: #edede7;
-
-$test-color: #364144;
-
-
-$success: #76a83a; // $wolf-green
-$info: #2980b9; // blue
-$error: #c0392b; // red
-
-$page-status: $wolf-brown;
-$page-status-published: #2e2924; // new darker brown
-$page-status-draft: #c0392b; // red
-$page-status-hidden: #9eb3bf; // blueish
-$page-status-preview: #76a83a; // new, darker green
-
-
-
-
-// Other colors
-$brown: #2e2924;
-$green: #76a83a;
-$grey: #e5e5e5;
+// Colors
 $black: #333;
 $white: #fff;
+$green: #76a83a;
+$red: #C0392B;
 $blue: #2980b9;
-$red: #c0392b;
-$purple: #8e44ad;
-$medium-purple: #9370DB;
+$light_blue: #9eb3bf;
+$grey: #e5e5e5;
+$light_grey: #edede7;
+$wrap_border: #d4d4d4;
+$dark_grey: #999;
+
 
 // Main site color
-//$brand-color: $wolf-green;
-$brand-color: $test-color;
+$brand-color: #364144;
 
-// Main background color
-//$background-color: $grey;
-$background-color: $wolf-grey;
+// Admin background color
+$background-color: $light_grey;
+
+// Borders
+$border-color: $grey;
+$form-border-color: $grey;
 
 // Links
-$link: $wolf-green;
-$link-hover: darken($wolf-green, 10);
+$link: $red;
+$link-hover: darken($brand-color, 10);
+
+// Flash messages
+$success: $green; // $wolf-green
+$info: $blue; // blue
+$error: $red; // red
+
+// Page status messages
+$page-status: $grey;
+$page-status-published: $black; // new darker brown
+$page-status-draft: $red; // red
+$page-status-hidden: $light_blue; // blueish
+$page-status-preview: $green; // new, darker green
 
 // Fonts
 $serif: Georgia, 'Times New Roman', Times, serif;
