@@ -86,6 +86,10 @@ input.submit {
   margin: 10% auto;
   width: 350px;
   text-align: center;
+
+  h1 {
+    border: none;
+  }
 }
 
 #dialog {
@@ -98,7 +102,7 @@ input.submit {
   //width: 332px;
   text-align: left;
   border-radius: $border-radius;
-  
+
   //-moz-box-shadow: 0 0 1px $black;
   //-webkit-box-shadow: 0 0 1px $black;
   //box-shadow: 0 0 5px $black;

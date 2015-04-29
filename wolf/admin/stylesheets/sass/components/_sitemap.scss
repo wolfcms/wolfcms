@@ -4,13 +4,13 @@
     @include row();
     font-size: 90%;
     //margin-bottom: 5px;
-    border-bottom: 1px solid $grey;
+    border-bottom: 1px solid $border-color;
 
     .page {
     	@include column(8,0);
         margin-bottom: 10px;
     }
-    .page-layout, 
+    .page-layout,
     .status,
     .view,
     .modify {
@@ -28,11 +28,11 @@
 /*
 #site-map-root ul {
     //@include clearfix();
-    //padding-left: 0; 
+    //padding-left: 0;
     //list-style: none;
-    .edit-link { 
-        line-height: 32px; 
-        
+    .edit-link {
+        line-height: 32px;
+
         img { vertical-align: middle; }
     }
     .page span.title { vertical-align: middle; font-weight: $bold; }
@@ -52,11 +52,11 @@
 }
 
 #site-map-root .page a {
-    color: $wolf-brown;
+    color: $black;
 }
 
 // ICONS
-a { 
+a {
     // Remove icon [-]
     &.remove { color: $red; }
     &.remove:hover { color: darken($red,10); }
@@ -85,8 +85,9 @@ a {
 #site-map, #site-map-root {
     .page-list-item {
         @include row();
-        border-bottom: 1px solid $grey;
-        line-height: 2em;
+        border-bottom: 1px solid $border-color;
+        //line-height: 2em;
+        padding: 0.5em;
 
         .page { @include column(8,0); }
 
@@ -109,9 +110,13 @@ a {
 #site-map {
     // If there is no child pages, move right to verttically align icons
     // and avoid [+] expander
-    .no-children .indent { margin-left: 21px; }
+    .no-children .indent { padding-left: 1em; margin-left: 1.5em; }
     // indent by levels
-    .level-1 .indent { padding-left: 10px; }
+    .level-1 .indent { padding-left: 1em; }
+    .level-2 .indent { padding-left: 2em; }
+    .level-3 .indent { padding-left: 3em; }
+    .level-4 .indent { padding-left: 4em; }
+    /*.level-1 .indent { padding-left: 10px; }
     .level-2 .indent { padding-left: 40px; }
     .level-3 .indent { padding-left: 60px; }
     .level-4 .indent { padding-left: 80px; }
@@ -119,11 +124,11 @@ a {
     .level-6 .indent { padding-left: 120px; }
     .level-7 .indent { padding-left: 140px; }
     .level-8 .indent { padding-left: 160px; }
-
+*/
     // Page statuses
-    .status { 
-        color: $page-status; 
-        
+    .status {
+        color: $page-status;
+
         &.draft-status { color: $page-status-draft; }
         &.published-status { color: $page-status-published; }
         &.hidden-status { color: $page-status-hidden; }
@@ -136,18 +141,18 @@ a {
 
 // Snippet and Layout
 .index {
-	
+
 	li.node {
 		@include row();
-		padding: 5px 0;
-		border-bottom: 1px solid $grey;
+		padding: 0.5em 5px;
+		border-bottom: 1px solid $border-color;
 
 		.title {
 			@include column(11,0);
-            
+
             a {
                 font-weight: $bold;
-                color: $wolf-brown;
+                color: $black;
             }
 
 		}
