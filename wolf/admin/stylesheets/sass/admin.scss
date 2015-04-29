@@ -9,7 +9,7 @@
 
 // STYLES
 
-@import "components/reset";
+@import "components/normalize";
 
 * {
     @include border-box;
@@ -64,7 +64,7 @@
     margin-top: 2em;
 
     background: $white;
-    border: $grey solid 1px;
+    border: $wrap_border solid 1px;
     border-radius: $border-radius;
 }
 
@@ -84,7 +84,7 @@
   background-color: #fff;
   border-bottom: 2px solid #76A83A;
 
-   Border-radius implemented. 
+   Border-radius implemented.
   border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -98,14 +98,14 @@
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
 
-  Box-shadow - implemented. 
+  Box-shadow - implemented.
   box-shadow: 5px 3px 4px #aaa;
   -moz-box-shadow: 5px 3px 4px #aaa;
   -webkit-box-shadow: 5px 3px 4px #aaa;
 }
 
 #content h1 {
-   Border-radius not implemented yet 
+   Border-radius not implemented yet
   border-radius: 6px 6px 0px 0px;
   -moz-border-radius: 6px 6px 0px 0px;
   -webkit-border-radius: 6px;
@@ -165,11 +165,11 @@
     font-size: .83em;
 
     background: $white;
-    border: $grey solid 1px;
+    border: $wrap_border solid 1px;
     border-radius: $border-radius;
 
     .box {
-        
+
         padding: 0 1em 1em;
     }
 
@@ -213,7 +213,7 @@
   padding: 10px 20px 0;
   background: #59c;
 
-   Border-radius not implemented yet 
+   Border-radius not implemented yet
   border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -232,7 +232,7 @@
   padding: 6px 10px;
   background: #9ce;
 
-   Border-radius not implemented yet 
+   Border-radius not implemented yet
   border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -242,7 +242,7 @@
   text-decoration: none;
   font-weight: bold;
 
-   Border-radius not implemented yet 
+   Border-radius not implemented yet
   border-radius: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -258,21 +258,7 @@
 }
 */
 
-/* Footer ----------------------------------------------------------------- */
-#footer {
-    @include row();
-    font-size: 90%;
-    padding-top: 2em;
-
-    .info {
-        @include column(6);
-    }
-
-    #site-links {
-        @include column(6);
-        text-align: right;
-    }
-}
+@import "components/footer";
 
 /*  Plugins ------------------------------------- */
 #plugins {
@@ -289,8 +275,12 @@
         }
     }
 
+    h4 {
+      margin: 0;
+    }
+
     .disabled {
-        color: $wolf-grey;
+        color: $grey;
     }
 
     .notes {
@@ -300,8 +290,9 @@
     .from {
         font-size: 13px;
         font-weight: $regular;
-        //color: $grey;
-        color: #999;
+        font-style: italic;
+        color: $dark_grey;
+        //color: #999;
     }
 }
 /* Plugins tables */
@@ -341,9 +332,11 @@
   //@include clearfix();
 }
 
+@import "components/tabs";
 
 /* Tabs ------------------------------------------------------------------- */
-#metainfo-tabs { margin: 10px 0 5px 0; }
+
+/*#metainfo-tabs { margin: 10px 0 5px 0; }
 #part-tabs { margin: 35px 0 5px 0; }
 .tabs {
   margin-right: -4px;
@@ -353,7 +346,7 @@
 }
 .tabs .tab {
   display: inline;
-   border: $grey solid 1px;
+  border: $border-color solid 1px;
 }
 .tabs .tab a {
   margin-right: 0.35em;
@@ -361,11 +354,11 @@
   text-decoration: none;
   color: #000;
 
-  
+
   border-radius: 6px;
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
-  
+
   -moz-border-radius: 6px;
   -moz-border-radius-bottomright: 0px;
   -moz-border-radius-bottomleft: 0px;
@@ -376,7 +369,7 @@
 .tabs .tab a.here {
   background-color: #fff;
   font-weight: bold;
-}
+}*/
 /*.tab_toolbar {
   float: right;
   margin-top: .28em;
@@ -384,18 +377,18 @@
 .tab_toolbar img { padding-bottom: 2px; }
 */
 
-
+/*
 .pages {
   background-color: #fff;
   margin-top: 4px;
 
-  
+
   border-radius: 0 6px 6px 6px;
   -moz-border-radius: 0 6px 6px 6px;
   -webkit-border-radius: 0 6px 6px 6px;
 
   text-shadow: black;
-}
+}*/
 /*.pages .page {
   padding:  20px;
 }
@@ -722,6 +715,13 @@ table.fieldset .error-with-field small {
   font-size: 150%;
 }
 
+// Edit page "View this page" link
+.site-view-page {
+  //float: right;
+  padding-left: 1em;
+
+}
+
 .form-area .view-page-edit-plugins {
   @include row();
 }
@@ -785,144 +785,7 @@ table.fieldset .error-with-field small {
 }
 */
 
-/* Popups ----------------------------------------------------------------- */
-/*#content .popup {
-  background-color: white;
-  border: 5px solid silver;
-  padding: 2em;
-  padding-top: 1em;
-  padding-bottom: .5em;
 
-  /* Border-radius not implemented yet */
-  /*border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-}*/
-/*#content .popup .busy {
-  float: right;
-}
-#content .popup h3 {
-  margin-top: 0;
-}
-#content .popup .close-link {
-  font-size: 85%;
-  color: #999;
-}
-*/
-/* Z-index of #mask must lower than #boxes .window */
-/* #mask is default container for modals */
-#mask {
-  position:absolute;
-  z-index:9000;
-  background-color:#000;
-  display:none;
-}
-
-/* Modal dialog for Page parts, File manager (Create ne file/directory and Upload file) */
-#boxes {
-  .window {
-    position: absolute;
-    display: none;
-    z-index: 9999;
-    background: $white;
-    border-radius: $border-radius;
-    padding: 1em;
-
-    .titlebar {
-      font-size: 120%;
-      font-weight: $bold;
-      padding: 0 0 1em 0;
-      cursor: move;
-
-      .close {
-        float: right;
-      }
-    }
-
-    input {
-      margin-bottom: 1em;
-    }
-
-    button {
-      margin-bottom: 0;
-    }
-  }
-}
-
-/* Small modal window for Files manager - Change permissions and Rename */
-#popups {
-  .popup {
-    background: $white;
-    border: $grey solid 1px;
-    border-radius: $border-radius;
-    padding: 1em;
-
-    h3 span {
-      float: right;
-      font-size: 90%;
-      font-weight: $regular;
-    }
-
-    input {
-      margin-bottom: 1em;
-    }
-
-    button {
-      font-size: 12px;
-      padding: 0.5em 1em;
-      margin-bottom: 0;
-    }
-  }
-}
-
-/*
-#boxes .window {
-  position:absolute;
-  display:none;
-  z-index:9999;
-
-  background-color: white;
-  border: 5px solid silver;*/
-
-  /* Border-radius not implemented yet 
-  //border-radius: 6px;
-  //-moz-border-radius: 6px;
-  //-webkit-border-radius: 6px;
-}*/
-/*
-#boxes .window .titlebar {
-    background-color: #988060;
-    color: #fff;
-    padding: 0.5em;
-    font-size: 130%;
-    text-shadow: -1px 2px 3px #000;
-}
-
-#boxes .window .titlebar .close {
-    color: #fff;
-    text-decoration: none;
-    float: right;
-    font-size: 80%;
-    text-shadow: none;
-    margin-left: 0.5em;
-}
-
-#boxes .window .content {
-    padding: 1em;
-}
-
-#boxes .window .content p {
-    margin: 0em 0.2em 0em 0.2em;
-    padding: 0;
-}
-*/
-/* Customize your modal window here, you can add background image too */
-/*
-#boxes #dialog {
-  background-color: #fff;
-  color: #000;
-}
-*/
 
 /*
 
@@ -932,6 +795,12 @@ table.fieldset .error-with-field small {
 
 // BUTTONS
 @import "components/buttons";
+
+// MODALS AND POPUPS
+@import "components/popups";
+
+// ODD/EVEN for tables
+@import "components/odd-even";
 
 // DATEPICKER for Page Settings
 @import "components/datepicker";
