@@ -20,9 +20,10 @@ use_helper('Gravatar');
 ?>
 <h1><?php echo __('Users'); ?></h1>
 
-<table id="users" class="index">
+<table id="users">
   <thead>
     <tr>
+      <th class="user-gravatar"></th>
       <th class="user-name"><?php echo __('Name'); ?> / <?php echo __('Username'); ?></th>
       <th class="user-email"><?php echo __('Email'); ?></th>
       <th class="user-role"><?php echo __('Roles'); ?></th>
@@ -30,10 +31,10 @@ use_helper('Gravatar');
     </tr>
   </thead>
   <tbody>
-<?php foreach($users as $user): ?> 
+<?php foreach($users as $user): ?>
     <tr class="node <?php echo odd_even(); ?>">
+      <td class="gravatar"><?php echo Gravatar::img($user->email, array('align' => 'middle', 'alt' => 'user icon'), '32', URL_PUBLIC.'wolf/admin/images/user.png', 'g', USE_HTTPS); ?></td>
       <td class="user">
-        <?php echo Gravatar::img($user->email, array('align' => 'middle', 'alt' => 'user icon'), '32', URL_PUBLIC.'wolf/admin/images/user.png', 'g', USE_HTTPS); ?>
         <a href="<?php echo get_url('user/edit/'.$user->id); ?>"><?php echo $user->name; ?></a>
         <small><?php echo $user->username; ?></small>
       </td>
@@ -47,6 +48,6 @@ use_helper('Gravatar');
 <?php endif; ?>
       </td>
     </tr>
-<?php endforeach; ?> 
+<?php endforeach; ?>
   </tbody>
 </table>
