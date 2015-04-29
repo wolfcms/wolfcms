@@ -26,13 +26,11 @@ if ($pagetmp != null && !empty($pagetmp) && $parttmp != null && !empty($parttmp)
     $page = $pagetmp;
     $page_parts = $parttmp;
     $tags = $tagstmp;
-}
+} ?>
 
-if ($action == 'edit') { ?>
-    <span style="float: right;"><a id="site-view-page" onclick="target='_blank'" onkeypress="target='_blank'" href="<?php echo URL_PUBLIC; echo (USE_MOD_REWRITE == false) ? '?' : ''; echo $page->path(); echo ($page->path() != '') ? URL_SUFFIX : ''; ?>"><?php echo __('View this page'); ?></a> <input class="button" name="continue" type="submit" accesskey="e" value="<?php echo __('Save'); ?>" /></span>
-<?php } ?>
 
-<h1><?php echo __(ucfirst($action).' Page'); ?></h1>
+
+<h1><?php echo __(ucfirst($action).' Page'); ?><?php if ($action == 'edit') { ?><span><small><a class="site-view-page" onclick="target='_blank'" onkeypress="target='_blank'" href="<?php echo URL_PUBLIC; echo (USE_MOD_REWRITE == false) ? '?' : ''; echo $page->path(); echo ($page->path() != '') ? URL_SUFFIX : ''; ?>"><?php echo __('View this page'); ?></a></small></span><?php } ?></h1>
 
 <form id="page_edit_form" action="<?php if ($action == 'add') echo get_url('page/add'); else echo  get_url('page/edit/'.$page->id); ?>" method="post">
 
@@ -78,8 +76,14 @@ if ($action == 'edit') { ?>
             ?>
           </div>
 
+          <!--  Tags -->
+          <div class="page-tags">
+            <label class="label-body inline" for="page_tags"><?php echo __('Tags'); ?></label>
+            <input class="textbox inline" id="page_tags" maxlength="255" name="page_tag[tags]" type="text" value="<?php echo join(', ', $tags); ?>" />
+          </div>
+
           <?php Observer::notify('view_page_after_edit_tabs', $page); ?>
-        
+
         <!-- Updated by -->
         <?php if (isset($page->updated_on)): ?>
           <div class="updated-by">
@@ -125,10 +129,12 @@ if ($action == 'edit') { ?>
                   <td class="label optional"><label for="page_description"><?php echo __('Description'); ?></label></td>
                   <td class="field"><textarea class="textarea" id="page_description" name="page[description]" rows="2" cols="3"><?php echo $page->description; ?></textarea></td>
                 </tr>
+                <!--
                 <tr>
                   <td class="label optional"><label for="page_tags"><?php echo __('Tags'); ?></label></td>
                   <td class="field"><input class="textbox" id="page_tags" maxlength="255" name="page_tag[tags]" size="255" type="text" value="<?php echo join(', ', $tags); ?>" /></td>
                 </tr>
+                -->
               </table>
             </div>
         </div>
@@ -332,12 +338,12 @@ $('.form-area').tabs({
             if(part && pageId == part[1]) {
                 pageTab = (part[2]) ? part[2] : 0 ;
             } else { pageTab = 0; }
-            
+
             $('div#metainfo-content > div.page').hide();
             $('div#metainfo-tabs ul.tabNavigation li a').eq(metaTab).click();
 
             $('div#part-content > div.page').hide();
-            $('div#part-tabs ul.tabNavigation li a').eq(pageTab).click();     
+            $('div#part-tabs ul.tabNavigation li a').eq(pageTab).click();
         })();
 
         // Do the add part button thing
@@ -345,7 +351,7 @@ $('.form-area').tabs({
 
             // START show popup
             var id = 'div#boxes div#add-part-dialog';
-            
+
             $('div#add-part-dialog div.content form input#part-name-field').val('');
 
             //Get the screen height and width

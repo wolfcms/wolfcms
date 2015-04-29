@@ -128,7 +128,7 @@
 
             return this;
         };
-        
+
         jQuery.fn.expandableSetup = function expandableSetup() {
             $(this).live('click', function() {
                 if ($(this).hasClass("expanded")) {
@@ -149,7 +149,7 @@
 
                     if ($('#page_'+parentId).children('ul').length == 0) {
                         $('#busy-'+parentId).show();
-                        $.get("<?php echo get_url('page/children/'); ?>"+parentId+'/'+'1', function(data) {                        
+                        $.get("<?php echo get_url('page/children/'); ?>"+parentId+'/'+'1', function(data) {
                             $('#page_'+parentId).append(data);
                             $('#site-map li').sitemapSetup();
                             $('.busy').spinnerSetup();
@@ -173,8 +173,8 @@
 				})();
             });
         };
-        
-        jQuery.fn.sortableSetup = function sortableSetup() { 
+
+        jQuery.fn.sortableSetup = function sortableSetup() {
 			$('ul#site-map').nestedSortable({
 				disableNesting: 'no-nest',
 				forcePlaceholderSize: true,
@@ -190,23 +190,23 @@
 				beforeStop: function(event, ui) {
 					// quick checks incase they have taken it out of the sitemap tree
 					if(ui.item.parents("#page-0").is('li') === false)
-					{	
+					{
 						$("ul#site-map").nestedSortable('cancel');
 					}
 				},
-                stop: function(event, ui) {                    
+                stop: function(event, ui) {
                 	var order = $("ul#site-map").nestedSortable('serialize');
-                	
+
  					$.ajax({
 						type: 'post',
 						url: '<?php echo get_url('page/reorder'); ?>',
 						data: order,
 						cache: false
-					});  
-								             	
+					});
+
 					// check where we have put the row so we can change styles if needbe
-					var parent = ui.item.parent().parents('li.node:first');					
-										
+					var parent = ui.item.parent().parents('li.node:first');
+
 					if(parent.hasClass('level-0'))
 					{
 						// put back as homepage child
@@ -220,18 +220,18 @@
 						} else if(ui.item.hasClass('children-hidden'))
 						{
 							childClass = 'children-hidden';
-						}				
+						}
 						ui.item.removeClass();
 						ui.item.addClass('node level-1 '+childClass);
 					} else if(parent.find('img.expander').hasClass('expanded') == false)
 					{
 						// put into a row that has children but is closed
 						ui.item.parent().hide().remove();
-						
+
 						// todo: improve
 						// dirty fix for reloading tree
 						window.location.reload(true);
-						
+
 					} else if(parent.find('img.expander').hasClass('expanded') == true)
 					{
 						// put into a row that has expanded children
@@ -249,36 +249,36 @@
 							childClass = 'children-hidden';
 						}
 						ui.item.removeClass();
-						ui.item.addClass('node '+levelClass[1]+' '+childClass);	
+						ui.item.addClass('node '+levelClass[1]+' '+childClass);
 					}
                 }
 			});
             return this;
         };
-        
-        jQuery.fn.copyableSetup = function() { 
-        
-			$(this).live('click', function() {			
+
+        jQuery.fn.copyableSetup = function() {
+
+			$(this).live('click', function() {
 				var id = $(this).attr('id').split('-');
-				
+
 				$.ajax({
 					type: 'post',
 					url: '<?php echo get_url('page/copy'); ?>',
 					data: "&originalid="+id[1],
 					cache: false,
 					success: function(data) {
-					
+
 						data = data.split('||');
 						var newid = parseInt(data[0]);
-						
+
 						// setup the new row
-						var newobj = $("#page_"+id[1]).clone().css('display', 'none');					
-						
+						var newobj = $("#page_"+id[1]).clone().css('display', 'none');
+
 						newobj.attr('id', 'page_'+newid); // set the main li id
 						newobj.find('.edit-link').attr({ // set the edit link
 							'href' : data[1],
 							'title' : newid+' | '+data[3]
-						});	
+						});
 						newobj.find('.title').html(data[2]); // set the page title
 						newobj.find('.busy').attr('id', 'busy-'+newid); // set the spinner id
 						newobj.find('.view-link').attr('href', data[4]); // set the view page link
@@ -286,20 +286,20 @@
 						newobj.find('.remove').attr('href', data[6]); // set the delete link
 						newobj.find('.remove').attr('onclick', '').unbind('click'); //remove old confirm dialog for delete link (needs both for IE/FF/Chrome)
 						newobj.find('.remove').click(function(){return confirm('Are you sure you want to delete '+data[2]+' and its underlying pages?');}); //set the onclick dialog box for delete link
-						newobj.find('.copy-page').attr('id', 'copy-'+newid); // set the copy id						
-						
+						newobj.find('.copy-page').attr('id', 'copy-'+newid); // set the copy id
+
 						$("#page_"+id[1]).after(newobj); // add row to dom and slide down
 						newobj.slideDown();
-					}						
+					}
 				});
 			});
             return this;
-        };        
-         
-        
+        };
+
+
 $(document).ready(function(){
     $('#site-map li').sitemapSetup();
-    $("img.expander").expandableSetup(); 
+    $("img.expander").expandableSetup();
     $(".busy").spinnerSetup();
     $(".copy-page").copyableSetup();
     $('ul#site-map').sortableSetup();
@@ -307,15 +307,15 @@ $(document).ready(function(){
 
     $('#toggle_reorder').toggle(
             function(){
-    			$('ul#site-map').nestedSortable('enable');  
+    			$('ul#site-map').nestedSortable('enable');
     			$('img.handle_reorder').show();
                 $('#toggle_reorder').text('<?php echo __('disable reorder');?>');
             },
             function() {
-                $('ul#site-map').nestedSortable('disable');               
+                $('ul#site-map').nestedSortable('disable');
                 $('img.handle_reorder').hide();
                 $('#toggle_reorder').text('<?php echo __('reorder');?>');
             }
-    )      
+    )
 });
 </script>
