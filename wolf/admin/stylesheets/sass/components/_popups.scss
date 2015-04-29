@@ -1,0 +1,138 @@
+/* Popups ----------------------------------------------------------------- */
+/*#content .popup {
+  background-color: white;
+  border: 5px solid silver;
+  padding: 2em;
+  padding-top: 1em;
+  padding-bottom: .5em;
+
+  /* Border-radius not implemented yet */
+  /*border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}*/
+/*#content .popup .busy {
+  float: right;
+}
+#content .popup h3 {
+  margin-top: 0;
+}
+#content .popup .close-link {
+  font-size: 85%;
+  color: #999;
+}
+*/
+/* Z-index of #mask must lower than #boxes .window */
+/* #mask is default container for modals */
+#mask {
+  position:absolute;
+  z-index:9000;
+  background-color:#000;
+  display:none;
+}
+
+/* Modal dialog for Page parts, File manager (Create ne file/directory and Upload file) */
+#boxes {
+  .window {
+    position: absolute;
+    display: none;
+    z-index: 9999;
+    background: $white;
+    border-radius: $border-radius;
+    padding: 1em;
+
+    .titlebar {
+      font-size: 120%;
+      font-weight: $bold;
+      padding: 0 0 1em 0;
+      cursor: move;
+
+      .close {
+        float: right;
+      }
+    }
+
+    input {
+      margin-bottom: 1em;
+    }
+
+    button {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/* Small modal window for Files manager - Change permissions and Rename */
+#popups {
+  .popup {
+    background: $white;
+    border: $grey solid 1px;
+    border-radius: $border-radius;
+    padding: 1em;
+
+    h3 span {
+      float: right;
+      font-size: 90%;
+      font-weight: $regular;
+    }
+
+    input {
+      margin-bottom: 1em;
+    }
+
+    button {
+      font-size: 12px;
+      padding: 0.5em 1em;
+      margin-bottom: 0;
+    }
+  }
+}
+
+/*
+#boxes .window {
+  position:absolute;
+  display:none;
+  z-index:9999;
+
+  background-color: white;
+  border: 5px solid silver;*/
+
+  /* Border-radius not implemented yet
+  //border-radius: 6px;
+  //-moz-border-radius: 6px;
+  //-webkit-border-radius: 6px;
+}*/
+/*
+#boxes .window .titlebar {
+    background-color: #988060;
+    color: #fff;
+    padding: 0.5em;
+    font-size: 130%;
+    text-shadow: -1px 2px 3px #000;
+}
+
+#boxes .window .titlebar .close {
+    color: #fff;
+    text-decoration: none;
+    float: right;
+    font-size: 80%;
+    text-shadow: none;
+    margin-left: 0.5em;
+}
+
+#boxes .window .content {
+    padding: 1em;
+}
+
+#boxes .window .content p {
+    margin: 0em 0.2em 0em 0.2em;
+    padding: 0;
+}
+*/
+/* Customize your modal window here, you can add background image too */
+/*
+#boxes #dialog {
+  background-color: #fff;
+  color: #000;
+}
+*/
