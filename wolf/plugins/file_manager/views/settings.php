@@ -24,9 +24,9 @@ if (!defined('IN_CMS')) { exit(); }
 ?>
 <h1><?php echo __('File Manager Settings');?></h1>
 <form action="<?php echo get_url('plugin/file_manager/settings_save'); ?>" method="post">
-    <fieldset style="padding: 0.5em;">
-        <legend style="padding: 0em 0.5em 0em 0.5em; font-weight: bold;"><?php echo __('General settings'); ?></legend>
-        <table class="fieldset" cellpadding="0" cellspacing="0" border="0">
+    <fieldset>
+        <legend><?php echo __('General settings'); ?></legend>
+        <table>
             <tr>
                 <td class="label"><label for="setting_show_hidden"><?php echo __('Show hidden files'); ?>: </label></td>
                 <td class="field">
@@ -49,9 +49,9 @@ if (!defined('IN_CMS')) { exit(); }
             </tr>
         </table>
     </fieldset>
-    <fieldset style="padding: 0.5em;">
-        <legend style="padding: 0em 0.5em 0em 0.5em; font-weight: bold;"><?php echo __('File Creation Defaults'); ?></legend>
-        <table class="fieldset" cellpadding="0" cellspacing="0" border="0">
+    <fieldset>
+        <legend><?php echo __('File Creation Defaults'); ?></legend>
+        <table>
             <tr>
                 <td class="label"><label for="umask"><?php echo __('Umask:');?> </label></td>
                 <td class="field"><input name="settings[umask]" id="umask" type="text" size="35" maxsize="255" value="<?php echo $settings['umask'];?>"/></td>

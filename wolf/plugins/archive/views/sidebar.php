@@ -21,4 +21,4 @@
 /* Security measure */
 if (!defined('IN_CMS')) { exit(); }
 ?>
-<p class="button"><a href="<?php echo get_url('plugin/archive/settings'); ?>"><img src="<?php echo ICONS_PATH;?>settings-32-ns.png" align="middle" alt="page icon" /> <?php echo __('Settings'); ?></a></p>
+<a class="button" href="<?php echo get_url('plugin/archive/settings'); ?>"><i class="fa fa-cog"></i><?php echo __('Settings'); ?></a>

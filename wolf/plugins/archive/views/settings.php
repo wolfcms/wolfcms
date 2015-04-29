@@ -24,9 +24,9 @@ if (!defined('IN_CMS')) { exit(); }
 <h1><?php echo __('Settings'); ?></h1>
 
 <form action="<?php echo get_url('plugin/archive/save'); ?>" method="post">
-    <fieldset style="padding: 0.5em;">
-        <legend style="padding: 0em 0.5em 0em 0.5em; font-weight: bold;"><?php echo __('Settings'); ?></legend>
-        <table class="fieldset" cellpadding="0" cellspacing="0" border="0">
+    <fieldset>
+        <legend><?php echo __('Settings'); ?></legend>
+        <table>
             <tr>
                 <td class="label"><label for="setting_use_dates"><?php echo __('Generate dates'); ?>: </label></td>
                 <td class="field">
@@ -41,7 +41,7 @@ if (!defined('IN_CMS')) { exit(); }
     </fieldset>
 
     <p class="buttons">
-        <input class="button" name="commit" type="submit" accesskey="s" value="<?php echo __('Save'); ?>" />
+        <button name="commit" type="submit" accesskey="s"><?php echo __('Save'); ?></button>
     </p>
 </form>
 
