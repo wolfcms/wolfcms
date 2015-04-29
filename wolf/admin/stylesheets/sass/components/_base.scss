@@ -1,4 +1,4 @@
-/*  Base 
+/*  Base
 ----------------------------- */
 
 body {
@@ -21,7 +21,7 @@ a {
 }
 
 a:hover {
-    color: $wolf-brown;
+    color: $link-hover;
     text-decoration: underline;
 }
 
@@ -59,26 +59,28 @@ svg:not(:root) {
     overflow: hidden;
 }
 
-p img { 
-    margin: 0; 
+p img {
+    margin: 0;
 }
 
-p img.left { 
-    float: left; 
-    margin: 0 1em 1em 0; 
-    padding: 0; 
+p img.left {
+    float: left;
+    margin: 0 1em 1em 0;
+    padding: 0;
 }
 
-p img.right { 
-    float: right; 
-    margin: 0 0 1em 1em; 
+p img.right {
+    float: right;
+    margin: 0 0 1em 1em;
 }
 
 /*  Lists
 ----------------------------- */
 
 ul, ol, dl {
-    margin-bottom: $spacing;
+    margin: 0 0 $spacing 0;
+    padding: 0;
+    list-style-type: none;
 }
 
 ul ul,
@@ -86,6 +88,8 @@ ul ol,
 ol ol,
 ol ul {
     margin-bottom: 0;
+    padding: 0;
+    list-style-type: none;
 }
 
 ul.disc {
@@ -142,6 +146,8 @@ h2,.h2 {
 h3,
 .h3 {
     font-size: 15px;
+    text-transform: uppercase;
+    color: $red;
 }
 
 h4, h5, h6,
@@ -161,7 +167,7 @@ h4,
 hr {
     margin: em(32) auto;
     border: 0;
-    border-top: em(1) solid $grey;
+    border-top: em(1) solid $border-color;
     border-bottom: 0 solid $white;
 }
 
@@ -197,17 +203,17 @@ sub {
 /*  Highlighting colors */
 ::selection {
     color: $white;
-    background: $blue;
+    background: $brand-color;
 }
 
 ::-moz-selection {
     color: $white;
-    background: $blue;
+    background: $brand-color;
 }
 
 /*  Blockquotes */
 blockquote {
-    border-left: 4px solid $blue;
+    border-left: 4px solid $brand-color;
     margin-bottom: $spacing;
     padding-left: $spacing;
     padding-right: $spacing;
@@ -227,6 +233,8 @@ q:after {
 
 small {
     font-size: 75%;
+    font-style: italic;
+    color: $dark_grey;
 }
 
 /*  Pre, Code
