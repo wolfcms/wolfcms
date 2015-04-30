@@ -29,8 +29,8 @@
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
         <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/stylesheets/admin.css" media="screen" rel="stylesheet" type="text/css">
-        <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/login.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
-        
+        <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/screen.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
+
         <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/jquery-1.8.3.min.js"></script>
         <script type="text/javascript">
             // <![CDATA[
@@ -68,7 +68,7 @@
                     <form action="<?php echo get_url('login', 'forgot'); ?>" method="post">
                         <div>
                             <label for="forgot-email"><?php echo __('Email address'); ?>:</label>
-                            <input class="long" id="forgot-email" type="text" name="forgot[email]" value="<?php echo $email; ?>" />
+                            <input class="long" id="forgot-email" type="text" name="forgot[email]" placeholder="<?php echo __('Email address'); ?>" value="<?php echo $email; ?>" />
                         </div>
                         <div id="forgot-submit">
                             <button type="submit" accesskey="s"><i class="fa fa-envelope"></i> <?php echo __('Send password'); ?></button>

@@ -30,8 +30,8 @@
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
         <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/stylesheets/admin.css" media="screen" rel="stylesheet" type="text/css">
-        <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/login.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
-        
+        <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/themes/<?php echo Setting::get('theme'); ?>/screen.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
+
         <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/jquery-1.8.3.min.js"></script>
         <script type="text/javascript">
             // <![CDATA[
@@ -69,13 +69,13 @@
                         <form action="<?php echo get_url('login/login'); ?>" method="post">
                             <div id="login-username-div">
                                 <label for="login-username"><?php echo __('Username'); ?>:</label>
-                                <input id="login-username" type="text" name="login[username]" value="" />
+                                <input id="login-username" type="text" name="login[username]" placeholder="<?php echo __('Username'); ?>" value="" />
                             </div>
                             <div id="login-password-div">
                                 <label for="login-password"><?php echo __('Password'); ?>:</label>
-                                <input id="login-password" type="password" name="login[password]" value="" />
+                                <input id="login-password" type="password" name="login[password]" placeholder="<?php echo __('Password'); ?>" value="" />
                             </div>
-                            <div>
+                            <div class="remember-me">
                                 <label for="login-remember-me">
                                     <input id="login-remember-me" type="checkbox" class="checkbox" name="login[remember]" value="checked" />
                                     <input id="login-redirect" type="hidden" name="login[redirect]" value="<?php echo $redirect; ?>" />
@@ -88,7 +88,7 @@
                         </form>
                 </div>
             <p><?php echo __('website:').' <a href="'.URL_PUBLIC.'">'.Setting::get('admin_title').'</a>'; ?></p>
-        </div>        
+        </div>
         <script type="text/javascript" charset="utf-8">
             // <![CDATA[
             var loginUsername = document.getElementById('login-username');
