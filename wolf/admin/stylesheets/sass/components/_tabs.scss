@@ -1,12 +1,111 @@
 /* Tabs ------------------------------------------------------------------- */
-#metainfo-tabs {
-  margin: 2em 0 0 0;
+
+
+
+//Edit page navigational tabs container Page title, Metadata, Settings + hooks
+/*#metainfo-tabs {
+  margin: 2em 1em;
+  border-bottom: $border-color solid 1px;
+}
+
+// Page parts
+#part-tabs {
+  margin: 2em 1em;
+}
+
+#part-content {
+
 }
 
 .tab, .tabs {
   display: inline;
+  width: 100%;
+  margin: 1em 0;
+
+  a {
+    color: $base-font-color;
+    text-decoration: none;
+    padding: 0.5em 1em;
+    border: $border-color solid 1px;
+    border-bottom: none;
+
+    &.here {
+      font-weight: $bold;
+    }
+  }
+}*/
+
+.tabNavigation {
+  border-bottom: $border-color solid 1px;
+  margin-bottom: 1em;
+
+  .right { float: right; }
 }
-/*#metainfo-tabs { margin: 10px 0 5px 0; }
+
+.tab {
+  display: inline-block;
+  padding: 0.7em;
+  margin-bottom: -1px;
+
+  &.ui-state-active {
+    background-color: $white;
+    border: solid 1px;
+    border-color: $border-color;
+    border-width: 1px 1px 0 1px;
+    border-bottom: $white solid 1px;
+
+    /*a {
+      font-weight: $bold;
+    }*/
+
+  }
+
+  &:hover {
+    background-color: $light_grey;
+  }
+
+  a {
+    color: $base-font-color;
+    text-decoration: none;
+    outline: none;
+
+    &:hover {
+      color: $red;
+    }
+  }
+}
+
+#part-tabs {
+  margin-top: 1em;
+
+  .tab {
+    //@extend .tab;
+    display: inline-block;
+  padding: 0.7em;
+  margin-bottom: -1px;
+
+
+
+    a.here {
+      background-color: $white;
+      border: solid 1px;
+      border-color: $border-color;
+      border-width: 1px 1px 0 1px;
+      border-bottom: $white solid 1px;
+    }
+  }
+}
+
+#tab-toolbar {
+  display: inline;
+  float: right;
+
+  a {
+    line-height: 4;
+  }
+}
+
+/*#metainfo-tabs { margin: 10px 0 5px 0; }/*
 #part-tabs { margin: 35px 0 5px 0; }
 .tabs {
   margin-right: -4px;

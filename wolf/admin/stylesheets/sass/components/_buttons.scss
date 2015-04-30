@@ -9,9 +9,9 @@ input[type="button"] {
 	border: none;
     background-color: $brand-color;
     color: $white;
-    padding: .7em 1.2em;
+    padding: 0.7em 1.2em;
     cursor: pointer;
-    text-align: center;
+    //text-align: center;
     //font-size: 15px;
     //font-weight: $bold;
     letter-spacing: 1px;
@@ -36,6 +36,7 @@ input[type="button"] {
 
     i {
     	font-size: 15px;
+    	padding: 0 0.7em;
     }
 }
 

@@ -95,9 +95,9 @@ input.submit {
 #dialog {
   margin-bottom: 2em;
   //padding: 2em;
-  background: #fff;
-  color: #222;
-  border: 1px solid $grey;
+  background: $white;
+  //color: $base-font-color;
+  border: $wrap_border solid 1px;
   //padding: 10px;
   //width: 332px;
   text-align: left;
@@ -122,7 +122,7 @@ input.submit {
   }
 
   form {
-    padding: 2em;
+    padding: 2em 1em;
 
     input[type="text"],
     input[type="password"],
@@ -138,8 +138,12 @@ input.submit {
       //line-height: 3em;
       //border-radius: 2px;
       //font-size: 14px;
-      text-transform: capitalize;
+      //text-transform: capitalize;
     }
+  }
+
+  .remember-me {
+    margin-bottom: 0.5em;
   }
 }
 

@@ -5,43 +5,6 @@
  * @author James Wilson http://jimmynotjim.com
  * @version 2.1.0
  */
-/*html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-    display: block;
-}
-
-body {
-    line-height: 1;
-}
-
-ol, ul {
-    list-style: none;
-}
-
-blockquote, q {
-    quotes: none;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
-}
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}*/
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Set default font family to sans-serif.
@@ -574,7 +537,7 @@ h1, .h1 {
   font-weight: 400;
   border-bottom: #e5e5e5 solid 1px;
   line-height: 2;
-  margin-bottom: 0.5em;
+  margin: 0 0 0.5em 0;
 }
 
 h2, .h2 {
@@ -869,7 +832,7 @@ input[type="text"] > label,
 input[type="password"] > label,*/
 input[type="checkbox"] > label,
 input[type="radio"] > label {
-  display: inline;
+  display: inline-block;
   vertical-align: top;
 }
 
@@ -1307,13 +1270,13 @@ text-align: center;
   width: 75%;
   padding: 0 20px;
   margin-top: 2em;
-  background: #fff;
-  border: #d4d4d4 solid 1px;
-  border-radius: 2px;
 }
 
 #content {
-  padding: 1em;
+  padding: 2em;
+  background: #fff;
+  border: #d4d4d4 solid 1px;
+  border-radius: 2px;
 }
 
 /*
@@ -1586,15 +1549,97 @@ text-align: center;
 }
 
 /* Tabs ------------------------------------------------------------------- */
-#metainfo-tabs {
-  margin: 2em 0 0 0;
+/*#metainfo-tabs {
+  margin: 2em 1em;
+  border-bottom: $border-color solid 1px;
+}
+
+// Page parts
+#part-tabs {
+  margin: 2em 1em;
+}
+
+#part-content {
+
 }
 
 .tab, .tabs {
   display: inline;
+  width: 100%;
+  margin: 1em 0;
+
+  a {
+    color: $base-font-color;
+    text-decoration: none;
+    padding: 0.5em 1em;
+    border: $border-color solid 1px;
+    border-bottom: none;
+
+    &.here {
+      font-weight: $bold;
+    }
+  }
+}*/
+.tabNavigation {
+  border-bottom: #e5e5e5 solid 1px;
+  margin-bottom: 1em;
+}
+.tabNavigation .right {
+  float: right;
 }
 
-/*#metainfo-tabs { margin: 10px 0 5px 0; }
+.tab {
+  display: inline-block;
+  padding: 0.7em;
+  margin-bottom: -1px;
+}
+.tab.ui-state-active {
+  background-color: #fff;
+  border: solid 1px;
+  border-color: #e5e5e5;
+  border-width: 1px 1px 0 1px;
+  border-bottom: #fff solid 1px;
+  /*a {
+    font-weight: $bold;
+  }*/
+}
+.tab:hover {
+  background-color: #edede7;
+}
+.tab a {
+  color: #333;
+  text-decoration: none;
+  outline: none;
+}
+.tab a:hover {
+  color: #C0392B;
+}
+
+#part-tabs {
+  margin-top: 1em;
+}
+#part-tabs .tab {
+  display: inline-block;
+  padding: 0.7em;
+  margin-bottom: -1px;
+}
+#part-tabs .tab a.here {
+  background-color: #fff;
+  border: solid 1px;
+  border-color: #e5e5e5;
+  border-width: 1px 1px 0 1px;
+  border-bottom: #fff solid 1px;
+}
+
+#tab-toolbar {
+  display: inline;
+  float: right;
+}
+#tab-toolbar a {
+  line-height: 4;
+}
+
+/*#metainfo-tabs { margin: 10px 0 5px 0; }/*
 #part-tabs { margin: 35px 0 5px 0; }
 .tabs {
   margin-right: -4px;
@@ -2308,9 +2353,8 @@ input[type="button"] {
   border: none;
   background-color: #364144;
   color: #fff;
-  padding: .7em 1.2em;
+  padding: 0.7em 1.2em;
   cursor: pointer;
-  text-align: center;
   letter-spacing: 1px;
   text-transform: uppercase;
   text-decoration: none;
@@ -2337,6 +2381,7 @@ input[type="submit"] i,
 input[type="reset"] i,
 input[type="button"] i {
   font-size: 15px;
+  padding: 0 0.7em;
 }
 
 .large {
@@ -2679,8 +2724,7 @@ input.submit {
 #dialog {
   margin-bottom: 2em;
   background: #fff;
-  color: #222;
-  border: 1px solid #e5e5e5;
+  border: #d4d4d4 solid 1px;
   text-align: left;
   border-radius: 2px;
 }
@@ -2696,7 +2740,7 @@ input.submit {
   font-size: 13px;
 }
 #dialog form {
-  padding: 2em;
+  padding: 2em 1em;
 }
 #dialog form input[type="text"],
 #dialog form input[type="password"],
@@ -2705,7 +2749,9 @@ input.submit {
 }
 #dialog form button {
   margin-bottom: 0;
-  text-transform: capitalize;
+}
+#dialog .remember-me {
+  margin-bottom: 0.5em;
 }
 
 a {

@@ -36,13 +36,13 @@ if ($pagetmp != null && !empty($pagetmp) && $parttmp != null && !empty($parttmp)
 
   <input id="page_parent_id" name="page[parent_id]" type="hidden" value="<?php echo $page->parent_id; ?>" />
   <input id="csrf_token" name="csrf_token" type="hidden" value="<?php echo $csrf_token; ?>" />
-  <div class="form-area">
+  <div id="tabs" class="form-area">
     <div id="metainfo-tabs" class="content tabs">
         <ul class="tabNavigation">
             <li class="tab"><a href="#pagetitle"><?php echo __('Page Title'); ?></a></li>
             <li class="tab"><a href="#metadata"><?php echo __('Metadata'); ?></a></li>
             <li class="tab"><a href="#settings"><?php echo __('Settings'); ?></a></li>
-			<?php Observer::notify('view_page_edit_tab_links', $page); ?>
+            <?php Observer::notify('view_page_edit_tab_links', $page); ?>
         </ul>
     </div>
   <div id="metainfo-content">
@@ -55,15 +55,14 @@ if ($pagetmp != null && !empty($pagetmp) && $parttmp != null && !empty($parttmp)
             </div>
             <!-- test -->
             <div id="part-tabs" class="content tabs">
-              <!--<div id="tab-toolbar" class="tab_toolbar">
+              <div id="tab-toolbar" class="tab_toolbar">
                 <a href="#" id="add-part" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/plus.png" alt="<?php echo __('Add Tab'); ?> icon" /></a>
                 <a href="#" id="delete-part" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/minus.png" alt="<?php echo __('Remove Tab'); ?> icon" /></a>
-              </div>-->
+              </div>
               <ul class="tabNavigation">
                   <?php foreach ($page_parts as $key => $page_part) { ?>
-                  <li id="part-<?php echo $key+1; ?>-tab" class="tab"><a href="#part-<?php echo $key+1; ?>-content"><?php echo $page_part->name; ?></a><a href="#" id="delete-part" title="<?php echo __('Remove Tab'); ?>"><i class="fa fa-minus-square"></i></a></li>
+                  <li id="part-<?php echo $key+1; ?>-tab" class="tab"><a href="#part-<?php echo $key+1; ?>-content"><?php echo $page_part->name; ?></a></li>
                   <?php } ?>
-                  <li id="part-new-tab" class="tab"><a href="#add-part-dialog" id="add-part" title="<?php echo __('Add Tab'); ?>"><i class="fa fa-plus-square"></i></a></li>
               </ul>
           </div>
           <div id="part-content" class="pages">

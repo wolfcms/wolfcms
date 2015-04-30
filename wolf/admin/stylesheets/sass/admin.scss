@@ -10,6 +10,7 @@
 // STYLES
 
 @import "components/normalize";
+//@import "components/reset";
 
 * {
     @include border-box;
@@ -63,16 +64,16 @@
     @include column(9);
     margin-top: 2em;
 
-    background: $white;
-    border: $wrap_border solid 1px;
-    border-radius: $border-radius;
+    //background: $white;
+    //border: $wrap_border solid 1px;
+    //border-radius: $border-radius;
 }
 
 #content {
-    padding: 1em;
-    //background: $white;
-    //border: $grey solid 1px;
-    //border-radius: $border-radius;
+    padding: 2em;
+    background: $white;
+    border: $wrap_border solid 1px;
+    border-radius: $border-radius;
 }
 
 /*
