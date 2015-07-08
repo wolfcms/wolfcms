@@ -56,8 +56,10 @@ if ($pagetmp != null && !empty($pagetmp) && $parttmp != null && !empty($parttmp)
             <!-- test -->
             <div id="part-tabs" class="content tabs">
               <div id="tab-toolbar" class="tab_toolbar">
-                <a href="#" id="add-part" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/plus.png" alt="<?php echo __('Add Tab'); ?> icon" /></a>
-                <a href="#" id="delete-part" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/minus.png" alt="<?php echo __('Remove Tab'); ?> icon" /></a>
+                <!--<a href="#" id="add-part" title="<?php echo __('Add Tab'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/plus.png" alt="<?php echo __('Add Tab'); ?> icon" /></a>
+                <a href="#" id="delete-part" title="<?php echo __('Remove Tab'); ?>"><img src="<?php echo PATH_PUBLIC;?>wolf/admin/images/minus.png" alt="<?php echo __('Remove Tab'); ?> icon" /></a>-->
+                <a href="#" id="add-part" title="<?php echo __('Add Tab'); ?>"><i class="fa fa-plus-square"></i></a>
+                <a href="#" id="delete-part" title="<?php echo __('Remove Tab'); ?>"><i class="fa fa-minus-square"></i></a>
               </div>
               <ul class="tabNavigation">
                   <?php foreach ($page_parts as $key => $page_part) { ?>
