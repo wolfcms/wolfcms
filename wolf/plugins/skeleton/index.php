@@ -45,3 +45,44 @@ Plugin::setInfos(array(
 ));
 
 Plugin::addController('skeleton', __('Skeleton'), 'admin_view', false);
+
+
+// Add a tab of your own
+Observer::observe('view_page_edit_tab_links', 'addTab');
+
+function addTab() {
+    // Add example tab
+    echo '<li class="tab"><a href="#mytab">My tab link</a></li>';
+}
+
+// Add the tab content that belongs to it
+Observer::observe('view_page_edit_tabs', 'addTabContent');
+
+function addTabContent() {
+    // Add example tab content
+    echo '<div id="mytab" class="page"><div id="div-metadata" title="My Tab Content"><p style="font-size: 24pt; text-align: center;">My Tab Content</p></div></div>';
+}
+
+// Add the custom box
+Observer::observe('view_page_after_edit_tabs', 'addCustomBox');
+
+function addCustomBox() {
+    // Add custom box content
+    echo '<div style="margin: 1em 0 1em 0; background-color: white;"><p style="font-size: 24pt; text-align: center;">Custom Box</p></div>';
+}
+
+// Add some setting stuff for example
+Observer::observe('view_page_edit_plugins', 'addPluginSetting');
+
+function addPluginSetting() {
+    // Add custom settings for example
+    echo '<p><label>Custom select box</label> <select><option>Option 1</option><option>Option 2</option></select></p><br/><br/>';
+}
+
+// Add some (by default) hidden stuff
+Observer::observe('view_page_edit_popup', 'addHidden');
+
+function addHidden() {
+    // Add hidden stuff
+    echo '<div style="padding: 1em; background-color: lightgray;"><p style="font-size: 24pt; text-align: center;">Hidden Dialog</p></div>';
+}

@@ -9,6 +9,7 @@ This skeleton plugin makes use/provides the following features:
 - A sidebar
 - A settings page (that does nothing except display some text)
 - Code that gets run when the plugin is enabled (enable.php)
+- Adding custom areas in the page edit screen using Observer events
 
 == HOW TO USE IT ==
 
@@ -26,6 +27,9 @@ This skeleton plugin makes use/provides the following features:
 * To use the settings and documentation pages, you will first need to enable
   the plugin!
 
+* After enabling the plugin, be sure to view the page edit screen's changes by
+  editing a page.
+
 * In index.php, change the value of require_wolf_version into a non-existant
   Wolf version and look at the plugins list (in the administration section)
   again.
@@ -38,6 +42,6 @@ This skeleton plugin makes use/provides the following features:
 
 == LICENSE ==
 
-Copyright 2008-2009, Martijn van der Kleijn. <martijn.niji@gmail.com>
+Copyright 2008-2014, Martijn van der Kleijn. <martijn.niji@gmail.com>
 This demo plugin is licensed under the GPLv3 License.
 <http://www.gnu.org/licenses/gpl.html>
