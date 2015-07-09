@@ -76,7 +76,7 @@ Observer::observe('view_page_edit_plugins', 'addPluginSetting');
 
 function addPluginSetting() {
     // Add custom settings for example
-    echo '<p><label>Custom select box</label> <select><option>Option 1</option><option>Option 2</option></select></p><br/><br/>';
+    echo '<p><label>Custom select box <select><option>Option 1</option><option>Option 2</option></select></p></label>';
 }
 
 // Add some (by default) hidden stuff
