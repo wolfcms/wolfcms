@@ -1146,7 +1146,8 @@ header {
   float: right;
 }
 */
-/* Messages ------------------------------------- */
+/* Flash messages
+------------------- */
 .message, #info, #success, #error {
   position: absolute;
   width: 100%;
@@ -1161,6 +1162,7 @@ header {
 
 #success {
   background: #76a83a;
+  color: #fff;
 }
 
 #error {
@@ -1168,46 +1170,6 @@ header {
   color: #fff;
 }
 
-/*
-#info, #error, #success {
-/* css for fade positioning -- start */
-/*position: absolute;
-left: 10%;
-width: 75%;
-margin: 0 auto;
-padding: 1em 1.5em 0.9em 1.5em;
-text-align: center;
-
-/* Border-radius not implemented yet */
-  /*border-radius: 6px;
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
-  -moz-border-radius: 6px;
-  -moz-border-radius-topright: 0px;
-  -moz-border-radius-topleft: 0px;
-  -webkit-border-radius: 6px;
-  -webkit-border-top-right-radius: 0px;
-  -webkit-border-top-left-radius: 0px;
-
-  box-shadow: 5px 3px 4px #333;
-  -moz-box-shadow: 5px 3px 4px #333;
-  -webkit-box-shadow: 5px 3px 4px #333;
-}
-
-#info {
-  background: #EDFE86;
-  color: #000;
-}
-#error {
-  background: #a22;
-  color: #fff;
-}
-#success {
-  background: #cfc;
-  color: #000;
-}
-
-*/
 /*
     ORIGINAL ADMIN STYLESHEET FILE
 
@@ -1935,7 +1897,7 @@ a.view-link:hover {
 #site-map .page-list-item:after, #site-map-root .page-list-item:after {
   clear: both;
 }
-#site-map .page-list-item .page, #site-map-root .page-list-item .page {
+#site-map .page-list-item .page-list-name, #site-map-root .page-list-item .page-list-name {
   display: inline;
   float: left;
   width: 66.66667%;
@@ -2342,7 +2304,8 @@ table.fieldset .error-with-field small {
     ORIGINAL ADMIN STYLESHEET FILE
 
 */
-/*	BUTTONS ------------------------------------- */
+/*	Buttons
+------------------- */
 .button,
 button,
 input[type="submit"],
@@ -2355,8 +2318,8 @@ input[type="button"] {
   color: #fff;
   padding: 0.7em 1.2em;
   cursor: pointer;
+  font-size: 15px;
   letter-spacing: 1px;
-  text-transform: uppercase;
   text-decoration: none;
   transition: background 0.1s ease-in-out;
   -webkit-transition: background 0.1s ease-in-out;
@@ -2384,6 +2347,7 @@ input[type="button"] i {
   padding: 0 0.7em;
 }
 
+/* Large buttons - add class .large to button element to make it bigger */
 .large {
   padding: 1em 2em;
   line-height: 1.6;
@@ -2396,10 +2360,12 @@ input[type="button"] i {
   border-radius: 2px;
 }
 
+/* Full width button - add class .wide to button element to span full width of parent container */
 .wide {
   width: 100%;
 }
 
+/* All screen buttons are wrapped with .buttons to give it a bit more space */
 .buttons {
   margin-top: 1.5em;
 }

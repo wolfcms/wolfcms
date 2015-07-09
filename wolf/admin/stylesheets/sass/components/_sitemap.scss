@@ -89,7 +89,7 @@ a {
         //line-height: 2em;
         padding: 0.5em;
 
-        .page { @include column(8,0); }
+        .page-list-name { @include column(8,0); }
 
         .page-layout,
         .status,
@@ -108,6 +108,7 @@ a {
 
 // Indentation
 #site-map {
+    //position: relative;
     // If there is no child pages, move right to verttically align icons
     // and avoid [+] expander
     .no-children .indent { padding-left: 1em; margin-left: 1.5em; }
