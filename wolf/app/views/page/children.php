@@ -24,7 +24,7 @@
 <div class="page-list-item">
 <!--<div class="indent">-->
 
-      <div class="page">
+      <div class="page page-list-name">
         <span class="w1 indent">
           <?php if ($child->has_children): ?><img align="middle" alt="toggle children" class="expander<?php if($child->is_expanded) echo ' expanded'; ?>" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/<?php echo $child->is_expanded ? 'collapse': 'expand'; ?>.png" /><?php endif; ?>
 <?php if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $child->is_protected)): ?>

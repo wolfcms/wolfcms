@@ -31,7 +31,7 @@
       <!--<div class="page" style="padding-left: 4px">-->
       <div class="page-list-item">
 
-		<div class="page">
+		<div class="page page-list-name">
 			<span class="w1">
 				<?php if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $root->is_protected)): ?>
 					<i class="fa fa-file-o"></i> <span class="title"><?php echo $root->title; ?></span>
@@ -182,9 +182,11 @@
 				items: 'li',
 				opacity: .6,
 				placeholder: 'placeholder',
-				tabSize: 25,
+				//tabSize: 25,
+				tabSize: 0, // test 1
 				tolerance: 'pointer',
-				toleranceElement: '> div.content-children',
+				//toleranceElement: '> div.content-children',
+				toleranceElement: 'div.page-list-name',
 				listType: 'ul',
 				helper: 'clone',
 				beforeStop: function(event, ui) {
