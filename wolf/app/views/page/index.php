@@ -186,7 +186,7 @@
 				tabSize: 0, // test 1
 				tolerance: 'pointer',
 				//toleranceElement: '> div.content-children',
-				toleranceElement: 'div.page-list-name',
+				toleranceElement: 'div.page-list-item',
 				listType: 'ul',
 				helper: 'clone',
 				beforeStop: function(event, ui) {
