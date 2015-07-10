@@ -55,18 +55,30 @@
 
 #main {
   @include row();
-  //background-color: $grey;
-  //overflow:hidden;
 }
 
 /* Content -------------------------------------- */
 #content-wrapper {
-    @include column(9);
+    //@include column(9);
     margin-top: 2em;
+    // TEST
+    @include column(12);
 
     //background: $white;
     //border: $wrap_border solid 1px;
     //border-radius: $border-radius;
+}
+
+#main.has-sidebar #content-wrapper {
+  @include column(9);
+  //float: left;
+}
+
+#main.has-sidebar #sidebar-wrapper {
+  @include column(3);
+  margin-top: 2em;
+  //float: right;
+  //padding-left: 2%;
 }
 
 #content {
@@ -121,7 +133,7 @@
 */
 
 /* Sidebar -------------------------------------- */
-#sidebar-wrapper {
+/*#sidebar-wrapper {
   @include column(3);
   margin-top: 2em;
 }
@@ -159,7 +171,7 @@
 #body_plugin_index #sidebar-wrapper {
     display: none;
 }
-
+*/
 #sidebar {
     //border: 1px solid $grey;
     //margin: 56px 0 0 0;
