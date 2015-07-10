@@ -45,7 +45,7 @@ if (!isset($title) || trim($title) == '') {
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title><?php use_helper('Kses'); echo $title . ' | ' . kses(Setting::get('admin_title'), array()); ?></title>
 
     <link rel="shortcut icon" href="<?php echo PATH_PUBLIC; ?>wolf/admin/images/favicon.ico" />
@@ -58,15 +58,15 @@ if (!isset($title) || trim($title) == '') {
 
     <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/cp-datepicker.js"></script>
     <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/wolf.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/jquery-1.8.3.min.js"></script> 
+    <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/jquery-ui-1.10.3.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/admin/javascripts/jquery.ui.nestedSortable.js"></script>
 
     <?php Observer::notify('view_backend_layout_head', CURRENT_PATH); ?>
-        
+
     <script type="text/javascript" src="<?php echo PATH_PUBLIC; ?>wolf/admin/markitup/jquery.markitup.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo PATH_PUBLIC; ?>wolf/admin/markitup/skins/simple/style.css" />
-    
+
 <?php foreach(Plugin::$plugins as $plugin_id => $plugin): ?>
 <?php if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $plugin_id . '.js')): ?>
     <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.js"></script>
@@ -81,7 +81,7 @@ if (!isset($title) || trim($title) == '') {
 <?php foreach(Plugin::$javascripts as $jscript_plugin_id => $javascript): ?>
     <script type="text/javascript" charset="utf-8" src="<?php echo PATH_PUBLIC; ?>wolf/plugins/<?php echo $javascript; ?>"></script>
 <?php endforeach; ?>
-    
+
     <script type="text/javascript">
     // <![CDATA[
         $(document).ready(function() {
@@ -97,7 +97,7 @@ if (!isset($title) || trim($title) == '') {
             })( $(".message:first") );
 
             $("input:visible:enabled:first").focus();
-            
+
             // Get the initial values and activate filter
             $('.filter-selector').each(function() {
                 var $this = $(this);
@@ -110,7 +110,7 @@ if (!isset($title) || trim($title) == '') {
                 var elem = $('#'+elemId+'_content');
                 $this.trigger('wolfSwitchFilterIn', [$this.val(), elem]);
             });
-            
+
             $('.filter-selector').live('change',function(){
                 var $this = $(this);
                 var newFilter = $this.val();
@@ -150,7 +150,7 @@ if (!isset($title) || trim($title) == '') {
               <li id="<?php echo $plugin_name;?>-plugin" class="plugin"><a href="<?php echo get_url('plugin/'.$plugin_name); ?>"<?php if ($ctrl=='plugin' && $action==$plugin_name) echo ' class="current"'; ?>><?php echo $plugin->label; ?></a></li>
         <?php endif; ?>
     <?php endforeach; ?>
-            
+
                 <li class="dropdown right">
                     <a href="#"><?php echo __('Settings'); ?></a>
                     <ul>
@@ -162,7 +162,7 @@ if (!isset($title) || trim($title) == '') {
                         <?php endif; ?>
                         <?php if ( AuthUser::hasPermission('admin_view') ): ?>
                             <li><a href="<?php echo get_url('setting/plugin'); ?>"<?php if($ctrl != 'setting' && $action == 'plugin') echo ' class="current"'; ?>><?php echo __('Plugins'); ?></a></li>
-                        <?php endif; ?>   
+                        <?php endif; ?>
                     </ul>
                 </li>
             </ul>
@@ -189,7 +189,7 @@ if (!isset($title) || trim($title) == '') {
 <?php endif; ?>
 
     <div class="container" role="main">
-        <div id="main">
+        <div id="main" <?php if(isset($sidebar) && trim($sidebar) != '') { echo ' class="has-sidebar"'; } ?>>
             <div id="content-wrapper">
                 <div id="content">
             <!-- content -->
