@@ -1227,9 +1227,24 @@ header {
 
 /* Content -------------------------------------- */
 #content-wrapper {
+  margin-top: 2em;
+  display: inline;
+  float: left;
+  width: 100%;
+  padding: 0 20px;
+}
+
+#main.has-sidebar #content-wrapper {
   display: inline;
   float: left;
   width: 75%;
+  padding: 0 20px;
+}
+
+#main.has-sidebar #sidebar-wrapper {
+  display: inline;
+  float: left;
+  width: 25%;
   padding: 0 20px;
   margin-top: 2em;
 }
@@ -1285,11 +1300,8 @@ header {
 }
 */
 /* Sidebar -------------------------------------- */
-#sidebar-wrapper {
-  display: inline;
-  float: left;
-  width: 25%;
-  padding: 0 20px;
+/*#sidebar-wrapper {
+  @include column(3);
   margin-top: 2em;
 }
 
@@ -1307,10 +1319,7 @@ header {
 #body_user_edit #content-wrapper,
 #body_comment_edit #content-wrapper,
 #body_plugin_index #content-wrapper {
-  display: inline;
-  float: left;
-  width: 100%;
-  padding: 0 20px;
+  @include column(12);
   margin-top: 2em;
 }
 
@@ -1327,9 +1336,9 @@ header {
 #body_user_edit #sidebar-wrapper,
 #body_comment_edit #sidebar-wrapper,
 #body_plugin_index #sidebar-wrapper {
-  display: none;
+    display: none;
 }
-
+*/
 #sidebar {
   font-size: .83em;
   background: #fff;
