@@ -21,7 +21,7 @@
 
 <form action="<?php echo $action=='edit' ? get_url('user/edit/'.$user->id): get_url('user/add'); ; ?>" method="post">
     <input id="csrf_token" name="csrf_token" type="hidden" value="<?php echo $csrf_token; ?>" />
-  <table class="fieldset" cellpadding="0" cellspacing="0" border="0">
+  <table>
     <tr>
 
       <td class="label"><label for="user_name"><?php echo __('Name'); ?></label></td>
@@ -105,7 +105,7 @@
         $(':input').bind('change', function() { setConfirmUnload(true); });
         $('form').submit(function() { setConfirmUnload(false); return true; });
     });
-    
-Field.activate('user_name');
+
+//Field.activate('user_name');
 // ]]>
 </script>
