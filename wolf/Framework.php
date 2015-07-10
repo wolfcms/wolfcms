@@ -1941,7 +1941,7 @@ function html_decode($string) {
  * @return <type> 
  */
 function remove_xss($string) {
-// Remove all non-printable characters. CR(0a) and LF(0b) and TAB(9) are allowed
+// Remove all non-printable characters. CR(0a) and LF(0d) and TAB(9) are allowed
 // This prevents some character re-spacing such as <java\0script>
 // Note that you have to handle splits with \n, \r, and \t later since they *are* allowed in some inputs
     $string = preg_replace('/([\x00-\x08,\x0b-\x0c,\x0e-\x19])/', '', $string);
@@ -1986,7 +1986,7 @@ function remove_xss($string) {
             $pattern = '/';
             for ($j = 0; $j < strlen($ra[$i]); $j++) {
                 if ($j > 0) {
-                    $pattern .= '((&#[xX]0{0,8}([9ab]);)||(&#0{0,8}([9|10|13]);))*';
+                    $pattern .= '((&#[xX]0{0,8}([9ad]);)||(&#0{0,8}([9|10|13]);))*';
                 }
                 $pattern .= $ra[$i][$j];
             }
