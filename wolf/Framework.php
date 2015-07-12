@@ -170,8 +170,6 @@ final class Dispatcher {
      * @return string               A response.
      */
     public static function dispatch($requested_url = null, $default = null) {
-        Flash::init();
-
         // If no url passed, we will get the first key from the _GET array
         // that way, index.php?/controller/action/var1&email=example@example.com
         // requested_url will be equal to: /controller/action/var1
