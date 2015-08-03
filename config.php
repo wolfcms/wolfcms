@@ -21,7 +21,7 @@ define('CHECK_UPDATES', true);
 define('CHECK_TIMEOUT', 3);
 
 // The full URL of your Wolf CMS install
-define('URL_PUBLIC', 'http://localhost/wolfcms/');
+define('URL_PUBLIC', 'http://wolf.dev/');
 
 // Use httpS for the backend?
 // Before enabling this, please make sure you have a working HTTP+SSL installation.
