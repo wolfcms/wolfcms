@@ -102,7 +102,7 @@ class FileManagerController extends PluginController {
         $this->fullpath = preg_replace('/\/\//', '/', $this->fullpath);
 
         $this->display('file_manager/views/index', array(
-            'dir' => htmlContextCleaner($this->path),
+            'dir' => $this->htmlContextCleaner($this->path),
             //'files' => $this->_getListFiles()
             'files' => $this->_listFiles()
         ));
