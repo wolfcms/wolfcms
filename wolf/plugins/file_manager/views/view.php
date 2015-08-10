@@ -23,16 +23,26 @@
 /* Security measure */
 if (!defined('IN_CMS')) { exit(); }
 
+function htmlContextCleaner($input) {
+    $bad_chars = array("<", ">");
+    $safe_chars = array("&lt;", "&gt;");
+    $output = str_replace($bad_chars, $safe_chars, $input);
+
+    return stripslashes($output);
+}
+
+
   $out = '';
   $progres_path = '';
-  $paths = explode('/', $filename); 
+  $paths = explode('/', $filename);
   $nb_path = count($paths);
   foreach ($paths as $i => $path) {
     if ($i+1 == $nb_path) {
       $out .= $path;
     } else {
+      $path = preg_replace('/.*:\/\/[^\/]+\//', '/', $path);
       $progres_path .= $path.'/';
-      $out .= '<a href="'.get_url('plugin/file_manager/browse/'.rtrim($progres_path, '/')).'">'.$path.'</a>/';
+      $out .= '<a href="'.get_url('plugin/file_manager/browse/'.rtrim($progres_path, '/')).'">'.htmlContextCleaner($path).'</a>/';
     }
   }
 ?>

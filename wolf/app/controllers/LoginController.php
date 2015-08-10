@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  * Wolf CMS - Content Management Simplified. <http://www.wolfcms.org>
  * Copyright (C) 2008-2010 Martijn van der Kleijn <martijn.niji@gmail.com>
@@ -45,12 +45,12 @@ class LoginController extends Controller {
      */
     function index() {
         $redirect = '';
-        
+
         if (Flash::get('redirect') != null)
             $redirect = Flash::get('redirect');
         elseif (Flash::get('HTTP_REFERER') != null)
             $redirect = trim(Flash::get('HTTP_REFERER'));
-        
+
         // already log in ?
         if (AuthUser::isLoggedIn()) {
             if ($redirect != '')
@@ -74,19 +74,19 @@ class LoginController extends Controller {
      */
     function login() {
         $redirect = '';
-        
+
         if (Flash::get('redirect') != null)
             $redirect = Flash::get('redirect');
         elseif (Flash::get('HTTP_REFERER') != null)
             $redirect = trim(Flash::get('HTTP_REFERER'));
-        
+
         // Allow plugins to handle login
         Observer::notify('login_requested', $redirect);
 
         // already log in ?
         if (AuthUser::isLoggedIn())
             if ($redirect != '')
-                redirect($redirect);
+                redirect(self::sanitizeRedirect($redirect));
             else
                 redirect(get_url());
 
@@ -100,7 +100,7 @@ class LoginController extends Controller {
                 $this->_checkVersion();
                 // redirect to defaut controller and action
                 if ($data['redirect'] != null && $data['redirect'] != 'null')
-                    redirect($data['redirect']);
+                    redirect(self::sanitizeRedirect($data['redirect']));
                 else
                     redirect(get_url());
             }
@@ -112,10 +112,20 @@ class LoginController extends Controller {
 
         // not find or password is wrong
         if ($data['redirect'] != null && $data['redirect'] != 'null')
-            redirect($data['redirect']);
+            redirect(self::sanitizeRedirect($data['redirect']));
         else
             redirect(get_url('login'));
 
+    }
+
+    static function sanitizeRedirect($redirect) {
+        if ($redirect != null) {
+            $redirect = preg_replace('/.*:\/\/[^\/]+\//', '/', $redirect);
+
+            return $redirect;
+        }
+
+        return '';
     }
 
     /**
@@ -134,18 +144,18 @@ class LoginController extends Controller {
             Flash::set('error', __('No CSRF token found!'));
             redirect(get_url());
         }
-        
+
         // Allow plugins to handle logout events
         Observer::notify('logout_requested');
 
         $username = AuthUser::getUserName();
         AuthUser::logout();
-        
+
         // Also eat cookies that were set by JS for backend gui
         setcookie("expanded_rows", "", time()-3600);
         setcookie("meta_tab", "", time()-3600);
         setcookie("page_tab", "", time()-3600);
-        
+
         Observer::notify('admin_after_logout', $username);
         redirect(get_url());
     }
