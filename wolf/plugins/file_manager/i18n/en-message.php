@@ -41,6 +41,8 @@ return array(
     'Modified' => 'Modified',
     'Modify' => 'Modify',
     'No' => 'No',
+    'Not allowed to upload files with extension :ext' => 'Not allowed to upload files with extension :ext',
+    'Not allowed to rename to :ext' => 'Not allowed to rename to :ext',
     'Permission denied!' => 'Permission denied!',
     'Permissions' => 'Permissions',
     'Provides interface to manage files from the administration.' => 'Provides interface to manage files from the administration.',

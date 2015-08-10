@@ -27,7 +27,7 @@
 if (!defined('IN_CMS')) { exit(); }
 
 /**
- * 
+ *
  */
 class FileManagerController extends PluginController {
 
@@ -53,6 +53,14 @@ class FileManagerController extends PluginController {
 
     public function index() {
         $this->browse();
+    }
+
+    static function htmlContextCleaner($input) {
+        $bad_chars = array("<", ">");
+        $safe_chars = array("&lt;", "&gt;");
+        $output = str_replace($bad_chars, $safe_chars, $input);
+
+        return stripslashes($output);
     }
 
     public function browse() {
@@ -94,7 +102,7 @@ class FileManagerController extends PluginController {
         $this->fullpath = preg_replace('/\/\//', '/', $this->fullpath);
 
         $this->display('file_manager/views/index', array(
-            'dir' => $this->path,
+            'dir' => htmlContextCleaner($this->path),
             //'files' => $this->_getListFiles()
             'files' => $this->_listFiles()
         ));
@@ -133,15 +141,15 @@ class FileManagerController extends PluginController {
 
         // We don't allow leading slashes
         $filename = preg_replace('/^\//', '', $filename);
-        
+
         // Check if file had URL_SUFFIX - if so, append it to filename
         $filename .= (isset($_GET['has_url_suffix']) && $_GET['has_url_suffix']==='1') ? URL_SUFFIX : '';
-        
+
         $file = FILES_DIR . '/' . $filename;
         if (!$this->_isImage($file) && file_exists($file)) {
             $content = file_get_contents($file);
         }
-        
+
         $this->display('file_manager/views/view', array(
             'csrf_token' => SecureToken::generateToken(BASE_URL.'plugin/file_manager/save/'.$filename),
             'is_image' => $this->_isImage($file),
@@ -156,7 +164,7 @@ class FileManagerController extends PluginController {
         // security (remove all ..)
         $data['name'] = str_replace('..', '', $data['name']);
         $file = FILES_DIR . DS . $data['name'];
-        
+
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
             $csrf_token = $_POST['csrf_token'];
@@ -169,7 +177,7 @@ class FileManagerController extends PluginController {
             Flash::set('error', __('No CSRF token found!'));
             redirect(get_url('plugin/file_manager/view/'.$data['name']));
         }
-        
+
         if (file_exists($file)) {
             if (file_put_contents($file, $data['content']) !== false) {
                 Flash::set('success', __('File has been saved with success!'));
@@ -197,7 +205,7 @@ class FileManagerController extends PluginController {
             Flash::set('error', __('You do not have sufficient permissions to create a file.'));
             redirect(get_url('plugin/file_manager/browse/'));
         }
-        
+
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
             $csrf_token = $_POST['csrf_token'];
@@ -231,7 +239,7 @@ class FileManagerController extends PluginController {
             Flash::set('error', __('You do not have sufficient permissions to create a directory.'));
             redirect(get_url('plugin/file_manager/browse/'));
         }
-        
+
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
             $csrf_token = $_POST['csrf_token'];
@@ -269,7 +277,7 @@ class FileManagerController extends PluginController {
         $paths = func_get_args();
 
         $file = urldecode(join('/', $paths));
-        
+
         // CSRF checks
         if (isset($_GET['csrf_token'])) {
             $csrf_token = $_GET['csrf_token'];
@@ -304,7 +312,7 @@ class FileManagerController extends PluginController {
             Flash::set('error', __('You do not have sufficient permissions to upload a file.'));
             redirect(get_url('plugin/file_manager/browse/'));
         }
-        
+
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
             $csrf_token = $_POST['csrf_token'];
@@ -317,7 +325,7 @@ class FileManagerController extends PluginController {
             Flash::set('error', __('No CSRF token found!'));
             redirect(get_url('plugin/file_manager/browse/'));
         }
-        
+
         $mask = Plugin::getSetting('umask', 'file_manager');
         umask(octdec($mask));
 
@@ -328,6 +336,12 @@ class FileManagerController extends PluginController {
         // Clean filenames
         $filename = preg_replace('/ /', '_', $_FILES['upload_file']['name']);
         $filename = preg_replace('/[^a-z0-9_\-\.]/i', '', $filename);
+
+        $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        if (in_array($ext, ['php', 'php3', 'php4', 'inc'])) {
+            Flash::set('error', __('Not allowed to upload files with extension :ext', $ext));
+            redirect(get_url('plugin/file_manager/browse/'));
+        }
 
         if (isset($_FILES)) {
             $file = $this->_upload_file($filename, FILES_DIR . '/' . $path . '/', $_FILES['upload_file']['tmp_name'], $overwrite);
@@ -356,7 +370,7 @@ class FileManagerController extends PluginController {
             Flash::set('error', __('No CSRF token found!'));
             redirect(get_url('plugin/file_manager/browse/'));
         }
-        
+
         $data = $_POST['file'];
         $data['name'] = str_replace('..', '', $data['name']);
         $file = FILES_DIR . '/' . $data['name'];
@@ -378,7 +392,7 @@ class FileManagerController extends PluginController {
             Flash::set('error', __('You do not have sufficient permissions to rename this file or directory.'));
             redirect(get_url('plugin/file_manager/browse/'));
         }
-        
+
         // CSRF checks
         if (isset($_POST['csrf_token'])) {
             $csrf_token = $_POST['csrf_token'];
@@ -403,6 +417,14 @@ class FileManagerController extends PluginController {
 
         $path = substr($data['current_name'], 0, strrpos($data['current_name'], '/'));
         $file = FILES_DIR . '/' . $data['current_name'];
+
+        // Check if trying to rename to php file (.php / .php3 etc)
+        $ext = strtolower(pathinfo($data['new_name'], PATHINFO_EXTENSION));
+
+        if (in_array($ext, ['php', 'php3', 'php4', 'inc'])) {
+            Flash::set('error', __('Not allowed to rename to :ext', $ext));
+            redirect(get_url('plugin/file_manager/browse/' . $path));
+        }
 
         // Check another file doesn't already exist with same name
         if (file_exists(FILES_DIR . '/' . $path . '/' . $data['new_name'])) {
@@ -442,7 +464,7 @@ class FileManagerController extends PluginController {
                 $name = $cur->getFilename();
                 if (Plugin::getSetting('show_hidden', 'file_manager') == '0' && $name[0] === '.')
                     continue;
-                
+
                 if (Plugin::getSetting('show_backups', 'file_manager') == '0' && $name[strlen($name)-1] === '~')
                     continue;
 
@@ -453,7 +475,7 @@ class FileManagerController extends PluginController {
                 $object->size = convert_size($cur->getSize());
                 $object->mtime = date('D, j M, Y', $cur->getMTime());
                 list($object->perms, $object->chmod) = $this->_getPermissions($cur->getPerms());
-                
+
                 // Find the file type
                 $object->type = $this->_getFileType($cur);
 
@@ -477,13 +499,13 @@ class FileManagerController extends PluginController {
                     return strnatcmp($a->name, $b->name);
                 }
             });
-            
+
             return $files;
         }
 
         return array();
     }
-    
+
     private function _getFileType($file) {
         $default = 'unknown';
 
@@ -659,7 +681,7 @@ class FileManagerController extends PluginController {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url());
         }
-        
+
         $settings = Plugin::getAllSettings('file_manager');
 
         if (!$settings) {
@@ -678,7 +700,7 @@ class FileManagerController extends PluginController {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url());
         }
-        
+
         if (!isset($_POST['settings'])) {
             Flash::set('error', 'File Manager - ' . __('form was not posted.'));
             redirect(get_url('plugin/file_manager/settings'));
