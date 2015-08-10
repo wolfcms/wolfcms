@@ -8,6 +8,16 @@ Please be aware that we only support single version upgrades.
 IMPORTANT - always check your security by viewing security.php post update!
 
 
+### Upgrading from 0.8.2 => 0.8.3 ###
+
+SECURITY UPDATE - This release is a security release.
+
+There are no database changes in this release, only code changes.
+
+Index.php needs replacing only because it contains the updated version number, either
+replace the file or update the version number by hand.
+
+
 ### Upgrading from 0.8.1 => 0.8.2 ###
 
 SECURITY UPDATE - This release contains a one-file security patch.
