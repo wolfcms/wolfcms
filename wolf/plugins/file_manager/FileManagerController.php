@@ -338,7 +338,8 @@ class FileManagerController extends PluginController {
         $filename = preg_replace('/[^a-z0-9_\-\.]/i', '', $filename);
 
         $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-        if (in_array($ext, ['php', 'php3', 'php4', 'inc'])) {
+        $ext_arr = array('php', 'php3', 'php4', 'inc');
+        if (in_array($ext, $ext_arr)) {
             Flash::set('error', __('Not allowed to upload files with extension :ext', $ext));
             redirect(get_url('plugin/file_manager/browse/'));
         }
@@ -420,8 +421,9 @@ class FileManagerController extends PluginController {
 
         // Check if trying to rename to php file (.php / .php3 etc)
         $ext = strtolower(pathinfo($data['new_name'], PATHINFO_EXTENSION));
+        $ext_arr = array('php', 'php3', 'php4', 'inc');
 
-        if (in_array($ext, ['php', 'php3', 'php4', 'inc'])) {
+        if (in_array($ext, $ext_arr)) {
             Flash::set('error', __('Not allowed to rename to :ext', $ext));
             redirect(get_url('plugin/file_manager/browse/' . $path));
         }
