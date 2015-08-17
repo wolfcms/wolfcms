@@ -34,7 +34,7 @@ IMPORTANT - always check if there is any security advise by viewing security.php
     - PHP: Wolf CMS does *not* run on PHP 4.
 - PDO support.
 - A database supported by PDO.
-    - MySQL 4.1+ with InnoDB support.
+    - MySQL 5+
     - SQLite 3
     - PostgreSQL (tested against 8.4.5)
 
