@@ -12,7 +12,7 @@ define('DB_PASS', '');
 define('TABLE_PREFIX', '');
 
 // Should Wolf produce PHP error messages for debugging?
-define('DEBUG', false);
+define('DEBUG', true);
 
 // Should Wolf check for updates on Wolf itself and the installed plugins?
 define('CHECK_UPDATES', true);
