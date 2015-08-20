@@ -4,6 +4,8 @@
 
 // MIXINS
 @import "mixins/mixins";
+// MEDIA QUERIES
+@import "mixins/media-queries";
 // GRID
 @import "grid/grid";
 
@@ -22,64 +24,20 @@
 
 @import "components/tables";
 
-// Import header with navigation and gravatar
-@import "components/header";
+// Layout - Header, Content, Sidebar and Footer - this is the main part
+@import "components/layout";
+
+// Import header navigation with gravatar
+@import "components/site-navigation";
 
 // Flash messages
 @import "components/flash-message";
 
-/*
-    ORIGINAL ADMIN STYLESHEET FILE
-
-*/
-
-.hidden { display: none; }
-.clear { font-size: 1px; clear: both; }
-.warning { color: #D42B27; }
-
-.handle { display: none; cursor: move; }
-.handle_reorder { display: none; cursor: move; }
-.handle_copy { display: none; cursor: move; }
 
 
 
 
-/* Main ----------------------------------------- */
-.container {
-    width: 100%;
 
-    /*&[role="main"] {
-        background: $white;
-    }*/
-}
-
-#main {
-  @include row();
-}
-
-/* Content -------------------------------------- */
-#content-wrapper {
-    //@include column(9);
-    margin-top: 2em;
-    // TEST
-    @include column(12);
-
-    //background: $white;
-    //border: $wrap_border solid 1px;
-    //border-radius: $border-radius;
-}
-
-#main.has-sidebar #content-wrapper {
-  @include column(9);
-  //float: left;
-}
-
-#main.has-sidebar #sidebar-wrapper {
-  @include column(3);
-  margin-top: 2em;
-  //float: right;
-  //padding-left: 2%;
-}
 
 #content {
     padding: 2em;
@@ -88,190 +46,33 @@
     border-radius: $border-radius;
 }
 
-/*
-#content-wrapper {
-  float: left;
-  margin: 1%;
-  width: 70%;
-  font-size: 95%;
-  background-color: #fff;
-  border-bottom: 2px solid #76A83A;
-
-   Border-radius implemented.
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-}
-
-#content {
-  padding: 20px;
-
-  Border-radius - implemented.
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-
-  Box-shadow - implemented.
-  box-shadow: 5px 3px 4px #aaa;
-  -moz-box-shadow: 5px 3px 4px #aaa;
-  -webkit-box-shadow: 5px 3px 4px #aaa;
-}
-
-#content h1 {
-   Border-radius not implemented yet
-  border-radius: 6px 6px 0px 0px;
-  -moz-border-radius: 6px 6px 0px 0px;
-  -webkit-border-radius: 6px;
-  -webkit-border-bottom-left-radius: 0px;
-  -webkit-border-bottom-right-radius: 0px;
-}
-
-#content .logo {
-    float: right;
-    margin-top: 1em;
-}
-*/
-
-/* Sidebar -------------------------------------- */
-/*#sidebar-wrapper {
-  @include column(3);
-  margin-top: 2em;
-}
-
-#installation #content-wrapper,
-#body_setting_index #content-wrapper,
-#body_setting_plugin #content-wrapper,
-#body_page_index #content-wrapper,
-#body_page_add #content-wrapper,
-#body_page_edit #content-wrapper,
-#body_snippet_add #content-wrapper,
-#body_snippet_edit #content-wrapper,
-#body_layout_add #content-wrapper,
-#body_layout_edit #content-wrapper,
-#body_user_add #content-wrapper,
-#body_user_edit #content-wrapper,
-#body_comment_edit #content-wrapper,
-#body_plugin_index #content-wrapper {
-  @include column(12);
-  margin-top: 2em;
-}
-
-#installation #sidebar-wrapper,
-#body_setting_index #sidebar-wrapper,
-#body_page_index #sidebar-wrapper,
-#body_page_add #sidebar-wrapper,
-#body_page_edit #sidebar-wrapper,
-#body_snippet_add #sidebar-wrapper,
-#body_snippet_edit #sidebar-wrapper,
-#body_layout_add #sidebar-wrapper,
-#body_layout_edit #sidebar-wrapper,
-#body_user_add #sidebar-wrapper,
-#body_user_edit #sidebar-wrapper,
-#body_comment_edit #sidebar-wrapper,
-#body_plugin_index #sidebar-wrapper {
-    display: none;
-}
-*/
 #sidebar {
-    //border: 1px solid $grey;
-    //margin: 56px 0 0 0;
     font-size: .83em;
-
     background: $white;
     border: $wrap_border solid 1px;
     border-radius: $border-radius;
 
     .box {
-
-        padding: 0 1em 1em;
+      padding: 0 10% 5%;
     }
 
     // TEST
     .button {
       width: 90%;
-      margin: 5%;
       padding: 1em 0;
+      margin: 0 5% 2.5% 5%;
+
+      &:first-child {
+        margin: 5% 5% 2.5% 5%;
+      }
+
+      &:last-child {
+        margin-bottom: 5%;
+      }
     }
 
 }
-/*
-#sidebar h2 {
-  margin: 0;
-  padding: 0 0 5px 0;
-  font-size: 15px;
-  border-bottom: 1px solid #ddd;
-  text-shadow: -1px 2px 2px #ddd;
-}
-#sidebar .box {
-  margin-bottom: 10px;
-  padding: 10px 20px;
-  background: #fff;
-  border-bottom: 2px solid #58b;
 
-   Border-radius not implemented yet
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  box-shadow: 5px 3px 4px #aaa;
-  -moz-box-shadow: 5px 3px 4px #aaa;
-  -webkit-box-shadow: 5px 3px 4px #aaa;
-}
-#sidebar p,
-#sidebar td,
-#sidebar th {
-  font-size: .83em;
-}
-#sidebar p.button {
-  margin: 0 0 10px;
-  padding: 10px 20px 0;
-  background: #59c;
-
-   Border-radius not implemented yet
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  box-shadow: 5px 3px 4px #aaa;
-  -moz-box-shadow: 5px 3px 4px #aaa;
-  -webkit-box-shadow: 5px 3px 4px #aaa;
-}
-#sidebar p.button:hover {
-  box-shadow: 0px 0px 0px #aaa;
-  -moz-box-shadow: 0px 0px 0px #aaa;
-  -webkit-box-shadow: 0px 0px 0px #aaa;
-}
-
-#sidebar p.button img {
-  margin: -10px 10px 0 -20px;
-  padding: 6px 10px;
-  background: #9ce;
-
-   Border-radius not implemented yet
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-}
-#sidebar p.button a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-
-   Border-radius not implemented yet
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-}
-#sidebar p.button a:hover {
-  color: #123;
-}
-#sidebar .this {
-  color: #999;
-}
-#sidebar .optional {
-  color: #666;
-}
-*/
-
-@import "components/footer";
 
 /*  Plugins ------------------------------------- */
 #plugins {
@@ -308,195 +109,18 @@
         //color: #999;
     }
 }
-/* Plugins tables */
-/*
-#plugins th, #plugins td {
-    text-align: center;
-}
-#plugins th.plugin, #plugins td.plugin {
-    text-align: left;
-}
-#plugins .disabled td {
-    color: #a22;
-}
-#plugins td .notes {
-    padding: 2px 5px;
-    border: 1px solid #ddd;
-    background-color: #eee;
-    font-size: .83em;
-    color: #222;
-}
-#plugins .plugin h4 .from
-{
-    font-size: .83em;
-    font-weight: normal;
-    color: #999;
-}
-*/
-/* Form Elements ---------------------------------------------------------- */
-.form-area {
-  //background-color: #9ce;
-  /*
-  margin-left: -20px;
-  margin-right: -20px;
-  padding: 20px;
-  padding-top: 15px;
-  padding-bottom: 20px;*/
-  //@include clearfix();
-}
-
-@import "components/tabs";
-
-/* Tabs ------------------------------------------------------------------- */
-
-/*#metainfo-tabs { margin: 10px 0 5px 0; }
-#part-tabs { margin: 35px 0 5px 0; }
-.tabs {
-  margin-right: -4px;
-  width: 100%;
-  margin-top: 5px;
-  margin-bottom: 6px;
-}
-.tabs .tab {
-  display: inline;
-  border: $border-color solid 1px;
-}
-.tabs .tab a {
-  margin-right: 0.35em;
-  padding: 0.35em 1em 0.35em 1em;
-  text-decoration: none;
-  color: #000;
-
-
-  border-radius: 6px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
-
-  -moz-border-radius: 6px;
-  -moz-border-radius-bottomright: 0px;
-  -moz-border-radius-bottomleft: 0px;
-  -webkit-border-radius: 6px;
-  -webkit-border-bottom-right-radius: 0px;
-  -webkit-border-bottom-left-radius: 0px;
-}
-.tabs .tab a.here {
-  background-color: #fff;
-  font-weight: bold;
-}*/
-/*.tab_toolbar {
-  float: right;
-  margin-top: .28em;
-}
-.tab_toolbar img { padding-bottom: 2px; }
-*/
-
-/*
-.pages {
-  background-color: #fff;
-  margin-top: 4px;
-
-
-  border-radius: 0 6px 6px 6px;
-  -moz-border-radius: 0 6px 6px 6px;
-  -webkit-border-radius: 0 6px 6px 6px;
-
-  text-shadow: black;
-}*/
-/*.pages .page {
-  padding:  20px;
-}
-*/
 
 
 
-/* Index table, list ------------------------------------------------------ */
-
-/*
-.index-def {
-  background-color: #f5f5f5;
-  font-size: 90%;
-  font-weight: normal;
-  margin-top: 20px;
-  padding: 4px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-}
-.index {
-  font-size: 90%;
-  width: 100%;
-  margin-top: 20px;
-  border-bottom: 1px solid #ddd;
-}
-ul.index {
-  margin-top: 0;
-}
-table.index td,
-table.index th {
-  text-align: left;
-}
-table.index th {
-  background-color: #f5f5f5;
-  font-size: 90%;
-  font-weight: normal;
-  padding: 4px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-}
-table.index td, .index li {
-  position: relative;
-  border-top: 1px solid #ddd;
-  padding: 2px 4px;
-  font-weight: normal;
-}
-.index .node {
-  font-size: 115%;
-  font-weight: bold;
-}
-.index .node .user small {
-  position: relative;
-  top: 5px;
-  color: #666;
-  font-size: 90%;
-  font-style: italic;
-  font-weight: normal;
-  margin-left: .5em;
-}
-.index .even:hover,
-.index .odd:hover,
-.index .even.hover,
-.index .odd.hover {
-  background: #f5f5f5;
-}
-.index .node a,
-.index .node a:visited
-.index .node i {
-  position: relative;
-  //top: 5px;
-  color: #000;
-  text-decoration: none;
-}
-.index .node a:hover,
-.index .node a:visited:hover {
-  text-decoration: underline;
-}
-table.index td.note {
-  color: silver;
-  font-size: 85%;
-  font-style: italic;
-  padding: 3em;
-  text-align: center;
-}
-.index p {
-  margin-top: 5px;
-}
-.index .remove {
-  position: absolute;
-  top: 7px;
-  right: 10px;
-}
-*/
 // Import sitemap definitions for pages, snippets and layouts
 @import "components/sitemap";
+
+// Tabs
+@import "components/tabs";
+
+// Count Page children
+@import "components/count";
+
 /* Site Map --------------------------------------------------------------- */
 /*
 #site-map-root .node.level-0 .page,
@@ -760,52 +384,6 @@ table.fieldset .error-with-field small {
     }
 }
 
-/*
-.form-area .view-page-edit-plugins:after {
-  @include clearfix();
-}*/
-
-/*
-#metainfo-content td {
-  background-color: #fff;
-  padding: 6px;
-}
-#metainfo-content td.label {
-  padding-top: 10px;
-  vertical-align: top;
-  text-align: right;
-  width: 20%;
-}
-#metainfo-content td.label .optional {
-  color: #929488;
-}
-#metainfo-content #pagetitle,
-#metainfo-content #metadata,
-#metainfo-content #settings {
-  padding: 20px;
-  margin-top: .30em;
-  margin-bottom: 20px;
-}
-
-#metainfo-content table tr td {
-    padding: 0.2em 0.5em;
-}
-
-#content textarea {
-  padding: 3px 0;
-  width: 100%;
-  border: 1px solid #ccc;
-}
-*/
-
-
-
-/*
-
-    ORIGINAL ADMIN STYLESHEET FILE
-
-*/
-
 // BUTTONS
 @import "components/buttons";
 
@@ -820,6 +398,9 @@ table.fieldset .error-with-field small {
 
 // LOGIN / FORGOT PASSWORD
 @import "components/login";
+
+// Misc
+@import "components/misc";
 
 
 
