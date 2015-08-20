@@ -1,0 +1,114 @@
+/*	SITE TITLE ---------------------------------- */
+
+#site-title {
+	//@include column(2);
+	width: 15%;
+	float: left;
+	margin: 20px 0 0 0;
+
+	a {
+		font-size: 120%;
+		color: $white;
+		font-weight: $bold;
+		text-decoration: none;
+		line-height: 1;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+
+
+/*	NAVIGATION ---------------------------------- */
+#mainTabs {
+	//@include column(10);
+	width: 85%;
+	float: left;
+
+	ul {
+		text-align: left;
+		display: inline;
+		margin: 0; 
+
+		li {
+			float: left;
+			height: 62px;
+			position: relative;
+			padding: 20px 20px;
+			cursor: pointer;
+			-webkit-transition: all 0.2s;
+			-moz-transition: all 0.2s;
+			-ms-transition: all 0.2s;
+			-o-transition: all 0.2s;
+			transition: all 0.2s;
+
+			&:hover {
+				background: $link-hover;
+				color: #fff;
+			}
+
+			.gravatar {
+				margin: -7px 0 0 0;
+				padding: 0;
+			}
+
+			a { 
+				display: block; 
+				color: $white;
+				margin: 0;
+				padding: 0;
+
+				&:hover {
+					text-decoration: none;
+				}
+
+				&.current {
+					font-weight: $bold;
+				}
+
+			}
+
+			&:hover ul {
+				display: block;
+				opacity: 1;
+				visibility: visible;
+			}
+
+			ul {
+				padding: 0;
+				position: absolute;
+				top: 62px;
+				right: 0;
+				width: 200px;
+				-webkit-box-shadow: none;
+				-moz-box-shadow: none;
+				box-shadow: none;
+				display: none;
+				opacity: 0;
+				visibility: hidden;
+				-webkit-transiton: opacity 0.2s;
+				-moz-transition: opacity 0.2s;
+				-ms-transition: opacity 0.2s;
+				-o-transition: opacity 0.2s;
+				-transition: opacity 0.2s;
+
+				li {
+					background: $link-hover;
+					display: block;
+					float: none;
+					color: $white;
+
+					&:hover {
+						background: $link;
+					}
+				}
+			}
+		}
+	}
+
+	.right {
+		float: right;
+	}
+}
