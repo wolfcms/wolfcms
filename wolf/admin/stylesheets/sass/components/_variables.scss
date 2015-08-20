@@ -4,6 +4,10 @@ $columns: 12; // The amount of columns you want
 $max_width: 1280px; // Set a maximum width of the site
 $site_align: center !default;
 
+// Media queries
+$tablet: 768px;
+$phone: 480px;
+
 // Colors
 $black: #333;
 $white: #fff;
@@ -15,6 +19,9 @@ $grey: #e5e5e5;
 $light_grey: #edede7;
 $wrap_border: #d4d4d4;
 $dark_grey: #999;
+
+// Layout
+$max-width: 1600px;
 
 
 // Main site color
