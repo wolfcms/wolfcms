@@ -62,12 +62,18 @@ a {
     &.remove:hover { color: darken($red,10); }
     // Add child page icon [+]
     &.add-child-link { color: $green; }
-    &.add-child-link:hover { color: darken($green,10); }
+    &.add-child-link:hover  { color: darken($green,10); }
     // Copy page [][]
     &.copy-page { color: $black; }
     // View page link <o>
     &.view-link { color: $black; }
     &.view-link:hover { color: lighten($black,10); }
+    // Add page parts [+]
+    &#add-part { color: $green; }
+    &#add-part:hover { color: darken($green,10); }
+    // Remove page part [-]
+    &#delete-part { color: $red; }
+    &#delete-part:hover { color: darken($red,10); }
 }
 
 // Placeholder
@@ -108,7 +114,11 @@ a {
 
 // Indentation
 #site-map {
-    //position: relative;
+    position: relative;
+
+    .indent img.expander {
+        vertical-align: middle;
+    }
     // If there is no child pages, move right to verttically align icons
     // and avoid [+] expander
     .no-children .indent { padding-left: 1em; margin-left: 1.5em; }
@@ -138,6 +148,34 @@ a {
     }
 }
 
+// Page metadata & settings table cells
+#metainfo-content {
+    table {
+        td.label {
+            width: 10%;
+        }
+        td.field {
+            width: 90%;
+
+            .calendar {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+// Page Settings
+input {
+    &#page_created_on,
+    &#page_created_on_time,
+    &#page_published_on,
+    &#page_published_on_time,
+    &#page_valid_until,
+    &#page_valid_until_time {
+        width: 200px;
+    }
+}
+
 
 
 // Snippet and Layout
@@ -145,8 +183,10 @@ a {
 
 	li.node {
 		@include row();
-		padding: 0.5em 5px;
+        padding: 0.5em 5px;
 		border-bottom: 1px solid $border-color;
+
+        
 
 		.title {
 			@include column(11,0);
@@ -164,4 +204,3 @@ a {
 		}
 	}
 }
-
