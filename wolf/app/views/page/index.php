@@ -43,7 +43,7 @@
 
 		<div class="page-layout"><?php echo Layout::findById($root->layout_id)->name; ?></div>
 		<div class="status published-status"><?php echo __('Published'); ?></div>
-		<div class="view-page"><a href="<?php echo URL_PUBLIC; ?>" target="_blank" title="<?php echo __('View Page'); ?>"><i class="fa fa-eye"></i></a></div>
+		<div class="view-page"><a class="view-link" href="<?php echo URL_PUBLIC; ?>" target="_blank" title="<?php echo __('View Page'); ?>"><i class="fa fa-search"></i></a></div>
 		<div class="modify">
 			<a class="add-child-link" href="<?php echo get_url('page/add/1'); ?>" title="<?php echo __('Add child'); ?>"><i class="fa fa-plus-square"></i></a>&nbsp;
 			<i class="fa fa-minus-square remove"></i>&nbsp;
