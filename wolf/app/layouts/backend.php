@@ -49,8 +49,8 @@ if (!isset($title) || trim($title) == '') {
     <title><?php use_helper('Kses'); echo $title . ' | ' . kses(Setting::get('admin_title'), array()); ?></title>
 
     <link rel="shortcut icon" href="<?php echo PATH_PUBLIC; ?>wolf/admin/images/favicon.ico" />
-    <!-- Font awesome CDN -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Font awesome -->
+    <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/stylesheets/fontawesome.css" media="screen" rel="stylesheet" type="text/css">
     <!-- Main admin stylesheet -->
     <link href="<?php echo PATH_PUBLIC; ?>wolf/admin/stylesheets/admin.css" media="screen" rel="stylesheet" type="text/css">
     <!-- Theme stylesheet -->
@@ -150,8 +150,8 @@ if (!isset($title) || trim($title) == '') {
               <li id="<?php echo $plugin_name;?>-plugin" class="plugin"><a href="<?php echo get_url('plugin/'.$plugin_name); ?>"<?php if ($ctrl=='plugin' && $action==$plugin_name) echo ' class="current"'; ?>><?php echo $plugin->label; ?></a></li>
         <?php endif; ?>
     <?php endforeach; ?>
-
-                <li class="dropdown right">
+            <div class="right">
+                <li class="dropdown settings">
                     <a href="#"><?php echo __('Settings'); ?></a>
                     <ul>
                         <?php if (AuthUser::hasPermission('admin_edit')): ?>
@@ -165,16 +165,22 @@ if (!isset($title) || trim($title) == '') {
                         <?php endif; ?>
                     </ul>
                 </li>
-            </ul>
-          </div>
-          <div id="gravatar">
-                <div class="gravatar">
+
+                <li class="dropdown site-links">
+                    <a href="#">
                     <?php
                     use_helper('Gravatar');
-                    echo Gravatar::img(AuthUser::getRecord()->email, array( 'align' => 'middle', 'alt' => 'user icon', 'class' => 'navbar-user-gravatar' ), '32', URL_PUBLIC . 'wolf/admin/images/user.png', 'g', USE_HTTPS);
+                    echo Gravatar::img(AuthUser::getRecord()->email, array( 'align' => 'middle', 'alt' => 'user icon', 'class' => 'gravatar' ), '32', URL_PUBLIC . 'wolf/admin/images/user.png', 'g', USE_HTTPS);
                     ?>
-                    <span><?php echo AuthUser::getRecord()->name; ?></span>
-                </div>
+                    <span><?php echo AuthUser::getRecord()->name; ?></span></a>
+                    <ul>
+                        <li><a href="<?php echo get_url('user/edit/'.AuthUser::getId()); ?>"><?php echo AuthUser::getRecord()->name; ?></a></li>
+                        <li><a id="site-view-link" href="<?php echo URL_PUBLIC; ?>" target="_blank"><?php echo __('View Site'); ?></a></li>
+                        <li><a href="<?php echo get_url('login/logout'.'?csrf_token='.SecureToken::generateToken(BASE_URL.'login/logout')); ?>"><?php echo __('Log Out'); ?></a></li>
+                    </ul>
+                </li>
+            </div>
+            </ul>
           </div>
         </div>
     </header>
@@ -192,9 +198,9 @@ if (!isset($title) || trim($title) == '') {
         <div id="main" <?php if(isset($sidebar) && trim($sidebar) != '') { echo ' class="has-sidebar"'; } ?>>
             <div id="content-wrapper">
                 <div id="content">
-            <!-- content -->
-            <?php echo $content_for_layout; ?>
-            <!-- end content -->
+                <!-- content -->
+                <?php echo $content_for_layout; ?>
+                <!-- end content -->
                 </div>
             </div>
             <?php if (isset($sidebar)) { ?>
@@ -215,21 +221,16 @@ if (!isset($title) || trim($title) == '') {
               <p>
                 <?php echo __('Thank you for using'); ?> <a href="http://www.wolfcms.org/" target="_blank">Wolf CMS</a> <?php echo CMS_VERSION; ?> | <a href="http://forum.wolfcms.org/" target="_blank"><?php echo __('Feedback'); ?></a> | <a href="http://docs.wolfcms.org/" target="_blank"><?php echo __('Documentation'); ?></a>
               </p>
+            </div>
+
+            <div class="debug">
                 <?php if (DEBUG): ?>
-                <p class="stats">
-                    <?php echo __('Page rendered in'); ?> <?php echo execution_time(); ?> <?php echo __('seconds'); ?>
-                    | <?php echo __('Memory usage:'); ?> <?php echo memory_usage(); ?>
+                <p>
+                    <?php echo __('Page rendered in'); ?> <strong><?php echo execution_time(); ?> <?php echo __('seconds'); ?></strong>
+                    | <?php echo __('Memory usage:'); ?> <strong><?php echo memory_usage(); ?></strong>
                 </p>
                 <?php endif; ?>
             </div>
-
-            <p id="site-links">
-            <?php echo __('You are currently logged in as'); ?> <a href="<?php echo get_url('user/edit/'.AuthUser::getId()); ?>"><?php echo AuthUser::getRecord()->name; ?></a>
-            <span class="separator"> | </span>
-            <a href="<?php echo get_url('login/logout'.'?csrf_token='.SecureToken::generateToken(BASE_URL.'login/logout')); ?>"><?php echo __('Log Out'); ?></a>
-            <span class="separator"> | </span>
-            <a id="site-view-link" href="<?php echo URL_PUBLIC; ?>" target="_blank"><?php echo __('View Site'); ?></a>
-            </p>
         </div>
     </footer>
   </body>
