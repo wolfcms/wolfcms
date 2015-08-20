@@ -1,5 +1,4 @@
-/* Flash messages
-------------------- */
+/*  FLASH MESSAGES ------------------ */
 
 .message {
   position: absolute;
@@ -7,6 +6,11 @@
   margin: 0 auto;
   text-align: center;
   padding: 1em 0;
+  opacity: 0.8;
+
+  a {
+    color: $white;
+  }
 }
 
 #info {
