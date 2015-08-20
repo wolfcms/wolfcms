@@ -28,9 +28,18 @@
         <span class="w1 indent">
           <?php if ($child->has_children): ?><img align="middle" alt="toggle children" class="expander<?php if($child->is_expanded) echo ' expanded'; ?>" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/<?php echo $child->is_expanded ? 'collapse': 'expand'; ?>.png" /><?php endif; ?>
 <?php if (!AuthUser::hasPermission('page_edit') || (!AuthUser::hasPermission('admin_edit') && $child->is_protected)): ?>
-    <i class="fa fa-file-o"></i> <span class="title protected"><?php echo $child->title; ?></span> <img class="handle_reorder" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/drag_to_sort.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
+    <i class="fa fa-file-o"></i> <span class="title protected"><?php echo $child->title; ?></span>
+    <img class="handle_reorder" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/drag_to_sort.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
 <?php else: ?>
-    <i class="fa fa-file-o"></i> <a class="edit-link" href="<?php echo get_url('page/edit/'.$child->id); ?>" title="<?php echo $child->id.' | '.$child->slug; ?>"> <span class="title"><?php echo $child->title; ?></span></a> <img class="handle_reorder" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/drag_to_sort.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
+    <i class="fa fa-file-o"></i> 
+    <a class="edit-link" href="<?php echo get_url('page/edit/'.$child->id); ?>" title="<?php echo $child->id.' | '.$child->slug; ?>"> 
+    <span class="title"><?php echo $child->title; ?></span></a>
+    <?php
+      if($child->childrenCount() > 0) {
+        echo '<span class="count">'.$child->childrenCount().'</span>';
+      }
+    ?> 
+    <img class="handle_reorder" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/drag_to_sort.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
 <?php endif; ?>
           <?php if (! empty($child->behavior_id)): ?> <small class="info">(<?php echo Inflector::humanize($child->behavior_id); ?>)</small><?php endif; ?>
           <img align="middle" alt="" class="busy" id="busy-<?php echo $child->id; ?>" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/spinner.gif" title="" />
@@ -47,7 +56,7 @@
       case Page::STATUS_HIDDEN: echo '<div class="status hidden-status">'.__('Hidden').'</div>'; break;
       case Page::STATUS_ARCHIVED: echo '<div class="status archived-status">'.__('Archived').'</div>'; break;
 } ?>
-      <div class="view-page"><a class="view-link" href="<?php echo URL_PUBLIC; echo (USE_MOD_REWRITE == false) ? '?' : ''; echo $child->path(); echo ($child->path() != '') ? URL_SUFFIX : ''; ?>" target="_blank"><i class="fa fa-eye"></i></a></div>
+      <div class="view-page"><a class="view-link" href="<?php echo URL_PUBLIC; echo (USE_MOD_REWRITE == false) ? '?' : ''; echo $child->path(); echo ($child->path() != '') ? URL_SUFFIX : ''; ?>" target="_blank"><i class="fa fa-search"></i></a></div>
       <div class="modify">
         <a class="add-child-link" href="<?php echo get_url('page/add', $child->id); ?>" title="<?php echo __('Add child'); ?>"><i class="fa fa-plus-square"></i></a>&nbsp;
 <?php if ( ! $child->is_protected || AuthUser::hasPermission('page_delete') ): ?>
