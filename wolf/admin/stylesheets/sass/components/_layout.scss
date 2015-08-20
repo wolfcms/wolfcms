@@ -1,0 +1,76 @@
+/*	HEADER -------------------------------------- */
+header {
+	background-color: $brand-color;
+	min-height: 62px;
+	width: 100%;
+	
+	#header {
+		max-width: $max-width;
+		margin: 0 auto;
+		padding: 0 1%;
+	}
+}
+
+/*	MAIN CONTENT AREA -------------------- */
+.container {
+	width: 100%;
+}
+
+#main {
+	max-width: $max-width;
+	padding: 0 1%;
+	margin: 2em auto;
+
+	#content-wrapper {
+		width: 100%;
+		//margin-top: 2em;
+	}
+	
+	&.has-sidebar #content-wrapper {
+		width: 100%;
+		margin-bottom: 2em;
+	}
+
+	&.has-sidebar #sidebar-wrapper {
+		width: 100%;
+	}	
+	
+	@include min-screen($tablet) {
+		&.has-sidebar #content-wrapper {
+			width: 65%;
+			float: left;
+			margin-right: 5%;
+		}
+
+		&.has-sidebar #sidebar-wrapper {
+			width: 30%;
+			float: left;
+		}
+	}
+}
+
+/* FOOTER -------------------------------- */
+#footer {
+    max-width: $max-width;
+    margin: 0 auto;
+    clear: both;
+    font-size: 90%;
+    padding: 2em 1%;
+
+    .info, .debug {
+    	width: 100%;
+    }
+
+	@include min-screen($tablet) {
+	    .info {
+	        width: 50%;
+	        float: left;
+	    }
+
+	    .debug {
+	        width: 50%;
+	        float: right;
+	        text-align: right;
+	    }
+	}
+}
