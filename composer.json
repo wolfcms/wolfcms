@@ -2,12 +2,6 @@
     "name": "wolfcms/wolfcms",
     "description": "The Wolf CMS core system.",
     "license": "GPL-3.0+",
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "http://wolfextensions.org"
-        }
-    ],
     "require": {
         "php": ">=5.3.0",
         "composer/installers": "v1.0.12"
