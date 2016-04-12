@@ -421,7 +421,7 @@ class Email {
      * @return  void
      */
     function setNewline($newline = "\n") {
-        if ($newline != "\n" || $newline != "\r\n" || $newline != "\r") {
+        if ($newline != "\n" && $newline != "\r\n" && $newline != "\r") {
             $this->newline = "\n";
             return;
         }
