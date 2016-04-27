@@ -320,7 +320,7 @@ class Page extends Node {
         // Prepare SQL
         $sql = 'SELECT COUNT(*) AS nb_rows FROM '.TABLE_PREFIX.'page '
                 .'WHERE parent_id = '.$this->id
-                ." AND (COALESCE(valid_until, '') = '' OR '".date('Y-m-d H:i:s')."' < valid_until)"
+                ." AND (valid_until IS NULL OR '".date('Y-m-d H:i:s')."' < valid_until)"
                 .' AND (status_id='.Page::STATUS_PUBLISHED
                 .($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN : '').') '
                 ."$where_string ORDER BY $order $limit_string $offset_string";
@@ -368,7 +368,7 @@ class Page extends Node {
 
     /**
      * Allows people to include the parsed content from a Snippet in a Page.
-     *
+     * 
      * The method returns either true or false depending on whether the snippet
      * was found or not.
      *
@@ -618,7 +618,7 @@ class Page extends Node {
 
     /**
      * Return an array of this page's children.
-     *
+     * 
      * Note: returns a single Page object if only one child exists.
      *
      * @param array $args               Array of key=>value pairs.
@@ -652,7 +652,7 @@ class Page extends Node {
                 .'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
                 .'LEFT JOIN '.TABLE_PREFIX.'user AS updater ON updater.id = page.updated_by_id '
                 .'WHERE parent_id = '.$this->id.' AND (status_id='.Page::STATUS_PUBLISHED.($include_hidden ? ' OR status_id='.Page::STATUS_HIDDEN : '').') '
-                ." AND (COALESCE(valid_until, '') = '' OR '".date('Y-m-d H:i:s')."' < valid_until)"
+                ." AND (valid_until IS NULL OR '".date('Y-m-d H:i:s')."' < valid_until)"
                 ."$where_string ORDER BY $order $limit_string $offset_string";
 
         self::logQuery($sql);
@@ -861,12 +861,12 @@ class Page extends Node {
 
     /**
      * This function should no longer be used.
-     *
+     * 
      * @deprecated
      * @see setTags()
      *
      * @param type $tags
-     * @return type
+     * @return type 
      */
     public function saveTags($tags) {
         return $this->setTags($tags);
@@ -875,7 +875,7 @@ class Page extends Node {
 
     /**
      * This function should no longer be used.
-     *
+     * 
      * @deprecated
      * @see findByPath()
      */
@@ -982,17 +982,17 @@ class Page extends Node {
 
     /**
      * Finds a Page record based on supplied arguments.
-     *
+     * 
      * Usage:
      *      $page = Page::find('/the/path/to/your/page');
      *      $page = Page::find(array('where' => 'created_by_id=12'));
-     *
+     * 
      * Argument array can contain:
      *      - where
      *      - order
      *      - offset
      *      - limit
-     *
+     * 
      * Return values can be:
      *      - A single Page object
      *      - An array of Page objects which can be empty

@@ -55,14 +55,6 @@ class FileManagerController extends PluginController {
         $this->browse();
     }
 
-    static function htmlContextCleaner($input) {
-        $bad_chars = array("<", ">");
-        $safe_chars = array("&lt;", "&gt;");
-        $output = str_replace($bad_chars, $safe_chars, $input);
-
-        return stripslashes($output);
-    }
-
     public function browse() {
         $params = func_get_args();
 
@@ -102,7 +94,7 @@ class FileManagerController extends PluginController {
         $this->fullpath = preg_replace('/\/\//', '/', $this->fullpath);
 
         $this->display('file_manager/views/index', array(
-            'dir' => htmlContextCleaner($this->path),
+            'dir' => xssClean($this->path),
             //'files' => $this->_getListFiles()
             'files' => $this->_listFiles()
         ));
@@ -221,8 +213,8 @@ class FileManagerController extends PluginController {
 
         $data = $_POST['file'];
 
-        $path = str_replace('..', '', $data['path']);
-        $filename = str_replace('..', '', $data['name']);
+        $path = str_replace('..', '', xssClean($data['path']));
+        $filename = str_replace('..', '', xssClean($data['name']));
         $file = FILES_DIR . DS . $path . DS . $filename;
 
         if (file_put_contents($file, '') !== false) {
@@ -255,8 +247,8 @@ class FileManagerController extends PluginController {
 
         $data = $_POST['directory'];
 
-        $path = str_replace('..', '', $data['path']);
-        $dirname = str_replace('..', '', $data['name']);
+        $path = str_replace('..', '', xssClean($data['path']));
+        $dirname = str_replace('..', '', xssClean($data['name']));
         $dir = FILES_DIR . "/{$path}/{$dirname}";
 
         if (mkdir($dir)) {
@@ -330,21 +322,22 @@ class FileManagerController extends PluginController {
         umask(octdec($mask));
 
         $data = $_POST['upload'];
-        $path = str_replace('..', '', $data['path']);
+        $path = str_replace('..', '', xssClean($data['path']));
         $overwrite = isset($data['overwrite']) ? true : false;
 
         // Clean filenames
-        $filename = preg_replace('/ /', '_', $_FILES['upload_file']['name']);
+        $filename = preg_replace('/ /', '_', xssClean($_FILES['upload_file']['name']));
         $filename = preg_replace('/[^a-z0-9_\-\.]/i', '', $filename);
 
         $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-        if (in_array($ext, ['php', 'php3', 'php4', 'inc'])) {
+        $ext_arr = array('php', 'php3', 'php4', 'php5', 'php6', 'php7' 'inc', 'pht', 'phtml');
+        if (in_array($ext, $ext_arr)) {
             Flash::set('error', __('Not allowed to upload files with extension :ext', $ext));
             redirect(get_url('plugin/file_manager/browse/'));
         }
 
         if (isset($_FILES)) {
-            $file = $this->_upload_file($filename, FILES_DIR . '/' . $path . '/', $_FILES['upload_file']['tmp_name'], $overwrite);
+            $file = $this->_upload_file($filename, FILES_DIR . '/' . $path . '/', xssClean($_FILES['upload_file']['tmp_name']), $overwrite);
 
             if ($file === false)
                 Flash::set('error', __('File has not been uploaded!'));
@@ -372,7 +365,7 @@ class FileManagerController extends PluginController {
         }
 
         $data = $_POST['file'];
-        $data['name'] = str_replace('..', '', $data['name']);
+        $data['name'] = str_replace('..', '', xssClean($data['name']));
         $file = FILES_DIR . '/' . $data['name'];
 
         if (file_exists($file)) {
@@ -408,8 +401,8 @@ class FileManagerController extends PluginController {
 
         $data = $_POST['file'];
 
-        $data['current_name'] = str_replace('..', '', $data['current_name']);
-        $data['new_name'] = str_replace('..', '', $data['new_name']);
+        $data['current_name'] = str_replace('..', '', xssClean($data['current_name']));
+        $data['new_name'] = str_replace('..', '', xssClean($data['new_name']));
 
         // Clean filenames
         $data['new_name'] = preg_replace('/ /', '_', $data['new_name']);
@@ -420,8 +413,9 @@ class FileManagerController extends PluginController {
 
         // Check if trying to rename to php file (.php / .php3 etc)
         $ext = strtolower(pathinfo($data['new_name'], PATHINFO_EXTENSION));
+        $ext_arr = array('php', 'php3', 'php4', 'php5', 'php6', 'php7' 'inc', 'pht', 'phtml');
 
-        if (in_array($ext, ['php', 'php3', 'php4', 'inc'])) {
+        if (in_array($ext, $ext_arr)) {
             Flash::set('error', __('Not allowed to rename to :ext', $ext));
             redirect(get_url('plugin/file_manager/browse/' . $path));
         }

@@ -421,7 +421,7 @@ class Email {
      * @return  void
      */
     function setNewline($newline = "\n") {
-        if ($newline != "\n" || $newline != "\r\n" || $newline != "\r") {
+        if ($newline != "\n" && $newline != "\r\n" && $newline != "\r") {
             $this->newline = "\n";
             return;
         }
@@ -771,23 +771,28 @@ class Email {
                 break;
             case 'html' :
 
+            	$h = '';
+            	
                 $hdr .= "Content-Type: multipart/alternative; boundary=\"" . $this->_alt_boundary . "\"" . $this->newline;
-                $hdr .= $this->_getMimeMessage() . $this->newline . $this->newline;
-                $hdr .= "--" . $this->_alt_boundary . $this->newline;
+                
+                $h .= $this->_getMimeMessage() . $this->newline . $this->newline;
+                $h .= "--" . $this->_alt_boundary . $this->newline;
 
-                $hdr .= "Content-Type: text/plain; charset=" . $this->charset . $this->newline;
-                $hdr .= "Content-Transfer-Encoding: " . $this->_getEncoding() . $this->newline . $this->newline;
-                $hdr .= $this->_getAltMessage() . $this->newline . $this->newline . "--" . $this->_alt_boundary . $this->newline;
+                $h .= "Content-Type: text/plain; charset=" . $this->charset . $this->newline;
+                $h .= "Content-Transfer-Encoding: " . $this->_getEncoding() . $this->newline . $this->newline;
+                $h .= $this->_getAltMessage() . $this->newline . $this->newline . "--" . $this->_alt_boundary . $this->newline;
 
-                $hdr .= "Content-Type: text/html; charset=" . $this->charset . $this->newline;
-                $hdr .= "Content-Transfer-Encoding: quoted/printable";
+                $h .= "Content-Type: text/html; charset=" . $this->charset . $this->newline;
+                $h .= "Content-Transfer-Encoding: quoted/printable";
 
                 if ($this->_getProtocol() == 'mail') {
                     $this->_header_str .= $hdr;
-                    $this->_finalbody = $this->_body . $this->newline . $this->newline . "--" . $this->_alt_boundary . "--";
+                    $this->_finalbody = $h.$this->newline.$this->newline.$this->_body . $this->newline . $this->newline . "--" . $this->_alt_boundary . "--";
                     return;
                 }
 
+                $hdr .= $h;
+                
                 $hdr .= $this->newline . $this->newline;
                 $hdr .= $this->_body . $this->newline . $this->newline . "--" . $this->_alt_boundary . "--";
 

@@ -20,12 +20,12 @@
 
 /**
  * Gravatar helper.
- * 
+ *
  * The Gravatar helper simplifies getting Gravatar images and profiles by
  * providing some convenience functions.
- * 
+ *
  * It defaults to the following values:
- * 
+ *
  * Image size    - 32px
  * Rating        - G
  * Default image - mm (mystery-man) a simple, cartoon-style silhouetted outline
@@ -44,7 +44,7 @@ class Gravatar {
 
     /**
      * Generates a full HTML 5 compliant img tag to a Gravatar image.
-     * 
+     *
      * @param type $email
      * @param type $attr
      * @param type $size
@@ -76,9 +76,9 @@ class Gravatar {
 
     /**
      * Generates a url to a Gravatar.com profile.
-     * 
+     *
      * Defaults to a url requesting a JSON response.
-     * 
+     *
      * @param type $email
      * @param type $format
      * @param type $callback
@@ -90,7 +90,7 @@ class Gravatar {
 
     /**
      * Generates a Gravatar.com suited hash.
-     * 
+     *
      * @param type $email
      * @return type
      */
@@ -100,18 +100,18 @@ class Gravatar {
 
     /**
      * Generates a URL to a Gravatar avatar or profile data.
-     * 
+     *
      * Valid options for images:
-     * 
+     *
      * - default; one of: 404, mm, identicon, monsterid, wavatar, retro, blank
      * - size; 1-2048 (pixels)
      * - rating; one of: g, pg, r, x
      * - secure; true or false (whether to use SSL)
-     * 
+     *
      * Valid options for profiles:
-     * 
+     *
      * - format; one of: json, xml, php, vcf, qr
-     * 
+     *
      * @param type $email   Email for Gravatar user.
      * @param type $type    Can be either 'image' or 'profile'.
      * @param type $opt     Array of Gravatar image / profile related options.
@@ -132,19 +132,19 @@ class Gravatar {
                 } else {
                     $default = self::$default;
                 }
-                
+
                 if (isset($opt['size'])) {
                     $size = urlencode($opt['size']);
                 } else {
                     $size = self::$size;
                 }
-                
+
                 if (isset($opt['rating'])) {
                     $rating = urlencode($opt['rating']);
                 } else {
                     $rating = self::$rating;
                 }
-                
+
                 if (isset($opt['secure'])) {
                     $secure = $opt['secure'];
                 }
@@ -176,7 +176,7 @@ class Gravatar {
                 }
             }
 
-            return $url . htmlspecialchars($id . '.' . $format);
+            return self::$baseurl . htmlspecialchars($id . '.' . $format);
         }
 
         return NULL;

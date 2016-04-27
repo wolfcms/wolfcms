@@ -176,6 +176,19 @@ class LayoutController extends Controller {
 
 
     function delete($id) {
+      // CSRF checks
+      if (isset($_GET['csrf_token'])) {
+          $csrf_token = $_GET['csrf_token'];
+          if (!SecureToken::validateToken($csrf_token, BASE_URL.'layout/delete/'.$id)) {
+              Flash::set('error', __('Invalid CSRF token found!'));
+              redirect(get_url('layout'));
+          }
+      }
+      else {
+          Flash::set('error', __('No CSRF token found!'));
+          redirect(get_url('layout'));
+      }
+
         // find the layout to delete
         if ($layout = Record::findByIdFrom('Layout', $id)) {
             if ($layout->isUsed())

@@ -1549,8 +1549,8 @@ class TextileFilter
 // -------------------------------------------------------------
 	function footnoteRef($text)
 	{
-		return preg_replace('/(?<=\S)\[([0-9]+)([\!]?)\](\s)?/Ue',
-			'$this->footnoteID(\'\1\',\'\2\',\'\3\')', $text);
+		return preg_replace_callback('/(?<=\S)\[([0-9]+)([\!]?)\](\s)?/U',
+	    function($x) { return eFunction($x[1], $x[2], $x[3]); }, $text);
 	}
 
 // -------------------------------------------------------------

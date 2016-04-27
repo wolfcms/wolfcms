@@ -166,8 +166,14 @@ class LoginController extends Controller {
      * @return <type> ???
      */
     function forgot() {
-        if (get_request_method() == 'POST')
-            return $this->_sendPasswordTo($_POST['forgot']['email']);
+        use_helper('Validate');
+
+        if (get_request_method() == 'POST') {
+          $email = xssClean($_POST['forgot']['email']);
+          if (Validate::email($email)) {
+            return $this->_sendPasswordTo($email);
+          }
+        }
 
         $this->display('login/forgot', array('email' => Flash::get('email')));
     }
@@ -183,6 +189,7 @@ class LoginController extends Controller {
             use_helper('Email');
 
             $new_pass = '12'.dechex(rand(100000000, 4294967295)).'K';
+            $user->salt = AuthUser::generateSalt();
             $user->password = AuthUser::generateHashedPassword($new_pass.$user->salt);
             $user->save();
 
