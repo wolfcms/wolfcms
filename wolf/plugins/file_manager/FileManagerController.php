@@ -221,8 +221,8 @@ class FileManagerController extends PluginController {
 
         $data = $_POST['file'];
 
-        $path = str_replace('..', '', $data['path']);
-        $filename = str_replace('..', '', $data['name']);
+        $path = $this->htmlContextCleaner(str_replace('..', '', $data['path']));
+        $filename = $this->htmlContextCleaner(str_replace('..', '', $data['name']));
         $file = FILES_DIR . DS . $path . DS . $filename;
 
         if (file_put_contents($file, '') !== false) {
@@ -255,8 +255,8 @@ class FileManagerController extends PluginController {
 
         $data = $_POST['directory'];
 
-        $path = str_replace('..', '', $data['path']);
-        $dirname = str_replace('..', '', $data['name']);
+        $path = $this->htmlContextCleaner(str_replace('..', '', $data['path']));
+        $dirname = $this->htmlContextCleaner(str_replace('..', '', $data['name']));
         $dir = FILES_DIR . "/{$path}/{$dirname}";
 
         if (mkdir($dir)) {
@@ -330,11 +330,11 @@ class FileManagerController extends PluginController {
         umask(octdec($mask));
 
         $data = $_POST['upload'];
-        $path = str_replace('..', '', $data['path']);
+        $path = $this->htmlContextCleaner(str_replace('..', '', $data['path']));
         $overwrite = isset($data['overwrite']) ? true : false;
 
         // Clean filenames
-        $filename = preg_replace('/ /', '_', $_FILES['upload_file']['name']);
+        $filename = preg_replace('/ /', '_', $this->htmlContextCleaner($_FILES['upload_file']['name']));
         $filename = preg_replace('/[^a-z0-9_\-\.]/i', '', $filename);
 
         $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
@@ -345,7 +345,7 @@ class FileManagerController extends PluginController {
         }
 
         if (isset($_FILES)) {
-            $file = $this->_upload_file($filename, FILES_DIR . '/' . $path . '/', $_FILES['upload_file']['tmp_name'], $overwrite);
+            $file = $this->_upload_file($filename, FILES_DIR . '/' . $path . '/', $this->htmlContextCleaner($_FILES['upload_file']['tmp_name']), $overwrite);
 
             if ($file === false)
                 Flash::set('error', __('File has not been uploaded!'));
@@ -373,7 +373,7 @@ class FileManagerController extends PluginController {
         }
 
         $data = $_POST['file'];
-        $data['name'] = str_replace('..', '', $data['name']);
+        $data['name'] = $this->htmlContextCleaner(str_replace('..', '', $data['name']));
         $file = FILES_DIR . '/' . $data['name'];
 
         if (file_exists($file)) {
@@ -409,8 +409,8 @@ class FileManagerController extends PluginController {
 
         $data = $_POST['file'];
 
-        $data['current_name'] = str_replace('..', '', $data['current_name']);
-        $data['new_name'] = str_replace('..', '', $data['new_name']);
+        $data['current_name'] = $this->htmlContextCleaner(str_replace('..', '', $data['current_name']));
+        $data['new_name'] = $this->htmlContextCleaner(str_replace('..', '', $data['new_name']));
 
         // Clean filenames
         $data['new_name'] = preg_replace('/ /', '_', $data['new_name']);
