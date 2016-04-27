@@ -31,6 +31,6 @@ class MarkdownController extends PluginController {
     public function preview() {
         require_once('classMarkdown.php');
         $markdown = new Markdown_Parser();
-        echo $markdown->transform($_POST['data']);
+        echo xssClean($markdown->transform($_POST['data']));
     }
 }

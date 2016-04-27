@@ -32,7 +32,7 @@ class TextileController extends PluginController {
     public function preview() {
         require_once('classTextile.php');
         $textile = new TextileFilter();
-        echo $textile->TextileThis($_POST['data']);
+        echo xssClean($textile->TextileThis($_POST['data']));
 
         // For untrusted user input, use TextileRestricted instead:
         // echo $textile->TextileRestricted($in);
