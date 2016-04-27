@@ -2,6 +2,9 @@
 # Force some behaviours concerning the repository for Wolf CMS.
 #
 
+# Merge the changelog sensibly
+CHANGELOG.md merge=union
+
 # Make sure development files aren't in the GitHub downloads
 .gitattributes export-ignore
 .gitignore export-ignore
