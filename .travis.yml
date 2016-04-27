@@ -41,24 +41,24 @@ before_script:
   #- sudo apt-get install -y --force-yes apache2 libapache2-mod-php5 php5-mysql
   #- sudo sed -i -e "s,/var/www,$(pwd)/wolfcms/tests/selenium,g" /etc/apache2/sites-available/default
   #- sudo /etc/init.d/apache2 restart
-  
+
   # Install Wolf CMS files
   # todo
-  
+
   # Setup rights for Wolf CMS files
 
   # Start up graphics
   #- sh -e /etc/init.d/xvfb start
 
   #- sleep 5
-  
+
   # Run Wolf CMS Installer using Selenium
   #- sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'DROP DATABASE IF EXISTS wolfcms_selenium;' -U postgres; fi"
   #- sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'create database wolfcms_selenium;' -U postgres; fi"
   #- sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'DROP DATABASE IF EXISTS wolfcms_selenium;'; fi"
   #- sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database wolfcms_selenium;'; fi"
   # todo
-  
+
   # Change admin password in DB
   #- sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'UPDATE wolfcms_selenium SET password='TBD',salt='TDB' WHERE username=admin;' -U postgres; fi"
   #- sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'UPDATE wolfcms_selenium SET password='TBD',salt='TDB' WHERE username=admin;'; fi"
@@ -68,7 +68,7 @@ before_script:
   - sh -c "if [ '$DB' = 'postgres' ]; then psql -c 'create database wolfcms_test;' -U postgres; fi"
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'DROP DATABASE IF EXISTS wolfcms_test;'; fi"
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database wolfcms_test;'; fi"
-  
+
   # Clone the tests from the separate repo
   - git clone --depth=100 --quiet git://github.com/wolfcms/wolfcms-phpunit.git test
 
@@ -76,11 +76,11 @@ script:
   - cd test
   - mkdir -p build/logs
   - phpunit -c phpunit.travisci.xml
-  
+
 after_script:
   - cd ..
-  - php vendor/bin/coveralls --config test/.coveralls.yml -v
- 
+  # - php vendor/bin/coveralls --config test/.coveralls.yml -v
+
 notifications:
   irc:
     channels:

@@ -4,7 +4,7 @@
 
 [![Current Version](http://img.shields.io/badge/wolfcms-v0.8.3.1-blue.svg)](http://www.wolfcms.org/download.html)
 [![Build Status](http://img.shields.io/travis/wolfcms/wolfcms/master.svg)](http://travis-ci.org/wolfcms/wolfcms)
-[![Coverage Status](http://img.shields.io/coveralls/wolfcms/wolfcms/master.svg)](https://coveralls.io/r/wolfcms/wolfcms?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/18e85640d6044044b2004989ae1cedb0)](https://www.codacy.com/app/martijn-niji/wolfcms)
 [![Stories in Ready](https://badge.waffle.io/wolfcms/wolfcms.svg?label=ready&title=Ready)](http://waffle.io/wolfcms/wolfcms)
 
 Wolf CMS simplifies content management by offering an elegant user interface,
