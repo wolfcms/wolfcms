@@ -12,6 +12,7 @@
 - Fixed installer issue with switching to SQLite causing table prefixes to remain - thanks @korbeljak
 - Fixed Textile filter causing deprecated warnings
 - Fixed bug confusing x0b and x0d - thanks @phplaber
+- Fixed bug #520: childrenCount() and children() not working on PostgreSQLplaber - thanks @korbeljak
 
 # 0.8.3.1
 
