@@ -31,6 +31,7 @@ $drivers = PDO::getAvailableDrivers();
                     $('#help-db-name').html('Required. Enter the <strong>absolute</strong> path to the database file.<br/>You are <strong>strongly</strong> advised to keep the Wolf CMS SQLite database outside of the webserver root.');
                     $('#help-db-prefix').html('Optional. Usefull to prevent conflicts if you have, or plan to have, multiple Wolf installations with a single database.');
                     $('#row-table-prefix label').addClass('optional');
+                    $('#config_table_prefix').val('');
                     $('#row-db-socket').hide();
                     $('#row-db-host').hide();
                     $('#row-db-port').hide();
