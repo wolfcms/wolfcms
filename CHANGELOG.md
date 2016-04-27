@@ -13,6 +13,7 @@
 - Fixed Textile filter causing deprecated warnings
 - Fixed bug confusing x0b and x0d - thanks @phplaber
 - Fixed bug #520: childrenCount() and children() not working on PostgreSQLplaber - thanks @korbeljak
+- Fix rewrite issue with Apache 2.4 - thanks @macropin
 
 # 0.8.3.1
 
