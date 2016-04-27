@@ -31,7 +31,7 @@
     <img align="middle" alt="layout-icon" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/layout.png" title="" />
     <a href="<?php echo get_url('layout/edit/'.$layout->id); ?>"><?php echo $layout->name; ?></a>
     <img class="handle" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
-    <div class="remove"><a href="<?php echo get_url('layout/delete/'.$layout->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $layout->name; ?>?');"><img alt="<?php echo __('delete layout icon'); ?>" title="<?php echo __('Delete layout'); ?>" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/icon-remove.gif" /></a></div>
+    <div class="remove"><a href="<?php echo get_url('layout/delete/'.$layout->id); ?>?csrf_token=<?php echo SecureToken::generateToken(BASE_URL.'layout/delete/'.$layout->id);?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $layout->name; ?>?');"><img alt="<?php echo __('delete layout icon'); ?>" title="<?php echo __('Delete layout'); ?>" src="<?php echo PATH_PUBLIC;?>wolf/admin/images/icon-remove.gif" /></a></div>
   </li>
 <?php } ?>
 </ul>
