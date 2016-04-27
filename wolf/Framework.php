@@ -127,7 +127,7 @@ final class Dispatcher {
         if (!self::$routes || count(self::$routes) == 0) {
             return false;
         }
-        
+
         // Make sure we strip trailing slashes in the requested url
         $requested_url = rtrim($requested_url, '/');
 
@@ -194,7 +194,7 @@ final class Dispatcher {
         if (strpos($requested_url, '/') !== 0) {
             $requested_url = '/' . $requested_url;
         }
-        
+
         // Make sure we strip trailing slashes in the requested url
         $requested_url = rtrim($requested_url, '/');
 
@@ -288,11 +288,11 @@ final class Dispatcher {
 
     /**
      * ???
-     * 
+     *
      * @todo Finish docblock
      *
      * @param <type> $key
-     * @return <type> 
+     * @return <type>
      */
     public static function getStatus($key=null) {
         return ($key === null) ? self::$status: (isset(self::$status[$key]) ? self::$status[$key]: null);
@@ -303,7 +303,7 @@ final class Dispatcher {
      *
      * @param string $controller
      * @param string $action
-     * @param array $params 
+     * @param array $params
      */
     public static function executeAction($controller, $action, $params) {
         self::$status['controller'] = $controller;
@@ -422,7 +422,7 @@ class Record {
     /**
      * Sets a static reference for the connection to the database.
      *
-     * @param <type> $connection 
+     * @param <type> $connection
      */
     final public static function connection($connection) {
         self::$__CONN__ = $connection;
@@ -485,7 +485,7 @@ class Record {
 
     /**
      * Returns a database table name.
-     * 
+     *
      * The name that is returned is based on the classname or on the TABLE_NAME
      * constant in that class if that constant exists.
      *
@@ -521,7 +521,7 @@ class Record {
         // PostgreSQL does not support lastInsertId retrieval without knowing the sequence name
         if (self::$__CONN__->getAttribute(PDO::ATTR_DRIVER_NAME) === 'pgsql') {
             $sql = 'SELECT lastval();';
-            
+
             if ($result = self::$__CONN__->query($sql)) {
                 return $result->fetchColumn();
             }
@@ -529,7 +529,7 @@ class Record {
                 return 0;
             }
         }
-        
+
         return self::$__CONN__->lastInsertId();
     }
 
@@ -581,7 +581,7 @@ class Record {
                 if ($column === 'id') {
                     continue;
                 }
-                
+
                 if (!empty($this->$column) || is_numeric($this->$column)) { // Do include 0 as value
                     $value_of[$column] = self::$__CONN__->quote($this->$column);
                 }
@@ -819,17 +819,17 @@ class Record {
 
     /**
      * Returns a single class instance or an array of instances.
-     * 
+     *
      * This method guarantees sane defaults, making the `options` argument
      * optional. It is important to note however, that when using prepared
      * statements with placeholders in for example the `WHERE` clause, the
      * `values` option is mandatory.
-     * 
+     *
      * Valid options are: 'select', 'where', 'group_by', 'having', 'order_by', 'limit', 'offset', 'values'
-     * 
+     *
      * Example usage:
      * <code>
-     * // Note that MyClass extends Record 
+     * // Note that MyClass extends Record
      * $object = MyClass::find(array(
      *     'select'     => 'column1, column2',
      *     'where'      => 'id = ? and slug = ?',
@@ -841,23 +841,23 @@ class Record {
      *     'values'     => array($id, $slug, 'some-value-for-having-clause')
      * ));
      * </code>
-     * 
+     *
      * @param   array   $options    Array of options for the query.
      * @return  mixed               Single object, array of objects or false on failure.
-     * 
+     *
      * @todo    Decide if we'll keep the from and joins options since they clash heavily with the one Record == one DB tuple idea.
      */
     public static function find($options = array()) {
         // @todo Replace by InvalidArgumentException if not array based on logger decision.
         $options = (is_null($options)) ? array() : $options;
-        
+
         $class_name = get_called_class();
         $table_name = self::tableNameFromClassName($class_name);
-        
+
         // Collect attributes
         $ses    = isset($options['select']) ? trim($options['select'])   : '';
         $frs    = isset($options['from'])   ? trim($options['from'])     : '';
-        $jos    = isset($options['joins'])  ? trim($options['joins'])    : '';       
+        $jos    = isset($options['joins'])  ? trim($options['joins'])    : '';
         $whs    = isset($options['where'])  ? trim($options['where'])    : '';
         $gbs    = isset($options['group'])  ? trim($options['group'])    : '';
         $has    = isset($options['having']) ? trim($options['having'])   : '';
@@ -868,7 +868,7 @@ class Record {
 
         // Asked for single Record?
         $single = ($lis === 1) ? true : false;
-        
+
         // Prepare query parts
         $select      = empty($ses) ? 'SELECT *'         : "SELECT $ses";
         $from        = empty($frs) ? "FROM $table_name" : "FROM $frs";
@@ -879,41 +879,41 @@ class Record {
         $order_by    = empty($obs) ? ''                 : "ORDER BY $obs";
         $limit       = $lis > 0    ? "LIMIT $lis"       : '';
         $offset      = $ofs > 0    ? "OFFSET $ofs"      : '';
-        
+
         // Build the query
         $sql = "$select $from $joins $where $group_by $having $order_by $limit $offset";
 
         // Run query
         $objects = self::findBySql($sql, $values);
-        
+
         return ($single) ? (!empty($objects) ? $objects[0] : false) : $objects;
     }
-    
+
     private static function findBySql($sql, $values = null) {
         $class_name = get_called_class();
-        
+
         self::logQuery($sql);
-        
+
         // Prepare and execute
         $stmt = self::getConnection()->prepare($sql);
         if (!$stmt->execute($values)) {
             return false;
         }
-        
+
         $objects = array();
         while ($object = $stmt->fetchObject($class_name)) {
             $objects[] = $object;
         }
-        
+
         return $objects;
     }
-    
+
     /**
      * Returns a record based on it's id.
-     * 
+     *
      * Default method so that you don't have to create one for every model you write.
      * Can of course be overwritten by a custom findById() method (for instance when you want to include another model)
-     * 
+     *
      * @param int $id       Object's id
      * @return              Single object
      */
@@ -923,7 +923,7 @@ class Record {
             'values' => array(':id' => (int) $id)
         ));
     }
-        
+
     //
     // Note: lazy finder or getter method. Pratical when you need something really
     //       simple no join or anything will only generate simple select * from table ...
@@ -942,7 +942,7 @@ class Record {
 
     /**
      * Returns a single object, retrieved from the database.
-     * 
+     *
      * @param array $options        Options array containing parameters for the query
      * @return                      Single object
      */
@@ -971,7 +971,7 @@ class Record {
 
     /**
      * Returns an array of Record instances.
-     * 
+     *
      * Retrieves all records, or a subset thereof if the $where parameter is
      * used, for a specific database table.
      *
@@ -993,7 +993,7 @@ class Record {
 
     /**
      * Returns the number of records.
-     * 
+     *
      * Returns a total of all records in the specified database table or a count
      * for a specified subset thereof.
      *
@@ -1019,36 +1019,36 @@ class Record {
 
 /**
  * Abstract class that allows models to easily implement find..By.. methods.
- * 
+ *
  * By extending the `Finder` abstract class, users of an extending model can
  * make use of simple find.. and find..By.. methods without having to implement
  * them in the actual model.
- * 
+ *
  * Example usage:
- * 
+ *
  * <code>
  * class MyModel extends Finder {
  *     // code as if extending Record
  * }
- * 
+ *
  * $object  = MyModel::findOneById(2);
  * $objects = MyModel::findAll();
  * </code>
- * 
+ *
  * Users may consider these methods as generated wrappers around Record::find().
- * 
+ *
  * Non-trivial example:
- * 
+ *
  * <code>
  * // find users with same name
  * $objects = MyModel::findIdNameEmailByNameOrderedByIdAsc('mike');
  * </code>
- * 
+ *
  * @author Martijn van der Kleijn <martijn.niji@gmail.com>
  * @copyright (c) 2014, Martijn van der Kleijn.
  */
 abstract class Finder extends Record {
-    
+
     // Reserved keywords that can be used to construct a find method.
     private static $reserved = array(
         'all',
@@ -1057,10 +1057,10 @@ abstract class Finder extends Record {
         'and',
         'ordered'
     );
-    
+
     /**
      * Adds `SELECT` entry and passes on control to next find_* method.
-     * 
+     *
      * @param   array $commands         Array of tokens based on called virtual find.. method.
      * @param   array $options          Array of options, being built up for virtual find.. method.
      * @throws  BadMethodCallException  On failing to pass on to valid find_* method.
@@ -1081,7 +1081,7 @@ abstract class Finder extends Record {
 
     /**
      * Adds `SELECT` entry with a `LIMIT` of one and passes on control to next find_* method.
-     * 
+     *
      * @param   array $commands         Array of tokens based on called virtual find.. method.
      * @param   array $options          Array of options, being built up for virtual find.. method.
      * @throws  BadMethodCallException  On failing to pass on to valid find_* method.
@@ -1089,10 +1089,10 @@ abstract class Finder extends Record {
     private static function find_one(&$commands, &$options = array()) {
         $options['select'][] = '*';
         $options['limit'][] = 1;
-        
+
         if (is_array($commands) && !empty($commands)) {
             $cmd = array_shift($commands);
-            
+
             if (in_array($cmd, self::$reserved)) {
                 $cmd = 'find_'.$cmd;
                 self::$cmd($commands, $options);
@@ -1105,7 +1105,7 @@ abstract class Finder extends Record {
 
     /**
      * Adds `ORDER BY` entry and passes on control to next find_* method.
-     * 
+     *
      * @param   array $commands         Array of tokens based on called virtual find.. method.
      * @param   array $options          Array of options, being built up for virtual find.. method.
      * @throws  BadMethodCallException  On call to incorrectly named virtual find.. method.
@@ -1113,7 +1113,7 @@ abstract class Finder extends Record {
     private static function find_ordered(&$commands, &$options = array()) {
         if (is_array($commands) && !empty($commands) && array_shift($commands) == 'by') {
             $cmd = array_shift($commands);
-            
+
             if (in_array($cmd, self::$reserved)) {
                 $cmd = 'find_'.$cmd;
                 self::$cmd($commands, $options);
@@ -1132,7 +1132,7 @@ abstract class Finder extends Record {
 
     /**
      * Adds `AND` entry and passes on control to next find_* method.
-     * 
+     *
      * @param   array $commands     Array of tokens based on called virtual find.. method.
      * @param   array $options      Array of options, being built up for virtual find.. method.
      */
@@ -1147,10 +1147,10 @@ abstract class Finder extends Record {
             }
         }
     }
-    
+
     /**
      * Adds `WHERE` entry and passes on control to next find_* method.
-     * 
+     *
      * @param   array $commands     Array of tokens based on called virtual find.. method.
      * @param   array $options      Array of options, being built up for virtual find.. method.
      */
@@ -1165,12 +1165,12 @@ abstract class Finder extends Record {
             }
         }
     }
-    
+
     /**
      * Implements a virtual find.. or find..By.. method.
-     * 
+     *
      * Note: this is, of course, automatically called.
-     * 
+     *
      * @param string    $name       Name of virtual find.. method.
      * @param array     $arguments  Array of arguments given to virtual find.. method.
      * @ignore
@@ -1184,7 +1184,7 @@ abstract class Finder extends Record {
             'limit'  => array(),
             'offset' => array()
         );
-        
+
         // Check if this is a correct find.. or find..By.. method call.
         preg_match("/^find[A-Z][a-z]+.*/", $name, $matches);
         if ( empty($matches) ) {
@@ -1195,11 +1195,11 @@ abstract class Finder extends Record {
         // Match the virtual method's name and lowercase entries.
         preg_match_all("/([A-Z][a-z]+)/", $name, $matches);
         $matches = array_map('strtolower', $matches[1]);
-        
+
         // Run through matches and try to fire subcommands.
         for($i = 0; $i < count($matches); $i++) {
             $entry = array_shift($matches);
-            
+
             // If its not a reserved name, assume its a field name and add to SELECT.
             if (!in_array($entry, self::$reserved)) {
                 $options['select'][] = $entry;
@@ -1209,7 +1209,7 @@ abstract class Finder extends Record {
                 self::$cmd($matches, $options);
             }
         }
-        
+
         // Prep options for Record::find()
         $options['select'] = implode(','     , $options['select']);
         $options['where']  = implode(' AND ' , $options['where']);
@@ -1230,22 +1230,22 @@ abstract class Finder extends Record {
  * The class takes a template file after which you can assign properties to the
  * template. These properties become available as local variables in the
  * template.
- * 
+ *
  * You can then call the display() method to get the output of the template,
  * or just call print on the template directly thanks to PHP 5's __toString()
  * magic method.
  *
  * Usage example:
- * 
+ *
  * <code>
  * echo new View('my_template',array(
  *               'title' => 'My Title',
  *               'body' => 'My body content'
  *              ));
  * </code>
- * 
+ *
  * Template file example (in this case my_template.php):
- * 
+ *
  * <code>
  * <html>
  * <head>
@@ -1258,7 +1258,7 @@ abstract class Finder extends Record {
  * </html>
  * </code>
  * You can also use Helpers in the template by loading them as follows:
- * 
+ *
  * <code>
  * use_helper('HelperName', 'OtherHelperName');
  * </code>
@@ -1365,7 +1365,7 @@ class Controller {
      * Executes a specified action/method for this Controller.
      *
      * @param string $action
-     * @param array $params 
+     * @param array $params
      */
     public function execute($action, $params) {
     // it's a private method of the class or action is not a method of the class
@@ -1400,12 +1400,12 @@ class Controller {
 
     /**
      * Renders the output.
-     * 
+     *
      * @todo Remove? Is this proper OO/good idea?
      *
      * @param string $view  Name of the view to render
      * @param array $vars   Array of variables
-     * @return View 
+     * @return View
      */
     public function render($view, $vars=array()) {
         if ($this->layout) {
@@ -1452,25 +1452,25 @@ class Controller {
 
 /**
  * The Observer class allows for a simple but powerful event system.
- * 
+ *
  * Example of watching/handling an event:
  * <code>
  *      // Connecting your event hangling function to an event.
  *      Observer::observe('page_edit_after_save', 'my_simple_observer');
- * 
+ *
  *      // The event handling function
  *      function my_simple_observer($page) {
  *          // do what you want to do
  *          var_dump($page);
  *      }
  * </code>
- * 
+ *
  * Example of generating an event:
- * 
+ *
  * <code>
  *      Observer::notify('my_plugin_event', $somevar);
  * </code>
- * 
+ *
  */
 final class Observer {
     static protected $events = array();
@@ -1661,7 +1661,7 @@ final class Flash {
 
     /**
      * Returns a specific variable from the Flash service.
-     * 
+     *
      * If the value is not found, NULL is returned instead.
      * @todo Return false instead?
      *
@@ -1674,7 +1674,7 @@ final class Flash {
 
     /**
      * Adds specific variable to the Flash service.
-     * 
+     *
      * This variable will be available on the next page unless removed with the
      * removeVariable() or clear() methods.
      *
@@ -1741,9 +1741,9 @@ final class Inflector {
 
     /**
      * Returns a camelized string from a string using underscore syntax.
-     * 
+     *
      * Example: "like_this_dear_reader" becomes "LikeThisDearReader"
-     * 
+     *
      * @param string $string    Word to camelize.
      * @return string           Camelized word.
      */
@@ -1934,11 +1934,11 @@ function html_decode($string) {
 
 /**
  * Experimental anti XSS function.
- * 
+ *
  * @todo Improve or remove.
  *
  * @param <type> $string
- * @return <type> 
+ * @return <type>
  */
 function remove_xss($string) {
 // Remove all non-printable characters. CR(0a) and LF(0b) and TAB(9) are allowed
@@ -2059,6 +2059,40 @@ function cleanXSS() {
     return;
 }
 
+// Clean XSS attempts using different contexts
+// defaults to html type
+function xssClean($data, $type = 'html') {
+	// === html ===
+	if ($type == "html") {
+		$bad  = array("<",    ">");
+		$good = array("&lt;", "&gt;");
+	}
+	// === style ===
+	if ($type == "style") {
+		$bad  = array("<",    ">",    "\"",     "'",      "``",      "(",      ")",      "&",     "\\\\");
+		$good = array("&lt;", "&gt;", "&quot;", "&apos;", "&grave;", "&lpar;", "&rpar;", "&amp;", "&bsol;");
+	}
+	// === attribute ===
+	if ($type == "attribute") {
+		$bad  = array("\"",     "'",      "``");
+		$good = array("&quot;", "&apos;", "&grave;");
+	}
+	// === script ===
+	if ($type == "script") {
+		$bad  = array("<",    ">",    "\"",     "'",      "\\\\",   "%",        "&");
+		$good = array("&lt;", "&gt;", "&quot;", "&apos;", "&bsol;", "&percnt;", "&amp;");
+	}
+	// === url ===
+	if ($type == "url") {
+		if(preg_match("#^(?:(?:https?|ftp):{1})\/\/[^\"\s\\\\]*.[^\"\s\\\\]*$#iu",(string)$data,$match)) {
+			return $match[0];
+		} else {
+			return 'javascript:void(0)';
+		}
+	}
+
+	return stripslashes(str_replace($bad, $good, $data));
+}
 
 /**
  * Escapes special characters in Javascript strings.
@@ -2182,7 +2216,7 @@ function getContentFromUrl($url, $flags=0, $context=false) {
     if (!defined('CHECK_TIMEOUT')) define('CHECK_TIMEOUT', 5);
 
     // Use file_get_contents when possible... is faster.
-    if (ini_get('allow_url_fopen') && function_exists('file_get_contents')) {    
+    if (ini_get('allow_url_fopen') && function_exists('file_get_contents')) {
         if ($context === false) $context = stream_context_create(array('http' => array('timeout' => CHECK_TIMEOUT)));
 
         return file_get_contents($url, $flags, $context);
@@ -2269,7 +2303,7 @@ function framework_exception_handler($e) {
  * @param <type> $array
  * @param <type> $label
  * @param <type> $key_label
- * @param <type> $value_label 
+ * @param <type> $value_label
  */
 function debug_table($array, $label, $key_label='Variable', $value_label='Value') {
     echo '<table cellpadding="3" cellspacing="0" style="margin: 1em auto; border: 1px solid #000; width: 90%;">';
