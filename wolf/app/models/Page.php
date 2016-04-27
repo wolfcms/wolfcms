@@ -368,7 +368,7 @@ class Page extends Node {
 
     /**
      * Allows people to include the parsed content from a Snippet in a Page.
-     *
+     * 
      * The method returns either true or false depending on whether the snippet
      * was found or not.
      *
@@ -618,7 +618,7 @@ class Page extends Node {
 
     /**
      * Return an array of this page's children.
-     *
+     * 
      * Note: returns a single Page object if only one child exists.
      *
      * @param array $args               Array of key=>value pairs.
@@ -861,12 +861,12 @@ class Page extends Node {
 
     /**
      * This function should no longer be used.
-     *
+     * 
      * @deprecated
      * @see setTags()
      *
      * @param type $tags
-     * @return type
+     * @return type 
      */
     public function saveTags($tags) {
         return $this->setTags($tags);
@@ -875,7 +875,7 @@ class Page extends Node {
 
     /**
      * This function should no longer be used.
-     *
+     * 
      * @deprecated
      * @see findByPath()
      */
@@ -982,17 +982,17 @@ class Page extends Node {
 
     /**
      * Finds a Page record based on supplied arguments.
-     *
+     * 
      * Usage:
      *      $page = Page::find('/the/path/to/your/page');
      *      $page = Page::find(array('where' => 'created_by_id=12'));
-     *
+     * 
      * Argument array can contain:
      *      - where
      *      - order
      *      - offset
      *      - limit
-     *
+     * 
      * Return values can be:
      *      - A single Page object
      *      - An array of Page objects which can be empty
