@@ -133,7 +133,7 @@ class UserController extends Controller {
                 $data[$field] = '';
             }
         }
-        
+
         if (!empty($data['name']) && !Validate::alphanum_space($data['name'], true)) {
             $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'name'));
         }
@@ -150,7 +150,7 @@ class UserController extends Controller {
             // @todo Remove hardcoded reset to 'en' language
             $data['language'] = 'en';
         }
-        
+
         // Check if user with the same 'username' already exists
         if ( Record::existsIn('User', 'username=:username', array( ':username' => $data['username'] )) ) {
             $errors[] = __('Username <b>:username</b> is already in use, please choose other!', array( ':username' => $data['username'] ));
@@ -275,12 +275,12 @@ class UserController extends Controller {
         if (!empty($data['language']) && !Validate::alpha_dash($data['language'])) {
             $errors[] = __('Illegal value for :fieldname field!', array(':fieldname' => 'language'));
         }
-        
+
         // Check if user with the same 'username' already exists
         if ( Record::existsIn('User', 'username=:username', array( ':username' => $data['username'] )) ) {
             $errors[] = __('Username <b>:username</b> is already in use, please choose other!', array( ':username' => $data['username'] ));
         }
-        
+
         if ($errors !== false) {
             // Set the errors to be displayed.
             Flash::set('error', implode('<br/>', $errors));
@@ -289,9 +289,7 @@ class UserController extends Controller {
 
         $user = Record::findByIdFrom('User', $id);
         if (isset($data['password'])) {
-            if (empty($user->salt)) {
-                $user->salt = AuthUser::generateSalt();
-            }
+            $user->salt = AuthUser::generateSalt();
             $data['password'] = AuthUser::generateHashedPassword($data['password'], $user->salt);
         }
 
@@ -325,14 +323,14 @@ class UserController extends Controller {
             Flash::set('error', __('You do not have permission to access the requested page!'));
             redirect(get_url());
         }
-        
+
         // Sanity checks
         use_helper('Validate');
         if (!Validate::numeric($id)) {
             Flash::set('error', __('Invalid input found!'));
             redirect(get_url());
         }
-        
+
         // CSRF checks
         if (isset($_GET['csrf_token'])) {
             $csrf_token = $_GET['csrf_token'];

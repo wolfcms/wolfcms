@@ -183,6 +183,7 @@ class LoginController extends Controller {
             use_helper('Email');
 
             $new_pass = '12'.dechex(rand(100000000, 4294967295)).'K';
+            $user->salt = AuthUser::generateSalt();
             $user->password = AuthUser::generateHashedPassword($new_pass.$user->salt);
             $user->save();
 
