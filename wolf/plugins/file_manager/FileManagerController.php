@@ -330,7 +330,7 @@ class FileManagerController extends PluginController {
         $filename = preg_replace('/[^a-z0-9_\-\.]/i', '', $filename);
 
         $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-        $ext_arr = array('php', 'php3', 'php4', 'php5', 'php6', 'php7' 'inc', 'pht', 'phtml');
+        $ext_arr = array('php', 'php3', 'php4', 'php5', 'php6', 'php7', 'inc', 'pht', 'phtml');
         if (in_array($ext, $ext_arr)) {
             Flash::set('error', __('Not allowed to upload files with extension :ext', $ext));
             redirect(get_url('plugin/file_manager/browse/'));
