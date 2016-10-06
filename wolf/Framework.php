@@ -2115,9 +2115,45 @@ function jsEscape($value) {
     ));
 }
 
+/**
+ * Displays a generic error message using a generic View.
+ * 
+ * @param int $code     The HTML error code.
+ * @param string $url   The url the error occurred for, if any.
+ * @return boolean      Returns FALSE if error code is not an int.
+ */
+function errorPage(int $code=404, string $url=null) {
+    if (!is_int($code)) {
+        return false;
+    }
+    
+    Observer::notify('error_occurred', $code, $url);
+    
+    $message = 'Unknown error';
+    switch ($code) {
+        case 404:
+            Observer::notify('page_not_found', $url);
+            $message = 'Not Found';
+            break;
+        case 500:
+            $message = 'Internal Server Error';
+        default:
+            break;
+    }
+    
+    header('HTTP/1.0 '.$code.' '.$message);
+    echo new View('errorPage', array('errorCode' => $code, 'errorMessage' => $message));
+    exit;
+}
+
 
 /**
  * Displays a "404 - page not found" message and exits.
+ * 
+ * This function is deprecated in favor of errorPage()
+ * 
+ * @deprecated since version 0.7.7+
+ * @see errorPage()
  */
 function pageNotFound($url=null) {
     Observer::notify('page_not_found', $url);
@@ -2156,9 +2192,9 @@ function convert_size($num) {
 // Information about time and memory
 
 /**
- * @todo Finish doc
- *
- * @return <type>
+ * Displays current memory use in human readable format.
+ * 
+ * @return string   Human readable memory usage.
  */
 function memory_usage() {
     return convert_size(memory_get_usage());

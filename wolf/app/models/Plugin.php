@@ -524,4 +524,19 @@ class Plugin {
 
         return $stmt->fetchColumn();
     }
+    
+
+    /**
+     * Allows you to display a Node as a result.
+     * 
+     * This function allows the plugin developer to programmatically create a
+     * Node (usually Page) object instance and display that as if it were a normal
+     * content Node.
+     * 
+     * @param Node $node
+     * @throws Exception
+     */
+    public static final function display(Node $node) {
+        displayNode($node);
+    }
 } // end Plugin class
