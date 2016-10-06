@@ -60,13 +60,12 @@ if (startsWith($admin_check, ADMIN_DIR) || startsWith($admin_check, '/'.ADMIN_DI
     if (defined('USE_HTTPS') && USE_HTTPS) {
         $url = str_replace('http://', 'https://', $url);
     }
-    define('BASE_URL', $url . (endsWith($url, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?/') . ADMIN_DIR . (endsWith(ADMIN_DIR, '/') ? '': '/'));
-    define('BASE_PATH', PATH_PUBLIC . (endsWith($url, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?/') . ADMIN_DIR . (endsWith(ADMIN_DIR, '/') ? '': '/'));
 }
-else {
-    define('BASE_URL', URL_PUBLIC . (endsWith(URL_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
-    define('BASE_PATH', PATH_PUBLIC . (endsWith(PATH_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
-}
+
+define('BASE_ADMIN_URL', $url . (endsWith($url, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?/') . ADMIN_DIR . (endsWith(ADMIN_DIR, '/') ? '': '/'));
+define('BASE_ADMIN_PATH', PATH_PUBLIC . (endsWith($url, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?/') . ADMIN_DIR . (endsWith(ADMIN_DIR, '/') ? '': '/'));
+define('BASE_URL', URL_PUBLIC . (endsWith(URL_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
+define('BASE_PATH', PATH_PUBLIC . (endsWith(PATH_PUBLIC, '/') ? '': '/') . (USE_MOD_REWRITE ? '': '?'));
 
 // Alias for backward compatibility, this constant should no longer be used.
 define('BASE_URI', BASE_PATH);
