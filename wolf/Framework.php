@@ -1456,7 +1456,7 @@ class Controller {
  * Example of watching/handling an event:
  * <code>
  *      // Connecting your event hangling function to an event.
- *      Observer::observe('page_edit_after_save', 'my_simple_observer');
+ *      Observer::observe('my_plugin_event', 'my_simple_observer');
  *
  *      // The event handling function
  *      function my_simple_observer($page) {
@@ -1482,10 +1482,27 @@ final class Observer {
      * @param string $callback      The name of the function handling the event.
      */
     public static function observe($event_name, $callback) {
-        if ( ! isset(self::$events[$event_name]))
-            self::$events[$event_name] = array();
-
-        self::$events[$event_name][$callback] = $callback;
+		if(!is_string($event_name) || !is_callable($callback)){
+			return false;
+		}
+		
+		// Get Callback ID
+		if(is_array($callback)){
+			if(is_object($callback[0])){
+				$callback_id = get_class($callback[0])."-".$callback[1];
+			} else {
+				$callback_id = $callback[0]."::".$callback[1];
+			}
+		} else {
+			$callback_id = $callback;
+		}
+		
+		// Add Event
+		if(!isset(self::$events[$event_name])){
+			self::$events[$event_name] = array();
+		}
+        self::$events[$event_name][$callback_id] = $callback;
+		return true;
     }
 
     /**
@@ -1495,8 +1512,27 @@ final class Observer {
      * @param string $callback      The name of the function handling the event.
      */
     public static function stopObserving($event_name, $callback) {
-        if (isset(self::$events[$event_name][$callback]))
-            unset(self::$events[$event_name][$callback]);
+		if(!is_string($event_name) || !is_callable($callback)){
+			return false;
+		}
+		
+		// Get Callback ID
+		if(is_array($callback)){
+			if(is_object($callback[0])){
+				$callback_id = get_class($callback[0])."-".$callback[1];
+			} else {
+				$callback_id = $callback[0]."::".$callback[1];
+			}
+		} else {
+			$callback_id = $callback;
+		}
+		
+		// Remove Event
+        if(!isset(self::$events[$event_name][$callback_id])){
+			return false;
+		}
+		unset(self::$events[$event_name][$callback_id]);
+		return true;
     }
 
     /**
@@ -1505,7 +1541,11 @@ final class Observer {
      * @param string $event_name
      */
     public static function clearObservers($event_name) {
-        self::$events[$event_name] = array();
+		if(!is_string($event_name) || !isset(self::$events[$event_name])){
+			return false;
+		}
+		self::$events[$event_name] = array();
+		return true;
     }
 
     /**
@@ -1527,15 +1567,12 @@ final class Observer {
      * @param string $event_name
      */
     public static function notify($event_name) {
+		if(!is_string($event_name) || !isset(self::$events[$event_name])){
+			return false;
+		}
+		
         $args = array_slice(func_get_args(), 1); // remove event name from arguments
-
-        foreach(self::getObserverList($event_name) as $callback) {
-            // XXX For some strange reason, this works... figure out later.
-            // @todo FIXME Make this proper PHP 5.3 stuff.
-            $Args = array();
-            foreach($args as $k => &$arg){
-                $Args[$k] = &$arg;
-            }
+        foreach(self::getObserverList($event_name) as $callback){
             call_user_func_array($callback, $args);
         }
     }
