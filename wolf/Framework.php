@@ -1629,7 +1629,6 @@ class AutoLoader {
                 }
             }
         }
-        throw new Exception("AutoLoader could not find file for '{$class_name}'.");
     }
 
 } // end AutoLoader class
