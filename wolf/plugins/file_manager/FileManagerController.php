@@ -211,7 +211,9 @@ class FileManagerController extends PluginController {
             redirect(get_url('plugin/file_manager/browse/'));
         }
 
-        $data = $_POST['file'];
+        // Make sure file doesn't contain HTML
+        use_helper('Kses');
+        $data = kses(trim($_POST['file']), array());
 
         $path = str_replace('..', '', xssClean($data['path']));
         $filename = str_replace('..', '', xssClean($data['name']));
@@ -245,7 +247,9 @@ class FileManagerController extends PluginController {
             redirect(get_url('plugin/file_manager/browse/'));
         }
 
-        $data = $_POST['directory'];
+        // Make sure directory doesn't contain HTML
+        use_helper('Kses');
+        $data = kses(trim($_POST['directory']), array());        
 
         $path = str_replace('..', '', xssClean($data['path']));
         $dirname = str_replace('..', '', xssClean($data['name']));
