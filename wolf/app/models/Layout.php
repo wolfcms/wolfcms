@@ -34,12 +34,22 @@ class Layout extends Record {
     public function beforeInsert() {
         $this->created_by_id = AuthUser::getId();
         $this->created_on = date('Y-m-d H:i:s');
+        
+        // Make sure the name doesn't contain HTML
+        use_helper('Kses');
+        $this->name = kses(trim($this->name), array());
+        
         return true;
     }
 
     public function beforeUpdate() {
         $this->updated_by_id = AuthUser::getId();
         $this->updated_on = date('Y-m-d H:i:s');
+        
+        // Make sure the name doesn't contain HTML
+        use_helper('Kses');
+        $this->name = kses(trim($this->name), array());
+        
         return true;
     }
 
